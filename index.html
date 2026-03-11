@@ -453,7 +453,7 @@ body.light .vtxt{color:#4a5568!important;}
 body.light .mg{background:rgba(0,0,0,.08)!important;border-color:rgba(0,0,0,.12)!important;color:#374151!important;}
 
 body.light #hname{color:#0d1117!important;}
-body.light #hsub{color:rgba(0,0,0,.5)!important;}
+body.light #hsub{color:rgba(0,0,0,.75)!important;font-weight:600!important;}
 body.light #tbGreet{color:rgba(0,0,0,.45)!important;}
 body.light .topbar{border-bottom-color:rgba(0,0,0,.08)!important;}
 
@@ -519,7 +519,7 @@ body.light .mg-logo-wrap{background:rgba(0,51,160,.08)!important;border-color:rg
     <div onclick="openPM()" style="cursor:pointer;flex:1;min-width:0;padding:0 10px;">
       <div style="font-size:11px;font-weight:500;margin-bottom:2px;" id="tbGreet">Bonjour 👋</div>
       <div id="hname" style="font-size:19px;font-weight:900;font-family:'Syne',sans-serif;color:#f8faff;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Configurer profil</div>
-      <div id="hsub" style="display:none;font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+      <div id="hsub" style="display:none;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
     </div>
     <!-- NOTIFICATION à droite -->
     <div class="ic-btn" onclick="openDr('notifs')" style="position:relative;">
@@ -634,7 +634,8 @@ body.light .mg-logo-wrap{background:rgba(0,51,160,.08)!important;border-color:rg
     <div style="margin-left:auto;width:34px;height:34px;border-radius:50%;background:rgba(59,130,246,.25);border:2px solid rgba(59,130,246,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:900;color:#60a5fa;" onclick="toggleDotMenu(event)">⋮</div>
     <div id="dotMenu" style="position:absolute;top:52px;right:12px;background:#0d0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px;z-index:250;display:none;flex-direction:column;gap:2px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.8);">
       <div onclick="closeDotMenu();openRapport()" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📸 Rapport journalier</div>
-      <div onclick="closeDotMenu();exportPDF()" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📄 Exporter PDF</div>
+      <div onclick="closeDotMenu();exportTachesPDF('today')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📄 Tâches du jour (PDF)</div>
+      <div onclick="closeDotMenu();exportTachesPDF('week')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📅 Tâches semaine (PDF)</div>
       <div onclick="closeDotMenu();openTM(null)" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">➕ Nouvelle tâche</div>
     </div>
   </div>
@@ -1538,7 +1539,7 @@ function renderDr(){
     {ico:'📊',name:'Excel',a:"closeDr();goPage('chiffres')"},
     {ico:'🔔',name:'Notifications',a:"openDr('notifs')"},
     {ico:'👤',name:'Mon Profil',a:"openPM();closeDr()"},
-    {ico:'📄',name:'Exporter PDF',a:"exportPDF();closeDr()"},
+    {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
     {ico:'⚙️',name:'Réglages',a:"openDr('settings')"},
   ].map(x=>`<div class="dr-item" onclick="${x.a}"><div class="dr-ico">${x.ico}</div><div><div class="dr-name">${x.name}</div></div><div style="margin-left:auto;color:var(--t3)">›</div></div>`).join('');
   else if(_dm==='notifs')el.innerHTML=notifs.length?`<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><span style="font-size:11px;color:var(--blue);cursor:pointer;font-weight:700" onclick="clearN()">Tout effacer</span></div>`+notifs.map(n=>`<div class="nitem"><div class="nico" style="background:rgba(251,191,36,.15)">${{bell:'🔔',done:'✅',info:'ℹ️'}[n.type]||'🔔'}</div><div style="flex:1"><div class="ntit">${n.tit}</div><div class="nbod">${n.body}</div><div class="nts">${n.ts}</div></div><div style="cursor:pointer;color:var(--t3);font-size:18px" onclick="dimN('${n.id}')">×</div></div>`).join(''):'<div style="text-align:center;padding:30px;color:var(--t3)"><div style="font-size:32px;margin-bottom:8px">🔕</div><div style="font-size:12px;font-weight:700">Aucune notification</div></div>';
@@ -1707,84 +1708,8 @@ function switchTab3(t){
 }
 
 // ══ PDF ══
-function exportPDF(){
-  try{
-    const{jsPDF}=window.jspdf;
-    if(!jsPDF){showT('❌','jsPDF non chargé');return;}
-    const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    const d=tn();
-    const ds=DF[d.getDay()]+' '+d.getDate()+' '+MF[d.getMonth()]+' '+d.getFullYear();
+// exportPDF removed
 
-    // Header
-    doc.setFillColor(7,8,15);doc.rect(0,0,210,36,'F');
-    doc.setFillColor(59,130,246);doc.rect(0,0,6,36,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');
-    doc.setFontSize(17);doc.text('TaskPro Field — Rapport',12,14);
-    doc.setFont('helvetica','normal');doc.setFontSize(9);
-    doc.text(ds+' | '+(prof.store||''),12,23);
-
-    // Stats
-    const tt=getTT(),dn=tt.filter(t=>isDone(t.id)).length,tot=tt.length,pct=tot?Math.round(dn/tot*100):0;
-    doc.setFillColor(244,246,255);doc.roundedRect(10,42,190,14,2,2,'F');
-    doc.setTextColor(30);doc.setFont('helvetica','bold');doc.setFontSize(10);
-    doc.text(prof.name||'—',14,51);
-    doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(80);
-    doc.text(dn+'/'+tot+' accomplies ('+pct+'%)',100,51);
-
-    // Tasks
-    let y=64;
-    doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(30);
-    doc.text('Tâches du Jour',12,y);y+=8;
-    tt.forEach(t=>{
-      if(y>270){doc.addPage();y=20;}
-      const done=isDone(t.id);
-      doc.setFillColor(done?34:239,done?197:68,done?94:68);
-      doc.circle(17,y-1.5,2,'F');
-      doc.setFont('helvetica',done?'normal':'bold');
-      doc.setFontSize(9);doc.setTextColor(30);
-      doc.text((t.name||'').substring(0,60),22,y);
-      doc.setFont('helvetica','normal');doc.setFontSize(7);doc.setTextColor(100);
-      doc.text('['+t.time+'] '+(done?'Fait':'En attente'),22,y+4);
-      y+=10;
-    });
-
-    // CA du mois
-    const now=tn(),yk='ca10_'+now.getFullYear()+'_'+now.getMonth(),caData=JSON.parse(localStorage.getItem(yk)||'{}');
-    const caVals=Object.values(caData).map(Number).filter(v=>v>0);
-    if(caVals.length){
-      if(y>240){doc.addPage();y=20;}
-      y+=6;
-      doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(30);
-      doc.text('CA du Mois',12,y);y+=8;
-      const total=caVals.reduce((a,b)=>a+b,0);
-      doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(60);
-      doc.text('Total: '+total.toLocaleString('fr-TN')+' DT',14,y);y+=6;
-    }
-
-    // Save — mobile compatible: open as blob URL
-    const fname='rapport-'+now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate()+'.pdf';
-    const blob=doc.output('blob');
-    const url=URL.createObjectURL(blob);
-
-    // Try direct open (works on mobile browsers)
-    const a=document.createElement('a');
-    a.href=url;
-    a.download=fname;
-    a.target='_blank';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},3000);
-
-    showT('📄','PDF prêt — vérifiez vos téléchargements');
-  }catch(e){
-    console.error('PDF error:',e);
-    showT('❌','Erreur PDF: '+e.message);
-  }
-}
-
-// ══ INIT ══
-
-// ══ THEME ══
 function toggleTheme(){
   const isLight = document.body.classList.toggle('light');
   localStorage.setItem('tp10_theme', isLight ? 'light' : 'dark');
@@ -1896,7 +1821,7 @@ function exportAbsencesPDF(){
   var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
   var periodLabel='16 '+MFR[per.startM]+' '+per.startY+' — 15 '+MFR[per.endM]+' '+per.endY;
   var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
-  var dates=getDatesBetween(per.start, per.end);
+  var dates=getDatesBetween(per.start,per.end);
   
   var tableRows='';
   emps.forEach(function(emp,ei){
@@ -1904,9 +1829,9 @@ function exportAbsencesPDF(){
     dates.forEach(function(dateStr){
       var st=JSON.parse(localStorage.getItem(SK+'_empst_'+dateStr)||'{}');
       var s=st[ei]||'';
-      if(s==='absent'){absent++;detailStr+=dateStr+': Absent\n';}
-      else if(s==='retard'){retard++;detailStr+=dateStr+': Retard\n';}
-      else if(s==='miseapied'){miseapied++;detailStr+=dateStr+': Mise à pied\n';}
+      if(s==='absent'){absent++;detailStr+=dateStr+': Absent<br>';}
+      else if(s==='retard'){retard++;detailStr+=dateStr+': Retard<br>';}
+      else if(s==='miseapied'){miseapied++;detailStr+=dateStr+': Mise à pied<br>';}
     });
     tableRows+='<tr style="border-bottom:1px solid #e5e7eb;">';
     tableRows+='<td style="padding:8px;font-weight:600;">'+emp.name+'</td>';
@@ -1914,32 +1839,34 @@ function exportAbsencesPDF(){
     tableRows+='<td style="padding:8px;text-align:center;color:#ef4444;font-weight:700;">'+absent+'</td>';
     tableRows+='<td style="padding:8px;text-align:center;color:#f59e0b;font-weight:700;">'+retard+'</td>';
     tableRows+='<td style="padding:8px;text-align:center;color:#a855f7;font-weight:700;">'+miseapied+'</td>';
-    tableRows+='<td style="padding:8px;font-size:11px;color:#6b7280;white-space:pre;">'+detailStr+'</td>';
+    tableRows+='<td style="padding:8px;font-size:11px;color:#6b7280;">'+detailStr+'</td>';
     tableRows+='</tr>';
   });
   
-  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Rapport Absences</title>';
-  html+='<style>body{font-family:Arial,sans-serif;padding:24px;color:#111;}h1{color:#0033A0;font-size:20px;}h2{color:#374151;font-size:14px;margin-top:0;}table{width:100%;border-collapse:collapse;margin-top:16px;}th{background:#0033A0;color:#fff;padding:8px;text-align:left;font-size:12px;}td{font-size:12px;}@media print{button{display:none!important;}}</style>';
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport Absences</title>';
+  html+='<style>body{font-family:Arial,sans-serif;padding:16px;color:#111;max-width:900px;margin:0 auto;}h1{color:#0033A0;font-size:18px;margin:0;}h2{color:#374151;font-size:13px;margin:4px 0 0;}table{width:100%;border-collapse:collapse;margin-top:16px;}th{background:#0033A0;color:#fff;padding:8px;text-align:left;font-size:12px;}td{font-size:12px;}.btn{background:#0033A0;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;margin:12px 4px 0 0;}@media print{.btn{display:none!important;}}</style>';
   html+='</head><body>';
-  html+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">';
-  html+='<div style="background:#0033A0;color:#fff;font-weight:900;font-size:16px;padding:6px 12px;border-radius:6px;letter-spacing:1px;">MG</div>';
-  html+='<div><h1 style="margin:0;">Rapport Absences & Retards</h1><h2>Période : '+periodLabel+'</h2></div></div>';
-  html+='<button onclick="window.print()" style="background:#0033A0;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;margin-bottom:12px;">🖨️ Imprimer / Enregistrer PDF</button>';
+  html+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">';
+  html+='<div style="background:#0033A0;color:#fff;font-weight:900;font-size:14px;padding:6px 10px;border-radius:6px;">MG</div>';
+  html+='<div><h1>Rapport Absences & Retards</h1><h2>Période : '+periodLabel+'</h2></div></div>';
+  html+='<button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>';
+  html+='<button class="btn" style="background:#64748b;" onclick="window.close()">✕ Fermer</button>';
   html+='<table><thead><tr><th>Nom & Prénom</th><th style="text-align:center">Matricule</th><th style="text-align:center;color:#fca5a5">Absences</th><th style="text-align:center;color:#fde68a">Retards</th><th style="text-align:center;color:#d8b4fe">Mise à pied</th><th>Détail</th></tr></thead>';
   html+='<tbody>'+tableRows+'</tbody></table>';
-  html+='<p style="margin-top:16px;font-size:10px;color:#9ca3af;">Généré le '+new Date().toLocaleDateString('fr-FR')+' · TaskPro MG</p>';
+  html+='<p style="margin-top:16px;font-size:10px;color:#9ca3af;">Généré le '+new Date().toLocaleDateString('fr-FR')+' · TaskPro MG MAXI DENDEN</p>';
   html+='</body></html>';
   
-  var blob=new Blob([html],{type:'text/html'});
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a');
-  a.href=url; a.download='rapport_absences_'+per.startY+'_'+per.startM+'.html';
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showT('📄','Rapport exporté !');
+  a.href=url;
+  a.download='rapport_absences_'+new Date().toISOString().slice(0,10)+'.html';
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  showT('📄','Fichier téléchargé ! Ouvrez-le pour imprimer.');
 }
-
 
 function setDlcGrav(btn,val){
   document.querySelectorAll('[data-grav]').forEach(function(b){b.style.opacity='0.45';b.style.fontWeight='600';});
@@ -2008,6 +1935,80 @@ function _pinSubmit(){
     }
   }
 }
+
+function exportTachesPDF(mode){
+  var today=tn();
+  var d=today.getDay();
+  var title='';
+  var rows='';
+
+  if(mode==='today'){
+    title='Tâches du Jour — '+DF[d]+' '+today.getDate()+' '+MF[today.getMonth()]+' '+today.getFullYear();
+    var list=tasks.filter(isTodayT).sort(function(a,b){return a.time.localeCompare(b.time);});
+    if(!list.length){showT('⚠️','Aucune tâche aujourd\'hui');return;}
+    list.forEach(function(t){
+      var done=isDone(t.id);
+      var pc=t.prio==='urgent'?'#ef4444':t.prio==='high'?'#f59e0b':'#22c55e';
+      var pl=t.prio==='urgent'?'🔴 Urgent':t.prio==='high'?'🟡 Important':'🟢 Normal';
+      rows+='<tr style="border-bottom:1px solid #e5e7eb;background:'+(done?'#f0fdf4':'#fff')+'">';
+      rows+='<td style="padding:8px;">'+(done?'✅':'⬜')+'</td>';
+      rows+='<td style="padding:8px;font-size:13px;font-weight:600;">'+(t.name||'')+'</td>';
+      rows+='<td style="padding:8px;font-size:12px;color:#64748b;">'+t.time+'</td>';
+      rows+='<td style="padding:8px;font-size:11px;color:'+pc+';font-weight:700;">'+pl+'</td>';
+      rows+='<td style="padding:8px;font-size:11px;color:#64748b;">'+(t.desc||'')+'</td>';
+      rows+='</tr>';
+    });
+  } else {
+    title='Tâches de la Semaine';
+    [1,2,3,4,5,6].forEach(function(di){
+      var list=tasks.filter(function(t){
+        if(t.cat==='daily')return true;
+        if(t.cat==='weekly3')return[1,3,5].includes(di);
+        if(t.cat==='weekly2')return[1,4].includes(di);
+        if(t.cat==='custom')return t.days&&t.days.includes(di);
+        return false;
+      }).sort(function(a,b){return a.time.localeCompare(b.time);});
+      if(!list.length)return;
+      rows+='<tr><td colspan="5" style="padding:8px;background:#f1f5f9;font-weight:800;color:#0033A0;">📅 '+DF[di]+'</td></tr>';
+      list.forEach(function(t){
+        var pc=t.prio==='urgent'?'#ef4444':t.prio==='high'?'#f59e0b':'#22c55e';
+        var pl=t.prio==='urgent'?'🔴 Urgent':t.prio==='high'?'🟡 Important':'🟢 Normal';
+        rows+='<tr style="border-bottom:1px solid #e5e7eb;">';
+        rows+='<td style="padding:6px 8px;">⬜</td>';
+        rows+='<td style="padding:6px 8px;font-size:13px;font-weight:600;">'+(t.name||'')+'</td>';
+        rows+='<td style="padding:6px 8px;font-size:12px;color:#64748b;">'+t.time+'</td>';
+        rows+='<td style="padding:6px 8px;font-size:11px;color:'+pc+';font-weight:700;">'+pl+'</td>';
+        rows+='<td style="padding:6px 8px;font-size:11px;color:#64748b;">'+(t.desc||'')+'</td>';
+        rows+='</tr>';
+      });
+    });
+  }
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+title+'</title>';
+  html+='<style>body{font-family:Arial,sans-serif;padding:16px;max-width:900px;margin:0 auto;color:#111;}table{width:100%;border-collapse:collapse;margin-top:14px;}th{background:#0033A0;color:#fff;padding:8px;text-align:left;font-size:12px;}.btn{background:#0033A0;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;margin:10px 4px 0 0;}@media print{.btn{display:none!important;}}</style>';
+  html+='</head><body>';
+  html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">';
+  html+='<div style="background:#e8041b;border-radius:6px;padding:4px 8px 4px 4px;display:inline-flex;align-items:center;gap:5px;"><div style="background:#fff;border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 40 40"><ellipse cx="20" cy="13" rx="7" ry="11" fill="#e07b20" transform="rotate(-15 20 13)"/><ellipse cx="27" cy="23" rx="6" ry="10" fill="#3a9e3f" transform="rotate(30 27 23)"/><ellipse cx="13" cy="25" rx="6" ry="9" fill="#f0c020" transform="rotate(-30 13 25)"/></svg></div><span style="font-size:13px;font-weight:900;color:#fff;">mg</span></div>';
+  html+='<div><div style="font-size:16px;font-weight:800;color:#0033A0;">'+title+'</div><div style="font-size:12px;color:#64748b;">MG MAXI DENDEN · '+(prof&&prof.name?prof.name:'')+'</div></div></div>';
+  html+='<button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>';
+  html+='<button class="btn" style="background:#64748b;" onclick="window.close()">✕ Fermer</button>';
+  html+='<table><thead><tr><th style="width:30px;"></th><th>Tâche</th><th style="width:60px;">Heure</th><th style="width:100px;">Priorité</th><th>Description</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  html+='<p style="margin-top:14px;font-size:10px;color:#9ca3af;">Généré le '+new Date().toLocaleDateString('fr-FR')+'</p>';
+  html+='</body></html>';
+
+  // Download as HTML file (works on mobile without popup)
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download=(mode==='today'?'taches_jour':'taches_semaine')+'_'+new Date().toISOString().slice(0,10)+'.html';
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  showT('📄','Fichier téléchargé ! Ouvrez-le pour imprimer.');
+}
+
 window.addEventListener('DOMContentLoaded',()=>{
   loadTheme();load();initDef();unlockA();
   if(notifs.length)document.getElementById('nb').style.display='block';
