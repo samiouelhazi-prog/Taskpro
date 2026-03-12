@@ -524,6 +524,22 @@ body.light .ca-tbl3 th{color:rgba(0,0,0,.75)!important;}
 body.light .cs-rayon-lbl, body.light .cs-rayon-name {
   color: #1e3a8a !important;
 }
+
+
+.cs-rlbl { color: var(--t1); }
+body.light .cs-rlbl { color: #1e3a8a !important; }
+
+@media print {
+  body > *:not(#printDLC) { display: none !important; }
+  #printDLC { display: block !important; }
+  #printDLC { font-family: Arial, sans-serif; font-size: 12px; color: #000; }
+  #printDLC table { width: 100%; border-collapse: collapse; }
+  #printDLC th, #printDLC td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+  #printDLC th { background: #1e3a8a; color: #fff; }
+  #printDLC .p-urgent { color: #dc2626; font-weight: bold; }
+  #printDLC .p-attention { color: #d97706; }
+  #printDLC .p-ok { color: #16a34a; }
+}
 </style>
 </head>
 <body>
@@ -607,6 +623,19 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
     </div>
   </div>
 
+  <!-- YESTERDAY SUMMARY -->
+  <div id="yesterdayBar" style="display:none;margin:8px 16px 0;background:var(--card);border-radius:12px;padding:10px 14px;border-left:3px solid #a855f7;border:1px solid rgba(168,85,247,.2);">
+    <div style="font-size:10px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">📊 Hier</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="yDone" style="font-size:18px;font-weight:900;color:var(--t1);">—</div>
+      <div style="font-size:11px;color:var(--t2);">tâches accomplies sur <span id="yTotal">—</span></div>
+      <div id="yPct" style="margin-left:auto;font-size:16px;font-weight:900;color:#a855f7;">—%</div>
+    </div>
+    <div style="margin-top:6px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;">
+      <div id="yBar" style="height:4px;background:#a855f7;border-radius:2px;width:0%;transition:width .5s;"></div>
+    </div>
+  </div>
+
   <!-- SWIPE CARDS -->
   <div class="cards-section">
     <div class="cards-hdr">
@@ -628,28 +657,28 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
   <div class="scroll"><div style="padding:16px 18px 110px;display:flex;flex-direction:column;gap:14px;">
 
     <!-- CARD COMMERCIAL -->
-    <div onclick="goPage('commercial')" style="background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.12));border:1px solid rgba(59,130,246,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
+    <div onclick="goPage('commercial')" style="background:linear-gradient(135deg,#1e3a8a,#1e40af);border:1px solid rgba(59,130,246,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
       <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">🛒</div>
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#60a5fa;margin-bottom:8px;">Section</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
       <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Tâches Commerciales</div>
-      <div style="font-size:12px;color:#94a3b8;margin-bottom:14px;">Contrôle dépôt · Suivi · Tâches quotidiennes</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Contrôle dépôt · Suivi · Tâches quotidiennes</div>
       <div style="display:flex;align-items:center;gap:8px;">
         <div id="homeCommDone" style="font-size:11px;font-weight:700;color:#22c55e;">0 faites</div>
         <div style="width:4px;height:4px;border-radius:50%;background:#475569;"></div>
-        <div id="homeCommPend" style="font-size:11px;color:#94a3b8;">0 en attente</div>
-        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#60a5fa;">›</div>
+        <div id="homeCommPend" style="font-size:11px;color:rgba(255,255,255,.8);">0 en attente</div>
+        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:rgba(255,255,255,.9);">›</div>
       </div>
     </div>
 
     <!-- CARD ADMIN -->
-    <div onclick="goPage('admin')" style="background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(236,72,153,.12));border:1px solid rgba(168,85,247,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
+    <div onclick="goPage('admin')" style="background:linear-gradient(135deg,#991b1b,#b91c1c);border:1px solid rgba(168,85,247,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
       <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">📋</div>
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#c084fc;margin-bottom:8px;">Section</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
       <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Tâches Administratives</div>
-      <div style="font-size:12px;color:#94a3b8;margin-bottom:14px;">Pointage · Congés · Accomptes & Avances</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Pointage · Congés · Accomptes & Avances</div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <div id="homeAdminEmp" style="font-size:11px;color:#94a3b8;">Gestion du personnel</div>
-        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(168,85,247,.3);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#c084fc;">›</div>
+        <div id="homeAdminEmp" style="font-size:11px;color:rgba(255,255,255,.8);">Gestion du personnel</div>
+        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:rgba(255,255,255,.9);">›</div>
       </div>
     </div>
 
@@ -703,7 +732,7 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('home')">‹</div>
     <div class="pg-title">⏰ Contrôle DLC</div>
-    <button onclick="addDLC()" style="margin-left:auto;background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 13px;border-radius:20px;cursor:pointer;">+ Ajouter</button>
+    <button onclick="printDlcReport()" style="margin-left:auto;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">🖨️</button> <button onclick="addDLC()" style="margin-left:auto;background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 13px;border-radius:20px;cursor:pointer;">+ Ajouter</button>
   </div>
   <div class="scroll"><div style="padding:14px 18px 110px" id="dlcPageContent">
     <div style="text-align:center;padding:40px;color:#475569"><div style="font-size:36px">📦</div><div style="font-size:12px;margin-top:8px">Aucun produit DLC</div></div>
@@ -793,7 +822,76 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
           <option value="custom">Jours choisis</option>
         </select>
       </div>
-      <div class="fg"><label class="fl">Heure</label><input class="fi" type="time" id="t_t" value="08:00"></div>
+      <div class="fg"><label class="fl">Heure</label><select class="fi" id="t_t">
+<option value="05:00">05:00</option>
+<option value="05:15">05:15</option>
+<option value="05:30">05:30</option>
+<option value="05:45">05:45</option>
+<option value="06:00">06:00</option>
+<option value="06:15">06:15</option>
+<option value="06:30">06:30</option>
+<option value="06:45">06:45</option>
+<option value="07:00">07:00</option>
+<option value="07:15">07:15</option>
+<option value="07:30">07:30</option>
+<option value="07:45">07:45</option>
+<option value="08:00">08:00</option>
+<option value="08:15">08:15</option>
+<option value="08:30">08:30</option>
+<option value="08:45">08:45</option>
+<option value="09:00">09:00</option>
+<option value="09:15">09:15</option>
+<option value="09:30">09:30</option>
+<option value="09:45">09:45</option>
+<option value="10:00">10:00</option>
+<option value="10:15">10:15</option>
+<option value="10:30">10:30</option>
+<option value="10:45">10:45</option>
+<option value="11:00">11:00</option>
+<option value="11:15">11:15</option>
+<option value="11:30">11:30</option>
+<option value="11:45">11:45</option>
+<option value="12:00">12:00</option>
+<option value="12:15">12:15</option>
+<option value="12:30">12:30</option>
+<option value="12:45">12:45</option>
+<option value="13:00">13:00</option>
+<option value="13:15">13:15</option>
+<option value="13:30">13:30</option>
+<option value="13:45">13:45</option>
+<option value="14:00">14:00</option>
+<option value="14:15">14:15</option>
+<option value="14:30">14:30</option>
+<option value="14:45">14:45</option>
+<option value="15:00">15:00</option>
+<option value="15:15">15:15</option>
+<option value="15:30">15:30</option>
+<option value="15:45">15:45</option>
+<option value="16:00">16:00</option>
+<option value="16:15">16:15</option>
+<option value="16:30">16:30</option>
+<option value="16:45">16:45</option>
+<option value="17:00">17:00</option>
+<option value="17:15">17:15</option>
+<option value="17:30">17:30</option>
+<option value="17:45">17:45</option>
+<option value="18:00">18:00</option>
+<option value="18:15">18:15</option>
+<option value="18:30">18:30</option>
+<option value="18:45">18:45</option>
+<option value="19:00">19:00</option>
+<option value="19:15">19:15</option>
+<option value="19:30">19:30</option>
+<option value="19:45">19:45</option>
+<option value="20:00">20:00</option>
+<option value="20:15">20:15</option>
+<option value="20:30">20:30</option>
+<option value="20:45">20:45</option>
+<option value="21:00">21:00</option>
+<option value="21:15">21:15</option>
+<option value="21:30">21:30</option>
+<option value="21:45">21:45</option>
+</select></div>
     </div>
     <div class="fg" id="cdw" style="display:none">
       <label class="fl">Jours</label>
@@ -974,9 +1072,9 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
         <div style="margin-bottom:12px;">
       <label style="font-size:11px;color:rgba(255,255,255,.5);font-weight:700;display:block;margin-bottom:6px;">GRAVITÉ</label>
       <div style="display:flex;gap:8px;">
-        <button type="button" onclick="setDlcGrav(this,'urgent')" data-grav="urgent" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🔴 Urgent</button>
-        <button type="button" onclick="setDlcGrav(this,'attention')" data-grav="attention" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:10px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟡 Attention</button>
-        <button type="button" onclick="setDlcGrav(this,'ok')" data-grav="ok" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟢 OK</button>
+        <button type="button" onclick="setDlcGrav(this,'urgent')" data-grav="urgent" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🔴 Urgent</button>
+        <button type="button" onclick="setDlcGrav(this,'attention')" data-grav="attention" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);border-radius:10px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟡 Attention</button>
+        <button type="button" onclick="setDlcGrav(this,'ok')" data-grav="ok" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟢 OK</button>
       </div>
     </div>
     <button onclick="saveDLC()" style="width:100%;background:#06b6d4;border:none;color:#fff;font-size:14px;font-weight:700;padding:14px;border-radius:14px;cursor:pointer;">✅ Enregistrer</button>
@@ -1047,13 +1145,10 @@ body.light .cs-rayon-lbl, body.light .cs-rayon-name {
 </div>
 
 <!-- ══ RAPPORT ABSENCES MODAL ══ -->
-<div id="absRptModal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:20px;overflow-y:auto;"><div style="background:#0e1117;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:calc(100% - 32px);max-width:420px;padding:20px;margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><div style="font-family:'Syne';font-size:16px;font-weight:800;color:#f8faff;">📋 Rapport Absences</div><div onclick="document.getElementById('absRptModal').style.display='none'" style="color:#64748b;font-size:20px;cursor:pointer;">×</div></div><div id="absRptPeriod" style="font-size:11px;color:#64748b;margin-bottom:14px;"></div><button onclick="exportAbsencesPDF()" style="width:100%;background:#0033A0;border:none;color:#fff;font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;margin-bottom:14px;">📄 Exporter PDF</button><div id="absRptContent"></div></div></div>
+<div id="absRptModal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:20px;overflow-y:auto;"><div style="background:#0e1117;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:calc(100% - 32px);max-width:420px;padding:20px;margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><div style="font-family:'Syne';font-size:16px;font-weight:800;color:#f8faff;">📋 Rapport Absences</div><div onclick="document.getElementById('absRptModal').style.display='none'" style="color:#64748b;font-size:20px;cursor:pointer;">×</div></div><div id="absRptPeriod" style="font-size:11px;color:#64748b;margin-bottom:6px;"></div><div id="absRptDate" style="font-size:10px;color:#475569;margin-bottom:14px;"></div><button onclick="exportAbsencesPDF()" style="width:100%;background:#0033A0;border:none;color:#fff;font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;margin-bottom:14px;">📄 Exporter PDF</button><div id="absRptContent"></div></div></div>
 <!-- ══ PIN MODAL ══ -->
 <div id="pinModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;"><div style="background:#12161f;border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px 24px;width:290px;text-align:center;"><div style="font-size:28px;margin-bottom:8px;">🔒</div><div style="font-family:'Syne';font-size:17px;font-weight:800;color:#f8faff;margin-bottom:4px;" id="pinTitle">Zone Administratif</div><div style="font-size:12px;color:#64748b;margin-bottom:20px;" id="pinSub">Entrez votre code PIN</div><div style="display:flex;justify-content:center;gap:12px;margin-bottom:24px;"><div id="pd0" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd1" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd2" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd3" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;"><button onclick="pinKey('1')" class="pinbtn">1</button><button onclick="pinKey('2')" class="pinbtn">2</button><button onclick="pinKey('3')" class="pinbtn">3</button><button onclick="pinKey('4')" class="pinbtn">4</button><button onclick="pinKey('5')" class="pinbtn">5</button><button onclick="pinKey('6')" class="pinbtn">6</button><button onclick="pinKey('7')" class="pinbtn">7</button><button onclick="pinKey('8')" class="pinbtn">8</button><button onclick="pinKey('9')" class="pinbtn">9</button><button onclick="pinCancel()" class="pinbtn" style="color:#ef4444;font-size:11px;">Annuler</button><button onclick="pinKey('0')" class="pinbtn">0</button><button onclick="pinDel()" class="pinbtn" style="font-size:18px;">⌫</button></div><div id="pinErr" style="font-size:11px;color:#ef4444;min-height:16px;"></div></div></div>
 
-
-
-</div>
 <script>
 'use strict';
 var _pinVal='',_pinMode='check',_pinUnlocked=false,_pinTemp='';
@@ -1230,6 +1325,33 @@ function renderHome(){
   if(fProg)fProg.style.width=pct+'%';
   // Swipe cards
   renderSwipeCards();
+  // Yesterday summary
+  try{
+    var yDate=new Date(tn()); yDate.setDate(yDate.getDate()-1);
+    var yStr=yDate.getFullYear()+'-'+String(yDate.getMonth()+1).padStart(2,'0')+'-'+String(yDate.getDate()).padStart(2,'0');
+    var yComps=comps[yStr]||{};
+    var yTasks=tasks.filter(function(t){
+      var dw=yDate.getDay();
+      if(t.cat==='daily')return true;
+      if(t.cat==='weekly3')return[1,3,5].includes(dw);
+      if(t.cat==='weekly2')return[1,4].includes(dw);
+      if(t.cat==='custom')return t.days&&t.days.includes(dw);
+      return false;
+    });
+    var yTotal=yTasks.length;
+    var yDoneN=yTasks.filter(function(t){return yComps[t.id];}).length;
+    var yPctN=yTotal>0?Math.round(yDoneN/yTotal*100):0;
+    var yBar=document.getElementById('yesterdayBar');
+    if(yBar&&yTotal>0){
+      yBar.style.display='block';
+      document.getElementById('yDone').textContent=yDoneN;
+      document.getElementById('yTotal').textContent=yTotal;
+      document.getElementById('yPct').textContent=yPctN+'%';
+      document.getElementById('yBar').style.width=yPctN+'%';
+      document.getElementById('yBar').style.background=yPctN>=80?'#22c55e':yPctN>=50?'#f59e0b':'#ef4444';
+      document.getElementById('yPct').style.color=yPctN>=80?'#22c55e':yPctN>=50?'#f59e0b':'#ef4444';
+    } else if(yBar){ yBar.style.display='none'; }
+  }catch(e){}
 }
 
 // ══ SWIPE CARDS ══
@@ -1456,7 +1578,7 @@ function openTM(id){
   const t=id?tasks.find(x=>x.id===id):null;
   document.getElementById('t_n').value=t?t.name:'';
   document.getElementById('t_c').value=t?t.cat:'daily';
-  document.getElementById('t_t').value=t?t.time:'08:00';
+  document.getElementById('t_t').value=(t&&t.time)?t.time:'08:00';
   document.getElementById('t_d').value=t?t.desc:'';
   document.querySelectorAll('.dc[data-d]').forEach(c=>c.classList.toggle('on',!!(t&&t.days&&t.days.includes(+c.dataset.d))));
   document.querySelectorAll('.prio-opt').forEach(o=>o.classList.remove('on'));
@@ -1471,12 +1593,13 @@ function saveT(){
   const n=document.getElementById('t_n').value.trim();
   if(!n){document.getElementById('t_n').style.borderColor='var(--red)';return;}
   document.getElementById('t_n').style.borderColor='';
-  const cat=document.getElementById('t_c').value,time=document.getElementById('t_t').value;
+  const cat=document.getElementById('t_c').value,time=(document.getElementById('t_t').value||'').trim();
   const desc=document.getElementById('t_d').value.trim();
   const days=[...document.querySelectorAll('#tmov .dc[data-d].on')].map(c=>+c.dataset.d);
   const prio=(document.querySelector('.prio-opt.on')||{}).dataset?.p||'yellow';
-  if(eid){const i=tasks.findIndex(t=>t.id===eid);if(i>=0)tasks[i]={...tasks[i],name:n,cat,time,prio,desc,days,imgs:_tmpImgs};}
-  else tasks.push({id:uid(),name:n,cat,time,prio,desc,days,imgs:_tmpImgs});
+  const nowTs=tn().toISOString();
+  if(eid){const i=tasks.findIndex(t=>t.id===eid);if(i>=0)tasks[i]={...tasks[i],name:n,cat,time,prio,desc,days,imgs:_tmpImgs,updatedAt:nowTs};}
+  else tasks.push({id:uid(),name:n,cat,time,prio,desc,days,imgs:_tmpImgs,updatedAt:nowTs});
   save();closeM('tmov');renderHome();if(_curPage==='taches')renderTaches();showT('💾','Tâche enregistrée');
 }
 let _did=null;
@@ -1696,7 +1819,7 @@ function updCasseTotaux3(data){
   const el=document.getElementById('casseTotaux3');if(!el)return;
   el.innerHTML=RAYONS.map(r=>{
     const t=tot[r.key],noC=!t.casse||t.casse===0,tx=t.ca?(t.casse/t.ca*100).toFixed(2)+'%':'—',col=noC?'var(--green)':t.ca?'var(--red)':'var(--t3)';
-    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:9px;color:#1e3a8a;font-weight:900">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
+    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:9px;font-weight:900" class="cs-rlbl">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
   }).join('');
 }
 function renderCasse3(){
@@ -1707,7 +1830,7 @@ function renderCasse3(){
   const jrs=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
   let th='<thead><tr><th class="sticky" style="min-width:36px;vertical-align:middle" rowspan="2">Jour</th>';
   RAYONS.forEach(r=>{th+=`<th colspan="3" style="text-align:center;font-size:9px;font-weight:900;background:#1e3a8a;color:#ffffff">${r.label}</th>`;});
-  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px;color:#1e40af;font-weight:700">CA</th><th style="font-size:8px;color:#1e40af;font-weight:700">Casse</th><th style="font-size:8px;color:#1e40af;font-weight:700">TX</th>';});th+='</tr></thead>';
+  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">CA</th><th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">Casse</th><th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">TX</th>';});th+='</tr></thead>';
   const totCA={},totCasse={};RAYONS.forEach(r=>{totCA[r.key]=0;totCasse[r.key]=0;});
   let tb='<tbody>';
   for(let d=1;d<=days;d++){
@@ -1806,6 +1929,10 @@ function openRapportAbsences(){
   // Build data: for each employee, get status for each date
   var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
   var periodLabel='16 '+MFR[per.startM]+' '+per.startY+' → 15 '+MFR[per.endM]+' '+per.endY;
+  var nowD=new Date();
+  var dateLabel='Généré le '+nowD.getDate()+' '+MFR[nowD.getMonth()]+' '+nowD.getFullYear()+' à '+String(nowD.getHours()).padStart(2,'0')+':'+String(nowD.getMinutes()).padStart(2,'0');
+  var dateEl=document.getElementById('absRptDate');
+  if(dateEl) dateEl.textContent=dateLabel;
   
   var rows='';
   emps.forEach(function(emp,ei){
@@ -2503,17 +2630,18 @@ function addAccompte(){
 function saveAccompte(){
   var nom=document.getElementById('accNom').value.trim();
   var mat=document.getElementById('accMatricule').value.trim();
-  var type=document.getElementById('accType').value;
-  var montant=document.getElementById('accMontant').value.trim();
-  var note=document.getElementById('accNote').value.trim();
-  if(!nom||!montant){showT('⚠️','Nom et montant requis');return;}
+  var type=document.getElementById('accType').value.trim();
+  var montant=(document.getElementById('accMontant')||{value:''}).value.trim();
+  var note=(document.getElementById('accNote')||{value:''}).value.trim();
+  if(!nom){showT('⚠️','Nom requis');return;}
   var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
-  acc.unshift({nom:nom,matricule:mat,type:type,montant:montant,note:note,date:tstr()});
+  acc.push({id:uid(),nom:nom,mat:mat,type:type,montant:montant,note:note,date:tstr()});
   localStorage.setItem(SK+'_accomptes',JSON.stringify(acc));
-  document.getElementById('accompteForm').style.display='none';
-  showAdminTab('accompte');
-  showT('✅','Ajouté !');
+  closeM('accompteForm');
+  showAdminTab('a');
+  showT('✅','Retenu enregistré');
 }
+
 function delAccompte(i){
   var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
   acc.splice(i,1);
@@ -2568,10 +2696,72 @@ function updateDlcBadge(){
   var badge=document.getElementById('dlcNavBadge');
   if(badge){badge.textContent=urgent;badge.style.display=urgent>0?'flex':'none';}
 }
+
+function checkDlcNotifications(){
+  try{
+    var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    var now=new Date(); now.setHours(0,0,0,0);
+    var tomorrow=new Date(now); tomorrow.setDate(tomorrow.getDate()+1);
+    items.forEach(function(item){
+      var d=new Date(item.date); d.setHours(0,0,0,0);
+      var diff=Math.round((d-now)/(1000*60*60*24));
+      if(diff===1){
+        // Expires tomorrow
+        if(Notification.permission==='granted'){
+          new Notification('⚠️ DLC demain !',{
+            body:item.name+(item.rayon?' — '+item.rayon:''),
+            icon:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>'
+          });
+        }
+        showT('⚠️','DLC demain: '+item.name);
+      } else if(diff<=0){
+        if(Notification.permission==='granted'){
+          new Notification('🚨 DLC expiré !',{
+            body:item.name+(item.rayon?' — '+item.rayon:''),
+          });
+        }
+      }
+    });
+  }catch(e){}
+}
+function requestDlcNotifPerm(){
+  if('Notification' in window && Notification.permission==='default'){
+    Notification.requestPermission().then(function(p){
+      if(p==='granted') showT('🔔','Notifications activées !');
+    });
+  }
+}
+
+
+function printDlcReport(){
+  var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+  if(!items.length){showT('⚠️','Aucun produit DLC');return;}
+  var now=new Date(); now.setHours(0,0,0,0);
+  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var rows=items.map(function(item){
+    var d=new Date(item.date); d.setHours(0,0,0,0);
+    var diff=Math.round((d-now)/(1000*60*60*24));
+    var cls=diff<0?'p-urgent':diff<=3?'p-urgent':diff<=7?'p-attention':'p-ok';
+    var status=diff<0?'EXPIRÉ':diff===0?'Aujourd\'hui':diff===1?'Demain':diff+' jours';
+    var dStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+    return '<tr><td>'+item.name+'</td><td>'+(item.rayon||'—')+'</td><td>'+dStr+'</td><td class="'+cls+'">'+status+'</td></tr>';
+  }).join('');
+  var div=document.getElementById('printDLC');
+  div.innerHTML='<h2 style="color:#1e3a8a;margin-bottom:4px;">📦 Contrôle DLC</h2>'
+    +'<div style="font-size:11px;color:#666;margin-bottom:12px;">Généré le '+dateStr+'</div>'
+    +'<table><thead><tr><th>Produit</th><th>Rayon</th><th>Date DLC</th><th>Statut</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  window.print();
+}
+
+
 window.addEventListener('DOMContentLoaded', function(){
   // Load data
   load();
   initDef();
+  // DLC notifications
+  requestDlcNotifPerm();
+  setTimeout(checkDlcNotifications, 3000);
   // Load theme
   try{if(localStorage.getItem(SK+'_theme')==='light')document.body.classList.add('light');}catch(e){}
   // Load profile display
@@ -2603,5 +2793,6 @@ window.addEventListener('DOMContentLoaded', function(){
 });
 
 </script>
+<div id="printDLC" style="display:none;padding:20px;"></div>
 </body>
 </html>
