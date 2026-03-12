@@ -495,6 +495,35 @@ body.light .mg-logo-wrap{background:rgba(0,51,160,.08)!important;border-color:rg
 #empForm label, #dlcForm label, #congeForm label, #accompteForm label {
   color: rgba(200,210,255,.6) !important;
 }
+.bcard{background:var(--card);border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);cursor:pointer;}
+.bhdr{display:flex;align-items:center;gap:12px;padding:16px;}
+.btit{font-size:14px;font-weight:800;color:var(--t1);}
+.bsub{font-size:11px;color:var(--t2);margin-top:2px;}
+.barr{margin-left:auto;font-size:22px;color:var(--t2);font-weight:700;transition:transform .25s;flex-shrink:0;}
+.bcard.bopen .barr{transform:rotate(90deg);color:#a855f7;}
+.bbody{display:none;padding:0 16px 16px;font-size:13px;color:var(--t2);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);}
+.bbody p{margin:10px 0 0;}.bbody strong{color:var(--t1);}
+.bcard.bopen .bbody{display:block;}
+.btag{display:inline-block;background:rgba(168,85,247,.15);color:#a855f7;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;margin-top:10px;}
+.bsteps{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--t1);}
+/* TABLEAU DARKER */
+.sumcard3-l{color:rgba(255,255,255,.9)!important;font-weight:800!important;}
+.ca-tbl3 th,.ca-tbl3 .th{color:rgba(255,255,255,.88)!important;font-weight:700!important;}
+.cs-rayon-lbl,.cs-rayon-name{color:rgba(255,255,255,.88)!important;font-weight:700!important;}
+body.light .sumcard3-l{color:rgba(0,0,0,.8)!important;}
+body.light .ca-tbl3 th{color:rgba(0,0,0,.75)!important;}
+
+
+
+
+/* ══ CASSE RAYONS BLEU FONCÉ ══ */
+.cs-rayon-lbl, .cs-rayon-name, .rayon-label {
+  color: #1e3a8a !important;
+  font-weight: 900 !important;
+}
+body.light .cs-rayon-lbl, body.light .cs-rayon-name {
+  color: #1e3a8a !important;
+}
 </style>
 </head>
 <body>
@@ -1022,6 +1051,9 @@ body.light .mg-logo-wrap{background:rgba(0,51,160,.08)!important;border-color:rg
 <!-- ══ PIN MODAL ══ -->
 <div id="pinModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;"><div style="background:#12161f;border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px 24px;width:290px;text-align:center;"><div style="font-size:28px;margin-bottom:8px;">🔒</div><div style="font-family:'Syne';font-size:17px;font-weight:800;color:#f8faff;margin-bottom:4px;" id="pinTitle">Zone Administratif</div><div style="font-size:12px;color:#64748b;margin-bottom:20px;" id="pinSub">Entrez votre code PIN</div><div style="display:flex;justify-content:center;gap:12px;margin-bottom:24px;"><div id="pd0" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd1" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd2" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd3" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;"><button onclick="pinKey('1')" class="pinbtn">1</button><button onclick="pinKey('2')" class="pinbtn">2</button><button onclick="pinKey('3')" class="pinbtn">3</button><button onclick="pinKey('4')" class="pinbtn">4</button><button onclick="pinKey('5')" class="pinbtn">5</button><button onclick="pinKey('6')" class="pinbtn">6</button><button onclick="pinKey('7')" class="pinbtn">7</button><button onclick="pinKey('8')" class="pinbtn">8</button><button onclick="pinKey('9')" class="pinbtn">9</button><button onclick="pinCancel()" class="pinbtn" style="color:#ef4444;font-size:11px;">Annuler</button><button onclick="pinKey('0')" class="pinbtn">0</button><button onclick="pinDel()" class="pinbtn" style="font-size:18px;">⌫</button></div><div id="pinErr" style="font-size:11px;color:#ef4444;min-height:16px;"></div></div></div>
 
+
+
+</div>
 <script>
 'use strict';
 var _pinVal='',_pinMode='check',_pinUnlocked=false,_pinTemp='';
@@ -1664,7 +1696,7 @@ function updCasseTotaux3(data){
   const el=document.getElementById('casseTotaux3');if(!el)return;
   el.innerHTML=RAYONS.map(r=>{
     const t=tot[r.key],noC=!t.casse||t.casse===0,tx=t.ca?(t.casse/t.ca*100).toFixed(2)+'%':'—',col=noC?'var(--green)':t.ca?'var(--red)':'var(--t3)';
-    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:8px;color:var(--t2);font-weight:700">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
+    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:9px;color:#1e3a8a;font-weight:900">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
   }).join('');
 }
 function renderCasse3(){
@@ -1674,8 +1706,8 @@ function renderCasse3(){
   const isCur=(_csY===today.getFullYear()&&_csM===today.getMonth()),todD=today.getDate();
   const jrs=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
   let th='<thead><tr><th class="sticky" style="min-width:36px;vertical-align:middle" rowspan="2">Jour</th>';
-  RAYONS.forEach(r=>{th+=`<th colspan="3" style="text-align:center;font-size:8px;background:rgba(59,130,246,.07)">${r.label}</th>`;});
-  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px">CA</th><th style="font-size:8px">Casse</th><th style="font-size:8px">TX</th>';});th+='</tr></thead>';
+  RAYONS.forEach(r=>{th+=`<th colspan="3" style="text-align:center;font-size:9px;font-weight:900;background:#1e3a8a;color:#ffffff">${r.label}</th>`;});
+  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px;color:#1e40af;font-weight:700">CA</th><th style="font-size:8px;color:#1e40af;font-weight:700">Casse</th><th style="font-size:8px;color:#1e40af;font-weight:700">TX</th>';});th+='</tr></thead>';
   const totCA={},totCasse={};RAYONS.forEach(r=>{totCA[r.key]=0;totCasse[r.key]=0;});
   let tb='<tbody>';
   for(let d=1;d<=days;d++){
@@ -2009,17 +2041,10 @@ function exportTachesPDF(mode){
   showT('📄','Fichier téléchargé ! Ouvrez-le pour imprimer.');
 }
 
-window.addEventListener('DOMContentLoaded',()=>{
-  loadTheme();load();initDef();unlockA();
-  if(notifs.length)document.getElementById('nb').style.display='block';
-  renderHome();
-  updateDlcBadge();
-  updateClock();
-  setInterval(()=>{updateClock();checkTN();},1000);
-});
 
-
-// ══ NEW FEATURES v11 ══
+function toggleBoost(el){
+  el.classList.toggle('open');
+}
 
 function toggleDotMenu(e){
   e.stopPropagation();
@@ -2543,7 +2568,39 @@ function updateDlcBadge(){
   var badge=document.getElementById('dlcNavBadge');
   if(badge){badge.textContent=urgent;badge.style.display=urgent>0?'flex':'none';}
 }
-
+window.addEventListener('DOMContentLoaded', function(){
+  // Load data
+  load();
+  initDef();
+  // Load theme
+  try{if(localStorage.getItem(SK+'_theme')==='light')document.body.classList.add('light');}catch(e){}
+  // Load profile display
+  try{
+    var nm=document.getElementById('hname');
+    var sub=document.getElementById('hsub');
+    if(nm&&prof.name){nm.textContent=prof.name;}else if(nm){nm.textContent='Configurer profil';}
+    if(sub&&(prof.role||prof.store)){sub.textContent=[prof.role,prof.store].filter(Boolean).join(' · ');sub.style.display='block';}
+  }catch(e){}
+  // Start clock
+  function tickClock(){
+    try{
+      var now=new Date();
+      var utc=now.getTime()+(now.getTimezoneOffset()*60000);
+      var tn2=new Date(utc+(3600000*1));
+      var h=String(tn2.getHours()).padStart(2,'0');
+      var m=String(tn2.getMinutes()).padStart(2,'0');
+      var el=document.getElementById('clockDigital');
+      if(el)el.textContent=h+':'+m;
+      drawClock();
+    }catch(e){}
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+  // Render home
+  goPage('home');
+  // Update DLC badge
+  try{updateDlcBadge();}catch(e){}
+});
 
 </script>
 </body>
