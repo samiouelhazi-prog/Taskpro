@@ -71,7 +71,7 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .late-badge{position:absolute;top:2px;right:2px;background:var(--red);color:#fff;font-size:8px;font-weight:900;border-radius:99px;padding:1px 4px;min-width:14px;text-align:center;border:1.5px solid var(--bg);}
 
 /* ══════════════ CLOCK (Home) ══════════════ */
-.clock-section{padding:12px 18px 0;flex-shrink:0;}
+.clock-section{display:none;}
 .clock-info{}
 .clock-time{font-size:26px;font-weight:400;font-family:'IBM Plex Mono',monospace;line-height:1;letter-spacing:-0.5px;color:var(--t2);margin-top:2px;}
 .clock-date{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;line-height:1;letter-spacing:-.3px;margin-bottom:0;}
@@ -91,12 +91,12 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
   overflow:hidden;
 }
 .focus-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.6),transparent);}
-.focus-label{font-size:8.5px;font-weight:600;letter-spacing:2px;color:rgba(6,182,212,.8);text-transform:uppercase;margin-bottom:7px;}
-.focus-task{font-size:15px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;line-height:1.3;margin-bottom:8px;letter-spacing:-.2px;}
+.focus-label{font-size:9.5px;font-weight:800;letter-spacing:2px;color:#1e3a8a;text-transform:uppercase;margin-bottom:7px;}
+.focus-task{font-size:17px;font-weight:800;font-family:'IBM Plex Sans',sans-serif;line-height:1.3;margin-bottom:8px;letter-spacing:-.2px;}
 .focus-task.done-all{color:var(--green);font-size:14px;}
-.focus-row{display:flex;align-items:center;justify-content:space-between;}
-.focus-time{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:var(--cyan);}
-.focus-next{font-size:10px;color:var(--t2);}
+.focus-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:8px;}
+.focus-time{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:800;color:#1e3a8a;white-space:nowrap;}
+.focus-next{font-size:12px;font-weight:700;color:var(--t2);}
 .focus-prog{height:3px;background:rgba(255,255,255,.08);border-radius:99px;margin-top:10px;overflow:hidden;}
 .focus-progf{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:99px;transition:width .6s ease;}
 .prio-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
@@ -104,13 +104,13 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 /* ══════════════ STATS MINI ══════════════ */
 .stats-mini{display:flex;gap:0;padding:10px 18px 0;flex-shrink:0;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:16px;margin:8px 18px 0;overflow:hidden;}
 .sm-pill{flex:1;background:transparent;border:none;border-right:1px solid rgba(255,255,255,.06);padding:9px 4px;text-align:center;}
-.sm-v{font-size:18px;font-weight:500;font-family:'IBM Plex Mono',monospace;line-height:1;}
-.sm-l{font-size:7.5px;color:var(--t3);margin-top:3px;font-weight:400;text-transform:uppercase;letter-spacing:.8px;}.sm-pill:last-child{border-right:none;}
+.sm-v{font-size:20px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.sm-l{font-size:9px;color:var(--t2);margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}.sm-pill:last-child{border-right:none;}
 
 /* ══════════════ SWIPE CARDS SECTION ══════════════ */
 .cards-section{padding:10px 18px 0;}
 .cards-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-shrink:0;}
-.cards-title{font-size:11px;font-weight:800;color:var(--t2);letter-spacing:.8px;text-transform:uppercase;}
+.cards-title{font-size:12px;font-weight:900;color:var(--t1);letter-spacing:.8px;text-transform:uppercase;}
 .swipe-hint{font-size:9px;color:var(--t3);font-weight:600;}
 .cards-stack{padding-bottom:90px;}
 
@@ -141,20 +141,20 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .swipe-card.col-pink{background:linear-gradient(135deg,rgba(236,72,153,.18),rgba(236,72,153,.06));border-color:rgba(236,72,153,.3);}
 .swipe-card.col-gray{background:linear-gradient(135deg,rgba(100,116,139,.18),rgba(100,116,139,.06));border-color:rgba(100,116,139,.3);}
 /* Swipe indicators */
-.swipe-ok{position:absolute;top:10px;right:12px;background:rgba(34,197,94,.2);border:1.5px solid var(--green);border-radius:99px;padding:4px 10px;font-size:10px;font-weight:800;color:var(--green);opacity:0;transition:opacity .15s;}
-.swipe-skip{position:absolute;top:10px;left:12px;background:rgba(239,68,68,.15);border:1.5px solid var(--red);border-radius:99px;padding:4px 10px;font-size:10px;font-weight:800;color:var(--red);opacity:0;transition:opacity .15s;}
+.swipe-ok{position:absolute;top:10px;right:12px;background:rgba(34,197,94,.2);border:1.5px solid var(--green);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:800;color:var(--green);opacity:0;transition:opacity .15s;}
+.swipe-skip{position:absolute;top:10px;left:12px;background:rgba(239,68,68,.15);border:1.5px solid var(--red);border-radius:99px;padding:5px 12px;font-size:12px;font-weight:800;color:var(--red);opacity:0;transition:opacity .15s;}
 .card-prio{display:inline-flex;align-items:center;gap:3px;padding:1px 8px 1px 6px;border-radius:6px;font-size:8px;font-weight:600;margin-bottom:6px;letter-spacing:.2px;}
 .card-prio.red{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.25);}
 .card-prio.yellow{background:rgba(234,179,8,.12);color:var(--yellow);border:1px solid rgba(234,179,8,.2);}
 .card-prio.green{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2);}
 .card-prio.blue{background:rgba(59,130,246,.12);color:var(--blue);border:1px solid rgba(59,130,246,.2);}
-.card-name{font-size:14px;font-weight:600;font-family:'IBM Plex Sans',sans-serif;line-height:1.2;margin-bottom:4px;letter-spacing:-.1px;}
-.card-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--t2);font-weight:500;}
+.card-name{font-size:16px;font-weight:800;font-family:'IBM Plex Sans',sans-serif;line-height:1.2;margin-bottom:4px;letter-spacing:-.1px;}
+.card-time{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--t2);font-weight:700;}
 .card-late{color:var(--red);animation:blinkLate 1.5s infinite;}
 @keyframes blinkLate{0%,100%{opacity:1}50%{opacity:.5}}
 .card-desc{font-size:10px;color:var(--t2);margin-top:4px;line-height:1.3;}
 .card-actions{display:flex;gap:6px;margin-top:8px;}
-.card-btn{flex:1;padding:8px 6px;border-radius:10px;border:none;font-family:'IBM Plex Sans',sans-serif;font-size:10px;font-weight:700;cursor:pointer;transition:transform .15s;text-align:center;}
+.card-btn{flex:1;padding:9px 6px;border-radius:10px;border:none;font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:transform .15s;text-align:center;}
 .card-btn:active{transform:scale(.94);}
 .card-btn.done{background:rgba(34,197,94,.15);color:var(--green);border:1.5px solid rgba(34,197,94,.3);}
 .card-btn.skip{background:rgba(239,68,68,.1);color:var(--red);border:1.5px solid rgba(239,68,68,.2);}
@@ -172,12 +172,29 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 @keyframes fabPulse{0%,100%{box-shadow:0 4px 20px rgba(59,130,246,.5),0 0 0 0 rgba(59,130,246,.4)}50%{box-shadow:0 4px 20px rgba(59,130,246,.5),0 0 0 10px rgba(59,130,246,0)}}
 
 /* ══════════════ BOTTOM NAV ══════════════ */
-.bnav{display:flex;background:rgba(6,7,14,.9);border-top:1px solid rgba(255,255,255,.07);padding:8px 0 max(14px,env(safe-area-inset-bottom));flex-shrink:0;backdrop-filter:blur(28px);}
-.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:2px;}
-.bi-ico{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--t3);transition:all .2s;}
-.bi.on .bi-ico{background:rgba(59,130,246,.15);color:var(--blue);}
-.bi-l{font-size:9px;color:var(--t3);font-weight:700;letter-spacing:.3px;}
-.bi.on .bi-l{color:var(--blue);}
+.bnav{display:flex;background:rgba(8,10,18,.97);border-top:2px solid rgba(255,255,255,.07);padding:10px 0 max(16px,env(safe-area-inset-bottom));flex-shrink:0;backdrop-filter:blur(28px);}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:4px 2px;}
+.bi-ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);transition:all .2s;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.08);}
+.bi.on .bi-ico{border-color:rgba(59,130,246,.5);}
+.bi-l{font-size:11px;color:rgba(255,255,255,.4);font-weight:800;letter-spacing:.2px;}
+#navHome.on .bi-ico{background:rgba(30,41,59,.8);border-color:#1e293b;color:#f8faff;box-shadow:0 2px 12px rgba(15,23,42,.5);}
+#navHome.on .bi-l{color:#f8faff;font-weight:900;}
+#navTaches.on .bi-ico{background:#1e3a8a;border-color:#1e40af;color:#fff;box-shadow:0 2px 12px rgba(30,58,138,.5);}
+#navTaches.on .bi-l{color:#1e3a8a;font-weight:900;}
+#navDlc.on .bi-ico{background:#991b1b;border-color:#b91c1c;color:#fff;box-shadow:0 2px 12px rgba(153,27,27,.5);}
+#navDlc.on .bi-l{color:#ef4444;font-weight:900;}
+#navChiffres.on .bi-ico{background:#14532d;border-color:#166534;color:#fff;box-shadow:0 2px 12px rgba(20,83,45,.5);}
+#navChiffres.on .bi-l{color:#16a34a;font-weight:900;}
+body.light .bi-ico{color:rgba(0,0,0,.25);background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1);}
+body.light .bi-l{color:rgba(0,0,0,.45);font-weight:800;}
+body.light #navHome.on .bi-ico{background:#1e293b;border-color:#0f172a;color:#fff;box-shadow:0 2px 8px rgba(15,23,42,.3);}
+body.light #navHome.on .bi-l{color:#1e293b;font-weight:900;}
+body.light #navTaches.on .bi-ico{background:#1e3a8a;border-color:#1e40af;color:#fff;box-shadow:0 2px 8px rgba(30,58,138,.4);}
+body.light #navTaches.on .bi-l{color:#1e3a8a;font-weight:900;}
+body.light #navDlc.on .bi-ico{background:#991b1b;border-color:#b91c1c;color:#fff;box-shadow:0 2px 8px rgba(153,27,27,.4);}
+body.light #navDlc.on .bi-l{color:#b91c1c;font-weight:900;}
+body.light #navChiffres.on .bi-ico{background:#14532d;border-color:#166534;color:#fff;box-shadow:0 2px 8px rgba(20,83,45,.4);}
+body.light #navChiffres.on .bi-l{color:#16a34a;font-weight:900;}
 /* Center FAB space */
 .bi-fab-space{flex:1;}
 
@@ -190,7 +207,7 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .fbtn{padding:6px 13px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;color:var(--t2);white-space:nowrap;transition:all .2s;flex-shrink:0;}
 .fbtn.on{background:var(--blue);color:#fff;}
 /* Task list item */
-.tli{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);backdrop-filter:blur(10px);transition:transform .15s;}
+.tli{display:flex;align-items:flex-start;gap:12px;padding:15px 16px;border-radius:18px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);backdrop-filter:blur(10px);transition:transform .15s;}
 .tli:active{transform:scale(.98);}
 .tli.done{opacity:.45;}
 .tli.done .tli-name{text-decoration:line-through;}
@@ -200,12 +217,12 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .tli.prio-blue{background:rgba(59,130,246,.06);border-left:3px solid var(--blue);}
 .tli.late:not(.done){border-left:3px solid var(--orange)!important;}
 
-.chk{width:24px;height:24px;border-radius:8px;border:2px solid var(--bord2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;}
+.chk{width:24px;height:24px;border-radius:8px;border:2px solid var(--bord2);flex-shrink:0;align-self:flex-start;margin-top:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s;}
 .chk.done{background:var(--green);border-color:var(--green);}
 .chk.red{border-color:var(--red);}
 .chk.yellow{border-color:var(--yellow);}
 .tli-bd{flex:1;min-width:0;}
-.tli-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.1px;}
+.tli-name{font-size:15px;font-weight:800;white-space:normal;overflow:visible;word-break:break-word;letter-spacing:-.1px;line-height:1.3;}
 .tli-meta{margin-top:3px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
 .chip{background:rgba(255,255,255,.06);padding:2px 8px;border-radius:6px;font-size:8.5px;font-weight:500;color:var(--t2);letter-spacing:.2px;}
 .chip.blue{background:rgba(59,130,246,.12);color:var(--blue);}
@@ -213,7 +230,7 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .chip.green{background:rgba(34,197,94,.12);color:var(--green);}
 .chip.yellow{background:rgba(234,179,8,.1);color:var(--yellow);}
 .chip.late{background:rgba(239,68,68,.15);color:var(--red);}
-.tli-edit{padding:4px;color:var(--t3);font-size:13px;cursor:pointer;flex-shrink:0;}
+.tli-edit{padding:4px;color:var(--t3);font-size:13px;cursor:pointer;flex-shrink:0;align-self:flex-start;margin-top:2px;}
 
 /* ══════════════ CONTROLE SECTION ══════════════ */
 .ctrl-section{margin:8px 18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;backdrop-filter:blur(12px);}
@@ -381,6 +398,12 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 body.light{
   background:linear-gradient(160deg,#e8f0fe 0%,#f0f4ff 60%,#f8fafc 100%) !important;
   color:#0d1117;
+  --t1:#0d1117;
+  --t2:#4a5568;
+  --t3:#9ca3af;
+  --card:rgba(0,0,0,.06);
+  --bord:rgba(0,0,0,.1);
+  --s1:rgba(0,0,0,.04);
 }
 body.light .bnav{background:rgba(240,244,255,.92)!important;border-top:1px solid rgba(0,0,0,.1)!important;}
 body.light .av{background:linear-gradient(140deg,#2563eb,#7c3aed)!important;}
@@ -452,7 +475,7 @@ body.light .vbtn{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.1
 body.light .vtxt{color:#4a5568!important;}
 body.light .mg{background:rgba(0,0,0,.08)!important;border-color:rgba(0,0,0,.12)!important;color:#374151!important;}
 
-body.light #hname{color:#0d1117!important;}
+body.light #hname{color:#0d1117!important;} body.light #clockDigital{color:#0f172a!important;} body.light #hsub{color:#14532d!important;font-weight:900!important;}
 body.light #hsub{color:rgba(0,0,0,.75)!important;font-weight:600!important;}
 body.light #tbGreet{color:rgba(0,0,0,.45)!important;}
 body.light .topbar{border-bottom-color:rgba(0,0,0,.08)!important;}
@@ -495,51 +518,60 @@ body.light .mg-logo-wrap{background:rgba(0,51,160,.08)!important;border-color:rg
 #empForm label, #dlcForm label, #congeForm label, #accompteForm label {
   color: rgba(200,210,255,.6) !important;
 }
-.bcard{background:var(--card);border-radius:16px;margin-bottom:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07);cursor:pointer;}
-.bhdr{display:flex;align-items:center;gap:12px;padding:16px;}
-.btit{font-size:14px;font-weight:800;color:var(--t1);}
-.bsub{font-size:11px;color:var(--t2);margin-top:2px;}
-.barr{margin-left:auto;font-size:22px;color:var(--t2);font-weight:700;transition:transform .25s;flex-shrink:0;}
-.bcard.bopen .barr{transform:rotate(90deg);color:#a855f7;}
-.bbody{display:none;padding:0 16px 16px;font-size:13px;color:var(--t2);line-height:1.6;border-top:1px solid rgba(255,255,255,.06);}
-.bbody p{margin:10px 0 0;}.bbody strong{color:var(--t1);}
-.bcard.bopen .bbody{display:block;}
-.btag{display:inline-block;background:rgba(168,85,247,.15);color:#a855f7;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;margin-top:10px;}
-.bsteps{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--t1);}
-/* TABLEAU DARKER */
-.sumcard3-l{color:rgba(255,255,255,.9)!important;font-weight:800!important;}
-.ca-tbl3 th,.ca-tbl3 .th{color:rgba(255,255,255,.88)!important;font-weight:700!important;}
-.cs-rayon-lbl,.cs-rayon-name{color:rgba(255,255,255,.88)!important;font-weight:700!important;}
-body.light .sumcard3-l{color:rgba(0,0,0,.8)!important;}
-body.light .ca-tbl3 th{color:rgba(0,0,0,.75)!important;}
+
+@media print{body>*:not(#printDLC){display:none!important;}#printDLC{display:block!important;font-family:Arial,sans-serif;font-size:12px;color:#000;}#printDLC table{width:100%;border-collapse:collapse;}#printDLC th,#printDLC td{border:1px solid #ccc;padding:6px 10px;text-align:left;}#printDLC th{background:#1e3a8a;color:#fff;}#printDLC .p-urgent{color:#dc2626;font-weight:bold;}#printDLC .p-attention{color:#d97706;}#printDLC .p-ok{color:#16a34a;}}
+
+.statut-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;border:none;transition:all .2s;white-space:nowrap;}
+.statut-nd{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3);}
+.statut-ip{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
+.statut-dn{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3);}
+.tli.statut-border-nd{border-left:3px solid #ef4444!important;}
+.tli.statut-border-ip{border-left:3px solid #f59e0b!important;}
+.tli.statut-border-dn{border-left:3px solid #22c55e!important;}
+body.light .statut-nd{background:rgba(239,68,68,.1);color:#b91c1c;}
+body.light .statut-ip{background:rgba(245,158,11,.1);color:#92400e;}
+body.light .statut-dn{background:rgba(34,197,94,.1);color:#166534;}
+
+/* ══ EQUIPE LIGHT MODE ══ */
+body.light #pgBriefing .scroll > div,
+body.light #pgVigilance .scroll > div,
+body.light #pgHygiene .scroll > div,
+
+body.light [data-vg] { color: #0d1117 !important; background: rgba(0,0,0,.07) !important; border-color: rgba(0,0,0,.2) !important; }
+body.light #planningGrid > div { background: rgba(255,255,255,.8) !important; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+body.light #planningGrid > div > div:first-child { background: rgba(0,0,0,.06) !important; }
+body.light #planningGrid > div > div { border-top-color: rgba(0,0,0,.06) !important; }
+body.light .vigilanceModal > div, body.light .planningModal > div, 
 
 
-
-
-/* ══ CASSE RAYONS BLEU FONCÉ ══ */
-.cs-rayon-lbl, .cs-rayon-name, .rayon-label {
-  color: #1e3a8a !important;
-  font-weight: 900 !important;
+#bestSellerModal input, #bestSellerModal select,
+#planningModal select {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
-body.light .cs-rayon-lbl, body.light .cs-rayon-name {
-  color: #1e3a8a !important;
+#bestSellerModal input::placeholder { color: rgba(255,255,255,.35) !important; }
+
+.drawer{color-scheme:dark;}
+.dr-tit{color:#f8faff!important;font-weight:900!important;}
+.dr-nm{color:#f8faff!important;font-weight:700!important;}
+body.light .dr-tit{color:#0d1117!important;}
+body.light .dr-nm{color:#0d1117!important;}
+
+/* Force dark on commercial/taches pages */
+#pgCommercial .tli, #pgCommercial .tli-name, #pgCommercial .scroll {
+  background: rgba(255,255,255,.03) !important;
+  color: var(--t1) !important;
+}
+body.light #pgCommercial .tli {
+  background: rgba(0,0,0,.04) !important;
+  border-color: rgba(0,0,0,.08) !important;
+}
+body.light #pgCommercial .tli-name {
+  color: #0d1117 !important;
+  font-weight: 800 !important;
 }
 
-
-.cs-rlbl { color: var(--t1); }
-body.light .cs-rlbl { color: #1e3a8a !important; }
-
-@media print {
-  body > *:not(#printDLC) { display: none !important; }
-  #printDLC { display: block !important; }
-  #printDLC { font-family: Arial, sans-serif; font-size: 12px; color: #000; }
-  #printDLC table { width: 100%; border-collapse: collapse; }
-  #printDLC th, #printDLC td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
-  #printDLC th { background: #1e3a8a; color: #fff; }
-  #printDLC .p-urgent { color: #dc2626; font-weight: bold; }
-  #printDLC .p-attention { color: #d97706; }
-  #printDLC .p-ok { color: #16a34a; }
-}
+input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text-fill-color:#fff!important;}
 </style>
 </head>
 <body>
@@ -548,59 +580,43 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
 
 <!-- ══ HOME ══ -->
 <div class="pg on" id="pgHome">
-  <div class="topbar" style="padding:14px 18px 10px;">
-    <div style="display:flex;align-items:center;gap:0;">
-      <!-- MENU à gauche -->
-      <div onclick="openDr('menu')" style="display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;padding:6px 10px 6px 0;-webkit-tap-highlight-color:transparent;">
-        <svg fill="currentColor" width="18" height="12" viewBox="0 0 24 16" style="display:block;">
-          <rect y="0" width="24" height="2.5" rx="1.5" fill="currentColor"/>
-          <rect y="6.5" width="24" height="2.5" rx="1.5" fill="currentColor"/>
-          <rect y="13" width="24" height="2.5" rx="1.5" fill="currentColor"/>
-        </svg>
-        <span style="font-size:9px;font-weight:700;color:currentColor;letter-spacing:.3px;line-height:1;">Menu</span>
-      </div>
+  <!-- TOPBAR ROW -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
+    <div onclick="openDr('menu')" style="display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer;padding:4px 8px 4px 0;-webkit-tap-highlight-color:transparent;">
+      <svg fill="currentColor" width="18" height="12" viewBox="0 0 24 16"><rect y="0" width="24" height="2.5" rx="1.5" fill="currentColor"/><rect y="6.5" width="24" height="2.5" rx="1.5" fill="currentColor"/><rect y="13" width="24" height="2.5" rx="1.5" fill="currentColor"/></svg>
+      <span style="font-size:9px;font-weight:700;color:currentColor;letter-spacing:.3px;line-height:1;">Menu</span>
     </div>
-    <!-- Infos profil au centre -->
-    <div onclick="openPM()" style="cursor:pointer;flex:1;min-width:0;padding:0 10px;">
-      <div style="font-size:11px;font-weight:500;margin-bottom:2px;" id="tbGreet">Bonjour 👋</div>
-      <div id="hname" style="font-size:19px;font-weight:900;font-family:'Syne',sans-serif;color:#f8faff;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Configurer profil</div>
-      <div id="hsub" style="display:none;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
-    </div>
-    <!-- NOTIFICATION à droite -->
+    <div style="font-size:12px;font-weight:600;color:var(--t2);" id="tbGreet">Bonjour 👋</div>
     <div class="ic-btn" onclick="openDr('notifs')" style="position:relative;">
       <svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
       <div class="nbadge" id="nb" style="display:none"></div>
       <div class="late-badge" id="lateBadge" style="display:none">0</div>
     </div>
   </div>
-
   <div class="scroll" id="homeScroll">
 
-
-  <!-- LOGO MG -->
-  <div style="display:flex;align-items:center;padding:2px 18px 6px;">
-    <div style="display:inline-flex;align-items:center;gap:6px;background:#e8041b;border-radius:8px;padding:4px 10px 4px 4px;">
-      <!-- Icône feuilles sur fond BLANC -->
-      <div style="background:#ffffff;border-radius:5px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <svg width="20" height="20" viewBox="0 0 40 40">
-          <ellipse cx="20" cy="13" rx="7" ry="11" fill="#e07b20" transform="rotate(-15 20 13)"/>
-          <ellipse cx="27" cy="23" rx="6" ry="10" fill="#3a9e3f" transform="rotate(30 27 23)"/>
-          <ellipse cx="13" cy="25" rx="6" ry="9" fill="#f0c020" transform="rotate(-30 13 25)"/>
-        </svg>
+  <!-- ══ HERO HEADER ══ -->
+  <div style="padding:16px 18px 10px;display:flex;align-items:center;gap:14px;">
+    <div onclick="openPM()" style="cursor:pointer;flex-shrink:0;position:relative;">
+      <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(140deg,#e8041b,#b90214);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(232,4,27,.4);border:2px solid rgba(255,255,255,.15);">
+        <div style="width:48px;height:48px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;">
+          <svg width="34" height="34" viewBox="0 0 40 40"><ellipse cx="20" cy="13" rx="7" ry="11" fill="#e07b20" transform="rotate(-15 20 13)"/><ellipse cx="27" cy="23" rx="6" ry="10" fill="#3a9e3f" transform="rotate(30 27 23)"/><ellipse cx="13" cy="25" rx="6" ry="9" fill="#f0c020" transform="rotate(-30 13 25)"/></svg>
+        </div>
       </div>
-      <span style="font-size:15px;font-weight:900;color:#ffffff;font-family:'Syne',sans-serif;letter-spacing:-0.5px;line-height:1;">mg</span>
+      <div style="position:absolute;bottom:-2px;right:-2px;background:#e8041b;border-radius:10px;padding:1px 6px;border:1.5px solid rgba(255,255,255,.2);"><span style="font-size:9px;font-weight:900;color:#fff;font-family:'Syne',sans-serif;letter-spacing:.5px;">MG</span></div>
+    </div>
+    <div style="flex:1;min-width:0;" onclick="openPM()">
+      <div id="hname" style="font-size:20px;font-weight:900;font-family:'Syne',sans-serif;color:var(--t1);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;">Configurer profil</div>
+      <div id="hsub" style="display:none;font-size:12px;font-weight:800;color:#14532d;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.1px;"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+        <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:9px;color:var(--t3);">📅</span><span class="clock-date" id="tbDate" style="font-size:12px;font-weight:700;font-family:'Syne',sans-serif;color:var(--t2);"></span></div>
+        <div style="width:3px;height:3px;border-radius:50%;background:var(--t3);"></div>
+        <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:9px;color:var(--t3);">🕐</span><span id="clockDigital" style="font-size:17px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#0f172a;letter-spacing:-.5px;">--:--:--</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- CLOCK + DATE -->
-  <div class="clock-section">
-    <div class="clock-info">
-      <div class="clock-date" id="tbDate">Chargement...</div>
-      <div class="clock-time" id="clockDigital">--:--</div>
-    </div>
-  </div>
-
-  <!-- FOCUS CARD -->
+    <!-- FOCUS CARD -->
   <div class="focus-wrap">
     <div class="focus-card" onclick="goPage('taches')">
       <div class="focus-label">⚡ Focus maintenant</div>
@@ -624,7 +640,7 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
   </div>
 
   <!-- YESTERDAY SUMMARY -->
-  <div id="yesterdayBar" style="display:none;margin:8px 16px 0;background:var(--card);border-radius:12px;padding:10px 14px;border-left:3px solid #a855f7;border:1px solid rgba(168,85,247,.2);">
+  <div id="yesterdayBar" style="display:none;margin:8px 16px 0;background:var(--card);border-radius:12px;padding:10px 14px;border:1px solid rgba(168,85,247,.2);">
     <div style="font-size:10px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">📊 Hier</div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div id="yDone" style="font-size:18px;font-weight:900;color:var(--t1);">—</div>
@@ -645,6 +661,22 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
     <div class="cards-stack" id="cardsStack"></div>
   </div>
 
+
+  <!-- NOTE PERSONNELLE -->
+  <div style="margin:0 16px 16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <div style="font-size:12px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;">✍️ Note Personnelle</div>
+      <div id="notesSavedLbl" style="font-size:10px;color:var(--t3);display:none;">✓ Sauvegardé</div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:8px;">
+      <button onclick="switchNoteTab('success')" id="noteTabSuccess" style="flex:1;padding:8px;border-radius:10px;border:1.5px solid rgba(34,197,94,.4);background:rgba(34,197,94,.12);color:#22c55e;font-size:11px;font-weight:800;cursor:pointer;">🏆 Succès du jour</button>
+      <button onclick="switchNoteTab('improve')" id="noteTabImprove" style="flex:1;padding:8px;border-radius:10px;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;">🎯 À améliorer</button>
+    </div>
+    <div id="notePanelSuccess"><textarea id="noteSuccess" placeholder="Qu'est-ce qui s'est bien passé aujourd'hui ? 🌟" style="width:100%;min-height:90px;background:rgba(34,197,94,.05);border:1.5px solid rgba(34,197,94,.2);border-radius:12px;padding:12px;color:var(--t1);font-size:13px;resize:none;box-sizing:border-box;font-family:'IBM Plex Sans',sans-serif;line-height:1.5;" oninput="saveNotePerso()"></textarea></div>
+    <div id="notePanelImprove" style="display:none;"><textarea id="noteImprove" placeholder="Que veux-tu améliorer demain ? 🎯" style="width:100%;min-height:90px;background:rgba(245,158,11,.05);border:1.5px solid rgba(245,158,11,.2);border-radius:12px;padding:12px;color:var(--t1);font-size:13px;resize:none;box-sizing:border-box;font-family:'IBM Plex Sans',sans-serif;line-height:1.5;" oninput="saveNotePerso()"></textarea></div>
+    <button onclick="toggleNoteHistory()" style="width:100%;margin-top:8px;background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--t2);font-size:11px;font-weight:600;padding:8px;border-radius:10px;cursor:pointer;">📖 Historique des notes</button>
+    <div id="noteHistory" style="display:none;margin-top:8px;"></div>
+  </div>
   </div><!-- /homeScroll -->
 </div>
 
@@ -658,26 +690,52 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
 
     <!-- CARD COMMERCIAL -->
     <div onclick="goPage('commercial')" style="background:linear-gradient(135deg,#1e3a8a,#1e40af);border:1px solid rgba(59,130,246,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
-      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">🛒</div>
+      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.09;">🛒</div>
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
-      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Tâches Commerciales</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Contrôle dépôt · Suivi · Tâches quotidiennes</div>
+      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#ffffff;margin-bottom:6px;">Tâches Commerciales</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);margin-bottom:14px;">Contrôle dépôt · Suivi · Tâches quotidiennes</div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <div id="homeCommDone" style="font-size:11px;font-weight:700;color:#22c55e;">0 faites</div>
-        <div style="width:4px;height:4px;border-radius:50%;background:#475569;"></div>
-        <div id="homeCommPend" style="font-size:11px;color:rgba(255,255,255,.8);">0 en attente</div>
-        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:rgba(255,255,255,.9);">›</div>
+        <div id="homeCommDone" style="font-size:11px;font-weight:700;color:#86efac;">0 faites</div>
+        <div style="width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.4);"></div>
+        <div id="homeCommPend" style="font-size:11px;color:rgba(255,255,255,.7);">0 en attente</div>
+        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;">›</div>
       </div>
     </div>
 
     <!-- CARD ADMIN -->
-    <div onclick="goPage('admin')" style="background:linear-gradient(135deg,#991b1b,#b91c1c);border:1px solid rgba(168,85,247,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
-      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">📋</div>
+    <div onclick="goPage('admin')" style="background:linear-gradient(135deg,#581c87,#7c3aed);border:1px solid rgba(168,85,247,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.09;">📋</div>
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
-      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Tâches Administratives</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Pointage · Congés · Accomptes & Avances</div>
+      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#ffffff;margin-bottom:6px;">Tâches Administratives</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.75);margin-bottom:14px;">Pointage · Congés · Accomptes & Avances</div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <div id="homeAdminEmp" style="font-size:11px;color:rgba(255,255,255,.8);">Gestion du personnel</div>
+        <div id="homeAdminEmp" style="font-size:11px;color:rgba(255,255,255,.7);">Gestion du personnel</div>
+        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;">›</div>
+      </div>
+    </div>
+
+
+    <!-- CARD EQUIPE -->
+    <div onclick="goPage('equipe')" style="background:linear-gradient(135deg,#065f46,#047857);border:1px solid rgba(16,185,129,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;margin-top:12px;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">👥</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
+      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Gestion d'Équipe</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Briefing · Planning · Hygiène · Vigilance</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="font-size:11px;color:rgba(255,255,255,.8);">Suivi quotidien</div>
+        <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:rgba(255,255,255,.9);">›</div>
+      </div>
+    </div>
+
+
+    <!-- CARD AVANCÉES -->
+    <div onclick="goPage('avancees')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.35);border-radius:20px;padding:20px;cursor:pointer;position:relative;overflow:hidden;margin-top:12px;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:70px;opacity:.07;">🚀</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:8px;">Section</div>
+      <div style="font-size:20px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:6px;">Tâches Avancées</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.8);margin-bottom:14px;">Optimisation · Démarque · Veille</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="font-size:11px;color:rgba(255,255,255,.8);">Pilotage stratégique</div>
         <div style="margin-left:auto;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:rgba(255,255,255,.9);">›</div>
       </div>
     </div>
@@ -689,13 +747,7 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
   <div class="pg-topbar" style="position:relative;">
     <div class="pg-back" onclick="goPage('taches')">‹</div>
     <div class="pg-title">🛒 Commercial</div>
-    <div style="margin-left:auto;width:34px;height:34px;border-radius:50%;background:rgba(59,130,246,.25);border:2px solid rgba(59,130,246,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:900;color:#60a5fa;" onclick="toggleDotMenu(event)">⋮</div>
-    <div id="dotMenu" style="position:absolute;top:52px;right:12px;background:#0d0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px;z-index:250;display:none;flex-direction:column;gap:2px;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.8);">
-      <div onclick="closeDotMenu();openRapport()" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📸 Rapport journalier</div>
-      <div onclick="closeDotMenu();exportTachesPDF('today')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📄 Tâches du jour (PDF)</div>
-      <div onclick="closeDotMenu();exportTachesPDF('week')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">📅 Tâches semaine (PDF)</div>
-      <div onclick="closeDotMenu();openTM(null)" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">➕ Nouvelle tâche</div>
-    </div>
+    <button onclick="openTachesMenu()" style="background:rgba(59,130,246,.2);border:1.5px solid rgba(59,130,246,.4);color:#60a5fa;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;flex-shrink:0;">⋮</button>
   </div>
   <div class="filter-wrap">
     <div class="fbtn on" id="ft-today" onclick="setFT('today',this)">Chaque jour</div>
@@ -708,25 +760,173 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
 </div>
 
 <div class="pg" id="pgAdmin">
-  <div class="pg-topbar" style="position:relative;">
-    <div class="pg-back" onclick="goPage('taches')">‹</div>
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Tâches</div>
     <div class="pg-title">📋 Administratif</div>
-    <div style="margin-left:auto;width:34px;height:34px;border-radius:50%;background:rgba(168,85,247,.25);border:2px solid rgba(168,85,247,.6);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:900;color:#c084fc;" onclick="toggleAdminMenu(event)">⋮</div>
-    <div id="adminDotMenu" style="position:absolute;top:52px;right:12px;background:#0d0f1e;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px;z-index:250;display:none;flex-direction:column;gap:2px;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,.8);">
-      <div onclick="closeAdminMenu();showAdminTab('pointage')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">👆 Pointage Personnels</div>
-      <div onclick="closeAdminMenu();showAdminTab('conge')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">🏖️ Congé Personnels</div>
-      <div onclick="closeAdminMenu();showAdminTab('accompte')" style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:500;color:var(--t1);">💰 Suivi Accompte / Avance</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div onclick="goPage('listepersonnel')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">👥</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Liste Personnel</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Matricules · Noms · Postes</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
+
+    <div onclick="goPage('pointage')" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">👆</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Pointage</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Présences · Absences · Retards</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+    <div onclick="goPage('conge')" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">🏖️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Congés</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Soldes · Demandes · Suivi</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+    <div onclick="goPage('retenus')" style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">💰</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Retenus</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Accomptes · Avances · Achat/mois</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
   </div>
-  <!-- Tab Pills -->
-  <div style="display:flex;gap:6px;padding:10px 18px 0;flex-shrink:0;">
-    <div id="adminTabP" onclick="showAdminTab('pointage')" style="flex:1;padding:9px 4px;text-align:center;border-radius:12px;background:rgba(168,85,247,.3);border:1px solid rgba(168,85,247,.5);color:#c084fc;font-size:10px;font-weight:700;cursor:pointer;">👆 Pointage</div>
-    <div id="adminTabC" onclick="showAdminTab('conge')" style="flex:1;padding:9px 4px;text-align:center;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#94a3b8;font-size:10px;font-weight:700;cursor:pointer;">🏖️ Congés</div>
-    <div id="adminTabA" onclick="showAdminTab('accompte')" style="flex:1;padding:9px 4px;text-align:center;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#94a3b8;font-size:10px;font-weight:700;cursor:pointer;">💰 Retenus</div>
-  </div>
-  <div class="scroll"><div style="padding:14px 18px 110px" id="adminContent"></div></div>
 </div>
 
+
+<!-- ══ LISTE PERSONNEL ══ -->
+<div class="pg" id="pgListePersonnel">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Admin</div>
+    <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👥 Liste Personnel</div>
+    <button onclick="addEmp()" style="background:#0369a1;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="listePersonnelContent"></div>
+  </div>
+</div>
+
+<!-- ══ POINTAGE PAGE ══ -->
+<div class="pg" id="pgPointage">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Admin</div>
+    <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👆 Pointage</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addEmp()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="openPointagePdf()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="pointageDate" style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:12px;padding:8px;background:var(--card);border-radius:10px;"></div>
+    <div id="pointageList"></div>
+  </div>
+</div>
+
+<!-- ══ CONGÉ PAGE ══ -->
+<div class="pg" id="pgConge">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Admin</div>
+    <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🏖️ Congés</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addConge()" style="background:#2563eb;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="openCongePdf()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="congeList"></div>
+  </div>
+</div>
+
+<!-- ══ RETENUS HUB ══ -->
+<div class="pg" id="pgRetenus">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Admin</div>
+    <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">💰 Retenus</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div onclick="goPage('pgAccompte')" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:30px;">💵</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Accomptes</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);">Avances sur salaire</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('pgAvance')" style="background:linear-gradient(135deg,#78350f,#d97706);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:30px;">💸</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Avances</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);">Avances exceptionnelles</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('pgAchat')" style="background:linear-gradient(135deg,#064e3b,#16a34a);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:30px;">🛒</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Achat / Mois</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);">Achats sur fiche mensuelle</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ACCOMPTE PAGE ══ -->
+<div class="pg" id="pgAccompte">
+  <div class="pg-topbar" style="background:linear-gradient(90deg,rgba(30,58,138,.3),transparent);">
+    <div class="pg-back" onclick="goPage('retenus')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Retenus</div>
+    <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">💵 Accomptes</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addRetenu('accompte')" style="background:#1d4ed8;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="openRetenuPdf('accompte')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;"><div id="accompteList"></div></div>
+</div>
+
+<!-- ══ AVANCE PAGE ══ -->
+<div class="pg" id="pgAvance">
+  <div class="pg-topbar" style="background:linear-gradient(90deg,rgba(120,53,15,.3),transparent);">
+    <div class="pg-back" onclick="goPage('retenus')" style="font-size:13px;font-weight:700;color:#fbbf24;cursor:pointer;">‹ Retenus</div>
+    <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">💸 Avances</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addRetenu('avance')" style="background:#d97706;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="openRetenuPdf('avance')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;"><div id="avanceList"></div></div>
+</div>
+
+<!-- ══ ACHAT PAGE ══ -->
+<div class="pg" id="pgAchat">
+  <div class="pg-topbar" style="background:linear-gradient(90deg,rgba(6,78,59,.3),transparent);">
+    <div class="pg-back" onclick="goPage('retenus')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Retenus</div>
+    <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🛒 Achat / Mois</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addRetenu('achat')" style="background:#16a34a;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="openRetenuPdf('achat')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;"><div id="achatList"></div></div>
+</div>
 <!-- ══ AGENDA ══ -->
 <div class="pg" id="pgDlc">
   <div class="pg-topbar">
@@ -769,28 +969,614 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
   </div>
 </div>
 
+<!-- FAB CENTER -->
+
+<div id="pointagePdfModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #7c3aed;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div id="_" style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Pointage</div>
+      <div onclick="closeM('pointagePdfModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">De</label>
+        <input type="date" id="ptgFrom" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">À</label>
+        <input type="date" id="ptgTo" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;">
+      <button onclick="setRetPeriod('ptgFrom','ptgTo','day')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Auj.</button>
+      <button onclick="setRetPeriod('ptgFrom','ptgTo','week')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Semaine</button>
+      <button onclick="setRetPeriod('ptgFrom','ptgTo','month')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Mois</button>
+    </div>
+    <button onclick="exportPointagePdf()" style="width:100%;background:#7c3aed;border:none;color:#fff;font-size:14px;font-weight:800;padding:14px;border-radius:14px;cursor:pointer;">📄 Générer le rapport</button>
+  </div>
+</div>
+<div id="congePdfModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #2563eb;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div id="_" style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Congés</div>
+      <div onclick="closeM('congePdfModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">De</label>
+        <input type="date" id="cgeFrom" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">À</label>
+        <input type="date" id="cgeTo" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;">
+      <button onclick="setRetPeriod('cgeFrom','cgeTo','day')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Auj.</button>
+      <button onclick="setRetPeriod('cgeFrom','cgeTo','week')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Semaine</button>
+      <button onclick="setRetPeriod('cgeFrom','cgeTo','month')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Mois</button>
+    </div>
+    <button onclick="exportCongePdf()" style="width:100%;background:#2563eb;border:none;color:#fff;font-size:14px;font-weight:800;padding:14px;border-radius:14px;cursor:pointer;">📄 Générer le rapport</button>
+  </div>
+</div>
+<div id="retenuPdfModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #059669;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div id="retenuPdfTitle" style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Retenus</div>
+      <div onclick="closeM('retenuPdfModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;">
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">De</label>
+        <input type="date" id="retFrom" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+      <div style="flex:1;">
+        <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">À</label>
+        <input type="date" id="retTo" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:12px;">
+      <button onclick="setRetPeriod('retFrom','retTo','day')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Auj.</button>
+      <button onclick="setRetPeriod('retFrom','retTo','week')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Semaine</button>
+      <button onclick="setRetPeriod('retFrom','retTo','month')" style="flex:1;background:#1a1f30;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:11px;font-weight:700;padding:9px 4px;border-radius:10px;cursor:pointer;">Mois</button>
+    </div>
+    <button onclick="exportRetenuPdf()" style="width:100%;background:#059669;border:none;color:#fff;font-size:14px;font-weight:800;padding:14px;border-radius:14px;cursor:pointer;">📄 Générer le rapport</button>
+  </div>
+</div>
+<!-- ══ TACHES MENU MODAL ══ -->
+<div id="tachesMenuModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #3b82f6;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">🛒 Tâches Commerciales</div>
+      <div onclick="closeM('tachesMenuModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div onclick="closeM('tachesMenuModal');openRapport()" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,.06);border-radius:14px;cursor:pointer;">
+        <span style="font-size:22px;">📸</span><div><div style="font-size:13px;font-weight:700;color:#fff;">Rapport journalier</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Photo des tâches du jour</div></div>
+      </div>
+      <div onclick="closeM('tachesMenuModal');exportTachesPDF('today')" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,.06);border-radius:14px;cursor:pointer;">
+        <span style="font-size:22px;">📄</span><div><div style="font-size:13px;font-weight:700;color:#fff;">Tâches du jour (PDF)</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Export rapport aujourd'hui</div></div>
+      </div>
+      <div onclick="closeM('tachesMenuModal');exportTachesPDF('week')" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,.06);border-radius:14px;cursor:pointer;">
+        <span style="font-size:22px;">📅</span><div><div style="font-size:13px;font-weight:700;color:#fff;">Tâches semaine (PDF)</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Export rapport de la semaine</div></div>
+      </div>
+      <div onclick="closeM('tachesMenuModal');openTM(null)" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(59,130,246,.12);border-radius:14px;cursor:pointer;border:1px solid rgba(59,130,246,.25);">
+        <span style="font-size:22px;">➕</span><div><div style="font-size:13px;font-weight:700;color:#60a5fa;">Nouvelle tâche</div><div style="font-size:11px;color:rgba(59,130,246,.6);margin-top:1px;">Ajouter une tâche commerciale</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EQUIPE HUB ══ -->
+<div id="pgEquipe" class="pg">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('taches')">‹</div>
+    <div class="pg-title">👥 Gestion d'Équipe</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div onclick="goPage('briefing')" style="background:linear-gradient(135deg,#1e40af,#2563eb);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🌅</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:800;color:#fff;">Briefing du Matin</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Réunion équipe · Objectifs du jour</div>
+      </div>
+      <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('vigilance')" style="background:linear-gradient(135deg,#92400e,#b45309);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🔍</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:800;color:#fff;">Zone de Vigilance</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Points critiques · Alertes terrain</div>
+      </div>
+      <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('planning')" style="background:linear-gradient(135deg,#4c1d95,#6d28d9);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">📅</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:800;color:#fff;">Planning</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Affectation rayons · Caisse · Équipe</div>
+      </div>
+      <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('hygiene')" style="background:linear-gradient(135deg,#065f46,#059669);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🧹</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:800;color:#fff;">Contrôle Hygiène & Sécurité</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Checklist quotidienne · Conformité</div>
+      </div>
+      <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- ══ BRIEFING DU MATIN ══ -->
+<div id="pgBriefing" class="pg">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
+    <div class="pg-title">🌅 Briefing</div>
+    <button onclick="toggleBriefingAdd()" id="briefAddBtn" style="background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Point</button>
+  </div>
+  <div class="scroll" style="padding:12px 12px 90px;">
+
+    <!-- ADD FORM -->
+    <div id="briefAddForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(59,130,246,.3);">
+      <div style="font-size:12px;font-weight:800;color:#60a5fa;margin-bottom:8px;">+ Nouveau point</div>
+      <div style="display:flex;gap:8px;">
+        <input id="briefNewItem" class="fi" placeholder="Ex: Vérifier températures froid..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addBriefingItem()" />
+        <button onclick="addBriefingItem()" style="background:#3b82f6;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;">✓ OK</button>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:800;color:#60a5fa;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">📋 Points à aborder</div>
+      <div id="briefingChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="briefingEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:12px 0;display:none;">Aucun point — appuyez sur + Point</div>
+    </div>
+
+    <!-- NOTES -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">📝 Notes du jour</div>
+      <textarea id="briefingNote" placeholder="Objectifs, priorités, remarques..." style="width:100%;min-height:90px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;color:var(--t1);font-size:13px;resize:none;box-sizing:border-box;" oninput="saveBriefing()"></textarea>
+    </div>
+
+    <button onclick="resetBriefing()" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">🔄 Réinitialiser le briefing</button>
+  </div>
+</div>
+
+<!-- ══ ZONE DE VIGILANCE ══ -->
+<div id="pgVigilance" class="pg">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('equipe')" style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
+    <div class="pg-title">🔍 Vigilance</div>
+    <button onclick="toggleVigForm()" id="vigAddBtn" style="background:#ef4444;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Alerte</button>
+  </div>
+  <div class="scroll" style="padding:12px 12px 90px;">
+
+    <!-- INLINE ADD FORM -->
+    <div id="vigForm" style="display:none;background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid rgba(239,68,68,.3);">
+      <div style="font-size:13px;font-weight:800;color:#ef4444;margin-bottom:12px;">⚠️ Nouvelle Alerte</div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Description *</label>
+        <input id="vigDesc" class="fi" placeholder="Ex: Rupture rayon frais..." style="width:100%;box-sizing:border-box;" />
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Rayon / Zone</label>
+        <select id="vigZone" class="fi" style="width:100%;box-sizing:border-box;">
+          <option value="">-- Choisir --</option>
+          <option value="20-Traiteur">🛒 20-Traiteur</option>
+          <option value="21-Poisso.">🛒 21-Poisso.</option>
+          <option value="22-FLEG">🛒 22-FLEG</option>
+          <option value="23-Boul-Pat">🛒 23-Boul-Pat</option>
+          <option value="24-Boucherie">🛒 24-Boucherie</option>
+          <option value="12-PFLS">🛒 12-PFLS</option>
+          <option value="Caisse">💰 Caisse</option>
+          <option value="Réception">📦 Réception</option>
+          <option value="Entrée magasin">🚪 Entrée magasin</option>
+          <option value="Réserve">📦 Réserve</option>
+        </select>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Gravité</label>
+        <div style="display:flex;gap:8px;">
+          <button type="button" onclick="setVigGrav(this,'high')" data-vg="high" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:10px;color:#ef4444;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🔴 Critique</button>
+          <button type="button" onclick="setVigGrav(this,'med')" data-vg="med" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);border-radius:10px;color:#f59e0b;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🟡 Modéré</button>
+          <button type="button" onclick="setVigGrav(this,'low')" data-vg="low" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#22c55e;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🟢 Faible</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="toggleVigForm()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveVigilance()" style="flex:2;background:#ef4444;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">✅ Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- ALERTS LIST -->
+    <div id="vigilanceList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="vigilanceEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:13px;">✅ Aucune alerte active</div>
+  </div>
+</div>
+
+<!-- ══ PLANNING ══ -->
+<div id="pgPlanning" class="pg">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
+    <div class="pg-title">📅 Planning</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:12px 12px 90px;">
+    <div id="planningDate" style="text-align:center;font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;padding:8px;background:var(--card);border-radius:10px;"></div>
+
+    <!-- Ajouter Planning Caisse -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;">💰 Planning Caisse</div>
+      <button onclick="addPlanningItem()" style="background:#6d28d9;border:none;color:#fff;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+    </div>
+    <div id="planningGrid" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;"></div>
+    <div id="planningEmpty" style="display:none;text-align:center;padding:16px;color:var(--t2);font-size:12px;">💰 Aucune caisse affectée · Appuyez sur +</div>
+    <div id="planningSummary" style="display:none;"></div>
+
+    <!-- ─── Planning Rayons ─── -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:4px;">
+      <div style="font-size:12px;font-weight:800;color:#34d399;text-transform:uppercase;letter-spacing:.5px;">🛒 Planning Rayons</div>
+      <button onclick="openRayonPlanningModal()" style="background:#047857;border:none;color:#fff;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+    </div>
+    <div id="rayonPlanningGrid" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="rayonPlanningEmpty" style="text-align:center;padding:16px;color:var(--t2);font-size:12px;">🛒 Aucun rayon affecté · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ HYGIÈNE & SÉCURITÉ ══ -->
+<div id="pgHygiene" class="pg">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
+    <div class="pg-title">🧹 Hygiène</div>
+    <button onclick="toggleHygieneAdd()" id="hygAddBtn" style="background:#059669;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Point</button>
+  </div>
+  <div class="scroll" style="padding:12px 12px 90px;">
+    <div id="hygieneDate" style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:10px;padding:8px;background:var(--card);border-radius:10px;"></div>
+
+    <!-- ADD FORM -->
+    <div id="hygAddForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(5,150,105,.3);">
+      <div style="font-size:12px;font-weight:800;color:#34d399;margin-bottom:8px;">+ Nouveau point de contrôle</div>
+      <div style="display:flex;gap:8px;">
+        <input id="hygNewItem" class="fi" placeholder="Ex: Vérifier températures vitrine..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygieneItem()" />
+        <button onclick="addHygieneItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;">✓ OK</button>
+      </div>
+    </div>
+
+    <!-- SCORE -->
+    <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
+      <div style="flex:1;">
+        <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score conformité</div>
+        <div id="hygieneBar" style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
+          <div id="hygieneBarFill" style="height:6px;background:#22c55e;border-radius:3px;width:0%;transition:width .4s;"></div>
+        </div>
+      </div>
+      <div id="hygieneScore" style="font-size:22px;font-weight:900;color:#22c55e;min-width:44px;text-align:right;">—</div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div id="hygieneChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
+    <div id="hygieneEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point — appuyez sur + Point</div>
+  </div>
+</div>
+
+<!-- MODALS EQUIPE -->
+
+
+<div id="planningModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #6d28d9;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">💰 Planning Caisse</div>
+      <div onclick="closeM('planningModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;">×</div>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">Caissier(e)</label>
+      <select id="planEmp" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;appearance:none;"></select>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">Caisse</label>
+      <select id="planZone" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;appearance:none;">
+        <option value="">-- Choisir --</option>
+        <option value="Caisse-1">💰 Caisse 1</option>
+        <option value="Caisse-2">💰 Caisse 2</option>
+        <option value="Caisse-3">💰 Caisse 3</option>
+        <option value="Caisse-4">💰 Caisse 4</option>
+        <option value="Caisse-5">💰 Caisse 5</option>
+        <option value="Caisse-6">💰 Caisse 6</option>
+      </select>
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px;">Horaire</label>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+        <div style="flex:1;">
+          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">De</label>
+          <input type="time" id="planHeureDebut" value="08:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;margin-top:16px;">→</div>
+        <div style="flex:1;">
+          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">À</label>
+          <input type="time" id="planHeureFin" value="16:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+        </div>
+      </div>
+      <button onclick="setPlanRepos()" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🏖️ Repos (journée)</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeM('planningModal')" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:14px;font-weight:700;padding:13px;border-radius:14px;cursor:pointer;">Annuler</button>
+      <button onclick="savePlanningItem()" style="flex:2;background:#6d28d9;border:none;color:#fff;font-size:14px;font-weight:800;padding:13px;border-radius:14px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div id="bestSellerModal" class="mov" style="display:none;">
+  <div class="msh"><div class="mhdl"></div><div class="mtit">📦 Ajouter Produit</div></div>
+  <div class="mbd">
+    <div class="fg"><label class="fl">Nom du produit</label><input class="fi" id="bsName" placeholder="Ex: Yaourt Danone 125g" /></div>
+    <div class="fg"><label class="fl">Rayon</label><input class="fi" id="bsRayon" placeholder="Ex: 20-Traiteur" /></div>
+    <button onclick="saveBestSeller()" style="width:100%;background:#dc2626;border:none;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;margin-top:8px;">✅ Ajouter</button>
+  </div>
+</div>
+
+
+<!-- ══ TÂCHES AVANCÉES HUB ══ -->
+<div class="pg" id="pgAvancees">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Tâches</div>
+    <div class="pg-title">🚀 Tâches Avancées</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div onclick="goPage('optimisation')" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">⚙️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Optimisation</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Lutte contre la démarque · Veille concurrentielle</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ OPTIMISATION HUB ══ -->
+<div class="pg" id="pgOptimisation">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Avancées</div>
+    <div class="pg-title">⚙️ Optimisation</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div onclick="goPage('demarque')" style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">📉</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Lutte contre la Démarque</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Contrôle pertes · Actions correctives</div>
+      </div>
+      <div id="demarqueBadge" style="display:none;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-right:4px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+    <div onclick="goPage('veille')" style="background:linear-gradient(135deg,#1e1b4b,#4338ca);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:34px;">🔎</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Veille Concurrentielle</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Observation marché · Benchmarking</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ LUTTE CONTRE LA DÉMARQUE ══ -->
+<div class="pg" id="pgDemarque">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('optimisation')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Optim.</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📉 Démarque</div>
+    <button onclick="openDemarqueAdd()" style="background:#c2410c;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- STATS BAR -->
+    <div id="demarqueStats" style="display:flex;gap:8px;margin-bottom:12px;"></div>
+
+    <!-- ADD FORM -->
+    <div id="demarqueForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(194,65,12,.4);">
+      <div style="font-size:12px;font-weight:800;color:#fb923c;margin-bottom:10px;">📉 Nouveau constat de démarque</div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Produit / Zone *</label>
+        <input id="dmqProduit" class="fi" placeholder="Ex: Yaourt Danone 125g — Rayon 20" style="width:100%;box-sizing:border-box;" />
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Quantité perdue</label>
+          <input id="dmqQte" class="fi" type="number" placeholder="0" style="width:100%;box-sizing:border-box;" />
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Montant (TND)</label>
+          <input id="dmqMontant" class="fi" type="number" placeholder="0.00" style="width:100%;box-sizing:border-box;" />
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;">Type de démarque</label>
+          <button type="button" onclick="toggleDmqCustom()" style="background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:8px;color:#60a5fa;font-size:11px;font-weight:700;padding:4px 10px;cursor:pointer;">+ Autre type</button>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;" id="dmqTypeGroup">
+          <button type="button" onclick="setDmqType(this,'vol')" data-dt="vol" style="flex:1;min-width:70px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:9px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🦹 Vol</button>
+          <button type="button" onclick="setDmqType(this,'dlc')" data-dt="dlc" style="flex:1;min-width:70px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:9px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📅 DLC</button>
+          <button type="button" onclick="setDmqType(this,'casse')" data-dt="casse" style="flex:1;min-width:70px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.3);border-radius:9px;color:#a855f7;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">💔 Casse</button>
+          <button type="button" onclick="setDmqType(this,'perime')" data-dt="perime" style="flex:1;min-width:70px;background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.3);border-radius:9px;color:#eab308;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">⏳ Périmé</button>
+          <button type="button" onclick="setDmqType(this,'autre')" data-dt="autre" style="flex:1;min-width:70px;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.3);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📋 Autre</button>
+        </div>
+      </div>
+      <!-- Custom type input -->
+      <div id="dmqCustomTypeWrap" style="display:none;margin-top:6px;">
+        <input id="dmqCustomType" class="fi" placeholder="Ex: Rupture transport, Détérioration..." style="width:100%;box-sizing:border-box;" />
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Action corrective</label>
+        <input id="dmqAction" class="fi" placeholder="Ex: Mise en place antivol, réduction commande..." style="width:100%;box-sizing:border-box;" />
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="openDemarqueAdd()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveDemarque()" style="flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">✅ Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div id="demarqueList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="demarqueEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:13px;">✅ Aucun constat enregistré</div>
+  </div>
+</div>
+
+<!-- ══ VEILLE CONCURRENTIELLE ══ -->
+<div class="pg" id="pgVeille">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('optimisation')" style="font-size:13px;font-weight:700;color:#818cf8;cursor:pointer;">‹ Optim.</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🔎 Veille</div>
+    <button onclick="openVeilleAdd()" style="background:#4338ca;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- FILTER TABS -->
+    <div style="display:flex;gap:6px;margin-bottom:12px;" id="veilleFilters">
+      <button onclick="setVeilleFilter('all')" data-vf="all" style="flex:1;background:#4338ca;border:1.5px solid #6366f1;color:#fff;font-size:11px;font-weight:700;padding:8px 4px;border-radius:10px;cursor:pointer;">Tout</button>
+      <button onclick="setVeilleFilter('prix')" data-vf="prix" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 4px;border-radius:10px;cursor:pointer;">💰 Prix</button>
+      <button onclick="setVeilleFilter('promo')" data-vf="promo" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 4px;border-radius:10px;cursor:pointer;">🎯 Promo</button>
+      <button onclick="setVeilleFilter('produit')" data-vf="produit" style="flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 4px;border-radius:10px;cursor:pointer;">📦 Produit</button>
+    </div>
+
+    <!-- ADD FORM -->
+    <div id="veilleForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(99,102,241,.4);">
+      <div style="font-size:12px;font-weight:800;color:#818cf8;margin-bottom:10px;">🔎 Nouvelle observation</div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Concurrent *</label>
+        <input id="vlConcurrent" class="fi" placeholder="Ex: Carrefour, Monoprix..." style="width:100%;box-sizing:border-box;" />
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Observation *</label>
+        <textarea id="vlObs" class="fi" placeholder="Ex: Promotion -30% sur yaourts Danone cette semaine..." style="width:100%;min-height:70px;resize:none;box-sizing:border-box;"></textarea>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Catégorie</label>
+        <div style="display:flex;gap:6px;">
+          <button type="button" onclick="setVeilleType(this,'prix')" data-vt="prix" style="flex:1;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);border-radius:9px;color:#fbbf24;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">💰 Prix</button>
+          <button type="button" onclick="setVeilleType(this,'promo')" data-vt="promo" style="flex:1;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:9px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🎯 Promo</button>
+          <button type="button" onclick="setVeilleType(this,'produit')" data-vt="produit" style="flex:1;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:9px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📦 Produit</button>
+          <button type="button" onclick="setVeilleType(this,'autre')" data-vt="autre" style="flex:1;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.3);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📋 Autre</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="openVeilleAdd()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveVeille()" style="flex:2;background:#4338ca;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">✅ Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div id="veilleList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="veilleEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:13px;">🔎 Aucune observation enregistrée</div>
+  </div>
+</div>
+
+
 <!-- ══ BOTTOM NAV ══ -->
 <div class="bnav">
   <div class="bi on" id="navHome" onclick="goPage('home')">
-    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
     <div class="bi-l">Accueil</div>
   </div>
   <div class="bi" id="navTaches" onclick="goPage('taches')">
-    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
     <div class="bi-l">Tâches</div>
   </div>
   <div class="bi-fab-space"></div>
   <div class="bi" id="navDlc" onclick="goPage('dlc')" style="position:relative;"><div id="dlcNavBadge" style="display:none;position:absolute;top:2px;right:8px;background:#ef4444;color:#fff;font-size:9px;font-weight:800;width:16px;height:16px;border-radius:50%;align-items:center;justify-content:center;">0</div>
-    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-    <div class="bi-l">Contrôle DLC</div>
+    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="4" width="20" height="20" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="bi-l">DLC</div>
   </div>
   <div class="bi" id="navChiffres" onclick="goPage('chiffres')">
-    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
+    <div class="bi-ico"><svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="3" width="20" height="20" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
     <div class="bi-l">Excel</div>
   </div>
 </div>
 
-<!-- FAB CENTER -->
+
+<!-- ══ RAYON PLANNING MODAL ══ -->
+<div id="rayonPlanningModal" class="mov" style="display:none;">
+  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #047857;border-radius:24px 24px 0 0;padding:20px 18px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 16px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">🛒 Affecter un Rayon</div>
+      <div onclick="closeM('rayonPlanningModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
+    </div>
+
+    <!-- Employé -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">Employé</label>
+      <select id="rayonPlanEmp" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;color:#fff;font-size:13px;box-sizing:border-box;outline:none;appearance:none;"></select>
+    </div>
+
+    <!-- Secteur + Rayon (grouped) -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px;">Secteur & Rayon</label>
+
+      <!-- Secteur Alimentaire -->
+      <div style="margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;background:rgba(59,130,246,.1);border-radius:8px;margin-bottom:4px;">🏪 Secteur Alimentaire</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 4px;" id="rayonGroupAlim"></div>
+      </div>
+
+      <!-- Secteur MBA -->
+      <div style="margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:800;color:#34d399;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;background:rgba(5,150,105,.1);border-radius:8px;margin-bottom:4px;">🥩 Secteur MBA</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 4px;" id="rayonGroupMBA"></div>
+      </div>
+
+      <!-- Secteur Non Alimentaire -->
+      <div style="margin-bottom:4px;">
+        <div style="font-size:10px;font-weight:800;color:#f59e0b;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;background:rgba(245,158,11,.1);border-radius:8px;margin-bottom:4px;">🏠 Secteur Non Alimentaire</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 4px;" id="rayonGroupNA"></div>
+      </div>
+    </div>
+
+    <!-- Horaire -->
+    <div style="margin-bottom:20px;">
+      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px;">Horaire</label>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+        <div style="flex:1;">
+          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">De</label>
+          <input type="time" id="rayonHeureDebut" value="08:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;margin-top:16px;">→</div>
+        <div style="flex:1;">
+          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">À</label>
+          <input type="time" id="rayonHeureFin" value="16:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
+        </div>
+      </div>
+      <button onclick="setRayonRepos()" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🏖️ Repos (journée)</button>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeM('rayonPlanningModal')" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:14px;font-weight:700;padding:13px;border-radius:14px;cursor:pointer;">Annuler</button>
+      <button onclick="saveRayonPlanning()" style="flex:2;background:#047857;border:none;color:#fff;font-size:14px;font-weight:800;padding:13px;border-radius:14px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
 </div><!-- /app -->
 
 <!-- ══ DRAWER ══ -->
@@ -822,76 +1608,7 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
           <option value="custom">Jours choisis</option>
         </select>
       </div>
-      <div class="fg"><label class="fl">Heure</label><select class="fi" id="t_t">
-<option value="05:00">05:00</option>
-<option value="05:15">05:15</option>
-<option value="05:30">05:30</option>
-<option value="05:45">05:45</option>
-<option value="06:00">06:00</option>
-<option value="06:15">06:15</option>
-<option value="06:30">06:30</option>
-<option value="06:45">06:45</option>
-<option value="07:00">07:00</option>
-<option value="07:15">07:15</option>
-<option value="07:30">07:30</option>
-<option value="07:45">07:45</option>
-<option value="08:00">08:00</option>
-<option value="08:15">08:15</option>
-<option value="08:30">08:30</option>
-<option value="08:45">08:45</option>
-<option value="09:00">09:00</option>
-<option value="09:15">09:15</option>
-<option value="09:30">09:30</option>
-<option value="09:45">09:45</option>
-<option value="10:00">10:00</option>
-<option value="10:15">10:15</option>
-<option value="10:30">10:30</option>
-<option value="10:45">10:45</option>
-<option value="11:00">11:00</option>
-<option value="11:15">11:15</option>
-<option value="11:30">11:30</option>
-<option value="11:45">11:45</option>
-<option value="12:00">12:00</option>
-<option value="12:15">12:15</option>
-<option value="12:30">12:30</option>
-<option value="12:45">12:45</option>
-<option value="13:00">13:00</option>
-<option value="13:15">13:15</option>
-<option value="13:30">13:30</option>
-<option value="13:45">13:45</option>
-<option value="14:00">14:00</option>
-<option value="14:15">14:15</option>
-<option value="14:30">14:30</option>
-<option value="14:45">14:45</option>
-<option value="15:00">15:00</option>
-<option value="15:15">15:15</option>
-<option value="15:30">15:30</option>
-<option value="15:45">15:45</option>
-<option value="16:00">16:00</option>
-<option value="16:15">16:15</option>
-<option value="16:30">16:30</option>
-<option value="16:45">16:45</option>
-<option value="17:00">17:00</option>
-<option value="17:15">17:15</option>
-<option value="17:30">17:30</option>
-<option value="17:45">17:45</option>
-<option value="18:00">18:00</option>
-<option value="18:15">18:15</option>
-<option value="18:30">18:30</option>
-<option value="18:45">18:45</option>
-<option value="19:00">19:00</option>
-<option value="19:15">19:15</option>
-<option value="19:30">19:30</option>
-<option value="19:45">19:45</option>
-<option value="20:00">20:00</option>
-<option value="20:15">20:15</option>
-<option value="20:30">20:30</option>
-<option value="20:45">20:45</option>
-<option value="21:00">21:00</option>
-<option value="21:15">21:15</option>
-<option value="21:30">21:30</option>
-<option value="21:45">21:45</option>
-</select></div>
+      <div class="fg"><label class="fl">Heure</label><input class="fi" type="time" id="t_t" value="08:00"></div>
     </div>
     <div class="fg" id="cdw" style="display:none">
       <label class="fl">Jours</label>
@@ -1072,9 +1789,9 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
         <div style="margin-bottom:12px;">
       <label style="font-size:11px;color:rgba(255,255,255,.5);font-weight:700;display:block;margin-bottom:6px;">GRAVITÉ</label>
       <div style="display:flex;gap:8px;">
-        <button type="button" onclick="setDlcGrav(this,'urgent')" data-grav="urgent" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🔴 Urgent</button>
-        <button type="button" onclick="setDlcGrav(this,'attention')" data-grav="attention" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);border-radius:10px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟡 Attention</button>
-        <button type="button" onclick="setDlcGrav(this,'ok')" data-grav="ok" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟢 OK</button>
+        <button type="button" onclick="setDlcGrav(this,'urgent')" data-grav="urgent" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🔴 Urgent</button>
+        <button type="button" onclick="setDlcGrav(this,'attention')" data-grav="attention" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:10px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟡 Attention</button>
+        <button type="button" onclick="setDlcGrav(this,'ok')" data-grav="ok" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟢 OK</button>
       </div>
     </div>
     <button onclick="saveDLC()" style="width:100%;background:#06b6d4;border:none;color:#fff;font-size:14px;font-weight:700;padding:14px;border-radius:14px;cursor:pointer;">✅ Enregistrer</button>
@@ -1149,6 +1866,7 @@ body.light .cs-rlbl { color: #1e3a8a !important; }
 <!-- ══ PIN MODAL ══ -->
 <div id="pinModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;"><div style="background:#12161f;border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px 24px;width:290px;text-align:center;"><div style="font-size:28px;margin-bottom:8px;">🔒</div><div style="font-family:'Syne';font-size:17px;font-weight:800;color:#f8faff;margin-bottom:4px;" id="pinTitle">Zone Administratif</div><div style="font-size:12px;color:#64748b;margin-bottom:20px;" id="pinSub">Entrez votre code PIN</div><div style="display:flex;justify-content:center;gap:12px;margin-bottom:24px;"><div id="pd0" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd1" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd2" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div><div id="pd3" style="width:14px;height:14px;border-radius:50%;border:2px solid #3b82f6;background:transparent;"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;"><button onclick="pinKey('1')" class="pinbtn">1</button><button onclick="pinKey('2')" class="pinbtn">2</button><button onclick="pinKey('3')" class="pinbtn">3</button><button onclick="pinKey('4')" class="pinbtn">4</button><button onclick="pinKey('5')" class="pinbtn">5</button><button onclick="pinKey('6')" class="pinbtn">6</button><button onclick="pinKey('7')" class="pinbtn">7</button><button onclick="pinKey('8')" class="pinbtn">8</button><button onclick="pinKey('9')" class="pinbtn">9</button><button onclick="pinCancel()" class="pinbtn" style="color:#ef4444;font-size:11px;">Annuler</button><button onclick="pinKey('0')" class="pinbtn">0</button><button onclick="pinDel()" class="pinbtn" style="font-size:18px;">⌫</button></div><div id="pinErr" style="font-size:11px;color:#ef4444;min-height:16px;"></div></div></div>
 
+
 <script>
 'use strict';
 var _pinVal='',_pinMode='check',_pinUnlocked=false,_pinTemp='';
@@ -1215,8 +1933,9 @@ function updateClock(){
   const td = new Date(ms);
   const H = td.getHours(), M = td.getMinutes();
   const hp = String(H).padStart(2,'0'), mp = String(M).padStart(2,'0');
+  const sp = String(td.getSeconds()).padStart(2,'0');
   const el = document.getElementById('clockDigital');
-  if(el) el.textContent = hp+':'+mp;
+  if(el) el.textContent = hp+':'+mp+':'+sp;
 }
 
 // ══ CLOCK ══
@@ -1290,7 +2009,7 @@ function renderHome(){
     const nm2 = prof.name||'';
     if(nm2 && (prof.role||prof.store)){
       subEl.textContent = [prof.role,prof.store].filter(Boolean).join(' · ');
-      subEl.style.display='block';
+      subEl.style.display='block';subEl.style.color='#14532d';subEl.style.fontWeight='900';
     } else { subEl.style.display='none'; }
   }
   document.getElementById('tbDate').textContent=DF[d.getDay()]+' '+d.getDate()+' '+MF[d.getMonth()];
@@ -1325,33 +2044,9 @@ function renderHome(){
   if(fProg)fProg.style.width=pct+'%';
   // Swipe cards
   renderSwipeCards();
+  loadNotePerso();
   // Yesterday summary
-  try{
-    var yDate=new Date(tn()); yDate.setDate(yDate.getDate()-1);
-    var yStr=yDate.getFullYear()+'-'+String(yDate.getMonth()+1).padStart(2,'0')+'-'+String(yDate.getDate()).padStart(2,'0');
-    var yComps=comps[yStr]||{};
-    var yTasks=tasks.filter(function(t){
-      var dw=yDate.getDay();
-      if(t.cat==='daily')return true;
-      if(t.cat==='weekly3')return[1,3,5].includes(dw);
-      if(t.cat==='weekly2')return[1,4].includes(dw);
-      if(t.cat==='custom')return t.days&&t.days.includes(dw);
-      return false;
-    });
-    var yTotal=yTasks.length;
-    var yDoneN=yTasks.filter(function(t){return yComps[t.id];}).length;
-    var yPctN=yTotal>0?Math.round(yDoneN/yTotal*100):0;
-    var yBar=document.getElementById('yesterdayBar');
-    if(yBar&&yTotal>0){
-      yBar.style.display='block';
-      document.getElementById('yDone').textContent=yDoneN;
-      document.getElementById('yTotal').textContent=yTotal;
-      document.getElementById('yPct').textContent=yPctN+'%';
-      document.getElementById('yBar').style.width=yPctN+'%';
-      document.getElementById('yBar').style.background=yPctN>=80?'#22c55e':yPctN>=50?'#f59e0b':'#ef4444';
-      document.getElementById('yPct').style.color=yPctN>=80?'#22c55e':yPctN>=50?'#f59e0b':'#ef4444';
-    } else if(yBar){ yBar.style.display='none'; }
-  }catch(e){}
+  try{var yDate=new Date(tn());yDate.setDate(yDate.getDate()-1);var yStr=yDate.getFullYear()+'-'+String(yDate.getMonth()+1).padStart(2,'0')+'-'+String(yDate.getDate()).padStart(2,'0');var yComps=comps[yStr]||{};var yTasks=tasks.filter(function(t){var dw=yDate.getDay();if(t.cat==='daily')return true;if(t.cat==='weekly3')return[1,3,5].includes(dw);if(t.cat==='weekly2')return[1,4].includes(dw);if(t.cat==='custom')return t.days&&t.days.includes(dw);return false;});var yTotal=yTasks.length;var yDoneN=yTasks.filter(function(t){return yComps[t.id];}).length;var yPctN=yTotal>0?Math.round(yDoneN/yTotal*100):0;var yBar=document.getElementById('yesterdayBar');if(yBar&&yTotal>0){yBar.style.display='block';document.getElementById('yDone').textContent=yDoneN;document.getElementById('yTotal').textContent=yTotal;document.getElementById('yPct').textContent=yPctN+'%';document.getElementById('yBar').style.width=yPctN+'%';var yCol=yPctN>=80?'#22c55e':yPctN>=50?'#f59e0b':'#ef4444';document.getElementById('yBar').style.background=yCol;document.getElementById('yPct').style.color=yCol;}else if(yBar){yBar.style.display='none';}}catch(e){}
 }
 
 // ══ SWIPE CARDS ══
@@ -1457,18 +2152,34 @@ function goPage(p){
   _curPage=p;
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p])document.getElementById(map[p]).classList.add('on');
   if(nav[p])document.getElementById(nav[p]).classList.add('on');
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
+  var bnav=document.querySelector('.bnav');
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','demarque','veille','admin'];
+  if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home')renderHome();
   if(p==='taches')renderTaches();
   if(p==='dlc')renderDlcPage();
   if(p==='commercial')renderTaches();
   if(p==='admin'){showAdminTab(_adminTab||'pointage');}
   if(p==='chiffres'){renderCA3();renderCasse3();switchTab3('ca');}
+  if(p==='briefing')renderBriefing();
+  if(p==='pointage')renderPointagePage();
+  if(p==='listepersonnel')renderListePersonnel();
+  if(p==='conge')renderCongePage();
+  if(p==='pgAccompte')renderRetenuList('accompte');
+  if(p==='pgAvance')renderRetenuList('avance');
+  if(p==='pgAchat')renderRetenuList('achat');
+  if(p==='vigilance')renderVigilance();
+  if(p==='planning'){renderPlanning();renderRayonPlanning();}
+  if(p==='hygiene')renderHygiene();
+  if(p==='demarque')renderDemarque();
+  if(p==='veille')renderVeille();
+  if(p==='equipe'||p==='avancees'||p==='optimisation'||p==='retenus'){}// hub pages render on click
 }
 
 // ══ TACHES ══
@@ -1492,14 +2203,14 @@ function renderTaches(){
   if(!tt.length){el.innerHTML='<div style="text-align:center;padding:30px;color:var(--t3);font-size:12px">Aucune tâche</div>';return;}
   el.innerHTML=tt.map(t=>{
     const dn=isDone(t.id),late=isLate(t);
-    const cls='tli'+(dn?' done':'')+(late?' late':'')+' prio-'+(t.prio||'yellow');
+    const st=getStatut(t.id);const cls='tli'+(dn?' done':'')+(late?' late':'')+' prio-'+(t.prio||'yellow')+' '+statutBorderClass(st);
     const chkC='chk'+(dn?' done':t.prio==='red'?' red':t.prio==='yellow'?' yellow':'');
     const imgs=t.imgs&&t.imgs.length?`<span style="font-size:9px;color:var(--t2);cursor:pointer" onclick="event.stopPropagation();openImgModal('${t.id}')">📷 ${t.imgs.length}</span>`:'';
     return `<div class="${cls}" onclick="toggleD('${t.id}')">
       <div class="${chkC}">${dn?'<svg fill="none" stroke="white" stroke-width="3" width="11" height="11" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>':''}</div>
       <div class="tli-bd">
         <div class="tli-name">${t.name}</div>
-        <div class="tli-meta"><span class="chip blue">⏰ ${t.time}</span><span class="chip ${t.prio||'yellow'}">${{red:'🔴',yellow:'🟡',green:'🟢',blue:'🔵'}[t.prio||'yellow']||''}</span>${imgs}${late?'<span class="chip late">⚠️ Retard</span>':''}</div>
+        <div class="tli-meta" style="flex-wrap:wrap;gap:4px;"><span class="chip blue">⏰ ${t.time}</span><span class="chip ${t.prio||'yellow'}">${{red:'🔴',yellow:'🟡',green:'🟢',blue:'🔵'}[t.prio||'yellow']||''}</span><span class="statut-btn ${statutClass(st)}" onclick="cycleStatut(event,'${t.id}')">${statutLabel(st)}</span>${imgs}${late?'<span class="chip late">⚠️ Retard</span>':''}</div>
         ${t.imgs&&t.imgs.length?'<div style="display:flex;gap:4px;margin-top:5px;flex-wrap:wrap">'+t.imgs.slice(0,3).map((img,i)=>`<img class="card-img-t" src="${img}" onclick="event.stopPropagation();viewImg('${t.id}',${i})">`).join('')+'</div>':''}
       </div>
       <div class="tli-edit" onclick="event.stopPropagation();openTM('${t.id}')">✏️</div>
@@ -1578,7 +2289,7 @@ function openTM(id){
   const t=id?tasks.find(x=>x.id===id):null;
   document.getElementById('t_n').value=t?t.name:'';
   document.getElementById('t_c').value=t?t.cat:'daily';
-  document.getElementById('t_t').value=(t&&t.time)?t.time:'08:00';
+  document.getElementById('t_t').value=t?t.time:'08:00';
   document.getElementById('t_d').value=t?t.desc:'';
   document.querySelectorAll('.dc[data-d]').forEach(c=>c.classList.toggle('on',!!(t&&t.days&&t.days.includes(+c.dataset.d))));
   document.querySelectorAll('.prio-opt').forEach(o=>o.classList.remove('on'));
@@ -1593,7 +2304,7 @@ function saveT(){
   const n=document.getElementById('t_n').value.trim();
   if(!n){document.getElementById('t_n').style.borderColor='var(--red)';return;}
   document.getElementById('t_n').style.borderColor='';
-  const cat=document.getElementById('t_c').value,time=(document.getElementById('t_t').value||'').trim();
+  const cat=document.getElementById('t_c').value,time=document.getElementById('t_t').value;
   const desc=document.getElementById('t_d').value.trim();
   const days=[...document.querySelectorAll('#tmov .dc[data-d].on')].map(c=>+c.dataset.d);
   const prio=(document.querySelector('.prio-opt.on')||{}).dataset?.p||'yellow';
@@ -1676,7 +2387,7 @@ function openPM(){document.getElementById('p_n').value=prof.name;document.getEle
 function saveP(){prof.name=document.getElementById('p_n').value.trim();prof.role=document.getElementById('p_r').value.trim();prof.store=document.getElementById('p_s').value.trim();prof.rayon=document.getElementById('p_ray').value.trim();save();closeM('pmov');renderHome();showT('✅','Profil mis à jour');}
 
 // ══ MODALS ══
-function closeM(id){document.getElementById(id).classList.remove('on');}
+function closeM(id){var el=document.getElementById(id);if(!el)return;el.classList.remove('on');el.style.display='none';}
 ['tmov','pmov','evtmov','imgmov','snoozmov'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
 document.getElementById('cmov').addEventListener('click',function(e){if(e.target===this)closeM('cmov');});
 let _tt2;
@@ -1694,6 +2405,7 @@ function renderDr(){
     {ico:'📊',name:'Excel',a:"closeDr();goPage('chiffres')"},
     {ico:'🔔',name:'Notifications',a:"openDr('notifs')"},
     {ico:'👤',name:'Mon Profil',a:"openPM();closeDr()"},
+    
     {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
     {ico:'⚙️',name:'Réglages',a:"openDr('settings')"},
   ].map(x=>`<div class="dr-item" onclick="${x.a}"><div class="dr-ico">${x.ico}</div><div><div class="dr-name">${x.name}</div></div><div style="margin-left:auto;color:var(--t3)">›</div></div>`).join('');
@@ -1819,7 +2531,7 @@ function updCasseTotaux3(data){
   const el=document.getElementById('casseTotaux3');if(!el)return;
   el.innerHTML=RAYONS.map(r=>{
     const t=tot[r.key],noC=!t.casse||t.casse===0,tx=t.ca?(t.casse/t.ca*100).toFixed(2)+'%':'—',col=noC?'var(--green)':t.ca?'var(--red)':'var(--t3)';
-    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:9px;font-weight:900" class="cs-rlbl">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
+    return `<div style="background:var(--s1);border:1px solid var(--bord);border-radius:9px;padding:6px"><div style="font-size:8px;color:var(--t2);font-weight:700">${r.label}</div><div style="font-size:11px;font-weight:900;color:${col}">${tx}</div></div>`;
   }).join('');
 }
 function renderCasse3(){
@@ -1829,8 +2541,8 @@ function renderCasse3(){
   const isCur=(_csY===today.getFullYear()&&_csM===today.getMonth()),todD=today.getDate();
   const jrs=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
   let th='<thead><tr><th class="sticky" style="min-width:36px;vertical-align:middle" rowspan="2">Jour</th>';
-  RAYONS.forEach(r=>{th+=`<th colspan="3" style="text-align:center;font-size:9px;font-weight:900;background:#1e3a8a;color:#ffffff">${r.label}</th>`;});
-  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">CA</th><th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">Casse</th><th style="font-size:8px;color:rgba(255,255,255,.8);font-weight:700">TX</th>';});th+='</tr></thead>';
+  RAYONS.forEach(r=>{th+=`<th colspan="3" style="text-align:center;font-size:8px;background:rgba(59,130,246,.07)">${r.label}</th>`;});
+  th+='</tr><tr>';RAYONS.forEach(()=>{th+='<th style="font-size:8px">CA</th><th style="font-size:8px">Casse</th><th style="font-size:8px">TX</th>';});th+='</tr></thead>';
   const totCA={},totCasse={};RAYONS.forEach(r=>{totCA[r.key]=0;totCasse[r.key]=0;});
   let tb='<tbody>';
   for(let d=1;d<=days;d++){
@@ -1929,10 +2641,7 @@ function openRapportAbsences(){
   // Build data: for each employee, get status for each date
   var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
   var periodLabel='16 '+MFR[per.startM]+' '+per.startY+' → 15 '+MFR[per.endM]+' '+per.endY;
-  var nowD=new Date();
-  var dateLabel='Généré le '+nowD.getDate()+' '+MFR[nowD.getMonth()]+' '+nowD.getFullYear()+' à '+String(nowD.getHours()).padStart(2,'0')+':'+String(nowD.getMinutes()).padStart(2,'0');
-  var dateEl=document.getElementById('absRptDate');
-  if(dateEl) dateEl.textContent=dateLabel;
+  var nowD=new Date();var dateLabel='Généré le '+nowD.getDate()+' '+MFR[nowD.getMonth()]+' '+nowD.getFullYear()+' à '+String(nowD.getHours()).padStart(2,'0')+':'+String(nowD.getMinutes()).padStart(2,'0');var dateEl=document.getElementById('absRptDate');if(dateEl)dateEl.textContent=dateLabel;
   
   var rows='';
   emps.forEach(function(emp,ei){
@@ -2172,6 +2881,1004 @@ function exportTachesPDF(mode){
 function toggleBoost(el){
   el.classList.toggle('open');
 }
+
+function checkDlcNotifications(){try{var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');var now=new Date();now.setHours(0,0,0,0);items.forEach(function(item){var d=new Date(item.date);d.setHours(0,0,0,0);var diff=Math.round((d-now)/(1000*60*60*24));if(diff===1){if(Notification.permission==='granted'){new Notification('⚠️ DLC demain !',{body:item.name+(item.rayon?' — '+item.rayon:'')});}showT('⚠️','DLC demain: '+item.name);}});}catch(e){}}
+function requestDlcNotifPerm(){if('Notification' in window&&Notification.permission==='default'){Notification.requestPermission().then(function(p){if(p==='granted')showT('🔔','Notifications activées !');});}}
+
+function printDlcReport(){var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');if(!items.length){showT('⚠️','Aucun produit DLC');return;}var now=new Date();now.setHours(0,0,0,0);var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();var rows=items.map(function(item){var d=new Date(item.date);d.setHours(0,0,0,0);var diff=Math.round((d-now)/(1000*60*60*24));var cls=diff<0?'p-urgent':diff<=3?'p-urgent':diff<=7?'p-attention':'p-ok';var status=diff<0?'EXPIRÉ':diff===0?'Aujourd\'hui':diff===1?'Demain':diff+' jours';var dStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();return'<tr><td>'+item.name+'</td><td>'+(item.rayon||'—')+'</td><td>'+dStr+'</td><td class="'+cls+'">'+status+'</td></tr>';}).join('');var div=document.getElementById('printDLC');div.innerHTML='<h2 style="color:#1e3a8a;margin-bottom:4px;">📦 Contrôle DLC</h2><div style="font-size:11px;color:#666;margin-bottom:12px;">Généré le '+dateStr+'</div><table><thead><tr><th>Produit</th><th>Rayon</th><th>Date DLC</th><th>Statut</th></tr></thead><tbody>'+rows+'</tbody></table>';window.print();}
+
+function getStatut(taskId){var d=tstr();if(!comps[d])return'nd';var s=comps[d]['_st_'+taskId];return s||'nd';}
+function setStatut(taskId,s){var d=tstr();if(!comps[d])comps[d]={};comps[d]['_st_'+taskId]=s;if(s==='dn'&&!comps[d][taskId]){comps[d][taskId]=true;var t=tasks.find(function(x){return x.id===taskId;});if(t){addN('done','✅ Accomplie',t.name);if(cfg.sound)beep();}}if(s!=='dn')comps[d][taskId]=false;save();if(_curPage==='taches'||_curPage==='commercial')renderTaches();if(_curPage==='home')renderHome();}
+function cycleStatut(event,taskId){event.stopPropagation();var cur=getStatut(taskId);var next=cur==='nd'?'ip':cur==='ip'?'dn':'nd';setStatut(taskId,next);}
+function statutLabel(s){if(s==='ip')return'🟡 En cours';if(s==='dn')return'🟢 Terminé';return'🔴 Non démarré';}
+function statutClass(s){if(s==='ip')return'statut-ip';if(s==='dn')return'statut-dn';return'statut-nd';}
+function statutBorderClass(s){if(s==='ip')return'statut-border-ip';if(s==='dn')return'statut-border-dn';return'statut-border-nd';}
+
+
+// ══ ÉQUIPE DATA ══
+var SKE=SK+'_eq';
+function loadEQ(){try{return JSON.parse(localStorage.getItem(SKE)||'{}');}catch(e){return{};}}
+function saveEQ(d){try{localStorage.setItem(SKE,JSON.stringify(d));}catch(e){}}
+
+// ══ BRIEFING ══
+var DEFAULT_BRIEFING=[
+  'Présences & absences équipe',
+  'Objectifs CA du jour',
+  'Points DLC urgents',
+  'Ruptures à surveiller',
+  'Tâches prioritaires',
+  'Consignes direction'
+];
+function getBriefingItems(){
+  var d=loadEQ();
+  if(!d.briefing)d.briefing={items:DEFAULT_BRIEFING.slice(),checks:{},note:''};
+  if(!d.briefing.items)d.briefing.items=DEFAULT_BRIEFING.slice();
+  return d.briefing;
+}
+function toggleBriefingAdd(){
+  var f=document.getElementById('briefAddForm');
+  if(!f)return;
+  var showing=f.style.display!=='none';
+  f.style.display=showing?'none':'block';
+  var btn=document.getElementById('briefAddBtn');
+  if(btn){btn.textContent=showing?'+ Point':'✕';btn.style.background=showing?'#3b82f6':'rgba(255,255,255,.12)';}
+  if(!showing){var inp=document.getElementById('briefNewItem');if(inp){inp.value='';inp.focus();}}
+}
+function addBriefingItem(){
+  var inp=document.getElementById('briefNewItem'); if(!inp)return;
+  var val=inp.value.trim(); if(!val){inp.style.borderColor='#ef4444';return;}
+  inp.style.borderColor='';
+  var d=loadEQ(); var br=getBriefingItems();
+  br.items.push(val); d.briefing=br; saveEQ(d);
+  inp.value=''; toggleBriefingAdd(); renderBriefing(); showT('✅','Point ajouté');
+}
+function delBriefingItem(i){
+  var d=loadEQ(); var br=getBriefingItems();
+  br.items.splice(i,1); delete br.checks[i];
+  // re-index checks
+  var newChecks={};
+  Object.keys(br.checks).forEach(function(k){var ki=parseInt(k);if(ki<i)newChecks[ki]=br.checks[k];else if(ki>i)newChecks[ki-1]=br.checks[k];});
+  br.checks=newChecks; d.briefing=br; saveEQ(d); renderBriefing();
+}
+function renderBriefing(){
+  var br=getBriefingItems();
+  var el=document.getElementById('briefingChecks'); if(!el)return;
+  var empty=document.getElementById('briefingEmpty');
+  if(!br.items.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  el.innerHTML=br.items.map(function(item,i){
+    var done=br.checks[i];
+    return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px;">'
+      +'<div onclick="toggleBriefingItem('+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(done?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(done?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+      +'<div onclick="toggleBriefingItem('+i+')" style="flex:1;font-size:13px;color:var(--t1);'+(done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;">'+item+'</div>'
+      +'<div onclick="delBriefingItem('+i+')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
+      +'</div>';
+  }).join('');
+  var note=document.getElementById('briefingNote'); if(note)note.value=br.note||'';
+}
+function toggleBriefingItem(i){
+  var d=loadEQ(); var br=getBriefingItems();
+  br.checks[i]=!br.checks[i]; d.briefing=br; saveEQ(d); renderBriefing();
+}
+function saveBriefing(){
+  var d=loadEQ(); var br=getBriefingItems();
+  var n=document.getElementById('briefingNote'); if(n)br.note=n.value;
+  d.briefing=br; saveEQ(d);
+}
+function resetBriefing(){
+  var d=loadEQ();
+  d.briefing={items:DEFAULT_BRIEFING.slice(),checks:{},note:''};
+  saveEQ(d); renderBriefing(); showT('🌅','Briefing réinitialisé');
+}
+
+// ══ VIGILANCE ══
+var _vigGrav='med';
+function setVigGrav(btn,v){
+  _vigGrav=v;
+  document.querySelectorAll('[data-vg]').forEach(function(b){b.style.opacity='0.45';});
+  btn.style.opacity='1';
+}
+function toggleVigForm(){
+  var f=document.getElementById('vigForm');
+  if(!f)return;
+  var showing=f.style.display!=='none';
+  if(!showing){
+    document.getElementById('vigDesc').value='';
+    document.getElementById('vigZone').value='';
+    _vigGrav='med';
+    document.querySelectorAll('[data-vg]').forEach(function(b){b.style.opacity='1';});
+    document.getElementById('vigAddBtn').textContent='✕ Fermer';
+    document.getElementById('vigAddBtn').style.background='rgba(255,255,255,.12)';
+  } else {
+    document.getElementById('vigAddBtn').textContent='+ Alerte';
+    document.getElementById('vigAddBtn').style.background='#ef4444';
+  }
+  f.style.display=showing?'none':'block';
+}
+function addVigilance(){toggleVigForm();}
+function saveVigilance(){
+  var desc=document.getElementById('vigDesc').value.trim();
+  var zone=document.getElementById('vigZone').value.trim();
+  if(!desc){showT('⚠️','Description requise');return;}
+  var d=loadEQ(); if(!d.vigilance)d.vigilance=[];
+  d.vigilance.unshift({id:uid(),desc:desc,zone:zone,grav:_vigGrav,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
+  saveEQ(d); toggleVigForm(); renderVigilance(); showT('⚠️','Alerte enregistrée');
+}
+function renderVigilance(){
+  var d=loadEQ(); var list=d.vigilance||[];
+  var el=document.getElementById('vigilanceList'); var empty=document.getElementById('vigilanceEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var cols={high:'#ef4444',med:'#f59e0b',low:'#22c55e'};
+  var icons={high:'🔴',med:'🟡',low:'🟢'};
+  el.innerHTML=list.map(function(item,i){
+    return '<div style="background:var(--card);border-radius:12px;padding:12px;border-left:3px solid '+cols[item.grav||'med']+';">'
+      +'<div style="display:flex;align-items:flex-start;gap:8px;">'
+      +'<span style="font-size:16px;">'+icons[item.grav||'med']+'</span>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);">'+item.desc+'</div>'
+      +(item.zone?'<div style="font-size:11px;color:var(--t2);margin-top:2px;">📍 '+item.zone+'</div>':'')
+      +'<div style="font-size:10px;color:var(--t3);margin-top:4px;">'+item.date+' '+item.time+'</div>'
+      +'</div>'
+      +'<div onclick="delVigilance('+i+')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;">×</div>'
+      +'</div></div>';
+  }).join('');
+}
+function delVigilance(i){
+  var d=loadEQ(); if(!d.vigilance)return;
+  d.vigilance.splice(i,1); saveEQ(d); renderVigilance();
+}
+
+// ══ PLANNING ══
+var PLAN_ZONES=[
+  {id:'rayons',label:'🛒 Rayons',color:'#a78bfa',items:['20-Traiteur','21-Poisso.','22-FLEG','23-Boul-Pat','24-Boucherie','12-PFLS']},
+  {id:'caisse',label:'💰 Caisse',color:'#60a5fa',items:['Caisse-1','Caisse-2','Caisse-3','Caisse-4']},
+  {id:'autres',label:'📋 Autres',color:'#34d399',items:['Réception','Polyvalent']}
+];
+function renderPlanning(){
+  var el=document.getElementById('planningDate'); 
+  if(el){var now=tn();el.textContent='📅 '+DF[now.getDay()]+' '+now.getDate()+' '+MF[now.getMonth()]+' '+now.getFullYear();}
+  var d=loadEQ(); var plan=d.planning||[];
+  var today=tstr(); var todayItems=plan.filter(function(p){return p.date===today;});
+  // Caisse only
+  todayItems=todayItems.filter(function(p){return p.zone&&p.zone.startsWith('Caisse');});
+  
+  var empty=document.getElementById('planningEmpty');
+  var grid=document.getElementById('planningGrid');
+  var summary=document.getElementById('planningSummary');
+  if(!grid)return;
+  
+  if(!todayItems.length){
+    grid.innerHTML=''; 
+    if(empty)empty.style.display='block';
+    if(summary)summary.innerHTML='';
+    return;
+  }
+  if(empty)empty.style.display='none';
+
+  // Summary pills
+  if(summary){
+    var total=todayItems.length;
+    var repos=todayItems.filter(function(p){return p.horaire==='Repos';}).length;
+    summary.innerHTML='<div style="flex:1;background:var(--card);border-radius:10px;padding:8px;text-align:center;">'
+      +'<div style="font-size:18px;font-weight:900;color:#a78bfa;">'+total+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);">Affectés</div></div>'
+      +'<div style="flex:1;background:var(--card);border-radius:10px;padding:8px;text-align:center;">'
+      +'<div style="font-size:18px;font-weight:900;color:#22c55e;">'+(total-repos)+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);">En service</div></div>'
+      +'<div style="flex:1;background:var(--card);border-radius:10px;padding:8px;text-align:center;">'
+      +'<div style="font-size:18px;font-weight:900;color:#f59e0b;">'+repos+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);">Repos</div></div>';
+  }
+
+  // Caisse items list
+  var html='';
+  if(todayItems.length){
+    html='<div style="background:var(--card);border-radius:14px;overflow:hidden;">';
+    todayItems.forEach(function(item){
+      var idx=plan.indexOf(item);
+      var isRepos=item.horaire==='Repos';
+      html+='<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.04);">'
+        +'<div style="width:9px;height:9px;border-radius:50%;background:'+(isRepos?'#6b7280':'#22c55e')+';flex-shrink:0;"></div>'
+        +'<div style="flex:1;">'
+        +'<div style="font-size:14px;font-weight:700;color:var(--t1);">'+item.emp+'</div>'
+        +'<div style="font-size:11px;color:var(--t2);margin-top:2px;">'+item.zone+'  ·  '+item.horaire+'</div>'
+        +'</div>'
+        +'<div onclick="delPlanningItem('+idx+')" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+        +'</div>';
+    });
+    html+='</div>';
+  }
+  grid.innerHTML=html;
+}
+function addPlanningItem(){
+  var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var sel=document.getElementById('planEmp'); if(!sel)return;
+  sel.innerHTML=emps.length
+    ?emps.map(function(e){return '<option value="'+e.name+'">'+e.name+(e.role?' — '+e.role:'')+'</option>';}).join('')
+    :'<option value="">Aucun employé enregistré</option>';
+  window._planRepos=false;
+  populateTimeSelects();
+  document.getElementById('planningModal').style.display='flex';
+}
+function savePlanningItem(){
+  var emp=document.getElementById('planEmp').value;
+  var zone=document.getElementById('planZone').value;
+  var debut=(document.getElementById('planHeureDebut')||{value:'08:00'}).value;
+  var fin=(document.getElementById('planHeureFin')||{value:'16:00'}).value;
+  var horaire=window._planRepos?'🏖️ Repos':debut+' – '+fin;
+  if(!emp||!zone){showT('⚠️','Employé et zone requis');return;}
+  var d=loadEQ(); if(!d.planning)d.planning=[];
+  d.planning.push({emp:emp,zone:zone,horaire:horaire,date:tstr()});
+  saveEQ(d); closeM('planningModal'); renderPlanning(); showT('✅','Affectation enregistrée');
+}
+function delPlanningItem(i){
+  var d=loadEQ(); if(!d.planning)return;
+  d.planning.splice(i,1); saveEQ(d); renderPlanning();
+}
+
+// ══ HYGIÈNE ══
+var DEFAULT_HYGIENE=[
+  'Nettoyage sol rayons','Nettoyage vitrines réfrigérées','Désinfection plans de travail',
+  'Vérification dates DLC critiques','Contrôle températures réfrigération',
+  'Port tenues réglementaires équipe','Évacuation déchets / cartons',
+  'Signalétique sécurité visible','Extincteurs accessibles','Sorties de secours dégagées'
+];
+function getHygieneItems(){
+  var d=loadEQ();
+  if(!d.hygieneItems)d.hygieneItems=DEFAULT_HYGIENE.slice();
+  return d.hygieneItems;
+}
+function toggleHygieneAdd(){
+  var f=document.getElementById('hygAddForm');
+  if(!f)return;
+  var showing=f.style.display!=='none';
+  f.style.display=showing?'none':'block';
+  var btn=document.getElementById('hygAddBtn');
+  if(btn){btn.textContent=showing?'+ Point':'✕';btn.style.background=showing?'#059669':'rgba(255,255,255,.12)';}
+  if(!showing){var inp=document.getElementById('hygNewItem');if(inp){inp.value='';inp.focus();}}
+}
+function addHygieneItem(){
+  var inp=document.getElementById('hygNewItem'); if(!inp)return;
+  var val=inp.value.trim(); if(!val){inp.style.borderColor='#ef4444';return;}
+  inp.style.borderColor='';
+  var d=loadEQ();
+  d.hygieneItems=getHygieneItems();
+  d.hygieneItems.push(val); saveEQ(d);
+  inp.value=''; toggleHygieneAdd(); renderHygiene(); showT('✅','Point ajouté');
+}
+function delHygieneItem(i){
+  var d=loadEQ();
+  d.hygieneItems=getHygieneItems();
+  d.hygieneItems.splice(i,1);
+  // Clean up checks for all days
+  if(d.hygiene){Object.keys(d.hygiene).forEach(function(day){var newC={};Object.keys(d.hygiene[day]).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=d.hygiene[day][k];else if(ki>i)newC[ki-1]=d.hygiene[day][k];});d.hygiene[day]=newC;});}
+  saveEQ(d); renderHygiene();
+}
+function renderHygiene(){
+  var el=document.getElementById('hygieneDate');
+  if(el){var now=tn();el.textContent='Contrôle du '+now.getDate()+' '+MF[now.getMonth()]+' '+now.getFullYear();}
+  var items=getHygieneItems();
+  var d=loadEQ(); var hy=d.hygiene||{};
+  var today=tstr(); var checks=hy[today]||{};
+  var el2=document.getElementById('hygieneChecks'); if(!el2)return;
+  var empty=document.getElementById('hygieneEmpty');
+  if(!items.length){el2.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var done=items.filter(function(_,i){return checks[i];}).length;
+  var score=items.length>0?Math.round(done/items.length*100):0;
+  var sc=document.getElementById('hygieneScore');
+  var fill=document.getElementById('hygieneBarFill');
+  var col=score>=80?'#22c55e':score>=50?'#f59e0b':'#ef4444';
+  if(sc){sc.textContent=score+'%';sc.style.color=col;}
+  if(fill){fill.style.width=score+'%';fill.style.background=col;}
+  el2.innerHTML=items.map(function(item,i){
+    var ok=checks[i];
+    return '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;border:1px solid '+(ok?'rgba(34,197,94,.3)':'rgba(255,255,255,.06)')+'">'
+      +'<div onclick="toggleHygiene('+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(ok?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(ok?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(ok?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+      +'<div onclick="toggleHygiene('+i+')" style="flex:1;font-size:13px;color:var(--t1);'+(ok?'opacity:.6;text-decoration:line-through;':'')+'cursor:pointer;">'+item+'</div>'
+      +'<div onclick="delHygieneItem('+i+')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
+      +'</div>';
+  }).join('');
+}
+function toggleHygiene(i){
+  var d=loadEQ(); if(!d.hygiene)d.hygiene={};
+  var today=tstr(); if(!d.hygiene[today])d.hygiene[today]={};
+  d.hygiene[today][i]=!d.hygiene[today][i]; saveEQ(d); renderHygiene();
+}
+
+// ══ TOP VENTES / BEST SELLERS ══
+function openAddBestSeller(){document.getElementById('bsName').value='';document.getElementById('bsRayon').value='';document.getElementById('bestSellerModal').style.display='flex';}
+function saveBestSeller(){
+  var name=document.getElementById('bsName').value.trim();
+  var rayon=document.getElementById('bsRayon').value.trim();
+  if(!name){showT('⚠️','Nom requis');return;}
+  var d=loadEQ(); if(!d.bestSellers)d.bestSellers=[];
+  d.bestSellers.push({id:uid(),name:name,rayon:rayon,score:0});
+  saveEQ(d); closeM('bestSellerModal'); renderTopVentes(); showT('✅','Produit ajouté');
+}
+function addScore(id,val){
+  var d=loadEQ(); if(!d.bestSellers)return;
+  var idx=d.bestSellers.findIndex(function(b){return b.id===id;});
+  if(idx>=0){d.bestSellers[idx].score=Math.max(0,(d.bestSellers[idx].score||0)+val);}
+  saveEQ(d); renderTopVentes();
+}
+function delBestSeller(id){
+  var d=loadEQ(); if(!d.bestSellers)return;
+  d.bestSellers=d.bestSellers.filter(function(b){return b.id!==id;});
+  saveEQ(d); renderTopVentes();
+}
+var DEFAULT_INVENTAIRE=['Vérifier stock Produit 1','Vérifier stock Produit 2','Compter ruptures','Mise à jour commandes','Rapport stocks critiques'];
+function getInvItems(){var d=loadEQ();if(!d.invItems)d.invItems=DEFAULT_INVENTAIRE.slice();return d.invItems;}
+function renderTopVentes(){
+  var d=loadEQ();
+  var bs=d.bestSellers||[];
+  // Top ranking (sorted)
+  var sorted=[].concat(bs).sort(function(a,b){return (b.score||0)-(a.score||0);});
+  var topEl=document.getElementById('topVentesList');
+  if(topEl){
+    if(!sorted.length){topEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucun produit enregistré</div>';
+    }else{
+      topEl.innerHTML=sorted.slice(0,5).map(function(item,i){
+        var medals=['🥇','🥈','🥉','4️⃣','5️⃣'];
+        var w=item.score>0?Math.min(100,Math.round(item.score/(sorted[0].score||1)*100)):0;
+        return '<div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px;">'
+          +'<div style="display:flex;align-items:center;gap:10px;">'
+          +'<span style="font-size:20px;">'+medals[i]+'</span>'
+          +'<div style="flex:1;">'
+          +'<div style="font-size:13px;font-weight:800;color:var(--t1);">'+item.name+'</div>'
+          +(item.rayon?'<div style="font-size:10px;color:var(--t2);">'+item.rayon+'</div>':'')
+          +'</div>'
+          +'<div style="font-size:16px;font-weight:900;color:#fbbf24;">'+item.score+'</div>'
+          +'</div>'
+          +'<div style="margin-top:8px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;">'
+          +'<div style="height:4px;background:#fbbf24;border-radius:2px;width:'+w+'%;transition:width .3s;"></div>'
+          +'</div></div>';
+      }).join('');
+    }
+  }
+  // Manual scoring list
+  var bsEl=document.getElementById('bestSellersList');
+  if(bsEl){
+    if(!bs.length){bsEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Appuyez sur + Produit pour commencer</div>';
+    }else{
+      bsEl.innerHTML=bs.map(function(item){
+        return '<div style="background:var(--card);border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px;">'
+          +'<div style="flex:1;">'
+          +'<div style="font-size:13px;font-weight:700;color:var(--t1);">'+item.name+'</div>'
+          +(item.rayon?'<div style="font-size:10px;color:var(--t2);">'+item.rayon+'</div>':'')
+          +'</div>'
+          +'<div style="display:flex;align-items:center;gap:6px;">'
+          +'<button onclick="addScore(\''+item.id+'\',-1)" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#ef4444;font-size:16px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>'
+          +'<div style="min-width:32px;text-align:center;font-size:16px;font-weight:900;color:var(--t1);">'+(item.score||0)+'</div>'
+          +'<button onclick="addScore(\''+item.id+'\',1)" style="width:28px;height:28px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:16px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>'
+          +'<button onclick="delBestSeller(\''+item.id+'\')" style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:14px;cursor:pointer;margin-left:4px;">×</button>'
+          +'</div></div>';
+      }).join('');
+    }
+  }
+  // Inventaire checklist
+  var invEl=document.getElementById('inventaireChecks'); if(!invEl)return;
+  var items=getInvItems(); var inv=d.inventaire||{};
+  invEl.innerHTML=items.length?items.map(function(item,i){
+    var ok=inv[i];
+    return '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;border:1px solid '+(ok?'rgba(34,197,94,.25)':'rgba(255,255,255,.06)')+';">'
+      +'<div onclick="toggleInventaire('+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(ok?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(ok?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(ok?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+      +'<div onclick="toggleInventaire('+i+')" style="flex:1;font-size:13px;color:var(--t1);'+(ok?'opacity:.6;text-decoration:line-through;':'')+'cursor:pointer;">'+item+'</div>'
+      +'<div onclick="delInvItem('+i+')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
+      +'</div>';
+  }).join(''):'<div style=\'font-size:12px;color:var(--t2);text-align:center;padding:12px;\'>Aucun point — appuyez sur + Ajouter</div>';
+}
+function toggleInvAdd(){
+  var f=document.getElementById('invAddForm'); if(!f)return;
+  var showing=f.style.display!=='none';
+  f.style.display=showing?'none':'block';
+  var btn=document.getElementById('invAddBtn');
+  if(btn){btn.textContent=showing?'+ Ajouter':'✕';btn.style.background=showing?'#059669':'rgba(255,255,255,.12)';}
+  if(!showing){var inp=document.getElementById('invNewItem');if(inp){inp.value='';inp.focus();}}
+}
+function addInvItem(){
+  var inp=document.getElementById('invNewItem'); if(!inp)return;
+  var val=inp.value.trim(); if(!val){inp.style.borderColor='#ef4444';return;}
+  inp.style.borderColor='';
+  var d=loadEQ(); d.invItems=getInvItems();
+  d.invItems.push(val); saveEQ(d);
+  inp.value=''; toggleInvAdd(); renderTopVentes(); showT('✅','Point ajouté');
+}
+function delInvItem(i){
+  var d=loadEQ(); d.invItems=getInvItems();
+  d.invItems.splice(i,1);
+  var newC={}; var inv=d.inventaire||{};
+  Object.keys(inv).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=inv[k];else if(ki>i)newC[ki-1]=inv[k];});
+  d.inventaire=newC; saveEQ(d); renderTopVentes();
+}
+function toggleInventaire(i){
+  var d=loadEQ(); if(!d.inventaire)d.inventaire={};
+  d.inventaire[i]=!d.inventaire[i]; saveEQ(d); renderTopVentes();
+}
+function resetInventaire(){
+  var d=loadEQ(); d.inventaire={}; saveEQ(d); renderTopVentes(); showT('🔄','Inventaire réinitialisé');
+}
+
+
+var _noteTab='success';
+function switchNoteTab(tab){_noteTab=tab;var ts=document.getElementById('noteTabSuccess');var ti=document.getElementById('noteTabImprove');var ps=document.getElementById('notePanelSuccess');var pi=document.getElementById('notePanelImprove');if(!ts)return;if(tab==='success'){ts.style.background='rgba(34,197,94,.12)';ts.style.borderColor='rgba(34,197,94,.4)';ts.style.color='#22c55e';ts.style.fontWeight='800';ti.style.background='rgba(255,255,255,.03)';ti.style.borderColor='rgba(255,255,255,.08)';ti.style.color='var(--t2)';ti.style.fontWeight='700';if(ps)ps.style.display='block';if(pi)pi.style.display='none';}else{ti.style.background='rgba(245,158,11,.12)';ti.style.borderColor='rgba(245,158,11,.4)';ti.style.color='#f59e0b';ti.style.fontWeight='800';ts.style.background='rgba(255,255,255,.03)';ts.style.borderColor='rgba(255,255,255,.08)';ts.style.color='var(--t2)';ts.style.fontWeight='700';if(pi)pi.style.display='block';if(ps)ps.style.display='none';}}
+function saveNotePerso(){var today=tstr();var notes=JSON.parse(localStorage.getItem(SK+'_notes')||'{}');if(!notes[today])notes[today]={};var s=document.getElementById('noteSuccess');var im=document.getElementById('noteImprove');if(s)notes[today].success=s.value;if(im)notes[today].improve=im.value;localStorage.setItem(SK+'_notes',JSON.stringify(notes));var lbl=document.getElementById('notesSavedLbl');if(lbl){lbl.style.display='block';clearTimeout(window._noteSaveT);window._noteSaveT=setTimeout(function(){lbl.style.display='none';},1500);}}
+function loadNotePerso(){var today=tstr();var notes=JSON.parse(localStorage.getItem(SK+'_notes')||'{}');var n=notes[today]||{};var s=document.getElementById('noteSuccess');var im=document.getElementById('noteImprove');if(s)s.value=n.success||'';if(im)im.value=n.improve||'';}
+function toggleNoteHistory(){var el=document.getElementById('noteHistory');if(!el)return;if(el.style.display!=='none'){el.style.display='none';return;}var notes=JSON.parse(localStorage.getItem(SK+'_notes')||'{}');var days=Object.keys(notes).sort().reverse().slice(0,7);var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];var jours=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];if(!days.length){el.innerHTML='<div style="text-align:center;padding:12px;font-size:12px;color:var(--t2);">Aucune note enregistrée</div>';el.style.display='block';return;}el.innerHTML=days.map(function(d){var n=notes[d]||{};var p=d.split('-');var dt=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));var label=jours[dt.getDay()]+' '+p[2]+' '+MFR[parseInt(p[1])-1];var isToday=d===tstr();return'<div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:6px;">'+'<div style="font-size:11px;font-weight:700;color:'+(isToday?'#22c55e':'var(--t2)')+';margin-bottom:6px;">'+label+(isToday?' — Aujourd\'hui':'')+'</div>'+(n.success?'<div style="margin-bottom:4px;"><span style="font-size:10px;color:#22c55e;font-weight:700;">🏆 </span><span style="font-size:12px;color:var(--t1);">'+n.success+'</span></div>':'')+(n.improve?'<div><span style="font-size:10px;color:#f59e0b;font-weight:700;">🎯 </span><span style="font-size:12px;color:var(--t1);">'+n.improve+'</span></div>':'')+'</div>';}).join('');el.style.display='block';}
+
+
+// ══ POINTAGE PAGE ══
+function renderPointagePage(){
+  var el=document.getElementById('pointageDate');
+  var td=tstr();
+  if(el){var now=tn();el.textContent='📅 '+now.getDate()+' '+MF[now.getMonth()]+' '+now.getFullYear();}
+  var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var st=JSON.parse(localStorage.getItem(SK+'_empst_'+td)||'{}');
+  var list=document.getElementById('pointageList'); if(!list)return;
+  if(!emps.length){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--t2);"><div style="font-size:40px;">👥</div><div style="font-size:12px;margin-top:8px;">Aucun employé</div><div style="font-size:11px;margin-top:4px;opacity:.6;">Appuyez sur + pour ajouter</div></div>';return;}
+  list.innerHTML=emps.map(function(e,i){
+    var s=st[i]||'present';
+    var statuts=[
+      {k:'present',label:'✅ Présent',bg:'rgba(34,197,94,.15)',col:'#22c55e',border:'rgba(34,197,94,.3)'},
+      {k:'retard',label:'⏰ Retard',bg:'rgba(234,179,8,.15)',col:'#eab308',border:'rgba(234,179,8,.3)'},
+      {k:'absent',label:'❌ Absent',bg:'rgba(239,68,68,.15)',col:'#ef4444',border:'rgba(239,68,68,.3)'},
+      {k:'miseapied',label:'⛔ Mise à pied',bg:'rgba(100,116,139,.15)',col:'#94a3b8',border:'rgba(100,116,139,.3)'}
+    ];
+    var cur=statuts.find(function(x){return x.k===s;})||statuts[0];
+    return '<div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:8px;border:1px solid rgba(255,255,255,.07);">'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">'
+      +'<div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;flex-shrink:0;">'+((e.name||'?')[0]).toUpperCase()+'</div>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);">'+e.name+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);">'+(e.role||'')+( e.matricule?' · Mat: '+e.matricule:'')+'</div>'
+      +'</div>'
+      +'<span style="background:'+cur.bg+';color:'+cur.col+';border:1px solid '+cur.border+';padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;">'+cur.label+'</span>'
+      +'<div onclick="delEmp('+i+')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;opacity:.6;">×</div>'
+      +'</div>'
+      +'<div style="display:flex;gap:5px;">'
+      +statuts.map(function(st2){
+        var on=s===st2.k;
+        return '<button onclick="setEmpSt2('+i+',\''+st2.k+'\')" style="flex:1;padding:7px 2px;border-radius:9px;border:1px solid '+(on?st2.border:'rgba(255,255,255,.08)')+';background:'+(on?st2.bg:'rgba(255,255,255,.03)')+';color:'+(on?st2.col:'var(--t2)')+';font-size:9px;font-weight:700;cursor:pointer;">'+st2.label+'</button>';
+      }).join('')
+      +'</div></div>';
+  }).join('');
+}
+function setEmpSt2(i,s){
+  var td=tstr();
+  var st=JSON.parse(localStorage.getItem(SK+'_empst_'+td)||'{}');
+  st[i]=s; localStorage.setItem(SK+'_empst_'+td,JSON.stringify(st));
+  renderPointagePage();
+}
+
+// ══ CONGÉ PAGE ══
+function renderCongePage(){
+  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+  var el=document.getElementById('congeList'); if(!el)return;
+  if(!conges.length){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--t2);"><div style="font-size:40px;">🏖️</div><div style="font-size:12px;margin-top:8px;">Aucun congé enregistré</div></div>';return;}
+  el.innerHTML=conges.map(function(cg,i){
+    return '<div style="background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px;border:1px solid rgba(59,130,246,.2);">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);">'+(cg.nom||cg.name||'—')+'</div>'
+      +'<div onclick="delConge('+i+')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;opacity:.7;">×</div>'
+      +'</div>'
+      +'<div style="display:flex;gap:8px;flex-wrap:wrap;">'
+      +(cg.matricule?'<span style="font-size:10px;color:var(--t2);">Mat: '+cg.matricule+'</span>':'')
+      +(cg.solde!==undefined?'<span style="background:rgba(59,130,246,.15);color:#60a5fa;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;">Solde: '+cg.solde+' j</span>':'')
+      +(cg.conge!==undefined?'<span style="background:rgba(239,68,68,.15);color:#ef4444;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;">Pris: '+cg.conge+' j</span>':'')
+      +(cg.restant!==undefined?'<span style="background:rgba(34,197,94,.15);color:#22c55e;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700;">Restant: '+cg.restant+' j</span>':'')
+      +'</div>'
+      +(cg.date?'<div style="font-size:10px;color:var(--t2);margin-top:4px;">📅 '+cg.date+'</div>':'')
+      +'</div>';
+  }).join('');
+}
+function delConge(i){
+  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+  conges.splice(i,1); localStorage.setItem(SK+'_conges',JSON.stringify(conges));
+  renderCongePage();
+}
+
+// ══ RETENUS LIST ══
+var RET_COLORS={accompte:{bg:'rgba(30,58,138,.2)',col:'#60a5fa',border:'rgba(59,130,246,.3)',label:'💵 Accompte'},avance:{bg:'rgba(120,53,15,.2)',col:'#fbbf24',border:'rgba(217,119,6,.3)',label:'💸 Avance'},achat:{bg:'rgba(6,78,59,.2)',col:'#34d399',border:'rgba(22,163,74,.3)',label:'🛒 Achat/mois'}};
+function renderRetenuList(type){
+  var map={accompte:'accompteList',avance:'avanceList',achat:'achatList'};
+  var el=document.getElementById(map[type]); if(!el)return;
+  var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
+  var filtered=acc.filter(function(r){return r.type===type;});
+  var rc=RET_COLORS[type]||RET_COLORS.accompte;
+  if(!filtered.length){
+    el.innerHTML='<div style="text-align:center;padding:40px;color:var(--t2);"><div style="font-size:40px;">'+rc.label.split(' ')[0]+'</div><div style="font-size:12px;margin-top:8px;">Aucune entrée</div></div>';
+    return;
+  }
+  el.innerHTML=filtered.map(function(r){
+    var i=acc.indexOf(r);
+    return '<div style="background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px;border-left:3px solid '+rc.col+';border:1px solid '+rc.border+';border-left:3px solid '+rc.col+';">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;">'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);">'+r.nom+'</div>'
+      +(r.matricule?'<div style="font-size:10px;color:var(--t2);">Mat: '+r.matricule+'</div>':'')
+      +(r.note?'<div style="font-size:11px;color:var(--t2);margin-top:2px;">'+r.note+'</div>':'')
+      +(r.date?'<div style="font-size:10px;color:var(--t2);margin-top:4px;">📅 '+r.date+'</div>':'')
+      +'</div>'
+      +'<div style="text-align:right;flex-shrink:0;margin-left:8px;">'
+      +'<div style="font-size:18px;font-weight:900;color:'+rc.col+';font-family:\'IBM Plex Mono\';">'+(r.montant||0)+' TND</div>'
+      +'<div onclick="delAccompte('+i+')" style="color:#ef4444;font-size:12px;cursor:pointer;margin-top:4px;text-align:right;">× Supprimer</div>'
+      +'</div></div></div>';
+  }).join('');
+}
+function addRetenu(type){
+  window._retTab=type; addAccompte();
+}
+
+// ══ POINTAGE PDF ══
+function openPointagePdf(){document.getElementById('pointagePdfModal').style.display='flex';}
+function openCongePdf(){document.getElementById('congePdfModal').style.display='flex';}
+function openRetenuPdf(type){
+  window._retPdfType=type;
+  var labels={accompte:'💵 Accomptes',avance:'💸 Avances',achat:'🛒 Achat/mois'};
+  var el=document.getElementById('retenuPdfTitle');
+  if(el)el.textContent=labels[type]||type;
+  document.getElementById('retenuPdfModal').style.display='flex';
+}
+function exportPointagePdf(){
+  var from=document.getElementById('ptgFrom').value;
+  var to=document.getElementById('ptgTo').value;
+  if(!from||!to){showT('⚠️','Choisissez les dates');return;}
+  var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var now=new Date();var genDate=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Rapport Pointage</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:900px;margin:0 auto;padding:20px;color:#1a1a2e;}h1{color:#7c3aed;}table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:20px;}th{background:#4c1d95;color:#fff;padding:8px 10px;text-align:left;}td{padding:7px 10px;border-bottom:1px solid #e2e8f0;}.p{color:#16a34a;font-weight:700;}.r{color:#d97706;font-weight:700;}.a{color:#dc2626;font-weight:700;}.m{color:#64748b;font-weight:700;}.meta{font-size:11px;color:#666;margin-bottom:20px;}</style></head><body>'
+    +'<h1>👆 Rapport Pointage</h1><div class="meta">Période : '+from+' → '+to+' · Généré le '+genDate+'</div>';
+  // Build date list
+  var dates=[];var d=new Date(from);var dEnd=new Date(to);
+  while(d<=dEnd){dates.push(d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'));d.setDate(d.getDate()+1);}
+  html+='<table><thead><tr><th>Employé</th>';
+  dates.forEach(function(dt){var p=dt.split('-');html+='<th>'+p[2]+'/'+p[1]+'</th>';});
+  html+='</tr></thead><tbody>';
+  emps.forEach(function(e){
+    html+='<tr><td style="font-weight:700;">'+e.name+(e.matricule?' <span style="color:#64748b;font-size:10px;">('+e.matricule+')</span>':'')+'</td>';
+    dates.forEach(function(dt){
+      var st=JSON.parse(localStorage.getItem(SK+'_empst_'+dt)||'{}');
+      var idx2=emps.indexOf(e);var s=st[idx2]||'present';
+      var map2={present:'<td class="p">✅</td>',retard:'<td class="r">⏰</td>',absent:'<td class="a">❌</td>',miseapied:'<td class="m">⛔</td>'};
+      html+=map2[s]||'<td>—</td>';
+    });
+    html+='</tr>';
+  });
+  html+='</tbody></table></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='pointage_'+from+'_'+to+'.html';a.click();
+  closeM('pointagePdfModal');showT('📄','Rapport téléchargé !');
+}
+function exportCongePdf(){
+  var from=document.getElementById('cgeFrom').value;
+  var to=document.getElementById('cgeTo').value;
+  if(!from||!to){showT('⚠️','Choisissez les dates');return;}
+  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var now=new Date();var genDate=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var filtered=conges.filter(function(cg){return !cg.date||(cg.date>=from&&cg.date<=to);});
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Rapport Congés</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#1a1a2e;}h1{color:#1d4ed8;}table{width:100%;border-collapse:collapse;font-size:12px;}th{background:#1e3a8a;color:#fff;padding:8px 10px;text-align:left;}td{padding:7px 10px;border-bottom:1px solid #e2e8f0;}.meta{font-size:11px;color:#666;margin-bottom:20px;}</style></head><body>'
+    +'<h1>🏖️ Rapport Congés</h1><div class="meta">Période : '+from+' → '+to+' · Généré le '+genDate+'</div>'
+    +'<table><thead><tr><th>Matricule</th><th>Nom & Prénom</th><th>Solde</th><th>Pris</th><th>Restant</th><th>Date</th></tr></thead><tbody>'
+    +filtered.map(function(cg){return '<tr><td>'+(cg.matricule||'—')+'</td><td style="font-weight:700;">'+(cg.nom||cg.name||'—')+'</td><td>'+(cg.solde||'—')+' j</td><td>'+(cg.conge||'—')+' j</td><td style="color:#16a34a;font-weight:700;">'+(cg.restant||'—')+' j</td><td>'+(cg.date||'—')+'</td></tr>';}).join('')
+    +'</tbody></table></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='conges_'+from+'_'+to+'.html';a.click();
+  closeM('congePdfModal');showT('📄','Rapport téléchargé !');
+}
+function exportRetenuPdf(){
+  var type=window._retPdfType||'accompte';
+  var from=document.getElementById('retFrom').value;
+  var to=document.getElementById('retTo').value;
+  if(!from||!to){showT('⚠️','Choisissez les dates');return;}
+  var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
+  var filtered=acc.filter(function(r){return r.type===type&&(!r.date||(r.date>=from&&r.date<=to));});
+  var labels={accompte:'💵 Accomptes',avance:'💸 Avances',achat:'🛒 Achat/mois'};
+  var colors={accompte:'#1e3a8a',avance:'#92400e',achat:'#065f46'};
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var now=new Date();var genDate=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  // Group by employee
+  var byEmp={};
+  filtered.forEach(function(r){var k=r.nom+(r.matricule?'_'+r.matricule:'');if(!byEmp[k])byEmp[k]={nom:r.nom,mat:r.matricule,items:[],total:0};byEmp[k].items.push(r);byEmp[k].total+=(parseFloat(r.montant)||0);});
+  var total=filtered.reduce(function(s,r){return s+(parseFloat(r.montant)||0);},0);
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Rapport '+labels[type]+'</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#1a1a2e;}h1{color:'+colors[type]+';}table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}th{background:'+colors[type]+';color:#fff;padding:8px 10px;text-align:left;}td{padding:7px 10px;border-bottom:1px solid #e2e8f0;}.total{font-weight:700;font-size:14px;}.emp-head{background:#f1f5f9;font-weight:700;}.meta{font-size:11px;color:#666;margin-bottom:20px;}</style></head><body>'
+    +'<h1>'+labels[type]+'</h1><div class="meta">Période : '+from+' → '+to+' · Généré le '+genDate+'</div>'
+    +'<table><thead><tr><th>Employé</th><th>Matricule</th><th>Note</th><th>Date</th><th>Montant</th></tr></thead><tbody>';
+  Object.values(byEmp).forEach(function(emp){
+    html+='<tr class="emp-head"><td colspan="4" style="background:#f8fafc;font-weight:700;">'+emp.nom+(emp.mat?' — '+emp.mat:'')+'</td><td style="font-weight:900;text-align:right;">'+emp.total.toFixed(2)+' TND</td></tr>';
+    emp.items.forEach(function(r){html+='<tr><td></td><td>'+(r.matricule||'—')+'</td><td>'+(r.note||'—')+'</td><td>'+(r.date||'—')+'</td><td style="text-align:right;">'+(r.montant||0)+' TND</td></tr>';});
+  });
+  html+='<tr style="background:#f1f5f9;"><td colspan="4" class="total">TOTAL GÉNÉRAL</td><td class="total" style="text-align:right;">'+total.toFixed(2)+' TND</td></tr>';
+  html+='</tbody></table></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=type+'_'+from+'_'+to+'.html';a.click();
+  closeM('retenuPdfModal');showT('📄','Rapport téléchargé !');
+}
+
+
+function setRetPeriod(fromId,toId,p){
+  var now=new Date();
+  var y=now.getFullYear(),m=now.getMonth(),d=now.getDate();
+  var from,to;
+  if(p==='day'){from=to=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');}
+  else if(p==='week'){var day=now.getDay();var diff=d-day+(day===0?-6:1);var mon=new Date(y,m,diff);var sun=new Date(y,m,diff+6);from=mon.getFullYear()+'-'+String(mon.getMonth()+1).padStart(2,'0')+'-'+String(mon.getDate()).padStart(2,'0');to=sun.getFullYear()+'-'+String(sun.getMonth()+1).padStart(2,'0')+'-'+String(sun.getDate()).padStart(2,'0');}
+  else{from=y+'-'+String(m+1).padStart(2,'0')+'-01';to=y+'-'+String(m+1).padStart(2,'0')+'-'+String(new Date(y,m+1,0).getDate()).padStart(2,'0');}
+  var fe=document.getElementById(fromId);var te=document.getElementById(toId);
+  if(fe)fe.value=from;if(te)te.value=to;
+}
+
+
+// ══ DÉMARQUE ══
+var SKD = SK+'_demarque';
+var _dmqType = 'vol';
+var _veilleType = 'prix';
+var _veilleFilter = 'all';
+
+function loadDemarque(){ try{return JSON.parse(localStorage.getItem(SKD)||'[]');}catch(e){return[];} }
+function saveDemarqueData(d){ localStorage.setItem(SKD, JSON.stringify(d)); }
+
+function openDemarqueAdd(){
+  var f = document.getElementById('demarqueForm');
+  if(!f) return;
+  var showing = f.style.display !== 'none';
+  f.style.display = showing ? 'none' : 'block';
+  if(!showing){
+    document.getElementById('dmqProduit').value='';
+    document.getElementById('dmqQte').value='';
+    document.getElementById('dmqMontant').value='';
+    document.getElementById('dmqAction').value='';
+    _dmqType='vol';
+    document.querySelectorAll('[data-dt]').forEach(function(b){b.style.opacity='1';});
+  }
+}
+function setDmqType(btn,t){
+  _dmqType=t;
+  document.querySelectorAll('[data-dt]').forEach(function(b){b.style.opacity=b.dataset.dt===t?'1':'0.4';});
+  var wrap=document.getElementById('dmqCustomTypeWrap');
+  if(wrap)wrap.style.display=t==='custom'?'block':'none';
+}
+function toggleDmqCustom(){
+  _dmqType='custom';
+  document.querySelectorAll('[data-dt]').forEach(function(b){b.style.opacity='0.4';});
+  var wrap=document.getElementById('dmqCustomTypeWrap');
+  if(wrap){wrap.style.display='block';var inp=document.getElementById('dmqCustomType');if(inp)inp.focus();}
+}
+function saveDemarque(){
+  var prod = document.getElementById('dmqProduit').value.trim();
+  if(!prod){showT('⚠️','Produit requis');return;}
+  var qte = document.getElementById('dmqQte').value;
+  var montant = document.getElementById('dmqMontant').value;
+  var action = document.getElementById('dmqAction').value.trim();
+  var finalType=_dmqType;
+  if(_dmqType==='custom'){var ct=(document.getElementById('dmqCustomType')||{value:''}).value.trim();if(ct)finalType=ct;else finalType='autre';}
+  var data = loadDemarque();
+  data.unshift({id:uid(),produit:prod,qte:parseFloat(qte)||0,montant:parseFloat(montant)||0,type:finalType,action:action,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
+  saveDemarqueData(data);
+  openDemarqueAdd();
+  renderDemarque();
+  showT('✅','Constat enregistré');
+}
+function delDemarque(id){
+  var data = loadDemarque().filter(function(d){return d.id!==id;});
+  saveDemarqueData(data); renderDemarque();
+}
+function renderDemarque(){
+  var data = loadDemarque();
+  var list = document.getElementById('demarqueList');
+  var empty = document.getElementById('demarqueEmpty');
+  var stats = document.getElementById('demarqueStats');
+  if(!list) return;
+
+  // Stats
+  if(stats){
+    var totalM = data.reduce(function(s,d){return s+d.montant;},0);
+    var byType = {vol:0,dlc:0,casse:0,perime:0,autre:0};
+    data.forEach(function(d){byType[d.type]=(byType[d.type]||0)+1;});
+    stats.innerHTML = [
+      {label:'Total',val:totalM.toFixed(2)+' TND',col:'#ef4444'},
+      {label:'Vol',val:byType.vol,col:'#ef4444'},
+      {label:'DLC',val:byType.dlc,col:'#f59e0b'},
+      {label:'Casse',val:byType.casse,col:'#a855f7'}
+    ].map(function(s){
+      return '<div style="flex:1;background:var(--card);border-radius:10px;padding:8px;text-align:center;">'
+        +'<div style="font-size:14px;font-weight:900;color:'+s.col+';">'+s.val+'</div>'
+        +'<div style="font-size:9px;color:var(--t2);margin-top:2px;">'+s.label+'</div></div>';
+    }).join('');
+  }
+
+  if(!data.length){list.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var cols={vol:'#ef4444',dlc:'#f59e0b',casse:'#a855f7',perime:'#eab308',autre:'#94a3b8'};
+  var icons={vol:'🦹',dlc:'📅',casse:'💔',perime:'⏳',autre:'📋'};
+  list.innerHTML = data.map(function(d){
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid '+cols[d.type||'autre']+';">'
+      +'<div style="display:flex;align-items:flex-start;gap:8px;">'
+      +'<span style="font-size:18px;">'+icons[d.type||'autre']+'</span>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:13px;font-weight:800;color:var(--t1);">'+d.produit+'</div>'
+      +'<div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">'
+      +(d.qte?'<span style="font-size:10px;color:var(--t2);">Qté: '+d.qte+'</span>':'')
+      +(d.montant?'<span style="font-size:11px;font-weight:800;color:'+cols[d.type||'autre']+';">'+d.montant.toFixed(2)+' TND</span>':'')
+      +'</div>'
+      +(d.action?'<div style="font-size:11px;color:#22c55e;margin-top:4px;">✅ '+d.action+'</div>':'')
+      +'<div style="font-size:10px;color:var(--t2);margin-top:4px;">'+d.date+' '+d.time+'</div>'
+      +'</div>'
+      +'<div onclick="delDemarque(\''+d.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;">×</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+// ══ VEILLE CONCURRENTIELLE ══
+var SKV = SK+'_veille';
+function loadVeille(){ try{return JSON.parse(localStorage.getItem(SKV)||'[]');}catch(e){return[];} }
+function saveVeilleData(d){ localStorage.setItem(SKV, JSON.stringify(d)); }
+
+function openVeilleAdd(){
+  var f = document.getElementById('veilleForm');
+  if(!f) return;
+  var showing = f.style.display !== 'none';
+  f.style.display = showing ? 'none' : 'block';
+  if(!showing){
+    document.getElementById('vlConcurrent').value='';
+    document.getElementById('vlObs').value='';
+    _veilleType='prix';
+    document.querySelectorAll('[data-vt]').forEach(function(b){b.style.opacity='1';});
+  }
+}
+function setVeilleType(btn,t){
+  _veilleType=t;
+  document.querySelectorAll('[data-vt]').forEach(function(b){b.style.opacity=b.dataset.vt===t?'1':'0.4';});
+}
+function setVeilleFilter(f){
+  _veilleFilter=f;
+  document.querySelectorAll('[data-vf]').forEach(function(b){
+    var on=b.dataset.vf===f;
+    b.style.background=on?'#4338ca':'rgba(255,255,255,.04)';
+    b.style.borderColor=on?'#6366f1':'rgba(255,255,255,.1)';
+    b.style.color=on?'#fff':'var(--t2)';
+    b.style.fontWeight=on?'700':'600';
+  });
+  renderVeille();
+}
+function saveVeille(){
+  var concurrent = document.getElementById('vlConcurrent').value.trim();
+  var obs = document.getElementById('vlObs').value.trim();
+  if(!concurrent||!obs){showT('⚠️','Concurrent et observation requis');return;}
+  var data = loadVeille();
+  data.unshift({id:uid(),concurrent:concurrent,obs:obs,type:_veilleType,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
+  saveVeilleData(data);
+  openVeilleAdd(); renderVeille(); showT('✅','Observation enregistrée');
+}
+function delVeille(id){
+  var data = loadVeille().filter(function(d){return d.id!==id;});
+  saveVeilleData(data); renderVeille();
+}
+function renderVeille(){
+  var all = loadVeille();
+  var data = _veilleFilter==='all' ? all : all.filter(function(d){return d.type===_veilleFilter;});
+  var list = document.getElementById('veilleList');
+  var empty = document.getElementById('veilleEmpty');
+  if(!list) return;
+  if(!data.length){list.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var cols={prix:'#fbbf24',promo:'#ef4444',produit:'#22c55e',autre:'#94a3b8'};
+  var icons={prix:'💰',promo:'🎯',produit:'📦',autre:'📋'};
+  list.innerHTML = data.map(function(d){
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid '+cols[d.type||'autre']+';">'
+      +'<div style="display:flex;align-items:flex-start;gap:8px;">'
+      +'<span style="font-size:18px;">'+icons[d.type||'autre']+'</span>'
+      +'<div style="flex:1;">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+      +'<span style="font-size:13px;font-weight:800;color:var(--t1);">'+d.concurrent+'</span>'
+      +'<span style="font-size:9px;font-weight:700;color:'+cols[d.type||'autre']+';background:rgba(255,255,255,.06);padding:2px 7px;border-radius:8px;">'+d.type+'</span>'
+      +'</div>'
+      +'<div style="font-size:12px;color:var(--t1);line-height:1.4;">'+d.obs+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:4px;">'+d.date+' '+d.time+'</div>'
+      +'</div>'
+      +'<div onclick="delVeille(\''+d.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;">×</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+function openTachesMenu(){document.getElementById('tachesMenuModal').style.display='flex';}
+
+function renderListePersonnel(){
+  var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var el=document.getElementById('listePersonnelContent'); if(!el)return;
+  if(!emps.length){
+    el.innerHTML='<div style="text-align:center;padding:40px 20px;color:var(--t2);">'
+      +'<div style="font-size:48px;margin-bottom:12px;">👥</div>'
+      +'<div style="font-size:14px;font-weight:700;">Aucun employé enregistré</div>'
+      +'<div style="font-size:12px;margin-top:6px;opacity:.7;">Appuyez sur + pour ajouter</div>'
+      +'</div>';
+    return;
+  }
+  el.innerHTML=emps.map(function(e,i){
+    return '<div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">'
+      +'<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#0369a1,#38bdf8);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;flex-shrink:0;">'
+      +((e.name||'?')[0]).toUpperCase()+'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:14px;font-weight:800;color:var(--t1);">'+e.name+'</div>'
+      +'<div style="font-size:11px;color:var(--blue);font-weight:700;margin-top:1px;">'+(e.role||'—')+'</div>'
+      +(e.matricule?'<div style="font-size:10px;color:var(--t2);margin-top:1px;">Mat: '+e.matricule+'</div>':'')
+      +'</div>'
+      +'<div onclick="delEmp('+i+')" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+      +'</div>';
+  }).join('');
+}
+
+
+// ══ PLANNING RAYONS ══
+var RAYONS_PLAN = {
+  alim: [
+    {key:'liquide', label:'Liquide', col:'#38bdf8'},
+    {key:'epicerie_salee', label:'Épicerie salée', col:'#fb923c'},
+    {key:'pfls', label:'PFLS', col:'#a78bfa'},
+    {key:'parfumerie', label:'Parfumerie', col:'#f472b6'},
+    {key:'droguerie', label:'Droguerie', col:'#6366f1'},
+    {key:'epicerie_sucree', label:'Épicerie sucrée', col:'#ec4899'},
+    {key:'vrac', label:'Vrac', col:'#fbbf24'}
+  ],
+  mba: [
+    {key:'traiteur', label:'Traiteur', col:'#ef4444'},
+    {key:'poissonnerie', label:'Poissonnerie', col:'#06b6d4'},
+    {key:'fleg', label:'FLEG', col:'#22c55e'},
+    {key:'boul_pat', label:'Boul.-pat.', col:'#f59e0b'},
+    {key:'boucherie', label:'Boucherie-volaille', col:'#dc2626'}
+  ],
+  na: [
+    {key:'bazar', label:'Bazar', col:'#94a3b8'},
+    {key:'em', label:'EM', col:'#64748b'}
+  ]
+};
+var _selectedRayon = null;
+
+function openRayonPlanningModal(){
+  var emps = JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var sel = document.getElementById('rayonPlanEmp');
+  if(sel){
+    sel.innerHTML = emps.length
+      ? emps.map(function(e){return '<option value="'+e.name+'">'+e.name+(e.role?' — '+e.role:'')+'</option>';}).join('')
+      : '<option value="">Aucun employé enregistré</option>';
+  }
+  _selectedRayon = null;
+  window._rayonRepos=false;
+  // Render rayon chips
+  function renderChips(groupId, rayons){
+    var el = document.getElementById(groupId); if(!el)return;
+    el.innerHTML = rayons.map(function(r){
+      return '<button type="button" onclick="selectRayon(this,\"'+r.key+'\",\"'+r.label+'\")" data-rk="'+r.key+'" '
+        +'style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;color:rgba(255,255,255,.7);'
+        +'font-size:11px;font-weight:700;padding:6px 12px;cursor:pointer;transition:all .2s;">'+r.label+'</button>';
+    }).join('');
+  }
+  renderChips('rayonGroupAlim', RAYONS_PLAN.alim);
+  renderChips('rayonGroupMBA', RAYONS_PLAN.mba);
+  renderChips('rayonGroupNA', RAYONS_PLAN.na);
+  document.getElementById('rayonPlanningModal').style.display = 'flex';
+}
+function selectRayon(btn, key, label){
+  _selectedRayon = {key:key, label:label};
+  document.querySelectorAll('#rayonPlanningModal [data-rk]').forEach(function(b){
+    var isThis = b.dataset.rk === key;
+    b.style.background = isThis ? 'rgba(4,120,87,.3)' : 'rgba(255,255,255,.06)';
+    b.style.borderColor = isThis ? '#34d399' : 'rgba(255,255,255,.15)';
+    b.style.color = isThis ? '#34d399' : 'rgba(255,255,255,.7)';
+  });
+}
+function saveRayonPlanning(){
+  var emp = document.getElementById('rayonPlanEmp').value;
+  if(!emp){showT('⚠️','Sélectionnez un employé');return;}
+  if(!_selectedRayon){showT('⚠️','Sélectionnez un rayon');return;}
+  var rdebut=(document.getElementById('rayonHeureDebut')||{value:'08:00'}).value;
+  var rfin=(document.getElementById('rayonHeureFin')||{value:'16:00'}).value;
+  var horaire=window._rayonRepos?'🏖️ Repos':rdebut+' – '+rfin;
+  var d = loadEQ(); if(!d.rayonPlanning)d.rayonPlanning=[];
+  d.rayonPlanning.push({id:uid(),emp:emp,rayon:_selectedRayon.label,key:_selectedRayon.key,horaire:horaire,date:tstr()});
+  saveEQ(d);
+  closeM('rayonPlanningModal'); renderRayonPlanning(); showT('✅','Rayon affecté');
+}
+function delRayonPlanning(id){
+  var d=loadEQ(); if(!d.rayonPlanning)return;
+  d.rayonPlanning=d.rayonPlanning.filter(function(r){return r.id!==id;});
+  saveEQ(d); renderRayonPlanning();
+}
+function renderRayonPlanning(){
+  var d = loadEQ(); var items = (d.rayonPlanning||[]).filter(function(r){return r.date===tstr();});
+  var grid = document.getElementById('rayonPlanningGrid');
+  var empty = document.getElementById('rayonPlanningEmpty');
+  if(!grid)return;
+  if(!items.length){grid.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  // Group by secteur
+  var alimKeys = RAYONS_PLAN.alim.map(function(r){return r.key;});
+  var mbaKeys = RAYONS_PLAN.mba.map(function(r){return r.key;});
+  var groups = [
+    {label:'🏪 Secteur Alimentaire', col:'#60a5fa', items:items.filter(function(r){return alimKeys.includes(r.key);})},
+    {label:'🥩 Secteur MBA', col:'#34d399', items:items.filter(function(r){return mbaKeys.includes(r.key);})},
+    {label:'🏠 Non Alimentaire', col:'#f59e0b', items:items.filter(function(r){return !alimKeys.includes(r.key)&&!mbaKeys.includes(r.key);})},
+  ];
+  var html = '';
+  groups.forEach(function(g){
+    if(!g.items.length)return;
+    html += '<div style="background:var(--card);border-radius:12px;overflow:hidden;margin-bottom:4px;">'
+      +'<div style="padding:8px 12px;font-size:10px;font-weight:800;color:'+g.col+';background:rgba(0,0,0,.15);text-transform:uppercase;letter-spacing:.5px;">'+g.label+'</div>';
+    g.items.forEach(function(r){
+      html += '<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid rgba(255,255,255,.04);">'
+        +'<div style="flex:1;">'
+        +'<div style="font-size:13px;font-weight:700;color:var(--t1);">'+r.emp+'</div>'
+        +'<div style="font-size:11px;color:var(--t2);">📍 '+r.rayon+' &nbsp;·&nbsp; ⏰ '+r.horaire+'</div>'
+        +'</div>'
+        +'<div onclick="delRayonPlanning(\''+r.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+        +'</div>';
+    });
+    html += '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+
+// ══ PLANNING HORAIRE TIME SELECTS ══
+function genTimeOptions(){
+  var opts='';
+  for(var h=5;h<=23;h++){
+    for(var m=0;m<60;m+=15){
+      var hh=String(h).padStart(2,'0');
+      var mm=String(m).padStart(2,'0');
+      var val=hh+':'+mm;
+      opts+='<option value="'+val+'">'+val+'</option>';
+    }
+  }
+  return opts;
+}
+function populateTimeSelects(){
+  var pd=document.getElementById('planHeureDebut');
+  var pf=document.getElementById('planHeureFin');
+  if(pd)pd.value='08:00';
+  if(pf)pf.value='16:00';
+  var rd=document.getElementById('rayonHeureDebut');
+  var rf=document.getElementById('rayonHeureFin');
+  if(rd)rd.value='08:00';
+  if(rf)rf.value='16:00';
+}
+function setPlanRepos(){
+  var pd=document.getElementById('planHeureDebut');
+  var pf=document.getElementById('planHeureFin');
+  if(pd)pd.value='08:00';
+  if(pf)pf.value='08:00';
+  // Mark as repos
+  window._planRepos=true;
+  showT('🏖️','Marqué comme Repos');
+}
+function setRayonRepos(){
+  var rd=document.getElementById('rayonHeureDebut');
+  var rf=document.getElementById('rayonHeureFin');
+  if(rd)rd.value='08:00';
+  if(rf)rf.value='08:00';
+  window._rayonRepos=true;
+  showT('🏖️','Marqué comme Repos');
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  loadTheme();load();initDef();unlockA();
+  if(notifs.length)document.getElementById('nb').style.display='block';
+  renderHome();
+  var _bn=document.querySelector('.bnav');if(_bn)_bn.style.display='flex';
+  updateDlcBadge();
+  updateClock();
+  setInterval(()=>{updateClock();checkTN();},1000);
+});
+
+
+// ══ NEW FEATURES v11 ══
 
 function toggleDotMenu(e){
   e.stopPropagation();
@@ -2437,9 +4144,9 @@ function showAdminTab(tab){
   });
   var ac=document.getElementById('adminContent');
   if(!ac)return;
-  if(tab==='pointage') renderPointage(ac);
-  else if(tab==='conge') renderConge(ac);
-  else if(tab==='accompte') renderAccompte(ac);
+  if(tab==='pointage') goPage('pointage');
+  else if(tab==='conge') goPage('conge');
+  else if(tab==='accompte') goPage('retenus');
 }
 
 // ── POINTAGE ──
@@ -2630,18 +4337,17 @@ function addAccompte(){
 function saveAccompte(){
   var nom=document.getElementById('accNom').value.trim();
   var mat=document.getElementById('accMatricule').value.trim();
-  var type=document.getElementById('accType').value.trim();
-  var montant=(document.getElementById('accMontant')||{value:''}).value.trim();
-  var note=(document.getElementById('accNote')||{value:''}).value.trim();
-  if(!nom){showT('⚠️','Nom requis');return;}
+  var type=document.getElementById('accType').value;
+  var montant=document.getElementById('accMontant').value.trim();
+  var note=document.getElementById('accNote').value.trim();
+  if(!nom||!montant){showT('⚠️','Nom et montant requis');return;}
   var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
-  acc.push({id:uid(),nom:nom,mat:mat,type:type,montant:montant,note:note,date:tstr()});
+  acc.unshift({nom:nom,matricule:mat,type:type,montant:montant,note:note,date:tstr()});
   localStorage.setItem(SK+'_accomptes',JSON.stringify(acc));
-  closeM('accompteForm');
-  showAdminTab('a');
-  showT('✅','Retenu enregistré');
+  document.getElementById('accompteForm').style.display='none';
+  showAdminTab('accompte');
+  showT('✅','Ajouté !');
 }
-
 function delAccompte(i){
   var acc=JSON.parse(localStorage.getItem(SK+'_accomptes')||'[]');
   acc.splice(i,1);
@@ -2697,100 +4403,6 @@ function updateDlcBadge(){
   if(badge){badge.textContent=urgent;badge.style.display=urgent>0?'flex':'none';}
 }
 
-function checkDlcNotifications(){
-  try{
-    var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
-    var now=new Date(); now.setHours(0,0,0,0);
-    var tomorrow=new Date(now); tomorrow.setDate(tomorrow.getDate()+1);
-    items.forEach(function(item){
-      var d=new Date(item.date); d.setHours(0,0,0,0);
-      var diff=Math.round((d-now)/(1000*60*60*24));
-      if(diff===1){
-        // Expires tomorrow
-        if(Notification.permission==='granted'){
-          new Notification('⚠️ DLC demain !',{
-            body:item.name+(item.rayon?' — '+item.rayon:''),
-            icon:'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>'
-          });
-        }
-        showT('⚠️','DLC demain: '+item.name);
-      } else if(diff<=0){
-        if(Notification.permission==='granted'){
-          new Notification('🚨 DLC expiré !',{
-            body:item.name+(item.rayon?' — '+item.rayon:''),
-          });
-        }
-      }
-    });
-  }catch(e){}
-}
-function requestDlcNotifPerm(){
-  if('Notification' in window && Notification.permission==='default'){
-    Notification.requestPermission().then(function(p){
-      if(p==='granted') showT('🔔','Notifications activées !');
-    });
-  }
-}
-
-
-function printDlcReport(){
-  var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
-  if(!items.length){showT('⚠️','Aucun produit DLC');return;}
-  var now=new Date(); now.setHours(0,0,0,0);
-  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-  var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
-  var rows=items.map(function(item){
-    var d=new Date(item.date); d.setHours(0,0,0,0);
-    var diff=Math.round((d-now)/(1000*60*60*24));
-    var cls=diff<0?'p-urgent':diff<=3?'p-urgent':diff<=7?'p-attention':'p-ok';
-    var status=diff<0?'EXPIRÉ':diff===0?'Aujourd\'hui':diff===1?'Demain':diff+' jours';
-    var dStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
-    return '<tr><td>'+item.name+'</td><td>'+(item.rayon||'—')+'</td><td>'+dStr+'</td><td class="'+cls+'">'+status+'</td></tr>';
-  }).join('');
-  var div=document.getElementById('printDLC');
-  div.innerHTML='<h2 style="color:#1e3a8a;margin-bottom:4px;">📦 Contrôle DLC</h2>'
-    +'<div style="font-size:11px;color:#666;margin-bottom:12px;">Généré le '+dateStr+'</div>'
-    +'<table><thead><tr><th>Produit</th><th>Rayon</th><th>Date DLC</th><th>Statut</th></tr></thead><tbody>'+rows+'</tbody></table>';
-  window.print();
-}
-
-
-window.addEventListener('DOMContentLoaded', function(){
-  // Load data
-  load();
-  initDef();
-  // DLC notifications
-  requestDlcNotifPerm();
-  setTimeout(checkDlcNotifications, 3000);
-  // Load theme
-  try{if(localStorage.getItem(SK+'_theme')==='light')document.body.classList.add('light');}catch(e){}
-  // Load profile display
-  try{
-    var nm=document.getElementById('hname');
-    var sub=document.getElementById('hsub');
-    if(nm&&prof.name){nm.textContent=prof.name;}else if(nm){nm.textContent='Configurer profil';}
-    if(sub&&(prof.role||prof.store)){sub.textContent=[prof.role,prof.store].filter(Boolean).join(' · ');sub.style.display='block';}
-  }catch(e){}
-  // Start clock
-  function tickClock(){
-    try{
-      var now=new Date();
-      var utc=now.getTime()+(now.getTimezoneOffset()*60000);
-      var tn2=new Date(utc+(3600000*1));
-      var h=String(tn2.getHours()).padStart(2,'0');
-      var m=String(tn2.getMinutes()).padStart(2,'0');
-      var el=document.getElementById('clockDigital');
-      if(el)el.textContent=h+':'+m;
-      drawClock();
-    }catch(e){}
-  }
-  tickClock();
-  setInterval(tickClock, 1000);
-  // Render home
-  goPage('home');
-  // Update DLC badge
-  try{updateDlcBadge();}catch(e){}
-});
 
 </script>
 <div id="printDLC" style="display:none;padding:20px;"></div>
