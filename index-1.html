@@ -5506,12 +5506,23 @@ function renderEisenhower(){
   manualTasks.forEach(function(t){q[t.quadrant||'q1'].push({name:t.name,id:t.id,manual:true});});
   ['q1','q2','q3','q4'].forEach(function(q_key){
     var listEl=document.getElementById('eisList_'+q_key);if(!listEl)return;
-    listEl.innerHTML=q[q_key].map(function(t){
-      return '<div style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--t1);background:rgba(255,255,255,.06);border-radius:6px;padding:4px 7px;margin-bottom:3px;">'
-        +'<span style="flex:1;font-weight:800;color:#0f172a;">'+t.name+'</span>'
-        +(t.manual?'<span onclick="delEisManual(\"'+t.id+'\")" style="color:#ef4444;font-size:14px;cursor:pointer;padding:0 2px;line-height:1;">×</span>':'')
-        +'</div>';
-    }).join('')||'<div style="font-size:10px;color:rgba(255,255,255,.3);font-style:italic;">—</div>';
+        // Build items with DOM for reliable event binding
+    listEl.innerHTML='';
+    var qItems=q[q_key];
+    if(!qItems.length){
+      var emptyEl=document.createElement('div');emptyEl.style.cssText='font-size:10px;color:rgba(255,255,255,.3);font-style:italic;';emptyEl.textContent='—';listEl.appendChild(emptyEl);
+    } else {
+      qItems.forEach(function(t){
+        var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--t1);background:rgba(255,255,255,.06);border-radius:6px;padding:4px 7px;margin-bottom:3px;';
+        var nameEl=document.createElement('span');nameEl.style.cssText='flex:1;font-weight:800;color:#0f172a;';nameEl.textContent=t.name;row.appendChild(nameEl);
+        if(t.manual){
+          var delEl=document.createElement('span');delEl.style.cssText='color:#ef4444;font-size:16px;cursor:pointer;padding:0 4px;line-height:1;';delEl.textContent='×';
+          (function(tid){delEl.addEventListener('click',function(e){e.stopPropagation();delEisManual(tid);});})(t.id);
+          row.appendChild(delEl);
+        }
+        listEl.appendChild(row);
+      });
+    }
   });
   // Assign section
   var assignEl=document.getElementById('eisTaskAssign');if(!assignEl)return;
@@ -5616,23 +5627,69 @@ function addEisTache(){
   var s=f.style.display!=='none';
   if(s){f.style.display='none';f.innerHTML='';return;}
   _eisQ='q1';
-  var qBtns=[
+  f.innerHTML='';
+
+  // Title
+  var title=document.createElement('div');
+  title.style.cssText='font-size:12px;font-weight:800;color:#fb923c;margin-bottom:10px;';
+  title.textContent='🎯 Ajouter une tâche';
+  f.appendChild(title);
+
+  // Input
+  var inputWrap=document.createElement('div');inputWrap.style.marginBottom='8px';
+  var inp=document.createElement('input');
+  inp.id='eisTaskName';inp.className='fi';inp.placeholder='Nom de la tâche...';
+  inp.style.cssText='width:100%;box-sizing:border-box;';
+  inputWrap.appendChild(inp);f.appendChild(inputWrap);
+
+  // Quadrant label
+  var qWrap=document.createElement('div');qWrap.style.marginBottom='10px';
+  var lbl=document.createElement('label');
+  lbl.style.cssText='font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:6px;';
+  lbl.textContent='Quadrant';qWrap.appendChild(lbl);
+
+  // Grid
+  var grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:6px;';
+  var qDefs=[
     ['q1','rgba(239,68,68,.12)','rgba(239,68,68,.3)','#ef4444','🔴 Urgent+Important'],
     ['q2','rgba(34,197,94,.12)','rgba(34,197,94,.3)','#22c55e','🟢 Important'],
     ['q3','rgba(245,158,11,.12)','rgba(245,158,11,.3)','#f59e0b','🟡 Urgent'],
     ['q4','rgba(100,116,139,.12)','rgba(100,116,139,.3)','#94a3b8','⚪ Ni l\'un ni l\'autre']
-  ].map(function(b){return '<button type="button" onclick="setEisQ(this,\"'+b[0]+'\")" data-eq="'+b[0]+'" style="background:'+b[1]+';border:1px solid '+b[2]+';border-radius:8px;color:'+b[3]+';font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">'+b[4]+'</button>';}).join('');
-  f.innerHTML='<div style="font-size:12px;font-weight:800;color:#fb923c;margin-bottom:10px;">🎯 Ajouter une tâche</div>'
-    +'<div style="margin-bottom:8px;"><input id="eisTaskName" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>'
-    +'<div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:6px;">Quadrant</label>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">'+qBtns+'</div></div>'
-    +'<div style="display:flex;gap:8px;">'
-    +'<button onclick="addEisTache()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>'
-    +'<button onclick="saveEisTache()" style="flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">✅ Ajouter</button>'
-    +'</div>';
+  ];
+  qDefs.forEach(function(qd){
+    var btn=document.createElement('button');
+    btn.type='button';btn.dataset.eq=qd[0];
+    btn.style.cssText='background:'+qd[1]+';border:1px solid '+qd[2]+';border-radius:8px;color:'+qd[3]+';font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;';
+    btn.textContent=qd[4];
+    btn.addEventListener('click',function(){
+      _eisQ=qd[0];
+      document.querySelectorAll('#eisForm [data-eq]').forEach(function(b){b.style.opacity=b.dataset.eq===qd[0]?'1':'0.45';});
+    });
+    grid.appendChild(btn);
+  });
+  qWrap.appendChild(grid);f.appendChild(qWrap);
+
+  // Action buttons
+  var actRow=document.createElement('div');actRow.style.cssText='display:flex;gap:8px;';
+
+  var cancelBtn=document.createElement('button');
+  cancelBtn.type='button';
+  cancelBtn.style.cssText='flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;';
+  cancelBtn.textContent='Annuler';
+  cancelBtn.addEventListener('click',addEisTache);
+
+  var saveBtn=document.createElement('button');
+  saveBtn.type='button';
+  saveBtn.style.cssText='flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;';
+  saveBtn.textContent='✅ Ajouter';
+  saveBtn.addEventListener('click',saveEisTache);
+
+  actRow.appendChild(cancelBtn);actRow.appendChild(saveBtn);f.appendChild(actRow);
   f.style.display='block';
-  setTimeout(function(){var inp=document.getElementById('eisTaskName');if(inp)inp.focus();},200);
+  setTimeout(function(){inp.focus();},200);
 }
+
 function saveEisTache(){
   var inp=document.getElementById('eisTaskName');if(!inp)return;
   var name=inp.value.trim();if(!name){showT('⚠️','Nom requis');return;}
@@ -5640,7 +5697,7 @@ function saveEisTache(){
   d.eisManual.push({id:uid(),name:name,quadrant:_eisQ});
   saveExc(d);addEisTache();renderEisenhower();showT('✅','Tâche ajoutée');
 }
-function delEisManual(el){var id=typeof el==='string'?el:el.dataset.eid;var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();}
+function delEisManual(id){var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();}
 
 
 // ══ DOCUMENTS TÉLÉCHARGÉS ══
