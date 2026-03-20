@@ -2033,38 +2033,283 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 </div>
 
 <!-- ══ EXCELLENCE OPÉRATIONNELLE HUB ══ -->
+<!-- ══ EXCELLENCE OPÉRATIONNELLE HUB ══ -->
 <div class="pg" id="pgExcellence">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
-    <div class="pg-title">🏆 Excellence Opérationnelle</div>
+    <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Tâches</div>
+    <div class="pg-title" style="font-size:14px;">🏆 Excellence Opérationnelle</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- ════ I. PHILOSOPHIES ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(234,179,8,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#eab308;letter-spacing:1.5px;text-transform:uppercase;">I. Les Philosophies de Performance</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(234,179,8,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Les règles d'or qui gouvernent la culture de travail</div>
+
+    <div onclick="goPage('lean')" style="background:linear-gradient(135deg,#1a1a2e,#312e81);border:1px solid rgba(234,179,8,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⚡</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#eab308;margin-bottom:2px;">I-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Lean Management</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Chasse au gaspillage · Valeur maximale</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('sixsigma')" style="background:linear-gradient(135deg,#1a1a2e,#312e81);border:1px solid rgba(234,179,8,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🎯</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#eab308;margin-bottom:2px;">I-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Six Sigma</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Zéro défaut · Précision chirurgicale</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('kaizen')" style="background:linear-gradient(135deg,#1a1a2e,#312e81);border:1px solid rgba(234,179,8,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🌱</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#eab308;margin-bottom:2px;">I-3</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Kaizen</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Amélioration continue · Petits pas chaque jour</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ II. STRATÉGIES ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(6,182,212,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#06b6d4;letter-spacing:1.5px;text-transform:uppercase;">II. Les Stratégies de Pilotage</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(6,182,212,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Maîtriser le flux et lever les blocages</div>
+
+    <div onclick="goPage('contraintes')" style="background:linear-gradient(135deg,#0c2340,#0e4a6e);border:1px solid rgba(6,182,212,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⛓️</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#06b6d4;margin-bottom:2px;">II-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Théorie des Contraintes</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Goulots d'étranglement · Maillon faible</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('cinqs')" style="background:linear-gradient(135deg,#0c2340,#0e4a6e);border:1px solid rgba(6,182,212,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">👁️</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#06b6d4;margin-bottom:2px;">II-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode 5S</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Organisation · Discipline visuelle</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ III. OUTILS ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(34,197,94,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#22c55e;letter-spacing:1.5px;text-transform:uppercase;">III. Les Outils d'Aide à la Décision</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(34,197,94,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Décider vite, agir juste, améliorer en continu</div>
+
+    <div onclick="goPage('eisenhower')" style="background:linear-gradient(135deg,#1a0a00,#431407);border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⏳</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:2px;">III-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Matrice d'Eisenhower</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Urgence & Importance · Priorisation</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('pareto')" style="background:linear-gradient(135deg,#1a0a00,#431407);border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">📈</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:2px;">III-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Loi de Pareto (20/80)</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">20% d'actions → 80% des résultats</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('pdca')" style="background:linear-gradient(135deg,#1a0a00,#431407);border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🔄</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:2px;">III-3</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Roue PDCA (Deming)</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Plan · Do · Check · Act</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+  </div>
+</div>
+<!-- ══ GESTION DU TEMPS ══ -->
+<div class="pg" id="pgGestionTemps">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Excellence</div>
+    <div class="pg-title" style="color:#1e3a8a;">⏱️ Gestion du Temps</div>
     <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
-    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">Outils de management scientifique pour une prise de décision optimale</div>
+    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">4 techniques éprouvées pour maximiser votre productivité quotidienne</div>
 
-    <div onclick="goPage('pareto')" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:32px;">📊</div>
-      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Analyse Pareto 80/20</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Produits Groupe A · B · C — CA automatique</div></div>
+    <div onclick="goPage('crapaud')" style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🐸</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Avalez le Crapaud</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Faire la tâche la plus difficile en premier</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
-    <div onclick="goPage('pdca')" style="background:linear-gradient(135deg,#14532d,#16a34a);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:32px;">🔄</div>
-      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Boucle PDCA</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Plan · Do · Check · Act — Suivi des actions</div></div>
+    <div onclick="goPage('deepwork')" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🧠</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Deep Work</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Travail concentré sans distraction</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
-    <div onclick="goPage('eisenhower')" style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:32px;">🎯</div>
-      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Matrice Eisenhower</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Urgent · Important — Priorisation des tâches</div></div>
+    <div onclick="goPage('methode135')" style="background:linear-gradient(135deg,#14532d,#15803d);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">📝</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Méthode 1-3-5</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">1 majeure · 3 moyennes · 5 petites</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
-    <div onclick="goPage('contraintes')" style="background:linear-gradient(135deg,#1e1b4b,#4338ca);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:32px;">⚙️</div>
-      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Théorie des Contraintes</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Goulots d'étranglement · Points de blocage</div></div>
+    <div onclick="goPage('timeblocking')" style="background:linear-gradient(135deg,#581c87,#7c3aed);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">📅</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Time Blocking</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Découper sa journée en créneaux dédiés</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
+  </div>
+</div>
+
+<!-- ══ CRAPAUD ══ -->
+<div class="pg" id="pgCrapaud">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🐸 Avalez le Crapaud</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addCrapaud()" style="background:#c2410c;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportCrapaudPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(194,65,12,.1);border:1px solid rgba(194,65,12,.3);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--t2);line-height:1.6;">
+      🐸 <b style="color:#fb923c;">Principe :</b> Commencez chaque journée par la tâche la plus difficile ou celle que vous redoutez le plus. Une fois accomplie, le reste vous semblera beaucoup plus simple.
+    </div>
+    <!-- Crapaud du jour -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:2px solid rgba(194,65,12,.3);">
+      <div style="font-size:11px;font-weight:800;color:#fb923c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">🐸 Crapaud du jour</div>
+      <div id="crapaudDuJour"></div>
+    </div>
+    <!-- Form -->
+    <div id="crapaudForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(194,65,12,.3);">
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Tâche difficile à accomplir *</label><input id="crapaudTitre" class="fi" placeholder="Ex: Traiter les écarts de stock, Passer les commandes urgentes..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Pourquoi la redoutez-vous ?</label><textarea id="crapaudRaison" class="fi" placeholder="Ex: Tâche complexe, longue, inconfortable..." style="width:100%;min-height:60px;resize:none;box-sizing:border-box;"></textarea></div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addCrapaud()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveCrapaud()" style="flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">🐸 Définir comme Crapaud</button>
+      </div>
+    </div>
+    <!-- Historique -->
+    <div style="font-size:11px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📊 Historique</div>
+    <div id="crapaudList"></div>
+    <div id="crapaudEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucun crapaud avalé · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ DEEP WORK ══ -->
+<div class="pg" id="pgDeepwork">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🧠 Deep Work</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addDeepwork()" style="background:#1d4ed8;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportDeepworkPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(29,78,216,.1);border:1px solid rgba(29,78,216,.3);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--t2);line-height:1.6;">
+      🧠 <b style="color:#60a5fa;">Principe :</b> Travailler sans aucune distraction sur une seule tâche complexe. Éteignez les notifications et concentrez-vous pendant 1 à 3 heures pour être ultra-productif.
+    </div>
+    <!-- Stats du jour -->
+    <div id="deepworkStats" style="display:flex;gap:8px;margin-bottom:12px;"></div>
+    <!-- Form -->
+    <div id="deepworkForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(29,78,216,.3);">
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Sujet de la session *</label><input id="dwSujet" class="fi" placeholder="Ex: Analyse des écarts de casse, Préparation réunion..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="margin-bottom:8px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:6px;">Durée prévue</label>
+        <div style="display:flex;gap:6px;">
+          <button type="button" onclick="setDwDuree(this,60)" data-dw="60" style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:700;padding:8px 4px;cursor:pointer;">1h</button>
+          <button type="button" onclick="setDwDuree(this,90)" data-dw="90" style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:700;padding:8px 4px;cursor:pointer;">1h30</button>
+          <button type="button" onclick="setDwDuree(this,120)" data-dw="120" style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:700;padding:8px 4px;cursor:pointer;">2h</button>
+          <button type="button" onclick="setDwDuree(this,180)" data-dw="180" style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:700;padding:8px 4px;cursor:pointer;">3h</button>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Résultat obtenu</label><textarea id="dwResultat" class="fi" placeholder="Ce qui a été accompli durant cette session..." style="width:100%;min-height:60px;resize:none;box-sizing:border-box;"></textarea></div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addDeepwork()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveDeepwork()" style="flex:2;background:#1d4ed8;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">🧠 Enregistrer Session</button>
+      </div>
+    </div>
+    <div id="deepworkList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="deepworkEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune session · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE 1-3-5 ══ -->
+<div class="pg" id="pgMethode135">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📝 Méthode 1-3-5</div>
+    <button onclick="exportMethode135PDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(20,83,45,.15);border:1px solid rgba(20,83,45,.4);border-radius:12px;padding:12px;margin-bottom:14px;font-size:11px;color:var(--t2);line-height:1.6;">
+      📝 <b style="color:#4ade80;">Principe :</b> Limitez votre liste à <b style="color:#fff;">1 tâche majeure</b> + <b style="color:#fbbf24;">3 tâches moyennes</b> + <b style="color:#94a3b8;">5 petites tâches</b> pour rester réaliste et efficace chaque jour.
+    </div>
+    <div id="m135Content"></div>
+  </div>
+</div>
+
+<!-- ══ TIME BLOCKING ══ -->
+<div class="pg" id="pgTimeblocking">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#c084fc;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📅 Time Blocking</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addTimeBlock()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportTimeBlockPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(91,33,182,.15);border:1px solid rgba(91,33,182,.4);border-radius:12px;padding:12px;margin-bottom:12px;font-size:11px;color:var(--t2);line-height:1.6;">
+      📅 <b style="color:#c084fc;">Principe :</b> Découpez votre journée en créneaux horaires réservés à des activités précises. Fixez des rendez-vous avec vous-même et respectez-les strictement.
+    </div>
+    <!-- Form -->
+    <div id="tbForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(91,33,182,.3);">
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Activité *</label><input id="tbActivite" class="fi" placeholder="Ex: Rédaction commandes, Analyse CA, Réunion équipe..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <div style="flex:1;"><label style="font-size:9px;color:var(--t2);display:block;margin-bottom:4px;">De</label><input type="time" id="tbDe" value="08:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;"/></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;margin-top:20px;">→</div>
+        <div style="flex:1;"><label style="font-size:9px;color:var(--t2);display:block;margin-bottom:4px;">À</label><input type="time" id="tbA" value="09:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;"/></div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:6px;">Priorité</label>
+        <div style="display:flex;gap:6px;">
+          <button type="button" onclick="setTbPrio(this,'haute')" data-tp="haute" style="flex:1;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#ef4444;font-size:11px;font-weight:700;padding:7px 4px;cursor:pointer;">🔴 Haute</button>
+          <button type="button" onclick="setTbPrio(this,'normale')" data-tp="normale" style="flex:1;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);border-radius:8px;color:#60a5fa;font-size:11px;font-weight:700;padding:7px 4px;cursor:pointer;">🔵 Normale</button>
+          <button type="button" onclick="setTbPrio(this,'flexible')" data-tp="flexible" style="flex:1;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.3);border-radius:8px;color:#94a3b8;font-size:11px;font-weight:700;padding:7px 4px;cursor:pointer;">⚪ Flexible</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addTimeBlock()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="saveTimeBlock()" style="flex:2;background:#7c3aed;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">📅 Ajouter Créneau</button>
+      </div>
+    </div>
+    <div id="tbList" style="display:flex;flex-direction:column;gap:6px;"></div>
+    <div id="tbEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucun créneau · Appuyez sur +</div>
   </div>
 </div>
 
@@ -2239,6 +2484,112 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="font-size:14px;font-weight:700;">Aucun document</div>
       <div style="font-size:12px;margin-top:6px;opacity:.7;">Les rapports PDF exportés apparaîtront ici</div>
     </div>
+  </div>
+</div>
+
+<!-- ══ LEAN MANAGEMENT ══ -->
+<div class="pg" id="pgLean">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#eab308;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">⚡ Lean Management</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addPhiloAction('lean')" style="background:#eab308;border:none;color:#000;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportPhiloPDF('lean')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:12px;font-weight:900;color:#eab308;margin-bottom:6px;">I-1 · Lean Management ⚡</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Concept :</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:8px;line-height:1.5;">Chasse au gaspillage (temps, stocks, mouvements inutiles). Créer de la valeur en purifiant les processus.</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Action :</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5;">Identifier les 7 gaspillages (Surproduction, Attente, Transport, Surtraitement, Stocks, Mouvements, Défauts) et les éliminer un à un.</div>
+    </div>
+    <div id="philoForm_lean" style="display:none;background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(234,179,8,.3);">
+      <div style="display:flex;gap:8px;">
+        <input id="philoInput_lean" class="fi" placeholder="Action Lean à mettre en place..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('lean')"/>
+        <button onclick="savePhiloAction('lean')" style="background:#eab308;border:none;color:#000;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:800;color:#eab308;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📋 Actions identifiées</div>
+    <div id="philoList_lean"></div>
+    <div id="philoEmpty_lean" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune action · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ SIX SIGMA ══ -->
+<div class="pg" id="pgSixsigma">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#eab308;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🎯 Six Sigma</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addPhiloAction('sixsigma')" style="background:#a21caf;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportPhiloPDF('sixsigma')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(162,28,175,.1);border:1px solid rgba(162,28,175,.3);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:12px;font-weight:900;color:#d946ef;margin-bottom:6px;">I-2 · Six Sigma 🎯</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Concept :</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:8px;line-height:1.5;">Zéro défaut et précision chirurgicale. Réduire la variabilité des processus jusqu'à 99,99966% de fiabilité.</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Action :</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5;">Appliquer la méthode DMAIC : <b style="color:#d946ef;">D</b>éfinir · <b style="color:#d946ef;">M</b>esurer · <b style="color:#d946ef;">A</b>nalyser · <b style="color:#d946ef;">I</b>mprouver · <b style="color:#d946ef;">C</b>ontrôler.</div>
+    </div>
+    <div id="philoForm_sixsigma" style="display:none;background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(162,28,175,.3);">
+      <div style="display:flex;gap:8px;">
+        <input id="philoInput_sixsigma" class="fi" placeholder="Non-conformité ou défaut à éliminer..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('sixsigma')"/>
+        <button onclick="savePhiloAction('sixsigma')" style="background:#a21caf;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:800;color:#d946ef;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📋 Non-conformités & Améliorations</div>
+    <div id="philoList_sixsigma"></div>
+    <div id="philoEmpty_sixsigma" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune action · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ KAIZEN ══ -->
+<div class="pg" id="pgKaizen">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#eab308;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🌱 Kaizen</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addPhiloAction('kaizen')" style="background:#16a34a;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="exportPhiloPDF('kaizen')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.3);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:12px;font-weight:900;color:#22c55e;margin-bottom:6px;">I-3 · Kaizen 🌱</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Concept :</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:8px;line-height:1.5;">Amélioration continue et participative. Chaque jour, chaque collaborateur apporte un petit changement positif.</div>
+      <div style="font-size:12px;color:var(--t1);font-weight:700;margin-bottom:4px;">Action :</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5;">Appliquer de petits changements positifs chaque jour avec l'équipe. Enregistrer chaque amélioration, aussi petite soit-elle.</div>
+    </div>
+    <div id="philoForm_kaizen" style="display:none;background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(22,163,74,.3);">
+      <div style="display:flex;gap:8px;">
+        <input id="philoInput_kaizen" class="fi" placeholder="Petite amélioration du jour..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('kaizen')"/>
+        <button onclick="savePhiloAction('kaizen')" style="background:#16a34a;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:800;color:#22c55e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">🌱 Journal des améliorations</div>
+    <div id="philoList_kaizen"></div>
+    <div id="philoEmpty_kaizen" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune amélioration · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ 5S ══ -->
+<div class="pg" id="pgCinqs">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#06b6d4;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👁️ Méthode 5S</div>
+    <button onclick="export5SPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:900;color:#06b6d4;margin-bottom:6px;">II-2 · Méthode 5S 👁️</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.5;">Organisation et discipline visuelle. Trier, Ranger, Nettoyer, Standardiser et Suivre rigoureusement l'espace de travail.</div>
+    </div>
+    <div id="cinqs5sContent"></div>
   </div>
 </div>
 
@@ -2527,14 +2878,14 @@ function goPage(p){
   _curPage=p;
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',documents:'pgDocuments',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',documents:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p])document.getElementById(map[p]).classList.add('on');
   if(nav[p])document.getElementById(nav[p]).classList.add('on');
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','documents','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home')renderHome();
   if(p==='taches')renderTaches();
@@ -2563,6 +2914,14 @@ function goPage(p){
   if(p==='pdca')renderPdca();
   if(p==='eisenhower')renderEisenhower();
   if(p==='contraintes')renderContraintes();
+  if(p==='lean')renderPhilo('lean');
+  if(p==='sixsigma')renderPhilo('sixsigma');
+  if(p==='kaizen')renderPhilo('kaizen');
+  if(p==='cinqs')render5S();
+  if(p==='crapaud')renderCrapaud();
+  if(p==='deepwork')renderDeepwork();
+  if(p==='methode135')renderMethode135();
+  if(p==='timeblocking')renderTimeblocking();
   if(p==='documents')renderDocs();
   if(p==='auditRayon')renderAudit();
   if(p==='objectifsKpi')renderKpi();
@@ -5281,7 +5640,7 @@ function saveEisTache(){
   d.eisManual.push({id:uid(),name:name,quadrant:_eisQ});
   saveExc(d);addEisTache();renderEisenhower();showT('✅','Tâche ajoutée');
 }
-function delEisManual(id){var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();}
+function delEisManual(el){var id=typeof el==='string'?el:el.dataset.eid;var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();}
 
 
 // ══ DOCUMENTS TÉLÉCHARGÉS ══
@@ -5344,6 +5703,414 @@ function deleteDoc(id){
 function clearDocs(){
   if(!confirm('Vider tous les documents ?'))return;
   localStorage.removeItem(SK+'_docs');renderDocs();showT('🗑️','Documents vidés');
+}
+
+
+// ══ GESTION DU TEMPS ══
+var SKTM=SK+'_timemgmt';
+function loadTM(){try{return JSON.parse(localStorage.getItem(SKTM)||'{}');}catch(e){return{};}}
+function saveTM(d){localStorage.setItem(SKTM,JSON.stringify(d));}
+function getGenDateTM(){var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];return now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear()+' à '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');}
+
+// ── 🐸 CRAPAUD ──
+function addCrapaud(){
+  var f=document.getElementById('crapaudForm');if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){document.getElementById('crapaudTitre').value='';document.getElementById('crapaudRaison').value='';}
+}
+function saveCrapaud(){
+  var titre=(document.getElementById('crapaudTitre')||{value:''}).value.trim();
+  if(!titre){showT('⚠️','Tâche requise');return;}
+  var raison=(document.getElementById('crapaudRaison')||{value:''}).value.trim();
+  var d=loadTM();if(!d.crapauds)d.crapauds=[];
+  d.crapauds.unshift({id:uid(),titre:titre,raison:raison,done:false,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
+  saveTM(d);addCrapaud();renderCrapaud();showT('🐸','Crapaud défini !');
+}
+function toggleCrapaud(id){
+  var d=loadTM();var c=(d.crapauds||[]).find(function(x){return x.id===id;});
+  if(c){c.done=!c.done;c.doneTime=c.done?getGenDateTM():null;}
+  saveTM(d);renderCrapaud();
+  if(c&&c.done)showT('🎉','Crapaud avalé ! Bravo !');
+}
+function delCrapaud(id){var d=loadTM();d.crapauds=(d.crapauds||[]).filter(function(x){return x.id!==id;});saveTM(d);renderCrapaud();}
+function renderCrapaud(){
+  var d=loadTM();var list=d.crapauds||[];
+  var today=list.filter(function(x){return x.date===tstr();});
+  var hist=list.filter(function(x){return x.date!==tstr();}).slice(0,10);
+  // Crapaud du jour
+  var jEl=document.getElementById('crapaudDuJour');
+  if(jEl){
+    if(!today.length){
+      jEl.innerHTML='<div style="text-align:center;padding:16px;color:var(--t2);font-size:12px;">🐸 Pas encore de crapaud défini pour aujourd\'hui<br><span style="opacity:.6;">Appuyez sur + pour en ajouter un</span></div>';
+    } else {
+      jEl.innerHTML=today.map(function(c){
+        return '<div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:'+(c.done?'rgba(34,197,94,.08)':'rgba(194,65,12,.08)')+';border-radius:10px;margin-bottom:6px;">'
+          +'<div onclick="toggleCrapaud(\''+c.id+'\')" style="width:26px;height:26px;border-radius:8px;border:2px solid '+(c.done?'#22c55e':'#fb923c')+';background:'+(c.done?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(c.done?'<svg width="14" height="14" viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div>'
+          +'<div style="flex:1;">'
+          +'<div style="font-size:14px;font-weight:900;color:'+(c.done?'#22c55e':'#fb923c')+';'+(c.done?'text-decoration:line-through;':'')+'">'+c.titre+'</div>'
+          +(c.raison?'<div style="font-size:11px;color:var(--t2);margin-top:2px;">💭 '+c.raison+'</div>':'')
+          +(c.done&&c.doneTime?'<div style="font-size:10px;color:#22c55e;margin-top:4px;font-weight:700;">✅ Avalé à '+c.doneTime+'</div>':'')
+          +'</div>'
+          +'<div onclick="delCrapaud(\''+c.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 4px;">×</div>'
+          +'</div>';
+      }).join('');
+    }
+  }
+  // Historique
+  var lEl=document.getElementById('crapaudList');var eEl=document.getElementById('crapaudEmpty');if(!lEl)return;
+  if(!hist.length){lEl.innerHTML='';if(eEl)eEl.style.display='block';return;}
+  if(eEl)eEl.style.display='none';
+  lEl.innerHTML=hist.map(function(c){
+    return '<div style="background:var(--card);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;">'
+      +'<span style="font-size:18px;">'+(c.done?'✅':'🐸')+'</span>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(c.done?'text-decoration:line-through;opacity:.6;':'')+'">'+c.titre+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);">'+c.date+' '+c.time+'</div>'
+      +'</div>'
+      +'<div onclick="delCrapaud(\''+c.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;padding:2px 6px;">×</div>'
+      +'</div>';
+  }).join('');
+}
+function exportCrapaudPDF(){
+  var d=loadTM();var list=d.crapauds||[];
+  var done=list.filter(function(x){return x.done;}).length;
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Avalez le Crapaud</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#c2410c;}table{width:100%;border-collapse:collapse;font-size:12px;}th{background:#c2410c;color:#fff;padding:8px;}td{padding:8px;border-bottom:1px solid #e2e8f0;}.ok{color:#16a34a;font-weight:700;}.ko{color:#9ca3af;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>🐸 Avalez le Crapaud</h1>'
+    +'<div class="meta">Généré le '+getGenDateTM()+' · MG MAXI DENDEN · '+done+'/'+list.length+' crapaud(s) avalé(s)</div>'
+    +'<table><thead><tr><th>Date</th><th>Tâche difficile</th><th>Raison</th><th>Statut</th></tr></thead><tbody>'
+    +list.map(function(c){return '<tr><td>'+c.date+'</td><td style="font-weight:700;">'+c.titre+'</td><td>'+(c.raison||'—')+'</td><td class="'+(c.done?'ok':'ko')+'">'+(c.done?'✅ Avalé':'⏳ En attente')+'</td></tr>';}).join('')
+    +'</tbody></table></body></html>';
+  _dlPDF(html,'crapaud_'+tstr()+'.html');
+}
+
+// ── 🧠 DEEP WORK ──
+var _dwDuree=60;
+function setDwDuree(btn,v){_dwDuree=v;document.querySelectorAll('[data-dw]').forEach(function(b){b.style.opacity=b.dataset.dw==v?'1':'0.4';});}
+function addDeepwork(){
+  var f=document.getElementById('deepworkForm');if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){document.getElementById('dwSujet').value='';document.getElementById('dwResultat').value='';_dwDuree=60;document.querySelectorAll('[data-dw]').forEach(function(b){b.style.opacity='1';});}
+}
+function saveDeepwork(){
+  var sujet=(document.getElementById('dwSujet')||{value:''}).value.trim();if(!sujet){showT('⚠️','Sujet requis');return;}
+  var resultat=(document.getElementById('dwResultat')||{value:''}).value.trim();
+  var d=loadTM();if(!d.deepwork)d.deepwork=[];
+  d.deepwork.unshift({id:uid(),sujet:sujet,duree:_dwDuree,resultat:resultat,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
+  saveTM(d);addDeepwork();renderDeepwork();showT('🧠','Session enregistrée !');
+}
+function delDeepwork(id){var d=loadTM();d.deepwork=(d.deepwork||[]).filter(function(x){return x.id!==id;});saveTM(d);renderDeepwork();}
+function renderDeepwork(){
+  var d=loadTM();var list=d.deepwork||[];
+  var today=list.filter(function(x){return x.date===tstr();});
+  var totalMin=today.reduce(function(s,x){return s+x.duree;},0);
+  // Stats
+  var sEl=document.getElementById('deepworkStats');
+  if(sEl){
+    sEl.innerHTML='<div style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:10px;padding:10px;text-align:center;">'
+      +'<div style="font-size:22px;font-weight:900;color:#60a5fa;">'+today.length+'</div><div style="font-size:10px;color:var(--t2);">Session(s)</div></div>'
+      +'<div style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:10px;padding:10px;text-align:center;">'
+      +'<div style="font-size:22px;font-weight:900;color:#60a5fa;">'+(totalMin>=60?Math.floor(totalMin/60)+'h'+(totalMin%60?''+totalMin%60:''):totalMin+'min')+'</div><div style="font-size:10px;color:var(--t2);">Aujourd\'hui</div></div>'
+      +'<div style="flex:1;background:rgba(29,78,216,.12);border:1px solid rgba(29,78,216,.3);border-radius:10px;padding:10px;text-align:center;">'
+      +'<div style="font-size:22px;font-weight:900;color:#60a5fa;">'+list.length+'</div><div style="font-size:10px;color:var(--t2);">Total</div></div>';
+  }
+  var lEl=document.getElementById('deepworkList');var eEl=document.getElementById('deepworkEmpty');if(!lEl)return;
+  if(!list.length){lEl.innerHTML='';if(eEl)eEl.style.display='block';return;}
+  if(eEl)eEl.style.display='none';
+  lEl.innerHTML=list.map(function(x){
+    var dMin=x.duree;var dStr=dMin>=60?Math.floor(dMin/60)+'h'+(dMin%60?''+dMin%60:''):dMin+'min';
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid #1d4ed8;">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;">'
+      +'<div style="flex:1;">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+      +'<span style="background:rgba(29,78,216,.2);color:#60a5fa;font-size:10px;font-weight:800;padding:2px 8px;border-radius:8px;">🧠 '+dStr+'</span>'
+      +'</div>'
+      +'<div style="font-size:14px;font-weight:900;color:var(--t1);">'+x.sujet+'</div>'
+      +(x.resultat?'<div style="font-size:12px;color:#22c55e;margin-top:4px;">✅ '+x.resultat+'</div>':'')
+      +'<div style="font-size:10px;color:var(--t2);margin-top:3px;">'+x.date+' à '+x.time+'</div>'
+      +'</div>'
+      +'<div onclick="delDeepwork(\''+x.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;margin-left:8px;">×</div>'
+      +'</div></div>';
+  }).join('');
+}
+function exportDeepworkPDF(){
+  var d=loadTM();var list=d.deepwork||[];
+  var total=list.reduce(function(s,x){return s+x.duree;},0);
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Deep Work</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#1e3a8a;}table{width:100%;border-collapse:collapse;font-size:12px;}th{background:#1e3a8a;color:#fff;padding:8px;}td{padding:8px;border-bottom:1px solid #e2e8f0;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>🧠 Sessions Deep Work</h1>'
+    +'<div class="meta">Généré le '+getGenDateTM()+' · MG MAXI DENDEN · '+list.length+' session(s) — Total: '+(total>=60?Math.floor(total/60)+'h'+total%60+'min':total+'min')+'</div>'
+    +'<table><thead><tr><th>Date</th><th>Sujet</th><th>Durée</th><th>Résultat</th></tr></thead><tbody>'
+    +list.map(function(x){var dStr=x.duree>=60?Math.floor(x.duree/60)+'h'+(x.duree%60?''+x.duree%60:''):x.duree+'min';return '<tr><td>'+x.date+'</td><td style="font-weight:700;">'+x.sujet+'</td><td>'+dStr+'</td><td>'+(x.resultat||'—')+'</td></tr>';}).join('')
+    +'</tbody></table></body></html>';
+  _dlPDF(html,'deepwork_'+tstr()+'.html');
+}
+
+// ── 📝 MÉTHODE 1-3-5 ──
+function getM135(){var d=loadTM();if(!d.m135)d.m135={};if(!d.m135[tstr()])d.m135[tstr()]={majeure:[],moyennes:[],petites:[]};return d.m135[tstr()];}
+function saveM135(data){var d=loadTM();if(!d.m135)d.m135={};d.m135[tstr()]=data;saveTM(d);}
+function renderMethode135(){
+  var data=getM135();
+  var el=document.getElementById('m135Content');if(!el)return;
+  function renderSection(label,icon,color,bg,items,max,type){
+    var count=items.filter(function(x){return x.done;}).length;
+    return '<div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border-left:4px solid '+color+';">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;">'
+      +'<span style="font-size:20px;">'+icon+'</span>'
+      +'<div style="font-size:13px;font-weight:900;color:'+color+';">'+label+'</div>'
+      +'<span style="background:'+bg+';color:'+color+';font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;">'+count+'/'+items.length+' · max '+max+'</span>'
+      +'</div>'
+      +(items.length<max?'<button onclick="addM135Item(\''+type+'\')" style="background:'+color+';border:none;color:#fff;font-size:16px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>':'')
+      +'</div>'
+      +'<div id="m135Form_'+type+'" style="display:none;margin-bottom:8px;">'
+      +'<div style="display:flex;gap:6px;">'
+      +'<input id="m135Input_'+type+'" class="fi" placeholder="Ajouter une tâche..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key===\'Enter\')saveM135Item(\''+type+'\')"/>'
+      +'<button onclick="saveM135Item(\''+type+'\')" style="background:'+color+';border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>'
+      +'</div></div>'
+      +items.map(function(item,i){
+        return '<div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:'+(item.done?bg:'rgba(255,255,255,.03)')+';border-radius:10px;margin-bottom:4px;">'
+          +'<div onclick="toggleM135(\''+type+'\','+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?color:'rgba(255,255,255,.2)')+';background:'+(item.done?color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(item.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+          +'<div onclick="toggleM135(\''+type+'\','+i+')" style="flex:1;font-size:13px;font-weight:700;color:var(--t1);cursor:pointer;'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div>'
+          +'<div onclick="delM135(\''+type+'\','+i+')" style="width:22px;height:22px;border-radius:6px;background:rgba(239,68,68,.1);color:#ef4444;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }
+  el.innerHTML=renderSection('1 Tâche Majeure','🔴','#ef4444','rgba(239,68,68,.1)',data.majeure,1,'majeure')
+    +renderSection('3 Tâches Moyennes','🟡','#f59e0b','rgba(245,158,11,.1)',data.moyennes,3,'moyennes')
+    +renderSection('5 Petites Tâches','⚪','#94a3b8','rgba(100,116,139,.1)',data.petites,5,'petites')
+    +'<button onclick="exportMethode135PDF()" style="width:100%;background:#0033A0;border:none;color:#fff;font-size:13px;font-weight:800;padding:12px;border-radius:12px;cursor:pointer;margin-top:4px;">📄 Exporter PDF</button>';
+}
+function addM135Item(type){
+  var f=document.getElementById('m135Form_'+type);if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){var inp=document.getElementById('m135Input_'+type);if(inp){inp.value='';inp.focus();}}
+}
+function saveM135Item(type){
+  var inp=document.getElementById('m135Input_'+type);if(!inp)return;
+  var val=inp.value.trim();if(!val)return;
+  var data=getM135();
+  var maxes={majeure:1,moyennes:3,petites:5};
+  if(data[type].length>=maxes[type]){showT('⚠️','Maximum atteint pour cette catégorie');return;}
+  data[type].push({text:val,done:false});
+  saveM135(data);
+  inp.value='';var f=document.getElementById('m135Form_'+type);if(f)f.style.display='none';
+  renderMethode135();
+}
+function toggleM135(type,i){var data=getM135();data[type][i].done=!data[type][i].done;saveM135(data);renderMethode135();}
+function delM135(type,i){var data=getM135();data[type].splice(i,1);saveM135(data);renderMethode135();}
+function exportMethode135PDF(){
+  var data=getM135();
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Méthode 1-3-5</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#14532d;}.section{margin-bottom:20px;}.sec-title{font-size:13px;font-weight:700;padding:8px 12px;border-radius:6px;margin-bottom:8px;}.item{padding:6px 12px;border-radius:6px;font-size:12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;}.ok{text-decoration:line-through;opacity:.6;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>📝 Méthode 1-3-5</h1>'
+    +'<div class="meta">'+tstr()+' · Généré le '+getGenDateTM()+' · MG MAXI DENDEN</div>'
+    +['majeure','moyennes','petites'].map(function(type){
+      var labels={majeure:'🔴 Tâche Majeure (1)',moyennes:'🟡 Tâches Moyennes (3)',petites:'⚪ Petites Tâches (5)'};
+      var cols={majeure:'#dc2626',moyennes:'#d97706',petites:'#64748b'};
+      return '<div class="section"><div class="sec-title" style="background:'+cols[type]+'22;color:'+cols[type]+';border:1px solid '+cols[type]+'44;">'+labels[type]+'</div>'
+        +(data[type].length?data[type].map(function(item){return '<div class="item '+(item.done?'ok':'')+'" style="background:'+cols[type]+'11;">'+(item.done?'✅':'⬜')+' '+item.text+'</div>';}).join(''):'<div class="item" style="color:#9ca3af;">— Aucune tâche</div>')
+        +'</div>';
+    }).join('')
+    +'</body></html>';
+  _dlPDF(html,'methode_135_'+tstr()+'.html');
+}
+
+// ── 📅 TIME BLOCKING ──
+var _tbPrio='normale';
+function setTbPrio(btn,v){_tbPrio=v;document.querySelectorAll('[data-tp]').forEach(function(b){b.style.opacity=b.dataset.tp===v?'1':'0.4';});}
+function addTimeBlock(){
+  var f=document.getElementById('tbForm');if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){document.getElementById('tbActivite').value='';_tbPrio='normale';document.querySelectorAll('[data-tp]').forEach(function(b){b.style.opacity='1';});}
+}
+function saveTimeBlock(){
+  var activite=(document.getElementById('tbActivite')||{value:''}).value.trim();if(!activite){showT('⚠️','Activité requise');return;}
+  var de=(document.getElementById('tbDe')||{value:'08:00'}).value;
+  var a=(document.getElementById('tbA')||{value:'09:00'}).value;
+  var d=loadTM();if(!d.timeblocks)d.timeblocks=[];
+  d.timeblocks.push({id:uid(),activite:activite,de:de,a:a,prio:_tbPrio,done:false,date:tstr()});
+  d.timeblocks.sort(function(x,y){return x.de.localeCompare(y.de);});
+  saveTM(d);addTimeBlock();renderTimeblocking();showT('📅','Créneau ajouté !');
+}
+function toggleTimeBlock(id){var d=loadTM();var tb=(d.timeblocks||[]).find(function(x){return x.id===id;});if(tb)tb.done=!tb.done;saveTM(d);renderTimeblocking();}
+function delTimeBlock(id){var d=loadTM();d.timeblocks=(d.timeblocks||[]).filter(function(x){return x.id!==id;});saveTM(d);renderTimeblocking();}
+function renderTimeblocking(){
+  var d=loadTM();var all=d.timeblocks||[];var list=all.filter(function(x){return x.date===tstr();});
+  var lEl=document.getElementById('tbList');var eEl=document.getElementById('tbEmpty');if(!lEl)return;
+  if(!list.length){lEl.innerHTML='';if(eEl)eEl.style.display='block';return;}
+  if(eEl)eEl.style.display='none';
+  var prioCols={haute:'#ef4444',normale:'#60a5fa',flexible:'#94a3b8'};
+  var prioIcons={haute:'🔴',normale:'🔵',flexible:'⚪'};
+  lEl.innerHTML=list.map(function(tb){
+    var col=prioCols[tb.prio||'normale'];
+    var dur=0;try{var d1=tb.de.split(':');var d2=tb.a.split(':');dur=(parseInt(d2[0])*60+parseInt(d2[1]))-(parseInt(d1[0])*60+parseInt(d1[1]));if(dur<0)dur+=1440;}catch(e){}
+    var durStr=dur>0?(dur>=60?Math.floor(dur/60)+'h'+(dur%60?dur%60+'min':''):dur+'min'):'';
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:4px solid '+col+';opacity:'+(tb.done?'.6':'1')+'">'
+      +'<div style="display:flex;align-items:center;gap:10px;">'
+      +'<div onclick="toggleTimeBlock(\''+tb.id+'\')" style="width:24px;height:24px;border-radius:7px;border:2px solid '+(tb.done?col:'rgba(255,255,255,.2)')+';background:'+(tb.done?col:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(tb.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+      +'<div style="flex:1;">'
+      +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">'
+      +'<span style="font-size:12px;font-weight:900;color:'+col+';">'+tb.de+' → '+tb.a+'</span>'
+      +(durStr?'<span style="font-size:10px;color:var(--t2);">('+durStr+')</span>':'')
+      +'<span style="font-size:10px;">'+prioIcons[tb.prio||'normale']+'</span>'
+      +'</div>'
+      +'<div style="font-size:14px;font-weight:900;color:var(--t1);'+(tb.done?'text-decoration:line-through;':'')+'">'+tb.activite+'</div>'
+      +'</div>'
+      +'<div onclick="delTimeBlock(\''+tb.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;">×</div>'
+      +'</div></div>';
+  }).join('');
+}
+function exportTimeBlockPDF(){
+  var d=loadTM();var all=d.timeblocks||[];var list=all.filter(function(x){return x.date===tstr();});
+  var done=list.filter(function(x){return x.done;}).length;
+  var prioCols={haute:'#dc2626',normale:'#1e3a8a',flexible:'#64748b'};
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Time Blocking</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#581c87;}.block{border-left:4px solid;padding:10px 14px;margin-bottom:8px;border-radius:0 8px 8px 0;}.time{font-size:13px;font-weight:700;}.activity{font-size:14px;font-weight:700;}.done{text-decoration:line-through;opacity:.6;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>📅 Time Blocking — '+tstr()+'</h1>'
+    +'<div class="meta">Généré le '+getGenDateTM()+' · MG MAXI DENDEN · '+done+'/'+list.length+' créneau(x) complété(s)</div>'
+    +list.map(function(tb){var col=prioCols[tb.prio||'normale'];return '<div class="block" style="border-color:'+col+';background:'+col+'11;"><div class="time" style="color:'+col+';">'+tb.de+' → '+tb.a+'</div><div class="activity '+(tb.done?'done':'')+'">'+(tb.done?'✅ ':'')+tb.activite+'</div></div>';}).join('')
+    +'</body></html>';
+  _dlPDF(html,'timeblocking_'+tstr()+'.html');
+}
+
+
+// ══ PHILOSOPHIES (Lean, Six Sigma, Kaizen) ══
+var SKPH=SK+'_philo';
+function loadPhilo(){try{return JSON.parse(localStorage.getItem(SKPH)||'{}');}catch(e){return{};}}
+function savePhilo(d){localStorage.setItem(SKPH,JSON.stringify(d));}
+
+var PHILO_META={
+  lean:{label:'Lean Management',icon:'⚡',color:'#eab308',section:'I-1'},
+  sixsigma:{label:'Six Sigma',icon:'🎯',color:'#d946ef',section:'I-2'},
+  kaizen:{label:'Kaizen',icon:'🌱',color:'#22c55e',section:'I-3'}
+};
+
+function addPhiloAction(type){
+  var f=document.getElementById('philoForm_'+type);if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){var inp=document.getElementById('philoInput_'+type);if(inp){inp.value='';inp.focus();}}
+}
+function savePhiloAction(type){
+  var inp=document.getElementById('philoInput_'+type);if(!inp)return;
+  var val=inp.value.trim();if(!val)return;
+  var d=loadPhilo();if(!d[type])d[type]=[];
+  d[type].unshift({id:uid(),text:val,done:false,date:tstr()});
+  savePhilo(d);
+  inp.value='';var f=document.getElementById('philoForm_'+type);if(f)f.style.display='none';
+  renderPhilo(type);showT('✅','Action ajoutée');
+}
+function togglePhilo(type,id){
+  var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
+  if(item)item.done=!item.done;savePhilo(d);renderPhilo(type);
+}
+function delPhilo(type,id){
+  var d=loadPhilo();d[type]=(d[type]||[]).filter(function(x){return x.id!==id;});
+  savePhilo(d);renderPhilo(type);
+}
+function renderPhilo(type){
+  var d=loadPhilo();var list=d[type]||[];
+  var meta=PHILO_META[type];
+  var el=document.getElementById('philoList_'+type);var empty=document.getElementById('philoEmpty_'+type);if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var done=list.filter(function(x){return x.done;}).length;
+  el.innerHTML='<div style="font-size:10px;color:var(--t2);margin-bottom:8px;">'+done+'/'+list.length+' accomplis</div>'
+    +list.map(function(item){
+      return '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1px solid '+(item.done?meta.color+'44':'rgba(255,255,255,.06)')+'">'
+        +'<div onclick="togglePhilo(\''+type+'\',\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?meta.color:'rgba(255,255,255,.2)')+';background:'+(item.done?meta.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(item.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+        +'<div style="flex:1;font-size:13px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;" onclick="togglePhilo(\''+type+'\',\''+item.id+'\')">'+item.text+'</div>'
+        +'<div style="font-size:10px;color:var(--t2);">'+item.date+'</div>'
+        +'<div onclick="delPhilo(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
+        +'</div>';
+    }).join('');
+}
+function exportPhiloPDF(type){
+  var d=loadPhilo();var list=d[type]||[];
+  var meta=PHILO_META[type];
+  var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var gen=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var done=list.filter(function(x){return x.done;}).length;
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+meta.label+'</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:'+meta.color+';}table{width:100%;border-collapse:collapse;font-size:12px;}th{background:'+meta.color+';color:#fff;padding:8px;}td{padding:8px;border-bottom:1px solid #e2e8f0;}.ok{color:#16a34a;font-weight:700;}.ko{color:#9ca3af;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>'+meta.icon+' '+meta.label+' ('+meta.section+')</h1>'
+    +'<div class="meta">Généré le '+gen+' · MG MAXI DENDEN · '+done+'/'+list.length+' action(s) accomplie(s)</div>'
+    +'<table><thead><tr><th>Date</th><th>Action</th><th>Statut</th></tr></thead><tbody>'
+    +list.map(function(x){return '<tr><td>'+x.date+'</td><td style="font-weight:700;">'+x.text+'</td><td class="'+(x.done?'ok':'ko')+'">'+(x.done?'✅ Accompli':'⏳ En cours')+'</td></tr>';}).join('')
+    +'</tbody></table></body></html>';
+  _dlPDF(html,type+'_'+tstr()+'.html');
+}
+
+// ══ 5S ══
+var CINQ_S=[
+  {key:'seiri',num:'1S',label:'Seiri — Trier',icon:'🗂️',color:'#ef4444',desc:'Éliminer ce qui est inutile. Garder uniquement l\'essentiel sur le poste de travail.'},
+  {key:'seiton',num:'2S',label:'Seiton — Ranger',icon:'📦',color:'#f59e0b',desc:'Une place pour chaque chose, chaque chose à sa place. Optimiser l\'organisation pour gagner du temps.'},
+  {key:'seiso',num:'3S',label:'Seiso — Nettoyer',icon:'🧹',color:'#22c55e',desc:'Maintenir propreté et ordre. Nettoyer = inspecter. Détecter les anomalies tôt.'},
+  {key:'seiketsu',num:'4S',label:'Seiketsu — Standardiser',icon:'📋',color:'#3b82f6',desc:'Créer des standards visuels et des procédures. Rendre les bonnes pratiques automatiques.'},
+  {key:'shitsuke',num:'5S',label:'Shitsuke — Suivre',icon:'👁️',color:'#a855f7',desc:'Discipline et amélioration continue. Maintenir les 4S dans le temps avec rigueur.'}
+];
+function render5S(){
+  var d=loadPhilo();var el=document.getElementById('cinqs5sContent');if(!el)return;
+  el.innerHTML=CINQ_S.map(function(s){
+    var items=d['5s_'+s.key]||[];var done=items.filter(function(x){return x.done;}).length;
+    return '<div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border-left:4px solid '+s.color+';">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+      +'<div style="display:flex;align-items:center;gap:8px;">'
+      +'<span style="font-size:22px;">'+s.icon+'</span>'
+      +'<div>'
+      +'<div style="font-size:9px;font-weight:800;color:'+s.color+';letter-spacing:.5px;">'+s.num+'</div>'
+      +'<div style="font-size:13px;font-weight:900;color:var(--t1);">'+s.label+'</div>'
+      +'</div></div>'
+      +(items.length<6?'<button onclick="add5SItem(\''+s.key+'\')" style="background:'+s.color+';border:none;color:#fff;font-size:16px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>':'')
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--t2);margin-bottom:10px;line-height:1.4;">'+s.desc+'</div>'
+      +'<div id="5sForm_'+s.key+'" style="display:none;margin-bottom:8px;">'
+      +'<div style="display:flex;gap:6px;">'
+      +'<input id="5sInput_'+s.key+'" class="fi" placeholder="Action à réaliser..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key===\'Enter\')save5SItem(\''+s.key+'\')"/>'
+      +'<button onclick="save5SItem(\''+s.key+'\')" style="background:'+s.color+';border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>'
+      +'</div></div>'
+      +(done+'/'+items.length?'<div style="font-size:10px;color:var(--t2);margin-bottom:6px;">'+done+'/'+items.length+' accomplis</div>':'')
+      +items.map(function(item,i){
+        return '<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:'+(item.done?s.color+'11':'rgba(255,255,255,.03)')+';border-radius:8px;margin-bottom:3px;">'
+          +'<div onclick="toggle5S(\''+s.key+'\','+i+')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?s.color:'rgba(255,255,255,.2)')+';background:'+(item.done?s.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+          +'<div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;" onclick="toggle5S(\''+s.key+'\','+i+')">'+item.text+'</div>'
+          +'<div onclick="del5S(\''+s.key+'\','+i+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:1px 4px;">×</div>'
+          +'</div>';
+      }).join('')
+      +'</div>';
+  }).join('');
+}
+function add5SItem(key){
+  var f=document.getElementById('5sForm_'+key);if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){var inp=document.getElementById('5sInput_'+key);if(inp){inp.value='';inp.focus();}}
+}
+function save5SItem(key){
+  var inp=document.getElementById('5sInput_'+key);if(!inp)return;
+  var val=inp.value.trim();if(!val)return;
+  var d=loadPhilo();if(!d['5s_'+key])d['5s_'+key]=[];
+  d['5s_'+key].push({text:val,done:false});
+  savePhilo(d);inp.value='';var f=document.getElementById('5sForm_'+key);if(f)f.style.display='none';
+  render5S();
+}
+function toggle5S(key,i){var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key][i].done=!d['5s_'+key][i].done;savePhilo(d);render5S();}
+function del5S(key,i){var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key].splice(i,1);savePhilo(d);render5S();}
+function export5SPDF(){
+  var d=loadPhilo();
+  var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var gen=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Méthode 5S</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#06b6d4;}.sec{border-radius:8px;padding:12px;margin-bottom:12px;}.sec-title{font-size:14px;font-weight:700;margin-bottom:6px;}.desc{font-size:11px;color:#666;margin-bottom:8px;}.item{font-size:12px;padding:4px 0;}.ok{color:#16a34a;text-decoration:line-through;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>👁️ Méthode 5S</h1><div class="meta">Généré le '+gen+' · MG MAXI DENDEN</div>'
+    +CINQ_S.map(function(s){
+      var items=d['5s_'+s.key]||[];
+      return '<div class="sec" style="border-left:4px solid '+s.color+';background:'+s.color+'11;"><div class="sec-title" style="color:'+s.color+';">'+s.icon+' '+s.label+'</div><div class="desc">'+s.desc+'</div>'
+        +(items.length?items.map(function(item){return '<div class="item '+(item.done?'ok':'')+'">'+(item.done?'✅ ':item.done===false?'⬜ ':'')+item.text+'</div>';}).join(''):'<div class="item" style="color:#9ca3af;">— Aucune action</div>')
+        +'</div>';
+    }).join('')
+    +'</body></html>';
+  _dlPDF(html,'5s_'+tstr()+'.html');
 }
 
 window.addEventListener('DOMContentLoaded',()=>{
