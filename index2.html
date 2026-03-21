@@ -609,7 +609,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div id="hname" style="font-size:20px;font-weight:900;font-family:'Syne',sans-serif;color:var(--t1);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.3px;">Configurer profil</div>
       <div id="hsub" style="display:none;font-size:12px;font-weight:800;color:#14532d;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.1px;"></div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
-        <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:9px;color:var(--t3);">📅</span><span class="clock-date" id="tbDate" style="font-size:12px;font-weight:700;font-family:'Syne',sans-serif;color:var(--t2);"></span></div>
+        <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:13px;">📅</span><span class="clock-date" id="tbDate" style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:#38bdf8;letter-spacing:.3px;"></span></div>
         <div style="width:3px;height:3px;border-radius:50%;background:var(--t3);"></div>
         <div style="display:flex;align-items:center;gap:4px;"><span style="font-size:9px;color:var(--t3);">🕐</span><span id="clockDigital" style="font-size:17px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#0f172a;letter-spacing:-.5px;">--:--:--</span></div>
       </div>
@@ -2187,7 +2187,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ CRAPAUD ══ -->
 <div class="pg" id="pgCrapaud">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Temps</div>
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Temps</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🐸 Avalez le Crapaud</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addCrapaud()" style="background:#c2410c;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -2222,7 +2222,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ DEEP WORK ══ -->
 <div class="pg" id="pgDeepwork">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Temps</div>
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Temps</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🧠 Deep Work</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addDeepwork()" style="background:#1d4ed8;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -2261,7 +2261,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ MÉTHODE 1-3-5 ══ -->
 <div class="pg" id="pgMethode135">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Temps</div>
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Temps</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📝 Méthode 1-3-5</div>
     <button onclick="exportMethode135PDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
   </div>
@@ -2276,7 +2276,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ TIME BLOCKING ══ -->
 <div class="pg" id="pgTimeblocking">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#c084fc;cursor:pointer;">‹ Temps</div>
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#c084fc;cursor:pointer;">‹ Temps</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📅 Time Blocking</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addTimeBlock()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -2878,14 +2878,14 @@ function goPage(p){
   _curPage=p;
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p])document.getElementById(map[p]).classList.add('on');
   if(nav[p])document.getElementById(nav[p]).classList.add('on');
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home')renderHome();
   if(p==='taches')renderTaches();
@@ -2923,6 +2923,7 @@ function goPage(p){
   if(p==='methode135')renderMethode135();
   if(p==='timeblocking')renderTimeblocking();
   if(p==='documents')renderDocs();
+  if(p==='resume')renderResume();
   if(p==='auditRayon')renderAudit();
   if(p==='objectifsKpi')renderKpi();
   if(p==='ruptures')renderRuptures();
@@ -3156,6 +3157,7 @@ function renderDr(){
     {ico:'👤',name:'Mon Profil',a:"openPM();closeDr()"},
     
     {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
+    {ico:'🌙',name:'Résumé de la journée',a:"closeDr();goPage('resume')"},
     {ico:'📁',name:'Documents téléchargés',a:"closeDr();goPage('documents')"},
     {ico:'🏆',name:'Excellence Opérationnelle',a:"closeDr();goPage('excellence')"},
     {ico:'⚙️',name:'Réglages',a:"openDr('settings')"},
@@ -5621,7 +5623,7 @@ function exportGoulotsPDF(){
 
 // ── EISENHOWER MANUAL TASKS ──
 var _eisQ = 'q1';
-function setEisQ(btn,v){_eisQ=v;document.querySelectorAll('[data-eq]').forEach(function(b){b.style.opacity=b.dataset.eq===v?'1':'0.45';});}
+function setEisQ(btn,v){_eisQ=v;var f=document.getElementById('eisForm');if(f)f.querySelectorAll('[data-eq]').forEach(function(b){b.style.opacity=b.dataset.eq===v?'1':'0.45';});}
 function addEisTache(){
   var f=document.getElementById('eisForm');if(!f)return;
   var s=f.style.display!=='none';
@@ -6170,6 +6172,179 @@ function export5SPDF(){
   _dlPDF(html,'5s_'+tstr()+'.html');
 }
 
+
+// ══ RÉSUMÉ FIN DE JOURNÉE ══
+function saveResumeNote(){
+  var note=(document.getElementById('resumeNote')||{value:''}).value;
+  var d=JSON.parse(localStorage.getItem(SK+'_resumeNotes')||'{}');
+  d[tstr()]=note;localStorage.setItem(SK+'_resumeNotes',JSON.stringify(d));
+}
+function getResumeNote(){
+  var d=JSON.parse(localStorage.getItem(SK+'_resumeNotes')||'{}');
+  return d[tstr()]||'';
+}
+function renderResume(){
+  var now=tn();
+  var MFR=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  var DF2=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var dateStr=DF2[now.getDay()]+' '+now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var dl=document.getElementById('resumeDateLabel');if(dl)dl.textContent=dateStr;
+  var pl=document.getElementById('resumeProfileLabel');
+  if(pl)pl.textContent=(prof.name||'')+((prof.store)?' · '+prof.store:'');
+
+  // Tasks
+  var tt=getTT(),td=tstr();
+  var done=tt.filter(function(t){return comps[td]&&comps[td][t.id];});
+  var pend=tt.filter(function(t){return !(comps[td]&&comps[td][t.id]);});
+  var rate=tt.length?Math.round(done.length/tt.length*100):0;
+
+  var rdEl=document.getElementById('resumeDone');if(rdEl)rdEl.textContent=done.length;
+  var rpEl=document.getElementById('resumePend');if(rpEl)rpEl.textContent=pend.length;
+  var rrEl=document.getElementById('resumeRate');
+  if(rrEl){rrEl.textContent=rate+'%';rrEl.style.color=rate>=80?'#22c55e':rate>=50?'#f59e0b':'#ef4444';}
+
+  var dEl=document.getElementById('resumeTasksDone');
+  if(dEl){
+    dEl.innerHTML=done.length
+      ?done.map(function(t){return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);">'
+        +'<span style="color:#22c55e;font-size:14px;">✓</span>'
+        +'<span style="font-size:13px;font-weight:700;color:var(--t1);">'+t.name+'</span>'
+        +'<span style="margin-left:auto;font-size:10px;color:var(--t2);">'+t.time+'</span>'
+        +'</div>';}).join('')
+      :'<div style="font-size:12px;color:var(--t2);text-align:center;padding:8px;">Aucune tâche accomplie</div>';
+  }
+
+  var pEl=document.getElementById('resumeTasksPend');
+  if(pEl){
+    pEl.innerHTML=pend.length
+      ?pend.map(function(t){return '<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);">'
+        +'<span style="color:#ef4444;font-size:14px;">○</span>'
+        +'<span style="font-size:13px;font-weight:700;color:var(--t1);">'+t.name+'</span>'
+        +'<span style="margin-left:auto;font-size:10px;color:var(--t2);">'+t.time+'</span>'
+        +'</div>';}).join('')
+      :'<div style="font-size:12px;color:#22c55e;text-align:center;padding:8px;">✅ Toutes les tâches accomplies !</div>';
+  }
+
+  // Incidents
+  var iEl=document.getElementById('resumeIncidents');
+  if(iEl){
+    var d_adv=loadAdv();
+    var items=[];
+    // Ruptures du jour
+    var rupt=(d_adv.ruptures||[]).filter(function(r){return r.date===td;});
+    if(rupt.length)items.push({icon:'📦',color:'#fb923c',text:rupt.length+' rupture(s) : '+rupt.map(function(r){return r.produit;}).join(', ')});
+    // Non-conformités du jour
+    var nc=(d_adv.nonConf||[]).filter(function(r){return r.date===td;});
+    if(nc.length)items.push({icon:'🛑',color:'#ef4444',text:nc.length+' non-conformité(s) enregistrée(s)'});
+    // Démarque du jour
+    var dmq=loadDemarque().filter(function(r){return r.date===td;});
+    var dmqTotal=dmq.reduce(function(s,r){return s+(r.montant||0);},0);
+    if(dmq.length)items.push({icon:'⚠️',color:'#f59e0b',text:'Démarque : '+dmq.length+' constat(s) — '+dmqTotal.toFixed(2)+' TND'});
+    // DLC urgentes
+    var dlcItems=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    var dlcNow=new Date();dlcNow.setHours(0,0,0,0);
+    var dlcUrgent=dlcItems.filter(function(i){var d2=new Date(i.date);d2.setHours(0,0,0,0);return Math.round((d2-dlcNow)/(86400000))<=2;});
+    if(dlcUrgent.length)items.push({icon:'🔴',color:'#ef4444',text:dlcUrgent.length+' produit(s) DLC critique(s) : '+dlcUrgent.map(function(i){return i.name;}).join(', ')});
+    // Vigilance
+    var d_eq=loadEQ();var vigToday=(d_eq.vigilance||[]).filter(function(v){return v.date===td;});
+    if(vigToday.length)items.push({icon:'👁️',color:'#a78bfa',text:vigToday.length+' alerte(s) vigilance signalée(s)'});
+
+    iEl.innerHTML=items.length
+      ?items.map(function(i){return '<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);">'
+        +'<span style="font-size:16px;flex-shrink:0;">'+i.icon+'</span>'
+        +'<span style="font-size:12px;font-weight:700;color:'+i.color+';">'+i.text+'</span>'
+        +'</div>';}).join('')
+      :'<div style="font-size:12px;color:#22c55e;text-align:center;padding:8px;">✅ Aucun incident signalé aujourd\'hui</div>';
+  }
+
+  // Note
+  var noteEl=document.getElementById('resumeNote');
+  if(noteEl)noteEl.value=getResumeNote();
+}
+
+function buildResumeText(){
+  var now=tn();
+  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var DF2=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var td=tstr();var tt=getTT();
+  var done=tt.filter(function(t){return comps[td]&&comps[td][t.id];});
+  var pend=tt.filter(function(t){return !(comps[td]&&comps[td][t.id]);});
+  var rate=tt.length?Math.round(done.length/tt.length*100):0;
+  var d_adv=loadAdv();
+  var rupt=(d_adv.ruptures||[]).filter(function(r){return r.date===td;});
+  var nc=(d_adv.nonConf||[]).filter(function(r){return r.date===td;});
+  var dmq=loadDemarque().filter(function(r){return r.date===td;});
+  var dmqTotal=dmq.reduce(function(s,r){return s+(r.montant||0);},0);
+  var note=getResumeNote();
+
+  var msg='🌙 *RAPPORT DE FIN DE JOURNÉE*\n';
+  msg+='📅 '+DF2[now.getDay()]+' '+now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear()+'\n';
+  if(prof.name)msg+='👤 '+prof.name+(prof.store?' · '+prof.store:'')+'\n';
+  msg+='\n';
+  msg+='📊 *Tâches :* '+done.length+'/'+tt.length+' accomplies ('+rate+'%)\n';
+  if(done.length){msg+='✅ '+done.map(function(t){return t.name;}).join(', ')+'\n';}
+  if(pend.length){msg+='⏳ Non faites : '+pend.map(function(t){return t.name;}).join(', ')+'\n';}
+  msg+='\n';
+  if(rupt.length)msg+='📦 *Ruptures :* '+rupt.length+' — '+rupt.map(function(r){return r.produit;}).join(', ')+'\n';
+  if(nc.length)msg+='🛑 *Non-conformités :* '+nc.length+'\n';
+  if(dmq.length)msg+='⚠️ *Démarque :* '+dmqTotal.toFixed(2)+' TND ('+dmq.length+' constat(s))\n';
+  if(note){msg+='\n📝 *Note :* '+note+'\n';}
+  msg+='\n_Envoyé depuis TaskPro · MG MAXI DENDEN_';
+  return msg;
+}
+
+function shareResume(){
+  var msg=buildResumeText();
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+
+function exportResumePDF(){
+  var now=tn();var td=tstr();var tt=getTT();
+  var done=tt.filter(function(t){return comps[td]&&comps[td][t.id];});
+  var pend=tt.filter(function(t){return !(comps[td]&&comps[td][t.id]);});
+  var rate=tt.length?Math.round(done.length/tt.length*100):0;
+  var d_adv=loadAdv();
+  var rupt=(d_adv.ruptures||[]).filter(function(r){return r.date===td;});
+  var nc=(d_adv.nonConf||[]).filter(function(r){return r.date===td;});
+  var dmq=loadDemarque().filter(function(r){return r.date===td;});
+  var dmqTotal=dmq.reduce(function(s,r){return s+(r.montant||0);},0);
+  var note=getResumeNote();
+  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var DF2=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var dateStr=DF2[now.getDay()]+' '+now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var rateCol=rate>=80?'#16a34a':rate>=50?'#d97706':'#dc2626';
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Résumé Journée</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;color:#1a1a2e;}'
+    +'h1{color:#1e3a8a;font-size:20px;}h2{font-size:14px;color:#374151;border-bottom:2px solid #e5e7eb;padding-bottom:6px;margin-top:20px;}'
+    +'.stat{display:inline-block;border-radius:8px;padding:10px 20px;text-align:center;margin-right:10px;margin-bottom:10px;}'
+    +'.task-ok{color:#16a34a;font-size:13px;padding:4px 0;border-bottom:1px solid #f3f4f6;}'
+    +'.task-ko{color:#9ca3af;font-size:13px;padding:4px 0;border-bottom:1px solid #f3f4f6;text-decoration:line-through;}'
+    +'.inc{font-size:12px;color:#374151;padding:5px 0;border-bottom:1px solid #f3f4f6;}'
+    +'.note{background:#f8fafc;border-radius:8px;padding:12px;font-size:13px;color:#374151;}'
+    +'.meta{font-size:11px;color:#666;margin-bottom:20px;}</style>'
+    +'</head><body>'
+    +'<h1>🌙 Résumé de Fin de Journée</h1>'
+    +'<div class="meta">'+dateStr+(prof.name?' · '+prof.name:'')+(prof.store?' · '+prof.store:'')+'</div>'
+    +'<div><span class="stat" style="background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;"><b style="font-size:24px;">'+done.length+'</b><br>Accomplies</span>'
+    +'<span class="stat" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;"><b style="font-size:24px;">'+pend.length+'</b><br>En attente</span>'
+    +'<span class="stat" style="background:#eff6ff;color:'+rateCol+';border:1px solid #bfdbfe;"><b style="font-size:24px;">'+rate+'%</b><br>Taux</span></div>'
+    +'<h2>✅ Tâches Accomplies</h2>'
+    +(done.length?done.map(function(t){return '<div class="task-ok">✓ '+t.name+' <span style="color:#9ca3af;">('+t.time+')</span></div>';}).join(''):'<div style="color:#9ca3af;font-size:12px;">—</div>')
+    +'<h2>⏳ Non Accomplies</h2>'
+    +(pend.length?pend.map(function(t){return '<div class="task-ko">'+t.name+' ('+t.time+')</div>';}).join(''):'<div style="color:#16a34a;font-size:12px;">✅ Toutes les tâches accomplies !</div>')
+    +'<h2>⚠️ Incidents & Alertes</h2>'
+    +(rupt.length?'<div class="inc">📦 Ruptures : '+rupt.map(function(r){return r.produit;}).join(', ')+'</div>':'')
+    +(nc.length?'<div class="inc">🛑 Non-conformités : '+nc.length+'</div>':'')
+    +(dmq.length?'<div class="inc">⚠️ Démarque : '+dmqTotal.toFixed(2)+' TND ('+dmq.length+' constat(s))</div>':'')
+    +(!rupt.length&&!nc.length&&!dmq.length?'<div style="color:#16a34a;font-size:12px;">✅ Aucun incident</div>':'')
+    +(note?'<h2>📝 Note du Manager</h2><div class="note">'+note+'</div>':'')
+    +'<p style="margin-top:20px;font-size:10px;color:#9ca3af;">Généré le '+dateStr+' · TaskPro · MG MAXI DENDEN</p>'
+    +'</body></html>';
+
+  _dlPDF(html,'resume_journee_'+td+'.html');
+}
+
 window.addEventListener('DOMContentLoaded',()=>{
   loadTheme();load();initDef();unlockA();
   if(notifs.length)document.getElementById('nb').style.display='block';
@@ -6711,6 +6886,71 @@ function updateDlcBadge(){
 <div id="printDLC" style="display:none;padding:20px;"></div>
 </body>
 </html>
+
+<!-- ══ RÉSUMÉ FIN DE JOURNÉE ══ -->
+<div class="pg" id="pgResume">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🌙 Résumé du Jour</div>
+    <button onclick="shareResume()" style="background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;cursor:pointer;">💬 WhatsApp</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Date -->
+    <div id="resumeDateBanner" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:14px;padding:14px;margin-bottom:12px;text-align:center;">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Rapport de fin de journée</div>
+      <div id="resumeDateLabel" style="font-size:18px;font-weight:900;color:#fff;font-family:'Syne';"></div>
+      <div id="resumeProfileLabel" style="font-size:12px;color:rgba(255,255,255,.7);margin-top:4px;"></div>
+    </div>
+
+    <!-- Stats tâches -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:var(--card);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.3);">
+        <div id="resumeDone" style="font-size:24px;font-weight:900;color:#22c55e;">0</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:2px;">Accomplies</div>
+      </div>
+      <div style="background:var(--card);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(239,68,68,.3);">
+        <div id="resumePend" style="font-size:24px;font-weight:900;color:#ef4444;">0</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:2px;">En attente</div>
+      </div>
+      <div style="background:var(--card);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(59,130,246,.3);">
+        <div id="resumeRate" style="font-size:24px;font-weight:900;color:#60a5fa;">0%</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:2px;">Taux</div>
+      </div>
+    </div>
+
+    <!-- Tâches accomplies -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#22c55e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">✅ Tâches Accomplies</div>
+      <div id="resumeTasksDone"></div>
+    </div>
+
+    <!-- Tâches non faites -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#ef4444;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">⏳ Non Accomplies</div>
+      <div id="resumeTasksPend"></div>
+    </div>
+
+    <!-- Incidents du jour -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#f59e0b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">⚠️ Incidents & Alertes</div>
+      <div id="resumeIncidents"></div>
+    </div>
+
+    <!-- Note du manager -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#a78bfa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📝 Note du Manager</div>
+      <textarea id="resumeNote" class="fi" placeholder="Remarques, observations, points pour demain..." style="width:100%;min-height:80px;resize:none;box-sizing:border-box;" oninput="saveResumeNote()"></textarea>
+    </div>
+
+    <!-- Export -->
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <button onclick="exportResumePDF()" style="flex:1;background:#0033A0;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">📄 Export PDF</button>
+      <button onclick="shareResume()" style="flex:1;background:#25d366;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💬 WhatsApp</button>
+    </div>
+  </div>
+</div>
+
 </div><!-- /app -->
 
 <!-- ══ DRAWER ══ -->
