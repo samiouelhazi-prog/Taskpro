@@ -573,6 +573,7 @@ body.light #pgCommercial .tli-name {
 
 input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text-fill-color:#fff!important;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="bg-mesh"></div>
@@ -679,6 +680,176 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
   </div><!-- /homeScroll -->
 </div>
+
+
+<!-- ══ DASHBOARD KPI ══ -->
+<div class="pg" id="pgDashboard">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📊 Tableau de Bord</div>
+    <div style="width:50px;"></div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Date banner -->
+    <div id="dashDateBanner" style="background:linear-gradient(135deg,#052e16,#166534);border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;">Tableau de Bord</div>
+        <div id="dashDate" style="font-size:18px;font-weight:900;color:#fff;font-family:'Syne';margin-top:2px;"></div>
+      </div>
+      <div style="text-align:right;">
+        <div id="dashProf" style="font-size:11px;color:rgba(255,255,255,.7);"></div>
+        <div id="dashStore" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:2px;"></div>
+      </div>
+    </div>
+
+    <!-- KPI grid principal -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:var(--card);border-radius:14px;border:1px solid rgba(34,197,94,.3);padding:14px;">
+        <div style="font-size:10px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">✅ Tâches</div>
+        <div id="dashTachesDone" style="font-size:28px;font-weight:900;color:#fff;font-family:'Syne';">0/0</div>
+        <div style="margin-top:8px;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div id="dashTachesBar" style="height:5px;background:#22c55e;border-radius:3px;width:0%;transition:width .6s;"></div></div>
+        <div id="dashTachesPct" style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px;">0% accompli</div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;border:1px solid rgba(239,68,68,.3);padding:14px;">
+        <div style="font-size:10px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🔴 DLC Critiques</div>
+        <div id="dashDlcCount" style="font-size:28px;font-weight:900;color:#fff;font-family:'Syne';">0</div>
+        <div id="dashDlcList" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.5;"></div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;border:1px solid rgba(251,146,60,.3);padding:14px;">
+        <div style="font-size:10px;font-weight:700;color:#fb923c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">⚠️ Démarque</div>
+        <div id="dashDemarqueTotal" style="font-size:24px;font-weight:900;color:#fff;font-family:'Syne';">0</div>
+        <div id="dashDemarqueSub" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;"></div>
+      </div>
+      <div style="background:var(--card);border-radius:14px;border:1px solid rgba(168,85,247,.3);padding:14px;">
+        <div style="font-size:10px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">📦 Ruptures</div>
+        <div id="dashRuptCount" style="font-size:28px;font-weight:900;color:#fff;font-family:'Syne';">0</div>
+        <div id="dashRuptSub" style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;"></div>
+      </div>
+    </div>
+
+    <!-- Checklist rapide -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:800;color:#fbbf24;text-transform:uppercase;letter-spacing:.5px;">✅ Checklist du Jour</div>
+        <div id="dashCheckPct" style="font-size:13px;font-weight:900;color:#fbbf24;">0%</div>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;margin-bottom:8px;"><div id="dashCheckBar" style="height:5px;background:#fbbf24;border-radius:3px;width:0%;transition:width .6s;"></div></div>
+      <div id="dashCheckStatus" style="font-size:11px;color:rgba(255,255,255,.5);"></div>
+    </div>
+
+    <!-- Non conformités & Alertes -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#f87171;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">🚨 Alertes & Incidents</div>
+      <div id="dashAlertes" style="font-size:12px;color:rgba(255,255,255,.6);">Chargement...</div>
+    </div>
+
+    <!-- Équipe présente -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">👥 Équipe Aujourd'hui</div>
+      <div id="dashEquipe" style="font-size:12px;color:rgba(255,255,255,.6);">Chargement...</div>
+    </div>
+
+    <!-- Réunions du jour -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;">
+      <div style="font-size:11px;font-weight:800;color:#c084fc;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📅 Réunions & Événements</div>
+      <div id="dashReunions" style="font-size:12px;color:rgba(255,255,255,.6);">Chargement...</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ CHECKLIST OUVERTURE/FERMETURE ══ -->
+<div class="pg" id="pgChecklist">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">✅ Checklist Rayon</div>
+    <div style="width:50px;"></div>
+  </div>
+  <!-- Tabs -->
+  <div style="display:flex;gap:0;border-bottom:1px solid var(--bord);flex-shrink:0;">
+    <button onclick="setCheckTab('ouv',this)" data-tab="ouv" style="flex:1;padding:12px 0;font-size:13px;font-weight:800;color:var(--blue);background:transparent;border:none;border-bottom:2px solid var(--blue);cursor:pointer;font-family:'Space Grotesk',sans-serif;">🌅 Ouverture</button>
+    <button onclick="setCheckTab('ferm',this)" data-tab="ferm" style="flex:1;padding:12px 0;font-size:13px;font-weight:700;color:var(--t2);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Space Grotesk',sans-serif;">🌙 Fermeture</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="checkProgressWrap" style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div style="font-size:11px;font-weight:700;color:var(--t2);" id="checkProgressLabel">0 / 0 validées</div>
+        <div style="font-size:14px;font-weight:900;color:var(--blue);" id="checkProgressPct">0%</div>
+      </div>
+      <div style="height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;"><div id="checkProgressBar" style="height:6px;background:var(--blue);border-radius:3px;width:0%;transition:width .4s;"></div></div>
+    </div>
+    <div id="checklistItems" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</div>
+
+<!-- ══ STATISTIQUES ══ -->
+<div class="pg" id="pgStats">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📈 Statistiques</div>
+    <div style="width:50px;"></div>
+  </div>
+  <div style="display:flex;gap:0;border-bottom:1px solid var(--bord);flex-shrink:0;overflow-x:auto;">
+    <button onclick="setStatPeriod('7',this)" data-sp="7" style="flex:1;padding:10px 0;font-size:12px;font-weight:800;color:var(--blue);background:transparent;border:none;border-bottom:2px solid var(--blue);cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">7 jours</button>
+    <button onclick="setStatPeriod('30',this)" data-sp="30" style="flex:1;padding:10px 0;font-size:12px;font-weight:700;color:var(--t2);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">30 jours</button>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Taux accomplissement -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#22c55e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">📋 Taux d'Accomplissement des Tâches</div>
+      <canvas id="statsChartTaches" height="120" style="width:100%;"></canvas>
+      <div id="statsTachesResume" style="margin-top:10px;font-size:11px;color:var(--t2);text-align:center;"></div>
+    </div>
+
+    <!-- Démarque par type -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#fb923c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">⚠️ Évolution Démarque</div>
+      <canvas id="statsChartDemarque" height="100" style="width:100%;"></canvas>
+      <div id="statsDemarqueResume" style="margin-top:10px;font-size:11px;color:var(--t2);text-align:center;"></div>
+    </div>
+
+    <!-- Ruptures -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:800;color:#a855f7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">📦 Évolution Ruptures</div>
+      <canvas id="statsChartRuptures" height="100" style="width:100%;"></canvas>
+      <div id="statsRupturesResume" style="margin-top:10px;font-size:11px;color:var(--t2);text-align:center;"></div>
+    </div>
+
+    <!-- Récapitulatif chiffré -->
+    <div style="background:var(--card);border-radius:14px;border:1px solid var(--bord);padding:14px;">
+      <div style="font-size:11px;font-weight:800;color:var(--t1);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📊 Récapitulatif Période</div>
+      <div id="statsRecap" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MESSAGERIE ÉQUIPE ══ -->
+<div class="pg" id="pgMessagerie">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">💬 Messagerie Équipe</div>
+    <div style="width:50px;"></div>
+  </div>
+  <div class="scroll" style="padding:10px 14px 0;" id="msgList"></div>
+  <!-- Input zone -->
+  <div style="padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--bord);flex-shrink:0;">
+    <div style="display:flex;gap:8px;align-items:flex-end;">
+      <textarea id="msgInput" class="fi" placeholder="Écrire un message, note, instruction..." style="flex:1;min-height:44px;max-height:120px;resize:none;padding:10px 14px;font-size:13px;" rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';"></textarea>
+      <button onclick="sendMsg()" style="background:var(--blue);border:none;color:#fff;width:44px;height:44px;border-radius:12px;font-size:18px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;">›</button>
+    </div>
+    <!-- Raccourcis -->
+    <div style="display:flex;gap:6px;margin-top:8px;overflow-x:auto;padding-bottom:2px;">
+      <button onclick="insertMsgTemplate('⚠️ Alerte : ')" style="background:rgba(251,146,60,.15);border:1px solid rgba(251,146,60,.3);color:#fb923c;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">⚠️ Alerte</button>
+      <button onclick="insertMsgTemplate('✅ Fait : ')" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">✅ Fait</button>
+      <button onclick="insertMsgTemplate('📌 À faire : ')" style="background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);color:#60a5fa;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">📌 À faire</button>
+      <button onclick="insertMsgTemplate('🔴 Urgent : ')" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#ef4444;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">🔴 Urgent</button>
+      <button onclick="insertMsgTemplate('📦 Rupture : ')" style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);color:#a855f7;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:'Space Grotesk',sans-serif;">📦 Rupture</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- ══ TACHES ══ -->
 <div class="pg" id="pgTaches">
@@ -2878,14 +3049,14 @@ function goPage(p){
   _curPage=p;
   document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p])document.getElementById(map[p]).classList.add('on');
   if(nav[p])document.getElementById(nav[p]).classList.add('on');
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home')renderHome();
   if(p==='taches')renderTaches();
@@ -2924,6 +3095,10 @@ function goPage(p){
   if(p==='timeblocking')renderTimeblocking();
   if(p==='documents')renderDocs();
   if(p==='resume')renderResume();
+  if(p==='dashboard')renderDashboard();
+  if(p==='checklist')renderChecklist();
+  if(p==='stats')renderStats();
+  if(p==='messagerie')renderMessagerie();
   if(p==='auditRayon')renderAudit();
   if(p==='objectifsKpi')renderKpi();
   if(p==='ruptures')renderRuptures();
@@ -3150,16 +3325,17 @@ function closeDr(){document.getElementById('ov').classList.remove('on');document
 function renderDr(){
   const el=document.getElementById('drbody');
   if(_dm==='menu')el.innerHTML=[
+    {ico:'📁',name:'Documents téléchargés',a:"closeDr();goPage('documents')"},
+    {ico:'🌙',name:'Résumé de la journée',a:"closeDr();goPage('resume')"},
+    {ico:'📈',name:'Statistiques & Historique',a:"closeDr();goPage('stats')"},
+    {ico:'📊',name:'Tableau de Bord KPI',a:"closeDr();goPage('dashboard')"},
+    {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
+    {ico:'🏆',name:'Excellence Opérationnelle',a:"closeDr();goPage('excellence')"},
     {ico:'📋',name:'Mes Tâches',a:"closeDr();goPage('taches')"},
     {ico:'📅',name:'Contrôle DLC',a:"closeDr();goPage('dlc')"},
     {ico:'📊',name:'Excel',a:"closeDr();goPage('chiffres')"},
     {ico:'🔔',name:'Notifications',a:"openDr('notifs')"},
     {ico:'👤',name:'Mon Profil',a:"openPM();closeDr()"},
-    
-    {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
-    {ico:'🌙',name:'Résumé de la journée',a:"closeDr();goPage('resume')"},
-    {ico:'📁',name:'Documents téléchargés',a:"closeDr();goPage('documents')"},
-    {ico:'🏆',name:'Excellence Opérationnelle',a:"closeDr();goPage('excellence')"},
     {ico:'⚙️',name:'Réglages',a:"openDr('settings')"},
   ].map(x=>`<div class="dr-item" onclick="${x.a}"><div class="dr-ico">${x.ico}</div><div><div class="dr-name">${x.name}</div></div><div style="margin-left:auto;color:var(--t3)">›</div></div>`).join('');
   else if(_dm==='notifs')el.innerHTML=notifs.length?`<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><span style="font-size:11px;color:var(--blue);cursor:pointer;font-weight:700" onclick="clearN()">Tout effacer</span></div>`+notifs.map(n=>`<div class="nitem"><div class="nico" style="background:rgba(251,191,36,.15)">${{bell:'🔔',done:'✅',info:'ℹ️'}[n.type]||'🔔'}</div><div style="flex:1"><div class="ntit">${n.tit}</div><div class="nbod">${n.body}</div><div class="nts">${n.ts}</div></div><div style="cursor:pointer;color:var(--t3);font-size:18px" onclick="dimN('${n.id}')">×</div></div>`).join(''):'<div style="text-align:center;padding:30px;color:var(--t3)"><div style="font-size:32px;margin-bottom:8px">🔕</div><div style="font-size:12px;font-weight:700">Aucune notification</div></div>';
@@ -6344,6 +6520,329 @@ function exportResumePDF(){
 
   _dlPDF(html,'resume_journee_'+td+'.html');
 }
+
+
+// ════════════════════════════════════════════════
+// DASHBOARD KPI
+// ════════════════════════════════════════════════
+function renderDashboard(){
+  var n=new Date();
+  var MFR=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  var DF=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  var dd=document.getElementById('dashDate');
+  if(dd)dd.textContent=DF[n.getDay()]+' '+n.getDate()+' '+MFR[n.getMonth()]+' '+n.getFullYear();
+  var dp=document.getElementById('dashProf');if(dp)dp.textContent=prof.name||'';
+  var ds=document.getElementById('dashStore');if(ds)ds.textContent=prof.store||'';
+
+  // Tâches
+  var td=tstr();var tt=getTT();
+  var done=tt.filter(function(t){return comps[td]&&comps[td][t.id];}).length;
+  var total=tt.length;
+  var pct=total?Math.round(done/total*100):0;
+  var dashTD=document.getElementById('dashTachesDone');if(dashTD)dashTD.textContent=done+'/'+total;
+  var dashBar=document.getElementById('dashTachesBar');if(dashBar){dashBar.style.width=pct+'%';dashBar.style.background=pct>=80?'#22c55e':pct>=50?'#f59e0b':'#ef4444';}
+  var dashPct=document.getElementById('dashTachesPct');if(dashPct)dashPct.textContent=pct+'% accompli';
+
+  // DLC critiques
+  var dlcItems=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+  var now2=new Date();now2.setHours(0,0,0,0);
+  var critiques=dlcItems.filter(function(i){var d=new Date(i.date);d.setHours(0,0,0,0);return Math.round((d-now2)/86400000)<=2;});
+  var dashDlc=document.getElementById('dashDlcCount');if(dashDlc)dashDlc.textContent=critiques.length;
+  var dashDlcL=document.getElementById('dashDlcList');if(dashDlcL)dashDlcL.textContent=critiques.slice(0,3).map(function(i){return '• '+i.name;}).join('\n')||'Aucun produit critique';
+
+  // Démarque
+  var dmq=loadDemarque().filter(function(r){return r.date===td;});
+  var dashDmq=document.getElementById('dashDemarqueTotal');if(dashDmq)dashDmq.textContent=dmq.length+' constat'+(dmq.length>1?'s':'');
+  var dashDmqS=document.getElementById('dashDemarqueSub');if(dashDmqS)dashDmqS.textContent=dmq.reduce(function(s,r){return s+(r.montant||0);},0).toFixed(2)+' TND aujourd\'hui';
+
+  // Ruptures
+  var d_adv=loadAdv();
+  var rupt=(d_adv.ruptures||[]).filter(function(r){return r.date===td;});
+  var dashR=document.getElementById('dashRuptCount');if(dashR)dashR.textContent=rupt.length;
+  var dashRS=document.getElementById('dashRuptSub');if(dashRS)dashRS.textContent=rupt.slice(0,2).map(function(r){return r.produit;}).join(', ')||(rupt.length===0?'Aucune rupture':'');
+
+  // Checklist
+  var cl=loadChecklist();
+  var tab=_checkTab||'ouv';
+  var items=CHECKLIST_ITEMS[tab]||[];
+  var done2=(cl[td]&&cl[td][tab])||{};
+  var doneCount=Object.keys(done2).filter(function(k){return done2[k];}).length;
+  var pct2=items.length?Math.round(doneCount/items.length*100):0;
+  var dashCP=document.getElementById('dashCheckPct');if(dashCP)dashCP.textContent=pct2+'%';
+  var dashCB=document.getElementById('dashCheckBar');if(dashCB){dashCB.style.width=pct2+'%';dashCB.style.background=pct2===100?'#22c55e':'#fbbf24';}
+  var dashCS=document.getElementById('dashCheckStatus');if(dashCS)dashCS.textContent=doneCount+'/'+items.length+' points validés — Ouverture: '+Math.round(doneCount/Math.max(items.length,1)*100)+'%';
+
+  // Alertes
+  var alertes=[];
+  if(critiques.length)alertes.push({col:'#ef4444',txt:'🔴 '+critiques.length+' produit(s) DLC critique(s)'});
+  var nc=(d_adv.nonConf||[]).filter(function(r){return r.date===td;});
+  if(nc.length)alertes.push({col:'#ef4444',txt:'🛑 '+nc.length+' non-conformité(s)'});
+  if(rupt.length)alertes.push({col:'#a855f7',txt:'📦 '+rupt.length+' rupture(s) signalée(s)'});
+  if(dmq.length)alertes.push({col:'#fb923c',txt:'⚠️ '+dmq.length+' constat(s) démarque'});
+  var dashA=document.getElementById('dashAlertes');
+  if(dashA)dashA.innerHTML=alertes.length?alertes.map(function(a){return '<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px;font-weight:700;color:'+a.col+';">'+a.txt+'</div>';}).join(''):'<div style="color:#22c55e;font-size:12px;font-weight:700;">✅ Aucune alerte — tout est en ordre</div>';
+
+  // Équipe
+  var eq=loadEQ();var pers=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  var conges=(eq.conges||[]).filter(function(c){return c.date===td;});
+  var dashEq=document.getElementById('dashEquipe');
+  if(dashEq){
+    if(pers.length){
+      var absents=conges.map(function(c){return c.nom;});
+      var presents=pers.filter(function(p){return absents.indexOf(p.nom)<0;});
+      dashEq.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;">'
+        +presents.slice(0,6).map(function(p){return '<span style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">'+p.nom+'</span>';}).join('')
+        +(absents.length?'<span style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#ef4444;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;">🏖️ '+absents.join(', ')+'</span>':'')
+        +'</div>';
+    } else {
+      dashEq.innerHTML='<div style="font-size:12px;color:rgba(255,255,255,.4);">Configurer le personnel dans Liste Personnel</div>';
+    }
+  }
+
+  // Réunions
+  var reunions=JSON.parse(localStorage.getItem(SK+'_reunions')||'[]');
+  var todayReunions=reunions.filter(function(r){return r.date===td;});
+  var dashReu=document.getElementById('dashReunions');
+  if(dashReu)dashReu.innerHTML=todayReunions.length
+    ?todayReunions.map(function(r){return '<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);"><div style="font-size:13px;font-weight:700;color:var(--t1);">'+r.titre+'</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">⏰ '+(r.heure||'—')+'</div></div>';}).join('')
+    :'<div style="font-size:12px;color:rgba(255,255,255,.4);">Aucune réunion prévue aujourd\'hui</div>';
+}
+
+// ════════════════════════════════════════════════
+// CHECKLIST OUVERTURE / FERMETURE
+// ════════════════════════════════════════════════
+var CHECKLIST_ITEMS={
+  ouv:[
+    {id:'o1',label:'Allumer les éclairages et équipements',cat:'🔌 Installation'},
+    {id:'o2',label:'Vérifier la propreté générale du rayon',cat:'🔌 Installation'},
+    {id:'o3',label:'Contrôler les températures frais/surgelés',cat:'🌡️ Température'},
+    {id:'o4',label:'Relever les températures et noter',cat:'🌡️ Température'},
+    {id:'o5',label:'Contrôler les DLC des produits en rayon',cat:'📅 DLC'},
+    {id:'o6',label:'Retirer les produits DLC dépassée',cat:'📅 DLC'},
+    {id:'o7',label:'Faire la rotation des produits (FIFO)',cat:'📦 Mise en rayon'},
+    {id:'o8',label:'Réassortir les ruptures constatées',cat:'📦 Mise en rayon'},
+    {id:'o9',label:'Vérifier l\'étiquetage et les prix',cat:'🏷️ Étiquetage'},
+    {id:'o10',label:'Contrôler la signalétique promotionnelle',cat:'🏷️ Étiquetage'},
+    {id:'o11',label:'Briefing équipe effectué',cat:'👥 Équipe'},
+    {id:'o12',label:'Planning du jour communiqué',cat:'👥 Équipe'},
+  ],
+  ferm:[
+    {id:'f1',label:'Comptage et rangement de la caisse',cat:'💰 Caisse'},
+    {id:'f2',label:'Vérification des stocks bas à commander',cat:'📦 Stock'},
+    {id:'f3',label:'Enregistrer les démarques du jour',cat:'📊 Bilan'},
+    {id:'f4',label:'Enregistrer les ruptures du jour',cat:'📊 Bilan'},
+    {id:'f5',label:'Remplir le cahier de main courante',cat:'📊 Bilan'},
+    {id:'f6',label:'Contrôle température finale frais',cat:'🌡️ Température'},
+    {id:'f7',label:'Vérifier sécurité et fermeture des frigos',cat:'🔒 Sécurité'},
+    {id:'f8',label:'Éteindre les équipements non essentiels',cat:'🔒 Sécurité'},
+    {id:'f9',label:'Nettoyer et ranger la zone de travail',cat:'🧹 Nettoyage'},
+    {id:'f10',label:'Rapport de fin de journée fait',cat:'📊 Bilan'},
+  ]
+};
+var _checkTab='ouv';
+
+function loadChecklist(){
+  return JSON.parse(localStorage.getItem(SK+'_checklist')||'{}');
+}
+function saveChecklist(d){localStorage.setItem(SK+'_checklist',JSON.stringify(d));}
+
+function setCheckTab(tab,btn){
+  _checkTab=tab;
+  document.querySelectorAll('[data-tab]').forEach(function(b){
+    var on=b.dataset.tab===tab;
+    b.style.color=on?'var(--blue)':'var(--t2)';
+    b.style.fontWeight=on?'800':'700';
+    b.style.borderBottomColor=on?'var(--blue)':'transparent';
+  });
+  renderChecklist();
+}
+
+function renderChecklist(){
+  var td=tstr();
+  var cl=loadChecklist();
+  var done=(cl[td]&&cl[td][_checkTab])||{};
+  var items=CHECKLIST_ITEMS[_checkTab]||[];
+  var doneCount=items.filter(function(i){return done[i.id];}).length;
+  var pct=items.length?Math.round(doneCount/items.length*100):0;
+  var lbl=document.getElementById('checkProgressLabel');if(lbl)lbl.textContent=doneCount+' / '+items.length+' validées';
+  var pctEl=document.getElementById('checkProgressPct');if(pctEl){pctEl.textContent=pct+'%';pctEl.style.color=pct===100?'#22c55e':pct>=50?'#f59e0b':'var(--blue)';}
+  var bar=document.getElementById('checkProgressBar');if(bar){bar.style.width=pct+'%';bar.style.background=pct===100?'#22c55e':pct>=50?'#f59e0b':'var(--blue)';}
+
+  // Group by category
+  var cats={};
+  items.forEach(function(item){
+    if(!cats[item.cat])cats[item.cat]=[];
+    cats[item.cat].push(item);
+  });
+
+  var el=document.getElementById('checklistItems');if(!el)return;
+  var html='';
+  Object.keys(cats).forEach(function(cat){
+    html+='<div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-top:8px;margin-bottom:4px;padding:0 2px;">'+cat+'</div>';
+    cats[cat].forEach(function(item){
+      var isDone=!!done[item.id];
+      html+='<div onclick="toggleCheck(\''+item.id+'\')" style="display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:13px 14px;cursor:pointer;border:1px solid '+(isDone?'rgba(34,197,94,.3)':'var(--bord)')+';">'
+        +'<div style="width:22px;height:22px;border-radius:50%;border:2px solid '+(isDone?'#22c55e':'var(--t3)') +';background:'+(isDone?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+        +(isDone?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>':'')
+        +'</div>'
+        +'<div style="flex:1;font-size:13px;font-weight:'+(isDone?'600':'700')+';color:'+(isDone?'var(--t2)':'var(--t1)')+';'+(isDone?'text-decoration:line-through;':'')+'">'+item.label+'</div>'
+        +'</div>';
+    });
+  });
+  el.innerHTML=html;
+}
+
+function toggleCheck(itemId){
+  var td=tstr();
+  var cl=loadChecklist();
+  if(!cl[td])cl[td]={};
+  if(!cl[td][_checkTab])cl[td][_checkTab]={};
+  cl[td][_checkTab][itemId]=!cl[td][_checkTab][itemId];
+  saveChecklist(cl);
+  renderChecklist();
+}
+
+// ════════════════════════════════════════════════
+// STATISTIQUES
+// ════════════════════════════════════════════════
+var _statPeriod='7';
+var _chartTaches=null;var _chartDemarque=null;var _chartRuptures=null;
+
+function setStatPeriod(p,btn){
+  _statPeriod=p;
+  document.querySelectorAll('[data-sp]').forEach(function(b){
+    var on=b.dataset.sp===p;
+    b.style.color=on?'var(--blue)':'var(--t2)';
+    b.style.fontWeight=on?'800':'700';
+    b.style.borderBottomColor=on?'var(--blue)':'transparent';
+  });
+  renderStats();
+}
+
+function getLast(n){
+  var dates=[];var d=new Date();
+  for(var i=n-1;i>=0;i--){var dd=new Date(d);dd.setDate(d.getDate()-i);var s=dd.getFullYear()+'-'+String(dd.getMonth()+1).padStart(2,'0')+'-'+String(dd.getDate()).padStart(2,'0');dates.push(s);}
+  return dates;
+}
+
+function renderStats(){
+  var days=parseInt(_statPeriod);
+  var dates=getLast(days);
+  var labels=dates.map(function(d){var p=d.split('-');return p[2]+'/'+p[1];});
+
+  // Data tâches
+  var tacheData=dates.map(function(td){
+    var tt=getTT();
+    var done=(tt.filter(function(t){return comps[td]&&comps[td][t.id];})).length;
+    return tt.length?Math.round(done/tt.length*100):0;
+  });
+  var avgTaches=tacheData.length?Math.round(tacheData.reduce(function(a,b){return a+b;},0)/tacheData.length):0;
+  var srT=document.getElementById('statsTachesResume');if(srT)srT.textContent='Moyenne: '+avgTaches+'% — '+Math.max.apply(null,tacheData)+'% max — '+Math.min.apply(null,tacheData)+'% min';
+
+  // Data démarque
+  var dmqData=dates.map(function(td){return loadDemarque().filter(function(r){return r.date===td;}).length;});
+  var totalDmq=dmqData.reduce(function(a,b){return a+b;},0);
+  var srD=document.getElementById('statsDemarqueResume');if(srD)srD.textContent='Total: '+totalDmq+' constat(s) sur '+days+' jours';
+
+  // Data ruptures
+  var d_adv=loadAdv();
+  var ruptData=dates.map(function(td){return (d_adv.ruptures||[]).filter(function(r){return r.date===td;}).length;});
+  var totalRupt=ruptData.reduce(function(a,b){return a+b;},0);
+  var srR=document.getElementById('statsRupturesResume');if(srR)srR.textContent='Total: '+totalRupt+' rupture(s) sur '+days+' jours';
+
+  // Draw charts
+  function mkChart(id,existing,data,color,label,type){
+    var el=document.getElementById(id);if(!el)return null;
+    if(existing){existing.destroy();}
+    return new Chart(el,{
+      type:type||'bar',
+      data:{labels:labels,datasets:[{label:label,data:data,backgroundColor:color+'33',borderColor:color,borderWidth:2,borderRadius:4,tension:.4,fill:true,pointRadius:3,pointBackgroundColor:color}]},
+      options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:type==='line'?100:undefined,grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.4)',font:{size:10}}},x:{grid:{display:false},ticks:{color:'rgba(255,255,255,.4)',font:{size:9}}}}}
+    });
+  }
+  _chartTaches=mkChart('statsChartTaches',_chartTaches,tacheData,'#22c55e','Taux (%)','line');
+  _chartDemarque=mkChart('statsChartDemarque',_chartDemarque,dmqData,'#fb923c','Constats','bar');
+  _chartRuptures=mkChart('statsChartRuptures',_chartRuptures,ruptData,'#a855f7','Ruptures','bar');
+
+  // Recap
+  var recap=document.getElementById('statsRecap');
+  if(recap){
+    function box(label,val,col){return '<div style="background:'+col+'18;border:1px solid '+col+'33;border-radius:12px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:900;color:'+col+';">'+val+'</div><div style="font-size:10px;color:var(--t2);margin-top:3px;">'+label+'</div></div>';}
+    recap.innerHTML=
+      box('Taux moyen tâches',avgTaches+'%','#22c55e')
+      +box('Démarques',totalDmq,'#fb923c')
+      +box('Ruptures',totalRupt,'#a855f7')
+      +box('Jours analysés',days,'#60a5fa');
+  }
+}
+
+// ════════════════════════════════════════════════
+// MESSAGERIE ÉQUIPE
+// ════════════════════════════════════════════════
+var SK_MSG=SK+'_msgs';
+
+function loadMsgs(){return JSON.parse(localStorage.getItem(SK_MSG)||'[]');}
+function saveMsgs(d){localStorage.setItem(SK_MSG,JSON.stringify(d));}
+
+function renderMessagerie(){
+  var msgs=loadMsgs();
+  var el=document.getElementById('msgList');if(!el)return;
+  if(!msgs.length){
+    el.innerHTML='<div style="text-align:center;padding:50px 20px;color:var(--t2);"><div style="font-size:48px;margin-bottom:12px;">💬</div><div style="font-size:14px;font-weight:700;">Aucun message</div><div style="font-size:12px;margin-top:6px;opacity:.6;">Commencez à communiquer avec votre équipe</div></div>';
+    return;
+  }
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  var lastDate='';
+  el.innerHTML=msgs.map(function(m){
+    var html='';
+    if(m.date!==lastDate){
+      lastDate=m.date;
+      var d=m.date.split('-');
+      html+='<div style="text-align:center;margin:12px 0 8px;"><span style="background:var(--card);border:1px solid var(--bord);border-radius:20px;padding:3px 12px;font-size:10px;font-weight:700;color:var(--t2);">'+d[2]+' '+MFR[parseInt(d[1])-1]+' '+d[0]+'</span></div>';
+    }
+    var isMe=m.author===(prof.name||'Moi');
+    var tagColors={'⚠️ Alerte':'#fb923c','✅ Fait':'#22c55e','📌 À faire':'#60a5fa','🔴 Urgent':'#ef4444','📦 Rupture':'#a855f7'};
+    var tagCol='var(--blue)';
+    Object.keys(tagColors).forEach(function(k){if(m.text.startsWith(k))tagCol=tagColors[k];});
+    html+='<div style="display:flex;flex-direction:column;'+(isMe?'align-items:flex-end':'align-items:flex-start')+';margin-bottom:8px;padding:0 2px;">'
+      +(isMe?'':'<div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:3px;padding-left:4px;">'+m.author+'</div>')
+      +'<div style="max-width:80%;background:'+(isMe?'var(--blue)':'var(--card)')+';border:1px solid '+(isMe?'var(--blue)':'var(--bord)')+';border-radius:'+(isMe?'16px 4px 16px 16px':'4px 16px 16px 16px')+';padding:10px 14px;">'
+      +'<div style="font-size:13px;font-weight:600;color:#fff;line-height:1.4;">'+m.text+'</div>'
+      +'</div>'
+      +'<div style="font-size:9px;color:var(--t3);margin-top:3px;padding:0 4px;">'+m.time+'</div>'
+      +'</div>';
+    return html;
+  }).join('');
+  // Scroll to bottom
+  setTimeout(function(){el.scrollTop=el.scrollHeight;},50);
+  // Mark as read
+  updateMsgBadge();
+}
+
+function sendMsg(){
+  var inp=document.getElementById('msgInput');if(!inp)return;
+  var text=inp.value.trim();if(!text)return;
+  var n=new Date();
+  var msgs=loadMsgs();
+  msgs.push({id:Date.now().toString(36),text:text,author:prof.name||'Manager',date:tstr(),time:String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'),read:true});
+  saveMsgs(msgs);
+  inp.value='';inp.style.height='auto';
+  renderMessagerie();
+}
+
+function insertMsgTemplate(tpl){
+  var inp=document.getElementById('msgInput');if(!inp)return;
+  inp.value=tpl;inp.focus();
+  inp.style.height='auto';inp.style.height=inp.scrollHeight+'px';
+}
+
+function updateMsgBadge(){
+  var msgs=loadMsgs();
+  var unread=msgs.filter(function(m){return !m.read;}).length;
+  var b1=document.getElementById('msgBadgeHome');
+  if(b1){if(unread>0){b1.textContent=unread;b1.style.display='block';}else{b1.style.display='none';}}
+}
+
 
 window.addEventListener('DOMContentLoaded',()=>{
   loadTheme();load();initDef();unlockA();
