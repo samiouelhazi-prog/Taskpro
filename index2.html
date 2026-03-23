@@ -54,6 +54,121 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
 .scroll::-webkit-scrollbar{display:none;}
 
+/* ══════════════ ANIMATIONS ══════════════ */
+
+/* — Keyframes — */
+@keyframes fadeSlideIn{
+  from{opacity:0;transform:translateX(22px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes fadeSlideUp{
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+@keyframes popIn{
+  0%{opacity:0;transform:scale(.9);}
+  70%{transform:scale(1.03);}
+  100%{opacity:1;transform:scale(1);}
+}
+@keyframes slideInBottom{
+  from{opacity:0;transform:translateY(32px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes shimmer{
+  0%{background-position:-200% 0;}
+  100%{background-position:200% 0;}
+}
+
+/* — Page entrance — */
+.pg.on{
+  animation:fadeSlideIn .28s cubic-bezier(.25,.46,.45,.94) both;
+}
+
+/* — Topbar fade — */
+.pg.on .pg-topbar,
+.pg.on .topbar{
+  animation:fadeIn .22s ease both;
+}
+
+/* — Scroll content slide up — */
+.pg.on .scroll > *{
+  animation:fadeSlideUp .32s cubic-bezier(.25,.46,.45,.94) both;
+}
+
+/* — Cards stagger (tiles tâches) — */
+#pgTaches .scroll > div > div:nth-child(1){animation:slideInBottom .25s .04s both;}
+#pgTaches .scroll > div > div:nth-child(2){animation:slideInBottom .25s .09s both;}
+#pgTaches .scroll > div > div:nth-child(3){animation:slideInBottom .25s .14s both;}
+#pgTaches .scroll > div > div:nth-child(4){animation:slideInBottom .25s .18s both;}
+#pgTaches .scroll > div > div:nth-child(5){animation:slideInBottom .25s .22s both;}
+#pgTaches .scroll > div > div:nth-child(6){animation:slideInBottom .25s .26s both;}
+#pgTaches .scroll > div > div:nth-child(7){animation:slideInBottom .25s .30s both;}
+#pgTaches .scroll > div > div:nth-child(8){animation:slideInBottom .25s .34s both;}
+
+/* — Swipe cards stagger — */
+.swipe-card.top{animation:slideInBottom .26s .05s both;}
+.swipe-card.mid{animation:slideInBottom .26s .12s both;}
+.swipe-card.bot{animation:slideInBottom .26s .19s both;}
+
+/* — Bottom nav entrance — */
+.bnav{animation:fadeIn .35s .1s both;}
+
+/* — Modal / form pop in — */
+.msh,
+[id$="Form"]:not([style*="display:none"]),
+[id$="Modal"]:not([style*="display:none"]){
+  animation:slideInBottom .28s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* — Boutons : press effect — */
+button:active:not([disabled]),
+.ic-btn:active,
+[onclick]:active{
+  transform:scale(.93);
+  transition:transform .08s ease;
+}
+
+/* — Cards hover shimmer (subtle) — */
+.tli{transition:transform .15s, box-shadow .2s;}
+.tli:active{transform:scale(.98);box-shadow:0 0 0 2px rgba(59,130,246,.3);}
+
+/* — Notifications pop — */
+.nitem{
+  animation:fadeSlideUp .22s ease both;
+}
+
+/* — Focus card pulse (subtle) — */
+.focus-card{
+  animation:fadeIn .4s ease both;
+}
+
+/* — Drawer slide in — */
+.drawer.on{
+  animation:slideInBottom .3s cubic-bezier(.25,.46,.45,.94) both;
+}
+
+/* — Avatar pop — */
+.av{transition:transform .2s cubic-bezier(.34,1.56,.64,1);}
+.av:active{transform:scale(.88);}
+
+/* — Stats mini cards — */
+.stats-mini{
+  animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both;
+}
+
+/* — Respect prefers-reduced-motion — */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+
 /* ══════════════ TOPBAR ══════════════ */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;}
 .tb-left{display:flex;align-items:center;gap:10px;}
@@ -1528,35 +1643,78 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <div id="pgHygiene" class="pg">
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div class="pg-title">🧹 Hygiène</div>
-    <button onclick="toggleHygieneAdd()" id="hygAddBtn" style="background:#059669;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Point</button>
+    <div class="pg-title">🧹 Hygiène & Sécurité</div>
+    <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:12px 12px 90px;">
-    <div id="hygieneDate" style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:10px;padding:8px;background:var(--card);border-radius:10px;"></div>
 
-    <!-- ADD FORM -->
-    <div id="hygAddForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(5,150,105,.3);">
-      <div style="font-size:12px;font-weight:800;color:#34d399;margin-bottom:8px;">+ Nouveau point de contrôle</div>
-      <div style="display:flex;gap:8px;">
-        <input id="hygNewItem" class="fi" placeholder="Ex: Vérifier températures vitrine..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygieneItem()" />
-        <button onclick="addHygieneItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;">✓ OK</button>
-      </div>
+    <!-- Date du jour -->
+    <div id="hygieneDate" style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:12px;padding:8px;background:var(--card);border-radius:10px;"></div>
+
+    <!-- ══ TABS ══ -->
+    <div style="display:flex;gap:6px;margin-bottom:14px;">
+      <button onclick="setHygieneTab('quotidien')" id="hygTab_quotidien" style="flex:1;background:#059669;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🌅 Contrôle Quotidien</button>
+      <button onclick="setHygieneTab('journee')" id="hygTab_journee" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🏆 Journée Hygiène</button>
     </div>
 
-    <!-- SCORE -->
-    <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
-      <div style="flex:1;">
-        <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score conformité</div>
-        <div id="hygieneBar" style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
-          <div id="hygieneBarFill" style="height:6px;background:#22c55e;border-radius:3px;width:0%;transition:width .4s;"></div>
+    <!-- ══ SECTION QUOTIDIEN ══ -->
+    <div id="hygSec_quotidien">
+      <!-- Score -->
+      <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
+        <div style="flex:1;">
+          <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score conformité quotidien</div>
+          <div id="hygieneBar" style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
+            <div id="hygieneBarFill" style="height:6px;background:#22c55e;border-radius:3px;width:0%;transition:width .4s;"></div>
+          </div>
+        </div>
+        <div id="hygieneScore" style="font-size:22px;font-weight:900;color:#22c55e;min-width:44px;text-align:right;">—</div>
+      </div>
+
+      <!-- Add form quotidien -->
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <input id="hygNewItem" class="fi" placeholder="+ Ajouter un point de contrôle..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygieneItem()"/>
+        <button onclick="addHygieneItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;flex-shrink:0;">✓</button>
+      </div>
+
+      <!-- Checklist quotidien -->
+      <div id="hygieneChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="hygieneEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point de contrôle</div>
+    </div>
+
+    <!-- ══ SECTION JOURNÉE HYGIÈNE ══ -->
+    <div id="hygSec_journee" style="display:none;">
+
+      <!-- Info bannière -->
+      <div style="background:linear-gradient(135deg,rgba(5,150,105,.15),rgba(4,120,87,.08));border:1px solid rgba(5,150,105,.3);border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">
+        <div style="font-size:28px;">🏆</div>
+        <div>
+          <div style="font-size:12px;font-weight:900;color:#34d399;margin-bottom:2px;">Journée Hygiène — Mardi</div>
+          <div style="font-size:11px;color:var(--t2);">Campagne de nettoyage complète et approfondie · Chaque mardi</div>
         </div>
       </div>
-      <div id="hygieneScore" style="font-size:22px;font-weight:900;color:#22c55e;min-width:44px;text-align:right;">—</div>
+
+      <!-- Score journée -->
+      <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
+        <div style="flex:1;">
+          <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score Journée Hygiène</div>
+          <div style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
+            <div id="hygJBar" style="height:6px;background:#10b981;border-radius:3px;width:0%;transition:width .4s;"></div>
+          </div>
+        </div>
+        <div id="hygJScore" style="font-size:22px;font-weight:900;color:#10b981;min-width:44px;text-align:right;">—</div>
+      </div>
+
+      <!-- Add form journée -->
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <input id="hygJNewItem" class="fi" placeholder="+ Ajouter un point journée hygiène..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygJItem()"/>
+        <button onclick="addHygJItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;flex-shrink:0;">✓</button>
+      </div>
+
+      <!-- Checklist journée -->
+      <div id="hygJChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
+      <div id="hygJEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point</div>
     </div>
 
-    <!-- CHECKLIST -->
-    <div id="hygieneChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
-    <div id="hygieneEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point — appuyez sur + Point</div>
   </div>
 </div>
 
@@ -1719,10 +1877,129 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <div class="pg" id="pgDemarque">
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('optimisation')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Optim.</div>
-    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📉 Démarque</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">📉 Lutte contre la Démarque</div>
     <button onclick="openDemarqueAdd()" style="background:#c2410c;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- ═══ HERO DÉFINITION ═══ -->
+    <div style="background:linear-gradient(135deg,rgba(194,65,12,.18),rgba(124,45,18,.1));border:1px solid rgba(249,115,22,.35);border-radius:18px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.07;line-height:1;">📉</div>
+      <div style="font-size:13px;font-weight:900;color:#fb923c;font-family:'Syne';margin-bottom:8px;">C'est quoi la Démarque ?</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.75;margin-bottom:10px;">La démarque représente la <b style="color:var(--t1);">différence entre le stock théorique</b> (ce que le système indique) et le <b style="color:var(--t1);">stock réel</b> (ce qui est physiquement présent). C'est une <b style="color:#fb923c;">perte directe de rentabilité</b> pour le magasin.</div>
+      <!-- Formule visuelle -->
+      <div style="display:flex;align-items:center;gap:6px;background:rgba(0,0,0,.2);border-radius:12px;padding:10px;justify-content:center;flex-wrap:wrap;">
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">Stock théorique</div><div style="font-size:16px;font-weight:900;color:#60a5fa;">100</div></div>
+        <div style="font-size:18px;color:var(--t2);">−</div>
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">Stock réel</div><div style="font-size:16px;font-weight:900;color:#4ade80;">94</div></div>
+        <div style="font-size:18px;color:var(--t2);">=</div>
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">Démarque</div><div style="font-size:16px;font-weight:900;color:#f87171;">6 unités perdues</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ CONNUE vs INCONNUE ═══ -->
+    <div style="font-size:10px;font-weight:900;color:#fb923c;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">⚖️ Les 2 Types de Démarque</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+
+      <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:12px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(34,197,94,.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✅</div>
+          <div style="font-size:12px;font-weight:900;color:#4ade80;">Connue</div>
+        </div>
+        <div style="font-size:10px;color:var(--t2);line-height:1.6;margin-bottom:8px;">Pertes <b style="color:var(--t1);">identifiées et enregistrées</b> au moment où elles surviennent.</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="background:rgba(34,197,94,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#4ade80;font-weight:700;">📅 DLC dépassée</div>
+          <div style="background:rgba(34,197,94,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#4ade80;font-weight:700;">💔 Casse accidentelle</div>
+          <div style="background:rgba(34,197,94,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#4ade80;font-weight:700;">🔄 Article défectueux retourné</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:14px;padding:12px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">⚠️</div>
+          <div style="font-size:12px;font-weight:900;color:#f87171;">Inconnue</div>
+        </div>
+        <div style="font-size:10px;color:var(--t2);line-height:1.6;margin-bottom:8px;"><b style="color:#f87171;">La plus dangereuse</b> — détectée uniquement à l'inventaire.</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <div style="background:rgba(239,68,68,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#f87171;font-weight:700;">🦹 Vol client / employé</div>
+          <div style="background:rgba(239,68,68,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#f87171;font-weight:700;">📦 Erreur livraison non signalée</div>
+          <div style="background:rgba(239,68,68,.1);border-radius:7px;padding:5px 8px;font-size:10px;color:#f87171;font-weight:700;">🏧 Erreur de caisse</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ INDICATEUR TAUX ═══ -->
+    <div style="font-size:10px;font-weight:900;color:#fb923c;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">📊 Calculer son Taux de Démarque</div>
+    <div style="background:var(--s2);border:1px solid rgba(249,115,22,.3);border-radius:14px;padding:14px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;background:rgba(0,0,0,.15);border-radius:10px;padding:10px;">
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">Démarque (TND)</div><div style="font-size:14px;font-weight:900;color:#fb923c;">X</div></div>
+        <div style="font-size:18px;color:var(--t2);">÷</div>
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">CA total (TND)</div><div style="font-size:14px;font-weight:900;color:#60a5fa;">Y</div></div>
+        <div style="font-size:18px;color:var(--t2);">×</div>
+        <div style="text-align:center;"><div style="font-size:14px;font-weight:900;color:var(--t2);">100</div></div>
+        <div style="font-size:18px;color:var(--t2);">=</div>
+        <div style="text-align:center;"><div style="font-size:10px;color:var(--t2);">Taux</div><div style="font-size:14px;font-weight:900;color:#4ade80;">%</div></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Démarque (TND)</label>
+          <input id="txDemarque" type="number" class="fi" placeholder="Ex: 350" style="width:100%;box-sizing:border-box;" oninput="calcTaux()"/>
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">CA total (TND)</label>
+          <input id="txCA" type="number" class="fi" placeholder="Ex: 45000" style="width:100%;box-sizing:border-box;" oninput="calcTaux()"/>
+        </div>
+      </div>
+      <div id="txResult" style="display:none;background:rgba(0,0,0,.2);border-radius:10px;padding:10px;text-align:center;">
+        <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Votre taux de démarque :</div>
+        <div id="txResultVal" style="font-size:28px;font-weight:900;font-family:'IBM Plex Mono',monospace;"></div>
+        <div id="txResultMsg" style="font-size:11px;margin-top:4px;"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px;">
+        <div style="background:rgba(34,197,94,.1);border-radius:8px;padding:6px;text-align:center;"><div style="font-size:11px;font-weight:900;color:#4ade80;">&lt; 1%</div><div style="font-size:9px;color:var(--t2);">Excellent</div></div>
+        <div style="background:rgba(245,158,11,.1);border-radius:8px;padding:6px;text-align:center;"><div style="font-size:11px;font-weight:900;color:#fbbf24;">1% – 3%</div><div style="font-size:9px;color:var(--t2);">Acceptable</div></div>
+        <div style="background:rgba(239,68,68,.1);border-radius:8px;padding:6px;text-align:center;"><div style="font-size:11px;font-weight:900;color:#f87171;">&gt; 3%</div><div style="font-size:9px;color:var(--t2);">⚠️ À surveiller</div></div>
+      </div>
+    </div>
+
+    <!-- ═══ 5 RÉFLEXES — CHECKLIST ═══ -->
+    <div style="font-size:10px;font-weight:900;color:#fb923c;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">✅ Les 5 Réflexes Anti-Démarque</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;" id="reflexesList">
+      <div onclick="toggleReflexe(this)" style="background:var(--s1);border:1px solid var(--bord);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:all .2s;">
+        <div class="reflexe-check" style="width:24px;height:24px;border-radius:7px;border:2px solid rgba(249,115,22,.5);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--t1);margin-bottom:3px;">📦 Contrôler les Réceptions</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Vérifier scrupuleusement les quantités livrées et la conformité des produits. Toute erreur non signalée devient de la démarque inconnue.</div></div>
+      </div>
+      <div onclick="toggleReflexe(this)" style="background:var(--s1);border:1px solid var(--bord);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:all .2s;">
+        <div class="reflexe-check" style="width:24px;height:24px;border-radius:7px;border:2px solid rgba(249,115,22,.5);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--t1);margin-bottom:3px;">🔍 Inventaires Tournants</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Effectuer des comptages réguliers par catégorie. Ne pas attendre l'inventaire annuel pour détecter les écarts.</div></div>
+      </div>
+      <div onclick="toggleReflexe(this)" style="background:var(--s1);border:1px solid var(--bord);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:all .2s;">
+        <div class="reflexe-check" style="width:24px;height:24px;border-radius:7px;border:2px solid rgba(249,115,22,.5);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--t1);margin-bottom:3px;">🔄 Appliquer le FIFO</div><div style="font-size:11px;color:var(--t2);line-height:1.5;"><b style="color:#fb923c;">Premier entré = Premier sorti</b>. Les anciens stocks toujours devant. Réduit drastiquement les pertes DLC.</div></div>
+      </div>
+      <div onclick="toggleReflexe(this)" style="background:var(--s1);border:1px solid var(--bord);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:all .2s;">
+        <div class="reflexe-check" style="width:24px;height:24px;border-radius:7px;border:2px solid rgba(249,115,22,.5);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--t1);margin-bottom:3px;">👥 Impliquer l'Équipe</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Développer une culture de responsabilité collective. Chaque employé est un maillon dans la chaîne anti-démarque.</div></div>
+      </div>
+      <div onclick="toggleReflexe(this)" style="background:var(--s1);border:1px solid var(--bord);border-radius:12px;padding:12px;display:flex;align-items:flex-start;gap:10px;cursor:pointer;transition:all .2s;">
+        <div class="reflexe-check" style="width:24px;height:24px;border-radius:7px;border:2px solid rgba(249,115,22,.5);background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;"></div>
+        <div><div style="font-size:12px;font-weight:800;color:var(--t1);margin-bottom:3px;">🛡️ Optimiser l'Implantation</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Placer les produits sensibles sous surveillance visuelle. Améliorer la visibilité des rayons pour limiter la casse et le vol.</div></div>
+      </div>
+    </div>
+
+    <!-- Compteur réflexes -->
+    <div id="reflexesScore" style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:10px;text-align:center;margin-bottom:14px;display:none;">
+      <span id="reflexesScoreText" style="font-size:13px;font-weight:700;color:#fb923c;"></span>
+    </div>
+
+    <!-- ═══ L'ESSENTIEL ═══ -->
+    <div style="background:linear-gradient(135deg,rgba(194,65,12,.12),rgba(124,45,18,.08));border:1px dashed rgba(249,115,22,.4);border-radius:14px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:900;color:#fb923c;margin-bottom:6px;letter-spacing:.5px;">💡 L'ESSENTIEL À RETENIR</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.75;">Bien gérer la démarque, c'est <b style="color:var(--t1);">protéger la rentabilité de l'entreprise</b> à chaque étape — de la réception à la vente. Ce n'est pas seulement surveiller les rayons, c'est instaurer une <b style="color:#fb923c;">rigueur opérationnelle collective</b> qui transforme les pertes potentielles en bénéfices réels.</div>
+    </div>
+
+    <div style="height:1px;background:rgba(255,255,255,.06);margin-bottom:14px;"></div>
+    <div style="font-size:10px;font-weight:900;color:#fb923c;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;">📋 Enregistrer un Constat</div>
 
     <!-- STATS BAR -->
     <div id="demarqueStats" style="display:flex;gap:8px;margin-bottom:12px;"></div>
@@ -1757,7 +2034,6 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
           <button type="button" onclick="setDmqType(this,'autre')" data-dt="autre" style="flex:1;min-width:70px;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.3);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📋 Autre</button>
         </div>
       </div>
-      <!-- Custom type input -->
       <div id="dmqCustomTypeWrap" style="display:none;margin-top:6px;">
         <input id="dmqCustomType" class="fi" placeholder="Ex: Rupture transport, Détérioration..." style="width:100%;box-sizing:border-box;" />
       </div>
@@ -2364,6 +2640,82 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
     </div>
 
+    <!-- ════ IV. PRIORISATION ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(236,72,153,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#ec4899;letter-spacing:1.5px;text-transform:uppercase;">IV. Les Méthodes de Priorisation</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(236,72,153,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Décider quoi faire, dans quel ordre, avec quelle énergie</div>
+
+    <div onclick="goPage('methodeABCDE')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🔤</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode ABCDE</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Catégoriser par importance · A→E</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('methodeMoscow')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🎯</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode MoSCoW</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Must · Should · Could · Won't</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('warren525')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">5️⃣</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-3</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Règle 5/25 Warren Buffett</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">25 objectifs → concentrez-vous sur 5</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('picklejar')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🫙</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-4</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode Pickle Jar</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Gros cailloux d'abord · Prioriser l'essentiel</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ V. ORGANISATION & FLUX ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(14,165,233,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#0ea5e9;letter-spacing:1.5px;text-transform:uppercase;">V. Organisation & Flux de Travail</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(14,165,233,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Organiser, visualiser et faire avancer les tâches</div>
+
+    <div onclick="goPage('kanban')" style="background:linear-gradient(135deg,#0a1628,#0c2d4a);border:1px solid rgba(14,165,233,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">📋</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#0ea5e9;margin-bottom:2px;">V-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Tableau Kanban</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">À faire · En cours · Terminé</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('gtd')" style="background:linear-gradient(135deg,#0a1628,#0c2d4a);border:1px solid rgba(14,165,233,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🔄</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#0ea5e9;margin-bottom:2px;">V-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">GTD — Faire Avancer les Choses</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Collecter · Clarifier · Organiser · Engager</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
   </div>
 </div>
 <!-- ══ GESTION DU TEMPS ══ -->
@@ -2374,11 +2726,17 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
-    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">4 techniques éprouvées pour maximiser votre productivité quotidienne</div>
+    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">8 techniques éprouvées pour maximiser votre productivité quotidienne</div>
 
     <div onclick="goPage('crapaud')" style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:32px;">🐸</div>
       <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Avalez le Crapaud</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Faire la tâche la plus difficile en premier</div></div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('pomodoro')" style="background:linear-gradient(135deg,#7f1d1d,#dc2626);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🍅</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Technique Pomodoro</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">25 min focus · 5 min pause · Répéter</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
@@ -2388,9 +2746,27 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
+    <div onclick="goPage('methode333')" style="background:linear-gradient(135deg,#312e81,#4338ca);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">3️⃣</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Méthode 3-3-3</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">3h concentré · 3 tâches · 3 entretiens</div></div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
     <div onclick="goPage('methode135')" style="background:linear-gradient(135deg,#14532d,#15803d);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:32px;">📝</div>
       <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Méthode 1-3-5</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">1 majeure · 3 moyennes · 5 petites</div></div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('regle2min')" style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">⚡</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Règle des 2 Minutes</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Moins de 2 min ? Fais-le maintenant !</div></div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('batching')" style="background:linear-gradient(135deg,#1c1917,#44403c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">📦</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Regrouper les Tâches</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Tâches similaires ensemble · Batching</div></div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
     </div>
 
@@ -3634,6 +4010,406 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
 </div>
 
+<!-- ══ POMODORO ══ -->
+<div class="pg" id="pgPomodoro">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#f87171;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🍅 Technique Pomodoro</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(239,68,68,.08));border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;">Inventée par Francesco Cirillo, la technique Pomodoro découpe le travail en blocs de <b style="color:#f87171;">25 minutes</b> séparés par de courtes pauses. Elle combat la procrastination et maintient la concentration à son maximum.</div>
+    </div>
+    <!-- Timer -->
+    <div style="background:var(--s2);border-radius:20px;padding:24px 16px;margin-bottom:14px;text-align:center;border:1px solid rgba(239,68,68,.25);">
+      <div style="font-size:11px;font-weight:700;color:var(--t2);letter-spacing:1px;margin-bottom:8px;" id="pomodoroMode">🍅 FOCUS</div>
+      <div style="font-size:64px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#f87171;line-height:1;margin-bottom:16px;" id="pomodoroTimer">25:00</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-bottom:14px;">
+        <button onclick="pomodoroStart()" id="pomBtnStart" style="background:#dc2626;border:none;color:#fff;font-size:14px;font-weight:700;padding:12px 24px;border-radius:12px;cursor:pointer;">▶ Démarrer</button>
+        <button onclick="pomodoroReset()" style="background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:14px;font-weight:700;padding:12px 20px;border-radius:12px;cursor:pointer;">↺ Reset</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;">
+        <div style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;color:#f87171;">🍅 <span id="pomCount">0</span> Pomodoros</div>
+        <div id="pomPause" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;color:#4ade80;">☕ Pause 5min</div>
+      </div>
+    </div>
+    <!-- Steps -->
+    <div style="font-size:11px;font-weight:900;color:#f87171;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📋 Les 5 Étapes</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+      <div style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;border-radius:0 10px 10px 0;padding:10px 12px;"><b style="color:#f87171;">1.</b> <span style="font-size:11px;color:var(--t1);">Sélectionnez UNE seule tâche à accomplir</span></div>
+      <div style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;border-radius:0 10px 10px 0;padding:10px 12px;"><b style="color:#f87171;">2.</b> <span style="font-size:11px;color:var(--t1);">Lancez le minuteur sur 25 minutes</span></div>
+      <div style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;border-radius:0 10px 10px 0;padding:10px 12px;"><b style="color:#f87171;">3.</b> <span style="font-size:11px;color:var(--t1);">Travaillez sans aucune interruption</span></div>
+      <div style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;border-radius:0 10px 10px 0;padding:10px 12px;"><b style="color:#f87171;">4.</b> <span style="font-size:11px;color:var(--t1);">Prenez une pause de 5 minutes</span></div>
+      <div style="background:rgba(239,68,68,.08);border-left:3px solid #ef4444;border-radius:0 10px 10px 0;padding:10px 12px;"><b style="color:#f87171;">5.</b> <span style="font-size:11px;color:var(--t1);">Après 4 Pomodoros → pause longue de 20-30 min</span></div>
+    </div>
+    <div style="background:rgba(234,179,8,.08);border:1px dashed rgba(234,179,8,.3);border-radius:12px;padding:12px;">
+      <div style="font-size:10px;font-weight:700;color:#eab308;margin-bottom:4px;">💡 En Grande Surface</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">Utilisez le Pomodoro pour les tâches de bureau : commandes, rapports, analyse. En rayon, adaptez à vos cycles naturels de travail.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE 3-3-3 ══ -->
+<div class="pg" id="pgMethode333">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#818cf8;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">3️⃣ Méthode 3-3-3</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(79,70,229,.08));border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;">La méthode 3-3-3 structure votre journée en <b style="color:#818cf8;">3 blocs distincts</b>. Elle garantit que vous avancez sur ce qui compte vraiment tout en maintenant l'opérationnel.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0;">3h</div>
+          <div><div style="font-size:13px;font-weight:900;color:#60a5fa;">3 Heures de Travail Profond</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Le projet le plus important de la semaine</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Consacrez 3 heures consécutives à <b style="color:var(--t1);">une seule tâche critique</b> sans aucune interruption. C'est votre bloc sacré de la journée. En grande surface : analyse stocks, préparation commandes, rapport direction.</div>
+      </div>
+      <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#d97706;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0;">×3</div>
+          <div><div style="font-size:13px;font-weight:900;color:#fbbf24;">3 Tâches Plus Petites</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Tâches urgentes de 20-30 min chacune</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Traitez 3 tâches qui attendent : répondre à un email fournisseur, vérifier une livraison, régler un écart de stock. Rapides mais nécessaires.</div>
+      </div>
+      <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#15803d;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0;">🔧</div>
+          <div><div style="font-size:13px;font-weight:900;color:#4ade80;">3 Tâches d'Entretien</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Maintenance courante et routines</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">3 tâches de routine : contrôle facing, réassort, vérification hygiène. Elles gardent le rayon en ordre sans effort mental intense.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RÈGLE 2 MINUTES ══ -->
+<div class="pg" id="pgRegle2min">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">⚡ Règle des 2 Minutes</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addRegle2min()" style="background:#15803d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <!-- Form en haut -->
+    <div id="regle2minForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(34,197,94,.4);">
+      <div style="font-size:12px;font-weight:800;color:#4ade80;margin-bottom:8px;">➕ Tâche rapide (&lt; 2 min)</div>
+      <div style="display:flex;gap:8px;">
+        <input id="regle2minInput" class="fi" placeholder="Ex: Appel fournisseur, corriger étiquette..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')saveRegle2min()"/>
+        <button onclick="saveRegle2min()" style="background:#15803d;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+    </div>
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(22,163,74,.08));border:1px solid rgba(34,197,94,.3);border-radius:16px;padding:20px;margin-bottom:14px;text-align:center;">
+      <div style="font-size:52px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#4ade80;line-height:1;margin-bottom:8px;">2<span style="font-size:24px;">min</span></div>
+      <div style="font-size:14px;font-weight:900;color:var(--t1);margin-bottom:8px;">Si ça prend moins de 2 minutes,</div>
+      <div style="font-size:16px;font-weight:900;color:#4ade80;">FAITES-LE IMMÉDIATEMENT !</div>
+      <div style="font-size:11px;color:var(--t2);margin-top:8px;line-height:1.6;">Ne le notez pas. Ne le planifiez pas. Le coût mental de le noter et d'y revenir est supérieur au temps nécessaire pour le faire.</div>
+    </div>
+    <div style="font-size:10px;font-weight:700;color:#4ade80;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Ma Liste 2 Minutes</div>
+    <div id="regle2minList"></div>
+    <div id="regle2minEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">⚡ Aucune tâche rapide · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ BATCHING ══ -->
+<div class="pg" id="pgBatching">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#a8a29e;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">📦 Regrouper les Tâches</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:var(--s2);border:1px solid rgba(120,113,108,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;">Le <b style="color:var(--t1);">Batching</b> consiste à regrouper les tâches similaires et à les traiter ensemble dans un créneau dédié. Chaque changement de type de tâche coûte 15-20 min de concentration. Éliminez ces transitions.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:4px;">📧</div>
+        <div style="font-size:11px;font-weight:800;color:#60a5fa;">Emails & Appels</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:4px;line-height:1.5;">9h00–9h30<br>Tous en une fois</div>
+      </div>
+      <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:4px;">📦</div>
+        <div style="font-size:11px;font-weight:800;color:#4ade80;">Commandes</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:4px;line-height:1.5;">10h00–10h45<br>Tous les fournisseurs</div>
+      </div>
+      <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:4px;">🏷️</div>
+        <div style="font-size:11px;font-weight:800;color:#fbbf24;">Étiquetage</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:4px;line-height:1.5;">14h00–14h30<br>Tous les rayons</div>
+      </div>
+      <div style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:24px;margin-bottom:4px;">📊</div>
+        <div style="font-size:11px;font-weight:800;color:#c084fc;">Rapports & Saisie</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:4px;line-height:1.5;">16h30–17h00<br>Tout d'un coup</div>
+      </div>
+    </div>
+    <div style="background:rgba(234,179,8,.08);border:1px dashed rgba(234,179,8,.3);border-radius:12px;padding:12px;">
+      <div style="font-size:10px;font-weight:700;color:#eab308;margin-bottom:6px;">⚡ Les 3 Étapes du Batching</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.8;">
+        <b style="color:var(--t1);">1. Listez</b> toutes vos tâches de la semaine<br>
+        <b style="color:var(--t1);">2. Groupez</b> les tâches similaires ensemble<br>
+        <b style="color:var(--t1);">3. Bloquez</b> des créneaux fixes dans votre agenda
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE ABCDE ══ -->
+<div class="pg" id="pgMethodeABCDE">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔤 Méthode ABCDE</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addABCDE()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div id="abcdeForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
+      <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Nouvelle tâche ABCDE</div>
+      <div style="margin-bottom:8px;"><input id="abcdeInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <button type="button" onclick="setABCDE(this,'A')" data-abc="A" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">A</button>
+        <button type="button" onclick="setABCDE(this,'B')" data-abc="B" style="flex:1;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">B</button>
+        <button type="button" onclick="setABCDE(this,'C')" data-abc="C" style="flex:1;background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);border-radius:8px;color:#facc15;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">C</button>
+        <button type="button" onclick="setABCDE(this,'D')" data-abc="D" style="flex:1;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">D</button>
+        <button type="button" onclick="setABCDE(this,'E')" data-abc="E" style="flex:1;background:rgba(100,116,139,.15);border:1px solid rgba(100,116,139,.3);border-radius:8px;color:#94a3b8;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">E</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addABCDE()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕</button>
+        <button onclick="saveABCDE()" style="flex:2;background:#be185d;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Ajouter</button>
+      </div>
+    </div>
+    <!-- Catégories -->
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#dc2626;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">A</div><div style="font-size:13px;font-weight:900;color:#f87171;">Très Important · Conséquences graves si non fait</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Retrait produit DLC, commande urgente, incident client</div></div>
+      <div style="background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#ea580c;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">B</div><div style="font-size:13px;font-weight:900;color:#fb923c;">Important · Conséquences mineures si non fait</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Appels fournisseurs, rapports de fin de journée</div></div>
+      <div style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#ca8a04;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">C</div><div style="font-size:13px;font-weight:900;color:#facc15;">Optionnel · Aucune conséquence réelle</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Réorganiser un fichier, ranger le bureau</div></div>
+      <div style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">D</div><div style="font-size:13px;font-weight:900;color:#60a5fa;">À Déléguer · Quelqu'un d'autre peut le faire</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Mise en rayon standard, nettoyage de routine</div></div>
+      <div style="background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#475569;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">E</div><div style="font-size:13px;font-weight:900;color:#94a3b8;">À Éliminer · Sans valeur ajoutée</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Réunions inutiles, tâches redondantes</div></div>
+    </div>
+    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Mes Tâches ABCDE</div>
+    <div id="abcdeList"></div>
+    <div id="abcdeEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">🔤 Aucune tâche · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE MOSCOW ══ -->
+<div class="pg" id="pgMethodeMoscow">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🎯 Méthode MoSCoW</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addMoscow()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div id="moscowForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
+      <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Nouvelle tâche MoSCoW</div>
+      <div style="margin-bottom:8px;"><input id="moscowInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;">
+        <button type="button" onclick="setMoscow(this,'M')" data-msw="M" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🔴 Must Have</button>
+        <button type="button" onclick="setMoscow(this,'S')" data-msw="S" style="background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🟠 Should Have</button>
+        <button type="button" onclick="setMoscow(this,'C')" data-msw="C" style="background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);border-radius:8px;color:#facc15;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🟡 Could Have</button>
+        <button type="button" onclick="setMoscow(this,'W')" data-msw="W" style="background:rgba(100,116,139,.15);border:1px solid rgba(100,116,139,.3);border-radius:8px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">⚫ Won't Have</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addMoscow()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕</button>
+        <button onclick="saveMoscow()" style="flex:2;background:#be185d;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Ajouter</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:12px;"><div style="font-size:13px;font-weight:900;color:#f87171;margin-bottom:4px;">🔴 M — Must Have (Doit avoir)</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Points critiques, non négociables. L'activité s'arrête sans eux. Ex: Retrait DLC, sécurité alimentaire, commandes critiques.</div></div>
+      <div style="background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:12px;padding:12px;"><div style="font-size:13px;font-weight:900;color:#fb923c;margin-bottom:4px;">🟠 S — Should Have (Devrait avoir)</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Important mais pas vital. Peut attendre un peu. Ex: Optimisation planogramme, réorganisation réserve.</div></div>
+      <div style="background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);border-radius:12px;padding:12px;"><div style="font-size:13px;font-weight:900;color:#facc15;margin-bottom:4px;">🟡 C — Could Have (Pourrait avoir)</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Bon à avoir si le temps le permet. Ex: Amélioration affichage, décoration rayon, animation promo.</div></div>
+      <div style="background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);border-radius:12px;padding:12px;"><div style="font-size:13px;font-weight:900;color:#94a3b8;margin-bottom:4px;">⚫ W — Won't Have (N'aura pas)</div><div style="font-size:11px;color:var(--t2);line-height:1.5;">Écarté volontairement pour cette période. À reconsidérer plus tard.</div></div>
+    </div>
+    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Mes Tâches MoSCoW</div>
+    <div id="moscowList"></div>
+    <div id="moscowEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">🎯 Aucune tâche · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ WARREN BUFFETT 5/25 ══ -->
+<div class="pg" id="pgWarren525">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">5️⃣ Règle 5/25 Buffett</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addWarren()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div id="warrenForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
+      <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:8px;">➕ Ajouter un objectif</div>
+      <div style="display:flex;gap:8px;">
+        <input id="warrenInput" class="fi" placeholder="Objectif ou tâche importante..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')saveWarren()"/>
+        <button onclick="saveWarren()" style="background:#be185d;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+      <button onclick="addWarren()" style="width:100%;margin-top:8px;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:12px;padding:8px;border-radius:10px;cursor:pointer;">✕ Annuler</button>
+    </div>
+    <div style="background:linear-gradient(135deg,rgba(236,72,153,.15),rgba(190,24,93,.08));border:1px solid rgba(236,72,153,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;">Warren Buffett conseilla à son pilote privé : listez vos <b style="color:#f472b6;">25 objectifs</b>, classez-les par importance, puis concentrez-vous sur les <b style="color:#4ade80;">TOP 5 seulement</b>. Les 20 autres ? <b style="color:#f87171;">Évitez-les absolument</b> — ils sont des distractions.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#4ade80;" id="warrenTop5Count">0</div>
+        <div style="font-size:10px;color:#4ade80;font-weight:700;">✅ TOP 5</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;">Focus total</div>
+      </div>
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:#f87171;" id="warrenAvoidCount">0</div>
+        <div style="font-size:10px;color:#f87171;font-weight:700;">🚫 À ÉVITER</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;">Les 20 restants</div>
+      </div>
+    </div>
+    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Ma Liste d'Objectifs</div>
+    <div id="warrenList"></div>
+    <div id="warrenEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">5️⃣ Ajoutez vos objectifs · Les 5 premiers seront votre focus</div>
+  </div>
+</div>
+
+<!-- ══ PICKLE JAR ══ -->
+<div class="pg" id="pgPicklejar">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🫙 Méthode Pickle Jar</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addPickle()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div id="pickleForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
+      <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Ajouter une tâche</div>
+      <div style="margin-bottom:8px;"><input id="pickleInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="display:flex;gap:6px;margin-bottom:10px;">
+        <button type="button" onclick="setPickle(this,'rock')" data-pkl="rock" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🪨 Gros caillou</button>
+        <button type="button" onclick="setPickle(this,'gravel')" data-pkl="gravel" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);border-radius:8px;color:#fbbf24;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🪵 Gravier</button>
+        <button type="button" onclick="setPickle(this,'sand')" data-pkl="sand" style="flex:1;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);border-radius:8px;color:#facc15;font-size:11px;font-weight:700;padding:8px;cursor:pointer;">🏖️ Sable</button>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addPickle()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕</button>
+        <button onclick="savePickle()" style="flex:2;background:#be185d;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Ajouter</button>
+      </div>
+    </div>
+    <!-- Jar visuel -->
+    <div style="display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(239,68,68,.1);border:2px solid rgba(239,68,68,.3);border-radius:14px;padding:14px;">
+        <div style="font-size:11px;font-weight:900;color:#f87171;margin-bottom:4px;">🪨 GROS CAILLOUX — Priorités absolues</div>
+        <div style="font-size:11px;color:var(--t2);">Tâches à fort impact qui définissent le succès de la journée. Planifiez-les EN PREMIER dans votre agenda.</div>
+        <div id="pickleRocks" style="margin-top:8px;"></div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:2px solid rgba(245,158,11,.25);border-radius:14px;padding:14px;">
+        <div style="font-size:11px;font-weight:900;color:#fbbf24;margin-bottom:4px;">🪵 GRAVIER — Tâches importantes</div>
+        <div style="font-size:11px;color:var(--t2);">Tâches nécessaires mais moins critiques. Remplissent les espaces entre les gros cailloux.</div>
+        <div id="pickleGravel" style="margin-top:8px;"></div>
+      </div>
+      <div style="background:rgba(234,179,8,.06);border:2px solid rgba(234,179,8,.2);border-radius:14px;padding:14px;">
+        <div style="font-size:11px;font-weight:900;color:#facc15;margin-bottom:4px;">🏖️ SABLE — Distractions & futilités</div>
+        <div style="font-size:11px;color:var(--t2);">Tâches à faible valeur. Si vous les mettez en premier, il ne reste plus de place pour ce qui compte!</div>
+        <div id="pickleSand" style="margin-top:8px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KANBAN ══ -->
+<div class="pg" id="pgKanban">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">📋 Tableau Kanban</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addKanban()" style="background:#0369a1;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 12px 90px;">
+    <div id="kanbanForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(56,189,248,.4);">
+      <div style="font-size:12px;font-weight:800;color:#38bdf8;margin-bottom:8px;">➕ Nouvelle carte Kanban</div>
+      <div style="margin-bottom:8px;"><input id="kanbanInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="margin-bottom:10px;">
+        <div style="display:flex;gap:6px;">
+          <button type="button" onclick="setKanbanCol(this,'todo')" data-kcol="todo" style="flex:1;background:rgba(100,116,139,.15);border:1px solid rgba(100,116,139,.3);border-radius:8px;color:#94a3b8;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">📋 À faire</button>
+          <button type="button" onclick="setKanbanCol(this,'doing')" data-kcol="doing" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:8px;color:#fbbf24;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">⚡ En cours</button>
+          <button type="button" onclick="setKanbanCol(this,'done')" data-kcol="done" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:8px;color:#4ade80;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">✅ Terminé</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addKanban()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+        <button onclick="saveKanban()" style="flex:2;background:#0369a1;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Ajouter</button>
+      </div>
+    </div>
+    <!-- Board 3 colonnes -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+      <div style="background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);border-radius:12px;padding:10px;min-height:300px;">
+        <div style="font-size:10px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center;">📋 À faire<br><span id="kanbanTodoCount" style="font-size:16px;color:#94a3b8;">0</span></div>
+        <div id="kanbanTodo" style="display:flex;flex-direction:column;gap:5px;"></div>
+      </div>
+      <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:10px;min-height:300px;">
+        <div style="font-size:10px;font-weight:900;color:#fbbf24;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center;">⚡ En cours<br><span id="kanbanDoingCount" style="font-size:16px;color:#fbbf24;">0</span></div>
+        <div id="kanbanDoing" style="display:flex;flex-direction:column;gap:5px;"></div>
+      </div>
+      <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px;min-height:300px;">
+        <div style="font-size:10px;font-weight:900;color:#4ade80;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;text-align:center;">✅ Terminé<br><span id="kanbanDoneCount" style="font-size:16px;color:#4ade80;">0</span></div>
+        <div id="kanbanDone" style="display:flex;flex-direction:column;gap:5px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GTD ══ -->
+<div class="pg" id="pgGtd">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔄 GTD — Faire Avancer</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="addGTD()" style="background:#0369a1;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div id="gtdForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(56,189,248,.4);">
+      <div style="font-size:12px;font-weight:800;color:#38bdf8;margin-bottom:8px;">➕ Capturer une tâche</div>
+      <div style="display:flex;gap:8px;">
+        <input id="gtdInput" class="fi" placeholder="Tout ce qui occupe votre esprit..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')saveGTD()"/>
+        <button onclick="saveGTD()" style="background:#0369a1;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+      </div>
+      <button onclick="addGTD()" style="width:100%;margin-top:8px;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:12px;padding:8px;border-radius:10px;cursor:pointer;">✕ Annuler</button>
+    </div>
+    <!-- 5 étapes GTD -->
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px;">
+      <div style="background:rgba(37,99,235,.12);border-left:4px solid #3b82f6;border-radius:0 12px 12px 0;padding:12px;">
+        <div style="font-size:12px;font-weight:900;color:#60a5fa;margin-bottom:4px;">1️⃣ COLLECTER — Vider le cerveau</div>
+        <div style="font-size:11px;color:var(--t2);">Notez TOUT ce qui occupe votre esprit : tâches, idées, inquiétudes. Ne filtrez pas.</div>
+      </div>
+      <div style="background:rgba(245,158,11,.1);border-left:4px solid #f59e0b;border-radius:0 12px 12px 0;padding:12px;">
+        <div style="font-size:12px;font-weight:900;color:#fbbf24;margin-bottom:4px;">2️⃣ CLARIFIER — Est-ce actionnable ?</div>
+        <div style="font-size:11px;color:var(--t2);">Pour chaque élément : Est-ce qu'une action est nécessaire ? Si oui, quelle est la PROCHAINE action concrète ?</div>
+      </div>
+      <div style="background:rgba(168,85,247,.1);border-left:4px solid #a855f7;border-radius:0 12px 12px 0;padding:12px;">
+        <div style="font-size:12px;font-weight:900;color:#c084fc;margin-bottom:4px;">3️⃣ ORGANISER — Mettre à la bonne place</div>
+        <div style="font-size:11px;color:var(--t2);">Classez dans la bonne liste : À faire aujourd'hui, En attente, Projet, Référence, Corbeille.</div>
+      </div>
+      <div style="background:rgba(34,197,94,.1);border-left:4px solid #22c55e;border-radius:0 12px 12px 0;padding:12px;">
+        <div style="font-size:12px;font-weight:900;color:#4ade80;margin-bottom:4px;">4️⃣ EXAMINER — Révision régulière</div>
+        <div style="font-size:11px;color:var(--t2);">Revoyez vos listes chaque semaine. Mettez à jour, éliminez ce qui n'est plus pertinent.</div>
+      </div>
+      <div style="background:rgba(6,182,212,.1);border-left:4px solid #06b6d4;border-radius:0 12px 12px 0;padding:12px;">
+        <div style="font-size:12px;font-weight:900;color:#22d3ee;margin-bottom:4px;">5️⃣ ENGAGER — Choisir et agir</div>
+        <div style="font-size:11px;color:var(--t2);">Choisissez la prochaine action selon votre contexte, énergie et priorité. Faites-la.</div>
+      </div>
+    </div>
+    <div style="font-size:10px;font-weight:700;color:#38bdf8;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">🧠 Ma Capture GTD</div>
+    <div id="gtdList"></div>
+    <div id="gtdEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">🔄 Aucune tâche capturée · Appuyez sur +</div>
+  </div>
+</div>
+
 <script>
 'use strict';
 var _pinVal='',_pinMode='check',_pinUnlocked=false,_pinTemp='';
@@ -3925,16 +4701,28 @@ function doSnooze(mins){
 let _curPage='home';
 function goPage(p){
   _curPage=p;
-  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.pg').forEach(x=>{
+    x.classList.remove('on');
+    // reset animation so it replays on next .on
+    x.style.animation='none';
+  });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
-  if(map[p])document.getElementById(map[p]).classList.add('on');
+  if(map[p]){
+    var activePg=document.getElementById(map[p]);
+    if(activePg){
+      activePg.style.animation='none';
+      void activePg.offsetHeight; // reflow
+      activePg.style.animation='';
+      activePg.classList.add('on');
+    }
+  }
   if(nav[p])document.getElementById(nav[p]).classList.add('on');
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeInvBadge();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -3969,6 +4757,14 @@ function goPage(p){
   if(p==='cinqs')render5S();
   if(p==='inventaireMag')renderInv();
   if(p==='stockLourd')renderSL();
+  if(p==='pomodoro')initPomodoro();
+  if(p==='regle2min')renderRegle2min();
+  if(p==='methodeABCDE')renderABCDE();
+  if(p==='methodeMoscow')renderMoscow();
+  if(p==='warren525')renderWarren();
+  if(p==='picklejar')renderPickle();
+  if(p==='kanban')renderKanban();
+  if(p==='gtd')renderGTD();
   if(p==='crapaud')renderCrapaud();
   if(p==='deepwork')renderDeepwork();
   if(p==='methode135')renderMethode135();
@@ -5002,72 +5798,139 @@ function delPlanningItem(i){
 
 // ══ HYGIÈNE ══
 var DEFAULT_HYGIENE=[
-  'Nettoyage sol rayons','Nettoyage vitrines réfrigérées','Désinfection plans de travail',
-  'Vérification dates DLC critiques','Contrôle températures réfrigération',
+  'Contrôle chambres froides & rayon MBA (hygiène, traçabilité, stockage, température)',
+  'Réserve bien tenue et organisée',
+  'Pas de produits périmés ou invendables exposés en rayon',
+  'Zone casse, retours bien identifiés et poubelle propre',
+  'Pas de ventes en gros des produits homologués',
+  'Application des tares au niveau balance',
+  'Application légale des marges MBA',
+  'Adéquation des prix affichés et les promos',
+  'Nettoyage sol rayons','Nettoyage vitrines réfrigérées',
   'Port tenues réglementaires équipe','Évacuation déchets / cartons',
   'Signalétique sécurité visible','Extincteurs accessibles','Sorties de secours dégagées'
 ];
+
+var DEFAULT_HYG_JOURNEE=[
+  'Propreté à fond — nettoyage complet de toutes les zones',
+  'Contrôle des procédures et normes d\'hygiène',
+  'Hygiène corporelle des collaborateurs vérifiée',
+  'Check de tous les points de contrôle rayon par rayon',
+  'Briefing équipes sur les normes hygiène',
+  'Remplir check-list nettoyage complète',
+  'Désinfection complète des plans de travail et équipements',
+  'Contrôle des températures de toutes les chambres froides',
+  'Vérification de la signalétique et affichage obligatoire'
+];
+
+var _hygTab='quotidien';
+function setHygieneTab(tab){
+  _hygTab=tab;
+  document.getElementById('hygSec_quotidien').style.display=tab==='quotidien'?'block':'none';
+  document.getElementById('hygSec_journee').style.display=tab==='journee'?'block':'none';
+  var tq=document.getElementById('hygTab_quotidien');
+  var tj=document.getElementById('hygTab_journee');
+  if(tq){tq.style.background=tab==='quotidien'?'#059669':'';tq.style.color=tab==='quotidien'?'#fff':'';tq.style.border=tab==='quotidien'?'none':'1px solid var(--bord)';}
+  if(tj){tj.style.background=tab==='journee'?'#059669':'';tj.style.color=tab==='journee'?'#fff':'';tj.style.border=tab==='journee'?'none':'1px solid var(--bord)';}
+}
+
 function getHygieneItems(){
   var d=loadEQ();
   if(!d.hygieneItems)d.hygieneItems=DEFAULT_HYGIENE.slice();
   return d.hygieneItems;
 }
-function toggleHygieneAdd(){
-  var f=document.getElementById('hygAddForm');
-  if(!f)return;
-  var showing=f.style.display!=='none';
-  f.style.display=showing?'none':'block';
-  var btn=document.getElementById('hygAddBtn');
-  if(btn){btn.textContent=showing?'+ Point':'✕';btn.style.background=showing?'#059669':'rgba(255,255,255,.12)';}
-  if(!showing){var inp=document.getElementById('hygNewItem');if(inp){inp.value='';inp.focus();}}
+function getHygJItems(){
+  var d=loadEQ();
+  if(!d.hygJItems)d.hygJItems=DEFAULT_HYG_JOURNEE.slice();
+  return d.hygJItems;
 }
+
+function toggleHygieneAdd(){
+  var inp=document.getElementById('hygNewItem');
+  if(inp)inp.focus();
+}
+
 function addHygieneItem(){
-  var inp=document.getElementById('hygNewItem'); if(!inp)return;
-  var val=inp.value.trim(); if(!val){inp.style.borderColor='#ef4444';return;}
+  var inp=document.getElementById('hygNewItem');if(!inp)return;
+  var val=inp.value.trim();if(!val){inp.style.borderColor='#ef4444';return;}
   inp.style.borderColor='';
   var d=loadEQ();
   d.hygieneItems=getHygieneItems();
-  d.hygieneItems.push(val); saveEQ(d);
-  inp.value=''; toggleHygieneAdd(); renderHygiene(); showT('✅','Point ajouté');
+  d.hygieneItems.push(val);saveEQ(d);
+  inp.value='';renderHygiene();showT('✅','Point ajouté');
 }
+
+function addHygJItem(){
+  var inp=document.getElementById('hygJNewItem');if(!inp)return;
+  var val=inp.value.trim();if(!val){inp.style.borderColor='#ef4444';return;}
+  inp.style.borderColor='';
+  var d=loadEQ();
+  d.hygJItems=getHygJItems();
+  d.hygJItems.push(val);saveEQ(d);
+  inp.value='';renderHygiene();showT('✅','Point journée ajouté');
+}
+
 function delHygieneItem(i){
   var d=loadEQ();
   d.hygieneItems=getHygieneItems();
   d.hygieneItems.splice(i,1);
-  // Clean up checks for all days
   if(d.hygiene){Object.keys(d.hygiene).forEach(function(day){var newC={};Object.keys(d.hygiene[day]).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=d.hygiene[day][k];else if(ki>i)newC[ki-1]=d.hygiene[day][k];});d.hygiene[day]=newC;});}
-  saveEQ(d); renderHygiene();
+  saveEQ(d);renderHygiene();
 }
-function renderHygiene(){
-  var el=document.getElementById('hygieneDate');
-  if(el){var now=tn();el.textContent='Contrôle du '+now.getDate()+' '+MF[now.getMonth()]+' '+now.getFullYear();}
-  var items=getHygieneItems();
-  var d=loadEQ(); var hy=d.hygiene||{};
-  var today=tstr(); var checks=hy[today]||{};
-  var el2=document.getElementById('hygieneChecks'); if(!el2)return;
-  var empty=document.getElementById('hygieneEmpty');
-  if(!items.length){el2.innerHTML='';if(empty)empty.style.display='block';return;}
+function delHygJItem(i){
+  var d=loadEQ();
+  d.hygJItems=getHygJItems();
+  d.hygJItems.splice(i,1);
+  if(d.hygJ){Object.keys(d.hygJ).forEach(function(day){var newC={};Object.keys(d.hygJ[day]).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=d.hygJ[day][k];else if(ki>i)newC[ki-1]=d.hygJ[day][k];});d.hygJ[day]=newC;});}
+  saveEQ(d);renderHygiene();
+}
+
+function renderHygieneList(items,checks,elId,emptyId,scoreEl,barEl){
+  var el=document.getElementById(elId);var empty=document.getElementById(emptyId);
+  if(!el)return;
+  if(!items.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
   if(empty)empty.style.display='none';
   var done=items.filter(function(_,i){return checks[i];}).length;
   var score=items.length>0?Math.round(done/items.length*100):0;
-  var sc=document.getElementById('hygieneScore');
-  var fill=document.getElementById('hygieneBarFill');
   var col=score>=80?'#22c55e':score>=50?'#f59e0b':'#ef4444';
+  var sc=document.getElementById(scoreEl);var fill=document.getElementById(barEl);
   if(sc){sc.textContent=score+'%';sc.style.color=col;}
   if(fill){fill.style.width=score+'%';fill.style.background=col;}
-  el2.innerHTML=items.map(function(item,i){
+  el.innerHTML=items.map(function(item,i){
     var ok=checks[i];
-    return '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;border:1px solid '+(ok?'rgba(34,197,94,.3)':'rgba(255,255,255,.06)')+'">'
-      +'<div onclick="toggleHygiene('+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(ok?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(ok?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(ok?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
-      +'<div onclick="toggleHygiene('+i+')" style="flex:1;font-size:13px;color:var(--t1);'+(ok?'opacity:.6;text-decoration:line-through;':'')+'cursor:pointer;">'+item+'</div>'
-      +'<div onclick="delHygieneItem('+i+')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
-      +'</div>';
+    return '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;border:1px solid '+(ok?'rgba(34,197,94,.3)':'rgba(255,255,255,.06)')+'">'+
+      '<div onclick="'+( elId==='hygieneChecks'?'toggleHygiene':'toggleHygJ')+'('+i+')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(ok?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(ok?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(ok?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'+
+      '<div onclick="'+(elId==='hygieneChecks'?'toggleHygiene':'toggleHygJ')+'('+i+')" style="flex:1;font-size:12px;color:var(--t1);'+(ok?'opacity:.6;text-decoration:line-through;':'')+'cursor:pointer;line-height:1.5;">'+item+'</div>'+
+      '<div onclick="'+(elId==='hygieneChecks'?'delHygieneItem':'delHygJItem')+'('+i+')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'+
+    '</div>';
   }).join('');
 }
+
+function renderHygiene(){
+  var el=document.getElementById('hygieneDate');
+  if(el){var now=tn();el.textContent='Contrôle du '+now.getDate()+' '+MF[now.getMonth()]+' '+now.getFullYear();}
+  var d=loadEQ();var today=tstr();
+
+  // Quotidien
+  var items=getHygieneItems();
+  var checks=(d.hygiene||{})[today]||{};
+  renderHygieneList(items,checks,'hygieneChecks','hygieneEmpty','hygieneScore','hygieneBarFill');
+
+  // Journée
+  var jItems=getHygJItems();
+  var jChecks=(d.hygJ||{})[today]||{};
+  renderHygieneList(jItems,jChecks,'hygJChecks','hygJEmpty','hygJScore','hygJBar');
+}
+
 function toggleHygiene(i){
-  var d=loadEQ(); if(!d.hygiene)d.hygiene={};
-  var today=tstr(); if(!d.hygiene[today])d.hygiene[today]={};
-  d.hygiene[today][i]=!d.hygiene[today][i]; saveEQ(d); renderHygiene();
+  var d=loadEQ();if(!d.hygiene)d.hygiene={};
+  var today=tstr();if(!d.hygiene[today])d.hygiene[today]={};
+  d.hygiene[today][i]=!d.hygiene[today][i];saveEQ(d);renderHygiene();
+}
+function toggleHygJ(i){
+  var d=loadEQ();if(!d.hygJ)d.hygJ={};
+  var today=tstr();if(!d.hygJ[today])d.hygJ[today]={};
+  d.hygJ[today][i]=!d.hygJ[today][i];saveEQ(d);renderHygiene();
 }
 
 // ══ TOP VENTES / BEST SELLERS ══
@@ -5452,8 +6315,66 @@ function delDemarque(id){
   var data = loadDemarque().filter(function(d){return d.id!==id;});
   saveDemarqueData(data); renderDemarque();
 }
+
+// ── Calculateur taux de démarque ──
+function calcTaux(){
+  var dm=parseFloat(document.getElementById('txDemarque').value)||0;
+  var ca=parseFloat(document.getElementById('txCA').value)||0;
+  var res=document.getElementById('txResult');
+  var val=document.getElementById('txResultVal');
+  var msg=document.getElementById('txResultMsg');
+  if(!dm||!ca||ca===0){if(res)res.style.display='none';return;}
+  var taux=(dm/ca*100);
+  if(res)res.style.display='block';
+  if(val){
+    val.textContent=taux.toFixed(2)+'%';
+    val.style.color=taux<1?'#4ade80':taux<3?'#fbbf24':'#f87171';
+  }
+  if(msg){
+    if(taux<1){msg.textContent='✅ Excellent — Votre démarque est bien maîtrisée';msg.style.color='#4ade80';}
+    else if(taux<3){msg.textContent='🟡 Acceptable — Restez vigilant et suivez les réflexes';msg.style.color='#fbbf24';}
+    else{msg.textContent='🔴 À surveiller — Action corrective urgente nécessaire';msg.style.color='#f87171';}
+  }
+}
+
+// ── Réflexes anti-démarque ──
+function toggleReflexe(el){
+  var check=el.querySelector('.reflexe-check');
+  if(!check)return;
+  var done=check.style.background!=='transparent'&&check.style.background!=='';
+  if(!done){
+    check.style.background='#f97316';
+    check.style.borderColor='#f97316';
+    check.innerHTML='<svg width="11" height="11" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>';
+    el.style.background='rgba(249,115,22,.08)';
+    el.style.borderColor='rgba(249,115,22,.35)';
+  } else {
+    check.style.background='transparent';
+    check.style.borderColor='rgba(249,115,22,.5)';
+    check.innerHTML='';
+    el.style.background='';
+    el.style.borderColor='';
+  }
+  updateReflexesScore();
+}
+function updateReflexesScore(){
+  var items=document.querySelectorAll('#reflexesList > div');
+  var done=0;
+  items.forEach(function(el){var c=el.querySelector('.reflexe-check');if(c&&c.style.background&&c.style.background!=='transparent')done++;});
+  var score=document.getElementById('reflexesScore');
+  var txt=document.getElementById('reflexesScoreText');
+  if(!score||!txt)return;
+  if(done===0){score.style.display='none';return;}
+  score.style.display='block';
+  var msgs=['','1/5 — Bon début ! 4 réflexes à adopter','2/5 — Vous progressez bien 💪','3/5 — À mi-chemin, continuez !','4/5 — Presque parfait 🔥','5/5 — Excellent ! Tous les réflexes appliqués ✅'];
+  txt.textContent=msgs[done]||done+'/5';
+  score.style.borderColor=done===5?'rgba(34,197,94,.4)':'rgba(249,115,22,.2)';
+  if(txt)txt.style.color=done===5?'#4ade80':'#fb923c';
+}
+
 function renderDemarque(){
   var data = loadDemarque();
+
   var list = document.getElementById('demarqueList');
   var empty = document.getElementById('demarqueEmpty');
   var stats = document.getElementById('demarqueStats');
@@ -6020,20 +6941,285 @@ function exportFournisseurPDF(){
 }
 
 // ══ SHARED DOWNLOAD HELPER ══
+function exportRapportComplet(){
+  showT('⏳','Génération du rapport...');
+  setTimeout(function(){
+    var now=new Date();
+    var MFR=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    var dayNames=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    var dateStr=dayNames[now.getDay()]+' '+now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+    var heureStr=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    var todayKey=tstr();
+
+    // ── Données ──
+    var nomAgent=prof.name||'—';
+    var role=prof.role||'—';
+    var magasin=prof.store||'—';
+    var rayon=prof.rayon||'—';
+
+    // Tâches du jour
+    var tt=getTT();
+    var done=tt.filter(function(t){return isDone(t.id);});
+    var pending=tt.filter(function(t){return !isDone(t.id);});
+    var late=tt.filter(function(t){return isLate(t);});
+    var pct=tt.length?Math.round(done.length/tt.length*100):0;
+
+    // DLC
+    var dlcItems=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    var dlcNow=new Date();dlcNow.setHours(0,0,0,0);
+    var dlcUrgent=dlcItems.filter(function(x){var d=new Date(x.date);d.setHours(0,0,0,0);return Math.floor((d-dlcNow)/86400000)<=3;});
+    var dlcOk=dlcItems.filter(function(x){var d=new Date(x.date);d.setHours(0,0,0,0);return Math.floor((d-dlcNow)/86400000)>3;});
+
+    // Stock Lourd
+    var slItems=JSON.parse(localStorage.getItem('tp10_sl')||'[]');
+    var slValeur=slItems.reduce(function(s,x){return s+(x.qte||0)*(x.dpr||0);},0);
+
+    // Inventaires
+    var invData=JSON.parse(localStorage.getItem('tp10_inv')||'{}');
+    var invItems=(invData.items||[]);
+    var invValides=invItems.filter(function(x){return x.etat==='V';});
+
+    // Démarque
+    var dmqData=JSON.parse(localStorage.getItem(SK+'_demarque')||'[]');
+    var dmqTotal=dmqData.reduce(function(s,x){return s+(parseFloat(x.montant)||0);},0);
+
+    // Équipe / pointage
+    var eqData=JSON.parse(localStorage.getItem(SK+'_eq')||'{}');
+    var empList=eqData.emp||[];
+
+    // Contrôle rayons
+    var ctrl=controleData[todayKey]||{};
+    var ctrlDone=RAYONS_CTRL.filter(function(r){return ctrl[r]&&ctrl[r].done;}).length;
+
+    // ── CSS ──
+    var css='*{margin:0;padding:0;box-sizing:border-box;}'+
+      'body{font-family:"Segoe UI",Arial,sans-serif;background:#f8fafc;color:#1e293b;font-size:13px;}'+
+      '.wrap{max-width:800px;margin:0 auto;padding:20px;}'+
+      '.header{background:linear-gradient(135deg,#0033A0,#1d4ed8);color:#fff;border-radius:16px;padding:28px 32px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;}'+
+      '.header-left h1{font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:4px;}'+
+      '.header-left p{font-size:13px;opacity:.8;}'+
+      '.header-right{text-align:right;font-size:12px;opacity:.85;line-height:1.7;}'+
+      '.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}'+
+      '.badge-blue{background:rgba(59,130,246,.15);color:#1d4ed8;}'+
+      '.section{background:#fff;border-radius:14px;padding:20px 24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);}'+
+      '.section-title{font-size:14px;font-weight:800;color:#0f172a;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #f1f5f9;display:flex;align-items:center;gap:8px;}'+
+      '.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}'+
+      '.kpi{background:#f8fafc;border-radius:10px;padding:14px;text-align:center;border:1px solid #e2e8f0;}'+
+      '.kpi-val{font-size:28px;font-weight:900;line-height:1;}'+
+      '.kpi-lbl{font-size:10px;color:#64748b;font-weight:700;margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}'+
+      '.green{color:#16a34a;}.red{color:#dc2626;}.orange{color:#d97706;}.blue{color:#2563eb;}'+
+      '.bar-wrap{background:#e2e8f0;border-radius:99px;height:10px;margin:8px 0 4px;}'+
+      '.bar-fill{height:10px;border-radius:99px;background:linear-gradient(90deg,#0033A0,#3b82f6);}'+
+      '.table{width:100%;border-collapse:collapse;}'+
+      '.table th{background:#f1f5f9;font-size:10px;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:.5px;padding:8px 12px;text-align:left;}'+
+      '.table td{padding:9px 12px;border-bottom:1px solid #f1f5f9;font-size:12px;}'+
+      '.table tr:last-child td{border-bottom:none;}'+
+      '.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}'+
+      '.pill-green{background:#dcfce7;color:#15803d;}'+
+      '.pill-red{background:#fee2e2;color:#dc2626;}'+
+      '.pill-orange{background:#ffedd5;color:#c2410c;}'+
+      '.pill-gray{background:#f1f5f9;color:#475569;}'+
+      '.alert-box{background:#fef3c7;border-left:4px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:8px;font-size:12px;}'+
+      '.footer{text-align:center;font-size:11px;color:#94a3b8;margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;}'+
+      '@media print{body{background:#fff;}.wrap{padding:10px;}button{display:none;}}';
+
+    // ── HTML Sections ──
+
+    // 1. KPI Tâches
+    var secTaches='<div class="section">'+
+      '<div class="section-title">🛒 Tâches Commerciales du Jour</div>'+
+      '<div class="kpi-grid">'+
+        '<div class="kpi"><div class="kpi-val '+( pct>=80?'green':pct>=50?'orange':'red')+'">'+pct+'%</div><div class="kpi-lbl">Taux réalisation</div></div>'+
+        '<div class="kpi"><div class="kpi-val green">'+done.length+'</div><div class="kpi-lbl">Accomplies</div></div>'+
+        '<div class="kpi"><div class="kpi-val orange">'+pending.length+'</div><div class="kpi-lbl">En attente</div></div>'+
+        '<div class="kpi"><div class="kpi-val red">'+late.length+'</div><div class="kpi-lbl">En retard</div></div>'+
+      '</div>'+
+      '<div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%"></div></div>'+
+      '<div style="font-size:11px;color:#64748b;text-align:right;">'+done.length+' / '+tt.length+' tâches</div>'+
+      (done.length?'<div style="margin-top:14px;"><div style="font-size:11px;font-weight:700;color:#0f172a;margin-bottom:8px;">✅ Tâches accomplies</div>'+
+        '<table class="table"><thead><tr><th>Tâche</th><th>Heure</th></tr></thead><tbody>'+
+        done.slice(0,10).map(function(t){return '<tr><td>'+t.name+'</td><td>'+t.time+'</td></tr>';}).join('')+
+        '</tbody></table></div>':'')+'</div>';
+
+    // 2. Contrôle Rayons
+    var secCtrl='<div class="section">'+
+      '<div class="section-title">🔍 Contrôle des Rayons</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val '+(ctrlDone===RAYONS_CTRL.length?'green':'orange')+'">'+ctrlDone+'/'+RAYONS_CTRL.length+'</div><div class="kpi-lbl">Rayons contrôlés</div></div>'+
+        '<div class="kpi"><div class="kpi-val '+(ctrlDone===RAYONS_CTRL.length?'green':'red')+'">'+( ctrlDone===RAYONS_CTRL.length?'✅ Complet':'⚠️ Incomplet')+'</div><div class="kpi-lbl">Statut</div></div>'+
+      '</div>'+
+      (RAYONS_CTRL.length?'<table class="table" style="margin-top:12px;"><thead><tr><th>Rayon</th><th>Statut</th></tr></thead><tbody>'+
+        RAYONS_CTRL.map(function(r){var done2=ctrl[r]&&ctrl[r].done;return '<tr><td>'+r+'</td><td><span class="pill '+(done2?'pill-green':'pill-gray')+'">'+(done2?'✅ Validé':'⬜ Non contrôlé')+'</span></td></tr>';}).join('')+
+        '</tbody></table>':'')+'</div>';
+
+    // 3. DLC
+    var secDlc='<div class="section">'+
+      '<div class="section-title">⏳ Contrôle DLC</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val blue">'+dlcItems.length+'</div><div class="kpi-lbl">Total produits</div></div>'+
+        '<div class="kpi"><div class="kpi-val red">'+dlcUrgent.length+'</div><div class="kpi-lbl">🔴 Urgents ≤3j</div></div>'+
+        '<div class="kpi"><div class="kpi-val green">'+dlcOk.length+'</div><div class="kpi-lbl">✅ OK</div></div>'+
+      '</div>'+
+      (dlcUrgent.length?'<div style="margin-top:14px;"><div style="font-size:11px;font-weight:700;color:#dc2626;margin-bottom:8px;">⚠️ Produits en alerte</div>'+
+        '<table class="table"><thead><tr><th>Produit</th><th>Rayon</th><th>DLC</th><th>Jours restants</th></tr></thead><tbody>'+
+        dlcUrgent.slice(0,8).map(function(x){
+          var d=new Date(x.date);d.setHours(0,0,0,0);
+          var diff=Math.floor((d-dlcNow)/86400000);
+          var dlcFmt=x.date.split('-').reverse().join('/');
+          return '<tr><td>'+x.name+'</td><td>'+(x.rayon||'—')+'</td><td>'+dlcFmt+'</td><td><span class="pill '+(diff<0?'pill-red':diff===0?'pill-red':'pill-orange')+'">'+(diff<0?'Expiré':diff===0?"Auj.":diff+' j')+'</span></td></tr>';
+        }).join('')+
+      '</tbody></table></div>':'')+'</div>';
+
+    // 4. Stock Lourd
+    var secSL='<div class="section">'+
+      '<div class="section-title">🏋️ Stock Lourd</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val orange">'+slItems.length+'</div><div class="kpi-lbl">Articles surveillés</div></div>'+
+        '<div class="kpi"><div class="kpi-val blue">'+(slValeur>0?slValeur.toFixed(3)+' DT':'—')+'</div><div class="kpi-lbl">Valeur totale</div></div>'+
+      '</div>'+
+      (slItems.length?'<table class="table" style="margin-top:12px;"><thead><tr><th>Produit</th><th>Qté</th><th>DPR</th><th>Valeur</th></tr></thead><tbody>'+
+        slItems.slice(0,8).map(function(x){return '<tr><td>'+x.nom+'</td><td>'+x.qte+'</td><td>'+(x.dpr?x.dpr.toFixed(3)+' DT':'—')+'</td><td>'+(x.qte&&x.dpr?(x.qte*x.dpr).toFixed(3)+' DT':'—')+'</td></tr>';}).join('')+
+      '</tbody></table>':'<div style="text-align:center;padding:16px;color:#94a3b8;font-size:12px;">Aucun article</div>')+
+    '</div>';
+
+    // 5. Inventaires
+    var secInv='<div class="section">'+
+      '<div class="section-title">📦 Inventaires</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val blue">'+invItems.length+'</div><div class="kpi-lbl">Total</div></div>'+
+        '<div class="kpi"><div class="kpi-val green">'+invValides.length+'</div><div class="kpi-lbl">✅ Validés</div></div>'+
+        '<div class="kpi"><div class="kpi-val orange">'+(invItems.length-invValides.length)+'</div><div class="kpi-lbl">En cours</div></div>'+
+      '</div>'+
+      (invItems.length?'<table class="table" style="margin-top:12px;"><thead><tr><th>N°</th><th>Date</th><th>Type</th><th>État</th></tr></thead><tbody>'+
+        invItems.slice(0,6).map(function(x){
+          var df=x.date?x.date.split('-').reverse().join('/'):'—';
+          var etatPill=x.etat==='V'?'pill-green':x.etat==='EC'?'pill-orange':'pill-gray';
+          var etatLabel=x.etat==='V'?'✅ Validé':x.etat==='EC'?'🔄 En cours':'⏳ À faire';
+          return '<tr><td>#'+x.num+'</td><td>'+df+'</td><td>'+(x.type||'—')+'</td><td><span class="pill '+etatPill+'">'+etatLabel+'</span></td></tr>';
+        }).join('')+
+      '</tbody></table>':'<div style="text-align:center;padding:16px;color:#94a3b8;font-size:12px;">Aucun inventaire</div>')+
+    '</div>';
+
+    // 6. Démarque
+    var secDmq='<div class="section">'+
+      '<div class="section-title">📉 Lutte contre la Démarque</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val orange">'+dmqData.length+'</div><div class="kpi-lbl">Constats enregistrés</div></div>'+
+        '<div class="kpi"><div class="kpi-val red">'+(dmqTotal>0?dmqTotal.toFixed(3)+' DT':'0 DT')+'</div><div class="kpi-lbl">Pertes enregistrées</div></div>'+
+      '</div>'+
+      (dmqData.length?'<table class="table" style="margin-top:12px;"><thead><tr><th>Produit</th><th>Type</th><th>Montant</th><th>Action</th></tr></thead><tbody>'+
+        dmqData.slice(0,6).map(function(x){return '<tr><td>'+x.produit+'</td><td>'+x.type+'</td><td>'+(x.montant?parseFloat(x.montant).toFixed(3)+' DT':'—')+'</td><td style="font-size:10px;color:#64748b;">'+(x.action||'—')+'</td></tr>';}).join('')+
+      '</tbody></table>':'<div style="text-align:center;padding:16px;color:#94a3b8;font-size:12px;">Aucun constat</div>')+
+    '</div>';
+
+    // 7. Équipe
+    var secEq='<div class="section">'+
+      '<div class="section-title">👥 Équipe</div>'+
+      '<div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);gap:10px;">'+
+        '<div class="kpi"><div class="kpi-val blue">'+empList.length+'</div><div class="kpi-lbl">Effectif total</div></div>'+
+        '<div class="kpi"><div class="kpi-val green">'+(empList.filter(function(e){var p=JSON.parse(localStorage.getItem(SK+'_pointage')||'{}');return p[todayKey]&&p[todayKey][e.id]==='P';}).length||'—')+'</div><div class="kpi-lbl">Présents aujourd\'hui</div></div>'+
+      '</div>'+
+    '</div>';
+
+    // ── Assemblage complet ──
+    var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'+
+      '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+      '<title>Rapport — '+nomAgent+'</title>'+
+      '<style>'+css+'</style></head><body>'+
+      '<div class="wrap">'+
+
+      // En-tête
+      '<div class="header">'+
+        '<div class="header-left">'+
+          '<h1>📊 Rapport d\'Activité</h1>'+
+          '<p>'+dateStr+' · Généré à '+heureStr+'</p>'+
+        '</div>'+
+        '<div class="header-right">'+
+          '<div style="font-size:14px;font-weight:800;">'+nomAgent+'</div>'+
+          '<div>'+role+'</div>'+
+          '<div>'+magasin+' — Rayon : '+rayon+'</div>'+
+          '<div style="margin-top:6px;"><span style="background:rgba(255,255,255,.2);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">TaskPro Field</span></div>'+
+        '</div>'+
+      '</div>'+
+
+      // Résumé exécutif
+      '<div class="section" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px solid #bae6fd;">'+
+        '<div class="section-title" style="color:#0369a1;">⭐ Résumé Exécutif</div>'+
+        '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">'+
+          '<div style="text-align:center;padding:12px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">'+
+            '<div style="font-size:24px;font-weight:900;color:'+(pct>=80?'#16a34a':pct>=50?'#d97706':'#dc2626')+'">'+pct+'%</div>'+
+            '<div style="font-size:10px;color:#64748b;font-weight:700;margin-top:2px;">TÂCHES</div>'+
+          '</div>'+
+          '<div style="text-align:center;padding:12px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">'+
+            '<div style="font-size:24px;font-weight:900;color:'+(dlcUrgent.length?'#dc2626':'#16a34a')+'">'+dlcUrgent.length+'</div>'+
+            '<div style="font-size:10px;color:#64748b;font-weight:700;margin-top:2px;">ALERTES DLC</div>'+
+          '</div>'+
+          '<div style="text-align:center;padding:12px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">'+
+            '<div style="font-size:24px;font-weight:900;color:#d97706">'+slItems.length+'</div>'+
+            '<div style="font-size:10px;color:#64748b;font-weight:700;margin-top:2px;">STOCK LOURD</div>'+
+          '</div>'+
+          '<div style="text-align:center;padding:12px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.08);">'+
+            '<div style="font-size:24px;font-weight:900;color:#2563eb">'+ctrlDone+'/'+RAYONS_CTRL.length+'</div>'+
+            '<div style="font-size:10px;color:#64748b;font-weight:700;margin-top:2px;">CONTRÔLES</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+
+      secTaches+secCtrl+secDlc+secSL+secInv+secDmq+secEq+
+
+      '<div class="footer">Rapport généré par <b>TaskPro Field</b> · '+dateStr+' · '+heureStr+'<br>'+nomAgent+' — '+magasin+'</div>'+
+      '</div></body></html>';
+
+    _dlPDF(html,'rapport_'+nomAgent.replace(/\s/g,'_')+'_'+tstr()+'.html');
+    showT('📄','Rapport complet exporté !');
+  },400);
+}
+
 function _dlPDF(html,filename){
-  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;
-  a.style.display='none';document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);document.body.removeChild(a);},1000);
-  // Track download
+  // Track in docs
   try{
     var docs=JSON.parse(localStorage.getItem(SK+'_docs')||'[]');
-    var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-    var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear()+' à '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-    docs.unshift({id:uid(),filename:filename,date:dateStr,html:html});
+    var now2=new Date();var MFR2=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+    var dateStr2=now2.getDate()+' '+MFR2[now2.getMonth()]+' '+now2.getFullYear()+' à '+String(now2.getHours()).padStart(2,'0')+':'+String(now2.getMinutes()).padStart(2,'0');
+    docs.unshift({id:uid(),filename:filename,date:dateStr2,html:html});
     if(docs.length>50)docs=docs.slice(0,50);
     localStorage.setItem(SK+'_docs',JSON.stringify(docs));
   }catch(e){}
+
+  // ── Ouvrir dans une nouvelle fenêtre avec boutons Imprimer/Partager ──
+  var printHtml=html.replace('</body>',
+    '<div style="position:fixed;bottom:0;left:0;right:0;background:#0033A0;padding:14px 16px;display:flex;gap:10px;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.4);">'+
+    '<button onclick="window.print()" style="flex:1;background:#fff;border:none;color:#0033A0;font-size:14px;font-weight:800;padding:12px;border-radius:12px;cursor:pointer;">🖨️ Imprimer / Enregistrer PDF</button>'+
+    '<button onclick="window.close()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:13px;font-weight:700;padding:12px 16px;border-radius:12px;cursor:pointer;">✕ Fermer</button>'+
+    '</div><div style="height:70px;"></div></body>'
+  );
+
+  var w=window.open('','_blank');
+  if(w){
+    w.document.write(printHtml);
+    w.document.close();
+    showT('📄','Rapport ouvert — Appuyez sur Imprimer !');
+  } else {
+    // Fallback si popup bloqué
+    var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=filename;
+    a.style.display='none';
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);document.body.removeChild(a);},1000);
+    showT('📄','Rapport téléchargé !');
+  }
+}
+
+function _dlPDFFallback(blob,filename){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);document.body.removeChild(a);},1000);
   showT('📄','Rapport téléchargé !');
 }
 
@@ -7540,6 +8726,131 @@ function exportSLPDF(){
     }).join('')+
     '</body></html>';
   _dlPDF(html,'stocklourd_'+gen.replace(/\//g,'-')+'.html');
+}
+
+// ══════════════════════════════════════════════
+// NOUVELLES MÉTHODES — JS
+// ══════════════════════════════════════════════
+var SK_NEW='tp10_newmethods';
+function loadNM(){try{return JSON.parse(localStorage.getItem(SK_NEW))||{};}catch(e){return{};}}
+function saveNM(d){try{localStorage.setItem(SK_NEW,JSON.stringify(d));}catch(e){}}
+
+// ── POMODORO ──
+var _pomTid=null,_pomSecs=25*60,_pomRunning=false,_pomCount=0,_pomIsPause=false;
+function initPomodoro(){
+  _pomRunning=false;clearInterval(_pomTid);
+  var d=loadNM();_pomCount=d.pomCount||0;
+  updatePomDisplay();
+  var btn=document.getElementById('pomBtnStart');if(btn)btn.textContent='▶ Démarrer';
+}
+function updatePomDisplay(){
+  var el=document.getElementById('pomodoroTimer');
+  var m=Math.floor(_pomSecs/60),s=_pomSecs%60;
+  if(el)el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  var c=document.getElementById('pomCount');if(c)c.textContent=_pomCount;
+  var m2=document.getElementById('pomodoroMode');if(m2)m2.textContent=_pomIsPause?'☕ PAUSE':'🍅 FOCUS';
+  var tc=document.getElementById('pomodoroTimer');if(tc)tc.style.color=_pomIsPause?'#4ade80':'#f87171';
+}
+function pomodoroStart(){
+  if(_pomRunning){clearInterval(_pomTid);_pomRunning=false;var btn=document.getElementById('pomBtnStart');if(btn)btn.textContent='▶ Reprendre';return;}
+  _pomRunning=true;var btn=document.getElementById('pomBtnStart');if(btn)btn.textContent='⏸ Pause';
+  _pomTid=setInterval(function(){
+    _pomSecs--;updatePomDisplay();
+    if(_pomSecs<=0){
+      clearInterval(_pomTid);_pomRunning=false;
+      try{var ctx=new(window.AudioContext||window.webkitAudioContext)();var o=ctx.createOscillator();var g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=660;g.gain.setValueAtTime(0.4,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1);o.start();o.stop(ctx.currentTime+1);}catch(e){}
+      if(!_pomIsPause){_pomCount++;var nd=loadNM();nd.pomCount=_pomCount;saveNM(nd);_pomIsPause=true;_pomSecs=5*60;showT('☕',_pomCount%4===0?'Grande pause 20-30 min !':'Pause 5 min !');}
+      else{_pomIsPause=false;_pomSecs=25*60;showT('🍅','Focus 25 min !');}
+      var btn2=document.getElementById('pomBtnStart');if(btn2)btn2.textContent='▶ Démarrer';updatePomDisplay();
+    }
+  },1000);
+}
+function pomodoroReset(){clearInterval(_pomTid);_pomRunning=false;_pomSecs=25*60;_pomIsPause=false;updatePomDisplay();var btn=document.getElementById('pomBtnStart');if(btn)btn.textContent='▶ Démarrer';}
+
+// ── RÈGLE 2 MINUTES ──
+function addRegle2min(){var f=document.getElementById('regle2minForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('regle2minInput').value='';var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('regle2minInput').focus();},300);}}
+function saveRegle2min(){var v=document.getElementById('regle2minInput').value.trim();if(!v)return;var d=loadNM();if(!d.r2m)d.r2m=[];d.r2m.unshift({id:uid(),text:v,done:false,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});saveNM(d);addRegle2min();renderRegle2min();showT('⚡','Fait !');}
+function toggleR2m(id){var d=loadNM();var i=(d.r2m||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderRegle2min();}
+function delR2m(id){var d=loadNM();d.r2m=(d.r2m||[]).filter(function(x){return x.id!==id;});saveNM(d);renderRegle2min();}
+function renderRegle2min(){
+  var d=loadNM();var items=d.r2m||[];var el=document.getElementById('regle2minList');var em=document.getElementById('regle2minEmpty');if(!el)return;
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
+  el.innerHTML=items.map(function(item){return '<div style="background:var(--s1);border:1px solid var(--bord);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;"><div onclick="toggleR2m(\''+item.id+'\')" style="width:22px;height:22px;border-radius:6px;border:2px solid '+(item.done?'#22c55e':'rgba(255,255,255,.2)')+';background:'+(item.done?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div style="font-size:9px;color:var(--t2);margin-right:4px;">'+item.ts+'</div><div onclick="delR2m(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('');
+}
+
+// ── ABCDE ──
+var _abcdeLevel='A';
+function setABCDE(btn,v){_abcdeLevel=v;document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity=b.dataset.abc===v?'1':'0.4';});}
+function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
+function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,level:_abcdeLevel,done:false});saveNM(d);addABCDE();renderABCDE();}
+function toggleABCDE(id){var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
+function delABCDE(id){var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
+function renderABCDE(){
+  var d=loadNM();var items=d.abcde||[];var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
+  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
+  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:4px;">'+lv+' — '+lbls[lv]+'</div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid var(--bord);border-radius:10px;padding:9px 12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div onclick="toggleABCDE(\''+item.id+'\')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.2)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delABCDE(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('')+'</div>';}).join('');
+}
+
+// ── MOSCOW ──
+var _moscowLevel='M';
+function setMoscow(btn,v){_moscowLevel=v;document.querySelectorAll('[data-msw]').forEach(function(b){b.style.opacity=b.dataset.msw===v?'1':'0.4';});}
+function addMoscow(){var f=document.getElementById('moscowForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('moscowInput').value='';_moscowLevel='M';document.querySelectorAll('[data-msw]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('moscowInput').focus();},300);}}
+function saveMoscow(){var v=document.getElementById('moscowInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.moscow)d.moscow=[];d.moscow.push({id:uid(),text:v,level:_moscowLevel,done:false});saveNM(d);addMoscow();renderMoscow();}
+function toggleMoscow(id){var d=loadNM();var i=(d.moscow||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderMoscow();}
+function delMoscow(id){var d=loadNM();d.moscow=(d.moscow||[]).filter(function(x){return x.id!==id;});saveNM(d);renderMoscow();}
+function renderMoscow(){
+  var d=loadNM();var items=d.moscow||[];var el=document.getElementById('moscowList');var em=document.getElementById('moscowEmpty');if(!el)return;
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
+  var info={M:{col:'#f87171',bg:'rgba(239,68,68,.1)',lbl:'Must Have'},S:{col:'#fb923c',bg:'rgba(249,115,22,.1)',lbl:'Should Have'},C:{col:'#facc15',bg:'rgba(234,179,8,.08)',lbl:'Could Have'},W:{col:'#94a3b8',bg:'rgba(100,116,139,.08)',lbl:"Won't Have"}};
+  el.innerHTML=['M','S','C','W'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';var inf=info[lv];return '<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:900;color:'+inf.col+';margin-bottom:4px;">'+lv+' — '+inf.lbl+'</div>'+gr.map(function(item){return '<div style="background:'+inf.bg+';border:1px solid var(--bord);border-radius:10px;padding:9px 12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div onclick="toggleMoscow(\''+item.id+'\')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?inf.col:'rgba(255,255,255,.2)')+';background:'+(item.done?inf.col:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delMoscow(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('')+'</div>';}).join('');
+}
+
+// ── WARREN BUFFETT 5/25 ──
+function addWarren(){var f=document.getElementById('warrenForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('warrenInput').value='';var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('warrenInput').focus();},300);}}
+function saveWarren(){var v=document.getElementById('warrenInput').value.trim();if(!v)return;var d=loadNM();if(!d.warren)d.warren=[];if(d.warren.length>=25){showT('⚠️','Maximum 25 objectifs');return;}d.warren.push({id:uid(),text:v,rank:d.warren.length+1});saveNM(d);addWarren();renderWarren();}
+function delWarren(id){var d=loadNM();d.warren=(d.warren||[]).filter(function(x){return x.id!==id;});d.warren.forEach(function(x,i){x.rank=i+1;});saveNM(d);renderWarren();}
+function renderWarren(){
+  var d=loadNM();var items=d.warren||[];var el=document.getElementById('warrenList');var em=document.getElementById('warrenEmpty');if(!el)return;
+  var t5=document.getElementById('warrenTop5Count');var av=document.getElementById('warrenAvoidCount');
+  if(t5)t5.textContent=Math.min(5,items.length);if(av)av.textContent=Math.max(0,items.length-5);
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
+  el.innerHTML=items.map(function(item,i){var isTop=i<5;return '<div style="background:'+(isTop?'rgba(34,197,94,.1)':'rgba(239,68,68,.07)')+';border:1px solid '+(isTop?'rgba(34,197,94,.3)':'rgba(239,68,68,.2)')+';border-radius:10px;padding:10px 12px;margin-bottom:5px;display:flex;align-items:center;gap:8px;"><div style="width:24px;height:24px;border-radius:6px;background:'+(isTop?'#15803d':'#dc2626')+';display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;flex-shrink:0;">'+(i+1)+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);">'+item.text+'</div>'+(isTop?'<span style="font-size:9px;font-weight:700;color:#4ade80;background:rgba(34,197,94,.15);padding:2px 6px;border-radius:10px;">✅ FOCUS</span>':'<span style="font-size:9px;font-weight:700;color:#f87171;background:rgba(239,68,68,.12);padding:2px 6px;border-radius:10px;">🚫 ÉVITER</span>')+'<div onclick="delWarren(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;margin-left:4px;">×</div></div>';}).join('');
+}
+
+// ── PICKLE JAR ──
+var _pickleType='rock';
+function setPickle(btn,v){_pickleType=v;document.querySelectorAll('[data-pkl]').forEach(function(b){b.style.opacity=b.dataset.pkl===v?'1':'0.4';});}
+function addPickle(){var f=document.getElementById('pickleForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('pickleInput').value='';_pickleType='rock';document.querySelectorAll('[data-pkl]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('pickleInput').focus();},300);}}
+function savePickle(){var v=document.getElementById('pickleInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.pickle)d.pickle=[];d.pickle.push({id:uid(),text:v,type:_pickleType,done:false});saveNM(d);addPickle();renderPickle();}
+function togglePickle(id){var d=loadNM();var i=(d.pickle||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderPickle();}
+function delPickle(id){var d=loadNM();d.pickle=(d.pickle||[]).filter(function(x){return x.id!==id;});saveNM(d);renderPickle();}
+function renderPickle(){
+  var d=loadNM();var items=d.pickle||[];var types={rock:{col:'#f87171',el:'pickleRocks'},gravel:{col:'#fbbf24',el:'pickleGravel'},sand:{col:'#facc15',el:'pickleSand'}};
+  Object.keys(types).forEach(function(t){var gr=items.filter(function(x){return x.type===t;});var el=document.getElementById(types[t].el);if(!el)return;if(!gr.length){el.innerHTML='<div style="font-size:10px;color:var(--t2);font-style:italic;text-align:center;padding:4px;">Aucune tâche</div>';return;}el.innerHTML=gr.map(function(item){return '<div style="background:var(--s1);border:1px solid var(--bord);border-radius:8px;padding:7px 10px;margin-bottom:4px;display:flex;align-items:center;gap:6px;"><div onclick="togglePickle(\''+item.id+'\')" style="width:18px;height:18px;border-radius:5px;border:2px solid '+(item.done?types[t].col:'rgba(255,255,255,.2)')+';background:'+(item.done?types[t].col:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:11px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delPickle(\''+item.id+'\')" style="color:#ef4444;font-size:14px;cursor:pointer;">×</div></div>';}).join('');});
+}
+
+// ── KANBAN ──
+var _kanbanCol='todo';
+function setKanbanCol(btn,v){_kanbanCol=v;document.querySelectorAll('[data-kcol]').forEach(function(b){b.style.opacity=b.dataset.kcol===v?'1':'0.4';});}
+function addKanban(){var f=document.getElementById('kanbanForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('kanbanInput').value='';_kanbanCol='todo';document.querySelectorAll('[data-kcol]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('kanbanInput').focus();},300);}}
+function saveKanban(){var v=document.getElementById('kanbanInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.kanban)d.kanban=[];d.kanban.push({id:uid(),text:v,col:_kanbanCol});saveNM(d);addKanban();renderKanban();}
+function moveKanban(id,col){var d=loadNM();var i=(d.kanban||[]).find(function(x){return x.id===id;});if(i)i.col=col;saveNM(d);renderKanban();}
+function delKanban(id){var d=loadNM();d.kanban=(d.kanban||[]).filter(function(x){return x.id!==id;});saveNM(d);renderKanban();}
+function renderKanban(){
+  var d=loadNM();var items=d.kanban||[];var cols={todo:{el:'kanbanTodo',cnt:'kanbanTodoCount',col:'#94a3b8'},doing:{el:'kanbanDoing',cnt:'kanbanDoingCount',col:'#fbbf24'},done:{el:'kanbanDone',cnt:'kanbanDoneCount',col:'#4ade80'}};var nextCol={todo:'doing',doing:'done',done:'todo'};var nextLabel={todo:'⚡→',doing:'✅→',done:'📋→'};
+  Object.keys(cols).forEach(function(c){var gr=items.filter(function(x){return x.col===c;});var cnt=document.getElementById(cols[c].cnt);if(cnt)cnt.textContent=gr.length;var el=document.getElementById(cols[c].el);if(!el)return;el.innerHTML=gr.map(function(item){return '<div style="background:var(--s2);border:1px solid var(--bord);border-radius:8px;padding:7px 8px;font-size:10px;font-weight:700;color:var(--t1);margin-bottom:4px;"><div style="margin-bottom:5px;line-height:1.3;">'+item.text+'</div><div style="display:flex;gap:4px;"><button onclick="moveKanban(\''+item.id+'\',\''+nextCol[c]+'\')" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:'+cols[c].col+';font-size:10px;font-weight:700;padding:3px;border-radius:6px;cursor:pointer;">'+nextLabel[c]+'</button><button onclick="delKanban(\''+item.id+'\')" style="background:rgba(239,68,68,.1);border:none;color:#f87171;font-size:12px;width:20px;height:20px;border-radius:5px;cursor:pointer;">×</button></div></div>';}).join('');});
+}
+
+// ── GTD ──
+function addGTD(){var f=document.getElementById('gtdForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('gtdInput').value='';var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('gtdInput').focus();},300);}}
+function saveGTD(){var v=document.getElementById('gtdInput').value.trim();if(!v)return;var d=loadNM();if(!d.gtd)d.gtd=[];d.gtd.unshift({id:uid(),text:v,done:false});saveNM(d);addGTD();renderGTD();}
+function toggleGTD(id){var d=loadNM();var i=(d.gtd||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderGTD();}
+function delGTD(id){var d=loadNM();d.gtd=(d.gtd||[]).filter(function(x){return x.id!==id;});saveNM(d);renderGTD();}
+function renderGTD(){
+  var d=loadNM();var items=d.gtd||[];var el=document.getElementById('gtdList');var em=document.getElementById('gtdEmpty');if(!el)return;
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
+  el.innerHTML=items.map(function(item){return '<div style="background:var(--s1);border:1px solid var(--bord);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px;"><div onclick="toggleGTD(\''+item.id+'\')" style="width:22px;height:22px;border-radius:6px;border:2px solid '+(item.done?'#38bdf8':'rgba(255,255,255,.2)')+';background:'+(item.done?'#38bdf8':'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delGTD(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('');
 }
 
 // ══════════════════════════════════════════════
@@ -9158,6 +10469,16 @@ function updateDlcBadge(){
     <div class="fg"><label class="fl">Fonction</label><input class="fi" id="p_r" placeholder="Manager de Rayon"></div>
     <div class="fg"><label class="fl">Magasin</label><input class="fi" id="p_s" placeholder="Carrefour Tunis"></div>
     <div class="fg"><label class="fl">Rayon</label><input class="fi" id="p_ray" placeholder="Alimentaire"></div>
+
+    <!-- Bouton Rapport -->
+    <div style="margin:8px 0 4px;padding:14px;background:linear-gradient(135deg,rgba(0,51,160,.15),rgba(59,130,246,.08));border:1px solid rgba(59,130,246,.3);border-radius:14px;">
+      <div style="font-size:11px;font-weight:700;color:#60a5fa;margin-bottom:4px;">📊 Rapport Professionnel</div>
+      <div style="font-size:10px;color:var(--t2);line-height:1.5;margin-bottom:10px;">Générez votre rapport complet et envoyez-le directement par Email, WhatsApp ou imprimez-le.</div>
+      <button onclick="closeM('pmov');exportRapportComplet()" style="width:100%;background:#0033A0;border:none;color:#fff;font-size:13px;font-weight:800;padding:12px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+        <span style="font-size:16px;">📤</span> Envoyer / Partager mon Rapport
+      </button>
+    </div>
+
     <div class="macts">
       <button class="mb mg" onclick="closeM('pmov')">Annuler</button>
       <button class="mb mp" onclick="saveP()">💾 Sauvegarder</button>
