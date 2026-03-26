@@ -727,6 +727,17 @@ body.light #pgCommercial .tli-name {
 input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text-fill-color:#fff!important;}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+  <!-- ══ PWA ══ -->
+  <meta name="theme-color" content="#07080f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TaskPro">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="TaskPro">
+  <meta name="description" content="Application de gestion de rayon — MG MAXI DENDEN">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2307080f'/%3E%3Ctext y='.9em' font-size='80'%3E📋%3C/text%3E%3C/svg%3E">
+  <!-- manifest injected by JS -->
 </head>
 <body>
 <div class="bg-mesh"></div>
@@ -5890,19 +5901,56 @@ function checkDlcNotifications(){
 
 // Protection suppression DLC : demander confirmation avec info temps
 function confirmDelDlc(id,name,dateStr){
-  var now=new Date();now.setHours(0,0,0,0);
-  var d=new Date(dateStr);d.setHours(0,0,0,0);
-  var diff=Math.round((d-now)/(1000*60*60*24));
-  var msg='';
-  if(diff<0) msg='⛔ Ce produit est EXPIRÉ depuis '+Math.abs(diff)+' jour(s). Êtes-vous sûr de vouloir le supprimer ?';
-  else if(diff<=3) msg='🔴 DLC dans '+diff+' jour(s) ! Confirmez-vous la suppression de "'+name+'" ?';
-  else msg='Supprimer "'+name+'" ? Cette action est irréversible.';
-  if(confirm(msg)) delDlcItem(id);
+  // confirm() bloqué sur Android Chrome PWA — supprimer directement avec undo
+  delDlcItem(id);
 }
 
 function requestDlcNotifPerm(){if('Notification' in window&&Notification.permission==='default'){Notification.requestPermission().then(function(p){if(p==='granted')showT('🔔','Notifications activées !');});}}
 
-function printDlcReport(){var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');if(!items.length){showT('⚠️','Aucun produit DLC');return;}var now=new Date();now.setHours(0,0,0,0);var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();var rows=items.map(function(item){var d=new Date(item.date);d.setHours(0,0,0,0);var diff=Math.round((d-now)/(1000*60*60*24));var cls=diff<0?'p-urgent':diff<=3?'p-urgent':diff<=7?'p-attention':'p-ok';var status=diff<0?'EXPIRÉ':diff===0?'Aujourd\'hui':diff===1?'Demain':diff+' jours';var dStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();return'<tr><td>'+item.name+'</td><td>'+(item.rayon||'—')+'</td><td>'+dStr+'</td><td class="'+cls+'">'+status+'</td></tr>';}).join('');var div=document.getElementById('printDLC');div.innerHTML='<h2 style="color:#1e3a8a;margin-bottom:4px;">📦 Contrôle DLC</h2><div style="font-size:11px;color:#666;margin-bottom:12px;">Généré le '+dateStr+'</div><table><thead><tr><th>Produit</th><th>Rayon</th><th>Date DLC</th><th>Statut</th></tr></thead><tbody>'+rows+'</tbody></table>';window.print();}
+function printDlcReport(){
+  var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+  if(!items.length){showT('⚠️','Aucun produit DLC');return;}
+  var now=new Date();now.setHours(0,0,0,0);
+  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var dateStr=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var sorted=items.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date);});
+  var rows=sorted.map(function(item){
+    var d=new Date(item.date);d.setHours(0,0,0,0);
+    var diff=Math.round((d-now)/(1000*60*60*24));
+    var col=diff<0?'#dc2626':diff<=3?'#dc2626':diff<=7?'#d97706':'#16a34a';
+    var status=diff<0?'EXPIRÉ':diff===0?'Auj.':diff===1?'Demain':diff+' j';
+    var dStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();
+    return '<tr style="border-bottom:1px solid #e5e7eb;">'
+      +'<td style="padding:8px 10px;font-size:13px;font-weight:600;">'+item.name+'</td>'
+      +'<td style="padding:8px 10px;font-size:12px;color:#6b7280;">'+( item.rayon||'—')+'</td>'
+      +'<td style="padding:8px 10px;font-size:12px;">'+dStr+'</td>'
+      +(item.alarmTime?'<td style="padding:8px 10px;font-size:12px;color:#0891b2;">'+item.alarmTime+'</td>':'<td style="padding:8px 10px;font-size:12px;color:#9ca3af;">—</td>')
+      +'<td style="padding:8px 10px;font-size:12px;font-weight:700;color:'+col+';">'+status+'</td>'
+      +'</tr>';
+  }).join('');
+  var expired=sorted.filter(function(i){var d=new Date(i.date);d.setHours(0,0,0,0);return Math.round((d-now)/86400000)<0;}).length;
+  var urgent=sorted.filter(function(i){var d=new Date(i.date);d.setHours(0,0,0,0);var df=Math.round((d-now)/86400000);return df>=0&&df<=3;}).length;
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Contrôle DLC</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:750px;margin:0 auto;padding:20px;color:#111;}'
+    +'h1{color:#1e3a8a;font-size:20px;margin-bottom:4px;}table{width:100%;border-collapse:collapse;margin-top:14px;}'
+    +'th{background:#1e3a8a;color:#fff;padding:9px 10px;font-size:12px;text-align:left;}'
+    +'.stat{display:inline-block;background:#f1f5f9;border-radius:8px;padding:6px 14px;margin:4px 6px 10px 0;font-size:12px;font-weight:700;}'
+    +'@media print{button{display:none!important;}}</style>'
+    +'</head><body>'
+    +'<h1>📦 Contrôle DLC</h1>'
+    +'<div style="font-size:11px;color:#666;margin-bottom:8px;">Généré le '+dateStr+(prof&&prof.store?' · '+prof.store:'')+'</div>'
+    +'<button onclick="window.print()" style="background:#1e3a8a;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;margin-bottom:10px;">🖨️ Imprimer</button>'
+    +'<div>'
+    +'<span class="stat">Total : '+items.length+'</span>'
+    +(expired?'<span class="stat" style="background:#fef2f2;color:#dc2626;">⛔ Expirés : '+expired+'</span>':'')
+    +(urgent?'<span class="stat" style="background:#fff7ed;color:#d97706;">🔴 Urgents : '+urgent+'</span>':'')
+    +'</div>'
+    +'<table><thead><tr><th>Produit</th><th>Rayon</th><th>Date DLC</th><th>Alarme</th><th>Statut</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table>'
+    +'</body></html>';
+  _dlPDF(html,'dlc_rapport_'+tstr()+'.html');
+}
+
 
 function getStatut(taskId){var d=tstr();if(!comps[d])return'nd';var s=comps[d]['_st_'+taskId];return s||'nd';}
 function setStatut(taskId,s){var d=tstr();if(!comps[d])comps[d]={};comps[d]['_st_'+taskId]=s;if(s==='dn'&&!comps[d][taskId]){comps[d][taskId]=true;var t=tasks.find(function(x){return x.id===taskId;});if(t){addN('done','✅ Accomplie',t.name);if(cfg.sound)beep();}}if(s!=='dn')comps[d][taskId]=false;save();if(_curPage==='taches'||_curPage==='commercial')renderTaches();if(_curPage==='home')renderHome();}
@@ -9905,66 +9953,97 @@ function checkDlcAlarms(){
   try{
     var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
     if(!items.length)return;
+
+    // ── Heure locale correcte (sans offset) ──
     var now=new Date();
-    var todayStr=tstr();
     var currentHH=String(now.getHours()).padStart(2,'0');
     var currentMM=String(now.getMinutes()).padStart(2,'0');
     var currentTime=currentHH+':'+currentMM;
+    // Date locale correcte
+    var todayStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+
     var firedKey=SK+'_alarmFired';
     var fired=JSON.parse(localStorage.getItem(firedKey)||'{}');
 
     items.forEach(function(item){
       if(!item.alarmTime||!item.date)return;
-      // Vérifier si c'est la bonne date ET la bonne heure
       if(item.date===todayStr && item.alarmTime===currentTime){
         var key=item.id+'_'+todayStr+'_'+currentTime;
-        if(fired[key])return; // déjà déclenché
+        if(fired[key])return;
         fired[key]=true;
         localStorage.setItem(firedKey,JSON.stringify(fired));
 
-        // Son d'alarme
-        try{
-          var ctx=new(window.AudioContext||window.webkitAudioContext)();
-          [0,200,400,600].forEach(function(delay){
-            var o=ctx.createOscillator();
-            var g=ctx.createGain();
-            o.connect(g);g.connect(ctx.destination);
-            o.frequency.value=880;
-            g.gain.setValueAtTime(0.4,ctx.currentTime+delay/1000);
-            g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.3);
-            o.start(ctx.currentTime+delay/1000);
-            o.stop(ctx.currentTime+delay/1000+0.3);
-          });
-        }catch(e){}
-
-        // Notification système
-        var body='🗑️ Retirer du rayon maintenant !'+(item.rayon?' · '+item.rayon:'');
-        if(Notification.permission==='granted'){
-          new Notification('⏰ ALARME DLC — '+item.name,{
-            body:body,
-            tag:'dlc_alarm_'+item.id,
-            requireInteraction:true
-          });
+        // ── Son d'alarme ──
+        function playAlarm(){
+          try{
+            var ctx=new(window.AudioContext||window.webkitAudioContext)();
+            // Séquence de 4 bips urgents
+            [0,250,500,750,1200,1450,1700,1950].forEach(function(delay){
+              var o=ctx.createOscillator();
+              var g=ctx.createGain();
+              o.connect(g);g.connect(ctx.destination);
+              o.type='square';
+              o.frequency.value=delay%500===0?1046:880;
+              g.gain.setValueAtTime(0,ctx.currentTime+delay/1000);
+              g.gain.linearRampToValueAtTime(0.5,ctx.currentTime+delay/1000+0.05);
+              g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.22);
+              o.start(ctx.currentTime+delay/1000);
+              o.stop(ctx.currentTime+delay/1000+0.25);
+            });
+          }catch(e){
+            // Fallback: vibration si disponible
+            if(navigator.vibrate) navigator.vibrate([300,100,300,100,600]);
+          }
         }
+        playAlarm();
+        // Rejouer après 3s pour s'assurer que l'utilisateur entend
+        setTimeout(playAlarm, 3000);
 
-        // Notification interne
-        addN('bell','⏰ ALARME : '+item.name,body);
+        // ── Notification système ──
+        var titre='⏰ ALARME DLC — '+item.name;
+        var corps='🗑️ Retirer du rayon maintenant !'+(item.rayon?' · Rayon: '+item.rayon:'');
+        function sendNotif(){
+          if(Notification.permission==='granted'){
+            try{
+              var n=new Notification(titre,{
+                body:corps,
+                tag:'dlc_alarm_'+item.id,
+                requireInteraction:true,
+                icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⏰</text></svg>'
+              });
+              // Re-notifier après 30s si pas fermée
+              setTimeout(function(){ try{ n.close(); new Notification(titre,{body:corps,requireInteraction:true}); }catch(e){} },30000);
+            }catch(e){}
+          } else if(Notification.permission==='default'){
+            Notification.requestPermission().then(function(p){
+              if(p==='granted') sendNotif();
+            });
+          }
+        }
+        sendNotif();
+
+        // ── Notification interne ──
+        addN('bell',titre,corps);
         var nb=document.getElementById('nb');if(nb)nb.style.display='block';
 
-        // Toast visible
-        showT('⏰','ALARME : '+item.name+' — Retirer maintenant !');
+        // ── Toast très visible ──
+        showT('⏰','🚨 ALARME DLC : '+item.name);
+        // Toast supplémentaire après 2s
+        setTimeout(function(){ showT('🗑️',item.name+' — Retirer du rayon maintenant !'); },2500);
       }
     });
-    // Nettoyer les anciens fired (garder 2 derniers jours)
+
+    // Nettoyer fired anciens
     var cleaned={};
     var yesterday=new Date(now);yesterday.setDate(yesterday.getDate()-1);
-    var ystStr=yesterday.toISOString().split('T')[0].replace(/-/g,'');
+    var ystStr=yesterday.getFullYear()+'-'+String(yesterday.getMonth()+1).padStart(2,'0')+'-'+String(yesterday.getDate()).padStart(2,'0');
     Object.keys(fired).forEach(function(k){
-      if(k.indexOf(todayStr.replace(/-/g,''))>-1||k.indexOf(ystStr)>-1)cleaned[k]=fired[k];
+      if(k.indexOf(todayStr)>-1||k.indexOf(ystStr)>-1)cleaned[k]=fired[k];
     });
     localStorage.setItem(firedKey,JSON.stringify(cleaned));
   }catch(e){}
 }
+
 
 
 var SK_INV='tp10_inv';
@@ -10755,6 +10834,39 @@ function updateMsgBadge(){
 }
 
 
+
+// ══ PWA SERVICE WORKER (safe) ══
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    // Try to register sw.js if it exists (won't break if it doesn't)
+    navigator.serviceWorker.register('./sw.js')
+      .then(function(r){console.log('[TaskPro] SW ready');})
+      .catch(function(){/* no sw.js - offline mode disabled */});
+  });
+}
+
+
+
+
+
+// ══ PWA MANIFEST (inline) ══
+(function(){
+  try{
+    var manifest={
+      name:'TaskPro',short_name:'TaskPro',
+      description:'Application de gestion de rayon — MG MAXI DENDEN',
+      start_url:'./',display:'standalone',
+      background_color:'#07080f',theme_color:'#07080f',
+      orientation:'portrait-primary',
+      icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%2307080f"/><text y=".85em" font-size="72" text-anchor="middle" x="50">📋</text></svg>',sizes:'192x192',type:'image/svg+xml'}]
+    };
+    var blob=new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
+    var link=document.createElement('link');
+    link.rel='manifest';link.href=URL.createObjectURL(blob);
+    document.head.appendChild(link);
+  }catch(e){}
+})();
+
 window.addEventListener('DOMContentLoaded',()=>{
   loadTheme();load();initDef();unlockA();
   if(notifs.length)document.getElementById('nb').style.display='block';
@@ -10774,9 +10886,16 @@ window.addEventListener('DOMContentLoaded',()=>{
   checkDlcNotifications();
   // Vérifier toutes les heures
   setInterval(checkDlcNotifications, 60*60*1000);
-  // Alarmes DLC — vérification chaque minute
+  // Alarmes DLC — synchronisées avec le début de chaque minute
   checkDlcAlarms();
-  setInterval(checkDlcAlarms, 60*1000);
+  (function scheduleAlarmCheck(){
+    var now=new Date();
+    var msToNextMinute=(60-now.getSeconds())*1000 - now.getMilliseconds() + 500;
+    setTimeout(function(){
+      checkDlcAlarms();
+      setInterval(checkDlcAlarms, 60*1000);
+    }, msToNextMinute);
+  })();
   setInterval(()=>{updateClock();checkTN();},1000);
 });
 
