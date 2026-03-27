@@ -552,6 +552,26 @@ body.light .motto-mg{font-style:normal;font-weight:700;font-family:'IBM Plex San
 .clock-motto{color:#e53e3e!important;}
 body.light .clock-date{color:#0d1117!important;}
 
+/* ── PASSATION LIGHT MODE ── */
+body.light #passationPanel{
+  background:linear-gradient(135deg,#fffbeb,#fef3c7) !important;
+  border-bottom-color:rgba(234,179,8,.5) !important;
+}
+body.light #passationDateLbl{color:#92400e !important;}
+body.light #passationContent{color:#1a1200 !important;}
+body.light #passationContent div{color:#1a1200 !important;}
+body.light #passationInputZone textarea{
+  background:rgba(234,179,8,.08) !important;
+  color:#1a1200 !important;
+  border-color:rgba(234,179,8,.4) !important;
+  -webkit-text-fill-color:#1a1200 !important;
+}
+body.light #passationInputZone textarea::placeholder{color:#a16207 !important;}
+body.light #shiftMatin,body.light #shiftApresMidi{
+  color:#92400e !important;
+  border-color:rgba(234,179,8,.4) !important;
+}
+
 /* ── INVENTAIRE LIGHT MODE ── */
 body.light #pgInventaireMag{background:none!important;}
 body.light #invSiteCard{background:linear-gradient(135deg,rgba(15,118,110,.12),rgba(6,78,59,.08))!important;border-color:rgba(20,184,166,.3)!important;}
@@ -5213,9 +5233,49 @@ function addH(t,n){hist.unshift({type:t,name:n,ts:tn().toLocaleString('fr-FR',{h
 let _ln={};
 function checkTN(){
   if(!cfg.notif)return;
-  const d=tn(),hm=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
-  getTT().forEach(t=>{
-    if(t.time===hm&&!isDone(t.id)){const k=tstr()+'-'+t.id;if(!_ln[k]){_ln[k]=true;addN('bell','🔔 Rappel',t.name+' — '+t.time);alertToast(t.name,t.time);if(cfg.sound)beep();}}
+  // Heure locale précise sans offset
+  var now=new Date();
+  var hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  var today=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  getTT().forEach(function(t){
+    if(t.time===hm&&!isDone(t.id)){
+      var k=today+'-'+t.id;
+      if(!_ln[k]){
+        _ln[k]=true;
+
+        // 1. Notification interne app
+        addN('bell','🔔 Rappel tâche',t.name+' — '+t.time);
+        var nb=document.getElementById('nb');if(nb)nb.style.display='block';
+
+        // 2. Toast visible en haut
+        alertToast(t.name,t.time);
+
+        // 3. Son
+        if(cfg.sound)beep();
+
+        // 4. Notification système navigateur
+        function sendTaskNotif(){
+          if(Notification.permission==='granted'){
+            try{
+              new Notification('🔔 Rappel : '+t.name,{
+                body:'⏰ Il est '+t.time+' — Tâche à effectuer maintenant !',
+                tag:'task_'+t.id,
+                requireInteraction:true,
+                icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🔔</text></svg>'
+              });
+            }catch(e){}
+          } else if(Notification.permission==='default'){
+            Notification.requestPermission().then(function(p){
+              if(p==='granted') sendTaskNotif();
+            });
+          }
+        }
+        sendTaskNotif();
+
+        // 5. Vibration (mobile)
+        if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]);
+      }
+    }
   });
 }
 function alertToast(name,time){
@@ -5247,7 +5307,7 @@ function openTM(id){
   _tmpImgs=t&&t.imgs?[...t.imgs]:[];
   renderImgGrid();updCat();
   document.getElementById('tDelRow').style.display=id?'block':'none';
-  document.getElementById('tmov').classList.add('on');
+  const _tmovEl=document.getElementById('tmov');_tmovEl.style.display='';_tmovEl.classList.add('on');
 }
 function selPrio(el){document.querySelectorAll('.prio-opt').forEach(o=>o.classList.remove('on'));el.classList.add('on');}
 function saveT(){
@@ -9721,18 +9781,22 @@ function setPassationShift(shift){
 }
 
 function renderPassationPanel(){
+  var isLight = document.body.classList.contains('light');
   // Update tab styles
   var tabM = document.getElementById('shiftMatin');
   var tabA = document.getElementById('shiftApresMidi');
+  var inactiveBg = isLight ? 'rgba(234,179,8,.08)' : 'rgba(255,255,255,.05)';
+  var inactiveBord = isLight ? 'rgba(234,179,8,.2)' : 'rgba(255,255,255,.1)';
+  var inactiveCol = isLight ? '#a16207' : '#64748b';
   if(tabM){
-    tabM.style.background = _passShift==='matin' ? 'rgba(234,179,8,.25)' : 'rgba(255,255,255,.05)';
-    tabM.style.borderColor = _passShift==='matin' ? 'rgba(234,179,8,.5)' : 'rgba(255,255,255,.1)';
-    tabM.style.color = _passShift==='matin' ? '#fbbf24' : '#64748b';
+    tabM.style.background = _passShift==='matin' ? 'rgba(234,179,8,.25)' : inactiveBg;
+    tabM.style.borderColor = _passShift==='matin' ? 'rgba(234,179,8,.5)' : inactiveBord;
+    tabM.style.color = _passShift==='matin' ? (isLight?'#92400e':'#fbbf24') : inactiveCol;
   }
   if(tabA){
-    tabA.style.background = _passShift==='apresmidi' ? 'rgba(234,179,8,.25)' : 'rgba(255,255,255,.05)';
-    tabA.style.borderColor = _passShift==='apresmidi' ? 'rgba(234,179,8,.5)' : 'rgba(255,255,255,.1)';
-    tabA.style.color = _passShift==='apresmidi' ? '#fbbf24' : '#64748b';
+    tabA.style.background = _passShift==='apresmidi' ? 'rgba(234,179,8,.25)' : inactiveBg;
+    tabA.style.borderColor = _passShift==='apresmidi' ? 'rgba(234,179,8,.5)' : inactiveBord;
+    tabA.style.color = _passShift==='apresmidi' ? (isLight?'#92400e':'#fbbf24') : inactiveCol;
   }
 
   var data = loadPassations();
@@ -9745,22 +9809,31 @@ function renderPassationPanel(){
 
   var shiftLbl = _passShift === 'matin' ? '🌅 Équipe Matin' : '🌆 Équipe Après-midi';
 
+  // Colors depending on mode
+  var cardBg   = isLight ? 'rgba(234,179,8,.1)'  : 'rgba(255,255,255,.05)';
+  var cardBord = isLight ? 'rgba(234,179,8,.35)' : 'rgba(234,179,8,.2)';
+  var txtMain  = isLight ? '#1a1200'             : 'var(--t1)';
+  var txtSub   = isLight ? '#a16207'             : '#64748b';
+  var shiftCol = isLight ? '#92400e'             : '#fbbf24';
+  var emptyCol = isLight ? '#a16207'             : 'rgba(255,255,255,.4)';
+  var btnCol   = isLight ? '#92400e'             : '#fbbf24';
+
   if(entry && entry.texte){
     // Afficher la passation existante
     if(content) content.innerHTML =
-      '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(234,179,8,.2);border-radius:10px;padding:10px 12px;margin-bottom:8px;">'+
+      '<div style="background:'+cardBg+';border:1px solid '+cardBord+';border-radius:10px;padding:10px 12px;margin-bottom:8px;">'+
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'+
-          '<div style="font-size:10px;font-weight:700;color:#fbbf24;">'+shiftLbl+' · '+entry.heure+'</div>'+
-          '<div style="font-size:10px;color:#64748b;">par '+entry.auteur+'</div>'+
+          '<div style="font-size:10px;font-weight:700;color:'+shiftCol+';">'+shiftLbl+' · '+entry.heure+'</div>'+
+          '<div style="font-size:10px;color:'+txtSub+';">par '+entry.auteur+'</div>'+
         '</div>'+
-        '<div style="font-size:12px;color:var(--t1);line-height:1.7;white-space:pre-line;">'+entry.texte+'</div>'+
+        '<div style="font-size:12px;color:'+txtMain+';line-height:1.7;white-space:pre-line;">'+entry.texte+'</div>'+
       '</div>'+
-      '<button onclick="editPassation()" style="width:100%;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);color:#fbbf24;font-size:12px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;margin-bottom:4px;">✏️ Modifier la passation</button>';
+      '<button onclick="editPassation()" style="width:100%;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.3);color:'+btnCol+';font-size:12px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;margin-bottom:4px;">✏️ Modifier la passation</button>';
     if(inputZone) inputZone.style.display = 'none';
   } else {
     // Afficher le formulaire vide
     if(content) content.innerHTML =
-      '<div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px;text-align:center;">'+
+      '<div style="font-size:11px;color:'+emptyCol+';margin-bottom:8px;text-align:center;">'+
         '📝 Aucune passation enregistrée pour '+shiftLbl+' aujourd\'hui'+
       '</div>';
     if(inputZone) inputZone.style.display = 'block';
@@ -10874,11 +10947,11 @@ window.addEventListener('DOMContentLoaded',()=>{
   var _bn=document.querySelector('.bnav');if(_bn)_bn.style.display='flex';
   updateDlcBadge();
   updateClock();
-  // Demander permission notifications DLC
+  // Demander permission notifications (tâches + DLC)
   if('Notification' in window && Notification.permission==='default'){
     setTimeout(function(){
       Notification.requestPermission().then(function(p){
-        if(p==='granted'){showT('🔔','Notifications DLC activées !');}
+        if(p==='granted'){showT('🔔','Notifications activées — Rappels tâches & DLC !');}
       });
     },2000);
   }
@@ -10896,7 +10969,17 @@ window.addEventListener('DOMContentLoaded',()=>{
       setInterval(checkDlcAlarms, 60*1000);
     }, msToNextMinute);
   })();
-  setInterval(()=>{updateClock();checkTN();},1000);
+  setInterval(()=>{updateClock();},1000);
+  // checkTN synchronisé avec le début de chaque minute
+  checkTN();
+  (function scheduleTaskCheck(){
+    var now=new Date();
+    var msToNext=(60-now.getSeconds())*1000 - now.getMilliseconds() + 200;
+    setTimeout(function(){
+      checkTN();
+      setInterval(checkTN, 60*1000);
+    }, msToNext);
+  })();
 });
 
 
