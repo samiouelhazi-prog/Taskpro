@@ -440,7 +440,7 @@ body.light #navChiffres.on .bi-l{color:#16a34a;font-weight:900;}
 .mtit{font-size:18px;font-weight:900;font-family:'Syne',sans-serif;margin-bottom:16px;}
 .fg{margin-bottom:12px;}
 .fl{font-size:10px;font-weight:700;color:var(--t2);margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:.7px;}
-.fi,.fs{width:100%;padding:12px 14px;background:rgba(255,255,255,.055);border:1.5px solid rgba(255,255,255,.09);border-radius:13px;color:var(--t1);font-family:'IBM Plex Sans';font-size:13px;outline:none;transition:border .2s;}
+.fi,.fs{width:100%;padding:12px 14px;background:rgba(255,255,255,.055);border:1.5px solid rgba(255,255,255,.09);border-radius:13px;color:var(--t1);font-family:'IBM Plex Sans';font-size:13px;outline:none;transition:border .2s;color-scheme:dark;}
 .fi:focus,.fs:focus{border-color:var(--blue);}
 .fi::placeholder{color:var(--t3);}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -545,7 +545,7 @@ body.light #gsResults{background:rgba(240,244,255,.99);border-color:rgba(0,0,0,.
 body.light .gs-name{color:#0f172a;}
 body.light .gs-item{border-bottom-color:rgba(0,0,0,.05);}
 body.light #gsOverlay.on{background:rgba(200,210,240,.6);}
-body.light .av{background:linear-gradient(140deg,#2563eb,#7c3aed)!important;}
+/* ══ PLANOGRAMME ══ */
 body.light .icb{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.1)!important;color:#4a5568!important;}
 body.light .focus-card{background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(8,145,178,.06))!important;border-color:rgba(59,130,246,.25)!important;}
 body.light .swipe-card{border-color:rgba(0,0,0,.12)!important;}
@@ -565,7 +565,7 @@ body.light .tli{background:rgba(255,255,255,.7)!important;border-color:rgba(0,0,
 body.light .tli-name,body.light .tli-n{color:#0d1117!important;}
 body.light .drawer,body.light .msh,body.light .cmsh{background:#f8fafc!important;border-color:rgba(0,0,0,.1)!important;}
 body.light .dr-item:active,body.light .dr-it:active{background:rgba(0,0,0,.06)!important;}
-body.light .fi,body.light .fs{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;}
+body.light .fi,body.light .fs{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;color-scheme:light!important;}
 body.light .fi::placeholder,body.light .fs::placeholder{color:#9ca3af!important;}
 body.light input,body.light textarea,body.light select{color:#0d1117!important;background:rgba(0,0,0,.06)!important;}
 body.light input::placeholder,body.light textarea::placeholder{color:#9ca3af!important;}
@@ -1965,6 +1965,16 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
 
+    <div onclick="goPage('anomaliesQte')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.4);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:.08;line-height:1;">⚖️</div>
+      <div style="font-size:34px;">⚖️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Anomalies Quantités</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Poissonnerie · FLEG · Écarts de réception</div>
+      </div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
     <div onclick="goPage('visiteDR')" style="background:linear-gradient(135deg,#1a0533,#6d28d9);border:1px solid rgba(139,92,246,.5);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
       <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:.08;line-height:1;">📊</div>
       <div style="font-size:34px;">👔</div>
@@ -1987,6 +1997,78 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
 
+  </div>
+</div>
+<div class="pg" id="pgAnomaliesQte">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Avancées</div>
+    <div class="pg-title" style="font-size:13px;">⚖️ Anomalies Quantités</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(3,105,161,.1));border:1px solid rgba(14,165,233,.3);border-radius:14px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      <div style="font-size:24px;">⚖️</div>
+      <div>
+        <div style="font-size:12px;font-weight:900;color:#38bdf8;margin-bottom:2px;">Suivi des Écarts de Réception</div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.5;">Comparez les quantités commandées vs réceptionnées · Détectez les anomalies · Générez des rapports PDF</div>
+      </div>
+    </div>
+
+    <div onclick="goPage('anomaliesPoissonnerie')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border-radius:18px;padding:20px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-5px;top:-5px;font-size:55px;opacity:.1;">🐟</div>
+      <div style="font-size:36px;">🐟</div>
+      <div style="flex:1;">
+        <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">Poissonnerie</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Anomalies quantités · Code Méti · Écarts</div>
+      </div>
+      <div id="anomPoissCount" style="display:none;background:#38bdf8;color:#0c4a6e;border-radius:20px;padding:2px 10px;font-size:10px;font-weight:900;margin-right:6px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+    <div onclick="goPage('anomaliesFLEG')" style="background:linear-gradient(135deg,#14532d,#16a34a);border-radius:18px;padding:20px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-5px;top:-5px;font-size:55px;opacity:.1;">🥦</div>
+      <div style="font-size:36px;">🥦</div>
+      <div style="flex:1;">
+        <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">FLEG</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Fruits · Légumes · Écarts · Code Méti</div>
+      </div>
+      <div id="anomFlegCount" style="display:none;background:#4ade80;color:#14532d;border-radius:20px;padding:2px 10px;font-size:10px;font-weight:900;margin-right:6px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ANOMALIES POISSONNERIE ══ -->
+<div class="pg" id="pgAnomaliesPoissonnerie">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('anomaliesQte')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Anomalies</div>
+    <div class="pg-title" style="font-size:13px;">🐟 Poissonnerie</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAnomPDF('poissonnerie')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openAnomForm('poissonnerie')" style="background:#0369a1;border:none;color:#fff;font-size:20px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="anomPoissForm" style="display:none;"></div>
+    <div id="anomPoissList"></div>
+    <div id="anomPoissEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:12px;">🐟 Aucune anomalie · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ ANOMALIES FLEG ══ -->
+<div class="pg" id="pgAnomaliesFLEG">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('anomaliesQte')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Anomalies</div>
+    <div class="pg-title" style="font-size:13px;">🥦 FLEG</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAnomPDF('fleg')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openAnomForm('fleg')" style="background:#15803d;border:none;color:#fff;font-size:20px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+    <div id="anomFlegForm" style="display:none;"></div>
+    <div id="anomFlegList"></div>
+    <div id="anomFlegEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:12px;">🥦 Aucune anomalie · Appuyez sur +</div>
   </div>
 </div>
 
@@ -5167,7 +5249,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -5182,7 +5264,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','catalogue','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','catalogue','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeInvBadge();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -5203,6 +5285,9 @@ function goPage(p){
   if(p==='reunion')renderReunions();
   if(p==='demarque')renderDemarque();
   if(p==='catalogue')renderCatalogue();
+  if(p==='anomaliesQte')renderAnomHubBadges();
+  if(p==='anomaliesPoissonnerie')renderAnom('poissonnerie');
+  if(p==='anomaliesFLEG')renderAnom('fleg');
   if(p==='previsions')renderPrevisions();
   if(p==='saisonnalite')renderSaisonnalite();
   if(p==='saisondetail')renderSaisonDetail();
@@ -11991,6 +12076,197 @@ function exportCatPDF(id){
   document.body.appendChild(a);a.click();
   document.body.removeChild(a);URL.revokeObjectURL(url);
   showT('📄','Rapport exporté');
+}
+
+// ══ ANOMALIES QUANTITÉS ══
+var SK_ANOM = SK + '_anom';
+function loadAnom(rayon){try{var d=JSON.parse(localStorage.getItem(SK_ANOM)||'{}');return d[rayon]||[];}catch(e){return[];}}
+function saveAnom(rayon,list){try{var d=JSON.parse(localStorage.getItem(SK_ANOM)||'{}');d[rayon]=list;localStorage.setItem(SK_ANOM,JSON.stringify(d));}catch(e){}}
+
+var _anomRayon=null;
+
+function renderAnomHubBadges(){
+  var pc=document.getElementById('anomPoissCount');
+  var fc=document.getElementById('anomFlegCount');
+  var pl=loadAnom('poissonnerie');var fl=loadAnom('fleg');
+  if(pc){if(pl.length){pc.style.display='block';pc.textContent=pl.length+' fiche'+(pl.length>1?'s':'');}else pc.style.display='none';}
+  if(fc){if(fl.length){fc.style.display='block';fc.textContent=fl.length+' fiche'+(fl.length>1?'s':'');}else fc.style.display='none';}
+}
+
+function openAnomForm(rayon){
+  _anomRayon=rayon;
+  var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
+  var color=rayon==='poissonnerie'?'#38bdf8':'#4ade80';
+  var emoji=rayon==='poissonnerie'?'🐟':'🥦';
+  var el=document.getElementById(formId);if(!el)return;
+  var today=tstr();
+  el.innerHTML='<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:12px;">'+
+    '<div style="font-size:12px;font-weight:900;color:'+color+';margin-bottom:10px;">'+emoji+' Nouvelle Anomalie</div>'+
+    '<div class="fg"><label class="fl">Date de réception</label><input type="date" class="fi" id="anomDate" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;" value="'+today+'"></div>'+
+    '<div class="fg"><label class="fl">Nom du fournisseur / Rayon</label><input class="fi" id="anomFournisseur" placeholder="Ex: STAPS, Ferme X..."></div>'+
+    '<div class="fg"><label class="fl">Désignation du produit</label><input class="fi" id="anomProduit" placeholder="Nom du produit..."></div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:12px;">'+
+    '<div style="flex:0 0 130px;"><label class="fl">Code Méti (8 chiffres)</label><input type="text" inputmode="numeric" maxlength="8" id="anomCode" placeholder="00000000" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(59,130,246,.3);border-radius:12px;padding:10px;color:#93c5fd;font-size:15px;font-weight:900;font-family:\'IBM Plex Mono\',monospace;outline:none;text-align:center;letter-spacing:2px;" oninput="this.value=this.value.replace(/\\D/g,\'\').slice(0,8)"></div>'+
+    '<div style="flex:1;"><label class="fl">Qté commandée</label><input type="number" min="0" step="0.001" class="fi" id="anomCde" placeholder="0"></div>'+
+    '<div style="flex:1;"><label class="fl">Qté réceptionnée</label><input type="number" min="0" step="0.001" class="fi" id="anomRec" placeholder="0" oninput="calcAnomEcart()"></div>'+
+    '</div>'+
+    '<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:12px;padding:10px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">'+
+    '<div style="font-size:10px;font-weight:800;color:#f87171;">ÉCART CALCULÉ</div>'+
+    '<div style="font-size:22px;font-weight:900;color:#f87171;font-family:\'IBM Plex Mono\';" id="anomEcartDisplay">—</div>'+
+    '</div>'+
+    '<div class="fg"><label class="fl">Observation (optionnel)</label><input class="fi" id="anomObs" placeholder="Ex: Colis ouvert, manque de glace..."></div>'+
+    '<div style="display:flex;gap:8px;margin-top:4px;">'+
+    '<button onclick="closeAnomForm(\''+rayon+'\')" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>'+
+    '<button onclick="saveAnomalie(\''+rayon+'\')" style="flex:2;background:'+(rayon==='poissonnerie'?'#0369a1':'#15803d')+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>'+
+    '</div>'+
+    '</div>';
+  el.style.display='block';
+  setTimeout(function(){document.getElementById('anomDate').focus();},200);
+}
+
+function calcAnomEcart(){
+  var cde=parseFloat(document.getElementById('anomCde').value)||0;
+  var rec=parseFloat(document.getElementById('anomRec').value)||0;
+  var ecart=rec-cde;
+  var el=document.getElementById('anomEcartDisplay');
+  if(el){
+    el.textContent=(ecart>=0?'+':'')+ecart.toFixed(3).replace(/\.?0+$/,'');
+    el.style.color=ecart<0?'#f87171':ecart>0?'#4ade80':'#94a3b8';
+  }
+}
+
+function closeAnomForm(rayon){
+  var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
+  var el=document.getElementById(formId);if(el)el.style.display='none';
+}
+
+function saveAnomalie(rayon){
+  var produit=(document.getElementById('anomProduit').value||'').trim();
+  if(!produit){showT('⚠️','Entrez le nom du produit');return;}
+  var cde=parseFloat(document.getElementById('anomCde').value)||0;
+  var rec=parseFloat(document.getElementById('anomRec').value)||0;
+  var entry={
+    id:uid(),
+    date:document.getElementById('anomDate').value||tstr(),
+    fournisseur:(document.getElementById('anomFournisseur').value||'').trim(),
+    produit:produit,
+    code:(document.getElementById('anomCode').value||'').replace(/\D/g,'').slice(0,8),
+    qteCde:cde,
+    qteRec:rec,
+    ecart:parseFloat((rec-cde).toFixed(3)),
+    obs:(document.getElementById('anomObs').value||'').trim(),
+    ts:Date.now()
+  };
+  var list=loadAnom(rayon);
+  list.unshift(entry);
+  saveAnom(rayon,list);
+  closeAnomForm(rayon);
+  renderAnom(rayon);
+  showT('✅','Anomalie enregistrée');
+}
+
+function delAnomalie(rayon,id){
+  var list=loadAnom(rayon).filter(function(x){return x.id!==id;});
+  saveAnom(rayon,list);renderAnom(rayon);showT('🗑️','Supprimée');
+}
+
+function renderAnom(rayon){
+  var isP=rayon==='poissonnerie';
+  var listId='anom'+(isP?'Poiss':'Fleg')+'List';
+  var emptyId='anom'+(isP?'Poiss':'Fleg')+'Empty';
+  var el=document.getElementById(listId);var em=document.getElementById(emptyId);
+  if(!el)return;
+  var list=loadAnom(rayon);
+  var color=isP?'#38bdf8':'#4ade80';
+  var borderCol=isP?'rgba(14,165,233,.3)':'rgba(74,222,128,.3)';
+  if(!list.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+  el.innerHTML=list.map(function(a){
+    var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+    var df=a.date?(function(){var p=a.date.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];})():a.date;
+    var ecartCol=a.ecart<0?'#f87171':a.ecart>0?'#4ade80':'#94a3b8';
+    var ecartStr=(a.ecart>=0?'+':'')+a.ecart;
+    return '<div style="background:var(--s2);border:1px solid '+borderCol+';border-radius:14px;padding:12px 14px;margin-bottom:8px;border-left:3px solid '+color+';">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
+      '<div style="flex:1;">'+
+      '<div style="font-size:13px;font-weight:900;color:var(--t1);">'+a.produit+'</div>'+
+      (a.code?'<div style="font-size:10px;font-family:\'IBM Plex Mono\',monospace;color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);border-radius:5px;padding:1px 7px;display:inline-block;margin-top:3px;letter-spacing:1px;">'+a.code+'</div>':'')+
+      '<div style="font-size:10px;color:var(--t2);margin-top:4px;">📅 '+df+(a.fournisseur?' · '+a.fournisseur:'')+'</div>'+
+      '</div>'+
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">'+
+      '<div style="font-size:18px;font-weight:900;color:'+ecartCol+';font-family:\'IBM Plex Mono\';">'+ecartStr+'</div>'+
+      '<div style="font-size:9px;color:var(--t2);font-weight:700;">ÉCART</div>'+
+      '</div>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:'+(a.obs?'6':'0')+'px;">'+
+      '<div style="background:rgba(255,255,255,.04);border-radius:8px;padding:6px 10px;">'+
+      '<div style="font-size:9px;color:var(--t2);font-weight:700;margin-bottom:2px;">QTÉ COMMANDÉE</div>'+
+      '<div style="font-size:16px;font-weight:900;color:var(--t1);font-family:\'IBM Plex Mono\';">'+a.qteCde+'</div>'+
+      '</div>'+
+      '<div style="background:rgba(255,255,255,.04);border-radius:8px;padding:6px 10px;">'+
+      '<div style="font-size:9px;color:var(--t2);font-weight:700;margin-bottom:2px;">QTÉ RÉCEPTIONNÉE</div>'+
+      '<div style="font-size:16px;font-weight:900;color:var(--t1);font-family:\'IBM Plex Mono\';">'+a.qteRec+'</div>'+
+      '</div>'+
+      '</div>'+
+      (a.obs?'<div style="font-size:11px;color:var(--t2);background:rgba(255,255,255,.03);border-radius:8px;padding:6px 10px;margin-bottom:6px;">💬 '+a.obs+'</div>':'')+
+      '<div style="display:flex;justify-content:flex-end;">'+
+      '<button onclick="delAnomalie(\''+rayon+'\',\''+a.id+'\')" style="background:rgba(239,68,68,.1);border:none;color:#f87171;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;">🗑️ Supprimer</button>'+
+      '</div>'+
+      '</div>';
+  }).join('');
+}
+
+function exportAnomPDF(rayon){
+  var list=loadAnom(rayon);
+  if(!list.length){showT('⚠️','Aucune anomalie à exporter');return;}
+  var isP=rayon==='poissonnerie';
+  var label=isP?'Poissonnerie':'FLEG';
+  var emoji=isP?'🐟':'🥦';
+  var color=isP?'#0369a1':'#15803d';
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  function dfmt(d){if(!d)return'—';var p=d.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];}
+  function eh(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  var rows=list.map(function(a,i){
+    var ecartCol=a.ecart<0?'#dc2626':a.ecart>0?'#16a34a':'#64748b';
+    return '<tr style="background:'+(i%2===0?'#f8faff':'#fff')+';">'+
+      '<td style="padding:8px 10px;">'+dfmt(a.date)+'</td>'+
+      '<td style="padding:8px 10px;font-weight:700;">'+eh(a.produit)+'</td>'+
+      '<td style="padding:8px 10px;font-family:monospace;color:#1d4ed8;font-weight:700;text-align:center;">'+(a.code||'—')+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;font-weight:700;">'+a.qteCde+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;font-weight:700;">'+a.qteRec+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;font-weight:900;color:'+ecartCol+';font-size:14px;">'+(a.ecart>=0?'+':'')+a.ecart+'</td>'+
+      '<td style="padding:8px 10px;font-size:11px;color:#64748b;">'+eh(a.obs||'—')+'</td>'+
+      '</tr>';
+  }).join('');
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Anomalies '+label+'</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:960px;margin:auto;}'+
+    'h1{font-size:20px;color:'+color+';margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    'table{width:100%;border-collapse:collapse;font-size:12px;}'+
+    'th{background:'+color+';color:#fff;padding:9px 10px;text-align:left;}'+
+    'th:nth-child(4),th:nth-child(5),th:nth-child(6){text-align:center;}'+
+    'td{border-bottom:1px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>'+emoji+' Anomalies Quantités — '+label+'</h1>'+
+    '<div class="meta">MG MAXI DENDEN · Généré le '+genDate+' · '+list.length+' anomalie(s)</div>'+
+    '<table><thead><tr>'+
+    '<th>Date</th><th>Produit</th><th style="text-align:center;">Code Méti</th>'+
+    '<th style="text-align:center;">Qté Cmd.</th><th style="text-align:center;">Qté Reçue</th>'+
+    '<th style="text-align:center;">Écart</th><th>Observation</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Anomalies '+label+'</div>'+
+    '</body></html>';
+
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='Anomalies_'+label+'_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport '+label+' exporté');
 }
 
 // Render on page open
