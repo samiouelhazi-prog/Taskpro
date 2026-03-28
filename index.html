@@ -519,6 +519,32 @@ body.light{
   --s1:rgba(0,0,0,.04);
 }
 body.light .bnav{background:rgba(240,244,255,.92)!important;border-top:1px solid rgba(0,0,0,.1)!important;}
+/* ══ GLOBAL SEARCH ══ */
+#gsOverlay{position:fixed;inset:0;z-index:600;background:rgba(4,6,20,.0);pointer-events:none;transition:background .25s;}
+#gsOverlay.on{background:rgba(4,6,20,.85);pointer-events:all;backdrop-filter:blur(12px);}
+#gsBox{position:fixed;top:10px;left:50%;transform:translateX(-50%) translateY(-8px);z-index:601;width:calc(100% - 28px);max-width:440px;opacity:0;pointer-events:none;transition:opacity .2s,transform .22s;}
+#gsBox.on{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:all;}
+#gsRow{display:flex;align-items:center;gap:10px;background:rgba(15,20,40,.98);border:1.5px solid rgba(59,130,246,.5);border-radius:18px;padding:10px 14px;box-shadow:0 8px 40px rgba(0,0,0,.6);}
+#gsInp{flex:1;background:transparent;border:none;outline:none;color:#f1f5f9;font-size:15px;font-family:'IBM Plex Sans',sans-serif;caret-color:#3b82f6;}
+#gsInp::placeholder{color:rgba(255,255,255,.28);}
+#gsClear{background:none;border:none;color:rgba(148,163,184,.6);font-size:18px;cursor:pointer;line-height:1;padding:0 2px;display:none;}
+#gsResults{background:rgba(10,14,32,.98);border:1px solid rgba(255,255,255,.08);border-radius:16px;margin-top:6px;overflow:hidden;max-height:72vh;overflow-y:auto;}
+.gs-item{display:flex;align-items:center;gap:11px;padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);transition:background .12s;}
+.gs-item:last-child{border-bottom:none;}
+.gs-item:active{background:rgba(59,130,246,.18);}
+.gs-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.gs-name{font-size:13px;font-weight:700;color:#f1f5f9;line-height:1.2;}
+.gs-desc{font-size:10px;color:rgba(148,163,184,.75);margin-top:1px;}
+.srch-circle{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);-webkit-tap-highlight-color:transparent;}
+.srch-circle:active{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5);}
+body.light .srch-circle{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.12);color:rgba(15,23,42,.55);}
+body.light #gsRow{background:rgba(240,244,255,.99);border-color:rgba(37,99,235,.4);}
+body.light #gsInp{color:#0f172a;}
+body.light #gsInp::placeholder{color:rgba(15,23,42,.3);}
+body.light #gsResults{background:rgba(240,244,255,.99);border-color:rgba(0,0,0,.1);}
+body.light .gs-name{color:#0f172a;}
+body.light .gs-item{border-bottom-color:rgba(0,0,0,.05);}
+body.light #gsOverlay.on{background:rgba(200,210,240,.6);}
 body.light .av{background:linear-gradient(140deg,#2563eb,#7c3aed)!important;}
 body.light .icb{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.1)!important;color:#4a5568!important;}
 body.light .focus-card{background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(8,145,178,.06))!important;border-color:rgba(59,130,246,.25)!important;}
@@ -772,10 +798,15 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <span style="font-size:9px;font-weight:700;color:currentColor;letter-spacing:.3px;line-height:1;">Menu</span>
     </div>
     <div style="font-size:12px;font-weight:600;color:var(--t2);" id="tbGreet">Bonjour 👋</div>
-    <div class="ic-btn" onclick="openDr('notifs')" style="position:relative;">
-      <svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <div class="nbadge" id="nb" style="display:none"></div>
-      <div class="late-badge" id="lateBadge" style="display:none">0</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="srch-circle" onclick="openGS()">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="ic-btn" onclick="openDr('notifs')" style="position:relative;">
+        <svg fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <div class="nbadge" id="nb" style="display:none"></div>
+        <div class="late-badge" id="lateBadge" style="display:none">0</div>
+      </div>
     </div>
   </div>
   <div class="scroll" id="homeScroll">
@@ -2714,6 +2745,12 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
 
+    <div onclick="goPage('catalogue')" style="background:linear-gradient(135deg,#0f172a,#1e3a8a);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;border:1px solid rgba(99,102,241,.35);box-shadow:0 4px 18px rgba(99,102,241,.15);">
+      <div style="font-size:32px;">📒</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Catalogue</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Ruptures · Erratums · Suivi par rayon</div></div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;">›</div>
+    </div>
+
     <div onclick="goPage('previsions')" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:32px;">📈</div>
       <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Prévisions</div><div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Objectifs · Estimations · Planification</div></div>
@@ -2735,7 +2772,63 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
 </div>
 
-<!-- ══ PRÉVISIONS ══ -->
+<!-- ══ CATALOGUE ══ -->
+<div class="pg" id="pgCatalogue">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('pilotage')" style="font-size:13px;font-weight:700;color:#818cf8;cursor:pointer;">‹ Pilotage</div>
+    <div class="pg-title">📒 Catalogue</div>
+    <button onclick="openCatalogueForm()" style="background:#312e81;border:1.5px solid #818cf8;color:#818cf8;font-size:20px;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+  </div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+    <div id="catList"></div>
+    <div id="catEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:12px;">📒 Aucun catalogue · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ CATALOGUE FORM MODAL ══ -->
+<div class="mov" id="catFormMov" style="display:none;">
+  <div class="msh" style="max-height:92vh;overflow-y:auto;">
+    <div class="mhdl"></div>
+    <div class="mtit" id="catFormTit">Nouveau Catalogue</div>
+
+    <!-- Infos générales -->
+    <div class="fg"><label class="fl">Nom du catalogue</label><input class="fi" id="catNom" placeholder="Ex: Catalogue Ramadan 2025..."></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;"><label class="fl">Du</label><input type="date" class="fi" id="catDe" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;"></div>
+      <div style="flex:1;"><label class="fl">Au</label><input type="date" class="fi" id="catAu" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;"></div>
+    </div>
+
+    <!-- Ruptures par rayon -->
+    <div style="font-size:12px;font-weight:900;color:#f87171;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+      <span>⚠️</span> Ruptures par Rayon
+    </div>
+    <div id="catRupturesList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;"></div>
+    <button onclick="addCatRuptureRayon()" style="width:100%;background:rgba(248,113,113,.08);border:1px dashed rgba(248,113,113,.35);border-radius:12px;padding:9px;color:#f87171;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:14px;">+ Ajouter un rayon en rupture</button>
+
+    <!-- Erratum -->
+    <div style="font-size:12px;font-weight:900;color:#fb923c;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+      <span>🖨️</span> Erratum (produit imprimé par erreur)
+    </div>
+    <div id="catErratumList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;"></div>
+    <button onclick="addCatErratum()" style="width:100%;background:rgba(251,146,60,.08);border:1px dashed rgba(251,146,60,.35);border-radius:12px;padding:9px;color:#fb923c;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:14px;">+ Ajouter un erratum</button>
+
+    <!-- Actions -->
+    <div id="catDelRow" style="display:none;margin-bottom:8px;">
+      <button onclick="delCatalogue(_catEid);closeM('catFormMov')" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-family:'IBM Plex Sans';font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer ce catalogue</button>
+    </div>
+    <div class="macts">
+      <button class="mb sec" onclick="closeM('catFormMov')">Annuler</button>
+      <button class="mb" onclick="saveCatalogue()">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CATALOGUE DETAIL ══ -->
+<div class="mov" id="catDetailMov" style="display:none;">
+  <div class="msh" style="max-height:92vh;overflow-y:auto;" id="catDetailContent"></div>
+</div>
+
+<!-- ══ CATALOGUE ══ -->
 <div class="pg" id="pgPrevisions">
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('pilotage')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Pilotage</div>
@@ -5071,8 +5164,8 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
     if(activePg){
@@ -5086,7 +5179,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','catalogue','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeInvBadge();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -5106,6 +5199,7 @@ function goPage(p){
   if(p==='hygiene')renderHygiene();
   if(p==='reunion')renderReunions();
   if(p==='demarque')renderDemarque();
+  if(p==='catalogue')renderCatalogue();
   if(p==='previsions')renderPrevisions();
   if(p==='saisonnalite')renderSaisonnalite();
   if(p==='saisondetail')renderSaisonDetail();
@@ -5307,7 +5401,7 @@ function openTM(id){
   _tmpImgs=t&&t.imgs?[...t.imgs]:[];
   renderImgGrid();updCat();
   document.getElementById('tDelRow').style.display=id?'block':'none';
-  const _tmovEl=document.getElementById('tmov');_tmovEl.style.display='';_tmovEl.classList.add('on');
+  document.getElementById('tmov').classList.add('on');
 }
 function selPrio(el){document.querySelectorAll('.prio-opt').forEach(o=>o.classList.remove('on'));el.classList.add('on');}
 function saveT(){
@@ -5398,7 +5492,7 @@ function saveP(){prof.name=document.getElementById('p_n').value.trim();prof.role
 
 // ══ MODALS ══
 function closeM(id){var el=document.getElementById(id);if(!el)return;el.classList.remove('on');el.style.display='none';}
-['tmov','pmov','evtmov','imgmov','snoozmov'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
+['tmov','pmov','evtmov','imgmov','snoozmov','catFormMov','catDetailMov'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
 var _cmov=document.getElementById('cmov');if(_cmov)_cmov.addEventListener('click',function(e){if(e.target===this)closeM('cmov');});
 let _tt2;
 function showT(e,m){document.getElementById('te').textContent=e;document.getElementById('tm').textContent=m;const el=document.getElementById('toast');el.classList.add('on');clearTimeout(_tt2);_tt2=setTimeout(()=>el.classList.remove('on'),3000);}
@@ -11523,9 +11617,413 @@ function updateDlcBadge(){
   if(badge){badge.textContent=urgent;badge.style.display=urgent>0?'flex':'none';}
 }
 
+// ══ CATALOGUE ══
+var _catEid=null;
+var _catRuptures=[];
+var _catErratums=[];
+var CAT_RAYONS=['Liquide','Salée','PFLS','Parfumerie','Droguerie','Sucrée','Vrac','Traiteur','Poissonnerie','FLEG','Boul.-Pat.','Boucherie-Volaille','Bazar','EM'];
 
+function loadCat(){try{return JSON.parse(localStorage.getItem(SK+'_cat')||'[]');}catch(e){return[];}}
+function saveCat(d){localStorage.setItem(SK+'_cat',JSON.stringify(d));}
+
+function renderCatalogue(){
+  var list=loadCat();
+  var el=document.getElementById('catList');
+  var empty=document.getElementById('catEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  el.innerHTML=list.map(function(c){
+    var rCount=(c.ruptures||[]).length;
+    var eCount=(c.erratums||[]).length;
+    var dateStr=c.de&&c.au?c.de.split('-').reverse().join('/')+'  →  '+c.au.split('-').reverse().join('/'):'';
+    return '<div style="background:var(--card);border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:14px;margin-bottom:10px;" onclick="openCatalogueDetail(\''+c.id+'\')">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">'+
+      '<div style="flex:1;min-width:0;cursor:pointer;">'+
+      '<div style="font-size:14px;font-weight:900;color:#e0e7ff;font-family:\'Syne\';">📒 '+c.nom+'</div>'+
+      (dateStr?'<div style="font-size:10px;color:rgba(148,163,184,.7);margin-top:3px;">📅 '+dateStr+'</div>':'')+
+      '</div>'+
+      '<div style="display:flex;gap:6px;flex-shrink:0;">'+
+      '<button onclick="event.stopPropagation();exportCatPDF(\''+c.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
+      '<button onclick="event.stopPropagation();openCatalogueForm(\''+c.id+'\')" style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:#818cf8;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">✏️</button>'+
+      '</div>'+
+      '</div>'+
+      '<div style="display:flex;gap:8px;margin-top:10px;">'+
+      (rCount?'<div style="background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:800;color:#f87171;">⚠️ '+rCount+' rupture'+(rCount>1?'s':'')+'</div>':'')+
+      (eCount?'<div style="background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.25);border-radius:8px;padding:4px 10px;font-size:10px;font-weight:800;color:#fb923c;">🖨️ '+eCount+' erratum'+(eCount>1?'s':'')+'</div>':'')+
+      (!rCount&&!eCount?'<div style="font-size:10px;color:var(--t2);">Aucune rupture ni erratum</div>':'')+
+      '</div>'+
+      '</div>';
+  }).join('');
+}
+
+function openCatalogueForm(id){
+  _catEid=id||null;
+  _catRuptures=[];_catErratums=[];
+  var c=id?loadCat().find(function(x){return x.id===id;}):null;
+  document.getElementById('catFormTit').textContent=id?'Modifier Catalogue':'Nouveau Catalogue';
+  document.getElementById('catNom').value=c?c.nom:'';
+  document.getElementById('catDe').value=c?c.de:'';
+  document.getElementById('catAu').value=c?c.au:'';
+  _catRuptures=c&&c.ruptures?JSON.parse(JSON.stringify(c.ruptures)):[];
+  _catErratums=c&&c.erratums?JSON.parse(JSON.stringify(c.erratums)):[];
+  renderCatRuptures();renderCatErratums();
+  document.getElementById('catDelRow').style.display=id?'block':'none';
+  var el=document.getElementById('catFormMov');el.style.display='';el.classList.add('on');
+}
+
+function addCatRuptureRayon(){
+  _catRuptures.push({rayon:'',produits:[],cause:'',qteManq:'',dateArrivee:''});
+  renderCatRuptures();
+}
+function removeCatRupture(i){_catRuptures.splice(i,1);renderCatRuptures();}
+function addCatProduit(i){
+  if(!_catRuptures[i].produits)_catRuptures[i].produits=[];
+  _catRuptures[i].produits.push({nom:'',code:''});
+  renderCatRuptures();
+}
+function removeCatProduit(i,j){_catRuptures[i].produits.splice(j,1);renderCatRuptures();}
+function setCatProduitNom(i,j,v){if(_catRuptures[i]&&_catRuptures[i].produits[j])_catRuptures[i].produits[j].nom=v;}
+function setCatProduitCode(i,j,v){
+  // Only allow digits, max 8
+  v=v.replace(/\D/g,'').slice(0,8);
+  if(_catRuptures[i]&&_catRuptures[i].produits[j])_catRuptures[i].produits[j].code=v;
+}
+
+function renderCatRuptures(){
+  var el=document.getElementById('catRupturesList');if(!el)return;
+  if(!_catRuptures.length){el.innerHTML='';return;}
+  el.innerHTML=_catRuptures.map(function(r,i){
+    var opts=CAT_RAYONS.map(function(rn){return '<option value="'+rn+'"'+(r.rayon===rn?' selected':'')+'>'+rn+'</option>';}).join('');
+    var produits=r.produits||[];
+    var produitsHTML=produits.map(function(p,j){
+      // Support old format (string) and new format (object)
+      var nom=typeof p==='object'?p.nom||'':p||'';
+      var code=typeof p==='object'?p.code||'':'';
+      return '<div style="background:rgba(248,113,113,.04);border:1px solid rgba(248,113,113,.15);border-radius:10px;padding:8px 10px;margin-bottom:6px;">'+
+        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">'+
+        '<div style="width:20px;height:20px;border-radius:50%;background:rgba(248,113,113,.25);border:1px solid rgba(248,113,113,.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:900;color:#f87171;">'+(j+1)+'</div>'+
+        '<span style="font-size:10px;font-weight:800;color:#f87171;flex:1;">Article #'+(j+1)+'</span>'+
+        '<button onclick="removeCatProduit('+i+','+j+')" style="background:none;border:none;color:rgba(248,113,113,.5);font-size:16px;cursor:pointer;line-height:1;padding:0;">×</button>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;">'+
+        '<div style="flex:0 0 120px;">'+
+        '<label style="font-size:9px;font-weight:800;color:rgba(148,163,184,.7);display:block;margin-bottom:3px;letter-spacing:.5px;">CODE MÉTI</label>'+
+        '<input type="text" inputmode="numeric" maxlength="8" pattern="[0-9]*" placeholder="00000000" value="'+escH(code)+'" oninput="setCatProduitCode('+i+','+j+',this.value);this.value=_catRuptures['+i+'].produits['+j+'].code" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(59,130,246,.3);border-radius:10px;padding:8px 10px;color:#93c5fd;font-size:14px;font-weight:900;font-family:\'IBM Plex Mono\',monospace;outline:none;letter-spacing:2px;text-align:center;">'+
+        '</div>'+
+        '<div style="flex:1;">'+
+        '<label style="font-size:9px;font-weight:800;color:rgba(148,163,184,.7);display:block;margin-bottom:3px;letter-spacing:.5px;">PRODUIT EN RUPTURE</label>'+
+        '<input class="fi" placeholder="Désignation du produit..." value="'+escH(nom)+'" oninput="setCatProduitNom('+i+','+j+',this.value)" style="margin:0;width:100%;box-sizing:border-box;">'+
+        '</div>'+
+        '</div>'+
+        '</div>';
+    }).join('');
+    return '<div style="background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);border-radius:12px;padding:10px;position:relative;">'+
+      '<button onclick="removeCatRupture('+i+')" style="position:absolute;top:6px;right:6px;background:none;border:none;color:#f87171;font-size:16px;cursor:pointer;line-height:1;">×</button>'+
+      '<div style="font-size:10px;font-weight:800;color:#f87171;margin-bottom:8px;">⚠️ Rupture #'+(i+1)+'</div>'+
+      '<label class="fl">Rayon</label>'+
+      '<select class="fs" style="margin-bottom:10px;" onchange="_catRuptures['+i+'].rayon=this.value"><option value="">-- Choisir --</option>'+opts+'</select>'+
+      '<div style="font-size:10px;font-weight:800;color:rgba(148,163,184,.8);margin-bottom:6px;">📦 Articles en rupture</div>'+
+      '<div id="prodList_'+i+'">'+produitsHTML+'</div>'+
+      '<button onclick="addCatProduit('+i+')" style="width:100%;background:rgba(248,113,113,.08);border:1px dashed rgba(248,113,113,.3);border-radius:8px;padding:7px;color:#f87171;font-size:11px;font-weight:700;cursor:pointer;margin-bottom:10px;">+ Ajouter code méti &amp; produit</button>'+
+      '<label class="fl">Cause de la rupture</label>'+
+      '<input class="fi" placeholder="Ex: Retard fournisseur, rupture entrepôt..." style="margin-bottom:6px;" value="'+escH(r.cause||'')+'" oninput="_catRuptures['+i+'].cause=this.value">'+
+      '<div style="display:flex;gap:6px;">'+
+      '<div style="flex:1;"><label class="fl">Qté manquante / prévision</label><input class="fi" placeholder="Ex: 120 u / 500 u" value="'+escH(r.qteManq||'')+'" oninput="_catRuptures['+i+'].qteManq=this.value"></div>'+
+      '<div style="flex:1;"><label class="fl">Date probable d\'arrivée</label><input type="date" class="fi" style="background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;width:100%;box-sizing:border-box;" value="'+(r.dateArrivee||'')+'" onchange="_catRuptures['+i+'].dateArrivee=this.value"></div>'+
+      '</div>'+
+      '</div>';
+  }).join('');
+}
+
+function addCatErratum(){
+  _catErratums.push({produit:'',type:'prix',detail:''});
+  renderCatErratums();
+}
+function removeCatErratum(i){_catErratums.splice(i,1);renderCatErratums();}
+
+function renderCatErratums(){
+  var el=document.getElementById('catErratumList');if(!el)return;
+  if(!_catErratums.length){el.innerHTML='';return;}
+  el.innerHTML=_catErratums.map(function(e,i){
+    return '<div style="background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.2);border-radius:12px;padding:10px;position:relative;">'+
+      '<button onclick="removeCatErratum('+i+')" style="position:absolute;top:6px;right:6px;background:none;border:none;color:#fb923c;font-size:16px;cursor:pointer;line-height:1;">×</button>'+
+      '<div style="font-size:10px;font-weight:800;color:#fb923c;margin-bottom:6px;">🖨️ Erratum #'+(i+1)+'</div>'+
+      '<label class="fl">Nom du produit</label>'+
+      '<input class="fi" placeholder="Nom du produit concerné..." style="margin-bottom:6px;" value="'+escH(e.produit||'')+'" oninput="_catErratums['+i+'].produit=this.value">'+
+      '<label class="fl">Type d\'erreur</label>'+
+      '<div style="display:flex;gap:6px;margin-bottom:6px;">'+
+      '<button type="button" onclick="setCatErratumType('+i+',\'prix\')" style="flex:1;background:'+(e.type==='prix'?'rgba(251,146,60,.25)':'rgba(255,255,255,.04)')+';border:1px solid '+(e.type==='prix'?'rgba(251,146,60,.5)':'rgba(255,255,255,.1)')+';border-radius:8px;color:'+(e.type==='prix'?'#fb923c':'#94a3b8')+';font-size:11px;font-weight:700;padding:7px;cursor:pointer;">💰 Prix incorrect</button>'+
+      '<button type="button" onclick="setCatErratumType('+i+',\'image\')" style="flex:1;background:'+(e.type==='image'?'rgba(251,146,60,.25)':'rgba(255,255,255,.04)')+';border:1px solid '+(e.type==='image'?'rgba(251,146,60,.5)':'rgba(255,255,255,.1)')+';border-radius:8px;color:'+(e.type==='image'?'#fb923c':'#94a3b8')+';font-size:11px;font-weight:700;padding:7px;cursor:pointer;">🖼️ Image incorrecte</button>'+
+      '<button type="button" onclick="setCatErratumType('+i+',\'autre\')" style="flex:1;background:'+(e.type==='autre'?'rgba(251,146,60,.25)':'rgba(255,255,255,.04)')+';border:1px solid '+(e.type==='autre'?'rgba(251,146,60,.5)':'rgba(255,255,255,.1)')+';border-radius:8px;color:'+(e.type==='autre'?'#fb923c':'#94a3b8')+';font-size:11px;font-weight:700;padding:7px;cursor:pointer;">⚠️ Autre</button>'+
+      '</div>'+
+      '<label class="fl">Détail / correction à appliquer</label>'+
+      '<input class="fi" placeholder="Ex: Prix affiché 12.500 DT au lieu de 9.900 DT..." value="'+escH(e.detail||'')+'" oninput="_catErratums['+i+'].detail=this.value">'+
+      '</div>';
+  }).join('');
+}
+
+function setCatErratumType(i,t){_catErratums[i].type=t;renderCatErratums();}
+
+function saveCatalogue(){
+  var nom=document.getElementById('catNom').value.trim();
+  if(!nom){document.getElementById('catNom').style.borderColor='var(--red)';showT('⚠️','Entrez un nom de catalogue');return;}
+  document.getElementById('catNom').style.borderColor='';
+  var de=document.getElementById('catDe').value;
+  var au=document.getElementById('catAu').value;
+  var list=loadCat();
+  var now=new Date().toISOString();
+  if(_catEid){
+    var idx=list.findIndex(function(x){return x.id===_catEid;});
+    if(idx>=0)list[idx]={...list[idx],nom:nom,de:de,au:au,ruptures:_catRuptures,erratums:_catErratums,updatedAt:now};
+  } else {
+    list.unshift({id:uid(),nom:nom,de:de,au:au,ruptures:_catRuptures,erratums:_catErratums,createdAt:now});
+  }
+  saveCat(list);closeM('catFormMov');renderCatalogue();showT('💾','Catalogue enregistré');
+}
+
+function delCatalogue(id){
+  var list=loadCat().filter(function(x){return x.id!==id;});
+  saveCat(list);renderCatalogue();showT('🗑️','Catalogue supprimé');
+}
+
+function openCatalogueDetail(id){
+  var c=loadCat().find(function(x){return x.id===id;});if(!c)return;
+  var dateStr=c.de&&c.au?c.de.split('-').reverse().join('/')+'  →  '+c.au.split('-').reverse().join('/'):'Non définie';
+  var rupturesHTML=(c.ruptures||[]).length?
+    (c.ruptures||[]).map(function(r){
+      var da=r.dateArrivee?r.dateArrivee.split('-').reverse().join('/'):'N/A';
+      var prods=(r.produits||[]).filter(function(p){return typeof p==='object'?p.nom||p.code:p;});
+      var produitsLine=prods.length?
+        '<div style="margin-top:6px;"><b style="color:var(--t2);font-size:10px;">Produits :</b>'+
+        prods.map(function(p,j){
+          var nom=typeof p==='object'?p.nom||'':''+p;
+          var code=typeof p==='object'?p.code||'':'';
+          return '<div style="display:flex;align-items:center;gap:6px;margin-top:4px;">'+
+            '<span style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,.25);color:#f87171;font-size:8px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+(j+1)+'</span>'+
+            (code?'<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;font-weight:900;color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:5px;padding:1px 6px;flex-shrink:0;">'+escH(code)+'</span>':'')  +
+            (nom?'<span style="font-size:11px;color:var(--t1);">'+escH(nom)+'</span>':'<span style="font-size:11px;color:var(--t2);font-style:italic;">Sans désignation</span>')+
+            '</div>';
+        }).join('')+
+        '</div>':
+        '<div style="font-size:10px;color:var(--t2);margin-top:4px;font-style:italic;">Aucun produit précisé</div>';
+      return '<div style="background:rgba(248,113,113,.08);border-left:3px solid #f87171;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:6px;">'+
+        '<div style="font-size:12px;font-weight:900;color:#f87171;">🏪 '+escH(r.rayon||'Rayon non défini')+'</div>'+
+        produitsLine+
+        '<div style="font-size:11px;color:var(--t1);margin-top:6px;"><b style="color:var(--t2);">Cause :</b> '+escH(r.cause||'—')+'</div>'+
+        '<div style="font-size:11px;color:var(--t1);margin-top:2px;"><b style="color:var(--t2);">Qté manquante :</b> '+escH(r.qteManq||'—')+'</div>'+
+        '<div style="font-size:11px;color:var(--t1);margin-top:2px;"><b style="color:var(--t2);">Arrivée prévue :</b> <span style="color:#34d399;font-weight:700;">'+da+'</span></div>'+
+        '</div>';
+    }).join('')
+  :'<div style="font-size:11px;color:var(--t2);padding:8px;">Aucune rupture enregistrée</div>';
+
+  var erratumHTML=(c.erratums||[]).length?
+    (c.erratums||[]).map(function(e){
+      var ico={prix:'💰',image:'🖼️',autre:'⚠️'}[e.type]||'⚠️';
+      var lbl={prix:'Prix incorrect',image:'Image incorrecte',autre:'Autre erreur'}[e.type]||'Erreur';
+      return '<div style="background:rgba(251,146,60,.08);border-left:3px solid #fb923c;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:6px;">'+
+        '<div style="font-size:12px;font-weight:900;color:#fb923c;">'+ico+' '+escH(e.produit||'Produit non défini')+'</div>'+
+        '<div style="font-size:11px;color:var(--t2);margin-top:2px;">'+lbl+'</div>'+
+        '<div style="font-size:11px;color:var(--t1);margin-top:4px;">'+escH(e.detail||'—')+'</div>'+
+        '</div>';
+    }).join('')
+  :'<div style="font-size:11px;color:var(--t2);padding:8px;">Aucun erratum enregistré</div>';
+
+  var html='<div class="mhdl"></div>'+
+    '<div class="mtit" style="font-size:16px;">📒 '+escH(c.nom)+'</div>'+
+    '<div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;">📅 '+dateStr+'</div>'+
+    '<div style="font-size:12px;font-weight:900;color:#f87171;margin-bottom:8px;">⚠️ Ruptures par Rayon</div>'+
+    rupturesHTML+
+    '<div style="font-size:12px;font-weight:900;color:#fb923c;margin:14px 0 8px;">🖨️ Erratums</div>'+
+    erratumHTML+
+    '<div style="display:flex;gap:8px;margin-top:16px;">'+
+    '<button class="mb sec" onclick="closeM(\'catDetailMov\')" style="flex:1;">Fermer</button>'+
+    '<button class="mb" onclick="closeM(\'catDetailMov\');openCatalogueForm(\''+c.id+'\')" style="flex:1;">✏️ Modifier</button>'+
+    '</div>';
+  document.getElementById('catDetailContent').innerHTML=html;
+  var el=document.getElementById('catDetailMov');el.style.display='';el.classList.add('on');
+}
+
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function exportCatPDF(id){
+  var c=loadCat().find(function(x){return x.id===id;});if(!c)return;
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var dateStr=c.de&&c.au?c.de.split('-').reverse().join('/')+'  →  '+c.au.split('-').reverse().join('/'):'Non définie';
+
+  var rupturesRows=(c.ruptures||[]).map(function(r,i){
+    var da=r.dateArrivee?r.dateArrivee.split('-').reverse().join('/'):'—';
+    var prods=(r.produits||[]).filter(function(p){return typeof p==='object'?p.nom||p.code:p;});
+    var produitsCell=prods.length?prods.map(function(p,j){
+      var nom=typeof p==='object'?p.nom||'':''+p;
+      var code=typeof p==='object'?p.code||'':'';
+      return (j+1)+'. '+(code?'<b style="color:#1e40af;font-family:monospace;">'+escH(code)+'</b> — ':'')+(nom?escH(nom):'<i>Sans désignation</i>');
+    }).join('<br>'):'<span style="color:#94a3b8;">—</span>';
+    return '<tr style="background:'+(i%2===0?'#f8f9ff':'#fff')+';">'+
+      '<td style="padding:8px 10px;font-weight:700;color:#1e3a8a;">'+escH(r.rayon||'—')+'</td>'+
+      '<td style="padding:8px 10px;font-size:11px;">'+produitsCell+'</td>'+
+      '<td style="padding:8px 10px;">'+escH(r.cause||'—')+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;font-weight:700;">'+escH(r.qteManq||'—')+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;color:#059669;font-weight:700;">'+da+'</td>'+
+      '</tr>';
+  }).join('');
+
+  var erratumRows=(c.erratums||[]).map(function(e,i){
+    var typeLabel={prix:'💰 Prix incorrect',image:'🖼️ Image incorrecte',autre:'⚠️ Autre erreur'}[e.type]||'Erreur';
+    return '<tr style="background:'+(i%2===0?'#fffbf5':'#fff')+';">'+
+      '<td style="padding:8px 10px;font-weight:700;">'+escH(e.produit||'—')+'</td>'+
+      '<td style="padding:8px 10px;color:#b45309;font-weight:700;">'+typeLabel+'</td>'+
+      '<td style="padding:8px 10px;">'+escH(e.detail||'—')+'</td>'+
+      '</tr>';
+  }).join('');
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8">'+
+    '<title>Catalogue - '+escH(c.nom)+'</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:900px;margin:auto;}'+
+    'h1{font-size:22px;color:#312e81;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;border-bottom:2px solid #e2e8f0;padding-bottom:10px;}'+
+    '.section{margin-bottom:24px;}'+
+    '.section-title{font-size:14px;font-weight:700;padding:8px 12px;border-radius:6px;margin-bottom:10px;}'+
+    '.rupt-title{background:#fef2f2;color:#dc2626;border-left:4px solid #dc2626;}'+
+    '.errat-title{background:#fff7ed;color:#ea580c;border-left:4px solid #ea580c;}'+
+    'table{width:100%;border-collapse:collapse;font-size:12px;}'+
+    'th{background:#1e3a8a;color:#fff;padding:9px 10px;text-align:left;}'+
+    'th.rupt{background:#dc2626;} th.errat{background:#ea580c;}'+
+    'td{border-bottom:1px solid #e2e8f0;}'+
+    '.empty{color:#94a3b8;font-size:12px;padding:10px;text-align:center;}'+
+    '.footer{margin-top:30px;font-size:10px;color:#94a3b8;text-align:center;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:10px;}}</style></head><body>'+
+    '<h1>📒 Catalogue · '+escH(c.nom)+'</h1>'+
+    '<div class="meta">Période : '+dateStr+' &nbsp;|&nbsp; Généré le '+genDate+' &nbsp;|&nbsp; MG MAXI DENDEN</div>'+
+    '<div class="section">'+
+    '<div class="section-title rupt-title">⚠️ Ruptures par Rayon ('+(c.ruptures||[]).length+')</div>'+
+    ((c.ruptures||[]).length?
+      '<table><thead><tr>'+
+      '<th class="rupt">Rayon</th><th class="rupt">Produits en rupture</th><th class="rupt">Cause</th><th class="rupt" style="text-align:center;">Qté manquante</th><th class="rupt" style="text-align:center;">Arrivée prévue</th>'+
+      '</tr></thead><tbody>'+rupturesRows+'</tbody></table>'
+      :'<div class="empty">Aucune rupture enregistrée</div>')+
+    '</div>'+
+    '<div class="section">'+
+    '<div class="section-title errat-title">🖨️ Erratums ('+(c.erratums||[]).length+')</div>'+
+    ((c.erratums||[]).length?
+      '<table><thead><tr>'+
+      '<th class="errat">Produit</th><th class="errat">Type d\'erreur</th><th class="errat">Détail / Correction</th>'+
+      '</tr></thead><tbody>'+erratumRows+'</tbody></table>'
+      :'<div class="empty">Aucun erratum enregistré</div>')+
+    '</div>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Catalogue</div>'+
+    '</body></html>';
+
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='Catalogue_'+c.nom.replace(/\s+/g,'_')+'_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
+// Render on page open
+(function(){var orig=goPage;})();
 </script>
 <div id="printDLC" style="display:none;padding:20px;"></div>
+
+<!-- ══ GLOBAL SEARCH ══ -->
+<div id="gsOverlay" onclick="closeGS()"></div>
+<div id="gsBox">
+  <div id="gsRow">
+    <svg fill="none" stroke="rgba(59,130,246,.8)" stroke-width="2.2" width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="gsInp" type="search" placeholder="Rechercher une page, un outil..." autocomplete="off" autocorrect="off" spellcheck="false" oninput="renderGS(this.value)"/>
+    <button id="gsClear" onclick="clearGS()">✕</button>
+  </div>
+  <div id="gsResults"></div>
+</div>
+
+<script>
+var _GS=[
+  {ico:'📒',bg:'#312e81',n:'Catalogue',d:'Ruptures par rayon · Erratums · Suivi catalogue',p:'catalogue',t:'catalogue rupture erratum rayon'},
+  {ico:'📋',bg:'#1e3a8a',n:'Tâches Commerciales',d:'Tâches urgentes, quotidiennes, hebdomadaires',p:'commercial',t:'tache commercial quotidien priorite urgent'},
+  {ico:'📋',bg:'#1e3a8a',n:'Toutes les Tâches',d:'Liste complète des tâches et statuts',p:'taches',t:'tache liste statut accompli'},
+  {ico:'👥',bg:'#065f46',n:'Équipe & RH',d:'Tous les outils de gestion du personnel',p:'equipe',t:'equipe rh personnel'},
+  {ico:'🏢',bg:'#0c4a6e',n:'Liste du Personnel',d:'Annuaire des employés du rayon',p:'listepersonnel',t:'personnel liste employe contact'},
+  {ico:'🕐',bg:'#4c1d95',n:'Pointage Employés',d:'Présences, absences, rapport PDF',p:'pointage',t:'pointage presence heure rapport'},
+  {ico:'🏖️',bg:'#1e3a8a',n:'Gestion des Congés',d:'Demandes de congé et formulaire PDF',p:'conge',t:'conge vacances formulaire'},
+  {ico:'💰',bg:'#78350f',n:'Avances sur Salaire',d:'Avances accordées aux employés',p:'pgAvance',t:'avance salaire argent'},
+  {ico:'🛒',bg:'#1e3a8a',n:'Achats Internes',d:'Achats et accomptes employés',p:'pgAchat',t:'achat employe interne'},
+  {ico:'🔒',bg:'#064e3b',n:'Retenues & Sanctions',d:'Retenues disciplinaires et PV officiel',p:'retenus',t:'retenue sanction discipline pv'},
+  {ico:'📊',bg:'#0c4a6e',n:'Accomptes',d:'Suivi des accomptes accordés',p:'pgAccompte',t:'accompte salaire'},
+  {ico:'⚙️',bg:'#581c87',n:'Administration Rayon',d:'Outils d\'administration et contrôle',p:'admin',t:'admin administration controle'},
+  {ico:'🤝',bg:'#0033A0',n:'Réunion d\'Équipe',d:'Ordre du jour, compte-rendu, PV',p:'reunion',t:'reunion ordre jour pv compte rendu'},
+  {ico:'📢',bg:'#1e3a8a',n:'Briefing Journalier',d:'Points du briefing quotidien',p:'briefing',t:'briefing journalier matin equipe'},
+  {ico:'👁️',bg:'#7f1d1d',n:'Vigilance Sécurité',d:'Incidents et suivi des risques',p:'vigilance',t:'vigilance securite incident risque'},
+  {ico:'🧹',bg:'#064e3b',n:'Hygiène & Propreté',d:'Check-lists hygiène et conformité',p:'hygiene',t:'hygiene proprete nettoyage'},
+  {ico:'📅',bg:'#1e3a8a',n:'Planning Équipe',d:'Planning hebdomadaire du rayon',p:'planning',t:'planning horaire semaine employe'},
+  {ico:'⏰',bg:'#7c2d12',n:'Contrôle DLC',d:'Dates limites avec alarmes automatiques',p:'dlc',t:'dlc date limite peremption alerte alarme'},
+  {ico:'⚠️',bg:'#7f1d1d',n:'Ruptures de Stock',d:'Détecter et traiter les ruptures',p:'ruptures',t:'rupture stock manque rayon'},
+  {ico:'🔬',bg:'#7f1d1d',n:'Non-Conformités',d:'Non-conformités fournisseurs',p:'nonConformites',t:'non conformite fournisseur qualite'},
+  {ico:'📦',bg:'#134e4a',n:'Compte Rendu Fournisseur',d:'Fiche officielle fournisseur',p:'compteRenduFournisseur',t:'fournisseur compte rendu livraison'},
+  {ico:'🏪',bg:'#0033A0',n:'Audit Rayon',d:'Grille d\'audit complète avec scoring',p:'auditRayon',t:'audit rayon scoring conformite'},
+  {ico:'🎯',bg:'#0033A0',n:'Objectifs & KPI',d:'Indicateurs clés de performance',p:'objectifsKpi',t:'kpi objectif indicateur performance'},
+  {ico:'📦',bg:'#134e4a',n:'Inventaire Magasin',d:'Suivi et gestion de l\'inventaire',p:'inventaireMag',t:'inventaire stock magasin'},
+  {ico:'🏋️',bg:'#431407',n:'Stock Lourd',d:'Gestion des articles en stock lourd',p:'stockLourd',t:'stock lourd article reserve'},
+  {ico:'🚫',bg:'#1e293b',n:'Rapport Absences',d:'Rapport hebdomadaire et mensuel',p:null,t:'absence rapport mensuel hebdomadaire',a:'openRapportAbsences()'},
+  {ico:'📊',bg:'#166534',n:'Chiffres & Pilotage',d:'Tableau de bord commercial',p:'chiffres',t:'chiffre ca vente pilotage'},
+  {ico:'🧭',bg:'#1e293b',n:'Pilotage & Prospective',d:'Prévisions, tendances, saisonnalité',p:'pilotage',t:'pilotage prospective prevision tendance'},
+  {ico:'📊',bg:'#166534',n:'Tableau de Bord KPI',d:'Indicateurs en temps réel',p:'dashboard',t:'dashboard kpi tableau bord'},
+  {ico:'🔮',bg:'#0c4a6e',n:'Prévisions de Ventes',d:'Projections et objectifs',p:'previsions',t:'prevision vente objectif projection'},
+  {ico:'🌊',bg:'#134e4a',n:'Saisonnalité',d:'Cycles saisonniers et commandes',p:'saisonnalite',t:'saison saisonnalite commande cycle'},
+  {ico:'📉',bg:'#0c4a6e',n:'Tendances & Analyse',d:'Graphiques de tendances',p:'tendances',t:'tendance analyse graphique performance'},
+  {ico:'💸',bg:'#78350f',n:'Gestion des Démarques',d:'Démarques connues et inconnues',p:'demarque',t:'demarque perte inconnue connue'},
+  {ico:'🔍',bg:'#1e293b',n:'Veille Concurrentielle',d:'Suivi concurrence et alertes',p:'veille',t:'veille concurrence strategie'},
+  {ico:'📈',bg:'#166534',n:'Optimisation',d:'Optimisation des performances',p:'optimisation',t:'optimisation performance amelioration'},
+  {ico:'🏆',bg:'#312e81',n:'Excellence Opérationnelle',d:'Méthodes managériales',p:'excellence',t:'excellence methode management qualite'},
+  {ico:'📊',bg:'#431407',n:'Pareto 80/20',d:'Les 20% d\'actions qui font 80% des résultats',p:'pareto',t:'pareto 80 20 analyse priorite'},
+  {ico:'🔄',bg:'#0c4a6e',n:'PDCA',d:'Plan-Do-Check-Act',p:'pdca',t:'pdca amelioration cycle'},
+  {ico:'⚖️',bg:'#7f1d1d',n:'Matrice Eisenhower',d:'Prioriser par urgence et importance',p:'eisenhower',t:'eisenhower matrice urgence importance'},
+  {ico:'🚧',bg:'#78350f',n:'Théorie des Contraintes',d:'Éliminer le goulot d\'étranglement',p:'contraintes',t:'contrainte goulot etranglement'},
+  {ico:'♻️',bg:'#064e3b',n:'Lean Management',d:'Éliminer les gaspillages',p:'lean',t:'lean gaspillage flux'},
+  {ico:'6σ',bg:'#1e3a8a',n:'Six Sigma',d:'Réduire la variabilité et défauts',p:'sixsigma',t:'six sigma qualite variation defaut'},
+  {ico:'改',bg:'#4c1d95',n:'Kaizen',d:'Amélioration continue par petits pas',p:'kaizen',t:'kaizen amelioration continue'},
+  {ico:'5S',bg:'#134e4a',n:'Méthode 5S',d:'Trier, Ranger, Nettoyer, Standardiser',p:'cinqs',t:'5s trier ranger nettoyer standardiser'},
+  {ico:'⏱️',bg:'#1e3a5f',n:'Gestion du Temps',d:'Toutes les techniques de productivité',p:'gestiontemps',t:'temps productivite technique methode'},
+  {ico:'🍅',bg:'#7f1d1d',n:'Pomodoro',d:'Blocs de 25 min avec pauses',p:'pomodoro',t:'pomodoro 25 minutes concentration pause'},
+  {ico:'🐸',bg:'#431407',n:'Avalez le Crapaud',d:'Commencer par la tâche la plus difficile',p:'crapaud',t:'crapaud difficile premier matin'},
+  {ico:'🧠',bg:'#1e3a8a',n:'Deep Work',d:'3h de concentration totale',p:'deepwork',t:'deep work concentration focus'},
+  {ico:'135',bg:'#064e3b',n:'Méthode 1-3-5',d:'1 majeure + 3 moyennes + 5 petites',p:'methode135',t:'135 tache majeure moyenne petite'},
+  {ico:'⏰',bg:'#4c1d95',n:'Time Blocking',d:'Planifier chaque heure en blocs',p:'timeblocking',t:'time blocking planifier bloc heure'},
+  {ico:'333',bg:'#78350f',n:'Méthode 3-3-3',d:'3h focus + 3 urgentes + 3 routine',p:'methode333',t:'333 focus urgent routine'},
+  {ico:'📊',bg:'#134e4a',n:'Méthode ABCDE',d:'Classer de A critique à E éliminer',p:'methodeABCDE',t:'abcde classer priorite critique'},
+  {ico:'🎯',bg:'#831843',n:'Méthode MoSCoW',d:'Must, Should, Could, Won\'t',p:'methodeMoscow',t:'moscow must should agile priorite'},
+  {ico:'⚡',bg:'#78350f',n:'Règle des 2 Minutes',d:'Moins de 2 min → faire maintenant',p:'regle2min',t:'2 minutes regle rapide immediat'},
+  {ico:'📋',bg:'#0c4a6e',n:'Tableau Kanban',d:'À faire / En cours / Terminé',p:'kanban',t:'kanban tableau faire cours termine'},
+  {ico:'📥',bg:'#4c1d95',n:'GTD',d:'Capturer, clarifier, organiser',p:'gtd',t:'gtd capture organiser clarifier'},
+  {ico:'🔀',bg:'#1e3a8a',n:'Batching',d:'Regrouper les tâches similaires',p:'batching',t:'batching regrouper similaire'},
+  {ico:'⚖️',bg:'#831843',n:'Warren 5/25',d:'5 priorités absolues',p:'warren525',t:'warren buffett 25 5 priorite'},
+  {ico:'🏺',bg:'#134e4a',n:'Pickle Jar',d:'Rochers, galets, sable, eau',p:'picklejar',t:'pickle jar rocher galet sable planifier'},
+  {ico:'📁',bg:'#1e293b',n:'Documents Téléchargés',d:'Fichiers et documents sauvegardés',p:'documents',t:'document fichier pdf telecharge'},
+  {ico:'🌙',bg:'#1e293b',n:'Résumé de la Journée',d:'Bilan et notes de fin de journée',p:'resume',t:'resume journee bilan note fin'},
+  {ico:'📈',bg:'#1e293b',n:'Statistiques & Historique',d:'Performance et historique des tâches',p:'stats',t:'statistique historique performance'},
+  {ico:'✅',bg:'#166534',n:'Checklist',d:'Listes de contrôle récurrentes',p:'checklist',t:'checklist liste controle verification'},
+  {ico:'👔',bg:'#1e3a8a',n:'Visite de la Direction',d:'Préparer et documenter la visite DR',p:'visiteDR',t:'visite direction dr preparation rapport'},
+  {ico:'🏛️',bg:'#4c1d95',n:'Réunion Régionale',d:'Préparer la réunion régionale',p:'reunionRegionale',t:'reunion regionale pv preparation'},
+  {ico:'📊',bg:'#166534',n:'Avancées & Résultats',d:'Suivi des avancées du rayon',p:'avancees',t:'avancee resultat suivi performance'},
+];
+function _gn(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function _gh(str,q){if(!q)return str;var ns=_gn(str),nq=_gn(q),i=ns.indexOf(nq);if(i<0)return str;return str.slice(0,i)+'<mark style="background:rgba(59,130,246,.35);color:#93c5fd;border-radius:3px;padding:0 2px;">'+str.slice(i,i+nq.length)+'</mark>'+str.slice(i+nq.length);}
+function openGS(){document.getElementById('gsOverlay').classList.add('on');document.getElementById('gsBox').classList.add('on');document.getElementById('gsInp').value='';document.getElementById('gsClear').style.display='none';document.getElementById('gsResults').innerHTML='<div style="padding:14px;text-align:center;font-size:10px;color:rgba(100,116,139,.6);">Tapez pour rechercher parmi tous les modules</div>';setTimeout(function(){document.getElementById('gsInp').focus();},150);}
+function closeGS(){document.getElementById('gsOverlay').classList.remove('on');document.getElementById('gsBox').classList.remove('on');document.getElementById('gsInp').blur();}
+function clearGS(){document.getElementById('gsInp').value='';document.getElementById('gsClear').style.display='none';document.getElementById('gsResults').innerHTML='<div style="padding:14px;text-align:center;font-size:10px;color:rgba(100,116,139,.6);">Tapez pour rechercher parmi tous les modules</div>';document.getElementById('gsInp').focus();}
+function renderGS(q){
+  document.getElementById('gsClear').style.display=q?'block':'none';
+  var r=document.getElementById('gsResults');
+  if(!(q=q.trim())){r.innerHTML='<div style="padding:14px;text-align:center;font-size:10px;color:rgba(100,116,139,.6);">Tapez pour rechercher parmi tous les modules</div>';return;}
+  var nq=_gn(q);
+  var m=_GS.filter(function(x){return _gn(x.n).includes(nq)||_gn(x.d).includes(nq)||_gn(x.t).includes(nq);});
+  if(!m.length){r.innerHTML='<div style="text-align:center;padding:24px 16px;color:rgba(100,116,139,.6);font-size:12px;">Aucun résultat pour <b style="color:#f1f5f9;">'+q+'</b></div>';return;}
+  r.innerHTML=m.map(function(x){return '<div class="gs-item" onclick="closeGS();'+(x.p?'goPage(\''+x.p+'\')':x.a||'')+'">'+'<div class="gs-ico" style="background:'+x.bg+';">'+x.ico+'</div>'+'<div style="flex:1;min-width:0;"><div class="gs-name">'+_gh(x.n,q)+'</div><div class="gs-desc">'+_gh(x.d,q)+'</div></div>'+'<svg fill="none" stroke="rgba(148,163,184,.35)" stroke-width="2" width="13" height="13" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>';}).join('');
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGS();});
+</script>
 </body>
 </html>
 
