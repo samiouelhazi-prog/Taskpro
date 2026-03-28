@@ -2104,7 +2104,10 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Avancées</div>
     <div class="pg-title" style="font-size:14px;">👔 Visite DR</div>
-    <button onclick="openVisiteDR()" style="background:#6d28d9;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAllVisitesDRPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openVisiteDR()" style="background:#6d28d9;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
 
@@ -10027,6 +10030,72 @@ function toggleDRDone(id){
   renderVisiteDR();
 }
 
+function _drDateFmt(d){
+  if(!d)return '—';
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];
+}
+function _drSection(col,ico,label,txt){
+  if(!txt)return '';
+  return '<div style="border-left:4px solid '+col+';padding:10px 14px;margin-bottom:10px;border-radius:0 8px 8px 0;background:'+col+'18;">'+
+    '<div style="font-size:11px;font-weight:900;color:'+col+';margin-bottom:5px;">'+ico+' '+label+'</div>'+
+    '<div style="font-size:12px;color:#1e293b;line-height:1.7;white-space:pre-line;">'+txt.replace(/</g,'&lt;')+'</div>'+
+    '</div>';
+}
+function _drBuildHTML(visits){
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var rows=visits.map(function(v){
+    return '<div style="page-break-inside:avoid;margin-bottom:28px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
+      '<div style="background:linear-gradient(135deg,#6d28d9,#4c1d95);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">'+
+        '<div>'+
+          '<div style="font-size:16px;font-weight:900;">👔 Visite DR'+(v.nom?' · '+v.nom.replace(/</g,'&lt;'):'')+'</div>'+
+          '<div style="font-size:11px;opacity:.8;margin-top:3px;">'+_drDateFmt(v.date)+(v.duree?' · '+v.duree:'')+(v.magasin?' · '+v.magasin.replace(/</g,'&lt;'):'')+'</div>'+
+        '</div>'+
+        '<div style="background:'+(v.actionsDone?'#4ade80':'#fbbf24')+';color:#1e293b;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;">'+
+          (v.actionsDone?'✅ Actions faites':'⏳ En attente')+
+        '</div>'+
+      '</div>'+
+      '<div style="padding:14px 18px;">'+
+        _drSection('#22c55e','✅','CE QUI A PLU',v.positif)+
+        _drSection('#ef4444','⚠️','POINTS À AMÉLIORER',v.negatif)+
+        _drSection('#eab308','📋','RECOMMANDATIONS DR',v.recommandations)+
+        _drSection('#0ea5e9','🎯','ACTIONS PRIORITAIRES',v.actions)+
+        (v.prochaine?'<div style="margin-top:8px;font-size:11px;color:#6d28d9;font-weight:700;">📅 Prochaine visite prévue : '+_drDateFmt(v.prochaine)+'</div>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Visites DR — MG MAXI DENDEN</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:800px;margin:auto;}'+
+    'h1{font-size:20px;color:#6d28d9;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>👔 Rapport Visites Directeur Régional</h1>'+
+    '<div class="meta">MG MAXI DENDEN &nbsp;|&nbsp; '+prof.store+' &nbsp;|&nbsp; Généré le '+genDate+'</div>'+
+    rows+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Visite DR</div>'+
+    '</body></html>';
+}
+function exportVisiteDRPDF(id){
+  var v=loadVisitesDR().find(function(x){return x.id===id;});if(!v)return;
+  var html=_drBuildHTML([v]);
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='VisiteDR_'+_drDateFmt(v.date).replace(/\s/g,'_')+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+function exportAllVisitesDRPDF(){
+  var data=loadVisitesDR();
+  if(!data.length){showT('⚠️','Aucune visite enregistrée');return;}
+  var html=_drBuildHTML(data);
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='VisitesDR_Toutes_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄',data.length+' visite(s) exportée(s)');
+}
+
 function delVisiteDR(id){
   if(!confirm('Supprimer cette visite ?')) return;
   var data = loadVisitesDR().filter(function(x){ return x.id!==id; });
@@ -10080,6 +10149,7 @@ function renderVisiteDR(){
           '<div style="font-size:11px;color:var(--t2);margin-top:3px;">📅 '+df+(v.duree?' · ⏱ '+v.duree:'')+(v.magasin?' · 🏪 '+v.magasin:'')+'</div>'+
         '</div>'+
         '<div onclick="delVisiteDR(\''+v.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;margin-left:8px;flex-shrink:0;">×</div>'+
+        '<button onclick="event.stopPropagation();exportVisiteDRPDF(\''+v.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:11px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:4px;">📄</button>'+
       '</div>'+
 
       // Contenu
