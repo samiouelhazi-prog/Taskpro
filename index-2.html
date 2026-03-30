@@ -2770,6 +2770,28 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         </div>
         <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
       </div>
+
+      <div onclick="goPage('arrivageDepot')" style="background:linear-gradient(135deg,#1c1400,#3d2e00);border:1px solid rgba(251,191,36,.4);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">🏭</div>
+        <div style="font-size:28px;">🏭</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Arrivage Dépôt Sec</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Palettes · Plombage · Anomalies · Camion</div>
+        </div>
+        <div id="arrivageBadge" style="display:none;background:#fbbf24;color:#1c1400;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
+
+      <div onclick="goPage('collecteDechets')" style="background:linear-gradient(135deg,#1a2e1a,#2d5a1b);border:1px solid rgba(132,204,22,.4);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">♻️</div>
+        <div style="font-size:28px;">♻️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Collecte Déchets</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Cartons · Kg · Camion · Collecteur</div>
+        </div>
+        <div id="collecteDéchetsBadge" style="display:none;background:#84cc16;color:#1a2e1a;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
     </div>
 
     <!-- TAB 2 : Direction & Réunions -->
@@ -2801,6 +2823,273 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 
   </div>
 </div>
+<!-- ══ ARRIVAGE DÉPÔT SEC ══ -->
+<div class="pg" id="pgArrivageDepot">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#fbbf24;cursor:pointer;">‹ Réception</div>
+    <div class="pg-title" style="font-size:13px;">🏭 Arrivage Dépôt Sec</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportArrivagePDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Exporter PDF">📄</button>
+      <button onclick="openArrivageForm()" style="background:#3d2e00;border:1.5px solid #fbbf24;color:#fbbf24;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(61,46,0,.2));border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+      <div style="font-size:22px;">🏭</div>
+      <div>
+        <div style="font-size:12px;font-weight:900;color:#fbbf24;margin-bottom:2px;">Suivi Arrivages Dépôt Sec</div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.5;">Palettes par rayon · Plombage · Anomalies · Livreur</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#fbbf24;" id="arTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">ARRIVAGES</div>
+      </div>
+      <div style="background:var(--s2);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#fbbf24;" id="arTotalPal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">TOTAL PAL.</div>
+      </div>
+      <div style="background:var(--s2);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#f87171;" id="arAnomalies">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">ANOMALIES</div>
+      </div>
+    </div>
+
+    <div id="arrivageList"></div>
+    <div id="arrivageEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:36px;margin-bottom:8px;">🏭</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Aucun arrivage enregistré</div>
+      <div style="font-size:11px;">Appuyez sur + pour ajouter</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM ARRIVAGE DÉPÔT SEC ══ -->
+<div id="arrivageForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#100d00;border:1px solid rgba(251,191,36,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';" id="arrivageFormTit">🏭 Nouvel Arrivage</div>
+      <div onclick="document.getElementById('arrivageForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Date + Heure -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">📅 DATE *</label>
+        <input id="arDate" type="date" style="width:100%;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">⏰ HEURE *</label>
+        <input id="arHeure" type="time" style="width:100%;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
+      </div>
+    </div>
+
+    <!-- Camion + Livreur -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🚛 MATRICULE CAMION</label>
+        <input id="arCamion" type="text" placeholder="Ex : 123 TUN 4567" style="width:100%;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.25);border-radius:10px;padding:10px 12px;color:#38bdf8;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="this.value=this.value.toUpperCase()">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#c4b5fd;display:block;margin-bottom:4px;">👤 LIVREUR</label>
+        <input id="arLivreur" type="text" placeholder="Nom du livreur..." style="width:100%;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Section palettes -->
+    <div style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:14px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:900;color:#fbbf24;margin-bottom:12px;letter-spacing:.5px;">📦 RÉPARTITION DES PALETTES</div>
+
+      <!-- Total palettes (calculé auto) -->
+      <div style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-size:11px;font-weight:700;color:#fbbf24;">TOTAL PALETTES</div>
+        <div style="font-size:26px;font-weight:900;color:#fbbf24;font-family:'IBM Plex Mono',monospace;" id="arTotalPalCalc">0</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#f97316;display:block;margin-bottom:3px;">🧂 SALÉ</label>
+          <input id="arPalSale" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:9px;padding:10px 12px;color:#fb923c;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#ec4899;display:block;margin-bottom:3px;">🍬 SUCRÉ</label>
+          <input id="arPalSucre" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.3);border-radius:9px;padding:10px 12px;color:#f472b6;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#a855f7;display:block;margin-bottom:3px;">🌸 PARFUMERIE</label>
+          <input id="arPalParfum" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:9px;padding:10px 12px;color:#c084fc;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#6366f1;display:block;margin-bottom:3px;">🧴 DROGUERIE</label>
+          <input id="arPalDrogue" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.3);border-radius:9px;padding:10px 12px;color:#818cf8;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#14b8a6;display:block;margin-bottom:3px;">🛒 BAZAR</label>
+          <input id="arPalBazar" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.3);border-radius:9px;padding:10px 12px;color:#2dd4bf;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+        <div>
+          <label style="font-size:9px;font-weight:700;color:#94a3b8;display:block;margin-bottom:3px;">📦 AUTRES</label>
+          <input id="arPalAutres" type="number" min="0" placeholder="0" value="0"
+            style="width:100%;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.2);border-radius:9px;padding:10px 12px;color:#cbd5e1;font-size:18px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;text-align:center;"
+            oninput="calcArTotal()">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Plombage de sécurité -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:6px;">🔒 PLOMBAGE DE SÉCURITÉ</label>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <button type="button" id="arPlombOkBtn" onclick="setArPlomb('ok')" style="flex:1;background:rgba(34,197,94,.12);border:1.5px solid rgba(34,197,94,.3);border-radius:10px;color:#4ade80;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">✅ Conforme</button>
+        <button type="button" id="arPlombNokBtn" onclick="setArPlomb('nok')" style="flex:1;background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.3);border-radius:10px;color:#f87171;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🚨 Problème</button>
+      </div>
+      <div id="arPlombDetailWrap" style="display:none;">
+        <input id="arPlombDetail" type="text" placeholder="Décrivez le problème de plombage..." style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Anomalies -->
+    <div style="margin-bottom:18px;">
+      <label style="font-size:10px;font-weight:700;color:#fb923c;display:block;margin-bottom:4px;">⚠️ ANOMALIES <span style="color:#475569;font-weight:400;">(si constatées)</span></label>
+      <textarea id="arAnomalies" rows="2" placeholder="Ex : Palette endommagée, produits manquants, carton ouvert..." style="width:100%;background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <div id="arDelRow" style="display:none;margin-bottom:10px;">
+      <button onclick="delArrivage(_arEid);document.getElementById('arrivageForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer cet arrivage</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('arrivageForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveArrivage()" style="flex:2;background:#92400e;border:1px solid #fbbf24;color:#fef3c7;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COLLECTE DÉCHETS ══ -->
+<div class="pg" id="pgCollecteDechets">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#84cc16;cursor:pointer;">‹ Réception</div>
+    <div class="pg-title" style="font-size:13px;">♻️ Collecte Déchets</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportCollectePDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Exporter PDF">📄</button>
+      <button onclick="openCollecteForm()" style="background:#365314;border:1.5px solid #84cc16;color:#84cc16;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- Info banner -->
+    <div style="background:linear-gradient(135deg,rgba(132,204,22,.12),rgba(45,90,27,.2));border:1px solid rgba(132,204,22,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+      <div style="font-size:22px;">♻️</div>
+      <div>
+        <div style="font-size:12px;font-weight:900;color:#a3e635;margin-bottom:2px;">Suivi Collecte Cartons</div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.5;">Enregistrez chaque enlèvement · Camion · Collecteur · Poids (kg)</div>
+      </div>
+    </div>
+
+    <!-- Stats rapides -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border:1px solid rgba(132,204,22,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#a3e635;" id="cdTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">COLLECTES</div>
+      </div>
+      <div style="background:var(--s2);border:1px solid rgba(132,204,22,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#a3e635;" id="cdTotalKg">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">KG TOTAL</div>
+      </div>
+      <div style="background:var(--s2);border:1px solid rgba(132,204,22,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:18px;font-weight:900;color:#a3e635;" id="cdMoisKg">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">KG CE MOIS</div>
+      </div>
+    </div>
+
+    <div id="collecteList"></div>
+    <div id="collecteEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:36px;margin-bottom:8px;">♻️</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">Aucune collecte enregistrée</div>
+      <div style="font-size:11px;">Appuyez sur + pour ajouter</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM COLLECTE DÉCHETS ══ -->
+<div id="collecteForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0a130a;border:1px solid rgba(132,204,22,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';" id="collecteFormTit">♻️ Nouvelle Collecte</div>
+      <div onclick="document.getElementById('collecteForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Date + Heure -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#84cc16;display:block;margin-bottom:4px;">📅 DATE *</label>
+        <input id="cdDate" type="date" style="width:100%;background:rgba(132,204,22,.08);border:1px solid rgba(132,204,22,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#84cc16;display:block;margin-bottom:4px;">⏰ HEURE *</label>
+        <input id="cdHeure" type="time" style="width:100%;background:rgba(132,204,22,.08);border:1px solid rgba(132,204,22,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
+      </div>
+    </div>
+
+    <!-- Poids -->
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">⚖️ QUANTITÉ (Kg) *</label>
+      <div style="position:relative;">
+        <input id="cdKg" type="number" min="0" step="0.5" placeholder="Ex : 120" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:11px 44px 11px 14px;color:#f8faff;font-size:20px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;">
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:#64748b;">Kg</span>
+      </div>
+    </div>
+
+    <!-- Matricule camion -->
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🚛 MATRICULE CAMION <span style="color:#475569;font-weight:400;">format : xxx TUN xxxx</span></label>
+      <input id="cdCamion" type="text" placeholder="Ex : 123 TUN 4567" style="width:100%;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.25);border-radius:10px;padding:11px 14px;color:#38bdf8;font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="this.value=this.value.toUpperCase()">
+    </div>
+
+    <!-- Nom collecteur -->
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:#c4b5fd;display:block;margin-bottom:4px;">🙋 NOM DU COLLECTEUR *</label>
+      <input id="cdCollecteur" type="text" placeholder="Nom de la personne / société de collecte..." style="width:100%;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:11px 14px;color:#f8faff;font-size:14px;box-sizing:border-box;">
+    </div>
+
+    <!-- Observation -->
+    <div style="margin-bottom:18px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATION</label>
+      <textarea id="cdObs" rows="2" placeholder="Remarques, type de déchets, état des cartons..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <div id="cdDelRow" style="display:none;margin-bottom:10px;">
+      <button onclick="delCollecte(_cdEid);document.getElementById('collecteForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer cette collecte</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('collecteForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveCollecte()" style="flex:2;background:#4d7c0f;border:1px solid #84cc16;color:#ecfccb;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+
 <div class="pg" id="pgAnomaliesQte">
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Avancées</div>
@@ -6212,7 +6501,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -6253,6 +6542,8 @@ function goPage(p){
   if(p==='visiteAutorites')renderVisiteAutorites();
   if(p==='contrats')renderContrats();
   if(p==='demandeAvoir')renderAvoirs();
+  if(p==='arrivageDepot')renderArrivage();
+  if(p==='collecteDechets')renderCollecte();
   if(p==='anomaliesQte')renderAnomHubBadges();
   if(p==='anomaliesPoissonnerie')renderAnom('poissonnerie');
   if(p==='anomaliesFLEG')renderAnom('fleg');
@@ -14413,12 +14704,450 @@ function exportCatPDF(id){
   showT('📄','Rapport exporté');
 }
 
+// ══════════════════════════════════════════════
+// ARRIVAGE DÉPÔT SEC
+// ══════════════════════════════════════════════
+var SK_AR = SK + '_arrivageDepot';
+var _arEid = null;
+var _arPlomb = 'ok';
+
+function loadArrivage(){ try{ return JSON.parse(localStorage.getItem(SK_AR)||'[]'); }catch(e){ return []; } }
+function saveArrivageData(d){ localStorage.setItem(SK_AR, JSON.stringify(d)); }
+
+function _arDateFmt(d){
+  if(!d)return '—';
+  var M=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-'); return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
+}
+
+function calcArTotal(){
+  var ids=['arPalSale','arPalSucre','arPalParfum','arPalDrogue','arPalBazar','arPalAutres'];
+  var tot=ids.reduce(function(s,id){ return s+(parseInt(document.getElementById(id).value)||0); },0);
+  var el=document.getElementById('arTotalPalCalc');
+  if(el) el.textContent=tot;
+}
+
+function setArPlomb(val){
+  _arPlomb=val;
+  var okBtn=document.getElementById('arPlombOkBtn');
+  var nokBtn=document.getElementById('arPlombNokBtn');
+  var wrap=document.getElementById('arPlombDetailWrap');
+  if(val==='ok'){
+    if(okBtn){ okBtn.style.background='rgba(34,197,94,.35)'; okBtn.style.borderColor='#22c55e'; okBtn.style.fontWeight='900'; }
+    if(nokBtn){ nokBtn.style.background='rgba(239,68,68,.12)'; nokBtn.style.borderColor='rgba(239,68,68,.3)'; nokBtn.style.fontWeight='700'; }
+    if(wrap) wrap.style.display='none';
+  } else {
+    if(nokBtn){ nokBtn.style.background='rgba(239,68,68,.35)'; nokBtn.style.borderColor='#ef4444'; nokBtn.style.fontWeight='900'; }
+    if(okBtn){ okBtn.style.background='rgba(34,197,94,.12)'; okBtn.style.borderColor='rgba(34,197,94,.3)'; okBtn.style.fontWeight='700'; }
+    if(wrap) wrap.style.display='block';
+  }
+}
+
+function openArrivageForm(eid){
+  _arEid = eid||null;
+  _arPlomb = 'ok';
+  document.getElementById('arrivageFormTit').textContent = eid ? '✏️ Modifier l\'Arrivage' : '🏭 Nouvel Arrivage';
+  document.getElementById('arDelRow').style.display = eid ? 'block' : 'none';
+  var d=new Date(); var pad=function(n){return('0'+n).slice(-2);};
+  var palFields=['arPalSale','arPalSucre','arPalParfum','arPalDrogue','arPalBazar','arPalAutres'];
+  if(eid){
+    var rec=loadArrivage().find(function(x){return x.id===eid;});
+    if(rec){
+      document.getElementById('arDate').value=rec.date||'';
+      document.getElementById('arHeure').value=rec.heure||'';
+      document.getElementById('arCamion').value=rec.camion||'';
+      document.getElementById('arLivreur').value=rec.livreur||'';
+      document.getElementById('arPalSale').value=rec.palSale||0;
+      document.getElementById('arPalSucre').value=rec.palSucre||0;
+      document.getElementById('arPalParfum').value=rec.palParfum||0;
+      document.getElementById('arPalDrogue').value=rec.palDrogue||0;
+      document.getElementById('arPalBazar').value=rec.palBazar||0;
+      document.getElementById('arPalAutres').value=rec.palAutres||0;
+      document.getElementById('arAnomalies').value=rec.anomalies||'';
+      document.getElementById('arPlombDetail').value=rec.plombDetail||'';
+      _arPlomb=rec.plomb||'ok';
+    }
+  } else {
+    document.getElementById('arDate').value=tstr();
+    document.getElementById('arHeure').value=pad(d.getHours())+':'+pad(d.getMinutes());
+    document.getElementById('arCamion').value='';
+    document.getElementById('arLivreur').value='';
+    palFields.forEach(function(id){document.getElementById(id).value=0;});
+    document.getElementById('arAnomalies').value='';
+    document.getElementById('arPlombDetail').value='';
+  }
+  // reset plomb buttons
+  var okBtn=document.getElementById('arPlombOkBtn'); var nokBtn=document.getElementById('arPlombNokBtn');
+  if(okBtn){okBtn.style.background='rgba(34,197,94,.12)';okBtn.style.borderColor='rgba(34,197,94,.3)';okBtn.style.fontWeight='700';}
+  if(nokBtn){nokBtn.style.background='rgba(239,68,68,.12)';nokBtn.style.borderColor='rgba(239,68,68,.3)';nokBtn.style.fontWeight='700';}
+  document.getElementById('arPlombDetailWrap').style.display='none';
+  setArPlomb(_arPlomb);
+  calcArTotal();
+  document.getElementById('arrivageForm').style.display='flex';
+}
+
+function saveArrivage(){
+  var palSale=parseInt(document.getElementById('arPalSale').value)||0;
+  var palSucre=parseInt(document.getElementById('arPalSucre').value)||0;
+  var palParfum=parseInt(document.getElementById('arPalParfum').value)||0;
+  var palDrogue=parseInt(document.getElementById('arPalDrogue').value)||0;
+  var palBazar=parseInt(document.getElementById('arPalBazar').value)||0;
+  var palAutres=parseInt(document.getElementById('arPalAutres').value)||0;
+  var totalPal=palSale+palSucre+palParfum+palDrogue+palBazar+palAutres;
+  if(totalPal<=0){ showT('⚠️','Entrez au moins 1 palette'); return; }
+  var data=loadArrivage();
+  var entry={
+    id:_arEid||uid(), ts:Date.now(),
+    date:document.getElementById('arDate').value,
+    heure:document.getElementById('arHeure').value,
+    camion:document.getElementById('arCamion').value.trim().toUpperCase(),
+    livreur:document.getElementById('arLivreur').value.trim(),
+    palSale:palSale, palSucre:palSucre, palParfum:palParfum,
+    palDrogue:palDrogue, palBazar:palBazar, palAutres:palAutres,
+    totalPal:totalPal,
+    plomb:_arPlomb,
+    plombDetail:(_arPlomb==='nok'?document.getElementById('arPlombDetail').value.trim():''),
+    anomalies:document.getElementById('arAnomalies').value.trim()
+  };
+  if(_arEid){
+    var idx=data.findIndex(function(x){return x.id===_arEid;});
+    if(idx>-1) data[idx]=entry; else data.unshift(entry);
+  } else { data.unshift(entry); }
+  saveArrivageData(data);
+  document.getElementById('arrivageForm').style.display='none';
+  renderArrivage();
+  updateArrivageBadge();
+  showT('🏭',_arEid?'Arrivage mis à jour !':'Arrivage enregistré !');
+}
+
+function delArrivage(id){
+  if(!confirm('Supprimer cet arrivage ?')) return;
+  saveArrivageData(loadArrivage().filter(function(x){return x.id!==id;}));
+  document.getElementById('arrivageForm').style.display='none';
+  renderArrivage();
+  updateArrivageBadge();
+  showT('🗑️','Supprimé');
+}
+
+function updateArrivageBadge(){
+  var data=loadArrivage();
+  var badge=document.getElementById('arrivageBadge');
+  if(badge){
+    if(data.length){badge.style.display='block';badge.textContent=data.length+' arrivage'+(data.length>1?'s':'');}
+    else badge.style.display='none';
+  }
+}
+
+function renderArrivage(){
+  var data=loadArrivage();
+  var el=document.getElementById('arrivageList');
+  var em=document.getElementById('arrivageEmpty');
+  var totEl=document.getElementById('arTotal');
+  var totPal=document.getElementById('arTotalPal');
+  var totAnom=document.getElementById('arAnomalies');
+  var totalPal=data.reduce(function(s,x){return s+(x.totalPal||0);},0);
+  var anomCount=data.filter(function(x){return x.anomalies||x.plomb==='nok';}).length;
+  if(totEl) totEl.textContent=data.length;
+  if(totPal) totPal.textContent=totalPal;
+  if(totAnom) totAnom.textContent=anomCount;
+  updateArrivageBadge();
+  if(!el) return;
+  if(!data.length){ el.innerHTML=''; if(em) em.style.display='block'; return; }
+  if(em) em.style.display='none';
+  var palTypes=[
+    {key:'palSale',  label:'Salé',       col:'#fb923c', bg:'rgba(249,115,22,.12)'},
+    {key:'palSucre', label:'Sucré',      col:'#f472b6', bg:'rgba(236,72,153,.12)'},
+    {key:'palParfum',label:'Parfumerie', col:'#c084fc', bg:'rgba(168,85,247,.12)'},
+    {key:'palDrogue',label:'Droguerie',  col:'#818cf8', bg:'rgba(99,102,241,.12)'},
+    {key:'palBazar', label:'Bazar',      col:'#2dd4bf', bg:'rgba(20,184,166,.12)'},
+    {key:'palAutres',label:'Autres',     col:'#94a3b8', bg:'rgba(148,163,184,.1)'}
+  ];
+  el.innerHTML=data.map(function(r){
+    var plombBadge=r.plomb==='nok'
+      ?'<span style="background:rgba(239,68,68,.2);color:#f87171;font-size:9px;font-weight:900;padding:2px 7px;border-radius:6px;border:1px solid rgba(239,68,68,.35);">🚨 Plombage</span>'
+      :'<span style="background:rgba(34,197,94,.15);color:#4ade80;font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;">✅ Plombage OK</span>';
+    var palGrid=palTypes.filter(function(pt){return (r[pt.key]||0)>0;}).map(function(pt){
+      return '<div style="background:'+pt.bg+';border-radius:7px;padding:5px 8px;display:flex;justify-content:space-between;align-items:center;">'+
+        '<span style="font-size:9px;font-weight:700;color:'+pt.col+';">'+pt.label+'</span>'+
+        '<span style="font-size:13px;font-weight:900;color:#f8faff;">'+r[pt.key]+'</span>'+
+      '</div>';
+    }).join('');
+    return '<div style="background:var(--s2);border:1px solid rgba(251,191,36,.2);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #fbbf24;" onclick="openArrivageForm(\''+r.id+'\')">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">'+
+        '<div style="flex:1;">'+
+          '<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;flex-wrap:wrap;">'+
+            '<div style="font-size:20px;font-weight:900;color:#fbbf24;font-family:\'IBM Plex Mono\',monospace;line-height:1;">'+r.totalPal+'</div>'+
+            '<div style="font-size:11px;font-weight:700;color:#94a3b8;">palettes</div>'+
+            plombBadge+
+          '</div>'+
+          '<div style="font-size:11px;color:var(--t2);">📅 '+_arDateFmt(r.date)+(r.heure?' · ⏰ '+r.heure:'')+'</div>'+
+        '</div>'+
+        '<button onclick="event.stopPropagation();exportArrivagePDF(\''+r.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:10px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📄</button>'+
+      '</div>'+
+      (r.camion||r.livreur?'<div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;">'+
+        (r.camion?'<span style="background:rgba(14,165,233,.1);color:#38bdf8;font-size:10px;font-weight:800;padding:3px 8px;border-radius:7px;font-family:monospace;">🚛 '+r.camion+'</span>':'')+
+        (r.livreur?'<span style="background:rgba(167,139,250,.1);color:#c4b5fd;font-size:10px;font-weight:700;padding:3px 8px;border-radius:7px;">👤 '+r.livreur+'</span>':'')+
+      '</div>':'')+
+      (palGrid?'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px;">'+palGrid+'</div>':'')+
+      (r.plomb==='nok'&&r.plombDetail?'<div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:6px 10px;margin-bottom:6px;font-size:10px;color:#fca5a5;">🔒 '+r.plombDetail+'</div>':'')+
+      (r.anomalies?'<div style="background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);border-radius:8px;padding:6px 10px;font-size:10px;color:#fdba74;">⚠️ '+r.anomalies+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+function exportArrivagePDF(filterid){
+  var all=loadArrivage();
+  var data=filterid?all.filter(function(x){return x.id===filterid;}):all;
+  if(!data.length){ showT('⚠️','Aucun arrivage à exporter'); return; }
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  function eh(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var palDefs=[
+    {key:'palSale',label:'Salé',col:'#c2410c'},
+    {key:'palSucre',label:'Sucré',col:'#9d174d'},
+    {key:'palParfum',label:'Parfumerie',col:'#7e22ce'},
+    {key:'palDrogue',label:'Droguerie',col:'#4338ca'},
+    {key:'palBazar',label:'Bazar',col:'#0f766e'},
+    {key:'palAutres',label:'Autres',col:'#475569'}
+  ];
+  var rows=data.map(function(r,i){
+    var palCells=palDefs.map(function(p){
+      return '<td style="padding:7px 8px;text-align:center;font-weight:700;color:'+(r[p.key]?p.col:'#94a3b8')+'">'+(r[p.key]||'—')+'</td>';
+    }).join('');
+    var plombTxt=r.plomb==='nok'?'🚨 Problème'+(r.plombDetail?' : '+eh(r.plombDetail):''):'✅ Conforme';
+    var plombCol=r.plomb==='nok'?'#dc2626':'#16a34a';
+    return '<tr style="background:'+(i%2===0?'#f8faff':'#fff')+';">'+
+      '<td style="padding:7px 8px;white-space:nowrap;">'+_arDateFmt(r.date)+(r.heure?' '+r.heure:'')+'</td>'+
+      '<td style="padding:7px 8px;font-family:monospace;font-weight:700;color:#0369a1;text-align:center;">'+(r.camion||'—')+'</td>'+
+      '<td style="padding:7px 8px;font-weight:700;">'+(r.livreur||'—')+'</td>'+
+      palCells+
+      '<td style="padding:7px 8px;text-align:center;font-weight:900;color:#92400e;">'+r.totalPal+'</td>'+
+      '<td style="padding:7px 8px;color:'+plombCol+';font-size:11px;font-weight:700;">'+plombTxt+'</td>'+
+      '<td style="padding:7px 8px;font-size:11px;color:#64748b;">'+(r.anomalies?eh(r.anomalies):'—')+'</td>'+
+    '</tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Arrivage Dépôt Sec</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:1100px;margin:auto;}'+
+    'h1{font-size:20px;color:#92400e;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.summary{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}'+
+    '.sbox{background:#fef3c7;border-radius:8px;padding:10px 14px;flex:1;min-width:120px;text-align:center;}'+
+    '.sbox .val{font-size:20px;font-weight:900;color:#92400e;}'+
+    '.sbox .lbl{font-size:10px;font-weight:700;color:#78716c;margin-top:2px;}'+
+    'table{width:100%;border-collapse:collapse;font-size:11px;}'+
+    'th{background:#92400e;color:#fff;padding:8px;text-align:center;white-space:nowrap;}'+
+    'th:nth-child(1),th:nth-child(3){text-align:left;}'+
+    'td{border-bottom:1px solid #e2e8f0;vertical-align:middle;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;font-size:10px;}}</style></head><body>'+
+    '<h1>🏭 Arrivage Dépôt Sec</h1>'+
+    '<div class="meta">MG MAXI DENDEN · Généré le '+genDate+' · '+data.length+' arrivage(s)</div>'+
+    '<div class="summary">'+
+      '<div class="sbox"><div class="val">'+data.length+'</div><div class="lbl">ARRIVAGES</div></div>'+
+      '<div class="sbox"><div class="val">'+data.reduce(function(s,x){return s+(x.totalPal||0);},0)+'</div><div class="lbl">TOTAL PALETTES</div></div>'+
+      '<div class="sbox"><div class="val">'+data.filter(function(x){return x.plomb==='nok';}).length+'</div><div class="lbl">PROB. PLOMBAGE</div></div>'+
+      '<div class="sbox"><div class="val">'+data.filter(function(x){return x.anomalies;}).length+'</div><div class="lbl">ANOMALIES</div></div>'+
+    '</div>'+
+    '<table><thead><tr>'+
+    '<th>Date/Heure</th><th>Camion</th><th>Livreur</th>'+
+    '<th>Salé</th><th>Sucré</th><th>Parfum.</th><th>Drogue.</th><th>Bazar</th><th>Autres</th>'+
+    '<th>Total</th><th>Plombage</th><th>Anomalies</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Arrivage Dépôt Sec</div>'+
+    '</body></html>';
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Arrivage_Depot_Sec_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
+// ══════════════════════════════════════════════
+// COLLECTE DÉCHETS
+// ══════════════════════════════════════════════
+var SK_CD = SK + '_collecteDechets';
+var _cdEid = null;
+
+function loadCollecte(){ try{ return JSON.parse(localStorage.getItem(SK_CD)||'[]'); }catch(e){ return []; } }
+function saveCollecteData(d){ localStorage.setItem(SK_CD, JSON.stringify(d)); }
+
+function _cdDateFmt(d){
+  if(!d)return '—';
+  var M=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-');return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
+}
+
+function openCollecteForm(eid){
+  _cdEid = eid||null;
+  document.getElementById('collecteFormTit').textContent = eid ? '✏️ Modifier la Collecte' : '♻️ Nouvelle Collecte';
+  document.getElementById('cdDelRow').style.display = eid ? 'block' : 'none';
+  var d = new Date();
+  var pad = function(n){ return ('0'+n).slice(-2); };
+  if(eid){
+    var rec = loadCollecte().find(function(x){ return x.id===eid; });
+    if(rec){
+      document.getElementById('cdDate').value = rec.date||'';
+      document.getElementById('cdHeure').value = rec.heure||'';
+      document.getElementById('cdKg').value = rec.kg||'';
+      document.getElementById('cdCamion').value = rec.camion||'';
+      document.getElementById('cdCollecteur').value = rec.collecteur||'';
+      document.getElementById('cdObs').value = rec.obs||'';
+    }
+  } else {
+    document.getElementById('cdDate').value = tstr();
+    document.getElementById('cdHeure').value = pad(d.getHours())+':'+pad(d.getMinutes());
+    document.getElementById('cdKg').value = '';
+    document.getElementById('cdCamion').value = '';
+    document.getElementById('cdCollecteur').value = '';
+    document.getElementById('cdObs').value = '';
+  }
+  document.getElementById('collecteForm').style.display = 'flex';
+}
+
+function saveCollecte(){
+  var kg = parseFloat(document.getElementById('cdKg').value);
+  var collecteur = document.getElementById('cdCollecteur').value.trim();
+  if(!kg||kg<=0){ showT('⚠️','Entrez la quantité en Kg'); return; }
+  if(!collecteur){ showT('⚠️','Nom du collecteur requis'); return; }
+  var data = loadCollecte();
+  var entry = {
+    id: _cdEid||uid(), ts: Date.now(),
+    date: document.getElementById('cdDate').value,
+    heure: document.getElementById('cdHeure').value,
+    kg: kg,
+    camion: document.getElementById('cdCamion').value.trim().toUpperCase(),
+    collecteur: collecteur,
+    obs: document.getElementById('cdObs').value.trim()
+  };
+  if(_cdEid){
+    var idx = data.findIndex(function(x){ return x.id===_cdEid; });
+    if(idx>-1) data[idx]=entry; else data.unshift(entry);
+  } else { data.unshift(entry); }
+  saveCollecteData(data);
+  document.getElementById('collecteForm').style.display = 'none';
+  renderCollecte();
+  updateCollecteBadge();
+  showT('♻️', _cdEid?'Collecte mise à jour !':'Collecte enregistrée !');
+}
+
+function delCollecte(id){
+  if(!confirm('Supprimer cette collecte ?')) return;
+  saveCollecteData(loadCollecte().filter(function(x){ return x.id!==id; }));
+  document.getElementById('collecteForm').style.display = 'none';
+  renderCollecte();
+  updateCollecteBadge();
+  showT('🗑️','Supprimée');
+}
+
+function updateCollecteBadge(){
+  var data = loadCollecte();
+  var badge = document.getElementById('collecteDéchetsBadge');
+  if(badge){
+    if(data.length){ badge.style.display='block'; badge.textContent=data.length+' collecte'+(data.length>1?'s':''); }
+    else badge.style.display='none';
+  }
+}
+
+function renderCollecte(){
+  var data = loadCollecte();
+  var el = document.getElementById('collecteList');
+  var em = document.getElementById('collecteEmpty');
+  var totEl = document.getElementById('cdTotal');
+  var totKg = document.getElementById('cdTotalKg');
+  var moisKg = document.getElementById('cdMoisKg');
+  // stats
+  var totalKg = data.reduce(function(s,x){ return s+(x.kg||0); },0);
+  var now = new Date(); var ym = now.getFullYear()+'-'+('0'+(now.getMonth()+1)).slice(-2);
+  var mKg = data.filter(function(x){ return (x.date||'').slice(0,7)===ym; }).reduce(function(s,x){ return s+(x.kg||0); },0);
+  if(totEl) totEl.textContent = data.length;
+  if(totKg) totKg.textContent = totalKg%1===0?totalKg:totalKg.toFixed(1);
+  if(moisKg) moisKg.textContent = mKg%1===0?mKg:mKg.toFixed(1);
+  updateCollecteBadge();
+  if(!el) return;
+  if(!data.length){ el.innerHTML=''; if(em) em.style.display='block'; return; }
+  if(em) em.style.display='none';
+  el.innerHTML = data.map(function(r){
+    return '<div style="background:var(--s2);border:1px solid rgba(132,204,22,.2);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #84cc16;" onclick="openCollecteForm(\''+r.id+'\')">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">'+
+        '<div style="flex:1;">'+
+          '<div style="font-size:13px;font-weight:900;color:#a3e635;margin-bottom:2px;">♻️ '+r.collecteur+'</div>'+
+          '<div style="font-size:11px;color:var(--t2);">📅 '+_cdDateFmt(r.date)+(r.heure?' · ⏰ '+r.heure:'')+'</div>'+
+        '</div>'+
+        '<div style="text-align:right;flex-shrink:0;margin-left:10px;">'+
+          '<div style="font-size:24px;font-weight:900;color:#a3e635;font-family:\'IBM Plex Mono\',monospace;line-height:1;">'+r.kg+'</div>'+
+          '<div style="font-size:10px;font-weight:700;color:#64748b;">Kg</div>'+
+        '</div>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">'+
+        '<div style="background:rgba(14,165,233,.08);border-radius:8px;padding:6px 9px;">'+
+          '<div style="font-size:8px;font-weight:700;color:#38bdf8;margin-bottom:1px;">🚛 CAMION</div>'+
+          '<div style="font-size:12px;font-weight:800;color:#f8faff;font-family:monospace;">'+(r.camion||'—')+'</div>'+
+        '</div>'+
+        '<div style="background:rgba(167,139,250,.08);border-radius:8px;padding:6px 9px;">'+
+          '<div style="font-size:8px;font-weight:700;color:#c4b5fd;margin-bottom:1px;">⚖️ POIDS</div>'+
+          '<div style="font-size:12px;font-weight:800;color:#f8faff;">'+r.kg+' Kg</div>'+
+        '</div>'+
+      '</div>'+
+      (r.obs?'<div style="font-size:10px;color:var(--t2);background:rgba(255,255,255,.03);border-radius:8px;padding:5px 9px;margin-top:7px;">💬 '+r.obs+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+function exportCollectePDF(){
+  var data = loadCollecte();
+  if(!data.length){ showT('⚠️','Aucune collecte à exporter'); return; }
+  var totalKg = data.reduce(function(s,x){ return s+(x.kg||0); },0);
+  var genDate = new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  function eh(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  var rows = data.map(function(r,i){
+    return '<tr style="background:'+(i%2===0?'#f8faff':'#fff')+';">'+
+      '<td style="padding:8px 10px;">'+_cdDateFmt(r.date)+(r.heure?' – '+r.heure:'')+'</td>'+
+      '<td style="padding:8px 10px;font-weight:700;">'+eh(r.collecteur)+'</td>'+
+      '<td style="padding:8px 10px;font-family:monospace;font-weight:700;color:#0369a1;text-align:center;">'+(r.camion||'—')+'</td>'+
+      '<td style="padding:8px 10px;text-align:center;font-weight:900;color:#16a34a;font-size:14px;">'+r.kg+' Kg</td>'+
+      '<td style="padding:8px 10px;font-size:11px;color:#64748b;">'+eh(r.obs||'—')+'</td>'+
+    '</tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Collecte Déchets</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:900px;margin:auto;}'+
+    'h1{font-size:20px;color:#4d7c0f;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.summary{display:flex;gap:12px;margin-bottom:20px;}'+
+    '.sbox{background:#f1f5f9;border-radius:8px;padding:12px 16px;flex:1;text-align:center;}'+
+    '.sbox .val{font-size:22px;font-weight:900;color:#4d7c0f;}'+
+    '.sbox .lbl{font-size:10px;font-weight:700;color:#64748b;margin-top:2px;}'+
+    'table{width:100%;border-collapse:collapse;font-size:12px;}'+
+    'th{background:#4d7c0f;color:#fff;padding:9px 10px;text-align:left;}'+
+    'th:nth-child(4){text-align:center;}'+
+    'td{border-bottom:1px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>♻️ Collecte Déchets — Cartons</h1>'+
+    '<div class="meta">MG MAXI DENDEN · Généré le '+genDate+' · '+data.length+' collecte(s)</div>'+
+    '<div class="summary">'+
+      '<div class="sbox"><div class="val">'+data.length+'</div><div class="lbl">COLLECTES</div></div>'+
+      '<div class="sbox"><div class="val">'+(totalKg%1===0?totalKg:totalKg.toFixed(1))+' Kg</div><div class="lbl">TOTAL POIDS</div></div>'+
+      '<div class="sbox"><div class="val">'+(data.length?(totalKg/data.length).toFixed(1):0)+' Kg</div><div class="lbl">MOY./COLLECTE</div></div>'+
+    '</div>'+
+    '<table><thead><tr>'+
+    '<th>Date / Heure</th><th>Collecteur</th><th style="text-align:center;">Matricule Camion</th>'+
+    '<th style="text-align:center;">Poids (Kg)</th><th>Observation</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Collecte Déchets Cartons</div>'+
+    '</body></html>';
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Collecte_Dechets_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
 // ══ ANOMALIES QUANTITÉS ══
 var SK_ANOM = SK + '_anom';
 function loadAnom(rayon){try{var d=JSON.parse(localStorage.getItem(SK_ANOM)||'{}');return d[rayon]||[];}catch(e){return[];}}
 function saveAnom(rayon,list){try{var d=JSON.parse(localStorage.getItem(SK_ANOM)||'{}');d[rayon]=list;localStorage.setItem(SK_ANOM,JSON.stringify(d));}catch(e){}}
 
 var _anomRayon=null;
+var _anomItems=[]; // multi-articles
 
 function renderAnomHubBadges(){
   var pc=document.getElementById('anomPoissCount');
@@ -14428,81 +15157,157 @@ function renderAnomHubBadges(){
   if(fc){if(fl.length){fc.style.display='block';fc.textContent=fl.length+' fiche'+(fl.length>1?'s':'');}else fc.style.display='none';}
 }
 
-function openAnomForm(rayon){
-  _anomRayon=rayon;
-  var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
-  var color=rayon==='poissonnerie'?'#38bdf8':'#4ade80';
-  var emoji=rayon==='poissonnerie'?'🐟':'🥦';
-  var el=document.getElementById(formId);if(!el)return;
-  var today=tstr();
-  el.innerHTML='<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:12px;">'+
-    '<div style="font-size:12px;font-weight:900;color:'+color+';margin-bottom:10px;">'+emoji+' Nouvelle Anomalie</div>'+
-    '<div class="fg"><label class="fl">Date de réception</label><input type="date" class="fi" id="anomDate" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;" value="'+today+'"></div>'+
-    '<div class="fg"><label class="fl">Nom du fournisseur / Rayon</label><input class="fi" id="anomFournisseur" placeholder="Ex: STAPS, Ferme X..."></div>'+
-    '<div class="fg"><label class="fl">Désignation du produit</label><input class="fi" id="anomProduit" placeholder="Nom du produit..."></div>'+
-    '<div style="display:flex;gap:8px;margin-bottom:12px;">'+
-    '<div style="flex:0 0 130px;"><label class="fl">Code Méti (8 chiffres)</label><input type="text" inputmode="numeric" maxlength="8" id="anomCode" placeholder="00000000" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(59,130,246,.3);border-radius:12px;padding:10px;color:#93c5fd;font-size:15px;font-weight:900;font-family:\'IBM Plex Mono\',monospace;outline:none;text-align:center;letter-spacing:2px;" oninput="this.value=this.value.replace(/\\D/g,\'\').slice(0,8)"></div>'+
-    '<div style="flex:1;"><label class="fl">Qté commandée</label><input type="number" min="0" step="0.001" class="fi" id="anomCde" placeholder="0"></div>'+
-    '<div style="flex:1;"><label class="fl">Qté réceptionnée</label><input type="number" min="0" step="0.001" class="fi" id="anomRec" placeholder="0" oninput="calcAnomEcart()"></div>'+
+// ── Render un article row dans le formulaire ──
+function _anomItemRow(idx, total, color){
+  var showDel = total > 1;
+  return '<div class="anom-item-row" id="anomRow_'+idx+'" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;margin-bottom:8px;">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">'+
+      '<span style="font-size:10px;font-weight:700;color:'+color+';letter-spacing:.5px;">📦 ARTICLE '+(idx+1)+'</span>'+
+      (showDel?'<button type="button" onclick="removeAnomItem('+idx+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#f87171;font-size:10px;font-weight:700;padding:3px 9px;border-radius:7px;cursor:pointer;">✕ Supprimer</button>':'')+
     '</div>'+
-    '<div style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:12px;padding:10px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">'+
-    '<div style="font-size:10px;font-weight:800;color:#f87171;">ÉCART CALCULÉ</div>'+
-    '<div style="font-size:22px;font-weight:900;color:#f87171;font-family:\'IBM Plex Mono\';" id="anomEcartDisplay">—</div>'+
+    '<div style="display:flex;gap:7px;margin-bottom:8px;">'+
+      '<div style="flex:0 0 120px;">'+
+        '<label class="fl">Code Méti</label>'+
+        '<input type="text" data-anf="code" inputmode="numeric" maxlength="8" placeholder="00000000" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(59,130,246,.3);border-radius:10px;padding:9px 7px;color:#93c5fd;font-size:13px;font-weight:900;font-family:\'IBM Plex Mono\',monospace;outline:none;text-align:center;letter-spacing:2px;" oninput="this.value=this.value.replace(/\\D/g,\'\').slice(0,8)">'+
+      '</div>'+
+      '<div style="flex:1;">'+
+        '<label class="fl">Désignation *</label>'+
+        '<input type="text" data-anf="produit" placeholder="Nom du produit..." style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:13px;outline:none;">'+
+      '</div>'+
     '</div>'+
-    '<div class="fg"><label class="fl">Observation (optionnel)</label><input class="fi" id="anomObs" placeholder="Ex: Colis ouvert, manque de glace..."></div>'+
-    '<div style="display:flex;gap:8px;margin-top:4px;">'+
-    '<button onclick="closeAnomForm(\''+rayon+'\')" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>'+
-    '<button onclick="saveAnomalie(\''+rayon+'\')" style="flex:2;background:'+(rayon==='poissonnerie'?'#0369a1':'#15803d')+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px;">'+
+      '<div>'+
+        '<label class="fl">Qté commandée</label>'+
+        '<input type="number" data-anf="qteCde" min="0" step="0.001" placeholder="0" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:14px;font-weight:700;outline:none;" oninput="_anomCalcRow('+idx+')">'+
+      '</div>'+
+      '<div>'+
+        '<label class="fl">Qté réceptionnée</label>'+
+        '<input type="number" data-anf="qteRec" min="0" step="0.001" placeholder="0" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:14px;font-weight:700;outline:none;" oninput="_anomCalcRow('+idx+')">'+
+      '</div>'+
     '</div>'+
-    '</div>';
-  el.style.display='block';
-  setTimeout(function(){document.getElementById('anomDate').focus();},200);
+    '<div id="anomEcart_'+idx+'" style="display:none;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:8px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px;">'+
+      '<div style="font-size:9px;font-weight:800;color:#f87171;">ÉCART</div>'+
+      '<div data-anf="ecartDisplay" style="font-size:20px;font-weight:900;color:#f87171;font-family:\'IBM Plex Mono\';">—</div>'+
+    '</div>'+
+    '<div>'+
+      '<label class="fl">Observation</label>'+
+      '<input type="text" data-anf="obs" placeholder="Ex: Colis ouvert, manque de glace..." style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:13px;outline:none;">'+
+    '</div>'+
+  '</div>';
 }
 
-function calcAnomEcart(){
-  var cde=parseFloat(document.getElementById('anomCde').value)||0;
-  var rec=parseFloat(document.getElementById('anomRec').value)||0;
-  var ecart=rec-cde;
-  var el=document.getElementById('anomEcartDisplay');
-  if(el){
-    el.textContent=(ecart>=0?'+':'')+ecart.toFixed(3).replace(/\.?0+$/,'');
-    el.style.color=ecart<0?'#f87171':ecart>0?'#4ade80':'#94a3b8';
+function _anomCalcRow(idx){
+  var row=document.getElementById('anomRow_'+idx);
+  if(!row)return;
+  var cde=parseFloat((row.querySelector('[data-anf="qteCde"]')||{value:0}).value)||0;
+  var rec=parseFloat((row.querySelector('[data-anf="qteRec"]')||{value:0}).value)||0;
+  var ecart=parseFloat((rec-cde).toFixed(3));
+  var ecartBox=row.querySelector('[id^="anomEcart_"]')||document.getElementById('anomEcart_'+idx);
+  var ecartDisp=row.querySelector('[data-anf="ecartDisplay"]');
+  if(ecartBox){ecartBox.style.display='flex';}
+  if(ecartDisp){
+    ecartDisp.textContent=(ecart>=0?'+':'')+ecart;
+    ecartDisp.style.color=ecart<0?'#f87171':ecart>0?'#4ade80':'#94a3b8';
   }
 }
 
+function _anomRenderItems(){
+  var c=document.getElementById('_anomItemsContainer');if(!c)return;
+  var color=_anomRayon==='poissonnerie'?'#38bdf8':'#4ade80';
+  var total=_anomItems.length;
+  c.innerHTML=_anomItems.map(function(_,i){return _anomItemRow(i,total,color);}).join('');
+}
+
+function addAnomItem(){
+  _anomItems.push({});
+  _anomRenderItems();
+  var wrap=document.getElementById('_anomFormWrap');
+  if(wrap)setTimeout(function(){wrap.scrollTop=wrap.scrollHeight;},50);
+}
+
+function removeAnomItem(idx){
+  if(_anomItems.length<=1){showT('⚠️','Minimum 1 article requis');return;}
+  _anomItems.splice(idx,1);
+  _anomRenderItems();
+}
+
+function openAnomForm(rayon){
+  _anomRayon=rayon;
+  _anomItems=[{}]; // reset avec 1 ligne vide
+  var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
+  var color=rayon==='poissonnerie'?'#38bdf8':'#4ade80';
+  var bgColor=rayon==='poissonnerie'?'#0369a1':'#15803d';
+  var emoji=rayon==='poissonnerie'?'🐟':'🥦';
+  var el=document.getElementById(formId);if(!el)return;
+  var today=tstr();
+  el.innerHTML='<div id="_anomFormWrap" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px;margin-bottom:12px;max-height:70vh;overflow-y:auto;">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">'+
+      '<div style="font-size:13px;font-weight:900;color:'+color+';">'+emoji+' Nouvelle Anomalie</div>'+
+      '<button type="button" onclick="addAnomItem()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:'+color+';font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:4px;">＋ Article</button>'+
+    '</div>'+
+    // champs partagés
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">'+
+      '<div><label class="fl">📅 Date réception</label>'+
+      '<input type="date" id="anomDate" value="'+today+'" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;"></div>'+
+      '<div><label class="fl">🚛 Fournisseur / Rayon</label>'+
+      '<input type="text" id="anomFournisseur" placeholder="Ex: STAPS, Ferme X..." style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:13px;outline:none;"></div>'+
+    '</div>'+
+    '<div id="_anomItemsContainer"></div>'+
+    '<div style="display:flex;gap:8px;margin-top:8px;">'+
+      '<button onclick="closeAnomForm(\''+rayon+'\')" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>'+
+      '<button onclick="saveAnomalie(\''+rayon+'\')" style="flex:2;background:'+bgColor+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer tout</button>'+
+    '</div>'+
+  '</div>';
+  el.style.display='block';
+  _anomRenderItems();
+}
+
+function calcAnomEcart(){} // compat legacy — no-op
+
 function closeAnomForm(rayon){
   var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
-  var el=document.getElementById(formId);if(el)el.style.display='none';
+  var el=document.getElementById(formId);if(el){el.style.display='none';el.innerHTML='';}
 }
 
 function saveAnomalie(rayon){
-  var produit=(document.getElementById('anomProduit').value||'').trim();
-  if(!produit){showT('⚠️','Entrez le nom du produit');return;}
-  var cde=parseFloat(document.getElementById('anomCde').value)||0;
-  var rec=parseFloat(document.getElementById('anomRec').value)||0;
-  var entry={
-    id:uid(),
-    date:document.getElementById('anomDate').value||tstr(),
-    fournisseur:(document.getElementById('anomFournisseur').value||'').trim(),
-    produit:produit,
-    code:(document.getElementById('anomCode').value||'').replace(/\D/g,'').slice(0,8),
-    qteCde:cde,
-    qteRec:rec,
-    ecart:parseFloat((rec-cde).toFixed(3)),
-    obs:(document.getElementById('anomObs').value||'').trim(),
-    ts:Date.now()
-  };
+  var date=(document.getElementById('anomDate').value||tstr());
+  var fournisseur=((document.getElementById('anomFournisseur').value||'').trim());
+  // lire tous les articles
+  var rows=document.querySelectorAll('.anom-item-row');
+  var toSave=[];
+  var hasError=false;
+  rows.forEach(function(row,i){
+    var produit=(row.querySelector('[data-anf="produit"]').value||'').trim();
+    if(!produit){hasError=true;return;}
+    var cde=parseFloat(row.querySelector('[data-anf="qteCde"]').value)||0;
+    var rec=parseFloat(row.querySelector('[data-anf="qteRec"]').value)||0;
+    toSave.push({
+      id:uid(), ts:Date.now(),
+      date:date,
+      fournisseur:fournisseur,
+      produit:produit,
+      code:(row.querySelector('[data-anf="code"]').value||'').replace(/\D/g,'').slice(0,8),
+      qteCde:cde,
+      qteRec:rec,
+      ecart:parseFloat((rec-cde).toFixed(3)),
+      obs:(row.querySelector('[data-anf="obs"]').value||'').trim()
+    });
+  });
+  if(hasError){showT('⚠️','Chaque article doit avoir une désignation');return;}
+  if(!toSave.length){showT('⚠️','Aucun article saisi');return;}
   var list=loadAnom(rayon);
-  list.unshift(entry);
+  toSave.forEach(function(e){list.unshift(e);});
   saveAnom(rayon,list);
   closeAnomForm(rayon);
   renderAnom(rayon);
-  showT('✅','Anomalie enregistrée');
+  renderAnomHubBadges();
+  showT('✅',toSave.length+' article'+(toSave.length>1?'s':'')+' enregistré'+(toSave.length>1?'s':''));
 }
 
 function delAnomalie(rayon,id){
+  if(!confirm('Supprimer cette anomalie ?'))return;
   var list=loadAnom(rayon).filter(function(x){return x.id!==id;});
-  saveAnom(rayon,list);renderAnom(rayon);showT('🗑️','Supprimée');
+  saveAnom(rayon,list);renderAnom(rayon);renderAnomHubBadges();showT('🗑️','Supprimée');
 }
 
 function renderAnom(rayon){
