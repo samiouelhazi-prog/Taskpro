@@ -287,27 +287,42 @@ button:active:not([disabled]),
 /* ══════════════ BOTTOM NAV ══════════════ */
 .bnav{display:flex;background:rgba(8,10,18,.97);border-top:2px solid rgba(255,255,255,.07);padding:10px 0 max(16px,env(safe-area-inset-bottom));flex-shrink:0;backdrop-filter:blur(28px);}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:4px 2px;}
-.bi-ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);transition:all .2s;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.08);}
-.bi.on .bi-ico{border-color:rgba(59,130,246,.5);}
-.bi-l{font-size:11px;color:rgba(255,255,255,.4);font-weight:800;letter-spacing:.2px;}
-#navHome.on .bi-ico{background:rgba(30,41,59,.8);border-color:#1e293b;color:#f8faff;box-shadow:0 2px 12px rgba(15,23,42,.5);}
-#navHome.on .bi-l{color:#f8faff;font-weight:900;}
-#navTaches.on .bi-ico{background:#1e3a8a;border-color:#1e40af;color:#fff;box-shadow:0 2px 12px rgba(30,58,138,.5);}
-#navTaches.on .bi-l{color:#1e3a8a;font-weight:900;}
-#navDlc.on .bi-ico{background:#991b1b;border-color:#b91c1c;color:#fff;box-shadow:0 2px 12px rgba(153,27,27,.5);}
-#navDlc.on .bi-l{color:#ef4444;font-weight:900;}
-#navChiffres.on .bi-ico{background:#14532d;border-color:#166534;color:#fff;box-shadow:0 2px 12px rgba(20,83,45,.5);}
-#navChiffres.on .bi-l{color:#16a34a;font-weight:900;}
-body.light .bi-ico{color:rgba(0,0,0,.25);background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1);}
-body.light .bi-l{color:rgba(0,0,0,.45);font-weight:800;}
-body.light #navHome.on .bi-ico{background:#1e293b;border-color:#0f172a;color:#fff;box-shadow:0 2px 8px rgba(15,23,42,.3);}
-body.light #navHome.on .bi-l{color:#1e293b;font-weight:900;}
-body.light #navTaches.on .bi-ico{background:#1e3a8a;border-color:#1e40af;color:#fff;box-shadow:0 2px 8px rgba(30,58,138,.4);}
-body.light #navTaches.on .bi-l{color:#1e3a8a;font-weight:900;}
-body.light #navDlc.on .bi-ico{background:#991b1b;border-color:#b91c1c;color:#fff;box-shadow:0 2px 8px rgba(153,27,27,.4);}
+.bi-ico{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.bi-l{font-size:11px;font-weight:800;letter-spacing:.2px;}
+
+/* ── Accueil : bleu ciel ── */
+#navHome .bi-ico{background:rgba(14,165,233,.18);border:1.5px solid rgba(14,165,233,.5);color:#38bdf8;box-shadow:0 2px 12px rgba(14,165,233,.2);}
+#navHome .bi-l{color:#38bdf8;}
+#navHome.on .bi-ico{background:rgba(14,165,233,.35);border-color:#0ea5e9;color:#fff;box-shadow:0 2px 18px rgba(14,165,233,.5);}
+#navHome.on .bi-l{color:#7dd3fc;font-weight:900;}
+
+/* ── Tâches : doré ── */
+#navTaches .bi-ico{background:rgba(234,179,8,.15);border:1.5px solid rgba(234,179,8,.45);color:#fbbf24;box-shadow:0 2px 12px rgba(234,179,8,.2);}
+#navTaches .bi-l{color:#fbbf24;}
+#navTaches.on .bi-ico{background:rgba(234,179,8,.3);border-color:#eab308;color:#fff;box-shadow:0 2px 18px rgba(234,179,8,.5);}
+#navTaches.on .bi-l{color:#fde68a;font-weight:900;}
+
+/* ── DLC : rouge ── */
+#navDlc .bi-ico{background:rgba(239,68,68,.15);border:1.5px solid rgba(239,68,68,.45);color:#f87171;box-shadow:0 2px 12px rgba(239,68,68,.2);}
+#navDlc .bi-l{color:#f87171;}
+#navDlc.on .bi-ico{background:rgba(239,68,68,.3);border-color:#ef4444;color:#fff;box-shadow:0 2px 18px rgba(239,68,68,.5);}
+#navDlc.on .bi-l{color:#fca5a5;font-weight:900;}
+
+/* ── Chiffres / Excel : vert clair ── */
+#navChiffres .bi-ico{background:rgba(34,197,94,.15);border:1.5px solid rgba(34,197,94,.45);color:#4ade80;box-shadow:0 2px 12px rgba(34,197,94,.2);}
+#navChiffres .bi-l{color:#4ade80;}
+#navChiffres.on .bi-ico{background:rgba(34,197,94,.3);border-color:#22c55e;color:#fff;box-shadow:0 2px 18px rgba(34,197,94,.5);}
+#navChiffres.on .bi-l{color:#86efac;font-weight:900;}
+
+body.light .bi-ico{filter:brightness(.9);}
+body.light #navHome.on .bi-ico{background:rgba(14,165,233,.4);border-color:#0284c7;color:#fff;}
+body.light #navHome.on .bi-l{color:#0284c7;font-weight:900;}
+body.light #navTaches.on .bi-ico{background:rgba(234,179,8,.35);border-color:#ca8a04;color:#fff;}
+body.light #navTaches.on .bi-l{color:#a16207;font-weight:900;}
+body.light #navDlc.on .bi-ico{background:rgba(239,68,68,.35);border-color:#dc2626;color:#fff;}
 body.light #navDlc.on .bi-l{color:#b91c1c;font-weight:900;}
-body.light #navChiffres.on .bi-ico{background:#14532d;border-color:#166534;color:#fff;box-shadow:0 2px 8px rgba(20,83,45,.4);}
-body.light #navChiffres.on .bi-l{color:#16a34a;font-weight:900;}
+body.light #navChiffres.on .bi-ico{background:rgba(34,197,94,.35);border-color:#16a34a;color:#fff;}
+body.light #navChiffres.on .bi-l{color:#15803d;font-weight:900;}
 /* Center FAB space */
 .bi-fab-space{flex:1;}
 
@@ -565,9 +580,20 @@ body.light .tli{background:rgba(255,255,255,.7)!important;border-color:rgba(0,0,
 body.light .tli-name,body.light .tli-n{color:#0d1117!important;}
 body.light .drawer,body.light .msh,body.light .cmsh{background:#f8fafc!important;border-color:rgba(0,0,0,.1)!important;}
 body.light .dr-item:active,body.light .dr-it:active{background:rgba(0,0,0,.06)!important;}
-body.light .fi,body.light .fs{background:rgba(0,0,0,.06)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;color-scheme:light!important;}
+body.light .fi,body.light .fs{background:rgba(255,255,255,.92)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;color-scheme:light!important;}
+body.light input[type="date"].fi{color:#0d1117!important;-webkit-text-fill-color:#0d1117!important;}
+/* ══ SIGNATURE JOURNÉE ══ */
+.sj-doc-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:12px;cursor:pointer;}
+.sj-doc-row.checked{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.3);}
+.sj-doc-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(251,191,36,.5);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.sj-doc-row.checked .sj-doc-check{background:#22c55e;border-color:#22c55e;}
+.sj-doc-info{flex:1;}
+.sj-doc-name{font-size:12px;font-weight:700;color:var(--t1);}
+.sj-doc-sub{font-size:10px;color:var(--t2);margin-top:1px;}
+body.light .sj-doc-row{background:rgba(251,191,36,.06);border-color:rgba(180,120,0,.2);}
+body.light .sj-doc-row.checked{background:rgba(34,197,94,.08);border-color:rgba(22,163,74,.3);}
 body.light .fi::placeholder,body.light .fs::placeholder{color:#9ca3af!important;}
-body.light input,body.light textarea,body.light select{color:#0d1117!important;background:rgba(0,0,0,.06)!important;}
+body.light input,body.light textarea,body.light select{color:#0d1117!important;background:rgba(255,255,255,.92)!important;}
 body.light input::placeholder,body.light textarea::placeholder{color:#9ca3af!important;}
 
 body.light .tb-greet{color:#4a5568!important;}
@@ -1088,7 +1114,20 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         </div>
       </div>
 
-      <!-- FENÊTRE 2 — PILOTAGE -->
+      <!-- FENÊTRE 2 — AVANCÉES -->
+      <div onclick="goPage('avancees')" style="background:linear-gradient(145deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.35);border-radius:22px;padding:18px 14px 16px;cursor:pointer;position:relative;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(14,165,233,.2);">
+        <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.1;line-height:1;">🚀</div>
+        <div style="font-size:36px;line-height:1;margin-bottom:4px;">🚀</div>
+        <div>
+          <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;margin-bottom:4px;">Tâches Avancées</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,.6);line-height:1.4;">Optimisation · Veille</div>
+          <div style="display:flex;gap:5px;margin-top:8px;">
+            <span style="background:rgba(255,255,255,.12);border-radius:20px;padding:2px 7px;font-size:8.5px;color:#7dd3fc;font-weight:700;">Pilotage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FENÊTRE 3 — PILOTAGE -->
       <div onclick="goPage('pilotage')" style="background:linear-gradient(145deg,#1a1a2e,#16213e);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:18px 14px 16px;cursor:pointer;position:relative;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(99,102,241,.15);">
         <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.1;line-height:1;">🧭</div>
         <div style="font-size:36px;line-height:1;margin-bottom:4px;">🧭</div>
@@ -1101,7 +1140,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         </div>
       </div>
 
-      <!-- FENÊTRE 3 — EXCELLENCE -->
+      <!-- FENÊTRE 4 — EXCELLENCE -->
       <div onclick="goPage('excellence')" style="background:linear-gradient(145deg,#312e81,#4338ca);border:1px solid rgba(99,102,241,.4);border-radius:22px;padding:18px 14px 16px;cursor:pointer;position:relative;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(99,102,241,.2);">
         <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.1;line-height:1;">🏆</div>
         <div style="font-size:36px;line-height:1;margin-bottom:4px;">🏆</div>
@@ -1114,7 +1153,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         </div>
       </div>
 
-      <!-- FENÊTRE 4 — ÉQUIPE -->
+      <!-- FENÊTRE 5 — ÉQUIPE -->
       <div onclick="goPage('equipe')" style="background:linear-gradient(145deg,#065f46,#047857);border:1px solid rgba(16,185,129,.35);border-radius:22px;padding:18px 14px 16px;cursor:pointer;position:relative;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(16,185,129,.2);">
         <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.09;line-height:1;">👥</div>
         <div style="font-size:36px;line-height:1;margin-bottom:4px;">👥</div>
@@ -1123,19 +1162,6 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
           <div style="font-size:9.5px;color:rgba(255,255,255,.6);line-height:1.4;">Briefing · Planning</div>
           <div style="display:flex;gap:5px;margin-top:8px;">
             <span style="background:rgba(255,255,255,.12);border-radius:20px;padding:2px 7px;font-size:8.5px;color:#6ee7b7;font-weight:700;">Suivi quotidien</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- FENÊTRE 5 — AVANCÉES -->
-      <div onclick="goPage('avancees')" style="background:linear-gradient(145deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.35);border-radius:22px;padding:18px 14px 16px;cursor:pointer;position:relative;overflow:hidden;aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(14,165,233,.2);">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.1;line-height:1;">🚀</div>
-        <div style="font-size:36px;line-height:1;margin-bottom:4px;">🚀</div>
-        <div>
-          <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;margin-bottom:4px;">Tâches Avancées</div>
-          <div style="font-size:9.5px;color:rgba(255,255,255,.6);line-height:1.4;">Optimisation · Veille</div>
-          <div style="display:flex;gap:5px;margin-top:8px;">
-            <span style="background:rgba(255,255,255,.12);border-radius:20px;padding:2px 7px;font-size:8.5px;color:#7dd3fc;font-weight:700;">Pilotage</span>
           </div>
         </div>
       </div>
@@ -1246,6 +1272,101 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
 
+    <!-- Section label -->
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">GESTION DU PERSONNEL</div>
+
+    <!-- Hub card RH -->
+    <div onclick="goPage('adminRH')" style="background:linear-gradient(135deg,#0c1f3f,#1e3a8a);border:1px solid rgba(59,130,246,.35);border-radius:20px;padding:20px 18px 16px;margin-bottom:14px;cursor:pointer;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.07;line-height:1;">👥</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(59,130,246,.2);border:1.5px solid rgba(59,130,246,.4);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">👥</div>
+        <div>
+          <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">Ressources Humaines</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px;">Personnel · Pointage · Congés</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">👆</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Pointage</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">🏖️</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Congés</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">📋</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Liste Personnel</span>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:16px;right:16px;color:rgba(255,255,255,.3);font-size:20px;">›</div>
+    </div>
+
+    <!-- Section label -->
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">CONTRÔLE & CONFORMITÉ</div>
+
+    <!-- Hub card Comptabilité -->
+    <div onclick="goPage('adminControle')" style="background:linear-gradient(135deg,#0c1a2e,#0f3050);border:1px solid rgba(6,182,212,.35);border-radius:20px;padding:20px 18px 16px;margin-bottom:14px;cursor:pointer;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.07;line-height:1;">📑</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(6,182,212,.15);border:1.5px solid rgba(6,182,212,.4);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">📑</div>
+        <div>
+          <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">Comptabilité</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px;">Signature · Audit · Traçabilité</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">✍️</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Signature Journée</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">🔍</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Visite Audit</span>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:16px;right:16px;color:rgba(255,255,255,.3);font-size:20px;">›</div>
+    </div>
+
+    <!-- Section label -->
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">AUTORITÉS & RÉGLEMENTATION</div>
+
+    <!-- Hub card Conformité & Autorités -->
+    <div onclick="goPage('adminAutorites')" style="background:linear-gradient(135deg,#1a0a00,#3b1002);border:1px solid rgba(249,115,22,.35);border-radius:20px;padding:20px 18px 16px;margin-bottom:14px;cursor:pointer;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.07;line-height:1;">🏛️</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(249,115,22,.15);border:1.5px solid rgba(249,115,22,.4);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🏛️</div>
+        <div>
+          <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">Conformité & Autorités</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px;">Visites officielles · Contrôle réglementaire</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">🛒</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Min. Commerce</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">🏥</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Min. Santé</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">🚔</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Police / Sécurité</span>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:7px;">
+          <span style="font-size:15px;">📊</span><span style="font-size:11px;color:rgba(255,255,255,.75);font-weight:700;">Contrôle Éco.</span>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:16px;right:16px;color:rgba(255,255,255,.3);font-size:20px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ADMIN RH HUB ══ -->
+<div class="pg" id="pgAdminRH">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Administratif</div>
+    <div class="pg-title" style="font-size:13px;">👥 Ressources Humaines</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">ÉQUIPE & ORGANISATION</div>
+
     <div onclick="goPage('listepersonnel')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:34px;">👥</div>
       <div style="flex:1;">
@@ -1264,6 +1385,8 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
 
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;margin-top:6px;padding-left:4px;">PAIE & AVANTAGES</div>
+
     <div onclick="goPage('conge')" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:34px;">🏖️</div>
       <div style="flex:1;">
@@ -1272,6 +1395,192 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       </div>
       <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
+
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;margin-top:6px;padding-left:4px;">CONTRATS & DOCUMENTS RH</div>
+
+    <div onclick="goPage('contrats')" style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(139,92,246,.4);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.08;line-height:1;">📄</div>
+      <div style="font-size:34px;">📄</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Contrats</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Contractuels · Suivi · Légalisation · Envoi</div>
+      </div>
+      <div id="contratsBadge" style="display:none;background:#a855f7;color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ CONTRATS ══ -->
+<div class="pg" id="pgContrats">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('adminRH')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ RH</div>
+    <div class="pg-title" style="font-size:13px;">📄 Contrats</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportContratsPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openContratForm()" style="background:#3b0764;border:1.5px solid #a855f7;color:#a855f7;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Info banner -->
+    <div style="background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(109,40,217,.08));border:1px solid rgba(139,92,246,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:20px;flex-shrink:0;">📋</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">
+        Suivez l'état de chaque contrat · Légalisation · Réception · Envoi à l'administration<br>
+        <span style="color:#a78bfa;font-weight:700;">Statuts :</span> En attente · Légalisé · Envoyé · Complet
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:14px;">
+      <div style="background:var(--s2);border-radius:12px;padding:8px 4px;text-align:center;border:1px solid rgba(139,92,246,.2);">
+        <div style="font-size:20px;font-weight:900;color:#a78bfa;" id="ctTotal">0</div>
+        <div style="font-size:8px;color:var(--t2);font-weight:700;margin-top:2px;">TOTAL</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:8px 4px;text-align:center;border:1px solid rgba(234,179,8,.2);">
+        <div style="font-size:20px;font-weight:900;color:#fbbf24;" id="ctAttente">0</div>
+        <div style="font-size:8px;color:var(--t2);font-weight:700;margin-top:2px;">ATTENTE</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:8px 4px;text-align:center;border:1px solid rgba(14,165,233,.2);">
+        <div style="font-size:20px;font-weight:900;color:#38bdf8;" id="ctLegal">0</div>
+        <div style="font-size:8px;color:var(--t2);font-weight:700;margin-top:2px;">LÉGALISÉ</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:8px 4px;text-align:center;border:1px solid rgba(34,197,94,.2);">
+        <div style="font-size:20px;font-weight:900;color:#4ade80;" id="ctComplet">0</div>
+        <div style="font-size:8px;color:var(--t2);font-weight:700;margin-top:2px;">COMPLET</div>
+      </div>
+    </div>
+
+    <div id="contratsList"></div>
+    <div id="contratsEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:40px;margin-bottom:10px;">📄</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Aucun contrat enregistré</div>
+      <div style="font-size:11px;">Appuyez sur + pour ajouter un contractuel</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM CONTRAT ══ -->
+<div id="contratForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0a0614;border:1px solid rgba(139,92,246,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';" id="contratFormTit">➕ Nouveau Contrat</div>
+      <div onclick="document.getElementById('contratForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Nom + Prénom -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">👤 NOM *</label>
+        <input id="ctNom" type="text" placeholder="Nom de famille..." style="width:100%;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">👤 PRÉNOM *</label>
+        <input id="ctPrenom" type="text" placeholder="Prénom..." style="width:100%;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Matricule + Poste -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">🔢 MATRICULE</label>
+        <input id="ctMatricule" type="text" placeholder="Ex : 00247..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">💼 POSTE</label>
+        <input id="ctPoste" type="text" placeholder="Ex : Caissier..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Durée contrat + Date début -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">📅 DATE DÉBUT</label>
+        <input id="ctDateDebut" type="date" style="width:100%;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">📅 DATE FIN</label>
+        <input id="ctDateFin" type="date" style="width:100%;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Durée texte -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">⏳ DURÉE DU CONTRAT</label>
+      <select id="ctDuree" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+        <option value="">— Sélectionner —</option>
+        <option value="1 mois">1 mois</option>
+        <option value="2 mois">2 mois</option>
+        <option value="3 mois">3 mois</option>
+        <option value="6 mois">6 mois</option>
+        <option value="1 an">1 an</option>
+        <option value="2 ans">2 ans</option>
+        <option value="Autre">Autre durée</option>
+      </select>
+    </div>
+
+    <!-- 3 cases à cocher -->
+    <div style="font-size:10px;font-weight:700;color:#64748b;margin-bottom:8px;letter-spacing:.5px;">SUIVI DU CONTRAT</div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
+
+      <!-- Contrat reçu -->
+      <div onclick="toggleCtCheck('ctRecu')" id="ctRecuRow" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 14px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;">
+        <div id="ctRecuBox" style="width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.2);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;"></div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#f8faff;">📥 Contrat reçu</div>
+          <div style="font-size:10px;color:var(--t2);margin-top:1px;">L'employé a signé et remis le contrat</div>
+        </div>
+      </div>
+
+      <!-- Légalisation municipalité -->
+      <div onclick="toggleCtCheck('ctLegal')" id="ctLegalRow" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 14px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;">
+        <div id="ctLegalBox" style="width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.2);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;"></div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#f8faff;">🏛️ Légalisé à la municipalité</div>
+          <div style="font-size:10px;color:var(--t2);margin-top:1px;">La légalisation de signature est effectuée</div>
+        </div>
+      </div>
+
+      <!-- Envoyé à l'administration -->
+      <div onclick="toggleCtCheck('ctEnvoye')" id="ctEnvoyeRow" style="background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:13px;padding:13px 14px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .2s;">
+        <div id="ctEnvoyeBox" style="width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.2);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;"></div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#f8faff;">📤 Envoyé à l'administration</div>
+          <div style="font-size:10px;color:var(--t2);margin-top:1px;">Le contrat a été transmis à la direction</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Observations -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATIONS</label>
+      <textarea id="ctObs" placeholder="Remarques, renouvellement prévu, situation particulière..." rows="2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <div id="ctDelRow" style="display:none;margin-bottom:10px;">
+      <button onclick="delContrat(_ctEid);document.getElementById('contratForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer ce contrat</button>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('contratForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveContrat()" style="flex:2;background:#7c3aed;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+<div class="pg" id="pgAdminControle">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#06b6d4;cursor:pointer;">‹ Administratif</div>
+    <div class="pg-title" style="font-size:13px;">📑 Comptabilité</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">DOCUMENTS JOURNALIERS</div>
 
     <div onclick="goPage('retenus')" style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:34px;">💰</div>
@@ -1282,14 +1591,473 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
 
+    <div onclick="goPage('signatureJournee')" style="background:linear-gradient(135deg,#1c1917,#292524);border:1px solid rgba(251,191,36,.4);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.08;line-height:1;">✍️</div>
+      <div style="font-size:34px;">✍️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Signature Journée</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Bordereaux · Crédit · Virements · Contrôle</div>
+      </div>
+      <div id="sigJournBadge" style="display:none;background:#ef4444;color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;margin-top:6px;padding-left:4px;">INSPECTIONS & AUDITS</div>
+
+    <div onclick="goPage('visiteAudit')" style="background:linear-gradient(135deg,#0c1a2e,#0f2d4a);border:1px solid rgba(6,182,212,.45);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.08;line-height:1;">🔍</div>
+      <div style="font-size:34px;">🔍</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Visite Audit</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Comptabilité · Administration · Contrôle interne</div>
+      </div>
+      <div id="visiteAuditBadge" style="display:none;background:#06b6d4;color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ADMIN AUTORITÉS HUB ══ -->
+<div class="pg" id="pgAdminAutorites">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Administratif</div>
+    <div class="pg-title" style="font-size:13px;">🏛️ Conformité & Autorités</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+
+    <div style="background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(234,88,12,.06));border:1px solid rgba(249,115,22,.25);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:20px;flex-shrink:0;">⚠️</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">Documentez toute visite officielle · Gardez une traçabilité complète de chaque passage d'agent ou d'autorité de contrôle.</div>
+    </div>
+
+    <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:10px;padding-left:4px;">VISITES OFFICIELLES</div>
+
+    <div onclick="goPage('visiteAutorites')" style="background:linear-gradient(135deg,#1a0a00,#3b1002);border:1px solid rgba(249,115,22,.45);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.08;line-height:1;">🏛️</div>
+      <div style="font-size:34px;">🏛️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Visites Autorités</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Commerce · Santé · Municipale · Sécurité</div>
+      </div>
+      <div id="visiteAutoritesBadge" style="display:none;background:#f97316;color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+    </div>
+
   </div>
 </div>
 
 
+<!-- ══ SIGNATURE JOURNÉE ══ -->
+<div class="pg" id="pgSignatureJournee">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('adminControle')" style="font-size:13px;font-weight:700;color:#fbbf24;cursor:pointer;">‹ Comptabilité</div>
+    <div class="pg-title" style="font-size:13px;">✍️ Signature Journée</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportSigJournPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openSigJournForm()" style="background:#92400e;border:1.5px solid #fbbf24;color:#fbbf24;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Info banner -->
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(146,64,14,.1));border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:22px;flex-shrink:0;">ℹ️</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">
+        Vérifiez que chaque journée contient tous les documents requis avant signature.<br>
+        <span style="color:#fbbf24;font-weight:700;">Documents obligatoires :</span> bordereaux caissiers · dossiers crédit · frais personnels · pièces d'achat · reçus de virement
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(251,191,36,.2);">
+        <div style="font-size:22px;font-weight:900;color:#fbbf24;" id="sjTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">TOTAL</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.2);">
+        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="sjSignees">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">SIGNÉES</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(239,68,68,.2);">
+        <div style="font-size:22px;font-weight:900;color:#f87171;" id="sjEnAttente">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">EN ATTENTE</div>
+      </div>
+    </div>
+
+    <div id="sigJournList"></div>
+    <div id="sigJournEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:40px;margin-bottom:10px;">✍️</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Aucune journée enregistrée</div>
+      <div style="font-size:11px;">Appuyez sur + pour enregistrer une journée</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SIGNATURE JOURNÉE FORM MODAL ══ -->
+<div class="mov" id="sigJournMov" style="display:none;">
+  <div class="msh" style="max-height:92vh;overflow-y:auto;">
+    <div class="mhdl"></div>
+    <div class="mtit" id="sigJournFormTit">Nouvelle Journée</div>
+
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;"><label class="fl">Date de la journée</label><input type="date" class="fi" id="sjDate" style="width:100%;box-sizing:border-box;"></div>
+      <div style="flex:1;"><label class="fl">Caissier(e) responsable</label><input class="fi" id="sjCaissier" placeholder="Nom du caissier..."></div>
+    </div>
+
+    <!-- Documents checklist -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <div style="font-size:12px;font-weight:900;color:#fbbf24;">📋 Documents de la journée</div>
+      <button onclick="openSjAddDoc()" style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.35);color:#fbbf24;font-size:16px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+    <div id="sjAddDocRow" style="display:none;margin-bottom:8px;">
+      <div style="display:flex;gap:6px;">
+        <input class="fi" id="sjNewDocInput" placeholder="Nom du document..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addSjDoc()">
+        <button onclick="addSjDoc()" style="background:#92400e;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+        <button onclick="document.getElementById('sjAddDocRow').style.display='none'" style="background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:8px 10px;border-radius:10px;cursor:pointer;">✕</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px;" id="sjDocList"></div>
+
+    <div class="fg"><label class="fl">Observation (optionnel)</label><textarea class="fi" id="sjObs" placeholder="Documents manquants, anomalies, remarques..." style="height:65px;resize:none;"></textarea></div>
+
+    <div class="fg"><label class="fl">Statut de signature</label>
+      <div style="display:flex;gap:6px;">
+        <button type="button" id="sjStatutBtn0" onclick="setSjStatut(0)" style="flex:1;background:rgba(34,197,94,.15);border:1.5px solid rgba(34,197,94,.4);border-radius:10px;padding:10px;color:#4ade80;font-size:12px;font-weight:800;cursor:pointer;">✅ Signée<br><span style="font-size:9px;font-weight:400;opacity:.8;">Complète</span></button>
+        <button type="button" id="sjStatutBtn1" onclick="setSjStatut(1)" style="flex:1;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:10px;color:#fb923c;font-size:12px;font-weight:800;cursor:pointer;">⚠️ Partielle<br><span style="font-size:9px;font-weight:400;opacity:.8;">Docs manquants</span></button>
+        <button type="button" id="sjStatutBtn2" onclick="setSjStatut(2)" style="flex:1;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px;color:#f87171;font-size:12px;font-weight:800;cursor:pointer;">❌ Non signée<br><span style="font-size:9px;font-weight:400;opacity:.8;">En attente</span></button>
+      </div>
+    </div>
+
+    <div id="sjDelRow" style="display:none;margin-bottom:8px;">
+      <button onclick="delSigJourn(_sjEid);closeM('sigJournMov')" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-family:'IBM Plex Sans';font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer cette journée</button>
+    </div>
+    <div class="macts">
+      <button class="mb sec" onclick="closeM('sigJournMov')">Annuler</button>
+      <button class="mb" onclick="saveSigJourn()">💾 Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VISITE AUDIT ══ -->
+<div class="pg" id="pgVisiteAudit">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('adminControle')" style="font-size:13px;font-weight:700;color:#06b6d4;cursor:pointer;">‹ Comptabilité</div>
+    <div class="pg-title" style="font-size:13px;">🔍 Visite Audit</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAllVisitesAuditPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openVisiteAuditForm()" style="background:#0e4f5c;border:1.5px solid #06b6d4;color:#06b6d4;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Info banner -->
+    <div style="background:linear-gradient(135deg,rgba(6,182,212,.12),rgba(14,116,144,.1));border:1px solid rgba(6,182,212,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:22px;flex-shrink:0;">🔍</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">
+        Documentez chaque visite d'auditeur · Comptabilité · Contrôle administratif<br>
+        <span style="color:#06b6d4;font-weight:700;">Domaines :</span> Comptabilité · Stocks · RH · Hygiène · Caisse · Administratif
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(6,182,212,.25);">
+        <div style="font-size:22px;font-weight:900;color:#06b6d4;" id="auTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">VISITES</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.25);">
+        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="auConformes">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">CONFORMES</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(239,68,68,.25);">
+        <div style="font-size:22px;font-weight:900;color:#f87171;" id="auEcarts">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">ÉCARTS</div>
+      </div>
+    </div>
+
+    <div id="visiteAuditList"></div>
+    <div id="visiteAuditEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:40px;margin-bottom:10px;">🔍</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Aucune visite enregistrée</div>
+      <div style="font-size:11px;">Appuyez sur + pour documenter une visite d'audit</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM VISITE AUDIT ══ -->
+<div id="visiteAuditForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#080f1a;border:1px solid rgba(6,182,212,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';">🔍 Visite Audit</div>
+      <div onclick="document.getElementById('visiteAuditForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Date + Heure -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#06b6d4;display:block;margin-bottom:4px;">📅 DATE *</label>
+        <input id="auDate" type="date" style="width:100%;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#06b6d4;display:block;margin-bottom:4px;">⏰ HEURE D'ARRIVÉE</label>
+        <input id="auHeure" type="time" style="width:100%;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Auditeur + Organisme -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">👤 NOM DE L'AUDITEUR</label>
+        <input id="auNom" type="text" placeholder="Nom prénom..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">🏛️ ORGANISME</label>
+        <input id="auOrganisme" type="text" placeholder="Direction, Fisc, Interne..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Type d'audit -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">🎯 TYPE D'AUDIT</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        <button type="button" onclick="toggleAuditType(this,'Comptabilité')" data-type="Comptabilité" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">💼 Comptabilité</button>
+        <button type="button" onclick="toggleAuditType(this,'Stocks & Inventaire')" data-type="Stocks & Inventaire" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">📦 Stocks & Inventaire</button>
+        <button type="button" onclick="toggleAuditType(this,'RH & Paie')" data-type="RH & Paie" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">👥 RH & Paie</button>
+        <button type="button" onclick="toggleAuditType(this,'Caisse & Financier')" data-type="Caisse & Financier" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">💰 Caisse & Financier</button>
+        <button type="button" onclick="toggleAuditType(this,'Hygiène & Sécurité')" data-type="Hygiène & Sécurité" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">🧹 Hygiène & Sécurité</button>
+        <button type="button" onclick="toggleAuditType(this,'Administratif général')" data-type="Administratif général" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">📋 Administratif général</button>
+      </div>
+    </div>
+
+    <!-- Documents demandés -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">📂 DOCUMENTS DEMANDÉS PAR L'AUDITEUR</label>
+      <textarea id="auDocuments" placeholder="Ex : Livre de paie, états de caisse mois 03, bons de commandes fournisseurs, registre du personnel..." rows="3" style="width:100%;background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Constats & Écarts -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">⚠️ CONSTATS ET ÉCARTS RELEVÉS</label>
+      <textarea id="auConstats" placeholder="Ex : Écart de caisse de 120 DT sur le 12/03, bordereau manquant pour le 08/03..." rows="3" style="width:100%;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Points conformes -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#4ade80;display:block;margin-bottom:4px;">✅ POINTS CONFORMES VALIDÉS</label>
+      <textarea id="auConformes" placeholder="Ex : Livre d'inventaire à jour, archivage bons de livraison correct, pointage personnel conforme..." rows="2" style="width:100%;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Mesures correctives -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🎯 MESURES CORRECTIVES À METTRE EN PLACE</label>
+      <textarea id="auCorrectifs" placeholder="Action 1 : Régulariser l'écart de caisse avant le ...&#10;Action 2 : Fournir le bordereau manquant du ...&#10;Action 3 : ..." rows="3" style="width:100%;background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Délai de réponse + Résultat global -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📅 DÉLAI DE RÉPONSE</label>
+        <input id="auDelai" type="date" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📊 RÉSULTAT GLOBAL</label>
+        <select id="auResultat" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;">
+          <option value="">— Sélectionner —</option>
+          <option value="conforme">✅ Conforme</option>
+          <option value="partiel">⚠️ Partiellement conforme</option>
+          <option value="non-conforme">❌ Non conforme</option>
+          <option value="en-cours">🔄 En cours d'évaluation</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Observations générales -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATIONS GÉNÉRALES</label>
+      <textarea id="auObs" placeholder="Remarques supplémentaires, ambiance de la visite, autres informations..." rows="2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('visiteAuditForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveVisiteAudit()" style="flex:2;background:#0e7490;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer l'Audit</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VISITE AUTORITÉS COMPÉTENTES ══ -->
+<div class="pg" id="pgVisiteAutorites">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('adminAutorites')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Conformité</div>
+    <div class="pg-title" style="font-size:13px;">🏛️ Visites Autorités</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAllVisitesAutoritesPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openVisiteAutoritesForm()" style="background:#7c2d12;border:1.5px solid #f97316;color:#f97316;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- Info banner -->
+    <div style="background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(234,88,12,.08));border:1px solid rgba(249,115,22,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:22px;flex-shrink:0;">⚠️</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">
+        Enregistrez chaque visite officielle · Gardez une traçabilité complète<br>
+        <span style="color:#f97316;font-weight:700;">Autorités :</span> Min. Commerce · Min. Santé · Contrôle Économique · Police Municipale · Sécurité
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(249,115,22,.25);">
+        <div style="font-size:22px;font-weight:900;color:#f97316;" id="vaTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">VISITES</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(234,179,8,.25);">
+        <div style="font-size:22px;font-weight:900;color:#fbbf24;" id="vaEnCours">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">EN COURS</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.25);">
+        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="vaRegularises">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">RÉGULARISÉS</div>
+      </div>
+    </div>
+
+    <div id="visiteAutoritesList"></div>
+    <div id="visiteAutoritesEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:40px;margin-bottom:10px;">🏛️</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Aucune visite enregistrée</div>
+      <div style="font-size:11px;">Appuyez sur + pour documenter une visite officielle</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM VISITE AUTORITÉS ══ -->
+<div id="visiteAutoritesForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0f0a04;border:1px solid rgba(249,115,22,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:93vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';">🏛️ Visite Autorités Compétentes</div>
+      <div onclick="document.getElementById('visiteAutoritesForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Type d'autorité -->
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:#f97316;display:block;margin-bottom:8px;">🏛️ TYPE D'AUTORITÉ *</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;" id="vaTypeGrid">
+        <button type="button" onclick="selectVAType(this,'Min. Commerce')" data-vatype="Min. Commerce" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">🛒 Min. Commerce</button>
+        <button type="button" onclick="selectVAType(this,'Min. Santé')" data-vatype="Min. Santé" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">🏥 Min. Santé</button>
+        <button type="button" onclick="selectVAType(this,'Contrôle Économique')" data-vatype="Contrôle Économique" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">📊 Contrôle Éco.</button>
+        <button type="button" onclick="selectVAType(this,'Police Municipale')" data-vatype="Police Municipale" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">🚔 Police Municipale</button>
+        <button type="button" onclick="selectVAType(this,'Sécurité / Police')" data-vatype="Sécurité / Police" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">👮 Sécurité / Police</button>
+        <button type="button" onclick="selectVAType(this,'Autre autorité')" data-vatype="Autre autorité" style="background:rgba(249,115,22,.1);border:1.5px solid rgba(249,115,22,.25);border-radius:10px;color:#94a3b8;font-size:11px;font-weight:700;padding:10px 8px;cursor:pointer;text-align:center;">🏢 Autre autorité</button>
+      </div>
+    </div>
+
+    <!-- Date + Heure -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#f97316;display:block;margin-bottom:4px;">📅 DATE *</label>
+        <input id="vaDate" type="date" style="width:100%;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#f97316;display:block;margin-bottom:4px;">⏰ HEURE D'ARRIVÉE</label>
+        <input id="vaHeure" type="time" style="width:100%;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Nb agents + Noms -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">👤 NB D'AGENTS</label>
+        <input id="vaNbAgents" type="number" min="1" placeholder="Ex : 2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">🪪 NOM / MATRICULE</label>
+        <input id="vaAgentNom" type="text" placeholder="Nom ou matricule..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Zones visitées -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">📍 ZONES & RAYONS INSPECTÉS</label>
+      <textarea id="vaZones" placeholder="Ex : Rayon boucherie, chambre froide, zone caisse, dépôt boissons, rayon épicerie..." rows="2" style="width:100%;background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Questions posées -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">❓ QUESTIONS POSÉES & SUJETS ABORDÉS</label>
+      <textarea id="vaQuestions" placeholder="Ex : Questions sur les prix affichés, la traçabilité des produits, les dates de péremption, les conditions de stockage..." rows="3" style="width:100%;background:rgba(14,165,233,.07);border:1px solid rgba(14,165,233,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Factures demandées -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">🧾 FACTURES & DOCUMENTS DEMANDÉS</label>
+      <textarea id="vaFactures" placeholder="Ex : Factures fournisseur rayon boucherie, BL produits laitiers mois 03, certificat d'hygiène..." rows="2" style="width:100%;background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Produits contrôlés -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#4ade80;display:block;margin-bottom:4px;">📦 PRODUITS SPÉCIFIQUEMENT CONTRÔLÉS</label>
+      <textarea id="vaProduits" placeholder="Ex : Yaourts marque X (DLC vérifiée), poulet frais (température), huile en vrac (étiquetage prix)..." rows="2" style="width:100%;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Infractions / Remarques -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">⚠️ INFRACTIONS & REMARQUES RELEVÉES</label>
+      <textarea id="vaInfractions" placeholder="Ex : Prix non affiché sur 3 produits rayon épicerie, température chambre froide légèrement haute, étiquetage non conforme produit X..." rows="3" style="width:100%;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Mesures imposées + Délai -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#fb923c;display:block;margin-bottom:4px;">🎯 MESURES IMPOSÉES & CORRECTIONS DEMANDÉES</label>
+      <textarea id="vaMesures" placeholder="Ex : Afficher les prix de tous les produits sous 48h, corriger la température chambre froide, retirer le produit X de la vente..." rows="3" style="width:100%;background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Délai imposé + Statut -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">⏳ DÉLAI ACCORDÉ</label>
+        <input id="vaDelai" type="date" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📋 STATUT</label>
+        <select id="vaStatut" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;">
+          <option value="">— Sélectionner —</option>
+          <option value="ok">✅ Sans remarques</option>
+          <option value="en-cours">⏳ Corrections en cours</option>
+          <option value="regularise">✅ Régularisé</option>
+          <option value="pv">🚨 PV / Amende émise</option>
+          <option value="saisie">🔒 Saisie / Retrait produit</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PV / Amende -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">🚨 PV / AMENDE (si applicable)</label>
+      <input id="vaPV" type="text" placeholder="N° PV, montant amende, référence officielle..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+    </div>
+
+    <!-- Observations -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATIONS GÉNÉRALES</label>
+      <textarea id="vaObs" placeholder="Attitude des agents, contexte particulier, autres informations utiles..." rows="2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('visiteAutoritesForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveVisiteAutorites()" style="flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer la Visite</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ LISTE PERSONNEL ══ -->
 <div class="pg" id="pgListePersonnel">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Admin</div>
+    <div class="pg-back" onclick="goPage('adminRH')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ RH</div>
     <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👥 Liste Personnel</div>
     <button onclick="addEmp()" style="background:#0369a1;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
   </div>
@@ -1301,7 +2069,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ POINTAGE PAGE ══ -->
 <div class="pg" id="pgPointage">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Admin</div>
+    <div class="pg-back" onclick="goPage('adminRH')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ RH</div>
     <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👆 Pointage</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addEmp()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -1317,7 +2085,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ CONGÉ PAGE ══ -->
 <div class="pg" id="pgConge">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Admin</div>
+    <div class="pg-back" onclick="goPage('adminRH')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ RH</div>
     <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🏖️ Congés</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addConge()" style="background:#2563eb;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -1332,7 +2100,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 <!-- ══ RETENUS HUB ══ -->
 <div class="pg" id="pgRetenus">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('admin')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Admin</div>
+    <div class="pg-back" onclick="goPage('adminControle')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Comptabilité</div>
     <div style="font-size:17px;font-weight:900;color:#1e3a8a;font-family:'Syne';">💰 Retenus</div>
     <div style="width:34px;"></div>
   </div>
@@ -1909,92 +2677,126 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div class="pg-title">🚀 Tâches Avancées</div>
     <div style="width:34px;"></div>
   </div>
-  <div class="scroll" style="padding:16px 16px 90px;">
 
-    <div onclick="goPage('optimisation')" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">⚙️</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Optimisation</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Lutte contre la démarque · Veille concurrentielle</div>
+  <!-- Tabs -->
+  <div style="display:flex;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;padding:0 8px;">
+    <div id="avTab0" onclick="switchAvTab(0)" style="flex:1;text-align:center;padding:10px 4px;font-size:10px;font-weight:800;color:#3b82f6;border-bottom:2px solid #3b82f6;cursor:pointer;letter-spacing:.3px;">🎯 PILOTAGE</div>
+    <div id="avTab1" onclick="switchAvTab(1)" style="flex:1;text-align:center;padding:10px 4px;font-size:10px;font-weight:700;color:var(--t2);border-bottom:2px solid transparent;cursor:pointer;letter-spacing:.3px;">📦 RÉCEPTION</div>
+    <div id="avTab2" onclick="switchAvTab(2)" style="flex:1;text-align:center;padding:10px 4px;font-size:10px;font-weight:700;color:var(--t2);border-bottom:2px solid transparent;cursor:pointer;letter-spacing:.3px;">👔 DIRECTION</div>
+  </div>
+
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- TAB 0 : Pilotage Terrain -->
+    <div id="avPanel0">
+      <div style="font-size:9px;font-weight:900;color:rgba(59,130,246,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-left:2px;">🎯 Pilotage Terrain</div>
+
+      <div onclick="goPage('optimisation')" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">⚙️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Optimisation</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Lutte contre la démarque · Veille concurrentielle</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
       </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+
+      <div onclick="goPage('auditRayon')" style="background:linear-gradient(135deg,#0f4c81,#0369a1);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">🔍</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Audit Rayon</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Facing · Étiquetage · Propreté · Signalétique</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
+
+      <div onclick="goPage('objectifsKpi')" style="background:linear-gradient(135deg,#14532d,#15803d);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">🎯</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Objectifs & KPIs</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">CA cible · Suivi performance · Alertes</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
     </div>
 
-    <div onclick="goPage('auditRayon')" style="background:linear-gradient(135deg,#0f4c81,#0369a1);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">🔍</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Audit Rayon</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Facing · Étiquetage · Propreté · Signalétique</div>
+    <!-- TAB 1 : Coin Réception -->
+    <div id="avPanel1" style="display:none;">
+      <div style="font-size:9px;font-weight:900;color:rgba(14,165,233,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-left:2px;">📦 Coin Réception</div>
+
+      <div onclick="goPage('anomaliesQte')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.35);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">⚖️</div>
+        <div style="font-size:28px;">⚖️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Anomalies Quantités</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Poissonnerie · FLEG · Écarts de réception</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
       </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
+
+      <div onclick="goPage('demandeAvoir')" style="background:linear-gradient(135deg,#0a1f1a,#065f46);border:1px solid rgba(16,185,129,.4);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">↩️</div>
+        <div style="font-size:28px;">↩️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Demande d'Avoir</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Retours · Code Méti · Camion · N° Avoir</div>
+        </div>
+        <div id="demandeAvoirBadge" style="display:none;background:#10b981;color:#022c22;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
+
+      <div onclick="goPage('ruptures')" style="background:linear-gradient(135deg,#7c2d12,#ea580c);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">📦</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Gestion des Ruptures</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Produits manquants · Rayon · Actions</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
+
+      <div onclick="goPage('nonConformites')" style="background:linear-gradient(135deg,#450a0a,#dc2626);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">🛑</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Non-Conformités</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Équipe · Fournisseurs · Hygiène</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
+
+      <div onclick="goPage('compteRenduFournisseur')" style="background:linear-gradient(135deg,#1e1b4b,#5b21b6);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">🤝</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Compte-rendu Fournisseur</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Visites · Qualité · Livraisons</div>
+        </div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+      </div>
     </div>
 
-    <div onclick="goPage('objectifsKpi')" style="background:linear-gradient(135deg,#14532d,#15803d);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">🎯</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Objectifs & KPIs</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">CA cible · Suivi performance · Alertes</div>
-      </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
+    <!-- TAB 2 : Direction & Réunions -->
+    <div id="avPanel2" style="display:none;">
+      <div style="font-size:9px;font-weight:900;color:rgba(139,92,246,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;padding-left:2px;">👔 Direction & Réunions</div>
 
-    <div onclick="goPage('ruptures')" style="background:linear-gradient(135deg,#7c2d12,#ea580c);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">📦</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Gestion des Ruptures</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Produits manquants · Rayon · Actions</div>
+      <div onclick="goPage('visiteDR')" style="background:linear-gradient(135deg,#1a0533,#6d28d9);border:1px solid rgba(139,92,246,.5);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">📊</div>
+        <div style="font-size:28px;">👔</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Visite DR</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">Directeur Régional · Compte-rendu · Suivi actions</div>
+        </div>
+        <div id="visiteDRBadge" style="display:none;background:#a78bfa;color:#1a0533;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
       </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
 
-    <div onclick="goPage('nonConformites')" style="background:linear-gradient(135deg,#450a0a,#dc2626);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">🛑</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Non-Conformités</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Équipe · Fournisseurs · Hygiène</div>
+      <div onclick="goPage('reunionRegionale')" style="background:linear-gradient(135deg,#0a1628,#1e3a8a);border:1px solid rgba(59,130,246,.45);border-radius:16px;padding:16px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-6px;top:-6px;font-size:48px;opacity:.09;line-height:1;">📋</div>
+        <div style="font-size:28px;">🏛️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Réunion Régionale</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;">PV · Membres · Points · Actions · Export PDF</div>
+        </div>
+        <div id="reunionRegBadge" style="display:none;background:#60a5fa;color:#0a1628;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
+        <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
       </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
-
-    <div onclick="goPage('compteRenduFournisseur')" style="background:linear-gradient(135deg,#1e1b4b,#5b21b6);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:34px;">🤝</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Compte-rendu Fournisseur</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Visites · Qualité · Livraisons</div>
-      </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
-
-    <div onclick="goPage('anomaliesQte')" style="background:linear-gradient(135deg,#0c4a6e,#0369a1);border:1px solid rgba(14,165,233,.4);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-      <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:.08;line-height:1;">⚖️</div>
-      <div style="font-size:34px;">⚖️</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Anomalies Quantités</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Poissonnerie · FLEG · Écarts de réception</div>
-      </div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
-
-    <div onclick="goPage('visiteDR')" style="background:linear-gradient(135deg,#1a0533,#6d28d9);border:1px solid rgba(139,92,246,.5);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-      <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:.08;line-height:1;">📊</div>
-      <div style="font-size:34px;">👔</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Visite DR</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Directeur Régional · Compte-rendu · Suivi actions</div>
-      </div>
-      <div id="visiteDRBadge" style="display:none;background:#a78bfa;color:#1a0533;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
-    </div>
-
-    <div onclick="goPage('reunionRegionale')" style="background:linear-gradient(135deg,#0a1628,#1e3a8a);border:1px solid rgba(59,130,246,.45);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-      <div style="position:absolute;right:-8px;top:-8px;font-size:60px;opacity:.08;line-height:1;">📋</div>
-      <div style="font-size:34px;">🏛️</div>
-      <div style="flex:1;">
-        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Réunion Régionale</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">PV · Membres · Points · Actions · Export PDF</div>
-      </div>
-      <div id="reunionRegBadge" style="display:none;background:#60a5fa;color:#0a1628;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
-      <div style="color:rgba(255,255,255,.5);font-size:22px;">›</div>
     </div>
 
   </div>
@@ -2069,6 +2871,153 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div id="anomFlegForm" style="display:none;"></div>
     <div id="anomFlegList"></div>
     <div id="anomFlegEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:12px;">🥦 Aucune anomalie · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ DEMANDE D'AVOIR ══ -->
+<div class="pg" id="pgDemandeAvoir">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Réception</div>
+    <div class="pg-title" style="font-size:13px;">↩️ Demande d'Avoir</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportAllAvoirsPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openAvoirForm()" style="background:#064e3b;border:1.5px solid #10b981;color:#10b981;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(5,150,105,.07));border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:flex-start;gap:10px;">
+      <div style="font-size:20px;flex-shrink:0;">↩️</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">
+        Enregistrez chaque retour fournisseur · Suivez les avoirs demandés<br>
+        <span style="color:#34d399;font-weight:700;">Champs :</span> Code Méti · Désignation · Qté · Camion · N° Avoir
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(16,185,129,.2);">
+        <div style="font-size:22px;font-weight:900;color:#10b981;" id="avTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">TOTAL</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(234,179,8,.2);">
+        <div style="font-size:22px;font-weight:900;color:#fbbf24;" id="avEnAttente">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">EN ATTENTE</div>
+      </div>
+      <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.2);">
+        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="avRecus">0</div>
+        <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">REÇUS</div>
+      </div>
+    </div>
+
+    <div id="avoirsList"></div>
+    <div id="avoirsEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:40px;margin-bottom:10px;">↩️</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Aucune demande d'avoir</div>
+      <div style="font-size:11px;">Appuyez sur + pour enregistrer un retour</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORM DEMANDE D'AVOIR ══ -->
+<div id="avoirForm" style="display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#020f0a;border:1px solid rgba(16,185,129,.4);border-radius:20px 20px 0 0;width:100%;max-width:430px;max-height:91vh;overflow-y:auto;padding:20px 18px 36px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-size:16px;font-weight:800;color:#f8faff;font-family:'Syne';" id="avoirFormTit">↩️ Nouvelle Demande d'Avoir</div>
+      <div onclick="document.getElementById('avoirForm').style.display='none'" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+    </div>
+
+    <!-- Date + Heure -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#10b981;display:block;margin-bottom:4px;">📅 DATE *</label>
+        <input id="avDate" type="date" style="width:100%;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#10b981;display:block;margin-bottom:4px;">⏰ HEURE</label>
+        <input id="avHeure" type="time" style="width:100%;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Code Méti -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">🔢 CODE MÉTI <span style="color:#64748b;font-weight:400;">(8 chiffres)</span></label>
+      <input id="avCodeMeti" type="text" inputmode="numeric" maxlength="8" placeholder="Ex : 12345678" style="width:100%;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.3);border-radius:10px;padding:11px 14px;color:#fbbf24;font-size:16px;font-weight:900;letter-spacing:3px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,8)">
+    </div>
+
+    <!-- Désignation -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📦 DÉSIGNATION DU PRODUIT *</label>
+      <input id="avDesignation" type="text" placeholder="Ex : Palettes en bois, Caisses melon, Caisses plastique vert..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+    </div>
+
+    <!-- Quantité + Unité -->
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">🔄 QUANTITÉ RETOURNÉE *</label>
+        <input id="avQte" type="number" min="1" placeholder="Ex : 12" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:15px;font-weight:700;box-sizing:border-box;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">UNITÉ</label>
+        <select id="avUnite" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 8px;color:#f8faff;font-size:12px;box-sizing:border-box;">
+          <option value="Unité">Unité</option>
+          <option value="Palette">Palette</option>
+          <option value="Caisse">Caisse</option>
+          <option value="Kg">Kg</option>
+          <option value="Carton">Carton</option>
+          <option value="Lot">Lot</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Matricule camion -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">🚛 MATRICULE CAMION <span style="color:#475569;font-weight:400;">format : xxx TUN xxxx</span></label>
+      <input id="avCamion" type="text" placeholder="Ex : 123 TUN 4567" style="width:100%;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.25);border-radius:10px;padding:11px 14px;color:#38bdf8;font-size:15px;font-weight:800;letter-spacing:2px;text-transform:uppercase;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="this.value=this.value.toUpperCase()">
+    </div>
+
+    <!-- Nom fournisseur / livreur -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">👤 NOM DU LIVREUR / FOURNISSEUR</label>
+      <input id="avLivreur" type="text" placeholder="Nom du livreur ou du fournisseur..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+    </div>
+
+    <!-- Qui a effectué le retour -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">🙋 EFFECTUÉ PAR (employé)</label>
+      <input id="avEffPar" type="text" placeholder="Nom de l'employé qui a effectué le retour..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
+    </div>
+
+    <!-- N° Avoir -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#a78bfa;display:block;margin-bottom:4px;">🧾 N° AVOIR <span style="color:#475569;font-weight:400;">(si reçu)</span></label>
+      <input id="avNumero" type="text" placeholder="Numéro de l'avoir émis par le fournisseur..." style="width:100%;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:10px 12px;color:#c4b5fd;font-size:13px;font-weight:700;box-sizing:border-box;">
+    </div>
+
+    <!-- Statut avoir -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">📋 STATUT DE L'AVOIR</label>
+      <div style="display:flex;gap:7px;">
+        <button type="button" onclick="setAvStatut(this,'attente')" data-avs="attente" style="flex:1;background:rgba(234,179,8,.12);border:1.5px solid rgba(234,179,8,.3);border-radius:10px;color:#fbbf24;font-size:11px;font-weight:700;padding:9px 4px;cursor:pointer;">⏳ En attente</button>
+        <button type="button" onclick="setAvStatut(this,'demande')" data-avs="demande" style="flex:1;background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.2);border-radius:10px;color:#38bdf8;font-size:11px;font-weight:700;padding:9px 4px;cursor:pointer;">📤 Demandé</button>
+        <button type="button" onclick="setAvStatut(this,'recu')" data-avs="recu" style="flex:1;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:10px;color:#4ade80;font-size:11px;font-weight:700;padding:9px 4px;cursor:pointer;">✅ Reçu</button>
+      </div>
+    </div>
+
+    <!-- Observations -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATIONS</label>
+      <textarea id="avObs" placeholder="Motif du retour, état du produit, remarques..." rows="2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <div id="avDelRow" style="display:none;margin-bottom:10px;">
+      <button onclick="delAvoir(_avEid);document.getElementById('avoirForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('avoirForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+      <button onclick="saveAvoir()" style="flex:2;background:#059669;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+    </div>
   </div>
 </div>
 
@@ -2879,8 +3828,8 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <!-- Infos générales -->
     <div class="fg"><label class="fl">Nom du catalogue</label><input class="fi" id="catNom" placeholder="Ex: Catalogue Ramadan 2025..."></div>
     <div style="display:flex;gap:8px;margin-bottom:12px;">
-      <div style="flex:1;"><label class="fl">Du</label><input type="date" class="fi" id="catDe" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;"></div>
-      <div style="flex:1;"><label class="fl">Au</label><input type="date" class="fi" id="catAu" style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:10px;color:#fff;font-size:13px;font-weight:700;outline:none;color-scheme:dark;"></div>
+      <div style="flex:1;"><label class="fl">Du</label><input type="date" class="fi" id="catDe" style="width:100%;box-sizing:border-box;"></div>
+      <div style="flex:1;"><label class="fl">Au</label><input type="date" class="fi" id="catAu" style="width:100%;box-sizing:border-box;"></div>
     </div>
 
     <!-- Ruptures par rayon -->
@@ -2951,7 +3900,13 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- COUNTDOWN BLOCK -->
+    <div id="saisonCountdowns" style="margin-bottom:14px;"></div>
+
+    <!-- HUB LIST -->
     <div id="saisonHubList"></div>
+
   </div>
 </div>
 
@@ -3013,6 +3968,36 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         <label style="font-size:10px;font-weight:700;color:#f59e0b;display:block;margin-bottom:4px;">🔧 Points à améliorer</label>
         <textarea id="sdPointsAmelio" class="fi" placeholder="Ce qu'il faut améliorer la prochaine fois..." style="width:100%;min-height:70px;resize:none;box-sizing:border-box;" oninput="saveAnalyseSaison()"></textarea>
       </div>
+    </div>
+
+    <!-- ── SECTION 5: Checklist ── -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:900;color:#34d399;text-transform:uppercase;letter-spacing:.5px;">✅ Checklist Préparation</div>
+        <button onclick="openChecklistSaison()" style="background:#059669;border:none;color:#fff;font-size:16px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      </div>
+      <div id="sdChecklistForm" style="display:none;margin-bottom:8px;">
+        <div style="display:flex;gap:6px;">
+          <input id="sdChecklistInput" class="fi" placeholder="Ex: Commander moustiquaires, Préparer tête de gondole..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')saveChecklistSaison()"/>
+          <button onclick="saveChecklistSaison()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
+        </div>
+      </div>
+      <div id="sdChecklistDefault" style="margin-bottom:8px;"></div>
+      <div id="sdChecklistList" style="display:flex;flex-direction:column;gap:5px;"></div>
+      <div id="sdChecklistEmpty" style="font-size:11px;color:var(--t2);text-align:center;padding:8px;">Aucune tâche · +</div>
+    </div>
+
+    <!-- ── SECTION 6: Comparaison N-1 ── -->
+    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:12px;font-weight:900;color:#f472b6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📅 Comparaison N-1</div>
+      <div style="font-size:11px;color:var(--t2);margin-bottom:10px;line-height:1.5;">Enregistrez les ventes de la même période l'année dernière pour guider vos décisions d'achat cette année.</div>
+      <div style="display:flex;gap:6px;margin-bottom:8px;">
+        <div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">CA réalisé N-1 (TND)</label><input id="sdN1CA" class="fi" type="number" placeholder="0.000" step="0.001" style="width:100%;box-sizing:border-box;" oninput="saveN1Saison()"/></div>
+        <div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Marge N-1 (%)</label><input id="sdN1Marge" class="fi" type="number" placeholder="0" min="0" max="100" style="width:100%;box-sizing:border-box;" oninput="saveN1Saison()"/></div>
+      </div>
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Top produits vendus N-1</label><textarea id="sdN1Produits" class="fi" placeholder="Ex: Dattes Deglet 5kg × 200u, Harissa 400g × 350u..." style="width:100%;min-height:65px;resize:none;box-sizing:border-box;" oninput="saveN1Saison()"></textarea></div>
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Observation N-1</label><textarea id="sdN1Obs" class="fi" placeholder="Ce qu'il s'est passé, manques, surprises..." style="width:100%;min-height:55px;resize:none;box-sizing:border-box;" oninput="saveN1Saison()"></textarea></div>
+      <div id="sdN1Insight" style="display:none;background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.25);border-radius:10px;padding:10px;font-size:11px;color:var(--t1);"></div>
     </div>
 
   </div>
@@ -5249,7 +6234,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -5264,7 +6249,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','catalogue','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAccompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','pilotage','catalogue','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','inventaireMag','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','signatureJournee','visiteAudit','visiteAutorites'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeInvBadge();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -5285,6 +6270,11 @@ function goPage(p){
   if(p==='reunion')renderReunions();
   if(p==='demarque')renderDemarque();
   if(p==='catalogue')renderCatalogue();
+  if(p==='signatureJournee')renderSigJourn();
+  if(p==='visiteAudit')renderVisiteAudit();
+  if(p==='visiteAutorites')renderVisiteAutorites();
+  if(p==='contrats')renderContrats();
+  if(p==='demandeAvoir')renderAvoirs();
   if(p==='anomaliesQte')renderAnomHubBadges();
   if(p==='anomaliesPoissonnerie')renderAnom('poissonnerie');
   if(p==='anomaliesFLEG')renderAnom('fleg');
@@ -8188,7 +9178,10 @@ var JALONS = ['J-30 jours','J-15 jours','J-7 jours','Jour J'];
 var JALON_COLORS = ['#60a5fa','#f59e0b','#ef4444','#22c55e'];
 
 function getSaisonData(key){
-  var d=loadPilo();if(!d.saisonData)d.saisonData={};if(!d.saisonData[key])d.saisonData[key]={produits:[],jalons:{},kpiCA:'',kpiStock:'',pointsForts:'',pointsAmelio:''};return d.saisonData[key];}
+  var d=loadPilo();if(!d.saisonData)d.saisonData={};
+  if(!d.saisonData[key])d.saisonData[key]={produits:[],jalons:{},kpiCA:'',kpiStock:'',pointsForts:'',pointsAmelio:'',checklist:[],n1:{}};
+  return d.saisonData[key];
+}
 function saveSaisonData(key,data){var d=loadPilo();if(!d.saisonData)d.saisonData={};d.saisonData[key]=data;savePilo(d);}
 
 function openSaisonDetail(key){
@@ -8219,7 +9212,160 @@ function renderSaisonHubList(){
   }).join('');
 }
 
-function renderSaisonnalite(){renderSaisonHubList();}
+function renderSaisonnalite(){renderSaisonHubList();renderCountdowns();}
+
+// ── COUNTDOWN ──
+var SAISON_DATES={
+  ramadan:   {label:'Ramadan',     icon:'🌙', col:'#a855f7', getNext:function(){return _nextHijriApprox('ramadan');}},
+  eid_fitr:  {label:'Aïd El Fitr', icon:'🎉', col:'#f59e0b', getNext:function(){return _nextHijriApprox('eid_fitr');}},
+  eid_adha:  {label:'Aïd El Adha', icon:'🐑', col:'#22c55e', getNext:function(){return _nextHijriApprox('eid_adha');}},
+  ete:       {label:'Été',          icon:'☀️', col:'#06b6d4', getNext:function(){var d=new Date();var y=d.getFullYear();var t=new Date(y,5,1);if(t<d)t=new Date(y+1,5,1);return t;}},
+  mawlid:    {label:'Mawlid',       icon:'⭐', col:'#fbbf24', getNext:function(){return _nextHijriApprox('mawlid');}},
+  noel:      {label:'Nouvel An',    icon:'🎄', col:'#ef4444', getNext:function(){var d=new Date();var y=d.getFullYear();var t=new Date(y,11,31);if(t<d)t=new Date(y+1,11,31);return t;}}
+};
+// Approximate next dates (updated annually)
+function _nextHijriApprox(key){
+  var today=new Date();today.setHours(0,0,0,0);
+  var approx={
+    ramadan:   [new Date(2026,1,18), new Date(2027,2,8)],
+    eid_fitr:  [new Date(2026,2,20), new Date(2027,2,29)],
+    eid_adha:  [new Date(2026,5,27), new Date(2027,6,17)],
+    mawlid:    [new Date(2026,8,5),  new Date(2027,8,25)]
+  };
+  var dates=approx[key]||[];
+  for(var i=0;i<dates.length;i++){if(dates[i]>=today)return dates[i];}
+  return null;
+}
+function renderCountdowns(){
+  var el=document.getElementById('saisonCountdowns');if(!el)return;
+  var today=new Date();today.setHours(0,0,0,0);
+  var upcoming=[];
+  Object.keys(SAISON_DATES).forEach(function(k){
+    var s=SAISON_DATES[k];
+    var next=s.getNext();
+    if(!next)return;
+    next.setHours(0,0,0,0);
+    var diff=Math.round((next-today)/86400000);
+    if(diff>=0&&diff<=60)upcoming.push({key:k,label:s.label,icon:s.icon,col:s.col,diff:diff,date:next});
+  });
+  upcoming.sort(function(a,b){return a.diff-b.diff;});
+  if(!upcoming.length){el.innerHTML='';return;}
+  el.innerHTML='<div style="font-size:9px;font-weight:900;color:var(--t2);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">⏳ Événements à venir</div>'+
+  upcoming.map(function(u){
+    var urgCol=u.diff===0?'#ef4444':u.diff<=7?'#f97316':u.diff<=15?'#f59e0b':u.col;
+    var urgTxt=u.diff===0?'AUJOURD\'HUI !':u.diff===1?'DEMAIN !':u.diff<=7?'⚠️ Dans '+u.diff+' jours':'Dans '+u.diff+' jours';
+    var df=u.date.toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});
+    var pct=Math.max(0,Math.min(100,100-Math.round(u.diff/60*100)));
+    return '<div onclick="openSaisonDetail(\''+u.key+'\')" style="background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer;border-left:3px solid '+urgCol+';">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'+
+      '<div style="display:flex;align-items:center;gap:8px;">'+
+      '<span style="font-size:22px;">'+u.icon+'</span>'+
+      '<div>'+
+      '<div style="font-size:13px;font-weight:900;color:var(--t1);">'+u.label+'</div>'+
+      '<div style="font-size:10px;color:var(--t2);">📅 '+df+'</div>'+
+      '</div></div>'+
+      '<div style="font-size:11px;font-weight:900;color:'+urgCol+';text-align:right;white-space:nowrap;">'+urgTxt+'</div>'+
+      '</div>'+
+      '<div style="background:rgba(255,255,255,.07);border-radius:20px;height:5px;overflow:hidden;">'+
+      '<div style="height:100%;border-radius:20px;background:'+urgCol+';width:'+pct+'%;transition:width .4s;"></div>'+
+      '</div>'+
+      '</div>';
+  }).join('');
+}
+
+// ── CHECKLIST ──
+var CHECKLIST_DEFAULT={
+  ramadan:  ['Commander les dattes (3 semaines avant)','Préparer tête de gondole dattes/conserves','Commander harissa et épices en surplus','Renforcer stock jus et lait','Afficher promotions Iftar','Briefer l\'équipe sur le pic horaire'],
+  eid_fitr: ['Commander confiseries et pâtisseries','Préparer rayon cadeaux alimentaires','Commander habits/lingerie si rayon','Préparer décorations Aïd','Renforcer caisse en personnel'],
+  eid_adha: ['Commander épices × 2 du normal','Commander huile et sel en surplus','Prévoir sacs poubelle grande contenance','Afficher prix clarifiés boucher','Nettoyer et préparer zone boucherie'],
+  ete:      ['Commander eaux minérales × 2','Renforcer stock glaces et sorbets','Commander crèmes solaires','Préparer rayon BBQ/pique-nique','Adapter planogramme boissons froides'],
+  mawlid:   ['Commander amandes et fruits secs','Commander pâtisseries traditionnelles','Préparer bougies et décorations','Afficher promotions gâteaux'],
+  noel:     ['Commander chocolats et biscuits import','Préparer rayon champagne/mousseux','Commander décorations festives','Préparer coffrets cadeaux']
+};
+
+function openChecklistSaison(){
+  var f=document.getElementById('sdChecklistForm');
+  if(f){f.style.display=f.style.display==='none'?'block':'none';if(f.style.display==='block')document.getElementById('sdChecklistInput').focus();}
+}
+function saveChecklistSaison(){
+  var v=(document.getElementById('sdChecklistInput').value||'').trim();
+  if(!v)return;
+  var d=getSaisonData(_curSaison);
+  if(!d.checklist)d.checklist=[];
+  d.checklist.push({id:uid(),text:v,done:false});
+  saveSaisonData(_curSaison,d);
+  document.getElementById('sdChecklistInput').value='';
+  document.getElementById('sdChecklistForm').style.display='none';
+  renderChecklistSaison();
+}
+function toggleChecklistSaison(id){
+  var d=getSaisonData(_curSaison);
+  if(!d.checklist)d.checklist=[];
+  var item=d.checklist.find(function(x){return x.id===id;});
+  if(item)item.done=!item.done;
+  saveSaisonData(_curSaison,d);renderChecklistSaison();
+}
+function delChecklistSaison(id){
+  var d=getSaisonData(_curSaison);
+  d.checklist=(d.checklist||[]).filter(function(x){return x.id!==id;});
+  saveSaisonData(_curSaison,d);renderChecklistSaison();
+}
+function addDefaultChecklist(){
+  var defaults=CHECKLIST_DEFAULT[_curSaison]||[];
+  var d=getSaisonData(_curSaison);
+  if(!d.checklist)d.checklist=[];
+  defaults.forEach(function(t){
+    if(!d.checklist.find(function(x){return x.text===t;}))
+      d.checklist.push({id:uid(),text:t,done:false});
+  });
+  saveSaisonData(_curSaison,d);renderChecklistSaison();
+}
+function renderChecklistSaison(){
+  var d=getSaisonData(_curSaison);
+  var list=d.checklist||[];
+  var el=document.getElementById('sdChecklistList');
+  var em=document.getElementById('sdChecklistEmpty');
+  var def=document.getElementById('sdChecklistDefault');
+  var defaults=CHECKLIST_DEFAULT[_curSaison]||[];
+  if(def){
+    var saisonLabel=(SAISONS.find(function(s){return s.key===_curSaison;})||{}).label||'';
+    def.innerHTML=defaults.length&&!list.length?
+      '<button onclick="addDefaultChecklist()" style="width:100%;background:rgba(52,211,153,.1);border:1px dashed rgba(52,211,153,.35);border-radius:10px;padding:8px;color:#34d399;font-size:11px;font-weight:700;cursor:pointer;margin-bottom:6px;">✨ Charger checklist type '+saisonLabel+'</button>':
+      (list.length&&defaults.length?'<button onclick="addDefaultChecklist()" style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:8px;padding:5px 10px;color:#34d399;font-size:10px;font-weight:700;cursor:pointer;margin-bottom:6px;">+ Suggestions</button>':'');
+  }
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+  var done=list.filter(function(x){return x.done;}).length;
+  el.innerHTML='<div style="font-size:10px;color:var(--t2);margin-bottom:6px;">'+done+'/'+list.length+' tâche(s) complétée(s)</div>'+
+    '<div style="background:rgba(255,255,255,.05);border-radius:20px;height:5px;overflow:hidden;margin-bottom:8px;"><div style="height:100%;border-radius:20px;background:#34d399;width:'+(list.length?Math.round(done/list.length*100):0)+'%;transition:width .3s;"></div></div>'+
+    list.map(function(item){
+      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,'+(item.done?'.25':'.1')+');border-radius:10px;margin-bottom:4px;">'+
+        '<div onclick="toggleChecklistSaison(\''+item.id+'\')" style="width:20px;height:20px;border-radius:50%;border:2px solid '+(item.done?'#34d399':'rgba(52,211,153,.4)')+';background:'+(item.done?'#34d399':'transparent')+';cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;">'+
+        (item.done?'<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>':'')+
+        '</div>'+
+        '<span style="flex:1;font-size:11px;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'" onclick="toggleChecklistSaison(\''+item.id+'\')">'+item.text+'</span>'+
+        '<button onclick="delChecklistSaison(\''+item.id+'\')" style="background:none;border:none;color:rgba(239,68,68,.5);font-size:14px;cursor:pointer;padding:0;flex-shrink:0;">×</button>'+
+        '</div>';
+    }).join('');
+}
+
+// ── N-1 ──
+function saveN1Saison(){
+  var d=getSaisonData(_curSaison);
+  d.n1={ca:document.getElementById('sdN1CA').value,marge:document.getElementById('sdN1Marge').value,produits:document.getElementById('sdN1Produits').value,obs:document.getElementById('sdN1Obs').value};
+  saveSaisonData(_curSaison,d);
+  renderN1Insight();
+}
+function renderN1Insight(){
+  var d=getSaisonData(_curSaison);var n1=d.n1||{};var kpi=d.kpiCA||0;var n1ca=parseFloat(n1.ca)||0;
+  var el=document.getElementById('sdN1Insight');if(!el)return;
+  if(!n1ca){el.style.display='none';return;}
+  var delta=kpi&&n1ca?Math.round((kpi-n1ca)/n1ca*100):null;
+  var txt='📅 N-1 : <b>'+n1ca.toFixed(3)+' TND</b> de CA réalisé'+(n1.marge?' · Marge : <b>'+n1.marge+'%</b>':'');
+  if(delta!==null)txt+='<br>🎯 Votre objectif cette année est '+(delta>=0?'<b style="color:#4ade80;">+'+delta+'%</b> au-dessus':'<b style="color:#f87171;">'+delta+'%</b> en-dessous')+' du N-1';
+  el.innerHTML=txt;el.style.display='block';
+}
 
 function renderSaisonDetail(){
   if(!_curSaison)return;
@@ -8278,6 +9424,19 @@ function renderSaisonDetail(){
   var pfEl=document.getElementById('sdPointsForts');var paEl=document.getElementById('sdPointsAmelio');
   if(pfEl)pfEl.value=data.pointsForts||'';
   if(paEl)paEl.value=data.pointsAmelio||'';
+
+  // Checklist
+  renderChecklistSaison();
+
+  // N-1
+  var n1=data.n1||{};
+  var n1CA=document.getElementById('sdN1CA');var n1Marge=document.getElementById('sdN1Marge');
+  var n1Prod=document.getElementById('sdN1Produits');var n1Obs=document.getElementById('sdN1Obs');
+  if(n1CA)n1CA.value=n1.ca||'';
+  if(n1Marge)n1Marge.value=n1.marge||'';
+  if(n1Prod)n1Prod.value=n1.produits||'';
+  if(n1Obs)n1Obs.value=n1.obs||'';
+  renderN1Insight();
 }
 
 function openProduitStar(){
@@ -10060,6 +11219,868 @@ function savePassation(){
 }
 
 // ══════════════════════════════════════════════
+// DEMANDE D'AVOIR
+// ══════════════════════════════════════════════
+var SK_AV = SK + '_avoirs';
+var _avEid = null;
+var _avStatut = 'attente';
+
+function loadAvoirs(){ try{ return JSON.parse(localStorage.getItem(SK_AV)||'[]'); }catch(e){ return []; } }
+function saveAvoirs(d){ localStorage.setItem(SK_AV, JSON.stringify(d)); }
+
+function setAvStatut(btn, s){
+  _avStatut = s;
+  document.querySelectorAll('[data-avs]').forEach(function(b){
+    var isThis = b.getAttribute('data-avs')===s;
+    b.style.fontWeight = isThis?'900':'700';
+    if(s==='attente'){ b.style.background=isThis?'rgba(234,179,8,.3)':'rgba(234,179,8,.12)'; b.style.borderColor=isThis?'#eab308':'rgba(234,179,8,.3)'; }
+    if(s==='demande'){ b.style.background=isThis?'rgba(14,165,233,.25)':'rgba(14,165,233,.1)'; b.style.borderColor=isThis?'#0ea5e9':'rgba(14,165,233,.2)'; }
+    if(s==='recu'){ b.style.background=isThis?'rgba(34,197,94,.25)':'rgba(34,197,94,.1)'; b.style.borderColor=isThis?'#22c55e':'rgba(34,197,94,.2)'; }
+  });
+}
+
+function openAvoirForm(eid){
+  _avEid = eid||null;
+  _avStatut = 'attente';
+  document.getElementById('avoirFormTit').textContent = eid ? '✏️ Modifier l\'Avoir' : '↩️ Nouvelle Demande d\'Avoir';
+  document.getElementById('avDelRow').style.display = eid ? 'block' : 'none';
+  var d = new Date();
+  if(eid){
+    var av = loadAvoirs().find(function(x){return x.id===eid;});
+    if(av){
+      document.getElementById('avDate').value = av.date||'';
+      document.getElementById('avHeure').value = av.heure||'';
+      document.getElementById('avCodeMeti').value = av.codeMeti||'';
+      document.getElementById('avDesignation').value = av.designation||'';
+      document.getElementById('avQte').value = av.qte||'';
+      document.getElementById('avUnite').value = av.unite||'Unité';
+      document.getElementById('avCamion').value = av.camion||'';
+      document.getElementById('avLivreur').value = av.livreur||'';
+      document.getElementById('avEffPar').value = av.effPar||'';
+      document.getElementById('avNumero').value = av.numero||'';
+      document.getElementById('avObs').value = av.obs||'';
+      _avStatut = av.statut||'attente';
+    }
+  } else {
+    ['avCodeMeti','avDesignation','avQte','avCamion','avLivreur','avEffPar','avNumero','avObs'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('avDate').value = tstr();
+    document.getElementById('avHeure').value = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+    document.getElementById('avUnite').value = 'Unité';
+  }
+  // reset statut buttons then apply
+  document.querySelectorAll('[data-avs]').forEach(function(b){
+    var s=b.getAttribute('data-avs');
+    if(s==='attente'){b.style.background='rgba(234,179,8,.12)';b.style.borderColor='rgba(234,179,8,.3)';}
+    if(s==='demande'){b.style.background='rgba(14,165,233,.1)';b.style.borderColor='rgba(14,165,233,.2)';}
+    if(s==='recu'){b.style.background='rgba(34,197,94,.1)';b.style.borderColor='rgba(34,197,94,.2)';}
+    b.style.fontWeight='700';
+  });
+  setAvStatut(null, _avStatut);
+  document.getElementById('avoirForm').style.display = 'flex';
+}
+
+function saveAvoir(){
+  var designation = document.getElementById('avDesignation').value.trim();
+  var qte = document.getElementById('avQte').value;
+  if(!designation){showT('⚠️','Désignation requise');return;}
+  if(!qte){showT('⚠️','Quantité requise');return;}
+  var data = loadAvoirs();
+  var entry = {
+    id: _avEid||uid(), ts: Date.now(),
+    date: document.getElementById('avDate').value,
+    heure: document.getElementById('avHeure').value,
+    codeMeti: document.getElementById('avCodeMeti').value.trim(),
+    designation: designation,
+    qte: qte,
+    unite: document.getElementById('avUnite').value,
+    camion: document.getElementById('avCamion').value.trim().toUpperCase(),
+    livreur: document.getElementById('avLivreur').value.trim(),
+    effPar: document.getElementById('avEffPar').value.trim(),
+    numero: document.getElementById('avNumero').value.trim(),
+    statut: _avStatut,
+    obs: document.getElementById('avObs').value.trim()
+  };
+  if(_avEid){
+    var idx=data.findIndex(function(x){return x.id===_avEid;});
+    if(idx>-1) data[idx]=entry; else data.unshift(entry);
+  } else { data.unshift(entry); }
+  saveAvoirs(data);
+  document.getElementById('avoirForm').style.display='none';
+  renderAvoirs();
+  showT('↩️', _avEid?'Avoir mis à jour !':'Demande enregistrée !');
+}
+
+function delAvoir(id){
+  if(!confirm('Supprimer cette demande d\'avoir ?')) return;
+  saveAvoirs(loadAvoirs().filter(function(x){return x.id!==id;}));
+  renderAvoirs();
+  showT('🗑️','Supprimé');
+}
+
+function _avDateFmt(d){
+  if(!d)return '—';
+  var M=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-');return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
+}
+
+function _avStatutInfo(s){
+  if(s==='recu')   return {label:'✅ Reçu',   col:'#4ade80', bg:'rgba(34,197,94,.2)'};
+  if(s==='demande')return {label:'📤 Demandé',col:'#38bdf8', bg:'rgba(14,165,233,.2)'};
+  return               {label:'⏳ En attente',col:'#fbbf24', bg:'rgba(234,179,8,.2)'};
+}
+
+function exportAvoirPDF(id){
+  var av=loadAvoirs().find(function(x){return x.id===id;});
+  if(!av)return;
+  _avBuildAndDownload([av],'Avoir_'+av.designation.replace(/\s/g,'_').slice(0,20)+'_'+tstr());
+}
+
+function exportAllAvoirsPDF(){
+  var data=loadAvoirs();
+  if(!data.length){showT('⚠️','Aucune demande enregistrée');return;}
+  _avBuildAndDownload(data,'Avoirs_Tous_'+tstr());
+  showT('📄',data.length+' avoir(s) exporté(s)');
+}
+
+function _avBuildAndDownload(list, filename){
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var rows=list.map(function(av){
+    var si=_avStatutInfo(av.statut);
+    return '<div style="page-break-inside:avoid;margin-bottom:24px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
+      '<div style="background:linear-gradient(135deg,#059669,#064e3b);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">'+
+        '<div>'+
+          '<div style="font-size:15px;font-weight:900;">↩️ Demande d\'Avoir</div>'+
+          '<div style="font-size:11px;opacity:.8;margin-top:3px;">'+_avDateFmt(av.date)+(av.heure?' à '+av.heure:'')+(av.livreur?' · '+av.livreur.replace(/</g,'&lt;'):'')+'</div>'+
+        '</div>'+
+        '<div style="background:'+si.bg+';color:'+si.col+';font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;">'+si.label+'</div>'+
+      '</div>'+
+      '<div style="padding:14px 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">CODE MÉTI</div>'+
+          '<div style="font-size:16px;font-weight:900;color:#1e293b;letter-spacing:2px;font-family:monospace;">'+(av.codeMeti||'—')+'</div>'+
+        '</div>'+
+        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">QUANTITÉ RETOURNÉE</div>'+
+          '<div style="font-size:16px;font-weight:900;color:#dc2626;">'+av.qte+' '+av.unite+'</div>'+
+        '</div>'+
+        '<div style="background:#f8faff;border-radius:8px;padding:10px;grid-column:1/-1;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">DÉSIGNATION</div>'+
+          '<div style="font-size:14px;font-weight:700;color:#1e293b;">'+av.designation.replace(/</g,'&lt;')+'</div>'+
+        '</div>'+
+        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🚛 MATRICULE CAMION</div>'+
+          '<div style="font-size:13px;font-weight:800;color:#0369a1;font-family:monospace;">'+(av.camion||'—')+'</div>'+
+        '</div>'+
+        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🙋 EFFECTUÉ PAR</div>'+
+          '<div style="font-size:13px;font-weight:700;color:#1e293b;">'+(av.effPar||'—')+'</div>'+
+        '</div>'+
+        (av.numero?'<div style="background:#ede9fe;border-radius:8px;padding:10px;grid-column:1/-1;">'+
+          '<div style="font-size:9px;font-weight:700;color:#7c3aed;margin-bottom:4px;">🧾 N° AVOIR</div>'+
+          '<div style="font-size:14px;font-weight:900;color:#7c3aed;">'+av.numero.replace(/</g,'&lt;')+'</div>'+
+        '</div>':'')+
+        (av.obs?'<div style="border-radius:8px;padding:10px;grid-column:1/-1;border:1px solid #e2e8f0;">'+
+          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">📝 OBSERVATIONS</div>'+
+          '<div style="font-size:12px;color:#475569;">'+av.obs.replace(/</g,'&lt;')+'</div>'+
+        '</div>':'')+
+      '</div></div>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Demandes d\'Avoir</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:800px;margin:auto;}'+
+    'h1{font-size:20px;color:#059669;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>↩️ Rapport Demandes d\'Avoir</h1>'+
+    '<div class="meta">MG MAXI DENDEN &nbsp;|&nbsp; Généré le '+genDate+' &nbsp;|&nbsp; '+list.length+' demande(s)</div>'+
+    rows+'<div class="footer">TaskPro · MG MAXI DENDEN · Demandes d\'Avoir</div></body></html>';
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download=filename+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+function renderAvoirs(){
+  var data=loadAvoirs();
+  var el=document.getElementById('avoirsList');
+  var em=document.getElementById('avoirsEmpty');
+  var badge=document.getElementById('demandeAvoirBadge');
+  var attente=data.filter(function(x){return x.statut!=='recu';}).length;
+  var recus=data.filter(function(x){return x.statut==='recu';}).length;
+  var tot=document.getElementById('avTotal'),att=document.getElementById('avEnAttente'),rec=document.getElementById('avRecus');
+  if(tot)tot.textContent=data.length;
+  if(att)att.textContent=attente;
+  if(rec)rec.textContent=recus;
+  if(badge){badge.style.display=attente?'block':'none';badge.textContent=attente+' en attente';}
+  if(!el)return;
+  if(!data.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+  el.innerHTML=data.map(function(av){
+    var si=_avStatutInfo(av.statut);
+    return '<div style="background:var(--s2);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #10b981;" onclick="openAvoirForm(\''+av.id+'\')">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
+        '<div style="flex:1;">'+
+          '<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:3px;">'+
+            (av.codeMeti?'<span style="background:rgba(234,179,8,.15);color:#fbbf24;font-size:10px;font-weight:900;padding:2px 8px;border-radius:8px;font-family:monospace;letter-spacing:1px;">'+av.codeMeti+'</span>':'')+
+            '<span style="font-size:13px;font-weight:800;color:var(--t1);">'+av.designation+'</span>'+
+          '</div>'+
+          '<div style="font-size:11px;color:var(--t2);">📅 '+_avDateFmt(av.date)+(av.heure?' · ⏰ '+av.heure:'')+'</div>'+
+        '</div>'+
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;margin-left:8px;">'+
+          '<span style="background:'+si.bg+';color:'+si.col+';font-size:9px;font-weight:900;padding:2px 8px;border-radius:20px;white-space:nowrap;">'+si.label+'</span>'+
+          '<button onclick="event.stopPropagation();exportAvoirPDF(\''+av.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:10px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
+        '</div>'+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px;">'+
+        '<div style="background:rgba(239,68,68,.08);border-radius:8px;padding:6px 9px;">'+
+          '<div style="font-size:8px;font-weight:700;color:#f87171;">QTÉ RETOURNÉE</div>'+
+          '<div style="font-size:13px;font-weight:900;color:#f8faff;">'+av.qte+' <span style="font-size:10px;color:var(--t2);">'+av.unite+'</span></div>'+
+        '</div>'+
+        '<div style="background:rgba(14,165,233,.08);border-radius:8px;padding:6px 9px;">'+
+          '<div style="font-size:8px;font-weight:700;color:#38bdf8;">🚛 CAMION</div>'+
+          '<div style="font-size:12px;font-weight:800;color:#f8faff;font-family:monospace;">'+(av.camion||'—')+'</div>'+
+        '</div>'+
+      '</div>'+
+      (av.effPar||av.livreur?'<div style="font-size:10px;color:var(--t2);margin-top:6px;">'+
+        (av.effPar?'🙋 '+av.effPar:'')+(av.effPar&&av.livreur?' · ':'')+(av.livreur?'🚛 '+av.livreur:'')+'</div>':'')+
+      (av.numero?'<div style="background:rgba(167,139,250,.1);border-radius:8px;padding:5px 9px;margin-top:5px;font-size:11px;font-weight:700;color:#c4b5fd;">🧾 N° Avoir : '+av.numero+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// CONTRATS
+// ══════════════════════════════════════════════
+var SK_CT = SK + '_contrats';
+var _ctEid = null;
+var _ctChecks = {ctRecu:false, ctLegal:false, ctEnvoye:false};
+
+function loadContrats(){ try{ return JSON.parse(localStorage.getItem(SK_CT)||'[]'); }catch(e){ return []; } }
+function saveContrats(d){ localStorage.setItem(SK_CT, JSON.stringify(d)); }
+
+function toggleCtCheck(key){
+  _ctChecks[key] = !_ctChecks[key];
+  var box = document.getElementById(key+'Box');
+  var row = document.getElementById(key+'Row');
+  if(_ctChecks[key]){
+    box.textContent='✓';
+    box.style.background='#7c3aed';
+    box.style.borderColor='#a855f7';
+    box.style.color='#fff';
+    row.style.borderColor='rgba(139,92,246,.5)';
+    row.style.background='rgba(139,92,246,.08)';
+  } else {
+    box.textContent='';
+    box.style.background='transparent';
+    box.style.borderColor='rgba(255,255,255,.2)';
+    row.style.borderColor='rgba(255,255,255,.1)';
+    row.style.background='rgba(255,255,255,.05)';
+  }
+}
+
+function _ctSetCheck(key, val){
+  _ctChecks[key] = false; // reset first
+  if(val) toggleCtCheck(key);
+  else {
+    var box=document.getElementById(key+'Box');
+    var row=document.getElementById(key+'Row');
+    if(box){box.textContent='';box.style.background='transparent';box.style.borderColor='rgba(255,255,255,.2)';}
+    if(row){row.style.borderColor='rgba(255,255,255,.1)';row.style.background='rgba(255,255,255,.05)';}
+  }
+}
+
+function openContratForm(eid){
+  _ctEid = eid||null;
+  _ctChecks = {ctRecu:false,ctLegal:false,ctEnvoye:false};
+  document.getElementById('contratFormTit').textContent = eid ? '✏️ Modifier le Contrat' : '➕ Nouveau Contrat';
+  document.getElementById('ctDelRow').style.display = eid ? 'block' : 'none';
+  if(eid){
+    var ct = loadContrats().find(function(x){return x.id===eid;});
+    if(ct){
+      document.getElementById('ctNom').value = ct.nom||'';
+      document.getElementById('ctPrenom').value = ct.prenom||'';
+      document.getElementById('ctMatricule').value = ct.matricule||'';
+      document.getElementById('ctPoste').value = ct.poste||'';
+      document.getElementById('ctDateDebut').value = ct.dateDebut||'';
+      document.getElementById('ctDateFin').value = ct.dateFin||'';
+      document.getElementById('ctDuree').value = ct.duree||'';
+      document.getElementById('ctObs').value = ct.obs||'';
+      _ctSetCheck('ctRecu', ct.recu);
+      _ctSetCheck('ctLegal', ct.legal);
+      _ctSetCheck('ctEnvoye', ct.envoye);
+    }
+  } else {
+    ['ctNom','ctPrenom','ctMatricule','ctPoste','ctDateDebut','ctDateFin','ctObs'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('ctDuree').value='';
+    _ctSetCheck('ctRecu',false);_ctSetCheck('ctLegal',false);_ctSetCheck('ctEnvoye',false);
+  }
+  document.getElementById('contratForm').style.display='flex';
+}
+
+function saveContrat(){
+  var nom=document.getElementById('ctNom').value.trim();
+  var prenom=document.getElementById('ctPrenom').value.trim();
+  if(!nom||!prenom){showT('⚠️','Nom et prénom requis');return;}
+  var data=loadContrats();
+  var entry={
+    id:_ctEid||uid(), ts:Date.now(),
+    nom:nom, prenom:prenom,
+    matricule:document.getElementById('ctMatricule').value.trim(),
+    poste:document.getElementById('ctPoste').value.trim(),
+    dateDebut:document.getElementById('ctDateDebut').value,
+    dateFin:document.getElementById('ctDateFin').value,
+    duree:document.getElementById('ctDuree').value,
+    recu:_ctChecks.ctRecu,
+    legal:_ctChecks.ctLegal,
+    envoye:_ctChecks.ctEnvoye,
+    obs:document.getElementById('ctObs').value.trim()
+  };
+  if(_ctEid){
+    var idx=data.findIndex(function(x){return x.id===_ctEid;});
+    if(idx>-1) data[idx]=entry; else data.unshift(entry);
+  } else { data.unshift(entry); }
+  saveContrats(data);
+  document.getElementById('contratForm').style.display='none';
+  renderContrats();
+  showT('📄',_ctEid?'Contrat mis à jour !':'Contrat enregistré !');
+}
+
+function delContrat(id){
+  if(!confirm('Supprimer ce contrat ?')) return;
+  saveContrats(loadContrats().filter(function(x){return x.id!==id;}));
+  renderContrats();
+  showT('🗑️','Contrat supprimé');
+}
+
+function _ctDateFmt(d){
+  if(!d)return '—';
+  var M=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-');return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
+}
+
+function _ctStatut(ct){
+  if(ct.recu&&ct.legal&&ct.envoye) return {label:'✅ Complet',col:'#4ade80',bg:'rgba(34,197,94,.2)'};
+  if(ct.legal||ct.envoye) return {label:'🔄 En cours',col:'#38bdf8',bg:'rgba(14,165,233,.2)'};
+  if(ct.recu) return {label:'📥 Reçu',col:'#fbbf24',bg:'rgba(234,179,8,.2)'};
+  return {label:'⏳ En attente',col:'#f87171',bg:'rgba(239,68,68,.2)'};
+}
+
+function exportContratsPDF(){
+  var data=loadContrats();
+  if(!data.length){showT('⚠️','Aucun contrat enregistré');return;}
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var rows=data.map(function(ct){
+    var s=_ctStatut(ct);
+    return '<tr>'+
+      '<td style="font-weight:700;">'+ct.nom.replace(/</g,'&lt;')+' '+ct.prenom.replace(/</g,'&lt;')+'</td>'+
+      '<td>'+( ct.matricule||'—')+'</td>'+
+      '<td>'+(ct.poste||'—')+'</td>'+
+      '<td>'+(ct.duree||'—')+'</td>'+
+      '<td>'+_ctDateFmt(ct.dateDebut)+'</td>'+
+      '<td>'+_ctDateFmt(ct.dateFin)+'</td>'+
+      '<td style="text-align:center;">'+(ct.recu?'✅':'❌')+'</td>'+
+      '<td style="text-align:center;">'+(ct.legal?'✅':'❌')+'</td>'+
+      '<td style="text-align:center;">'+(ct.envoye?'✅':'❌')+'</td>'+
+      '<td><span style="background:'+s.bg+';color:'+s.col+';padding:2px 8px;border-radius:12px;font-size:11px;font-weight:700;">'+s.label+'</span></td>'+
+    '</tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Contrats</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:20px;}'+
+    'h1{font-size:18px;color:#7c3aed;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #e2e8f0;}'+
+    'table{width:100%;border-collapse:collapse;font-size:12px;}'+
+    'th{background:#7c3aed;color:#fff;padding:8px 10px;text-align:left;font-size:11px;}'+
+    'td{padding:8px 10px;border-bottom:1px solid #f1f5f9;}'+
+    'tr:hover td{background:#f8faff;}'+
+    '.footer{margin-top:16px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:8px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>📄 Rapport Contrats Employés</h1>'+
+    '<div class="meta">MG MAXI DENDEN &nbsp;|&nbsp; Généré le '+genDate+' &nbsp;|&nbsp; '+data.length+' contrat(s)</div>'+
+    '<table><thead><tr>'+
+      '<th>Nom & Prénom</th><th>Matricule</th><th>Poste</th><th>Durée</th><th>Début</th><th>Fin</th>'+
+      '<th>Reçu</th><th>Légalisé</th><th>Envoyé</th><th>Statut</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Contrats</div></body></html>';
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Contrats_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄',data.length+' contrat(s) exporté(s)');
+}
+
+function renderContrats(){
+  var data=loadContrats();
+  var el=document.getElementById('contratsList');
+  var em=document.getElementById('contratsEmpty');
+  var badge=document.getElementById('contratsBadge');
+
+  var attente=data.filter(function(x){return !x.recu||!x.legal||!x.envoye;}).length;
+  var complet=data.filter(function(x){return x.recu&&x.legal&&x.envoye;}).length;
+  var legal=data.filter(function(x){return x.legal;}).length;
+
+  var tot=document.getElementById('ctTotal'),att=document.getElementById('ctAttente');
+  var leg=document.getElementById('ctLegal'),comp=document.getElementById('ctComplet');
+  if(tot)tot.textContent=data.length;
+  if(att)att.textContent=attente;
+  if(leg)leg.textContent=legal;
+  if(comp)comp.textContent=complet;
+  if(badge){badge.style.display=attente?'block':'none';badge.textContent=attente+' en attente';}
+
+  if(!el)return;
+  if(!data.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+
+  el.innerHTML=data.map(function(ct){
+    var s=_ctStatut(ct);
+    return '<div style="background:var(--s2);border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #7c3aed;" onclick="openContratForm(\''+ct.id+'\')">'+
+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">'+
+        '<div style="flex:1;">'+
+          '<div style="font-size:15px;font-weight:900;color:var(--t1);">'+ct.prenom+' '+ct.nom+'</div>'+
+          '<div style="font-size:11px;color:var(--t2);margin-top:2px;">'+
+            (ct.matricule?'🔢 '+ct.matricule+' · ':'')+
+            (ct.poste?'💼 '+ct.poste:'')+'</div>'+
+          (ct.duree||ct.dateDebut||ct.dateFin?'<div style="font-size:11px;color:var(--t2);margin-top:2px;">'+
+            (ct.duree?'⏳ '+ct.duree:'')+(ct.dateDebut?' · 📅 '+_ctDateFmt(ct.dateDebut):'')+
+            (ct.dateFin?' → '+_ctDateFmt(ct.dateFin):'')+'</div>':'')+
+        '</div>'+
+        '<span style="background:'+s.bg+';color:'+s.col+';font-size:9px;font-weight:900;padding:3px 9px;border-radius:20px;white-space:nowrap;margin-left:8px;flex-shrink:0;">'+s.label+'</span>'+
+      '</div>'+
+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">'+
+        '<div style="background:'+(ct.recu?'rgba(139,92,246,.15)':'rgba(255,255,255,.04)')+';border:1px solid '+(ct.recu?'rgba(139,92,246,.4)':'rgba(255,255,255,.08)')+';border-radius:10px;padding:8px;text-align:center;">'+
+          '<div style="font-size:16px;">'+(ct.recu?'✅':'⬜')+'</div>'+
+          '<div style="font-size:9px;color:'+(ct.recu?'#a78bfa':'var(--t2)')+';font-weight:700;margin-top:2px;">REÇU</div>'+
+        '</div>'+
+        '<div style="background:'+(ct.legal?'rgba(14,165,233,.12)':'rgba(255,255,255,.04)')+';border:1px solid '+(ct.legal?'rgba(14,165,233,.35)':'rgba(255,255,255,.08)')+';border-radius:10px;padding:8px;text-align:center;">'+
+          '<div style="font-size:16px;">'+(ct.legal?'✅':'⬜')+'</div>'+
+          '<div style="font-size:9px;color:'+(ct.legal?'#38bdf8':'var(--t2)')+';font-weight:700;margin-top:2px;">LÉGALISÉ</div>'+
+        '</div>'+
+        '<div style="background:'+(ct.envoye?'rgba(34,197,94,.12)':'rgba(255,255,255,.04)')+';border:1px solid '+(ct.envoye?'rgba(34,197,94,.35)':'rgba(255,255,255,.08)')+';border-radius:10px;padding:8px;text-align:center;">'+
+          '<div style="font-size:16px;">'+(ct.envoye?'✅':'⬜')+'</div>'+
+          '<div style="font-size:9px;color:'+(ct.envoye?'#4ade80':'var(--t2)')+';font-weight:700;margin-top:2px;">ENVOYÉ</div>'+
+        '</div>'+
+      '</div>'+
+
+      (ct.obs?'<div style="font-size:10px;color:var(--t2);margin-top:8px;font-style:italic;">📝 '+ct.obs+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// VISITE AUTORITÉS COMPÉTENTES
+// ══════════════════════════════════════════════
+var SK_VA = SK + '_visiteAutorites';
+var _vaSelectedType = '';
+
+function loadVisitesAutorites(){ try{ return JSON.parse(localStorage.getItem(SK_VA)||'[]'); }catch(e){ return []; } }
+function saveVisitesAutorites(d){ localStorage.setItem(SK_VA, JSON.stringify(d)); }
+
+function selectVAType(btn, type){
+  _vaSelectedType = type;
+  document.querySelectorAll('#vaTypeGrid [data-vatype]').forEach(function(b){
+    b.style.background='rgba(249,115,22,.1)';
+    b.style.borderColor='rgba(249,115,22,.25)';
+    b.style.color='#94a3b8';
+  });
+  btn.style.background='rgba(249,115,22,.3)';
+  btn.style.borderColor='#f97316';
+  btn.style.color='#f97316';
+}
+
+function openVisiteAutoritesForm(){
+  _vaSelectedType='';
+  var f=document.getElementById('visiteAutoritesForm');
+  if(!f) return;
+  var d=new Date();
+  document.getElementById('vaDate').value=tstr();
+  document.getElementById('vaHeure').value=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+  ['vaNbAgents','vaAgentNom','vaZones','vaQuestions','vaFactures','vaProduits','vaInfractions','vaMesures','vaDelai','vaPV','vaObs'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('vaStatut').value='';
+  document.querySelectorAll('#vaTypeGrid [data-vatype]').forEach(function(b){
+    b.style.background='rgba(249,115,22,.1)';
+    b.style.borderColor='rgba(249,115,22,.25)';
+    b.style.color='#94a3b8';
+  });
+  f.style.display='flex';
+}
+
+function saveVisiteAutorites(){
+  if(!_vaSelectedType){ showT('⚠️','Sélectionnez le type d\'autorité'); return; }
+  var date=document.getElementById('vaDate').value;
+  if(!date){ showT('⚠️','Date requise'); return; }
+  var data=loadVisitesAutorites();
+  data.unshift({
+    id:uid(), ts:Date.now(),
+    type:_vaSelectedType,
+    date:date,
+    heure:document.getElementById('vaHeure').value,
+    nbAgents:document.getElementById('vaNbAgents').value,
+    agentNom:document.getElementById('vaAgentNom').value.trim(),
+    zones:document.getElementById('vaZones').value.trim(),
+    questions:document.getElementById('vaQuestions').value.trim(),
+    factures:document.getElementById('vaFactures').value.trim(),
+    produits:document.getElementById('vaProduits').value.trim(),
+    infractions:document.getElementById('vaInfractions').value.trim(),
+    mesures:document.getElementById('vaMesures').value.trim(),
+    delai:document.getElementById('vaDelai').value,
+    statut:document.getElementById('vaStatut').value,
+    pv:document.getElementById('vaPV').value.trim(),
+    obs:document.getElementById('vaObs').value.trim()
+  });
+  saveVisitesAutorites(data);
+  document.getElementById('visiteAutoritesForm').style.display='none';
+  renderVisiteAutorites();
+  showT('🏛️','Visite enregistrée !');
+}
+
+function delVisiteAutorites(id){
+  if(!confirm('Supprimer cette visite ?')) return;
+  saveVisitesAutorites(loadVisitesAutorites().filter(function(x){ return x.id!==id; }));
+  renderVisiteAutorites();
+  showT('🗑️','Visite supprimée');
+}
+
+function _vaDateFmt(d){
+  if(!d) return '—';
+  var M=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-'); return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
+}
+
+function _vaTypeIcon(t){
+  var m={'Min. Commerce':'🛒','Min. Santé':'🏥','Contrôle Économique':'📊','Police Municipale':'🚔','Sécurité / Police':'👮'};
+  return m[t]||'🏢';
+}
+
+function _vaStatutInfo(s){
+  if(s==='ok') return {label:'✅ Sans remarques',col:'#4ade80',bg:'rgba(34,197,94,.2)'};
+  if(s==='en-cours') return {label:'⏳ En cours',col:'#fbbf24',bg:'rgba(234,179,8,.2)'};
+  if(s==='regularise') return {label:'✅ Régularisé',col:'#4ade80',bg:'rgba(34,197,94,.15)'};
+  if(s==='pv') return {label:'🚨 PV émis',col:'#f87171',bg:'rgba(239,68,68,.25)'};
+  if(s==='saisie') return {label:'🔒 Saisie',col:'#f87171',bg:'rgba(239,68,68,.3)'};
+  return {label:'—',col:'#94a3b8',bg:'rgba(148,163,184,.1)'};
+}
+
+function _vaSectionPDF(col,ico,label,txt){
+  if(!txt) return '';
+  return '<div style="background:'+col+'18;border-left:4px solid '+col+';border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;">'+
+    '<div style="font-size:11px;font-weight:900;color:'+col+';margin-bottom:5px;">'+ico+' '+label+'</div>'+
+    '<div style="font-size:12px;color:#1e293b;line-height:1.7;white-space:pre-line;">'+txt.replace(/</g,'&lt;')+'</div></div>';
+}
+
+function _vaBuildHTML(list){
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var rows=list.map(function(v){
+    var si=_vaStatutInfo(v.statut);
+    return '<div style="page-break-inside:avoid;margin-bottom:28px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
+      '<div style="background:linear-gradient(135deg,#7c2d12,#1a0a00);color:#fff;padding:14px 18px;">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'+
+          '<div>'+
+            '<div style="font-size:16px;font-weight:900;">'+_vaTypeIcon(v.type)+' '+v.type+'</div>'+
+            '<div style="font-size:11px;opacity:.8;margin-top:3px;">'+_vaDateFmt(v.date)+(v.heure?' à '+v.heure:'')+(v.nbAgents?' · '+v.nbAgents+' agent(s)':'')+(v.agentNom?' · '+v.agentNom.replace(/</g,'&lt;'):'')+'</div>'+
+          '</div>'+
+          '<div style="background:'+si.bg+';color:'+si.col+';font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;">'+si.label+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<div style="padding:14px 18px;">'+
+        _vaSectionPDF('#eab308','📍','ZONES INSPECTÉES',v.zones)+
+        _vaSectionPDF('#0ea5e9','❓','QUESTIONS & SUJETS',v.questions)+
+        _vaSectionPDF('#a78bfa','🧾','FACTURES & DOCUMENTS',v.factures)+
+        _vaSectionPDF('#22c55e','📦','PRODUITS CONTRÔLÉS',v.produits)+
+        _vaSectionPDF('#ef4444','⚠️','INFRACTIONS & REMARQUES',v.infractions)+
+        _vaSectionPDF('#f97316','🎯','MESURES IMPOSÉES',v.mesures)+
+        (v.delai?'<div style="font-size:11px;color:#dc2626;font-weight:700;margin-bottom:6px;">⏳ Délai accordé : '+_vaDateFmt(v.delai)+'</div>':'')+
+        (v.pv?'<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:11px;color:#dc2626;font-weight:700;">🚨 PV / Amende : '+v.pv.replace(/</g,'&lt;')+'</div>':'')+
+        (v.obs?'<div style="font-size:11px;color:#64748b;font-style:italic;margin-top:6px;">📝 '+v.obs.replace(/</g,'&lt;')+'</div>':'')+
+      '</div></div>';
+  }).join('');
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Visites Autorités</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:800px;margin:auto;}'+
+    'h1{font-size:20px;color:#c2410c;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>🏛️ Rapport — Visites Autorités Compétentes</h1>'+
+    '<div class="meta">MG MAXI DENDEN &nbsp;|&nbsp; Généré le '+genDate+' &nbsp;|&nbsp; '+list.length+' visite(s)</div>'+
+    rows+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Visites Autorités Compétentes</div></body></html>';
+}
+
+function exportVisiteAutoritesPDF(id){
+  var v=loadVisitesAutorites().find(function(x){return x.id===id;});
+  if(!v) return;
+  var blob=new Blob([_vaBuildHTML([v])],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='VisiteAutorite_'+_vaDateFmt(v.date).replace(/\s/g,'_')+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
+function exportAllVisitesAutoritesPDF(){
+  var data=loadVisitesAutorites();
+  if(!data.length){showT('⚠️','Aucune visite enregistrée');return;}
+  var blob=new Blob([_vaBuildHTML(data)],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='VisitesAutorites_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄',data.length+' visite(s) exportée(s)');
+}
+
+function renderVisiteAutorites(){
+  var data=loadVisitesAutorites();
+  var el=document.getElementById('visiteAutoritesList');
+  var em=document.getElementById('visiteAutoritesEmpty');
+  var badge=document.getElementById('visiteAutoritesBadge');
+  var enCours=data.filter(function(x){return x.statut==='en-cours'||x.statut==='pv'||x.statut==='saisie';}).length;
+  var regul=data.filter(function(x){return x.statut==='regularise'||x.statut==='ok';}).length;
+  var tot=document.getElementById('vaTotal'),ec=document.getElementById('vaEnCours'),rg=document.getElementById('vaRegularises');
+  if(tot) tot.textContent=data.length;
+  if(ec) ec.textContent=enCours;
+  if(rg) rg.textContent=regul;
+  if(badge){badge.style.display=enCours?'block':'none';badge.textContent=enCours+' en cours';}
+  if(!el) return;
+  if(!data.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em) em.style.display='none';
+  el.innerHTML=data.map(function(v){
+    var si=_vaStatutInfo(v.statut);
+    return '<div style="background:var(--s2);border:1px solid rgba(249,115,22,.25);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #f97316;">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
+        '<div style="flex:1;">'+
+          '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;">'+
+            '<div style="font-size:14px;font-weight:900;color:var(--t1);">'+_vaTypeIcon(v.type)+' '+v.type+'</div>'+
+            (v.statut?'<span style="background:'+si.bg+';color:'+si.col+';font-size:9px;font-weight:900;padding:2px 8px;border-radius:20px;">'+si.label+'</span>':'')+
+          '</div>'+
+          '<div style="font-size:11px;color:var(--t2);">📅 '+_vaDateFmt(v.date)+(v.heure?' · ⏰ '+v.heure:'')+(v.nbAgents?' · 👤 '+v.nbAgents+' agent(s)':'')+(v.agentNom?' · 🪪 '+v.agentNom:'')+'</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:4px;flex-shrink:0;margin-left:8px;">'+
+          '<button onclick="event.stopPropagation();exportVisiteAutoritesPDF(\''+v.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:11px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
+          '<div onclick="delVisiteAutorites(\''+v.id+'\')" style="color:#ef4444;font-size:20px;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;line-height:1;">×</div>'+
+        '</div>'+
+      '</div>'+
+      (v.zones?'<div style="background:rgba(234,179,8,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#fbbf24;margin-bottom:2px;">📍 ZONES INSPECTÉES</div><div style="font-size:11px;color:var(--t1);line-height:1.5;">'+v.zones+'</div></div>':'')+
+      (v.questions?'<div style="background:rgba(14,165,233,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#38bdf8;margin-bottom:2px;">❓ QUESTIONS POSÉES</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.questions+'</div></div>':'')+
+      (v.factures?'<div style="background:rgba(167,139,250,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#a78bfa;margin-bottom:2px;">🧾 DOCUMENTS DEMANDÉS</div><div style="font-size:11px;color:var(--t1);line-height:1.5;">'+v.factures+'</div></div>':'')+
+      (v.produits?'<div style="background:rgba(34,197,94,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#4ade80;margin-bottom:2px;">📦 PRODUITS CONTRÔLÉS</div><div style="font-size:11px;color:var(--t1);line-height:1.5;">'+v.produits+'</div></div>':'')+
+      (v.infractions?'<div style="background:rgba(239,68,68,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#f87171;margin-bottom:2px;">⚠️ INFRACTIONS</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.infractions+'</div></div>':'')+
+      (v.mesures?'<div style="background:rgba(249,115,22,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#fb923c;margin-bottom:2px;">🎯 MESURES IMPOSÉES</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.mesures+'</div></div>':'')+
+      (v.pv?'<div style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:900;color:#f87171;margin-bottom:2px;">🚨 PV / AMENDE</div><div style="font-size:11px;color:#f87171;font-weight:700;">'+v.pv+'</div></div>':'')+
+      (v.delai?'<div style="font-size:11px;color:#fb923c;font-weight:700;margin-top:4px;">⏳ Délai : '+_vaDateFmt(v.delai)+'</div>':'')+
+      (v.obs?'<div style="font-size:10px;color:var(--t2);margin-top:4px;font-style:italic;">📝 '+v.obs+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// VISITE AUDIT
+// ══════════════════════════════════════════════
+var SK_AUDIT = SK + '_visiteAudit';
+var _auSelectedTypes = [];
+
+function loadVisitesAudit(){ try{ return JSON.parse(localStorage.getItem(SK_AUDIT)||'[]'); }catch(e){ return []; } }
+function saveVisitesAudit(data){ localStorage.setItem(SK_AUDIT, JSON.stringify(data)); }
+
+function toggleAuditType(btn, type){
+  var idx = _auSelectedTypes.indexOf(type);
+  if(idx === -1){
+    _auSelectedTypes.push(type);
+    btn.style.background = 'rgba(6,182,212,.3)';
+    btn.style.borderColor = '#06b6d4';
+    btn.style.color = '#06b6d4';
+  } else {
+    _auSelectedTypes.splice(idx,1);
+    btn.style.background = 'rgba(6,182,212,.1)';
+    btn.style.borderColor = 'rgba(6,182,212,.25)';
+    btn.style.color = '#94a3b8';
+  }
+}
+
+function openVisiteAuditForm(){
+  _auSelectedTypes = [];
+  var f = document.getElementById('visiteAuditForm');
+  if(!f) return;
+  document.getElementById('auDate').value = tstr();
+  var d=new Date();
+  document.getElementById('auHeure').value = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
+  document.getElementById('auNom').value = '';
+  document.getElementById('auOrganisme').value = '';
+  document.getElementById('auDocuments').value = '';
+  document.getElementById('auConstats').value = '';
+  document.getElementById('auConformes').value = '';
+  document.getElementById('auCorrectifs').value = '';
+  document.getElementById('auDelai').value = '';
+  document.getElementById('auResultat').value = '';
+  document.getElementById('auObs').value = '';
+  f.querySelectorAll('[data-type]').forEach(function(b){
+    b.style.background='rgba(6,182,212,.1)';
+    b.style.borderColor='rgba(6,182,212,.25)';
+    b.style.color='#94a3b8';
+  });
+  f.style.display = 'flex';
+}
+
+function saveVisiteAudit(){
+  var date = document.getElementById('auDate').value;
+  if(!date){ showT('⚠️','Date requise'); return; }
+  var data = loadVisitesAudit();
+  var entry = {
+    id: uid(),
+    date: date,
+    heure: document.getElementById('auHeure').value,
+    nom: document.getElementById('auNom').value.trim(),
+    organisme: document.getElementById('auOrganisme').value.trim(),
+    types: _auSelectedTypes.slice(),
+    documents: document.getElementById('auDocuments').value.trim(),
+    constats: document.getElementById('auConstats').value.trim(),
+    conformes: document.getElementById('auConformes').value.trim(),
+    correctifs: document.getElementById('auCorrectifs').value.trim(),
+    delai: document.getElementById('auDelai').value,
+    resultat: document.getElementById('auResultat').value,
+    obs: document.getElementById('auObs').value.trim(),
+    ts: Date.now()
+  };
+  data.unshift(entry);
+  saveVisitesAudit(data);
+  document.getElementById('visiteAuditForm').style.display = 'none';
+  renderVisiteAudit();
+  showT('🔍','Visite Audit enregistrée !');
+}
+
+function delVisiteAudit(id){
+  if(!confirm('Supprimer cette visite d\'audit ?')) return;
+  var data = loadVisitesAudit().filter(function(x){ return x.id!==id; });
+  saveVisitesAudit(data);
+  renderVisiteAudit();
+  showT('🗑️','Audit supprimé');
+}
+
+function _auDateFmt(d){
+  if(!d)return '—';
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  var p=d.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];
+}
+
+function _auResultatInfo(r){
+  if(r==='conforme') return {label:'✅ Conforme', color:'#4ade80', bg:'rgba(34,197,94,.2)'};
+  if(r==='partiel') return {label:'⚠️ Partiel', color:'#fbbf24', bg:'rgba(234,179,8,.2)'};
+  if(r==='non-conforme') return {label:'❌ Non conforme', color:'#f87171', bg:'rgba(239,68,68,.2)'};
+  if(r==='en-cours') return {label:'🔄 En cours', color:'#38bdf8', bg:'rgba(14,165,233,.2)'};
+  return {label:'—', color:'#94a3b8', bg:'rgba(148,163,184,.1)'};
+}
+
+function _auSectionPDF(col, ico, label, txt){
+  if(!txt) return '';
+  return '<div style="background:'+col+'18;border-left:4px solid '+col+';border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;">'+
+    '<div style="font-size:11px;font-weight:900;color:'+col+';margin-bottom:5px;">'+ico+' '+label+'</div>'+
+    '<div style="font-size:12px;color:#1e293b;line-height:1.7;white-space:pre-line;">'+txt.replace(/</g,'&lt;')+'</div>'+
+  '</div>';
+}
+
+function _auBuildHTML(list){
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var rows=list.map(function(v){
+    var ri=_auResultatInfo(v.resultat);
+    return '<div style="page-break-inside:avoid;margin-bottom:28px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
+      '<div style="background:linear-gradient(135deg,#0e4f5c,#0c1a2e);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">'+
+        '<div>'+
+          '<div style="font-size:15px;font-weight:900;">🔍 Visite Audit'+(v.nom?' · '+v.nom.replace(/</g,'&lt;'):'')+(v.organisme?' — '+v.organisme.replace(/</g,'&lt;'):'')+'</div>'+
+          '<div style="font-size:11px;opacity:.8;margin-top:3px;">'+_auDateFmt(v.date)+(v.heure?' à '+v.heure:'')+(v.types&&v.types.length?' · '+v.types.join(', '):'')+'</div>'+
+        '</div>'+
+        '<div style="background:'+ri.bg+';color:'+ri.color+';font-size:10px;font-weight:900;padding:4px 10px;border-radius:20px;">'+ri.label+'</div>'+
+      '</div>'+
+      '<div style="padding:14px 18px;">'+
+        _auSectionPDF('#eab308','📂','DOCUMENTS DEMANDÉS',v.documents)+
+        _auSectionPDF('#22c55e','✅','POINTS CONFORMES',v.conformes)+
+        _auSectionPDF('#ef4444','⚠️','CONSTATS & ÉCARTS',v.constats)+
+        _auSectionPDF('#0ea5e9','🎯','MESURES CORRECTIVES',v.correctifs)+
+        (v.delai?'<div style="margin-top:8px;font-size:11px;color:#6d28d9;font-weight:700;">📅 Délai de réponse : '+_auDateFmt(v.delai)+'</div>':'')+
+        (v.obs?'<div style="margin-top:8px;font-size:11px;color:#64748b;font-style:italic;">📝 '+v.obs.replace(/</g,'&lt;')+'</div>':'')+
+      '</div>'+
+    '</div>';
+  }).join('');
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Rapport Visites Audit</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:800px;margin:auto;}'+
+    'h1{font-size:20px;color:#0e7490;margin-bottom:4px;}'+
+    '.meta{font-size:11px;color:#64748b;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>🔍 Rapport Visites Audit</h1>'+
+    '<div class="meta">MG MAXI DENDEN &nbsp;|&nbsp; Généré le '+genDate+' &nbsp;|&nbsp; '+list.length+' visite(s)</div>'+
+    rows+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Visite Audit</div>'+
+    '</body></html>';
+}
+
+function exportVisiteAuditPDF(id){
+  var v=loadVisitesAudit().find(function(x){return x.id===id;});if(!v)return;
+  var html=_auBuildHTML([v]);
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Audit_'+_auDateFmt(v.date).replace(/\s/g,'_')+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
+function exportAllVisitesAuditPDF(){
+  var data=loadVisitesAudit();
+  if(!data.length){showT('⚠️','Aucune visite enregistrée');return;}
+  var html=_auBuildHTML(data);
+  var blob=new Blob([html],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='Audits_Tous_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄',data.length+' visite(s) exportée(s)');
+}
+
+function renderVisiteAudit(){
+  var data = loadVisitesAudit();
+  var el = document.getElementById('visiteAuditList');
+  var em = document.getElementById('visiteAuditEmpty');
+  var totEl = document.getElementById('auTotal');
+  var confElStat = document.getElementById('auConformes');
+  var ecEl = document.getElementById('auEcarts');
+  var badge = document.getElementById('visiteAuditBadge');
+
+  var confCount = data.filter(function(x){ return x.resultat==='conforme'; }).length;
+  var ecartCount = data.filter(function(x){ return x.resultat==='non-conforme'||x.resultat==='partiel'; }).length;
+
+  if(totEl) totEl.textContent = data.length;
+  if(confElStat) confElStat.textContent = confCount;
+  if(ecEl) ecEl.textContent = ecartCount;
+  if(badge){ badge.style.display = ecartCount?'block':'none'; badge.textContent = ecartCount+' écart(s)'; }
+
+  if(!el) return;
+  if(!data.length){ el.innerHTML=''; if(em)em.style.display='block'; return; }
+  if(em) em.style.display='none';
+
+  el.innerHTML = data.map(function(v){
+    var ri = _auResultatInfo(v.resultat);
+    return '<div style="background:var(--s2);border:1px solid rgba(6,182,212,.25);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #06b6d4;">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
+        '<div style="flex:1;">'+
+          '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">'+
+            '<div style="font-size:14px;font-weight:900;color:var(--t1);">🔍 Visite Audit</div>'+
+            (v.nom?'<span style="background:rgba(6,182,212,.2);color:#06b6d4;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;">'+v.nom+'</span>':'')+
+            (v.resultat?'<span style="background:'+ri.bg+';color:'+ri.color+';font-size:9px;font-weight:900;padding:2px 7px;border-radius:20px;">'+ri.label+'</span>':'')+
+          '</div>'+
+          '<div style="font-size:11px;color:var(--t2);margin-top:3px;">📅 '+_auDateFmt(v.date)+(v.heure?' · ⏰ '+v.heure:'')+(v.organisme?' · 🏛️ '+v.organisme:'')+'</div>'+
+          (v.types&&v.types.length?'<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px;">'+v.types.map(function(t){return '<span style="background:rgba(6,182,212,.12);color:#38bdf8;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;">'+t+'</span>';}).join('')+'</div>':'')+
+        '</div>'+
+        '<div style="display:flex;gap:4px;flex-shrink:0;margin-left:8px;">'+
+          '<button onclick="event.stopPropagation();exportVisiteAuditPDF(\''+v.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:11px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
+          '<div onclick="delVisiteAudit(\''+v.id+'\')" style="color:#ef4444;font-size:20px;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;line-height:1;">×</div>'+
+        '</div>'+
+      '</div>'+
+      (v.documents?'<div style="background:rgba(234,179,8,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#fbbf24;margin-bottom:2px;">📂 DOCUMENTS DEMANDÉS</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.documents+'</div></div>':'')+
+      (v.constats?'<div style="background:rgba(239,68,68,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#f87171;margin-bottom:2px;">⚠️ CONSTATS & ÉCARTS</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.constats+'</div></div>':'')+
+      (v.conformes?'<div style="background:rgba(34,197,94,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#4ade80;margin-bottom:2px;">✅ POINTS CONFORMES</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.conformes+'</div></div>':'')+
+      (v.correctifs?'<div style="background:rgba(14,165,233,.08);border-radius:9px;padding:7px 10px;margin-bottom:5px;"><div style="font-size:9px;font-weight:700;color:#38bdf8;margin-bottom:2px;">🎯 MESURES CORRECTIVES</div><div style="font-size:11px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+v.correctifs+'</div></div>':'')+
+      (v.delai?'<div style="font-size:11px;color:#a78bfa;font-weight:700;margin-top:4px;">📅 Délai : '+_auDateFmt(v.delai)+'</div>':'')+
+      (v.obs?'<div style="font-size:10px;color:var(--t2);margin-top:4px;font-style:italic;">📝 '+v.obs+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
 // VISITE DR
 // ══════════════════════════════════════════════
 var SK_DR = SK + '_visiteDR';
@@ -11772,6 +13793,241 @@ function updateDlcBadge(){
   if(badge){badge.textContent=urgent;badge.style.display=urgent>0?'flex':'none';}
 }
 
+// ══ SIGNATURE JOURNÉE ══
+var SK_SJ=SK+'_sigjourn';
+var _sjEid=null;
+var _sjStatut=2;
+var _sjDocs=[]; // [{id, label, checked}]
+var SJ_DEFAULTS=['Bordereaux des caissiers','Dossiers crédit','Frais personnels',"Pièces d'un achat effectué",'Reçu de virement / prélèvement'];
+
+function loadSigJourn(){try{return JSON.parse(localStorage.getItem(SK_SJ)||'[]');}catch(e){return[];}}
+function saveSigJournData(d){localStorage.setItem(SK_SJ,JSON.stringify(d));}
+
+function openSigJournForm(id){
+  _sjEid=id||null;
+  var j=id?loadSigJourn().find(function(x){return x.id===id;}):null;
+  document.getElementById('sigJournFormTit').textContent=id?'Modifier Journée':'Nouvelle Journée';
+  document.getElementById('sjDate').value=j?j.date:tstr();
+  document.getElementById('sjCaissier').value=j?j.caissier:'';
+  document.getElementById('sjObs').value=j?j.obs||'':'';
+  document.getElementById('sjAddDocRow').style.display='none';
+  // Build _sjDocs
+  if(j&&j.docsList&&j.docsList.length){
+    _sjDocs=j.docsList.map(function(d){return{id:d.id,label:d.label,checked:!!d.checked};});
+  } else {
+    _sjDocs=SJ_DEFAULTS.map(function(l){return{id:'d'+Math.random().toString(36).slice(2),label:l,checked:false};});
+  }
+  _sjStatut=j?j.statut:2;
+  renderSjDocList();
+  setSjStatut(_sjStatut);
+  document.getElementById('sjDelRow').style.display=id?'block':'none';
+  var el=document.getElementById('sigJournMov');el.style.display='';el.classList.add('on');
+}
+
+function renderSjDocList(){
+  var el=document.getElementById('sjDocList');if(!el)return;
+  var CHK='<svg width="11" height="11" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>';
+  el.innerHTML=_sjDocs.map(function(d,i){
+    return '<div class="sj-doc-row'+(d.checked?' checked':'')+'" data-idx="'+i+'">'+
+      '<div class="sj-doc-check" onclick="toggleSjDocIdx('+i+')">'+(d.checked?CHK:'')+'</div>'+
+      '<div class="sj-doc-info" onclick="toggleSjDocIdx('+i+')" style="cursor:pointer;">'+
+      '<div class="sj-doc-name">'+d.label+'</div></div>'+
+      '<button onclick="delSjDocIdx('+i+')" style="background:none;border:none;color:rgba(239,68,68,.5);font-size:16px;cursor:pointer;flex-shrink:0;padding:0 2px;" title="Supprimer">×</button>'+
+      '</div>';
+  }).join('');
+  autoSjStatut();
+}
+
+function toggleSjDocIdx(i){
+  _sjDocs[i].checked=!_sjDocs[i].checked;
+  renderSjDocList();
+}
+function delSjDocIdx(i){
+  _sjDocs.splice(i,1);
+  renderSjDocList();
+}
+function openSjAddDoc(){
+  var r=document.getElementById('sjAddDocRow');
+  r.style.display=r.style.display==='none'?'block':'none';
+  if(r.style.display==='block'){var inp=document.getElementById('sjNewDocInput');inp.value='';inp.focus();}
+}
+function addSjDoc(){
+  var v=(document.getElementById('sjNewDocInput').value||'').trim();
+  if(!v)return;
+  _sjDocs.push({id:'d'+Math.random().toString(36).slice(2),label:v,checked:false});
+  document.getElementById('sjNewDocInput').value='';
+  document.getElementById('sjAddDocRow').style.display='none';
+  renderSjDocList();
+  showT('✅','Document ajouté');
+}
+function autoSjStatut(){
+  var total=_sjDocs.length;
+  if(!total){setSjStatut(2);return;}
+  var done=_sjDocs.filter(function(d){return d.checked;}).length;
+  setSjStatut(done===total?0:done>0?1:2);
+}
+
+function setSjStatut(v){
+  _sjStatut=v;
+  var styles=[
+    {bg:'rgba(34,197,94,.15)',border:'1.5px solid rgba(34,197,94,.5)',col:'#4ade80'},
+    {bg:'rgba(249,115,22,.1)',border:'1.5px solid rgba(249,115,22,.4)',col:'#fb923c'},
+    {bg:'rgba(239,68,68,.1)',border:'1.5px solid rgba(239,68,68,.35)',col:'#f87171'}
+  ];
+  [0,1,2].forEach(function(i){
+    var btn=document.getElementById('sjStatutBtn'+i);
+    if(!btn)return;
+    btn.style.background=i===v?styles[i].bg:'rgba(255,255,255,.04)';
+    btn.style.border=i===v?styles[i].border:'1px solid rgba(255,255,255,.08)';
+    btn.style.color=i===v?styles[i].col:'var(--t2)';
+    btn.style.boxShadow=i===v?'0 0 0 2px '+styles[i].col.replace(')',',0.4)'):'';
+  });
+}
+
+function saveSigJourn(){
+  var date=document.getElementById('sjDate').value;
+  if(!date){showT('⚠️','Date requise');return;}
+  var entry={
+    id:_sjEid||uid(),
+    date:date,
+    caissier:(document.getElementById('sjCaissier').value||'').trim(),
+    docsList:_sjDocs.map(function(d){return{id:d.id,label:d.label,checked:d.checked};}),
+    statut:_sjStatut,
+    obs:(document.getElementById('sjObs').value||'').trim(),
+    ts:Date.now()
+  };
+  var list=loadSigJourn();
+  var idx=list.findIndex(function(x){return x.id===entry.id;});
+  if(idx>=0)list[idx]=entry;else list.unshift(entry);
+  saveSigJournData(list);
+  closeM('sigJournMov');renderSigJourn();
+  showT('✍️','Journée enregistrée');
+}
+
+function delSigJourn(id){
+  var list=loadSigJourn().filter(function(x){return x.id!==id;});
+  saveSigJournData(list);renderSigJourn();showT('🗑️','Journée supprimée');
+}
+
+function renderSigJourn(){
+  var list=loadSigJourn();
+  var el=document.getElementById('sigJournList');
+  var em=document.getElementById('sigJournEmpty');
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  function dfmt(d){if(!d)return'—';var p=d.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];}
+
+  var total=list.length;
+  var signees=list.filter(function(x){return x.statut===0;}).length;
+  var attente=list.filter(function(x){return x.statut!==0;}).length;
+  var el2=document.getElementById('sjTotal');if(el2)el2.textContent=total;
+  var el3=document.getElementById('sjSignees');if(el3)el3.textContent=signees;
+  var el4=document.getElementById('sjEnAttente');if(el4)el4.textContent=attente;
+  var badge=document.getElementById('sigJournBadge');
+  if(badge){if(attente>0){badge.style.display='block';badge.textContent=attente+' en attente';}else badge.style.display='none';}
+
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+
+  var statConf=[
+    {col:'#4ade80',bg:'rgba(34,197,94,.1)',border:'rgba(34,197,94,.3)',lbl:'✅ Signée'},
+    {col:'#fb923c',bg:'rgba(249,115,22,.1)',border:'rgba(249,115,22,.3)',lbl:'⚠️ Partielle'},
+    {col:'#f87171',bg:'rgba(239,68,68,.1)',border:'rgba(239,68,68,.3)',lbl:'❌ Non signée'}
+  ];
+
+  el.innerHTML=list.map(function(j){
+    var sc=statConf[j.statut]||statConf[2];
+    // Support old format (docs obj) and new format (docsList)
+    var docsList=j.docsList||[];
+    var docsOk=docsList.filter(function(d){return d.checked;}).length;
+    var docsTotal=docsList.length||1;
+    var docsBar=Math.round(docsOk/docsTotal*100);
+    var missing=docsList.filter(function(d){return !d.checked;}).map(function(d){return d.label;});
+
+    return '<div style="background:var(--s2);border:1px solid '+sc.border+';border-left:3px solid '+sc.col+';border-radius:14px;padding:12px 14px;margin-bottom:8px;">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
+      '<div style="flex:1;">'+
+      '<div style="font-size:13px;font-weight:900;color:var(--t1);">📅 '+dfmt(j.date)+(j.caissier?' · 👤 '+j.caissier:'')+'</div>'+
+      '<div style="font-size:10px;color:var(--t2);margin-top:2px;">'+docsOk+'/'+docsList.length+' documents présents</div>'+
+      '</div>'+
+      '<div style="display:flex;gap:6px;flex-shrink:0;align-items:center;">'+
+      '<span style="font-size:10px;font-weight:800;color:'+sc.col+';background:'+sc.bg+';padding:3px 8px;border-radius:20px;">'+sc.lbl+'</span>'+
+      '<button onclick="openSigJournForm(\''+j.id+'\')" style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:#fbbf24;font-size:10px;font-weight:700;padding:4px 8px;border-radius:7px;cursor:pointer;">✏️</button>'+
+      '</div></div>'+
+      '<div style="background:rgba(255,255,255,.05);border-radius:20px;height:5px;overflow:hidden;margin-bottom:6px;">'+
+      '<div style="height:100%;border-radius:20px;background:'+sc.col+';width:'+docsBar+'%;transition:width .3s;"></div></div>'+
+      (missing.length?'<div style="font-size:10px;color:#f87171;margin-top:4px;">⚠️ Manquants : '+missing.join(', ')+'</div>':'')+
+      (j.obs?'<div style="font-size:10px;color:var(--t2);margin-top:4px;">💬 '+j.obs+'</div>':'')+
+      '</div>';
+  }).join('');
+}
+
+function exportSigJournPDF(){
+  var list=loadSigJourn();
+  if(!list.length){showT('⚠️','Aucune journée');return;}
+  var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sep','Oct','Nov','Déc'];
+  function dfmt(d){if(!d)return'—';var p=d.split('-');return p[2]+' '+MFR[parseInt(p[1])-1]+' '+p[0];}
+  function eh(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var sLabels=['✅ Signée','⚠️ Partielle','❌ Non signée'];
+  var sCols=['#16a34a','#ea580c','#dc2626'];
+
+  var rows=list.map(function(j,i){
+    var docsHTML=SJ_DOCS.map(function(d){
+      var ok=j.docs&&j.docs[d];
+      return '<span style="display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;margin:2px;background:'+(ok?'rgba(34,197,94,.15)':'rgba(239,68,68,.1)')+';color:'+(ok?'#16a34a':'#dc2626')+';">'+(ok?'✓':'✗')+' '+SJ_DOC_LABELS[d]+'</span>';
+    }).join('');
+    return '<tr style="background:'+(i%2===0?'#f8faff':'#fff')+';">'+
+      '<td style="padding:10px 12px;font-weight:700;">'+dfmt(j.date)+'</td>'+
+      '<td style="padding:10px 12px;">'+eh(j.caissier||'—')+'</td>'+
+      '<td style="padding:10px 12px;"><div>'+docsHTML+'</div></td>'+
+      '<td style="padding:10px 12px;font-weight:800;color:'+sCols[j.statut||2]+';">'+sLabels[j.statut||2]+'</td>'+
+      '<td style="padding:10px 12px;font-size:11px;color:#64748b;">'+eh(j.obs||'—')+'</td>'+
+      '</tr>';
+  }).join('');
+
+  var signees=list.filter(function(x){return x.statut===0;}).length;
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Signature Journées</title>'+
+    '<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;color:#1e293b;padding:24px;max-width:960px;margin:auto;}'+
+    'h1{font-size:20px;color:#92400e;margin-bottom:4px;}.meta{font-size:11px;color:#64748b;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #e2e8f0;}'+
+    '.kpis{display:flex;gap:12px;margin-bottom:20px;}.kpi{flex:1;padding:12px;border-radius:8px;text-align:center;}.kpi b{display:block;font-size:22px;margin-bottom:3px;}'+
+    'table{width:100%;border-collapse:collapse;font-size:12px;}th{background:#92400e;color:#fff;padding:9px 12px;text-align:left;}td{border-bottom:1px solid #e2e8f0;vertical-align:top;}'+
+    '.footer{margin-top:24px;text-align:center;font-size:10px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:10px;}'+
+    '@media print{body{padding:8px;}}</style></head><body>'+
+    '<h1>✍️ Rapport Signature des Journées</h1>'+
+    '<div class="meta">MG MAXI DENDEN · Généré le '+genDate+' · '+list.length+' journée(s)</div>'+
+    '<div class="kpis">'+
+    '<div class="kpi" style="background:#f0fdf4;border:1px solid #bbf7d0;"><b style="color:#16a34a;">'+signees+'</b><span style="font-size:11px;color:#166534;">Signées</span></div>'+
+    '<div class="kpi" style="background:#fff7ed;border:1px solid #fed7aa;"><b style="color:#ea580c;">'+(list.filter(function(x){return x.statut===1;}).length)+'</b><span style="font-size:11px;color:#9a3412;">Partielles</span></div>'+
+    '<div class="kpi" style="background:#fef2f2;border:1px solid #fecaca;"><b style="color:#dc2626;">'+(list.filter(function(x){return x.statut===2;}).length)+'</b><span style="font-size:11px;color:#991b1b;">Non signées</span></div>'+
+    '</div>'+
+    '<table><thead><tr><th>Date</th><th>Caissier</th><th>Documents</th><th>Statut</th><th>Observation</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="footer">TaskPro · MG MAXI DENDEN · Rapport Signature Journées</div></body></html>';
+
+  var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='SignatureJournees_'+tstr()+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  showT('📄','Rapport exporté');
+}
+
+// Modal close
+(function(){var el=document.getElementById('sigJournMov');if(el)el.addEventListener('click',function(e){if(e.target===this)closeM('sigJournMov');});})();
+
+// ══ AVANCÉES TABS ══
+function switchAvTab(n){
+  for(var i=0;i<3;i++){
+    var t=document.getElementById('avTab'+i);
+    var p=document.getElementById('avPanel'+i);
+    var cols=['#3b82f6','#0ea5e9','#8b5cf6'];
+    if(t){
+      t.style.color=i===n?cols[n]:'var(--t2)';
+      t.style.borderBottom=i===n?'2px solid '+cols[n]:'2px solid transparent';
+      t.style.fontWeight=i===n?'800':'700';
+    }
+    if(p)p.style.display=i===n?'':'none';
+  }
+}
+
 // ══ CATALOGUE ══
 var _catEid=null;
 var _catRuptures=[];
@@ -11795,12 +14051,13 @@ function renderCatalogue(){
     return '<div style="background:var(--card);border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:14px;margin-bottom:10px;" onclick="openCatalogueDetail(\''+c.id+'\')">'+
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">'+
       '<div style="flex:1;min-width:0;cursor:pointer;">'+
-      '<div style="font-size:14px;font-weight:900;color:#e0e7ff;font-family:\'Syne\';">📒 '+c.nom+'</div>'+
-      (dateStr?'<div style="font-size:10px;color:rgba(148,163,184,.7);margin-top:3px;">📅 '+dateStr+'</div>':'')+
+      '<div style="font-size:14px;font-weight:900;color:var(--t1);font-family:\'Syne\';">📒 '+c.nom+'</div>'+
+      (dateStr?'<div style="font-size:10px;color:var(--t2);margin-top:3px;">📅 '+dateStr+'</div>':'')+
       '</div>'+
       '<div style="display:flex;gap:6px;flex-shrink:0;">'+
       '<button onclick="event.stopPropagation();exportCatPDF(\''+c.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
       '<button onclick="event.stopPropagation();openCatalogueForm(\''+c.id+'\')" style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:#818cf8;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">✏️</button>'+
+      '<button onclick="event.stopPropagation();if(confirm(\'Supprimer ce catalogue ?\'))delCatalogue(\''+c.id+'\')" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:14px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">🗑️</button>'+
       '</div>'+
       '</div>'+
       '<div style="display:flex;gap:8px;margin-top:10px;">'+
