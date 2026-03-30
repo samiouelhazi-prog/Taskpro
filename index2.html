@@ -2940,35 +2940,13 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       </div>
     </div>
 
-    <!-- Code Méti -->
+    <!-- PRODUITS MULTIPLES -->
     <div style="margin-bottom:10px;">
-      <label style="font-size:10px;font-weight:700;color:#fbbf24;display:block;margin-bottom:4px;">🔢 CODE MÉTI <span style="color:#64748b;font-weight:400;">(8 chiffres)</span></label>
-      <input id="avCodeMeti" type="text" inputmode="numeric" maxlength="8" placeholder="Ex : 12345678" style="width:100%;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.3);border-radius:10px;padding:11px 14px;color:#fbbf24;font-size:16px;font-weight:900;letter-spacing:3px;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,8)">
-    </div>
-
-    <!-- Désignation -->
-    <div style="margin-bottom:10px;">
-      <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📦 DÉSIGNATION DU PRODUIT *</label>
-      <input id="avDesignation" type="text" placeholder="Ex : Palettes en bois, Caisses melon, Caisses plastique vert..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;">
-    </div>
-
-    <!-- Quantité + Unité -->
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-bottom:10px;">
-      <div>
-        <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">🔄 QUANTITÉ RETOURNÉE *</label>
-        <input id="avQte" type="number" min="1" placeholder="Ex : 12" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:15px;font-weight:700;box-sizing:border-box;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <label style="font-size:10px;font-weight:700;color:#10b981;">📦 PRODUITS RETOURNÉS *</label>
+        <button type="button" onclick="addAvItem()" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#34d399;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:4px;">＋ Ajouter produit</button>
       </div>
-      <div>
-        <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">UNITÉ</label>
-        <select id="avUnite" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 8px;color:#f8faff;font-size:12px;box-sizing:border-box;">
-          <option value="Unité">Unité</option>
-          <option value="Palette">Palette</option>
-          <option value="Caisse">Caisse</option>
-          <option value="Kg">Kg</option>
-          <option value="Carton">Carton</option>
-          <option value="Lot">Lot</option>
-        </select>
-      </div>
+      <div id="avItemsContainer"></div>
     </div>
 
     <!-- Matricule camion -->
@@ -11224,6 +11202,7 @@ function savePassation(){
 var SK_AV = SK + '_avoirs';
 var _avEid = null;
 var _avStatut = 'attente';
+var _avItems = []; // liste multi-produits
 
 function loadAvoirs(){ try{ return JSON.parse(localStorage.getItem(SK_AV)||'[]'); }catch(e){ return []; } }
 function saveAvoirs(d){ localStorage.setItem(SK_AV, JSON.stringify(d)); }
@@ -11239,6 +11218,89 @@ function setAvStatut(btn, s){
   });
 }
 
+// ── Helpers multi-items ──
+function _avGetItems(){
+  // lire les valeurs directement depuis le DOM pour être sûr
+  var c = document.getElementById('avItemsContainer');
+  if(!c) return _avItems;
+  var rows = c.querySelectorAll('.av-item-row');
+  var result = [];
+  rows.forEach(function(row, i){
+    result.push({
+      codeMeti: (row.querySelector('[data-avf="codeMeti"]')||{value:''}).value.trim(),
+      designation: (row.querySelector('[data-avf="designation"]')||{value:''}).value.trim(),
+      qte: (row.querySelector('[data-avf="qte"]')||{value:''}).value,
+      unite: (row.querySelector('[data-avf="unite"]')||{value:'Unité'}).value
+    });
+  });
+  return result;
+}
+
+function _avItemHTML(idx, item, total){
+  item = item||{codeMeti:'',designation:'',qte:'',unite:'Unité'};
+  var showDel = total > 1;
+  var uniteOpts = ['Unité','Palette','Caisse','Kg','Carton','Lot'].map(function(u){
+    return '<option value="'+u+'"'+(item.unite===u?' selected':'')+'>'+u+'</option>';
+  }).join('');
+  return '<div class="av-item-row" id="avRow_'+idx+'" style="background:rgba(255,255,255,.04);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:12px;margin-bottom:8px;">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">'+
+      '<span style="font-size:10px;font-weight:700;color:#10b981;letter-spacing:.5px;">📦 PRODUIT '+(idx+1)+'</span>'+
+      (showDel?'<button type="button" onclick="removeAvItem('+idx+')" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);color:#f87171;font-size:10px;font-weight:700;padding:3px 9px;border-radius:7px;cursor:pointer;">✕ Supprimer</button>':'')+
+    '</div>'+
+    '<div style="margin-bottom:7px;">'+
+      '<label style="font-size:9px;font-weight:700;color:#fbbf24;display:block;margin-bottom:3px;">🔢 CODE MÉTI <span style="color:#475569;font-weight:400;">(8 chiffres)</span></label>'+
+      '<input type="text" data-avf="codeMeti" inputmode="numeric" maxlength="8" placeholder="Ex : 12345678" value="'+(item.codeMeti||'')+'" style="width:100%;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.3);border-radius:8px;padding:9px 11px;color:#fbbf24;font-size:15px;font-weight:900;letter-spacing:3px;box-sizing:border-box;font-family:\'IBM Plex Mono\',monospace;" oninput="this.value=this.value.replace(/\\D/g,\'\').slice(0,8)">'+
+    '</div>'+
+    '<div style="margin-bottom:7px;">'+
+      '<label style="font-size:9px;font-weight:700;color:#94a3b8;display:block;margin-bottom:3px;">📦 DÉSIGNATION *</label>'+
+      '<input type="text" data-avf="designation" placeholder="Ex : Caisses melon, Palettes en bois..." value="'+(item.designation||'').replace(/"/g,'&quot;')+'" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:9px 11px;color:#f8faff;font-size:13px;box-sizing:border-box;">'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:2fr 1fr;gap:7px;">'+
+      '<div>'+
+        '<label style="font-size:9px;font-weight:700;color:#f87171;display:block;margin-bottom:3px;">🔄 QUANTITÉ *</label>'+
+        '<input type="number" data-avf="qte" min="1" placeholder="Ex : 12" value="'+(item.qte||'')+'" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:9px 11px;color:#f8faff;font-size:14px;font-weight:700;box-sizing:border-box;">'+
+      '</div>'+
+      '<div>'+
+        '<label style="font-size:9px;font-weight:700;color:#64748b;display:block;margin-bottom:3px;">UNITÉ</label>'+
+        '<select data-avf="unite" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px 7px;color:#f8faff;font-size:12px;box-sizing:border-box;color-scheme:dark !important;">'+uniteOpts+'</select>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function _renderAvItemsForm(){
+  var c = document.getElementById('avItemsContainer');
+  if(!c) return;
+  var total = _avItems.length;
+  c.innerHTML = _avItems.map(function(it,i){ return _avItemHTML(i, it, total); }).join('');
+}
+
+function addAvItem(){
+  _avItems.push({codeMeti:'', designation:'', qte:'', unite:'Unité'});
+  _renderAvItemsForm();
+  // scroll to new item
+  var wrap = document.querySelector('#avoirForm > div');
+  if(wrap) setTimeout(function(){ wrap.scrollTop = wrap.scrollHeight; }, 50);
+}
+
+function removeAvItem(idx){
+  if(_avItems.length <= 1){ showT('⚠️','Minimum 1 produit requis'); return; }
+  _avItems.splice(idx, 1);
+  _renderAvItemsForm();
+}
+
+// ── Migrate old single-product entry ──
+function _avMigrateItems(av){
+  if(av.items && av.items.length) return av.items;
+  // ancien format → convertir
+  return [{
+    codeMeti: av.codeMeti||'',
+    designation: av.designation||'',
+    qte: av.qte||'',
+    unite: av.unite||'Unité'
+  }];
+}
+
 function openAvoirForm(eid){
   _avEid = eid||null;
   _avStatut = 'attente';
@@ -11250,24 +11312,22 @@ function openAvoirForm(eid){
     if(av){
       document.getElementById('avDate').value = av.date||'';
       document.getElementById('avHeure').value = av.heure||'';
-      document.getElementById('avCodeMeti').value = av.codeMeti||'';
-      document.getElementById('avDesignation').value = av.designation||'';
-      document.getElementById('avQte').value = av.qte||'';
-      document.getElementById('avUnite').value = av.unite||'Unité';
       document.getElementById('avCamion').value = av.camion||'';
       document.getElementById('avLivreur').value = av.livreur||'';
       document.getElementById('avEffPar').value = av.effPar||'';
       document.getElementById('avNumero').value = av.numero||'';
       document.getElementById('avObs').value = av.obs||'';
       _avStatut = av.statut||'attente';
+      _avItems = _avMigrateItems(av);
     }
   } else {
-    ['avCodeMeti','avDesignation','avQte','avCamion','avLivreur','avEffPar','avNumero','avObs'].forEach(function(id){document.getElementById(id).value='';});
+    ['avCamion','avLivreur','avEffPar','avNumero','avObs'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('avDate').value = tstr();
     document.getElementById('avHeure').value = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
-    document.getElementById('avUnite').value = 'Unité';
+    _avItems = [{codeMeti:'', designation:'', qte:'', unite:'Unité'}];
   }
-  // reset statut buttons then apply
+  _renderAvItemsForm();
+  // reset + apply statut
   document.querySelectorAll('[data-avs]').forEach(function(b){
     var s=b.getAttribute('data-avs');
     if(s==='attente'){b.style.background='rgba(234,179,8,.12)';b.style.borderColor='rgba(234,179,8,.3)';}
@@ -11280,19 +11340,16 @@ function openAvoirForm(eid){
 }
 
 function saveAvoir(){
-  var designation = document.getElementById('avDesignation').value.trim();
-  var qte = document.getElementById('avQte').value;
-  if(!designation){showT('⚠️','Désignation requise');return;}
-  if(!qte){showT('⚠️','Quantité requise');return;}
+  var items = _avGetItems();
+  // Validation : au moins 1 produit avec désignation + qté
+  var valid = items.filter(function(it){ return it.designation && it.qte; });
+  if(!valid.length){showT('⚠️','Au moins 1 produit avec désignation et quantité requis');return;}
   var data = loadAvoirs();
   var entry = {
     id: _avEid||uid(), ts: Date.now(),
     date: document.getElementById('avDate').value,
     heure: document.getElementById('avHeure').value,
-    codeMeti: document.getElementById('avCodeMeti').value.trim(),
-    designation: designation,
-    qte: qte,
-    unite: document.getElementById('avUnite').value,
+    items: items,
     camion: document.getElementById('avCamion').value.trim().toUpperCase(),
     livreur: document.getElementById('avLivreur').value.trim(),
     effPar: document.getElementById('avEffPar').value.trim(),
@@ -11313,6 +11370,7 @@ function saveAvoir(){
 function delAvoir(id){
   if(!confirm('Supprimer cette demande d\'avoir ?')) return;
   saveAvoirs(loadAvoirs().filter(function(x){return x.id!==id;}));
+  document.getElementById('avoirForm').style.display='none';
   renderAvoirs();
   showT('🗑️','Supprimé');
 }
@@ -11332,7 +11390,9 @@ function _avStatutInfo(s){
 function exportAvoirPDF(id){
   var av=loadAvoirs().find(function(x){return x.id===id;});
   if(!av)return;
-  _avBuildAndDownload([av],'Avoir_'+av.designation.replace(/\s/g,'_').slice(0,20)+'_'+tstr());
+  var items=_avMigrateItems(av);
+  var label=(items[0]&&items[0].designation?items[0].designation:'avoir').replace(/\s/g,'_').slice(0,20);
+  _avBuildAndDownload([av],'Avoir_'+label+'_'+tstr());
 }
 
 function exportAllAvoirsPDF(){
@@ -11346,7 +11406,15 @@ function _avBuildAndDownload(list, filename){
   var genDate=new Date().toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   var rows=list.map(function(av){
     var si=_avStatutInfo(av.statut);
-    return '<div style="page-break-inside:avoid;margin-bottom:24px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
+    var items=_avMigrateItems(av);
+    var itemsHTML=items.map(function(it,i){
+      return '<tr style="border-bottom:1px solid #e2e8f0;">'+
+        '<td style="padding:8px 10px;font-size:12px;font-family:monospace;font-weight:700;color:#d97706;letter-spacing:1px;">'+(it.codeMeti||'—')+'</td>'+
+        '<td style="padding:8px 10px;font-size:13px;font-weight:700;color:#1e293b;">'+it.designation.replace(/</g,'&lt;')+'</td>'+
+        '<td style="padding:8px 10px;font-size:13px;font-weight:900;color:#dc2626;text-align:center;">'+it.qte+' '+it.unite+'</td>'+
+      '</tr>';
+    }).join('');
+    return '<div style="page-break-inside:avoid;margin-bottom:28px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">'+
       '<div style="background:linear-gradient(135deg,#059669,#064e3b);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;">'+
         '<div>'+
           '<div style="font-size:15px;font-weight:900;">↩️ Demande d\'Avoir</div>'+
@@ -11354,35 +11422,34 @@ function _avBuildAndDownload(list, filename){
         '</div>'+
         '<div style="background:'+si.bg+';color:'+si.col+';font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;">'+si.label+'</div>'+
       '</div>'+
-      '<div style="padding:14px 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
-        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">CODE MÉTI</div>'+
-          '<div style="font-size:16px;font-weight:900;color:#1e293b;letter-spacing:2px;font-family:monospace;">'+(av.codeMeti||'—')+'</div>'+
+      '<div style="padding:14px 18px;">'+
+        '<div style="font-size:10px;font-weight:700;color:#64748b;margin-bottom:8px;">PRODUITS RETOURNÉS ('+items.length+')</div>'+
+        '<table style="width:100%;border-collapse:collapse;margin-bottom:12px;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">'+
+          '<thead><tr style="background:#f1f5f9;">'+
+            '<th style="padding:7px 10px;font-size:9px;font-weight:700;color:#64748b;text-align:left;">CODE MÉTI</th>'+
+            '<th style="padding:7px 10px;font-size:9px;font-weight:700;color:#64748b;text-align:left;">DÉSIGNATION</th>'+
+            '<th style="padding:7px 10px;font-size:9px;font-weight:700;color:#64748b;text-align:center;">QTÉ</th>'+
+          '</tr></thead>'+
+          '<tbody>'+itemsHTML+'</tbody>'+
+        '</table>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+          '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+            '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🚛 MATRICULE CAMION</div>'+
+            '<div style="font-size:13px;font-weight:800;color:#0369a1;font-family:monospace;">'+(av.camion||'—')+'</div>'+
+          '</div>'+
+          '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
+            '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🙋 EFFECTUÉ PAR</div>'+
+            '<div style="font-size:13px;font-weight:700;color:#1e293b;">'+(av.effPar||'—')+'</div>'+
+          '</div>'+
+          (av.numero?'<div style="background:#ede9fe;border-radius:8px;padding:10px;grid-column:1/-1;">'+
+            '<div style="font-size:9px;font-weight:700;color:#7c3aed;margin-bottom:4px;">🧾 N° AVOIR</div>'+
+            '<div style="font-size:14px;font-weight:900;color:#7c3aed;">'+av.numero.replace(/</g,'&lt;')+'</div>'+
+          '</div>':'')+
+          (av.obs?'<div style="border-radius:8px;padding:10px;grid-column:1/-1;border:1px solid #e2e8f0;">'+
+            '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">📝 OBSERVATIONS</div>'+
+            '<div style="font-size:12px;color:#475569;">'+av.obs.replace(/</g,'&lt;')+'</div>'+
+          '</div>':'')+
         '</div>'+
-        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">QUANTITÉ RETOURNÉE</div>'+
-          '<div style="font-size:16px;font-weight:900;color:#dc2626;">'+av.qte+' '+av.unite+'</div>'+
-        '</div>'+
-        '<div style="background:#f8faff;border-radius:8px;padding:10px;grid-column:1/-1;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">DÉSIGNATION</div>'+
-          '<div style="font-size:14px;font-weight:700;color:#1e293b;">'+av.designation.replace(/</g,'&lt;')+'</div>'+
-        '</div>'+
-        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🚛 MATRICULE CAMION</div>'+
-          '<div style="font-size:13px;font-weight:800;color:#0369a1;font-family:monospace;">'+(av.camion||'—')+'</div>'+
-        '</div>'+
-        '<div style="background:#f8faff;border-radius:8px;padding:10px;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">🙋 EFFECTUÉ PAR</div>'+
-          '<div style="font-size:13px;font-weight:700;color:#1e293b;">'+(av.effPar||'—')+'</div>'+
-        '</div>'+
-        (av.numero?'<div style="background:#ede9fe;border-radius:8px;padding:10px;grid-column:1/-1;">'+
-          '<div style="font-size:9px;font-weight:700;color:#7c3aed;margin-bottom:4px;">🧾 N° AVOIR</div>'+
-          '<div style="font-size:14px;font-weight:900;color:#7c3aed;">'+av.numero.replace(/</g,'&lt;')+'</div>'+
-        '</div>':'')+
-        (av.obs?'<div style="border-radius:8px;padding:10px;grid-column:1/-1;border:1px solid #e2e8f0;">'+
-          '<div style="font-size:9px;font-weight:700;color:#64748b;margin-bottom:4px;">📝 OBSERVATIONS</div>'+
-          '<div style="font-size:12px;color:#475569;">'+av.obs.replace(/</g,'&lt;')+'</div>'+
-        '</div>':'')+
       '</div></div>';
   }).join('');
   var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Demandes d\'Avoir</title>'+
@@ -11417,12 +11484,22 @@ function renderAvoirs(){
   if(em)em.style.display='none';
   el.innerHTML=data.map(function(av){
     var si=_avStatutInfo(av.statut);
+    var items=_avMigrateItems(av);
+    var firstItem=items[0]||{};
+    // liste produits dans la carte
+    var itemsPreview=items.slice(0,3).map(function(it){
+      return '<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);">'+
+        (it.codeMeti?'<span style="background:rgba(234,179,8,.15);color:#fbbf24;font-size:9px;font-weight:900;padding:1px 6px;border-radius:6px;font-family:monospace;letter-spacing:1px;flex-shrink:0;">'+it.codeMeti+'</span>':'')+
+        '<span style="font-size:12px;font-weight:700;color:var(--t1);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+it.designation+'</span>'+
+        '<span style="font-size:11px;font-weight:900;color:#f87171;flex-shrink:0;">'+it.qte+' '+it.unite+'</span>'+
+      '</div>';
+    }).join('');
+    var moreCount=items.length>3?items.length-3:0;
     return '<div style="background:var(--s2);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:14px;margin-bottom:10px;border-left:3px solid #10b981;" onclick="openAvoirForm(\''+av.id+'\')">'+
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;">'+
-        '<div style="flex:1;">'+
-          '<div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:3px;">'+
-            (av.codeMeti?'<span style="background:rgba(234,179,8,.15);color:#fbbf24;font-size:10px;font-weight:900;padding:2px 8px;border-radius:8px;font-family:monospace;letter-spacing:1px;">'+av.codeMeti+'</span>':'')+
-            '<span style="font-size:13px;font-weight:800;color:var(--t1);">'+av.designation+'</span>'+
+        '<div style="flex:1;min-width:0;">'+
+          '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">'+
+            '<span style="font-size:11px;font-weight:900;color:#10b981;">'+items.length+' produit'+(items.length>1?'s':'')+'</span>'+
           '</div>'+
           '<div style="font-size:11px;color:var(--t2);">📅 '+_avDateFmt(av.date)+(av.heure?' · ⏰ '+av.heure:'')+'</div>'+
         '</div>'+
@@ -11431,18 +11508,19 @@ function renderAvoirs(){
           '<button onclick="event.stopPropagation();exportAvoirPDF(\''+av.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:10px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
         '</div>'+
       '</div>'+
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:4px;">'+
-        '<div style="background:rgba(239,68,68,.08);border-radius:8px;padding:6px 9px;">'+
-          '<div style="font-size:8px;font-weight:700;color:#f87171;">QTÉ RETOURNÉE</div>'+
-          '<div style="font-size:13px;font-weight:900;color:#f8faff;">'+av.qte+' <span style="font-size:10px;color:var(--t2);">'+av.unite+'</span></div>'+
-        '</div>'+
-        '<div style="background:rgba(14,165,233,.08);border-radius:8px;padding:6px 9px;">'+
+      '<div style="background:rgba(0,0,0,.2);border-radius:8px;padding:6px 8px;margin-bottom:6px;">'+itemsPreview+
+        (moreCount?'<div style="font-size:10px;color:#64748b;margin-top:4px;text-align:center;">+ '+moreCount+' autre(s) produit(s)</div>':'')+
+      '</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">'+
+        '<div style="background:rgba(14,165,233,.08);border-radius:8px;padding:5px 9px;">'+
           '<div style="font-size:8px;font-weight:700;color:#38bdf8;">🚛 CAMION</div>'+
-          '<div style="font-size:12px;font-weight:800;color:#f8faff;font-family:monospace;">'+(av.camion||'—')+'</div>'+
+          '<div style="font-size:11px;font-weight:800;color:#f8faff;font-family:monospace;">'+(av.camion||'—')+'</div>'+
+        '</div>'+
+        '<div style="background:rgba(255,255,255,.04);border-radius:8px;padding:5px 9px;">'+
+          '<div style="font-size:8px;font-weight:700;color:#64748b;">🙋 EFFECTUÉ PAR</div>'+
+          '<div style="font-size:11px;font-weight:700;color:#f8faff;">'+(av.effPar||'—')+'</div>'+
         '</div>'+
       '</div>'+
-      (av.effPar||av.livreur?'<div style="font-size:10px;color:var(--t2);margin-top:6px;">'+
-        (av.effPar?'🙋 '+av.effPar:'')+(av.effPar&&av.livreur?' · ':'')+(av.livreur?'🚛 '+av.livreur:'')+'</div>':'')+
       (av.numero?'<div style="background:rgba(167,139,250,.1);border-radius:8px;padding:5px 9px;margin-top:5px;font-size:11px;font-weight:700;color:#c4b5fd;">🧾 N° Avoir : '+av.numero+'</div>':'')+
     '</div>';
   }).join('');
