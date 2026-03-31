@@ -2302,6 +2302,9 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div onclick="closeM('tachesMenuModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;">×</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;">
+      <div onclick="closeM('tachesMenuModal');goPage('tachesTraitees')" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(34,197,94,.12);border-radius:14px;cursor:pointer;border:1px solid rgba(34,197,94,.3);">
+        <span style="font-size:22px;">📋</span><div><div style="font-size:13px;font-weight:700;color:#4ade80;">Tâches Traitées</div><div style="font-size:11px;color:rgba(34,197,94,.6);margin-top:1px;">Journal des actions effectuées (matin/soir)</div></div>
+      </div>
       <div onclick="closeM('tachesMenuModal');openTM(null)" style="display:flex;align-items:center;gap:12px;padding:14px;background:rgba(59,130,246,.12);border-radius:14px;cursor:pointer;border:1px solid rgba(59,130,246,.25);">
         <span style="font-size:22px;">📝</span><div><div style="font-size:13px;font-weight:700;color:#60a5fa;">Tâche de jour</div><div style="font-size:11px;color:rgba(59,130,246,.6);margin-top:1px;">Ajouter une tâche quotidienne normale</div></div>
       </div>
@@ -2316,6 +2319,63 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       </div>
     </div>
   </div>
+</div>
+
+<!-- ══ TÂCHES TRAITÉES ══ -->
+<div class="pg" id="pgTachesTraitees">
+  <div class="pg-topbar" style="position:relative;">
+    <div class="pg-back" onclick="goPage('commercial')">‹</div>
+    <div class="pg-title" style="font-size:14px;">📋 Tâches Traitées</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportTachesTraiteesPDF()" style="background:rgba(34,197,94,.18);border:1.5px solid rgba(34,197,94,.45);color:#4ade80;font-size:11px;font-weight:800;padding:0 10px;height:36px;border-radius:10px;cursor:pointer;white-space:nowrap;">📄 PDF</button>
+    </div>
+  </div>
+
+  <!-- Shift tabs -->
+  <div style="display:flex;gap:8px;padding:10px 16px 0;flex-shrink:0;">
+    <button id="trt-tab-matin" onclick="setTrtShift('matin')"
+      style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid rgba(251,191,36,.5);background:rgba(251,191,36,.18);color:#fbbf24;">🌅 Matin</button>
+    <button id="trt-tab-soir" onclick="setTrtShift('soir')"
+      style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#64748b;">🌆 Soir</button>
+  </div>
+
+  <!-- Formulaire d'ajout -->
+  <div style="padding:10px 16px 0;flex-shrink:0;">
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 14px;">
+      <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:8px;letter-spacing:.4px;">NOUVELLE ACTION TRAITÉE</div>
+
+      <!-- Catégorie -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;" id="trtCatBtns">
+        <button onclick="setTrtCat(this,'mise_rayon')" data-cat="mise_rayon"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#60a5fa;">🧺 Mise en rayon</button>
+        <button onclick="setTrtCat(this,'facing')" data-cat="facing"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📐 Facing</button>
+        <button onclick="setTrtCat(this,'commande')" data-cat="commande"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🛒 Commande</button>
+        <button onclick="setTrtCat(this,'dlc')" data-cat="dlc"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">⏰ DLC</button>
+        <button onclick="setTrtCat(this,'nettoyage')" data-cat="nettoyage"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🧹 Nettoyage</button>
+        <button onclick="setTrtCat(this,'reception')" data-cat="reception"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Réception</button>
+        <button onclick="setTrtCat(this,'autre')" data-cat="autre"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">✏️ Autre</button>
+      </div>
+
+      <!-- Description + Quantité -->
+      <div style="display:flex;gap:8px;align-items:stretch;">
+        <input id="trtDesc" type="text" placeholder="Description de l'action traitée…"
+          style="flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 12px;color:#f8faff;-webkit-text-fill-color:#f8faff;font-size:13px;"/>
+        <input id="trtQty" type="number" min="1" placeholder="Nbre" value=""
+          style="width:64px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 8px;color:#f8faff;-webkit-text-fill-color:#f8faff;font-size:13px;text-align:center;"/>
+        <button onclick="addTacheTraitee()"
+          style="background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;font-size:20px;font-weight:900;width:44px;border-radius:10px;cursor:pointer;flex-shrink:0;">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liste -->
+  <div class="scroll"><div style="padding:10px 16px 110px;" id="trtList"></div></div>
 </div>
 
 <!-- ══ EQUIPE HUB ══ -->
@@ -6501,7 +6561,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',tachesTraitees:'pgTachesTraitees',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAccompte:'pgAccompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',resume:'pgResume',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAccompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -6522,6 +6582,7 @@ function goPage(p){
   if(p==='taches')renderTaches();
   if(p==='dlc')renderDlcPage();
   if(p==='commercial')renderTaches();
+  if(p==='tachesTraitees')openTachesTraitees();
   if(p==='admin'){showAdminTab(_adminTab||'pointage');}
   if(p==='chiffres'){renderCA3();renderCasse3();switchTab3('ca');}
   if(p==='briefing')renderBriefing();
@@ -7333,6 +7394,280 @@ function exportTachesPDF(mode){
   showT('📄','Fichier téléchargé ! Ouvrez-le pour imprimer.');
 }
 
+
+
+// ══════════════════════════════════════════════════════════════
+// TÂCHES TRAITÉES
+// ══════════════════════════════════════════════════════════════
+var SKT = SK+'_trt';
+var _trtShift = 'matin'; // 'matin' | 'soir'
+var _trtCat   = 'mise_rayon';
+
+// ─── helpers ──────────────────────────────────────────────────
+function loadTRT(){
+  try{return JSON.parse(localStorage.getItem(SKT))||{};}catch(e){return{};}
+}
+function saveTRT(data){
+  try{localStorage.setItem(SKT,JSON.stringify(data));}catch(e){}
+}
+function todayKey(){
+  var d=tn();
+  return d.getFullYear()+'-'+(d.getMonth()+1<10?'0':'')+(d.getMonth()+1)+'-'+(d.getDate()<10?'0':'')+d.getDate();
+}
+function nowTime(){
+  var d=tn();
+  return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();
+}
+
+// ─── shift auto-detect on open ────────────────────────────────
+function openTachesTraitees(){
+  var h=tn().getHours();
+  _trtShift=(h>=14)?'soir':'matin';
+  renderTRT();
+}
+
+// ─── switch shift ─────────────────────────────────────────────
+function setTrtShift(s){
+  _trtShift=s;
+  renderTRT();
+}
+
+// ─── select category ──────────────────────────────────────────
+var TRT_CAT_LABELS={
+  mise_rayon:'🧺 Mise en rayon',
+  facing:'📐 Facing',
+  commande:'🛒 Commande',
+  dlc:'⏰ DLC',
+  nettoyage:'🧹 Nettoyage',
+  reception:'📦 Réception',
+  autre:'✏️ Autre'
+};
+var TRT_CAT_COLORS={
+  mise_rayon:'#3b82f6',
+  facing:'#a855f7',
+  commande:'#f59e0b',
+  dlc:'#ef4444',
+  nettoyage:'#22c55e',
+  reception:'#06b6d4',
+  autre:'#94a3b8'
+};
+
+function setTrtCat(btn,cat){
+  _trtCat=cat;
+  document.querySelectorAll('#trtCatBtns button').forEach(function(b){
+    var c=b.getAttribute('data-cat');
+    if(c===cat){
+      b.style.background='rgba(34,197,94,.22)';
+      b.style.border='1.5px solid rgba(34,197,94,.6)';
+      b.style.color='#4ade80';
+    } else {
+      b.style.background='rgba(255,255,255,.07)';
+      b.style.border='1px solid rgba(255,255,255,.12)';
+      b.style.color='#94a3b8';
+    }
+  });
+}
+
+// ─── add entry ────────────────────────────────────────────────
+function addTacheTraitee(){
+  var desc=(document.getElementById('trtDesc').value||'').trim();
+  var qtyRaw=document.getElementById('trtQty').value;
+  var qty=qtyRaw?parseInt(qtyRaw):null;
+  if(!desc){showT('⚠️','Décrivez l\'action traitée');return;}
+  var data=loadTRT();
+  var dk=todayKey();
+  if(!data[dk])data[dk]={matin:[],soir:[]};
+  if(!data[dk].matin)data[dk].matin=[];
+  if(!data[dk].soir)data[dk].soir=[];
+  data[dk][_trtShift].push({
+    id:uid(),
+    desc:desc,
+    qty:qty,
+    cat:_trtCat,
+    heure:nowTime()
+  });
+  saveTRT(data);
+  document.getElementById('trtDesc').value='';
+  document.getElementById('trtQty').value='';
+  renderTRT();
+  showT('✅','Action enregistrée !');
+}
+
+// ─── delete entry ─────────────────────────────────────────────
+function deleteTRT(id){
+  var data=loadTRT();
+  var dk=todayKey();
+  if(!data[dk])return;
+  ['matin','soir'].forEach(function(sh){
+    data[dk][sh]=(data[dk][sh]||[]).filter(function(x){return x.id!==id;});
+  });
+  saveTRT(data);
+  renderTRT();
+  showT('🗑️','Supprimé');
+}
+
+// ─── render ───────────────────────────────────────────────────
+function renderTRT(){
+  // Update shift tabs
+  var isMatin=(_trtShift==='matin');
+  var tabM=document.getElementById('trt-tab-matin');
+  var tabS=document.getElementById('trt-tab-soir');
+  if(tabM&&tabS){
+    tabM.style.background=isMatin?'rgba(251,191,36,.22)':'rgba(255,255,255,.05)';
+    tabM.style.border=isMatin?'1.5px solid rgba(251,191,36,.55)':'1px solid rgba(255,255,255,.1)';
+    tabM.style.color=isMatin?'#fbbf24':'#64748b';
+    tabS.style.background=!isMatin?'rgba(99,102,241,.22)':'rgba(255,255,255,.05)';
+    tabS.style.border=!isMatin?'1.5px solid rgba(99,102,241,.55)':'1px solid rgba(255,255,255,.1)';
+    tabS.style.color=!isMatin?'#a5b4fc':'#64748b';
+  }
+
+  var el=document.getElementById('trtList');
+  if(!el)return;
+  var data=loadTRT();
+  var dk=todayKey();
+  var list=(data[dk]&&data[dk][_trtShift])||[];
+
+  // Active category button highlight
+  document.querySelectorAll('#trtCatBtns button').forEach(function(b){
+    var c=b.getAttribute('data-cat');
+    if(c===_trtCat){
+      b.style.background='rgba(34,197,94,.22)';
+      b.style.border='1.5px solid rgba(34,197,94,.6)';
+      b.style.color='#4ade80';
+    } else {
+      b.style.background='rgba(255,255,255,.07)';
+      b.style.border='1px solid rgba(255,255,255,.12)';
+      b.style.color='#94a3b8';
+    }
+  });
+
+  if(!list.length){
+    el.innerHTML='<div style="text-align:center;padding:40px 20px;color:#334155;">'
+      +'<div style="font-size:36px;margin-bottom:10px;">📋</div>'
+      +'<div style="font-size:14px;font-weight:700;color:#475569;">Aucune action traitée</div>'
+      +'<div style="font-size:12px;color:#64748b;margin-top:6px;">Ajoutez votre première action ci-dessus</div>'
+      +'</div>';
+    return;
+  }
+
+  // Counter
+  var total=list.length;
+  var withQty=list.filter(function(x){return x.qty!=null;});
+  var totalQty=withQty.reduce(function(a,x){return a+(x.qty||0);},0);
+
+  var html='<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">';
+  html+='<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:7px 13px;font-size:11px;font-weight:800;color:#4ade80;">'
+    +'✅ '+total+' action'+(total>1?'s':'')+' traitée'+(total>1?'s':'')+'</div>';
+  if(withQty.length){
+    html+='<div style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:10px;padding:7px 13px;font-size:11px;font-weight:800;color:#60a5fa;">'
+      +'🔢 Quantité totale : '+totalQty+'</div>';
+  }
+  html+='</div>';
+
+  // List items (reverse = most recent first)
+  var rev=list.slice().reverse();
+  rev.forEach(function(item){
+    var catColor=TRT_CAT_COLORS[item.cat]||'#94a3b8';
+    var catLabel=TRT_CAT_LABELS[item.cat]||item.cat;
+    html+='<div style="display:flex;align-items:center;gap:10px;padding:11px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;margin-bottom:7px;position:relative;overflow:hidden;">';
+    // left accent
+    html+='<div style="position:absolute;left:0;top:0;width:4px;height:100%;background:'+catColor+';border-radius:2px 0 0 2px;"></div>';
+    // category icon
+    html+='<div style="font-size:11px;font-weight:700;color:'+catColor+';background:'+catColor+'22;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-left:4px;">'+catLabel+'</div>';
+    // desc
+    html+='<div style="flex:1;min-width:0;">';
+    html+='<div style="font-size:13px;font-weight:700;color:#f1f5f9;white-space:pre-wrap;word-break:break-word;">'+item.desc+'</div>';
+    html+='<div style="font-size:10px;color:#64748b;margin-top:2px;">⏱ '+item.heure+'</div>';
+    html+='</div>';
+    // qty badge
+    if(item.qty!=null){
+      html+='<div style="background:rgba(251,191,36,.18);border:1.5px solid rgba(251,191,36,.4);border-radius:10px;padding:4px 10px;font-size:14px;font-weight:900;color:#fbbf24;flex-shrink:0;">×'+item.qty+'</div>';
+    }
+    // delete
+    html+='<button onclick="deleteTRT(\''+item.id+'\')" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:15px;flex-shrink:0;">🗑</button>';
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+// ─── PDF export ───────────────────────────────────────────────
+function exportTachesTraiteesPDF(){
+  var data=loadTRT();
+  var dk=todayKey();
+  var day=data[dk]||{matin:[],soir:[]};
+  var matin=day.matin||[];
+  var soir=day.soir||[];
+  if(!matin.length&&!soir.length){showT('⚠️','Aucune action traitée aujourd\'hui');return;}
+
+  var d=tn();
+  var DF2=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  var MF2=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  var dateStr=DF2[d.getDay()]+' '+d.getDate()+' '+MF2[d.getMonth()]+' '+d.getFullYear();
+
+  function buildRows(list){
+    if(!list.length)return '<tr><td colspan="4" style="padding:10px;color:#94a3b8;font-style:italic;">Aucune action enregistrée</td></tr>';
+    return list.map(function(item){
+      var catLabel=TRT_CAT_LABELS[item.cat]||item.cat;
+      var catColor=TRT_CAT_COLORS[item.cat]||'#94a3b8';
+      return '<tr style="border-bottom:1px solid #e5e7eb;">'
+        +'<td style="padding:8px;font-size:12px;color:#64748b;">'+item.heure+'</td>'
+        +'<td style="padding:8px;"><span style="background:'+catColor+'22;color:'+catColor+';font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;">'+catLabel+'</span></td>'
+        +'<td style="padding:8px;font-size:13px;font-weight:600;">'+item.desc+'</td>'
+        +'<td style="padding:8px;text-align:center;font-size:13px;font-weight:800;color:#f59e0b;">'+(item.qty!=null?'×'+item.qty:'—')+'</td>'
+        +'</tr>';
+    }).join('');
+  }
+
+  var totalMatin=matin.reduce(function(a,x){return a+(x.qty||0);},0);
+  var totalSoir=soir.reduce(function(a,x){return a+(x.qty||0);},0);
+
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Tâches Traitées — '+dateStr+'</title>';
+  html+='<style>body{font-family:Arial,sans-serif;padding:20px;max-width:800px;margin:0 auto;color:#111;}';
+  html+='h2{color:#0033A0;font-size:16px;margin:20px 0 8px;}';
+  html+='table{width:100%;border-collapse:collapse;margin-bottom:16px;}';
+  html+='th{background:#0033A0;color:#fff;padding:8px;text-align:left;font-size:12px;}';
+  html+='.btn{background:#0033A0;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;margin:8px 4px 16px 0;}';
+  html+='@media print{.btn{display:none!important;}}</style></head><body>';
+
+  // Header
+  html+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">';
+  html+='<div style="background:#e8041b;border-radius:6px;padding:4px 8px 4px 4px;display:inline-flex;align-items:center;gap:5px;"><div style="background:#fff;border-radius:4px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 40 40"><ellipse cx="20" cy="13" rx="7" ry="11" fill="#e07b20" transform="rotate(-15 20 13)"/><ellipse cx="27" cy="23" rx="6" ry="10" fill="#3a9e3f" transform="rotate(30 27 23)"/><ellipse cx="13" cy="25" rx="6" ry="9" fill="#f0c020" transform="rotate(-30 13 25)"/></svg></div><span style="font-size:13px;font-weight:900;color:#fff;">mg</span></div>';
+  html+='<div><div style="font-size:18px;font-weight:800;color:#0033A0;">📋 Tâches Traitées</div>';
+  html+='<div style="font-size:12px;color:#64748b;">'+dateStr+' · MG MAXI DENDEN · '+(prof&&prof.name?prof.name:'')+'</div></div></div>';
+
+  html+='<button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>';
+  html+='<button class="btn" style="background:#64748b;" onclick="window.close()">✕ Fermer</button>';
+
+  // Résumé
+  html+='<div style="display:flex;gap:10px;margin-bottom:16px;">';
+  html+='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 16px;"><div style="font-size:11px;color:#64748b;">Total actions</div><div style="font-size:22px;font-weight:800;color:#16a34a;">'+(matin.length+soir.length)+'</div></div>';
+  html+='<div style="background:#fefce8;border:1px solid #fde68a;border-radius:10px;padding:10px 16px;"><div style="font-size:11px;color:#64748b;">Qtés matin</div><div style="font-size:22px;font-weight:800;color:#d97706;">'+totalMatin+'</div></div>';
+  html+='<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 16px;"><div style="font-size:11px;color:#64748b;">Qtés soir</div><div style="font-size:22px;font-weight:800;color:#1d4ed8;">'+totalSoir+'</div></div>';
+  html+='</div>';
+
+  // Matin table
+  html+='<h2>🌅 Équipe Matin ('+matin.length+' action'+(matin.length>1?'s':'')+')</h2>';
+  html+='<table><thead><tr><th style="width:60px;">Heure</th><th style="width:130px;">Catégorie</th><th>Description</th><th style="width:60px;">Qté</th></tr></thead><tbody>'+buildRows(matin)+'</tbody></table>';
+
+  // Soir table
+  html+='<h2>🌆 Équipe Soir ('+soir.length+' action'+(soir.length>1?'s':'')+')</h2>';
+  html+='<table><thead><tr><th style="width:60px;">Heure</th><th style="width:130px;">Catégorie</th><th>Description</th><th style="width:60px;">Qté</th></tr></thead><tbody>'+buildRows(soir)+'</tbody></table>';
+
+  html+='<p style="margin-top:14px;font-size:10px;color:#9ca3af;">Généré le '+new Date().toLocaleDateString('fr-FR')+' à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'</p>';
+  html+='</body></html>';
+
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='taches_traitees_'+dk+'.html';
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  showT('📄','Fichier téléchargé ! Ouvrez-le pour imprimer.');
+}
+// ══════════════════════════════════════════════════════════════
 
 function toggleBoost(el){
   el.classList.toggle('open');
