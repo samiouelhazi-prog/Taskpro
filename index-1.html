@@ -1020,6 +1020,21 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div class="cards-stack" id="cardsStack"></div>
   </div>
 
+  <!-- ══ ACCÈS RAPIDE — TÂCHES TRAITÉES ══ -->
+  <div style="margin:4px 16px 14px;" onclick="goPage('tachesTraitees');openTachesTraitees()">
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(99,102,241,.06));border:1px solid rgba(251,191,36,.22);border-radius:18px;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.5),rgba(99,102,241,.4),transparent);"></div>
+      <div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,rgba(251,191,36,.18),rgba(99,102,241,.12));border:1px solid rgba(251,191,36,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;">📋</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:14px;font-weight:900;color:#f8faff;font-family:'Syne';letter-spacing:-.1px;">Tâches Traitées</div>
+        <div style="font-size:10px;color:rgba(148,163,184,.7);margin-top:2px;">Journal des actions effectuées · matin / soir</div>
+        <div style="display:inline-flex;align-items:center;gap:4px;margin-top:5px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.28);border-radius:99px;padding:2px 9px;">
+          <span style="font-size:9px;font-weight:800;color:#fbbf24;" id="homeTrtCount">0 action</span>
+        </div>
+      </div>
+      <svg fill="none" stroke="rgba(251,191,36,.5)" stroke-width="2.5" width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
 
   <!-- NOTE PERSONNELLE -->
   <div style="margin:0 16px 16px;">
@@ -1277,24 +1292,24 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div onclick="goPage('offresCommerciales')" style="background:linear-gradient(145deg,#1e1a0e,#78350f);border:1px solid rgba(251,191,36,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
         <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🏷️</div>
         <div style="font-size:28px;line-height:1;">🏷️</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Engagement Commercial</div>
+        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Engagement</div>
         <span id="tileOCBadge" style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.35);border-radius:20px;padding:3px 8px;font-size:9px;color:#fbbf24;font-weight:700;align-self:flex-start;">9 rayons</span>
       </div>
 
-      <!-- 8 — PLAN TG -->
-      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c1a2e,#1e3a5f);border:1px solid rgba(56,189,248,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-10px;font-size:52px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.1;line-height:1;color:#38bdf8;pointer-events:none;">TG</div>
-        <div style="font-size:13px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#38bdf8;letter-spacing:1px;">TG</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Plan TG — Mise en Avant</div>
-        <span id="tileTGBadge" style="background:rgba(56,189,248,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#7dd3fc;font-weight:700;align-self:flex-start;">Mise en Avant</span>
-      </div>
-
-      <!-- 9 — TAUX DE SERVICE -->
+      <!-- 8 — TAUX DE SERVICE -->
       <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#064e3b,#047857);border:1px solid rgba(16,185,129,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
         <div style="position:absolute;right:-4px;bottom:-10px;font-size:64px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#10b981;pointer-events:none;">%</div>
         <div style="font-size:28px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#10b981;">%</div>
         <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Taux de Service</div>
         <span id="tileTSBadge" style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#a7f3d0;font-weight:700;align-self:flex-start;">KPI</span>
+      </div>
+
+      <!-- 9 — PLAN TG -->
+      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c1a2e,#1e3a5f);border:1px solid rgba(56,189,248,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
+        <div style="position:absolute;right:-8px;bottom:-10px;font-size:52px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.1;line-height:1;color:#38bdf8;pointer-events:none;">TG</div>
+        <div style="font-size:13px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#38bdf8;letter-spacing:1px;">TG</div>
+        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Plan TG — Mise en Avant</div>
+        <span id="tileTGBadge" style="background:rgba(56,189,248,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#7dd3fc;font-weight:700;align-self:flex-start;">Mise en Avant</span>
       </div>
 
       <!-- 10 — ADMIN -->
@@ -3286,6 +3301,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:8px;letter-spacing:.4px;">NOUVELLE ACTION TRAITÉE</div>
 
       <!-- Catégorie -->
+      <div style="font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;">— Opérations Rayon —</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;" id="trtCatBtns">
         <button onclick="setTrtCat(this,'mise_rayon')" data-cat="mise_rayon"
           style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#60a5fa;">🧺 Mise en rayon</button>
@@ -3299,6 +3315,28 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
           style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🧹 Nettoyage</button>
         <button onclick="setTrtCat(this,'reception')" data-cat="reception"
           style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Réception</button>
+        <button onclick="setTrtCat(this,'anomalie')" data-cat="anomalie"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🐠 Anomalie Poiss/FLEG</button>
+
+        <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Commercial —</div>
+        <button onclick="setTrtCat(this,'ctrl_catalogue')" data-cat="ctrl_catalogue"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📒 Contrôle Catalogue</button>
+        <button onclick="setTrtCat(this,'engagement')" data-cat="engagement"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🏷️ Traitement Engagement</button>
+        <button onclick="setTrtCat(this,'plan_tg')" data-cat="plan_tg"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📌 Plan TG</button>
+        <button onclick="setTrtCat(this,'affiches')" data-cat="affiches"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🖼️ Affiches TG/Podium</button>
+        <button onclick="setTrtCat(this,'taux_service')" data-cat="taux_service"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Taux de Service</button>
+
+        <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Administratif —</div>
+        <button onclick="setTrtCat(this,'avoir')" data-cat="avoir"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📄 Demande d'Avoir</button>
+        <button onclick="setTrtCat(this,'mail')" data-cat="mail"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📧 Mail envoyé</button>
+        <button onclick="setTrtCat(this,'reclamation')" data-cat="reclamation"
+          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📢 Réclamation envoyée</button>
         <button onclick="setTrtCat(this,'autre')" data-cat="autre"
           style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">✏️ Autre</button>
       </div>
@@ -6132,9 +6170,72 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div id="catErratumList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;"></div>
     <button onclick="addCatErratum()" style="width:100%;background:rgba(251,146,60,.08);border:1px dashed rgba(251,146,60,.35);border-radius:12px;padding:9px;color:#fb923c;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:14px;">+ Ajouter un erratum</button>
 
-    <!-- Actions -->
+    <!-- ══ RECOMMANDATIONS CATALOGUE ══ -->
+    <div style="margin-bottom:18px;">
+      <!-- Bouton accordéon -->
+      <div onclick="(function(el){el.classList.toggle('open');var body=document.getElementById('catRecoBody');var arr=document.getElementById('catRecoArr');body.style.display=el.classList.contains('open')?'block':'none';arr.style.transform=el.classList.contains('open')?'rotate(90deg)':'rotate(0deg)';})(this)"
+        style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(5,150,105,.05));border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:12px 14px;cursor:pointer;user-select:none;">
+        <div style="width:34px;height:34px;border-radius:10px;background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.35);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">✅</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:900;color:#f8faff;font-family:'Syne';">Recommandations Catalogue</div>
+          <div style="font-size:10px;color:rgba(52,211,153,.7);margin-top:1px;">5 points clés pour garantir le succès</div>
+        </div>
+        <div id="catRecoArr" style="color:rgba(52,211,153,.6);font-size:18px;transition:transform .25s;flex-shrink:0;">›</div>
+      </div>
+
+      <!-- Corps accordéon -->
+      <div id="catRecoBody" style="display:none;background:rgba(255,255,255,.025);border:1px solid rgba(16,185,129,.15);border-top:none;border-radius:0 0 14px 14px;overflow:hidden;">
+
+        <!-- Point 1 -->
+        <div style="display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#1d4ed8,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;">1</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:800;color:#93c5fd;margin-bottom:3px;">📊 Extraction Résultats AC</div>
+            <div style="font-size:11px;color:rgba(148,163,184,.8);line-height:1.5;">Extraire le fichier résultats des actions commerciales et lancer les besoins supplémentaires si nécessaire.</div>
+          </div>
+        </div>
+
+        <!-- Point 2 -->
+        <div style="display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#b45309,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;">2</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:800;color:#fcd34d;margin-bottom:3px;">⭐ Mise en Avant Articles Phares</div>
+            <div style="font-size:11px;color:rgba(148,163,184,.8);line-height:1.5;">Mettre en avant et théâtraliser les articles phares du catalogue pour maximiser la visibilité client.</div>
+          </div>
+        </div>
+
+        <!-- Point 3 -->
+        <div style="display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#065f46,#10b981);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;">3</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:800;color:#6ee7b7;margin-bottom:3px;">🏷️ Articles MDD Catalogue</div>
+            <div style="font-size:11px;color:rgba(148,163,184,.8);line-height:1.5;">Mettre en avant les articles MDD communiqués au catalogue conformément aux directives.</div>
+          </div>
+        </div>
+
+        <!-- Point 4 -->
+        <div style="display:flex;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.05);">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#6d28d9,#a855f7);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;">4</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:800;color:#c4b5fd;margin-bottom:3px;">🛒 Passation Commandes MBA</div>
+            <div style="font-size:11px;color:rgba(148,163,184,.8);line-height:1.5;">S'assurer de la passation des commandes MBA avec un <span style="font-weight:800;color:#a78bfa;">taux de passation 100%</span>.</div>
+          </div>
+        </div>
+
+        <!-- Point 5 -->
+        <div style="display:flex;gap:12px;padding:13px 14px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#be185d,#ec4899);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;flex-shrink:0;">5</div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:800;color:#f9a8d4;margin-bottom:3px;">🖼️ Signalétiques & Charte</div>
+            <div style="font-size:11px;color:rgba(148,163,184,.8);line-height:1.5;">Mettre en place les signalétiques : <span style="color:#f472b6;font-weight:700;">super prix</span>, affiches, points fidélité en respectant strictement la charte graphique.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ══ FIN RECOMMANDATIONS ══ -->
     <div id="catDelRow" style="display:none;margin-bottom:8px;">
-      <button onclick="delCatalogue(_catEid);closeM('catFormMov')" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-family:'IBM Plex Sans';font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer ce catalogue</button>
+      <button onclick="showConfirm('🗑️ Supprimer','Supprimer ce catalogue définitivement ?',function(){delCatalogue(_catEid);closeM('catFormMov');})" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-family:'IBM Plex Sans';font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer ce catalogue</button>
     </div>
     <div class="macts">
       <button class="mb sec" onclick="closeM('catFormMov')">Annuler</button>
@@ -6606,12 +6707,22 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
     </div>
 
-    <div onclick="goPage('picklejar')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+    <div onclick="goPage('picklejar')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
       <div style="font-size:26px;">🫙</div>
       <div style="flex:1;">
         <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-4</div>
         <div style="font-size:14px;font-weight:900;color:#fff;">Méthode Pickle Jar</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Gros cailloux d'abord · Prioriser l'essentiel</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('listeNonFaire')" style="background:linear-gradient(135deg,#1a0a1a,#4a0e4e);border:1px solid rgba(236,72,153,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🚫</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#ec4899;margin-bottom:2px;">IV-5</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Liste "À Ne Pas Faire"</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Éliminer le non-essentiel · Déléguer le superflu</div>
       </div>
       <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
     </div>
@@ -6640,6 +6751,44 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         <div style="font-size:10px;font-weight:700;color:#0ea5e9;margin-bottom:2px;">V-2</div>
         <div style="font-size:14px;font-weight:900;color:#fff;">GTD — Faire Avancer les Choses</div>
         <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Collecter · Clarifier · Organiser · Engager</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ VI. ANTI-PROCRASTINATION ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(251,113,133,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#fb7185;letter-spacing:1.5px;text-transform:uppercase;">VI. Anti-Procrastination & Engagement</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(251,113,133,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Vaincre le blocage, agir maintenant, rester accountable</div>
+
+    <div onclick="goPage('regle5sec')" style="background:linear-gradient(135deg,#1a0010,#500020);border:1px solid rgba(251,113,133,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⚡</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#fb7185;margin-bottom:2px;">VI-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Règle des 5 Secondes</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">5-4-3-2-1 → Action immédiate · Mel Robbins</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('visualisationConseq')" style="background:linear-gradient(135deg,#1a0010,#500020);border:1px solid rgba(251,113,133,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🪞</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#fb7185;margin-bottom:2px;">VI-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Visualisation des Conséquences</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Imaginer le coût de l'inaction · Se motiver</div>
+      </div>
+      <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('partenaire')" style="background:linear-gradient(135deg,#1a0010,#500020);border:1px solid rgba(251,113,133,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🤝</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#fb7185;margin-bottom:2px;">VI-3</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Partenaire de Responsabilisation</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:1px;">Partager ses objectifs · Rester accountable</div>
       </div>
       <div style="color:rgba(255,255,255,.4);font-size:18px;">›</div>
     </div>
@@ -8238,6 +8387,193 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     IV-5 — LISTE "À NE PAS FAIRE"
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgListeNonFaire">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#ec4899;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🚫 À Ne Pas Faire</div>
+    <button onclick="npfOpenForm()" style="background:rgba(236,72,153,.2);border:1.5px solid rgba(236,72,153,.5);color:#ec4899;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div style="height:3px;background:linear-gradient(90deg,#831843,#ec4899,#f9a8d4);flex-shrink:0;"></div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,rgba(236,72,153,.12),rgba(190,24,93,.06));border:1px solid rgba(236,72,153,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="font-size:28px;">🚫</div>
+        <div>
+          <div style="font-size:14px;font-weight:900;color:#f9a8d4;font-family:'Syne';">Liste "À Ne Pas Faire"</div>
+          <div style="font-size:10px;color:rgba(249,168,212,.6);">Ce que tu refuses de faire · Libère de l'énergie</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">Identifie les tâches, habitudes ou activités qui <b style="color:#f9a8d4;">gaspillent ton temps</b> sans valeur ajoutée. Ce que tu décides de <b style="color:var(--t1);">ne pas faire</b> est aussi important que ce que tu fais.</div>
+    </div>
+
+    <!-- Formulaire ajout -->
+    <div id="npfForm" style="display:none;background:rgba(236,72,153,.07);border:1.5px solid rgba(236,72,153,.3);border-radius:16px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:800;color:#ec4899;margin-bottom:10px;">➕ Ajouter un interdit</div>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Activité / habitude à éviter *</label>
+      <input id="npfTitre" class="fi" placeholder="Ex: Checker les mails toutes les 5 minutes..." style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Catégorie</label>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
+        <button type="button" onclick="npfSetCat(this,'distraction')" data-cat="distraction" style="flex:1;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;color:#f87171;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">📱 Distraction</button>
+        <button type="button" onclick="npfSetCat(this,'delegation')" data-cat="delegation" style="flex:1;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:8px;color:#fbbf24;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">🤲 À déléguer</button>
+        <button type="button" onclick="npfSetCat(this,'habitude')" data-cat="habitude" style="flex:1;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);border-radius:8px;color:#c084fc;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">🔄 Mauvaise hab.</button>
+        <button type="button" onclick="npfSetCat(this,'perte')" data-cat="perte" style="flex:1;background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.25);border-radius:8px;color:#f472b6;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">⏳ Perte de temps</button>
+      </div>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Pourquoi l'éviter ?</label>
+      <textarea id="npfRaison" class="fi" placeholder="Raison, impact négatif..." style="width:100%;min-height:60px;resize:none;box-sizing:border-box;margin-bottom:10px;"></textarea>
+      <div style="display:flex;gap:8px;">
+        <button onclick="npfOpenForm()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+        <button onclick="npfSave()" style="flex:2;background:linear-gradient(135deg,#831843,#ec4899);border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;background:rgba(236,72,153,.08);border:1px solid rgba(236,72,153,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono';color:#ec4899;" id="npfCountTotal">0</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;">Interdits</div>
+      </div>
+      <div style="flex:1;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono';color:#22c55e;" id="npfCountResiste">0</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.5px;">Résistances</div>
+      </div>
+    </div>
+
+    <div id="npfList"></div>
+    <div id="npfEmpty" style="text-align:center;padding:40px 20px;color:var(--t3);">
+      <div style="font-size:48px;margin-bottom:12px;">🚫</div>
+      <div style="font-size:13px;font-weight:700;color:var(--t2);">Aucun interdit défini</div>
+      <div style="font-size:11px;margin-top:6px;">Appuyez sur + pour commencer</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     VI-1 — RÈGLE DES 5 SECONDES
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgRegle5sec">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb7185;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">⚡ Règle des 5 Secondes</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div style="height:3px;background:linear-gradient(90deg,#9f1239,#fb7185,#fda4af);flex-shrink:0;"></div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,rgba(251,113,133,.12),rgba(159,18,57,.06));border:1px solid rgba(251,113,133,.3);border-radius:16px;padding:16px;margin-bottom:16px;">
+      <div style="font-size:11px;color:var(--t2);line-height:1.7;">La règle de <b style="color:#fb7185;">Mel Robbins</b> : dès que tu ressens l'envie d'agir, compte <b style="color:var(--t1);">5-4-3-2-1</b> et lance-toi immédiatement. Avant que ton cerveau ne trouve une excuse.</div>
+    </div>
+
+    <!-- Bouton déclencheur -->
+    <div style="text-align:center;margin-bottom:20px;">
+      <div id="r5sDisplay" style="font-size:72px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#fb7185;line-height:1;margin-bottom:16px;min-height:88px;display:flex;align-items:center;justify-content:center;text-shadow:0 0 40px rgba(251,113,133,.4);">GO</div>
+      <button id="r5sBtn" onclick="r5sStart()" style="background:linear-gradient(135deg,#9f1239,#e11d48,#fb7185);border:none;color:#fff;font-size:18px;font-weight:900;padding:18px 48px;border-radius:99px;cursor:pointer;font-family:'Syne',sans-serif;box-shadow:0 8px 32px rgba(251,113,133,.4);letter-spacing:.5px;transition:transform .15s;">⚡ LANCER LE COMPTE</button>
+      <div id="r5sActionInput" style="display:none;margin-top:14px;">
+        <input id="r5sAction" class="fi" placeholder="Quelle action as-tu accomplie ?" style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+        <button onclick="r5sLog()" style="width:100%;background:rgba(251,113,133,.15);border:1.5px solid rgba(251,113,133,.4);color:#fb7185;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">✅ Enregistrer cette victoire</button>
+      </div>
+    </div>
+
+    <!-- Historique -->
+    <div style="font-size:10px;font-weight:800;color:rgba(251,113,133,.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">🏆 Victoires du jour</div>
+    <div id="r5sList"></div>
+    <div id="r5sEmpty" style="text-align:center;padding:20px;color:var(--t3);font-size:11px;">Aucune victoire enregistrée · Lance ton premier compte !</div>
+
+    <!-- Principe -->
+    <div style="background:rgba(251,113,133,.06);border:1px dashed rgba(251,113,133,.3);border-radius:12px;padding:12px;margin-top:14px;">
+      <div style="font-size:10px;font-weight:800;color:#fb7185;margin-bottom:6px;">💡 Pourquoi ça marche ?</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">En comptant à rebours, tu <b style="color:var(--t1);">interromps le circuit de la procrastination</b> dans ton cortex préfrontal et actives ton instinct d'action avant que la peur ne prenne le dessus.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     VI-2 — VISUALISATION DES CONSÉQUENCES
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgVisualisationConseq">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb7185;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🪞 Visualisation</div>
+    <button onclick="visOpenForm()" style="background:rgba(251,113,133,.2);border:1.5px solid rgba(251,113,133,.5);color:#fb7185;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div style="height:3px;background:linear-gradient(90deg,#9f1239,#fb7185,#fda4af);flex-shrink:0;"></div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,rgba(251,113,133,.1),rgba(159,18,57,.05));border:1px solid rgba(251,113,133,.25);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--t2);line-height:1.7;">Prends 1 minute pour <b style="color:#fb7185;">visualiser les conséquences négatives</b> de ne pas accomplir une tâche. Ce déclencheur émotionnel est <b style="color:var(--t1);">plus puissant</b> que n'importe quelle motivation positive.</div>
+    </div>
+
+    <!-- Formulaire -->
+    <div id="visForm" style="display:none;background:rgba(251,113,133,.07);border:1.5px solid rgba(251,113,133,.3);border-radius:16px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:800;color:#fb7185;margin-bottom:10px;">🪞 Nouvelle visualisation</div>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Tâche / objectif *</label>
+      <input id="visTache" class="fi" placeholder="Ex: Terminer le rapport mensuel..." style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Si je ne le fais pas… (conséquences négatives)</label>
+      <textarea id="visConseq" class="fi" placeholder="Décris précisément ce qui se passera : retard, problème, déception, stress..." style="width:100%;min-height:80px;resize:none;box-sizing:border-box;margin-bottom:8px;border-color:rgba(239,68,68,.3);"></textarea>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Délai critique</label>
+      <input type="date" id="visDate" class="fi" style="width:100%;box-sizing:border-box;margin-bottom:10px;color-scheme:dark;">
+      <div style="display:flex;gap:8px;">
+        <button onclick="visOpenForm()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+        <button onclick="visSave()" style="flex:2;background:linear-gradient(135deg,#9f1239,#fb7185);border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+      </div>
+    </div>
+
+    <div id="visList"></div>
+    <div id="visEmpty" style="text-align:center;padding:40px 20px;color:var(--t3);">
+      <div style="font-size:48px;margin-bottom:12px;">🪞</div>
+      <div style="font-size:13px;font-weight:700;color:var(--t2);">Aucune visualisation</div>
+      <div style="font-size:11px;margin-top:6px;">Appuyez sur + pour ajouter</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     VI-3 — PARTENAIRE DE RESPONSABILISATION
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgPartenaire">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb7185;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🤝 Responsabilisation</div>
+    <button onclick="partOpenForm()" style="background:rgba(251,113,133,.2);border:1.5px solid rgba(251,113,133,.5);color:#fb7185;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+  </div>
+  <div style="height:3px;background:linear-gradient(90deg,#9f1239,#fb7185,#fda4af);flex-shrink:0;"></div>
+  <div class="scroll" style="padding:14px 14px 90px;">
+
+    <!-- Hero -->
+    <div style="background:linear-gradient(135deg,rgba(251,113,133,.1),rgba(159,18,57,.05));border:1px solid rgba(251,113,133,.25);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--t2);line-height:1.7;">Partage tes objectifs avec une personne de confiance. Savoir que quelqu'un <b style="color:#fb7185;">suit tes progrès</b> multiplie par 3 tes chances de réussir. C'est la science de l'accountability.</div>
+    </div>
+
+    <!-- Formulaire -->
+    <div id="partForm" style="display:none;background:rgba(251,113,133,.07);border:1.5px solid rgba(251,113,133,.3);border-radius:16px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:800;color:#fb7185;margin-bottom:10px;">🤝 Nouvel engagement</div>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Partenaire *</label>
+      <input id="partNom" class="fi" placeholder="Nom de la personne de confiance..." style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Mon objectif *</label>
+      <textarea id="partObjectif" class="fi" placeholder="Décris clairement ce que tu t'engages à accomplir..." style="width:100%;min-height:70px;resize:none;box-sizing:border-box;margin-bottom:8px;"></textarea>
+      <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Date de point de suivi</label>
+      <input type="date" id="partDate" class="fi" style="width:100%;box-sizing:border-box;margin-bottom:10px;color-scheme:dark;">
+      <div style="display:flex;gap:8px;">
+        <button onclick="partOpenForm()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
+        <button onclick="partSave()" style="flex:2;background:linear-gradient(135deg,#9f1239,#fb7185);border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
+      </div>
+    </div>
+
+    <div id="partList"></div>
+    <div id="partEmpty" style="text-align:center;padding:40px 20px;color:var(--t3);">
+      <div style="font-size:48px;margin-bottom:12px;">🤝</div>
+      <div style="font-size:13px;font-weight:700;color:var(--t2);">Aucun engagement enregistré</div>
+      <div style="font-size:11px;margin-top:6px;">Appuyez sur + pour commencer</div>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 var _pinVal='',_pinMode='check',_pinUnlocked=false,_pinTemp='';
@@ -8926,7 +9262,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',tachesTraitees:'pgTachesTraitees',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',devis:'pgDevis',factureSteg:'pgFactureSteg',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg'};
+  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',tachesTraitees:'pgTachesTraitees',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',briefing:'pgBriefing',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',inventaireMag:'pgInventaireMag',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',devis:'pgDevis',factureSteg:'pgFactureSteg',signatureJournee:'pgSignatureJournee',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',briefing:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -8941,7 +9277,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','inventaireMag','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','signatureJournee','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','inventaireMag','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','signatureJournee','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeInvBadge();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -9825,6 +10161,15 @@ var TRT_CAT_LABELS={
   dlc:'⏰ DLC',
   nettoyage:'🧹 Nettoyage',
   reception:'📦 Réception',
+  anomalie:'🐠 Anomalie Poiss/FLEG',
+  ctrl_catalogue:'📒 Contrôle Catalogue',
+  engagement:'🏷️ Traitement Engagement',
+  plan_tg:'📌 Plan TG',
+  affiches:'🖼️ Affiches TG/Podium',
+  taux_service:'📦 Taux de Service',
+  avoir:'📄 Demande d\'Avoir',
+  mail:'📧 Mail envoyé',
+  reclamation:'📢 Réclamation envoyée',
   autre:'✏️ Autre'
 };
 var TRT_CAT_COLORS={
@@ -9834,6 +10179,15 @@ var TRT_CAT_COLORS={
   dlc:'#ef4444',
   nettoyage:'#22c55e',
   reception:'#06b6d4',
+  anomalie:'#f97316',
+  ctrl_catalogue:'#fbbf24',
+  engagement:'#eab308',
+  plan_tg:'#38bdf8',
+  affiches:'#ec4899',
+  taux_service:'#10b981',
+  avoir:'#818cf8',
+  mail:'#a855f7',
+  reclamation:'#f87171',
   autre:'#94a3b8'
 };
 
@@ -18929,7 +19283,7 @@ function renderCatalogue(){
       '<div style="display:flex;gap:6px;flex-shrink:0;">'+
       '<button onclick="event.stopPropagation();exportCatPDF(\''+c.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
       '<button onclick="event.stopPropagation();openCatalogueForm(\''+c.id+'\')" style="background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);color:#818cf8;font-size:11px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">✏️</button>'+
-      '<button onclick="event.stopPropagation();if(confirm(\'Supprimer ce catalogue ?\'))delCatalogue(\''+c.id+'\')" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:14px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">🗑️</button>'+
+      '<button onclick="event.stopPropagation();showConfirm(\'🗑️ Supprimer\',\'Supprimer le catalogue <b>'+c.nom+'</b> ?\',function(){delCatalogue(\''+c.id+'\');})" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:14px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">🗑️</button>'+
       '</div>'+
       '</div>'+
       '<div style="display:flex;gap:8px;margin-top:10px;">'+
@@ -19116,6 +19470,20 @@ function openCatalogueDetail(id){
   var html='<div class="mhdl"></div>'+
     '<div class="mtit" style="font-size:16px;">📒 '+escH(c.nom)+'</div>'+
     '<div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;">📅 '+dateStr+'</div>'+
+
+    // ── POINTAGE CATALOGUE ──
+    '<div style="background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(99,102,241,.05));border:1px solid rgba(56,189,248,.25);border-radius:16px;overflow:hidden;margin-bottom:18px;">'+
+      '<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid rgba(56,189,248,.12);">'+
+        '<div style="font-size:20px;">📋</div>'+
+        '<div style="flex:1;">'+
+          '<div style="font-size:13px;font-weight:900;color:#f8faff;font-family:\'Syne\';">Pointage Catalogue</div>'+
+          '<div style="font-size:10px;color:rgba(56,189,248,.7);margin-top:1px;" id="ptgScoreLabel_'+c.id+'">—</div>'+
+        '</div>'+
+        '<div id="ptgScoreBadge_'+c.id+'" style="font-size:16px;font-weight:900;font-family:\'IBM Plex Mono\';color:#38bdf8;">—</div>'+
+      '</div>'+
+      catBuildPointage(c.id)+
+    '</div>'+
+
     '<div style="font-size:12px;font-weight:900;color:#f87171;margin-bottom:8px;">⚠️ Ruptures par Rayon</div>'+
     rupturesHTML+
     '<div style="font-size:12px;font-weight:900;color:#fb923c;margin:14px 0 8px;">🖨️ Erratums</div>'+
@@ -19125,7 +19493,100 @@ function openCatalogueDetail(id){
     '<button class="mb" onclick="closeM(\'catDetailMov\');openCatalogueForm(\''+c.id+'\')" style="flex:1;">✏️ Modifier</button>'+
     '</div>';
   document.getElementById('catDetailContent').innerHTML=html;
+  catRefreshScore(c.id);
   var el=document.getElementById('catDetailMov');el.style.display='';el.classList.add('on');
+}
+
+// ══ POINTAGE CATALOGUE ══
+var CAT_PTG_ITEMS = [
+  { key:'affiches_tg',    icon:'🖼️', label:'Affiches TG accrochées',                    color:'#38bdf8' },
+  { key:'affiches_pod',   icon:'🏆', label:'Affiches Podiums collées',                   color:'#a78bfa' },
+  { key:'prix_reduc',     icon:'💰', label:'Prix de réduction appliqués sur les produits',color:'#fbbf24' },
+  { key:'super_prix',     icon:'⭐', label:'Super Prix mis en place',                     color:'#f97316' },
+  { key:'mba_commandes',  icon:'🛒', label:'Produits MBA commandés (taux 100%)',          color:'#34d399' },
+  { key:'mdd_presents',   icon:'🏷️', label:'Produits MDD du catalogue présents',          color:'#ec4899' }
+];
+
+function catPtgKey(catId){ return (typeof SK!=='undefined'?SK:'tp')+'_catptg_'+catId; }
+
+function loadCatPtg(catId){
+  try{ return JSON.parse(localStorage.getItem(catPtgKey(catId))||'{}'); }catch(e){ return {}; }
+}
+function saveCatPtg(catId, data){
+  try{ localStorage.setItem(catPtgKey(catId), JSON.stringify(data)); }catch(e){}
+}
+
+function catTogglePtg(catId, itemKey, val){
+  var data = loadCatPtg(catId);
+  if(!data[itemKey]) data[itemKey]={};
+  data[itemKey].val = val;
+  if(val === 'oui') data[itemKey].raison = '';
+  saveCatPtg(catId, data);
+  // Update button styles
+  var btnO = document.getElementById('ptgO_'+catId+'_'+itemKey);
+  var btnN = document.getElementById('ptgN_'+catId+'_'+itemKey);
+  var rBox = document.getElementById('ptgR_'+catId+'_'+itemKey);
+  if(btnO){ btnO.style.background = val==='oui'?'rgba(52,211,153,.3)':'rgba(255,255,255,.06)'; btnO.style.borderColor = val==='oui'?'#34d399':'rgba(255,255,255,.12)'; btnO.style.color = val==='oui'?'#34d399':'#64748b'; }
+  if(btnN){ btnN.style.background = val==='non'?'rgba(248,113,113,.25)':'rgba(255,255,255,.06)'; btnN.style.borderColor = val==='non'?'#f87171':'rgba(255,255,255,.12)'; btnN.style.color = val==='non'?'#f87171':'#64748b'; }
+  if(rBox){ rBox.style.display = val==='non'?'block':'none'; }
+  catRefreshScore(catId);
+}
+
+function catSavePtgRaison(catId, itemKey, val){
+  var data = loadCatPtg(catId);
+  if(!data[itemKey]) data[itemKey]={};
+  data[itemKey].raison = val;
+  saveCatPtg(catId, data);
+}
+
+function catRefreshScore(catId){
+  var data = loadCatPtg(catId);
+  var total = CAT_PTG_ITEMS.length;
+  var done = CAT_PTG_ITEMS.filter(function(it){ return data[it.key] && data[it.key].val === 'oui'; }).length;
+  var missing = CAT_PTG_ITEMS.filter(function(it){ return data[it.key] && data[it.key].val === 'non'; }).length;
+  var pending = total - done - missing;
+  var pct = Math.round(done/total*100);
+  var badge = document.getElementById('ptgScoreBadge_'+catId);
+  var lbl   = document.getElementById('ptgScoreLabel_'+catId);
+  if(badge){ badge.textContent = pct+'%'; badge.style.color = pct===100?'#34d399':pct>=50?'#fbbf24':'#f87171'; }
+  if(lbl){   lbl.textContent   = done+' OK · '+missing+' Non · '+pending+' en attente'; }
+}
+
+function catBuildPointage(catId){
+  var data = loadCatPtg(catId);
+  var html = '<div style="padding:10px 14px;display:flex;flex-direction:column;gap:2px;">';
+  CAT_PTG_ITEMS.forEach(function(it){
+    var d = data[it.key]||{};
+    var isOui = d.val==='oui';
+    var isNon = d.val==='non';
+    html +=
+      '<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">'+
+        '<div style="display:flex;align-items:center;gap:10px;">'+
+          '<div style="font-size:18px;flex-shrink:0;">'+it.icon+'</div>'+
+          '<div style="flex:1;font-size:12px;font-weight:700;color:#e2e8f0;line-height:1.3;">'+it.label+'</div>'+
+          '<div style="display:flex;gap:6px;flex-shrink:0;">'+
+            '<button id="ptgO_'+catId+'_'+it.key+'" onclick="catTogglePtg(\''+catId+'\',\''+it.key+'\',\'oui\')" '+
+              'style="padding:5px 12px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;transition:all .15s;'+
+              'background:'+(isOui?'rgba(52,211,153,.3)':'rgba(255,255,255,.06)')+';'+
+              'border:1.5px solid '+(isOui?'#34d399':'rgba(255,255,255,.12)')+';'+
+              'color:'+(isOui?'#34d399':'#64748b')+';'+
+              '">✅ Oui</button>'+
+            '<button id="ptgN_'+catId+'_'+it.key+'" onclick="catTogglePtg(\''+catId+'\',\''+it.key+'\',\'non\')" '+
+              'style="padding:5px 12px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;transition:all .15s;'+
+              'background:'+(isNon?'rgba(248,113,113,.25)':'rgba(255,255,255,.06)')+';'+
+              'border:1.5px solid '+(isNon?'#f87171':'rgba(255,255,255,.12)')+';'+
+              'color:'+(isNon?'#f87171':'#64748b')+';'+
+              '">❌ Non</button>'+
+          '</div>'+
+        '</div>'+
+        '<div id="ptgR_'+catId+'_'+it.key+'" style="display:'+(isNon?'block':'none')+';margin-top:7px;">'+
+          '<textarea placeholder="Raison / explication…" oninput="catSavePtgRaison(\''+catId+'\',\''+it.key+'\',this.value)" '+
+            'style="width:100%;box-sizing:border-box;min-height:54px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:8px 10px;color:#f8faff;font-size:12px;resize:none;font-family:\'IBM Plex Sans\',sans-serif;line-height:1.4;">'+escH(d.raison||'')+'</textarea>'+
+        '</div>'+
+      '</div>';
+  });
+  html += '</div>';
+  return html;
 }
 
 function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -23018,6 +23479,18 @@ document.addEventListener('DOMContentLoaded', function(){
   window.goPage = function(p){
     _origGP(p);
     if(p === 'tauxService') setTimeout(renderTSMain, 80);
+    if(p === 'home') setTimeout(function(){
+      var el = document.getElementById('homeTrtCount');
+      if(!el) return;
+      try {
+        var SKT2 = 'tp_trt';
+        var data2 = JSON.parse(localStorage.getItem(SKT2)||'{}');
+        var dk2 = tstr();
+        var day2 = data2[dk2]||{matin:[],soir:[]};
+        var total2 = (day2.matin||[]).length + (day2.soir||[]).length;
+        el.textContent = total2 > 0 ? total2 + ' action' + (total2>1?'s':'')+' aujourd\'hui' : '0 action aujourd\'hui';
+      } catch(e){}
+    }, 80);
     if(p === 'taches') setTimeout(function(){
       var data = loadTS();
       var today = tstr();
@@ -23039,5 +23512,323 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     }, 80);
   };
+  // Mise à jour du compteur TRT à l'ouverture initiale
+  setTimeout(function(){
+    var el = document.getElementById('homeTrtCount');
+    if(!el) return;
+    try {
+      var data2 = JSON.parse(localStorage.getItem('tp_trt')||'{}');
+      var dk2 = tstr();
+      var day2 = data2[dk2]||{matin:[],soir:[]};
+      var total2 = (day2.matin||[]).length + (day2.soir||[]).length;
+      el.textContent = total2 > 0 ? total2+' action'+(total2>1?'s':'')+' aujourd\'hui' : '0 action aujourd\'hui';
+    } catch(e){}
+  }, 300);
 });
+
+// ══════════════════════════════════════════════════════
+// IV-5 — LISTE "À NE PAS FAIRE"
+// ══════════════════════════════════════════════════════
+var _npfCat = 'distraction';
+function npfKey(){ return SK+'_npf'; }
+function npfLoad(){ try{return JSON.parse(localStorage.getItem(npfKey())||'[]');}catch(e){return[];} }
+function npfSaveData(d){ try{localStorage.setItem(npfKey(),JSON.stringify(d));}catch(e){} }
+
+function npfOpenForm(){
+  var f=document.getElementById('npfForm');
+  if(!f)return;
+  var open=f.style.display!=='none';
+  f.style.display=open?'none':'block';
+  if(!open){
+    document.getElementById('npfTitre').value='';
+    document.getElementById('npfRaison').value='';
+    _npfCat='distraction';
+    document.querySelectorAll('[data-cat]').forEach(function(b){
+      if(b.closest('#npfForm')){
+        b.style.opacity=b.dataset.cat==='distraction'?'1':'0.45';
+      }
+    });
+  }
+}
+function npfSetCat(btn,cat){
+  _npfCat=cat;
+  document.querySelectorAll('#npfForm [data-cat]').forEach(function(b){
+    b.style.opacity=b.dataset.cat===cat?'1':'0.45';
+  });
+}
+function npfSave(){
+  var titre=(document.getElementById('npfTitre').value||'').trim();
+  var raison=(document.getElementById('npfRaison').value||'').trim();
+  if(!titre){showT('⚠️','Décrivez l\'activité à éviter');return;}
+  var list=npfLoad();
+  list.unshift({id:uid(),titre:titre,raison:raison,cat:_npfCat,resiste:0,date:tstr()});
+  npfSaveData(list);
+  npfOpenForm();
+  npfRender();
+  showT('🚫','Interdit ajouté');
+}
+function npfResiste(id){
+  var list=npfLoad();
+  var item=list.find(function(x){return x.id===id;});
+  if(item){ item.resiste=(item.resiste||0)+1; npfSaveData(list); npfRender(); showT('💪','Tentation résistée !'); }
+}
+function npfDel(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet interdit ?',function(){
+    npfSaveData(npfLoad().filter(function(x){return x.id!==id;}));
+    npfRender(); showT('🗑️','Supprimé');
+  });
+}
+function npfRender(){
+  var list=npfLoad();
+  var el=document.getElementById('npfList');
+  var empty=document.getElementById('npfEmpty');
+  var ct=document.getElementById('npfCountTotal');
+  var cr=document.getElementById('npfCountResiste');
+  if(!el)return;
+  var totalResiste=list.reduce(function(s,x){return s+(x.resiste||0);},0);
+  if(ct)ct.textContent=list.length;
+  if(cr)cr.textContent=totalResiste;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var catCols={distraction:'#f87171',delegation:'#fbbf24',habitude:'#c084fc',perte:'#f472b6'};
+  var catIcos={distraction:'📱',delegation:'🤲',habitude:'🔄',perte:'⏳'};
+  el.innerHTML=list.map(function(item){
+    var col=catCols[item.cat]||'#94a3b8';
+    var ico=catIcos[item.cat]||'🚫';
+    return '<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-left:3px solid '+col+';border-radius:14px;padding:13px 14px;margin-bottom:8px;">'
+      +'<div style="display:flex;align-items:flex-start;gap:10px;">'
+      +'<div style="font-size:20px;flex-shrink:0;">🚫</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:13px;font-weight:800;color:#f8faff;line-height:1.3;">'+escH(item.titre)+'</div>'
+      +(item.raison?'<div style="font-size:10px;color:var(--t2);margin-top:3px;line-height:1.4;">'+escH(item.raison)+'</div>':'')
+      +'<div style="display:flex;align-items:center;gap:6px;margin-top:6px;">'
+      +'<span style="background:'+col+'22;border:1px solid '+col+'44;border-radius:6px;padding:2px 8px;font-size:9px;font-weight:700;color:'+col+';">'+ico+' '+(item.cat||'—')+'</span>'
+      +(item.resiste?'<span style="font-size:9px;color:#4ade80;font-weight:700;">💪 '+item.resiste+'× résisté</span>':'')
+      +'</div>'
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">'
+      +'<button onclick="npfResiste(\''+item.id+'\')" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:10px;font-weight:800;padding:5px 8px;border-radius:8px;cursor:pointer;white-space:nowrap;">💪 Résisté</button>'
+      +'<button onclick="npfDel(\''+item.id+'\')" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:16px;width:30px;height:26px;border-radius:8px;cursor:pointer;">×</button>'
+      +'</div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var origGP2=window.goPage;
+  window.goPage=function(p){
+    origGP2(p);
+    if(p==='listeNonFaire') setTimeout(npfRender,80);
+    if(p==='regle5sec') setTimeout(r5sRender,80);
+    if(p==='visualisationConseq') setTimeout(visRender,80);
+    if(p==='partenaire') setTimeout(partRender,80);
+  };
+});
+
+// ══════════════════════════════════════════════════════
+// VI-1 — RÈGLE DES 5 SECONDES
+// ══════════════════════════════════════════════════════
+var _r5sRunning=false, _r5sTimer=null;
+function r5sKey(){ return SK+'_r5s'; }
+function r5sLoad(){ try{return JSON.parse(localStorage.getItem(r5sKey())||'[]');}catch(e){return[];} }
+function r5sSaveData(d){ try{localStorage.setItem(r5sKey(),JSON.stringify(d));}catch(e){} }
+
+function r5sStart(){
+  if(_r5sRunning)return;
+  _r5sRunning=true;
+  var btn=document.getElementById('r5sBtn');
+  var disp=document.getElementById('r5sDisplay');
+  var actionInput=document.getElementById('r5sActionInput');
+  if(btn)btn.disabled=true;
+  var count=5;
+  var colors=['#f97316','#eab308','#22c55e','#3b82f6','#a855f7'];
+  if(disp){ disp.textContent=count; disp.style.color=colors[5-count]||'#fb7185'; }
+  _r5sTimer=setInterval(function(){
+    count--;
+    if(count>0){
+      if(disp){ disp.textContent=count; disp.style.color=colors[5-count]||'#fb7185'; }
+    } else {
+      clearInterval(_r5sTimer);
+      _r5sRunning=false;
+      if(disp){ disp.textContent='🚀'; disp.style.color='#22c55e'; disp.style.textShadow='0 0 40px rgba(34,197,94,.6)'; }
+      if(btn){ btn.disabled=false; btn.textContent='⚡ RELANCER'; }
+      if(actionInput)actionInput.style.display='block';
+      showT('🚀','LANCEZ-VOUS MAINTENANT !');
+    }
+  },1000);
+}
+function r5sLog(){
+  var action=(document.getElementById('r5sAction').value||'').trim();
+  if(!action){showT('⚠️','Décris l\'action accomplie');return;}
+  var list=r5sLoad();
+  list.unshift({id:uid(),action:action,date:tstr(),heure:(function(){var d=new Date();return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();})()});
+  r5sSaveData(list);
+  document.getElementById('r5sAction').value='';
+  document.getElementById('r5sActionInput').style.display='none';
+  var disp=document.getElementById('r5sDisplay');
+  if(disp){disp.textContent='GO';disp.style.color='#fb7185';disp.style.textShadow='0 0 40px rgba(251,113,133,.4)';}
+  var btn=document.getElementById('r5sBtn');
+  if(btn)btn.textContent='⚡ LANCER LE COMPTE';
+  r5sRender();
+  showT('🏆','Victoire enregistrée !');
+}
+function r5sRender(){
+  var list=r5sLoad().filter(function(x){return x.date===tstr();});
+  var el=document.getElementById('r5sList');
+  var empty=document.getElementById('r5sEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  el.innerHTML=list.map(function(item){
+    return '<div style="background:rgba(251,113,133,.07);border:1px solid rgba(251,113,133,.2);border-radius:12px;padding:11px 14px;margin-bottom:7px;display:flex;align-items:center;gap:10px;">'
+      +'<div style="font-size:18px;">🚀</div>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:13px;font-weight:700;color:#f8faff;">'+escH(item.action)+'</div>'
+      +'<div style="font-size:10px;color:var(--t2);margin-top:2px;">⏱ '+item.heure+'</div>'
+      +'</div>'
+      +'<span style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:3px 9px;font-size:10px;font-weight:800;color:#4ade80;">✅</span>'
+      +'</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// VI-2 — VISUALISATION DES CONSÉQUENCES
+// ══════════════════════════════════════════════════════
+function visKey(){ return SK+'_vis'; }
+function visLoad(){ try{return JSON.parse(localStorage.getItem(visKey())||'[]');}catch(e){return[];} }
+function visSaveData(d){ try{localStorage.setItem(visKey(),JSON.stringify(d));}catch(e){} }
+
+function visOpenForm(){
+  var f=document.getElementById('visForm');
+  if(!f)return;
+  var open=f.style.display!=='none';
+  f.style.display=open?'none':'block';
+  if(!open){
+    document.getElementById('visTache').value='';
+    document.getElementById('visConseq').value='';
+    document.getElementById('visDate').value='';
+  }
+}
+function visSave(){
+  var tache=(document.getElementById('visTache').value||'').trim();
+  var conseq=(document.getElementById('visConseq').value||'').trim();
+  var date=document.getElementById('visDate').value||'';
+  if(!tache||!conseq){showT('⚠️','Remplis la tâche et les conséquences');return;}
+  var list=visLoad();
+  list.unshift({id:uid(),tache:tache,conseq:conseq,date:date,created:tstr(),done:false});
+  visSaveData(list);
+  visOpenForm();
+  visRender();
+  showT('🪞','Visualisation ajoutée');
+}
+function visToggleDone(id){
+  var list=visLoad();
+  var item=list.find(function(x){return x.id===id;});
+  if(item){item.done=!item.done;visSaveData(list);visRender();}
+}
+function visDel(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette visualisation ?',function(){
+    visSaveData(visLoad().filter(function(x){return x.id!==id;}));
+    visRender();showT('🗑️','Supprimé');
+  });
+}
+function visRender(){
+  var list=visLoad();
+  var el=document.getElementById('visList');
+  var empty=document.getElementById('visEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  el.innerHTML=list.map(function(item){
+    var urgent=item.date&&item.date<=tstr();
+    return '<div style="background:rgba(255,255,255,.03);border:1px solid '+(urgent?'rgba(239,68,68,.35)':'rgba(255,255,255,.08)')+';border-radius:14px;padding:13px 14px;margin-bottom:8px;'+(item.done?'opacity:.5;':'')+'>">'
+      +'<div style="display:flex;align-items:flex-start;gap:10px;">'
+      +'<div style="font-size:20px;flex-shrink:0;">🪞</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:13px;font-weight:800;color:#f8faff;'+(item.done?'text-decoration:line-through;':'')+'">'+escH(item.tache)+'</div>'
+      +'<div style="background:rgba(239,68,68,.08);border-left:2px solid #f87171;border-radius:0 8px 8px 0;padding:7px 10px;margin-top:6px;">'
+      +'<div style="font-size:9px;font-weight:800;color:#f87171;margin-bottom:2px;">⚠️ SI JE NE LE FAIS PAS…</div>'
+      +'<div style="font-size:11px;color:rgba(248,113,113,.8);line-height:1.4;">'+escH(item.conseq)+'</div>'
+      +'</div>'
+      +(item.date?'<div style="font-size:10px;color:'+(urgent?'#f87171':'var(--t2)')+';margin-top:5px;font-weight:'+(urgent?'800':'500')+';">'+(urgent?'🔴 ':'📅 ')+'Délai : '+item.date.split('-').reverse().join('/')+'</div>':'')
+      +'</div>'
+      +'<div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">'
+      +'<button onclick="visToggleDone(\''+item.id+'\')" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:10px;font-weight:800;padding:5px 8px;border-radius:8px;cursor:pointer;">'+(item.done?'↩ Réactiver':'✅ Fait')+' </button>'
+      +'<button onclick="visDel(\''+item.id+'\')" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:16px;width:30px;height:26px;border-radius:8px;cursor:pointer;">×</button>'
+      +'</div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// VI-3 — PARTENAIRE DE RESPONSABILISATION
+// ══════════════════════════════════════════════════════
+function partKey(){ return SK+'_part'; }
+function partLoad(){ try{return JSON.parse(localStorage.getItem(partKey())||'[]');}catch(e){return[];} }
+function partSaveData(d){ try{localStorage.setItem(partKey(),JSON.stringify(d));}catch(e){} }
+
+function partOpenForm(){
+  var f=document.getElementById('partForm');
+  if(!f)return;
+  var open=f.style.display!=='none';
+  f.style.display=open?'none':'block';
+  if(!open){
+    document.getElementById('partNom').value='';
+    document.getElementById('partObjectif').value='';
+    document.getElementById('partDate').value='';
+  }
+}
+function partSave(){
+  var nom=(document.getElementById('partNom').value||'').trim();
+  var obj=(document.getElementById('partObjectif').value||'').trim();
+  var date=document.getElementById('partDate').value||'';
+  if(!nom||!obj){showT('⚠️','Remplis le partenaire et l\'objectif');return;}
+  var list=partLoad();
+  list.unshift({id:uid(),nom:nom,objectif:obj,date:date,created:tstr(),statut:'cours'});
+  partSaveData(list);
+  partOpenForm();
+  partRender();
+  showT('🤝','Engagement enregistré');
+}
+function partSetStatut(id,statut){
+  var list=partLoad();
+  var item=list.find(function(x){return x.id===id;});
+  if(item){item.statut=statut;partSaveData(list);partRender();}
+}
+function partDel(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet engagement ?',function(){
+    partSaveData(partLoad().filter(function(x){return x.id!==id;}));
+    partRender();showT('🗑️','Supprimé');
+  });
+}
+function partRender(){
+  var list=partLoad();
+  var el=document.getElementById('partList');
+  var empty=document.getElementById('partEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var statCols={cours:'#fbbf24',atteint:'#4ade80',abandonne:'#f87171'};
+  var statLbls={cours:'🔥 En cours',atteint:'✅ Atteint',abandonne:'❌ Abandonné'};
+  el.innerHTML=list.map(function(item){
+    var col=statCols[item.statut]||'#fbbf24';
+    return '<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin-bottom:10px;">'
+      +'<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">'
+      +'<div style="width:40px;height:40px;border-radius:12px;background:rgba(251,113,133,.15);border:1px solid rgba(251,113,133,.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🤝</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:11px;font-weight:800;color:#fda4af;margin-bottom:2px;">Partenaire : '+escH(item.nom)+'</div>'
+      +'<div style="font-size:13px;font-weight:800;color:#f8faff;line-height:1.3;">'+escH(item.objectif)+'</div>'
+      +(item.date?'<div style="font-size:10px;color:var(--t2);margin-top:3px;">📅 Point de suivi : '+item.date.split('-').reverse().join('/')+'</div>':'')
+      +'</div>'
+      +'</div>'
+      +'<div style="display:flex;gap:5px;flex-wrap:wrap;">'
+      +'<button onclick="partSetStatut(\''+item.id+'\',\'cours\')" style="flex:1;padding:7px 4px;border-radius:9px;font-size:10px;font-weight:800;cursor:pointer;background:'+(item.statut==='cours'?'rgba(251,191,36,.25)':'rgba(255,255,255,.05)')+';border:'+(item.statut==='cours'?'1.5px solid #fbbf24':'1px solid rgba(255,255,255,.1)')+';color:'+(item.statut==='cours'?'#fbbf24':'#64748b')+';">🔥 En cours</button>'
+      +'<button onclick="partSetStatut(\''+item.id+'\',\'atteint\')" style="flex:1;padding:7px 4px;border-radius:9px;font-size:10px;font-weight:800;cursor:pointer;background:'+(item.statut==='atteint'?'rgba(34,197,94,.25)':'rgba(255,255,255,.05)')+';border:'+(item.statut==='atteint'?'1.5px solid #4ade80':'1px solid rgba(255,255,255,.1)')+';color:'+(item.statut==='atteint'?'#4ade80':'#64748b')+';">✅ Atteint</button>'
+      +'<button onclick="partSetStatut(\''+item.id+'\',\'abandonne\')" style="flex:1;padding:7px 4px;border-radius:9px;font-size:10px;font-weight:800;cursor:pointer;background:'+(item.statut==='abandonne'?'rgba(239,68,68,.2)':'rgba(255,255,255,.05)')+';border:'+(item.statut==='abandonne'?'1.5px solid #f87171':'1px solid rgba(255,255,255,.1)')+';color:'+(item.statut==='abandonne'?'#f87171':'#64748b')+';">❌ Abandonné</button>'
+      +'<button onclick="partDel(\''+item.id+'\')" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:16px;width:32px;border-radius:9px;cursor:pointer;flex-shrink:0;">×</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
 </script>
