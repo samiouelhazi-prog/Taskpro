@@ -1020,13 +1020,58 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div class="cards-stack" id="cardsStack"></div>
   </div>
 
+  <!-- ══ TÂCHES À TRAITER ══ -->
+  <div style="margin:4px 16px 10px;">
+    <div style="background:linear-gradient(135deg,rgba(34,197,94,.07),rgba(16,185,129,.04));border:1px solid rgba(34,197,94,.22);border-radius:18px;padding:14px 14px 10px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(34,197,94,.5),rgba(16,185,129,.4),transparent);"></div>
+
+      <!-- Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="display:flex;align-items:center;gap:9px;">
+          <div style="width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,rgba(34,197,94,.2),rgba(16,185,129,.1));border:1px solid rgba(34,197,94,.35);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+          <div>
+            <div style="font-size:13px;font-weight:900;color:var(--t1);font-family:'Syne';letter-spacing:-.1px;">Tâches à Traiter</div>
+            <div style="font-size:10px;color:rgba(148,163,184,.7);margin-top:1px;">
+              <span id="tatDone">0</span>/<span id="tatTotal">0</span> faites
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <button onclick="tatClearDone()" id="tatBtnClean" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#f87171;font-size:10px;font-weight:700;padding:5px 9px;border-radius:20px;cursor:pointer;">🗑 Nettoyer</button>
+          <button onclick="tatToggleInput()" style="background:rgba(34,197,94,.18);border:1.5px solid rgba(34,197,94,.45);color:#22c55e;font-size:18px;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+        </div>
+      </div>
+
+      <!-- Quick input -->
+      <div id="tatInputArea" style="display:none;margin-bottom:10px;">
+        <div style="display:flex;gap:6px;margin-bottom:6px;">
+          <input id="tatInput" class="fi" placeholder="Ajouter une tâche rapide..." style="flex:1;font-size:12px;padding:9px 12px;box-sizing:border-box;" onkeydown="if(event.key==='Enter')tatAdd()">
+          <button onclick="tatAdd()" style="background:linear-gradient(135deg,#15803d,#22c55e);border:none;color:#fff;font-size:12px;font-weight:800;padding:9px 14px;border-radius:12px;cursor:pointer;flex-shrink:0;">OK</button>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button onclick="tatSetUrgent(false)" id="tatBtnNormal" style="flex:1;background:rgba(34,197,94,.12);border:1.5px solid rgba(34,197,94,.4);border-radius:8px;color:#22c55e;font-size:11px;font-weight:700;padding:6px;cursor:pointer;">⬜ Normal</button>
+          <button onclick="tatSetUrgent(true)" id="tatBtnUrgent" style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:8px;color:#f87171;font-size:11px;font-weight:700;padding:6px;cursor:pointer;">🔴 Urgent</button>
+        </div>
+      </div>
+
+      <!-- Liste -->
+      <div id="tatList" style="display:flex;flex-direction:column;gap:5px;"></div>
+      <div id="tatEmpty" style="text-align:center;padding:12px 0 4px;color:var(--t3);font-size:11px;">Aucune tâche · Appuyez sur <b style="color:#22c55e;">+</b> pour commencer</div>
+
+      <!-- Barre progression -->
+      <div id="tatProgressWrap" style="display:none;margin-top:10px;height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;">
+        <div id="tatProgressBar" style="height:3px;background:linear-gradient(90deg,#15803d,#22c55e);border-radius:2px;width:0%;transition:width .4s;"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══ ACCÈS RAPIDE — TÂCHES TRAITÉES ══ -->
   <div style="margin:4px 16px 14px;" onclick="goPage('tachesTraitees');openTachesTraitees()">
     <div style="background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(99,102,241,.06));border:1px solid rgba(251,191,36,.22);border-radius:18px;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(251,191,36,.5),rgba(99,102,241,.4),transparent);"></div>
       <div style="width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,rgba(251,191,36,.18),rgba(99,102,241,.12));border:1px solid rgba(251,191,36,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;">📋</div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;font-weight:900;color:#f8faff;font-family:'Syne';letter-spacing:-.1px;">Tâches Traitées</div>
+        <div style="font-size:14px;font-weight:900;color:var(--t1);font-family:'Syne';letter-spacing:-.1px;">Tâches Traitées</div>
         <div style="font-size:10px;color:rgba(148,163,184,.7);margin-top:2px;">Journal des actions effectuées · matin / soir</div>
         <div style="display:inline-flex;align-items:center;gap:4px;margin-top:5px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.28);border-radius:99px;padding:2px 9px;">
           <span style="font-size:9px;font-weight:800;color:#fbbf24;" id="homeTrtCount">0 action</span>
@@ -6177,7 +6222,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(5,150,105,.05));border:1px solid rgba(16,185,129,.3);border-radius:14px;padding:12px 14px;cursor:pointer;user-select:none;">
         <div style="width:34px;height:34px;border-radius:10px;background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.35);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">✅</div>
         <div style="flex:1;">
-          <div style="font-size:13px;font-weight:900;color:#f8faff;font-family:'Syne';">Recommandations Catalogue</div>
+          <div style="font-size:13px;font-weight:900;color:var(--t1);font-family:'Syne';">Recommandations Catalogue</div>
           <div style="font-size:10px;color:rgba(52,211,153,.7);margin-top:1px;">5 points clés pour garantir le succès</div>
         </div>
         <div id="catRecoArr" style="color:rgba(52,211,153,.6);font-size:18px;transition:transform .25s;flex-shrink:0;">›</div>
@@ -9112,6 +9157,7 @@ function renderHome(){
   }
 
   updateAvatarUI();
+  tatRender();
   // Stats
   const tt=getTT(),done=tt.filter(t=>isDone(t.id)).length,total=tt.length,pct=total?Math.round(done/total*100):0;
   document.getElementById('sDone').textContent=done;
@@ -9194,6 +9240,111 @@ function renderSwipeCards(){
   try{var slItems2=JSON.parse(localStorage.getItem('tp10_sl')||'[]');if(tsc)tsc.textContent=slItems2.length+' article'+(slItems2.length>1?'s':'');}catch(e){}
   var tic=document.getElementById('tileInvCount');
   try{var invData2=JSON.parse(localStorage.getItem('tp10_inv')||'{}');var invLen=(invData2.items||[]).length;if(tic){if(invLen){tic.style.display='block';tic.textContent=invLen+' inv.';}else tic.style.display='none';}}catch(e){}
+}
+
+// ══════════════════════════════════════════
+// TÂCHES À TRAITER — Widget Home
+// ══════════════════════════════════════════
+var _tatUrgent=false;
+var TAT_KEY='tp10_tat';
+
+function tatLoad(){try{return JSON.parse(localStorage.getItem(TAT_KEY)||'[]');}catch(e){return [];}}
+function tatSave(arr){localStorage.setItem(TAT_KEY,JSON.stringify(arr));}
+
+function tatRender(){
+  var arr=tatLoad();
+  var list=document.getElementById('tatList');
+  var empty=document.getElementById('tatEmpty');
+  var done=arr.filter(function(t){return t.done;}).length;
+  var total=arr.length;
+  var doneEl=document.getElementById('tatDone');
+  var totalEl=document.getElementById('tatTotal');
+  var btnClean=document.getElementById('tatBtnClean');
+  var progressWrap=document.getElementById('tatProgressWrap');
+  var progressBar=document.getElementById('tatProgressBar');
+  if(doneEl)doneEl.textContent=done;
+  if(totalEl)totalEl.textContent=total;
+  if(btnClean)btnClean.style.display=done>0?'block':'none';
+  if(progressWrap)progressWrap.style.display=total>0?'block':'none';
+  if(progressBar)progressBar.style.width=(total>0?Math.round(done/total*100):0)+'%';
+  if(!list)return;
+  if(!arr.length){
+    list.innerHTML='';
+    if(empty)empty.style.display='block';
+    return;
+  }
+  if(empty)empty.style.display='none';
+  list.innerHTML=arr.map(function(t,i){
+    var urgent=t.urgent;
+    var doneStyle=t.done?'opacity:.45;text-decoration:line-through;':'';
+    var borderColor=urgent?'rgba(239,68,68,.35)':'rgba(34,197,94,.18)';
+    var bgColor=urgent?'rgba(239,68,68,.06)':'rgba(34,197,94,.05)';
+    var badgeHtml=urgent?'<span style="font-size:9px;font-weight:800;color:#f87171;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:20px;padding:2px 7px;flex-shrink:0;">🔴 Urgent</span>':'';
+    var checkIco=t.done?'✅':'⬜';
+    return '<div style="display:flex;align-items:center;gap:8px;background:'+bgColor+';border:1px solid '+borderColor+';border-radius:12px;padding:9px 10px;'+doneStyle+'">'
+      +'<span onclick="tatToggle('+i+')" style="font-size:18px;cursor:pointer;flex-shrink:0;line-height:1;">'+checkIco+'</span>'
+      +'<span style="flex:1;font-size:12px;font-weight:600;color:var(--t1);line-height:1.4;">'+escHtml(t.text)+'</span>'
+      +badgeHtml
+      +'<span onclick="tatDelete('+i+')" style="font-size:15px;color:var(--t3);cursor:pointer;flex-shrink:0;padding:0 2px;">×</span>'
+      +'</div>';
+  }).join('');
+}
+
+function tatToggleInput(){
+  var area=document.getElementById('tatInputArea');
+  if(!area)return;
+  var visible=area.style.display==='block';
+  area.style.display=visible?'none':'block';
+  if(!visible){
+    _tatUrgent=false;
+    tatSetUrgent(false);
+    setTimeout(function(){var inp=document.getElementById('tatInput');if(inp)inp.focus();},100);
+  }
+}
+
+function tatSetUrgent(val){
+  _tatUrgent=val;
+  var btnN=document.getElementById('tatBtnNormal');
+  var btnU=document.getElementById('tatBtnUrgent');
+  if(btnN){btnN.style.background=val?'rgba(34,197,94,.08)':'rgba(34,197,94,.2)';btnN.style.borderColor=val?'rgba(34,197,94,.2)':'rgba(34,197,94,.5)';}
+  if(btnU){btnU.style.background=val?'rgba(239,68,68,.18)':'rgba(239,68,68,.08)';btnU.style.borderColor=val?'rgba(239,68,68,.5)':'rgba(239,68,68,.2)';}
+}
+
+function tatAdd(){
+  var inp=document.getElementById('tatInput');
+  if(!inp)return;
+  var txt=inp.value.trim();
+  if(!txt){inp.focus();return;}
+  var arr=tatLoad();
+  arr.push({text:txt,done:false,urgent:_tatUrgent,ts:Date.now()});
+  tatSave(arr);
+  inp.value='';
+  _tatUrgent=false;
+  tatSetUrgent(false);
+  document.getElementById('tatInputArea').style.display='none';
+  tatRender();
+  showT('✅','Tâche ajoutée');
+}
+
+function tatToggle(i){
+  var arr=tatLoad();
+  if(arr[i])arr[i].done=!arr[i].done;
+  tatSave(arr);
+  tatRender();
+}
+
+function tatDelete(i){
+  var arr=tatLoad();
+  arr.splice(i,1);
+  tatSave(arr);
+  tatRender();
+}
+
+function tatClearDone(){
+  var arr=tatLoad().filter(function(t){return !t.done;});
+  tatSave(arr);
+  tatRender();
+  showT('🗑','Tâches accomplies supprimées');
 }
 
 function initSwipe(el,id){
