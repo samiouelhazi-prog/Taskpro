@@ -1282,103 +1282,103 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div class="pg-back" onclick="goPage('home')">‹</div>
     <div class="pg-title">Mes Tâches</div>
   </div>
-  <div class="scroll">
-    <div style="padding:12px 12px 90px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+  <div style="flex:1;overflow:hidden;padding:10px 12px 12px;">
+    <div style="height:100%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,1fr);gap:8px;">
 
       <!-- 1 — COMMERCIAL -->
-      <div onclick="goPage('commercial')" style="background:linear-gradient(145deg,#1e3a8a,#2563eb);border:1px solid rgba(59,130,246,.5);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🛒</div>
-        <div style="font-size:28px;line-height:1;">🛒</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Tâches Commerciales</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#bfdbfe;font-weight:700;align-self:flex-start;" id="tileCommDone">0 faites</span>
+      <div onclick="goPage('commercial')" style="background:linear-gradient(145deg,#1e3a8a,#2563eb);border:1px solid rgba(59,130,246,.5);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🛒</div>
+        <div style="font-size:22px;line-height:1;">🛒</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Tâches Commerciales</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#bfdbfe;font-weight:700;align-self:flex-start;" id="tileCommDone">0 faites</span>
       </div>
 
       <!-- 2 — GESTION DE STOCK -->
-      <div onclick="goPage('gestionStock')" style="background:linear-gradient(145deg,#14532d,#15803d);border:1px solid rgba(34,197,94,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.12;line-height:1;pointer-events:none;">📊</div>
-        <div style="font-size:28px;line-height:1;">📊</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Gestion de Stock</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#bbf7d0;font-weight:700;align-self:flex-start;">Stock</span>
+      <div onclick="goPage('gestionStock')" style="background:linear-gradient(145deg,#14532d,#15803d);border:1px solid rgba(34,197,94,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.12;line-height:1;pointer-events:none;">📊</div>
+        <div style="font-size:22px;line-height:1;">📊</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Gestion de Stock</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#bbf7d0;font-weight:700;align-self:flex-start;">Stock</span>
       </div>
 
       <!-- 3 — PILOTAGE -->
-      <div onclick="goPage('pilotage')" style="background:linear-gradient(145deg,#164e63,#0e7490);border:1px solid rgba(6,182,212,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🧭</div>
-        <div style="font-size:28px;line-height:1;">🧭</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Pilotage &amp; Prospective</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#a5f3fc;font-weight:700;align-self:flex-start;">Stratégie</span>
+      <div onclick="goPage('pilotage')" style="background:linear-gradient(145deg,#164e63,#0e7490);border:1px solid rgba(6,182,212,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🧭</div>
+        <div style="font-size:22px;line-height:1;">🧭</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Pilotage &amp; Prospective</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#a5f3fc;font-weight:700;align-self:flex-start;">Stratégie</span>
       </div>
 
       <!-- 4 — AVANCÉES -->
-      <div onclick="goPage('avancees')" style="background:linear-gradient(145deg,#7c2d12,#c2410c);border:1px solid rgba(249,115,22,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🚀</div>
-        <div style="font-size:28px;line-height:1;">🚀</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Tâches Avancées</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#fed7aa;font-weight:700;align-self:flex-start;">Pilotage</span>
+      <div onclick="goPage('avancees')" style="background:linear-gradient(145deg,#7c2d12,#c2410c);border:1px solid rgba(249,115,22,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🚀</div>
+        <div style="font-size:22px;line-height:1;">🚀</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Tâches Avancées</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#fed7aa;font-weight:700;align-self:flex-start;">Pilotage</span>
       </div>
 
       <!-- 5 — GESTION D'ÉQUIPE -->
-      <div onclick="goPage('equipe')" style="background:linear-gradient(145deg,#831843,#be185d);border:1px solid rgba(236,72,153,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.09;line-height:1;pointer-events:none;">👥</div>
-        <div style="font-size:28px;line-height:1;">👥</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Gestion d'Équipe</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#fbcfe8;font-weight:700;align-self:flex-start;">Suivi</span>
+      <div onclick="goPage('equipe')" style="background:linear-gradient(145deg,#831843,#be185d);border:1px solid rgba(236,72,153,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.09;line-height:1;pointer-events:none;">👥</div>
+        <div style="font-size:22px;line-height:1;">👥</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Gestion d'Équipe</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#fbcfe8;font-weight:700;align-self:flex-start;">Suivi</span>
       </div>
 
       <!-- 6 — EXCELLENCE OPÉRATIONNELLE -->
-      <div onclick="goPage('excellence')" style="background:linear-gradient(145deg,#713f12,#b45309);border:1px solid rgba(245,158,11,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🏆</div>
-        <div style="font-size:28px;line-height:1;">🏆</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Excellence Opérationnelle</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#fde68a;font-weight:700;align-self:flex-start;">Management</span>
+      <div onclick="goPage('excellence')" style="background:linear-gradient(145deg,#713f12,#b45309);border:1px solid rgba(245,158,11,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🏆</div>
+        <div style="font-size:22px;line-height:1;">🏆</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Excellence Opérationnelle</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#fde68a;font-weight:700;align-self:flex-start;">Management</span>
       </div>
 
       <!-- 7 — ENGAGEMENT -->
-      <div onclick="goPage('offresCommerciales')" style="background:linear-gradient(145deg,#1e1a0e,#78350f);border:1px solid rgba(251,191,36,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🏷️</div>
-        <div style="font-size:28px;line-height:1;">🏷️</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Engagement</div>
-        <span id="tileOCBadge" style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.35);border-radius:20px;padding:3px 8px;font-size:9px;color:#fbbf24;font-weight:700;align-self:flex-start;">9 rayons</span>
+      <div onclick="goPage('offresCommerciales')" style="background:linear-gradient(145deg,#1e1a0e,#78350f);border:1px solid rgba(251,191,36,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🏷️</div>
+        <div style="font-size:22px;line-height:1;">🏷️</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Engagement</div>
+        <span id="tileOCBadge" style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.35);border-radius:20px;padding:2px 7px;font-size:9px;color:#fbbf24;font-weight:700;align-self:flex-start;">9 rayons</span>
       </div>
 
       <!-- 8 — TAUX DE SERVICE -->
-      <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#064e3b,#047857);border:1px solid rgba(16,185,129,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-4px;bottom:-10px;font-size:64px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#10b981;pointer-events:none;">%</div>
-        <div style="font-size:28px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#10b981;">%</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Taux de Service</div>
-        <span id="tileTSBadge" style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#a7f3d0;font-weight:700;align-self:flex-start;">KPI</span>
+      <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#064e3b,#047857);border:1px solid rgba(16,185,129,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-4px;bottom:-8px;font-size:48px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#10b981;pointer-events:none;">%</div>
+        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#10b981;">%</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Taux de Service</div>
+        <span id="tileTSBadge" style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#a7f3d0;font-weight:700;align-self:flex-start;">KPI</span>
       </div>
 
       <!-- 9 — PLAN TG -->
-      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c1a2e,#1e3a5f);border:1px solid rgba(56,189,248,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-10px;font-size:52px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.1;line-height:1;color:#38bdf8;pointer-events:none;">TG</div>
+      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c1a2e,#1e3a5f);border:1px solid rgba(56,189,248,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-8px;font-size:40px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.1;line-height:1;color:#38bdf8;pointer-events:none;">TG</div>
         <div style="font-size:13px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#38bdf8;letter-spacing:1px;">TG</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Plan TG — Mise en Avant</div>
-        <span id="tileTGBadge" style="background:rgba(56,189,248,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#7dd3fc;font-weight:700;align-self:flex-start;">Mise en Avant</span>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Plan TG — Mise en Avant</div>
+        <span id="tileTGBadge" style="background:rgba(56,189,248,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#7dd3fc;font-weight:700;align-self:flex-start;">Mise en Avant</span>
       </div>
 
       <!-- 10 — ADMIN -->
-      <div onclick="goPage('admin')" style="background:linear-gradient(145deg,#3b0764,#6b21a8);border:1px solid rgba(168,85,247,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">📋</div>
-        <div style="font-size:28px;line-height:1;">📋</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Administratif</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#e9d5ff;font-weight:700;align-self:flex-start;" id="tileAdminEmp">Personnel</span>
+      <div onclick="goPage('admin')" style="background:linear-gradient(145deg,#3b0764,#6b21a8);border:1px solid rgba(168,85,247,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">📋</div>
+        <div style="font-size:22px;line-height:1;">📋</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Administratif</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#e9d5ff;font-weight:700;align-self:flex-start;" id="tileAdminEmp">Personnel</span>
       </div>
 
       <!-- 11 — COSWIN & GLPI -->
-      <div onclick="goPage('coswinGlpi')" style="background:linear-gradient(145deg,#7f1d1d,#991b1b);border:1px solid rgba(239,68,68,.4);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">⚙️</div>
-        <div style="font-size:28px;line-height:1;">⚙️</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Coswin &amp; GLPI</div>
-        <span id="tileCGBadge" style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#fca5a5;font-weight:700;align-self:flex-start;">Maintenance</span>
+      <div onclick="goPage('coswinGlpi')" style="background:linear-gradient(145deg,#7f1d1d,#991b1b);border:1px solid rgba(239,68,68,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">⚙️</div>
+        <div style="font-size:22px;line-height:1;">⚙️</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Coswin &amp; GLPI</div>
+        <span id="tileCGBadge" style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#fca5a5;font-weight:700;align-self:flex-start;">Maintenance</span>
       </div>
 
       <!-- 12 — RÉSUMÉ DU JOUR -->
-      <div onclick="goPage('resume')" style="background:linear-gradient(145deg,#1e1b4b,#4338ca);border:1px solid rgba(99,102,241,.45);border-radius:18px;padding:16px 14px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px;min-height:120px;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:56px;opacity:.1;line-height:1;pointer-events:none;">🌙</div>
-        <div style="font-size:28px;line-height:1;">🌙</div>
-        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.3;flex:1;">Résumé du Jour</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:3px 8px;font-size:9px;color:#c7d2fe;font-weight:700;align-self:flex-start;">Rapport</span>
+      <div onclick="goPage('resume')" style="background:linear-gradient(145deg,#1e1b4b,#4338ca);border:1px solid rgba(99,102,241,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🌙</div>
+        <div style="font-size:22px;line-height:1;">🌙</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Résumé du Jour</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#c7d2fe;font-weight:700;align-self:flex-start;">Rapport</span>
       </div>
 
     </div>
@@ -3332,74 +3332,79 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     </div>
   </div>
 
-  <!-- Shift tabs -->
-  <div style="display:flex;gap:8px;padding:10px 16px 0;flex-shrink:0;">
-    <button id="trt-tab-matin" onclick="setTrtShift('matin')"
-      style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid rgba(251,191,36,.5);background:rgba(251,191,36,.18);color:#fbbf24;">🌅 Matin</button>
-    <button id="trt-tab-soir" onclick="setTrtShift('soir')"
-      style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#64748b;">🌆 Soir</button>
-  </div>
+  <!-- Tout dans scroll -->
+  <div class="scroll">
+    <div style="padding:10px 16px 0;">
 
-  <!-- Formulaire d'ajout -->
-  <div style="padding:10px 16px 0;flex-shrink:0;">
-    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 14px;">
-      <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:8px;letter-spacing:.4px;">NOUVELLE ACTION TRAITÉE</div>
-
-      <!-- Catégorie -->
-      <div style="font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;">— Opérations Rayon —</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;" id="trtCatBtns">
-        <button onclick="setTrtCat(this,'mise_rayon')" data-cat="mise_rayon"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#60a5fa;">🧺 Mise en rayon</button>
-        <button onclick="setTrtCat(this,'facing')" data-cat="facing"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📐 Facing</button>
-        <button onclick="setTrtCat(this,'commande')" data-cat="commande"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🛒 Commande</button>
-        <button onclick="setTrtCat(this,'dlc')" data-cat="dlc"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">⏰ DLC</button>
-        <button onclick="setTrtCat(this,'nettoyage')" data-cat="nettoyage"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🧹 Nettoyage</button>
-        <button onclick="setTrtCat(this,'reception')" data-cat="reception"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Réception</button>
-        <button onclick="setTrtCat(this,'anomalie')" data-cat="anomalie"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🐠 Anomalie Poiss/FLEG</button>
-
-        <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Commercial —</div>
-        <button onclick="setTrtCat(this,'ctrl_catalogue')" data-cat="ctrl_catalogue"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📒 Contrôle Catalogue</button>
-        <button onclick="setTrtCat(this,'engagement')" data-cat="engagement"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🏷️ Traitement Engagement</button>
-        <button onclick="setTrtCat(this,'plan_tg')" data-cat="plan_tg"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📌 Plan TG</button>
-        <button onclick="setTrtCat(this,'affiches')" data-cat="affiches"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🖼️ Affiches TG/Podium</button>
-        <button onclick="setTrtCat(this,'taux_service')" data-cat="taux_service"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Taux de Service</button>
-
-        <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Administratif —</div>
-        <button onclick="setTrtCat(this,'avoir')" data-cat="avoir"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📄 Demande d'Avoir</button>
-        <button onclick="setTrtCat(this,'mail')" data-cat="mail"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📧 Mail envoyé</button>
-        <button onclick="setTrtCat(this,'reclamation')" data-cat="reclamation"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📢 Réclamation envoyée</button>
-        <button onclick="setTrtCat(this,'autre')" data-cat="autre"
-          style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">✏️ Autre</button>
+      <!-- Shift tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <button id="trt-tab-matin" onclick="setTrtShift('matin')"
+          style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid rgba(251,191,36,.5);background:rgba(251,191,36,.18);color:#fbbf24;">🌅 Matin</button>
+        <button id="trt-tab-soir" onclick="setTrtShift('soir')"
+          style="flex:1;padding:9px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#64748b;">🌆 Soir</button>
       </div>
 
-      <!-- Description + Quantité -->
-      <div style="display:flex;gap:8px;align-items:stretch;">
-        <input id="trtDesc" type="text" placeholder="Description de l'action traitée…"
-          style="flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 12px;color:#f8faff;-webkit-text-fill-color:#f8faff;font-size:13px;"/>
-        <input id="trtQty" type="number" min="1" placeholder="Nbre" value=""
-          style="width:64px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 8px;color:#f8faff;-webkit-text-fill-color:#f8faff;font-size:13px;text-align:center;"/>
-        <button onclick="addTacheTraitee()"
-          style="background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;font-size:20px;font-weight:900;width:44px;border-radius:10px;cursor:pointer;flex-shrink:0;">+</button>
+      <!-- Formulaire d'ajout -->
+      <div style="background:var(--s2);border:1px solid var(--bord);border-radius:16px;padding:12px 14px;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:8px;letter-spacing:.4px;">NOUVELLE ACTION TRAITÉE</div>
+
+        <!-- Catégorie -->
+        <div style="font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;">— Opérations Rayon —</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;" id="trtCatBtns">
+          <button onclick="setTrtCat(this,'mise_rayon')" data-cat="mise_rayon"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#60a5fa;">🧺 Mise en rayon</button>
+          <button onclick="setTrtCat(this,'facing')" data-cat="facing"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📐 Facing</button>
+          <button onclick="setTrtCat(this,'commande')" data-cat="commande"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🛒 Commande</button>
+          <button onclick="setTrtCat(this,'dlc')" data-cat="dlc"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">⏰ DLC</button>
+          <button onclick="setTrtCat(this,'nettoyage')" data-cat="nettoyage"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🧹 Nettoyage</button>
+          <button onclick="setTrtCat(this,'reception')" data-cat="reception"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Réception</button>
+          <button onclick="setTrtCat(this,'anomalie')" data-cat="anomalie"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🐠 Anomalie Poiss/FLEG</button>
+
+          <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Commercial —</div>
+          <button onclick="setTrtCat(this,'ctrl_catalogue')" data-cat="ctrl_catalogue"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📒 Contrôle Catalogue</button>
+          <button onclick="setTrtCat(this,'engagement')" data-cat="engagement"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🏷️ Traitement Engagement</button>
+          <button onclick="setTrtCat(this,'plan_tg')" data-cat="plan_tg"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📌 Plan TG</button>
+          <button onclick="setTrtCat(this,'affiches')" data-cat="affiches"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">🖼️ Affiches TG/Podium</button>
+          <button onclick="setTrtCat(this,'taux_service')" data-cat="taux_service"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📦 Taux de Service</button>
+
+          <div style="width:100%;font-size:9px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin:4px 0 2px;">— Administratif —</div>
+          <button onclick="setTrtCat(this,'avoir')" data-cat="avoir"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📄 Demande d'Avoir</button>
+          <button onclick="setTrtCat(this,'mail')" data-cat="mail"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📧 Mail envoyé</button>
+          <button onclick="setTrtCat(this,'reclamation')" data-cat="reclamation"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">📢 Réclamation envoyée</button>
+          <button onclick="setTrtCat(this,'autre')" data-cat="autre"
+            style="font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;">✏️ Autre</button>
+        </div>
+
+        <!-- Description + Quantité -->
+        <div style="display:flex;gap:8px;align-items:stretch;">
+          <input id="trtDesc" type="text" placeholder="Description de l'action traitée…"
+            style="flex:1;background:var(--s2);border:1px solid var(--bord2);border-radius:10px;padding:10px 12px;color:var(--t1);font-size:13px;"/>
+          <input id="trtQty" type="number" min="1" placeholder="Nbre" value=""
+            style="width:64px;background:var(--s2);border:1px solid var(--bord2);border-radius:10px;padding:10px 8px;color:var(--t1);font-size:13px;text-align:center;"/>
+          <button onclick="addTacheTraitee()"
+            style="background:linear-gradient(135deg,#22c55e,#16a34a);border:none;color:#fff;font-size:20px;font-weight:900;width:44px;border-radius:10px;cursor:pointer;flex-shrink:0;">+</button>
+        </div>
       </div>
+
+      <!-- Liste -->
+      <div style="padding-bottom:110px;" id="trtList"></div>
+
     </div>
   </div>
-
-  <!-- Liste -->
-  <div class="scroll"><div style="padding:10px 16px 110px;" id="trtList"></div></div>
 </div>
 
 <!-- ══ EQUIPE HUB ══ -->
