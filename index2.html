@@ -727,6 +727,15 @@ body.light #pgPlanTg [style*="rgba(0,0,0,.2)"]{background:rgba(0,0,0,.06)!import
 body.light #tgFormModal [style*="color:#f8faff"]{color:#0d1117!important;}
 body.light #tgFormModal [style*="rgba(148,163,184"]{color:#6b7280!important;}
 
+/* ══ LIGHT MODE — OBJECTIFS & KPIs ══ */
+body.light #pgObjectifsKpi .pg-topbar [style*="color:#f8faff"]{color:#0d1117!important;}
+body.light #pgObjectifsKpi [style*="border-bottom:1px solid rgba(255,255,255,.07)"]{border-bottom-color:rgba(0,0,0,.08)!important;}
+
+/* ══ LIGHT MODE — ARCHIVES ══ */
+body.light #pgArchiveResume .pg-topbar [style*="color:#f8faff"]{color:#0d1117!important;}
+body.light #pgArchiveDetail .pg-topbar [style*="color:#f8faff"]{color:#0d1117!important;}
+body.light #archiveDetailTitle{color:#0d1117!important;}
+
 /* ══ PROFIL — LIGHT MODE ══ */
 body.light #hname{color:#0d1117!important;}
 body.light #tbDate{color:#374151!important;}
@@ -4964,7 +4973,13 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="width:32px;"></div>
   </div>
   <div class="scroll" style="padding:12px 16px 100px;">
-    <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;flex-direction:column;gap:8px;">
+
+      <!-- ── GROUPE 1 : Suivi & Contrôle ── -->
+      <div style="display:flex;align-items:center;gap:8px;margin:4px 0 6px;">
+        <div style="font-size:9px;font-weight:900;color:rgba(20,184,166,.8);letter-spacing:1.5px;text-transform:uppercase;">📋 Suivi & Contrôle</div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(20,184,166,.3),transparent);"></div>
+      </div>
 
       <!-- Carte Inventaires -->
       <div onclick="goPage('inventaireMag')" style="background:linear-gradient(145deg,#134e4a,#0f766e);border:1px solid rgba(20,184,166,.4);border-radius:16px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
@@ -4998,14 +5013,10 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         <div style="margin-left:auto;color:#a855f7;font-size:18px;">›</div>
       </div>
 
-      <!-- Carte Stock Lourd -->
-      <div onclick="goPage('stockLourd')" style="background:linear-gradient(145deg,#431407,#7c2d12);border:1px solid rgba(249,115,22,.4);border-radius:16px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;">
-        <div style="font-size:36px;line-height:1;">🏋️</div>
-        <div style="flex:1;">
-          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Stock Lourd</div>
-          <div style="font-size:11px;color:#fdba74;margin-top:3px;">Gestion des articles en stock lourd</div>
-        </div>
-        <div style="margin-left:auto;color:#fb923c;font-size:18px;">›</div>
+      <!-- ── GROUPE 2 : Pertes & Risques ── -->
+      <div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;">
+        <div style="font-size:9px;font-weight:900;color:rgba(239,68,68,.8);letter-spacing:1.5px;text-transform:uppercase;">⚠️ Pertes & Risques</div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(239,68,68,.3),transparent);"></div>
       </div>
 
       <!-- Carte Shrinkage -->
@@ -5018,6 +5029,22 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         </div>
         <div id="shrinkageBadge" style="display:none;background:#dc2626;color:#fff;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:900;margin-right:4px;"></div>
         <div style="margin-left:auto;color:#ec4899;font-size:18px;">›</div>
+      </div>
+
+      <!-- Carte Stock Lourd -->
+      <div onclick="goPage('stockLourd')" style="background:linear-gradient(145deg,#431407,#7c2d12);border:1px solid rgba(249,115,22,.4);border-radius:16px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:36px;line-height:1;">🏋️</div>
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Stock Lourd</div>
+          <div style="font-size:11px;color:#fdba74;margin-top:3px;">Gestion des articles en stock lourd</div>
+        </div>
+        <div style="margin-left:auto;color:#fb923c;font-size:18px;">›</div>
+      </div>
+
+      <!-- ── GROUPE 3 : Maintenance & Implantation ── -->
+      <div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;">
+        <div style="font-size:9px;font-weight:900;color:rgba(234,179,8,.8);letter-spacing:1.5px;text-transform:uppercase;">🔧 Maintenance & Implantation</div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(234,179,8,.3),transparent);"></div>
       </div>
 
       <!-- Carte Instances SAV -->
@@ -5964,25 +5991,216 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
 
 <!-- ══ OBJECTIFS & KPIs ══ -->
 <div class="pg" id="pgObjectifsKpi">
-  <div class="pg-topbar">
+  <div class="pg-topbar" style="border-bottom:1px solid rgba(34,197,94,.15);">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Avancées</div>
-    <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🎯 Objectifs & KPIs</div>
-    <button onclick="exportKpiPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+    <div style="font-size:15px;font-weight:900;color:#f8faff;font-family:'Syne';">🎯 Objectifs & KPIs</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="kpiOpenObjectifs()" style="background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:11px;font-weight:800;padding:0 10px;height:32px;border-radius:10px;cursor:pointer;white-space:nowrap;">⚙️ Cibles</button>
+      <button onclick="exportKpiPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📄</button>
+    </div>
   </div>
+
+  <!-- TABS -->
+  <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;">
+    <button onclick="kpiSetTab('saisie',this)" data-kt="saisie" style="flex:1;padding:10px 0;font-size:12px;font-weight:800;color:#4ade80;background:transparent;border:none;border-bottom:2px solid #4ade80;cursor:pointer;font-family:'Space Grotesk';">📝 Saisie</button>
+    <button onclick="kpiSetTab('tableau',this)" data-kt="tableau" style="flex:1;padding:10px 0;font-size:12px;font-weight:700;color:var(--t2);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Space Grotesk';">📊 Tableau</button>
+    <button onclick="kpiSetTab('graphique',this)" data-kt="graphique" style="flex:1;padding:10px 0;font-size:12px;font-weight:700;color:var(--t2);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Space Grotesk';">📈 Tendance</button>
+  </div>
+
   <div class="scroll" style="padding:12px 14px 90px;">
-    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
-      <div style="font-size:11px;font-weight:800;color:#4ade80;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">🎯 Objectif CA du jour</div>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-        <input id="kpiCible" class="fi" type="number" placeholder="Objectif (TND)" style="flex:1;box-sizing:border-box;" oninput="calcKpi()" />
-        <input id="kpiReel" class="fi" type="number" placeholder="Réalisé (TND)" style="flex:1;box-sizing:border-box;" oninput="calcKpi()" />
+
+    <!-- ─── TAB SAISIE ─── -->
+    <div id="kpiTabSaisie">
+
+      <!-- Score global du jour -->
+      <div id="kpiScoreCard" style="border-radius:18px;padding:16px 18px;margin-bottom:12px;background:linear-gradient(135deg,#052e16,#166534);position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-10px;top:-10px;font-size:80px;opacity:.06;pointer-events:none;line-height:1;">🎯</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;">Performance du jour</div>
+            <div id="kpiScoreDateLbl" style="font-size:13px;font-weight:700;color:rgba(255,255,255,.75);margin-top:2px;"></div>
+          </div>
+          <div style="text-align:center;">
+            <div id="kpiScoreVal" style="font-size:44px;font-weight:900;font-family:'IBM Plex Mono',monospace;color:#fff;line-height:1;">—</div>
+            <div id="kpiScoreLbl" style="font-size:10px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:.5px;margin-top:2px;">SCORE GLOBAL</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;height:5px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden;">
+          <div id="kpiScoreBar" style="height:100%;width:0%;background:rgba(255,255,255,.9);border-radius:99px;transition:width .8s cubic-bezier(.4,0,.2,1);"></div>
+        </div>
+        <div id="kpiScoreBreakdown" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;"></div>
       </div>
-      <div id="kpiResult" style="text-align:center;font-size:22px;font-weight:900;color:#22c55e;">—</div>
-      <div id="kpiBar" style="height:8px;background:rgba(255,255,255,.08);border-radius:4px;margin-top:8px;overflow:hidden;"><div id="kpiBarFill" style="height:8px;background:#22c55e;border-radius:4px;width:0%;transition:width .5s;"></div></div>
+
+      <!-- KPI 1 — CA -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(34,197,94,.2);border-radius:16px;padding:14px;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:32px;height:32px;border-radius:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:16px;">💰</div>
+            <div>
+              <div style="font-size:12px;font-weight:900;color:#f8faff;">Chiffre d'Affaires</div>
+              <div style="font-size:10px;color:var(--t2);">CA réalisé vs objectif</div>
+            </div>
+          </div>
+          <div id="kpiCaResult" style="font-size:18px;font-weight:900;color:#22c55e;">—</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:8px;">
+          <div style="flex:1;">
+            <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:4px;text-transform:uppercase;">Objectif (TND)</div>
+            <input id="kpiCible" class="fi" type="number" placeholder="0.000" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:4px;text-transform:uppercase;">Réalisé (TND)</div>
+            <input id="kpiReel" class="fi" type="number" placeholder="0.000" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          </div>
+        </div>
+        <div style="height:6px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;"><div id="kpiBarFill" style="height:100%;background:#22c55e;border-radius:99px;width:0%;transition:width .5s;"></div></div>
+        <div id="kpiResult" style="font-size:11px;color:var(--t2);margin-top:5px;text-align:right;"></div>
+      </div>
+
+      <!-- KPI 2 — Clients + Panier -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">👥</span>
+            <div style="font-size:11px;font-weight:800;color:#f8faff;">Clients</div>
+          </div>
+          <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:3px;">Objectif</div>
+          <input id="kpiClientsCible" class="fi" type="number" placeholder="0" style="width:100%;box-sizing:border-box;margin:0 0 6px;" oninput="calcKpi()" />
+          <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:3px;">Réalisé</div>
+          <input id="kpiClientsReel" class="fi" type="number" placeholder="0" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          <div id="kpiClientsResult" style="font-size:12px;font-weight:800;color:#60a5fa;margin-top:6px;text-align:center;">—</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">🛒</span>
+            <div style="font-size:11px;font-weight:800;color:#f8faff;">Panier moyen</div>
+          </div>
+          <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:3px;">Objectif (TND)</div>
+          <input id="kpiPanierCible" class="fi" type="number" placeholder="0.000" style="width:100%;box-sizing:border-box;margin:0 0 6px;" oninput="calcKpi()" />
+          <div style="font-size:9px;font-weight:700;color:var(--t3);margin-bottom:3px;">Auto-calculé</div>
+          <div id="kpiPanierAuto" style="background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:8px;text-align:center;font-size:13px;font-weight:900;color:#c084fc;">—</div>
+          <div id="kpiPanierResult" style="font-size:12px;font-weight:800;color:#a855f7;margin-top:4px;text-align:center;">—</div>
+        </div>
+      </div>
+
+      <!-- KPI 3 — Taux ruptures + DLC -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(251,146,60,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">📦</span>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#f8faff;">Ruptures</div>
+              <div style="font-size:9px;color:var(--t2);">Nb signalées</div>
+            </div>
+          </div>
+          <input id="kpiRupturesNb" class="fi" type="number" placeholder="0" min="0" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          <div id="kpiRupturesResult" style="font-size:11px;font-weight:800;color:#fb923c;margin-top:6px;text-align:center;">—</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">⏰</span>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#f8faff;">Produits DLC</div>
+              <div style="font-size:9px;color:var(--t2);">Retirés aujourd'hui</div>
+            </div>
+          </div>
+          <input id="kpiDlcNb" class="fi" type="number" placeholder="0" min="0" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          <div id="kpiDlcResult" style="font-size:11px;font-weight:800;color:#ef4444;margin-top:6px;text-align:center;">—</div>
+        </div>
+      </div>
+
+      <!-- KPI 4 — Score Audit + Démarque -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(234,179,8,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">📋</span>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#f8faff;">Score Audit</div>
+              <div style="font-size:9px;color:var(--t2);">% conformité</div>
+            </div>
+          </div>
+          <input id="kpiAuditScore" class="fi" type="number" placeholder="0-100" min="0" max="100" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          <div id="kpiAuditResult" style="font-size:11px;font-weight:800;color:#fbbf24;margin-top:6px;text-align:center;">—</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(251,146,60,.2);border-radius:16px;padding:12px;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <span style="font-size:18px;">⚠️</span>
+            <div>
+              <div style="font-size:11px;font-weight:800;color:#f8faff;">Démarque</div>
+              <div style="font-size:9px;color:var(--t2);">Montant (TND)</div>
+            </div>
+          </div>
+          <input id="kpiDemarqueMt" class="fi" type="number" placeholder="0.000" min="0" style="width:100%;box-sizing:border-box;margin:0;" oninput="calcKpi()" />
+          <div id="kpiDemarqueResult" style="font-size:11px;font-weight:800;color:#fb923c;margin-top:6px;text-align:center;">—</div>
+        </div>
+      </div>
+
+      <!-- Note du jour -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-bottom:12px;">
+        <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">📝 Note / Observation du jour</div>
+        <textarea id="kpiNote" class="fi" placeholder="Points positifs, difficultés, actions correctives..." style="width:100%;box-sizing:border-box;margin:0;min-height:64px;resize:none;line-height:1.5;"></textarea>
+      </div>
+
+      <!-- Bouton enregistrer -->
+      <button onclick="saveKpiEntry()" style="width:100%;background:linear-gradient(135deg,#15803d,#166534);border:none;color:#fff;font-size:13px;font-weight:800;padding:14px;border-radius:14px;cursor:pointer;letter-spacing:.3px;box-shadow:0 4px 16px rgba(21,128,61,.4);">💾 Enregistrer la journée</button>
     </div>
 
-    <div id="kpiHistory" style="display:flex;flex-direction:column;gap:6px;"></div>
-    <button onclick="saveKpiEntry()" style="width:100%;background:#15803d;border:none;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;margin-top:8px;">💾 Enregistrer la journée</button>
+    <!-- ─── TAB TABLEAU ─── -->
+    <div id="kpiTabTableau" style="display:none;">
+      <!-- Résumé semaine -->
+      <div id="kpiWeekSummary" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin-bottom:12px;"></div>
+      <!-- Historique complet -->
+      <div id="kpiHistory" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+
+    <!-- ─── TAB GRAPHIQUE ─── -->
+    <div id="kpiTabGraphique" style="display:none;">
+      <div style="display:flex;gap:6px;margin-bottom:12px;">
+        <button onclick="kpiSetChartPeriod(7,this)" data-kcp="7" style="flex:1;background:rgba(34,197,94,.2);border:1.5px solid rgba(34,197,94,.5);color:#4ade80;font-size:11px;font-weight:800;padding:8px;border-radius:10px;cursor:pointer;">7j</button>
+        <button onclick="kpiSetChartPeriod(14,this)" data-kcp="14" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;">14j</button>
+        <button onclick="kpiSetChartPeriod(30,this)" data-kcp="30" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;">30j</button>
+      </div>
+      <!-- Graphique CA -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(34,197,94,.15);border-radius:16px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:800;color:#4ade80;margin-bottom:10px;">💰 CA Réalisé vs Objectif</div>
+        <canvas id="kpiChartCA" height="130"></canvas>
+      </div>
+      <!-- Graphique taux CA -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(59,130,246,.15);border-radius:16px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:800;color:#60a5fa;margin-bottom:10px;">📊 Taux de Réalisation CA (%)</div>
+        <canvas id="kpiChartTaux" height="110"></canvas>
+      </div>
+      <!-- Graphique clients -->
+      <div style="background:rgba(255,255,255,.03);border:1px solid rgba(168,85,247,.15);border-radius:16px;padding:14px;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:800;color:#c084fc;margin-bottom:10px;">👥 Clients & Panier Moyen</div>
+        <canvas id="kpiChartClients" height="110"></canvas>
+      </div>
+      <!-- Stats résumé -->
+      <div id="kpiChartStats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div>
+    </div>
+
   </div>
+
+  <!-- Modal objectifs cibles -->
+  <div id="kpiObjectifsModal" class="mov" style="display:none;">
+    <div class="msh" style="background:#0e1117;border-radius:22px 22px 0 0;padding:20px;width:100%;max-height:85vh;overflow-y:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="font-family:'Syne';font-size:16px;font-weight:900;color:#f8faff;">⚙️ Définir les Cibles</div>
+        <div onclick="closeM('kpiObjectifsModal')" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;">×</div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:12px;">Ces cibles seront utilisées comme référence pour le calcul du score et les graphiques.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">💰 Objectif CA quotidien (TND)</div><input id="kpiTargetCa" class="fi" type="number" placeholder="Ex: 25000" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">👥 Objectif Clients / jour</div><input id="kpiTargetClients" class="fi" type="number" placeholder="Ex: 500" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">🛒 Objectif Panier Moyen (TND)</div><input id="kpiTargetPanier" class="fi" type="number" placeholder="Ex: 50" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">📦 Max Ruptures tolérées</div><input id="kpiTargetRuptures" class="fi" type="number" placeholder="Ex: 5" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">📋 Score Audit minimum (%)</div><input id="kpiTargetAudit" class="fi" type="number" placeholder="Ex: 85" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+        <div><div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:4px;">⚠️ Max Démarque / jour (TND)</div><input id="kpiTargetDemarque" class="fi" type="number" placeholder="Ex: 200" style="width:100%;box-sizing:border-box;margin:0;" /></div>
+      </div>
+      <button onclick="kpiSaveObjectifs()" style="width:100%;background:#15803d;border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:13px;cursor:pointer;margin-top:16px;">✅ Sauvegarder les Cibles</button>
+    </div>
+  </div>
+
 </div>
 
 
@@ -9639,7 +9857,7 @@ function goPage(p){
   if(p==='stats')renderStats();
   if(p==='messagerie')renderMessagerie();
   if(p==='auditRayon')renderAudit();
-  if(p==='objectifsKpi')renderKpi();
+  if(p==='objectifsKpi'){kpiFillFromToday();calcKpi();}
   if(p==='ruptures')renderRuptures();
   if(p==='nonConformites')renderNonConf();
   if(p==='compteRenduFournisseur')renderFournisseurs();
@@ -9947,7 +10165,7 @@ function saveP(){prof.name=document.getElementById('p_n').value.trim();prof.role
 
 // ══ MODALS ══
 function closeM(id){var el=document.getElementById(id);if(!el)return;el.classList.remove('on');el.style.display='';}
-['tmov','pmov','evtmov','imgmov','snoozmov','catFormMov','catDetailMov'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
+['tmov','pmov','evtmov','imgmov','snoozmov','catFormMov','catDetailMov','kpiObjectifsModal'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
 var _cmov=document.getElementById('cmov');if(_cmov)_cmov.addEventListener('click',function(e){if(e.target===this)closeM('cmov');});
 let _tt2;
 function showT(e,m){document.getElementById('te').textContent=e;document.getElementById('tm').textContent=m;const el=document.getElementById('toast');el.classList.add('on');clearTimeout(_tt2);_tt2=setTimeout(()=>el.classList.remove('on'),3000);}
@@ -12093,48 +12311,459 @@ function exportAuditPDF(){
 }
 
 // ══ OBJECTIFS & KPIs ══
-function calcKpi(){
-  var cible=parseFloat((document.getElementById('kpiCible')||{value:0}).value)||0;
-  var reel=parseFloat((document.getElementById('kpiReel')||{value:0}).value)||0;
-  if(!cible){var sc=document.getElementById('kpiResult');if(sc)sc.textContent='—';return;}
-  var pct=Math.round(reel/cible*100);
-  var col=pct>=100?'#22c55e':pct>=80?'#f59e0b':'#ef4444';
-  var sc=document.getElementById('kpiResult');var fill=document.getElementById('kpiBarFill');
-  if(sc){sc.textContent=pct+'% ('+reel.toLocaleString('fr-FR')+' / '+cible.toLocaleString('fr-FR')+' TND)';sc.style.color=col;}
-  if(fill){fill.style.width=Math.min(pct,100)+'%';fill.style.background=col;}
+// ══════════════════════════════════════════════
+// OBJECTIFS & KPIs — VERSION ÉTENDUE
+// ══════════════════════════════════════════════
+
+// ── Tab management ──
+var _kpiTab = 'saisie';
+var _kpiChartPeriod = 7;
+var _kpiChartCA = null, _kpiChartTaux = null, _kpiChartClients = null;
+
+function kpiSetTab(tab, btn) {
+  _kpiTab = tab;
+  document.querySelectorAll('[data-kt]').forEach(function(b) {
+    var on = b.dataset.kt === tab;
+    b.style.color = on ? '#4ade80' : 'var(--t2)';
+    b.style.fontWeight = on ? '800' : '700';
+    b.style.borderBottomColor = on ? '#4ade80' : 'transparent';
+  });
+  document.getElementById('kpiTabSaisie').style.display = tab === 'saisie' ? 'block' : 'none';
+  document.getElementById('kpiTabTableau').style.display = tab === 'tableau' ? 'block' : 'none';
+  document.getElementById('kpiTabGraphique').style.display = tab === 'graphique' ? 'block' : 'none';
+  if (tab === 'tableau') renderKpi();
+  if (tab === 'graphique') renderKpiCharts(_kpiChartPeriod);
 }
-function saveKpiEntry(){
-  var cible=parseFloat((document.getElementById('kpiCible')||{value:0}).value)||0;
-  var reel=parseFloat((document.getElementById('kpiReel')||{value:0}).value)||0;
-  if(!cible||!reel){showT('⚠️','Entrez objectif et réalisé');return;}
-  var d=loadAdv();if(!d.kpiHistory)d.kpiHistory=[];
-  d.kpiHistory.unshift({date:tstr(),cible:cible,reel:reel,pct:Math.round(reel/cible*100)});
-  if(d.kpiHistory.length>30)d.kpiHistory=d.kpiHistory.slice(0,30);
-  saveAdv(d);renderKpi();showT('✅','Journée enregistrée');
+
+function kpiSetChartPeriod(p, btn) {
+  _kpiChartPeriod = p;
+  document.querySelectorAll('[data-kcp]').forEach(function(b) {
+    var on = parseInt(b.dataset.kcp) === p;
+    b.style.background = on ? 'rgba(34,197,94,.2)' : 'rgba(255,255,255,.05)';
+    b.style.borderColor = on ? 'rgba(34,197,94,.5)' : 'rgba(255,255,255,.1)';
+    b.style.color = on ? '#4ade80' : 'var(--t2)';
+    b.style.fontWeight = on ? '800' : '700';
+  });
+  renderKpiCharts(p);
 }
-function renderKpi(){
-  var d=loadAdv();var hist=d.kpiHistory||[];
-  var el=document.getElementById('kpiHistory');if(!el)return;
-  if(!hist.length){el.innerHTML='<div style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucun historique</div>';return;}
-  el.innerHTML='<div style="font-size:11px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📊 Historique</div>'
-    +hist.map(function(e){
-      var col=e.pct>=100?'#22c55e':e.pct>=80?'#f59e0b':'#ef4444';
-      return '<div style="background:var(--card);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px;">'
-        +'<div style="flex:1;"><div style="font-size:12px;font-weight:700;color:var(--t1);">'+e.date+'</div>'
-        +'<div style="font-size:11px;color:var(--t2);">Cible: '+e.cible.toLocaleString('fr-FR')+' TND · Réalisé: '+e.reel.toLocaleString('fr-FR')+' TND</div></div>'
-        +'<div style="font-size:16px;font-weight:900;color:'+col+';">'+e.pct+'%</div></div>';
+
+// ── Targets / Objectifs ──
+function kpiLoadTargets() {
+  try { return JSON.parse(localStorage.getItem(SK + '_kpiTargets') || '{}'); } catch(e) { return {}; }
+}
+function kpiSaveTargets(d) { localStorage.setItem(SK + '_kpiTargets', JSON.stringify(d)); }
+
+function kpiOpenObjectifs() {
+  var t = kpiLoadTargets();
+  var fields = ['Ca','Clients','Panier','Ruptures','Audit','Demarque'];
+  fields.forEach(function(f) {
+    var el = document.getElementById('kpiTarget' + f);
+    if (el && t[f.toLowerCase()]) el.value = t[f.toLowerCase()];
+  });
+  var m = document.getElementById('kpiObjectifsModal');
+  if (m) { m.style.display = ''; m.classList.add('on'); }
+}
+
+function kpiSaveObjectifs() {
+  var t = {};
+  var fields = ['Ca','Clients','Panier','Ruptures','Audit','Demarque'];
+  fields.forEach(function(f) {
+    var el = document.getElementById('kpiTarget' + f);
+    if (el && el.value) t[f.toLowerCase()] = parseFloat(el.value) || 0;
+  });
+  kpiSaveTargets(t);
+  closeM('kpiObjectifsModal');
+  showT('✅', 'Cibles enregistrées !');
+  calcKpi();
+}
+
+// ── Auto-fill from today's existing entry ──
+function kpiLoadTodayEntry() {
+  var d = loadAdv(); var hist = d.kpiHistory || [];
+  var today = tstr();
+  return hist.find(function(e) { return e.date === today; }) || null;
+}
+
+function kpiFillFromToday() {
+  var e = kpiLoadTodayEntry();
+  if (!e) return;
+  var fv = function(id, val) { var el = document.getElementById(id); if (el && val != null) el.value = val; };
+  fv('kpiCible', e.cible); fv('kpiReel', e.reel);
+  fv('kpiClientsCible', e.clientsCible); fv('kpiClientsReel', e.clientsReel);
+  fv('kpiPanierCible', e.panierCible);
+  fv('kpiRupturesNb', e.rupturesNb); fv('kpiDlcNb', e.dlcNb);
+  fv('kpiAuditScore', e.auditScore); fv('kpiDemarqueMt', e.demarqueMt);
+  fv('kpiNote', e.note);
+  calcKpi();
+}
+
+// ── Main calc ──
+function calcKpi() {
+  var gv = function(id) { var el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; };
+  var targets = kpiLoadTargets();
+
+  var cible = gv('kpiCible'), reel = gv('kpiReel');
+  var clientsCible = gv('kpiClientsCible'), clientsReel = gv('kpiClientsReel');
+  var panierCible = gv('kpiPanierCible');
+  var rupturesNb = gv('kpiRupturesNb'), dlcNb = gv('kpiDlcNb');
+  var auditScore = gv('kpiAuditScore'), demarqueMt = gv('kpiDemarqueMt');
+
+  var scores = [];
+
+  // CA
+  var caPct = cible > 0 ? Math.round(reel / cible * 100) : null;
+  var caCol = caPct == null ? '#94a3b8' : caPct >= 100 ? '#22c55e' : caPct >= 80 ? '#f59e0b' : '#ef4444';
+  var elCaRes = document.getElementById('kpiCaResult');
+  var elFill = document.getElementById('kpiBarFill');
+  var elRes = document.getElementById('kpiResult');
+  if (elCaRes) { elCaRes.textContent = caPct != null ? caPct + '%' : '—'; elCaRes.style.color = caCol; }
+  if (elFill) { elFill.style.width = Math.min(caPct || 0, 100) + '%'; elFill.style.background = caCol; }
+  if (elRes) {
+    elRes.textContent = caPct != null ? (reel.toLocaleString('fr-FR') + ' / ' + cible.toLocaleString('fr-FR') + ' TND · Écart: ' + (reel - cible).toLocaleString('fr-FR') + ' TND') : '';
+    elRes.style.color = caCol;
+  }
+  if (caPct != null) scores.push({ lbl: 'CA', pct: Math.min(caPct, 100), col: caCol, ico: '💰' });
+
+  // Clients
+  var clientsPct = clientsCible > 0 ? Math.round(clientsReel / clientsCible * 100) : null;
+  var clientsCol = clientsPct == null ? '#94a3b8' : clientsPct >= 100 ? '#22c55e' : clientsPct >= 80 ? '#f59e0b' : '#ef4444';
+  var elCli = document.getElementById('kpiClientsResult');
+  if (elCli) { elCli.textContent = clientsPct != null ? clientsPct + '%' : '—'; elCli.style.color = clientsCol; }
+  if (clientsPct != null) scores.push({ lbl: 'Clients', pct: Math.min(clientsPct, 100), col: clientsCol, ico: '👥' });
+
+  // Panier auto-calculé
+  var panierAuto = (clientsReel > 0 && reel > 0) ? (reel / clientsReel) : null;
+  var elPA = document.getElementById('kpiPanierAuto');
+  if (elPA) elPA.textContent = panierAuto != null ? panierAuto.toFixed(3) + ' TND' : '—';
+  var panierVal = panierAuto || 0;
+  var panierPct = panierCible > 0 ? Math.round(panierVal / panierCible * 100) : null;
+  var panierCol = panierPct == null ? '#94a3b8' : panierPct >= 100 ? '#22c55e' : panierPct >= 80 ? '#f59e0b' : '#ef4444';
+  var elPR = document.getElementById('kpiPanierResult');
+  if (elPR) { elPR.textContent = panierPct != null ? panierPct + '% vs objectif' : '—'; elPR.style.color = panierCol; }
+  if (panierPct != null) scores.push({ lbl: 'Panier', pct: Math.min(panierPct, 100), col: panierCol, ico: '🛒' });
+
+  // Ruptures (inversé — 0 ruptures = 100%)
+  var tgtRupt = targets.ruptures || 5;
+  var ruptPct = rupturesNb > 0 ? Math.max(0, Math.round((1 - rupturesNb / tgtRupt) * 100)) : 100;
+  var ruptCol = rupturesNb === 0 ? '#22c55e' : rupturesNb <= tgtRupt / 2 ? '#f59e0b' : '#ef4444';
+  var elRR = document.getElementById('kpiRupturesResult');
+  if (elRR) { elRR.textContent = rupturesNb > 0 ? rupturesNb + ' rupture(s) ⚠️' : '✅ Aucune rupture'; elRR.style.color = ruptCol; }
+  scores.push({ lbl: 'Ruptures', pct: ruptPct, col: ruptCol, ico: '📦' });
+
+  // DLC
+  var dlcCol = dlcNb === 0 ? '#22c55e' : dlcNb <= 3 ? '#f59e0b' : '#ef4444';
+  var dlcPct = dlcNb === 0 ? 100 : Math.max(0, 100 - dlcNb * 15);
+  var elDR = document.getElementById('kpiDlcResult');
+  if (elDR) { elDR.textContent = dlcNb > 0 ? dlcNb + ' produit(s) retiré(s)' : '✅ RAS'; elDR.style.color = dlcCol; }
+
+  // Audit
+  var tgtAudit = targets.audit || 85;
+  var auditCol = auditScore >= tgtAudit ? '#22c55e' : auditScore >= tgtAudit * 0.85 ? '#f59e0b' : '#ef4444';
+  var elAR = document.getElementById('kpiAuditResult');
+  if (elAR) {
+    elAR.textContent = auditScore > 0 ? auditScore + '% ' + (auditScore >= tgtAudit ? '✅' : '⚠️') : '—';
+    elAR.style.color = auditCol;
+  }
+  if (auditScore > 0) scores.push({ lbl: 'Audit', pct: Math.min(auditScore, 100), col: auditCol, ico: '📋' });
+
+  // Démarque
+  var tgtDmq = targets.demarque || 200;
+  var dmqPct = demarqueMt > 0 ? Math.max(0, Math.round((1 - demarqueMt / tgtDmq) * 100)) : 100;
+  var dmqCol = demarqueMt === 0 ? '#22c55e' : demarqueMt <= tgtDmq * 0.5 ? '#f59e0b' : '#ef4444';
+  var elDMR = document.getElementById('kpiDemarqueResult');
+  if (elDMR) { elDMR.textContent = demarqueMt > 0 ? demarqueMt.toFixed(3) + ' TND' : '✅ RAS'; elDMR.style.color = dmqCol; }
+  scores.push({ lbl: 'Démarque', pct: dmqPct, col: dmqCol, ico: '⚠️' });
+
+  // Score global
+  var globalScore = scores.length ? Math.round(scores.reduce(function(s, x) { return s + x.pct; }, 0) / scores.length) : null;
+  var scoreCol = globalScore == null ? '#94a3b8' : globalScore >= 80 ? '#22c55e' : globalScore >= 60 ? '#f59e0b' : '#ef4444';
+  var scoreBg = globalScore == null ? 'linear-gradient(135deg,#052e16,#166534)' : globalScore >= 80 ? 'linear-gradient(135deg,#052e16,#166534)' : globalScore >= 60 ? 'linear-gradient(135deg,#3d1a00,#92400e)' : 'linear-gradient(135deg,#3d0000,#991b1b)';
+  var scoreLbl = globalScore == null ? 'EN ATTENTE' : globalScore >= 80 ? 'EXCELLENTE' : globalScore >= 60 ? 'CORRECTE' : 'À AMÉLIORER';
+
+  var elSV = document.getElementById('kpiScoreVal');
+  if (elSV) elSV.textContent = globalScore != null ? globalScore + '%' : '—';
+  var elSL = document.getElementById('kpiScoreLbl');
+  if (elSL) elSL.textContent = scoreLbl;
+  var elSBar = document.getElementById('kpiScoreBar');
+  if (elSBar) elSBar.style.width = (globalScore || 0) + '%';
+  var elSCard = document.getElementById('kpiScoreCard');
+  if (elSCard) elSCard.style.background = scoreBg;
+
+  // Score date label
+  var DF = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+  var MFL = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+  var nd = new Date();
+  var elDL = document.getElementById('kpiScoreDateLbl');
+  if (elDL) elDL.textContent = DF[nd.getDay()] + ' ' + nd.getDate() + ' ' + MFL[nd.getMonth()] + ' ' + nd.getFullYear();
+
+  // Breakdown badges
+  var elBd = document.getElementById('kpiScoreBreakdown');
+  if (elBd) {
+    elBd.innerHTML = scores.map(function(s) {
+      return '<div style="background:rgba(255,255,255,.08);border-radius:8px;padding:3px 8px;display:flex;align-items:center;gap:4px;">'
+        + '<span style="font-size:11px;">' + s.ico + '</span>'
+        + '<span style="font-size:10px;font-weight:800;color:' + s.col + ';">' + s.pct + '%</span>'
+        + '<span style="font-size:9px;color:rgba(255,255,255,.4);">' + s.lbl + '</span>'
+        + '</div>';
     }).join('');
+  }
 }
-function exportKpiPDF(){
-  var d=loadAdv();var hist=d.kpiHistory||[];
-  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>KPIs CA</title>'
-    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#14532d;}table{width:100%;border-collapse:collapse;font-size:12px;}th{background:#14532d;color:#fff;padding:8px;}td{padding:8px;border-bottom:1px solid #e2e8f0;}.ok{color:#16a34a;font-weight:700;}.mid{color:#d97706;font-weight:700;}.ko{color:#dc2626;font-weight:700;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
-    +'</head><body><h1>🎯 Objectifs & KPIs — CA</h1>'
-    +'<div class="meta">Généré le '+getGenDate()+' · MG MAXI DENDEN</div>'
-    +'<table><thead><tr><th>Date</th><th>Cible (TND)</th><th>Réalisé (TND)</th><th>Taux</th></tr></thead><tbody>'
-    +hist.map(function(e){var cls=e.pct>=100?'ok':e.pct>=80?'mid':'ko';return '<tr><td>'+e.date+'</td><td>'+e.cible.toLocaleString('fr-FR')+'</td><td>'+e.reel.toLocaleString('fr-FR')+'</td><td class="'+cls+'">'+e.pct+'%</td></tr>';}).join('')
-    +'</tbody></table></body></html>';
-  _dlPDF(html,'kpi_ca_'+tstr()+'.html');
+
+// ── Save entry ──
+function saveKpiEntry() {
+  var gv = function(id) { var el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; };
+  var gs = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  var cible = gv('kpiCible'), reel = gv('kpiReel');
+  if (!cible && !reel) { showT('⚠️', 'Entrez au moins le CA'); return; }
+
+  var clientsCible = gv('kpiClientsCible'), clientsReel = gv('kpiClientsReel');
+  var panierCible = gv('kpiPanierCible');
+  var rupturesNb = gv('kpiRupturesNb'), dlcNb = gv('kpiDlcNb');
+  var auditScore = gv('kpiAuditScore'), demarqueMt = gv('kpiDemarqueMt');
+  var note = gs('kpiNote');
+  var panierAuto = (clientsReel > 0 && reel > 0) ? parseFloat((reel / clientsReel).toFixed(3)) : 0;
+
+  var entry = {
+    date: tstr(), ts: Date.now(),
+    cible: cible, reel: reel,
+    pct: cible > 0 ? Math.round(reel / cible * 100) : 0,
+    clientsCible: clientsCible, clientsReel: clientsReel,
+    panierCible: panierCible, panierAuto: panierAuto,
+    rupturesNb: rupturesNb, dlcNb: dlcNb,
+    auditScore: auditScore, demarqueMt: demarqueMt,
+    note: note
+  };
+
+  var d = loadAdv();
+  if (!d.kpiHistory) d.kpiHistory = [];
+  // Replace if same date
+  var idx = d.kpiHistory.findIndex(function(e) { return e.date === tstr(); });
+  if (idx >= 0) d.kpiHistory[idx] = entry;
+  else d.kpiHistory.unshift(entry);
+  if (d.kpiHistory.length > 60) d.kpiHistory = d.kpiHistory.slice(0, 60);
+  saveAdv(d);
+  showT('✅', 'Journée enregistrée !');
+  if (_kpiTab === 'tableau') renderKpi();
+}
+
+// ── Render history (tableau tab) ──
+function renderKpi() {
+  var d = loadAdv(); var hist = d.kpiHistory || [];
+  var el = document.getElementById('kpiHistory'); if (!el) return;
+
+  // Week summary
+  var weekEl = document.getElementById('kpiWeekSummary');
+  if (weekEl) {
+    var today = new Date(); var weekDates = [];
+    for (var i = 6; i >= 0; i--) {
+      var dd = new Date(today); dd.setDate(today.getDate() - i);
+      weekDates.push(dd.getFullYear() + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + String(dd.getDate()).padStart(2, '0'));
+    }
+    var weekEntries = weekDates.map(function(dt) { return hist.find(function(e) { return e.date === dt; }); }).filter(Boolean);
+    var weekCA = weekEntries.reduce(function(s, e) { return s + (e.reel || 0); }, 0);
+    var weekCACible = weekEntries.reduce(function(s, e) { return s + (e.cible || 0); }, 0);
+    var weekPct = weekCACible > 0 ? Math.round(weekCA / weekCACible * 100) : 0;
+    var weekCol = weekPct >= 100 ? '#22c55e' : weekPct >= 80 ? '#f59e0b' : '#ef4444';
+    var bestDay = weekEntries.reduce(function(best, e) { return (!best || e.pct > best.pct) ? e : best; }, null);
+    weekEl.innerHTML = '<div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">📅 Résumé 7 Derniers Jours</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">'
+      + kpiBox('CA Total', weekCA.toLocaleString('fr-FR') + ' TND', '#22c55e')
+      + kpiBox('Taux Semaine', weekPct + '%', weekCol)
+      + kpiBox('Meilleur Jour', bestDay ? bestDay.pct + '%' : '—', '#fbbf24')
+      + '</div>'
+      + '<div style="margin-top:10px;height:5px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;"><div style="height:100%;width:' + Math.min(weekPct, 100) + '%;background:' + weekCol + ';border-radius:99px;transition:width .6s;"></div></div>';
+  }
+
+  if (!hist.length) {
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--t2);font-size:12px;"><div style="font-size:36px;margin-bottom:10px;">📊</div>Aucun historique enregistré</div>';
+    return;
+  }
+
+  var MFD = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+  var DF2 = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+
+  el.innerHTML = hist.map(function(e) {
+    var col = e.pct >= 100 ? '#22c55e' : e.pct >= 80 ? '#f59e0b' : '#ef4444';
+    var bg = e.pct >= 100 ? 'rgba(34,197,94,.06)' : e.pct >= 80 ? 'rgba(245,158,11,.06)' : 'rgba(239,68,68,.06)';
+    var bord = e.pct >= 100 ? 'rgba(34,197,94,.2)' : e.pct >= 80 ? 'rgba(245,158,11,.2)' : 'rgba(239,68,68,.2)';
+    var parts = e.date.split('-');
+    var dt = new Date(e.date + 'T00:00:00');
+    var dlbl = DF2[dt.getDay()] + ' ' + parseInt(parts[2]) + ' ' + MFD[parseInt(parts[1]) - 1];
+    var isToday = e.date === tstr();
+    var html = '<div style="background:' + bg + ';border:1px solid ' + bord + ';border-radius:14px;overflow:hidden;">'
+      + '<div style="display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;" onclick="kpiToggleDay(\'' + e.date + '\')">'
+      + '<div style="flex:1;">'
+      + '<div style="font-size:12px;font-weight:900;color:#f8faff;">' + dlbl + (isToday ? ' <span style="background:rgba(59,130,246,.2);border-radius:20px;padding:1px 7px;font-size:9px;color:#60a5fa;font-weight:800;">Aujourd\'hui</span>' : '') + '</div>'
+      + '<div style="font-size:11px;color:var(--t2);margin-top:2px;">' + (e.reel || 0).toLocaleString('fr-FR') + ' / ' + (e.cible || 0).toLocaleString('fr-FR') + ' TND</div>'
+      + '</div>'
+      + '<div style="text-align:right;">'
+      + '<div style="font-size:20px;font-weight:900;color:' + col + ';">' + e.pct + '%</div>'
+      + '<div style="width:50px;height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-top:3px;"><div style="height:100%;width:' + Math.min(e.pct, 100) + '%;background:' + col + ';border-radius:99px;"></div></div>'
+      + '</div>'
+      + '<span style="color:var(--t3);font-size:14px;transition:transform .2s;" id="kpiico-' + e.date + '">›</span>'
+      + '</div>'
+      + '<div id="kpiday-' + e.date + '" style="display:' + (isToday ? 'block' : 'none') + ';padding:0 14px 12px;">'
+      + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;">';
+
+    // Mini KPI badges
+    if (e.clientsReel) html += kpiMini('👥 Clients', e.clientsReel, e.clientsCible);
+    if (e.panierAuto) html += kpiMini('🛒 Panier', e.panierAuto.toFixed(3) + ' TND', e.panierCible ? e.panierCible + ' TND' : '');
+    if (e.rupturesNb != null) html += kpiMini('📦 Ruptures', e.rupturesNb, '');
+    if (e.dlcNb != null) html += kpiMini('⏰ DLC', e.dlcNb, '');
+    if (e.auditScore) html += kpiMini('📋 Audit', e.auditScore + '%', '');
+    if (e.demarqueMt) html += kpiMini('⚠️ Démarque', e.demarqueMt.toFixed(3) + ' TND', '');
+
+    html += '</div>';
+    if (e.note) html += '<div style="background:rgba(255,255,255,.04);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--t2);line-height:1.5;">📝 ' + escH(e.note) + '</div>';
+    html += '<button onclick="event.stopPropagation();kpiDelEntry(\'' + e.date + '\')" style="margin-top:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;">🗑️ Supprimer</button>';
+    html += '</div></div>';
+    return html;
+  }).join('');
+
+  // Open today arrow
+  var todayIco = document.getElementById('kpiico-' + tstr());
+  if (todayIco) todayIco.style.transform = 'rotate(90deg)';
+}
+
+function kpiBox(label, val, col) {
+  return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:9px;text-align:center;">'
+    + '<div style="font-size:14px;font-weight:900;color:' + col + ';">' + val + '</div>'
+    + '<div style="font-size:9px;color:var(--t3);margin-top:2px;">' + label + '</div></div>';
+}
+
+function kpiMini(label, val, cible) {
+  return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:7px 6px;text-align:center;">'
+    + '<div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:2px;">' + label + '</div>'
+    + '<div style="font-size:12px;font-weight:900;color:#f8faff;">' + val + '</div>'
+    + (cible ? '<div style="font-size:9px;color:var(--t3);">cible: ' + cible + '</div>' : '')
+    + '</div>';
+}
+
+function kpiToggleDay(date) {
+  var el = document.getElementById('kpiday-' + date);
+  if (!el) return;
+  var open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  var ico = document.getElementById('kpiico-' + date);
+  if (ico) ico.style.transform = open ? 'rotate(0deg)' : 'rotate(90deg)';
+}
+
+function kpiDelEntry(date) {
+  showConfirm('🗑️ Supprimer', 'Supprimer l\'entrée du ' + date + ' ?', function() {
+    var d = loadAdv();
+    d.kpiHistory = (d.kpiHistory || []).filter(function(e) { return e.date !== date; });
+    saveAdv(d); renderKpi(); showT('🗑️', 'Supprimé');
+  }, '🗑️');
+}
+
+// ── Charts ──
+function renderKpiCharts(days) {
+  var d = loadAdv(); var hist = d.kpiHistory || [];
+  var dates = [];
+  var today = new Date();
+  for (var i = days - 1; i >= 0; i--) {
+    var dd = new Date(today); dd.setDate(today.getDate() - i);
+    dates.push(dd.getFullYear() + '-' + String(dd.getMonth() + 1).padStart(2, '0') + '-' + String(dd.getDate()).padStart(2, '0'));
+  }
+  var labels = dates.map(function(dt) { var p = dt.split('-'); return p[2] + '/' + p[1]; });
+
+  var caData = dates.map(function(dt) { var e = hist.find(function(x) { return x.date === dt; }); return e ? e.reel : null; });
+  var caCible = dates.map(function(dt) { var e = hist.find(function(x) { return x.date === dt; }); return e ? e.cible : null; });
+  var tauxData = dates.map(function(dt) { var e = hist.find(function(x) { return x.date === dt; }); return e && e.cible ? e.pct : null; });
+  var clientsData = dates.map(function(dt) { var e = hist.find(function(x) { return x.date === dt; }); return e ? (e.clientsReel || null) : null; });
+  var panierData = dates.map(function(dt) { var e = hist.find(function(x) { return x.date === dt; }); return e ? (e.panierAuto || null) : null; });
+
+  var opts = { responsive: true, plugins: { legend: { display: true, labels: { color: 'rgba(255,255,255,.5)', font: { size: 10 } } } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } }, x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } } } };
+
+  function mkKpiChart(id, existing, datasets, extraOpts) {
+    var el = document.getElementById(id); if (!el) return null;
+    if (existing) { try { existing.destroy(); } catch(e) {} }
+    return new Chart(el, { type: 'line', data: { labels: labels, datasets: datasets }, options: Object.assign({}, opts, extraOpts || {}) });
+  }
+
+  _kpiChartCA = mkKpiChart('kpiChartCA', _kpiChartCA, [
+    { label: 'Réalisé', data: caData, borderColor: '#22c55e', backgroundColor: 'rgba(34,197,94,.12)', fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: '#22c55e', spanGaps: true },
+    { label: 'Objectif', data: caCible, borderColor: 'rgba(255,255,255,.25)', backgroundColor: 'transparent', fill: false, tension: .4, borderDash: [4, 3], pointRadius: 2, spanGaps: true }
+  ]);
+
+  _kpiChartTaux = mkKpiChart('kpiChartTaux', _kpiChartTaux, [
+    { label: 'Taux CA (%)', data: tauxData, borderColor: '#60a5fa', backgroundColor: 'rgba(59,130,246,.12)', fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: '#60a5fa', spanGaps: true }
+  ], { plugins: { legend: { display: false }, annotation: {} }, scales: { y: { beginAtZero: true, max: 120, grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } }, x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } } } });
+
+  _kpiChartClients = mkKpiChart('kpiChartClients', _kpiChartClients, [
+    { label: 'Clients', data: clientsData, borderColor: '#c084fc', backgroundColor: 'rgba(168,85,247,.12)', fill: true, tension: .4, pointRadius: 3, spanGaps: true },
+    { label: 'Panier moy. (TND)', data: panierData, borderColor: '#fbbf24', backgroundColor: 'transparent', fill: false, tension: .4, pointRadius: 3, yAxisID: 'y2', spanGaps: true }
+  ], { scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,.05)' }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } }, y2: { position: 'right', beginAtZero: true, grid: { display: false }, ticks: { color: '#fbbf24', font: { size: 9 } } }, x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,.4)', font: { size: 9 } } } } });
+
+  // Stats globales
+  var validEntries = hist.filter(function(e) { return dates.includes(e.date); });
+  var avgPct = validEntries.length ? Math.round(validEntries.reduce(function(s, e) { return s + e.pct; }, 0) / validEntries.length) : 0;
+  var totalCA = validEntries.reduce(function(s, e) { return s + (e.reel || 0); }, 0);
+  var maxDay = validEntries.reduce(function(best, e) { return (!best || e.reel > best.reel) ? e : best; }, null);
+  var avgPanier = validEntries.filter(function(e) { return e.panierAuto; });
+  var avgPanierVal = avgPanier.length ? (avgPanier.reduce(function(s, e) { return s + e.panierAuto; }, 0) / avgPanier.length) : 0;
+
+  var statsEl = document.getElementById('kpiChartStats');
+  if (statsEl) {
+    var pCol = avgPct >= 100 ? '#22c55e' : avgPct >= 80 ? '#f59e0b' : '#ef4444';
+    statsEl.innerHTML = [
+      kpiBox('Taux moyen', avgPct + '%', pCol),
+      kpiBox('CA total', totalCA.toLocaleString('fr-FR') + ' TND', '#22c55e'),
+      kpiBox('Meilleur CA', maxDay ? maxDay.reel.toLocaleString('fr-FR') + ' TND' : '—', '#fbbf24'),
+      kpiBox('Panier moy.', avgPanierVal > 0 ? avgPanierVal.toFixed(3) + ' TND' : '—', '#c084fc')
+    ].join('');
+  }
+}
+
+// ── Export PDF ──
+function exportKpiPDF() {
+  var d = loadAdv(); var hist = d.kpiHistory || [];
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>KPIs CA</title>'
+    + '<style>body{font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#1a202c;}'
+    + 'h1{color:#14532d;font-size:22px;}h2{font-size:14px;color:#374151;margin-top:20px;border-bottom:2px solid #e5e7eb;padding-bottom:6px;}'
+    + 'table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}'
+    + 'th{background:#14532d;color:#fff;padding:9px 10px;text-align:left;}'
+    + 'td{padding:8px 10px;border-bottom:1px solid #e2e8f0;}'
+    + 'tr:nth-child(even){background:#f9fafb;}'
+    + '.ok{color:#16a34a;font-weight:700;}.mid{color:#d97706;font-weight:700;}.ko{color:#dc2626;font-weight:700;}'
+    + '.meta{font-size:11px;color:#666;margin-bottom:16px;}'
+    + '.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0;}'
+    + '.stat-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px;text-align:center;}'
+    + '.stat-val{font-size:20px;font-weight:900;color:#14532d;}'
+    + '.stat-lbl{font-size:10px;color:#6b7280;margin-top:3px;}'
+    + '</style></head><body>'
+    + '<h1>🎯 Objectifs & KPIs — MG MAXI DENDEN</h1>'
+    + '<div class="meta">Généré le ' + getGenDate() + ' · ' + hist.length + ' journées enregistrées</div>';
+
+  // Résumé
+  var totalCA = hist.reduce(function(s, e) { return s + (e.reel || 0); }, 0);
+  var avgPct = hist.length ? Math.round(hist.reduce(function(s, e) { return s + e.pct; }, 0) / hist.length) : 0;
+  var above100 = hist.filter(function(e) { return e.pct >= 100; }).length;
+  html += '<div class="stat-grid">'
+    + '<div class="stat-box"><div class="stat-val">' + totalCA.toLocaleString('fr-FR') + '</div><div class="stat-lbl">CA Total (TND)</div></div>'
+    + '<div class="stat-box"><div class="stat-val">' + avgPct + '%</div><div class="stat-lbl">Taux Moyen</div></div>'
+    + '<div class="stat-box"><div class="stat-val">' + above100 + '/' + hist.length + '</div><div class="stat-lbl">Objectifs Atteints</div></div>'
+    + '<div class="stat-box"><div class="stat-val">' + hist.length + '</div><div class="stat-lbl">Journées Enreg.</div></div>'
+    + '</div>';
+
+  html += '<h2>📊 Historique Détaillé</h2>'
+    + '<table><thead><tr><th>Date</th><th>CA Obj. (TND)</th><th>CA Réal. (TND)</th><th>Taux CA</th><th>Clients</th><th>Panier (TND)</th><th>Ruptures</th><th>Audit</th><th>Démarque</th></tr></thead><tbody>'
+    + hist.map(function(e) {
+      var cls = e.pct >= 100 ? 'ok' : e.pct >= 80 ? 'mid' : 'ko';
+      return '<tr>'
+        + '<td>' + e.date + '</td>'
+        + '<td>' + (e.cible || 0).toLocaleString('fr-FR') + '</td>'
+        + '<td>' + (e.reel || 0).toLocaleString('fr-FR') + '</td>'
+        + '<td class="' + cls + '">' + e.pct + '%</td>'
+        + '<td>' + (e.clientsReel || '—') + '</td>'
+        + '<td>' + (e.panierAuto ? e.panierAuto.toFixed(3) : '—') + '</td>'
+        + '<td>' + (e.rupturesNb != null ? e.rupturesNb : '—') + '</td>'
+        + '<td>' + (e.auditScore ? e.auditScore + '%' : '—') + '</td>'
+        + '<td>' + (e.demarqueMt ? e.demarqueMt.toFixed(3) : '—') + '</td>'
+        + '</tr>';
+    }).join('') + '</tbody></table></body></html>';
+
+  _dlPDF(html, 'kpi_objectifs_' + tstr() + '.html');
 }
 
 // ══ RUPTURES ══
