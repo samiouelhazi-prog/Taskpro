@@ -19782,6 +19782,15 @@ function saveDLC(){
   document.getElementById('dlcForm').style.display='none';
   renderDlcPage();
   showT('✅','Produit DLC ajouté !'+(alarmTime?' · Alarme à '+alarmTime:''));
+  // ← إشعار فوري عند الإضافة إذا كانت DLC قريبة أو منتهية
+  var _newDiff=Math.round((new Date(date)-tn())/86400000);
+  var _newKey='dlcal_'+name+'_'+date;
+  localStorage.removeItem(_newKey); // نزيل المفتاح لضمان ظهور الإشعار
+  if(_newDiff<0){addN('bell','🔴 DLC EXPIRÉE',name+' — retirez du rayon !');}
+  else if(_newDiff===0){addN('bell','🔴 DLC aujourd\'hui !',name+(rayon?' · '+rayon:''));}
+  else if(_newDiff===1){addN('bell','⚠️ DLC demain',name+(rayon?' · '+rayon:''));}
+  else if(_newDiff<=3){addN('bell','⏰ DLC dans '+_newDiff+'j',name+(rayon?' · '+rayon:''));}
+  localStorage.setItem(_newKey,'1');
 }
 function delDLC(i){
   var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
