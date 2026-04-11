@@ -873,6 +873,109 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <meta name="description" content="Application de gestion de rayon — MG MAXI DENDEN">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2307080f'/%3E%3Ctext y='.9em' font-size='80'%3E📋%3C/text%3E%3C/svg%3E">
   <!-- manifest injected by JS -->
+  <script>
+  // ══════════════════════════════════════════════════════
+  // NOTIFICATIONS DLC — فعّالة حتى مع ملف محلي
+  // نهج مزدوج: Notification API مباشرة + حفظ في IndexedDB
+  // ══════════════════════════════════════════════════════
+
+  // ── طلب إذن الإشعارات فوراً ──
+  function requestNotifPermission(cb){
+    if(!('Notification' in window)){if(cb)cb(false);return;}
+    if(Notification.permission==='granted'){if(cb)cb(true);return;}
+    Notification.requestPermission().then(function(p){if(cb)cb(p==='granted');});
+  }
+
+  // ── إرسال إشعار نظام حقيقي ──
+  function sendSystemNotif(title, body, tag){
+    if(!('Notification' in window))return;
+    if(Notification.permission!=='granted')return;
+    try{
+      new Notification(title,{
+        body: body,
+        tag: tag||'dlc-alert',
+        requireInteraction: true,
+        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📦</text></svg>',
+        vibrate: [400,100,400,100,600]
+      });
+    }catch(e){}
+  }
+
+  // ── حفظ DLC في IndexedDB ──
+  function saveDlcToIDB(items){
+    try{
+      var req=indexedDB.open('taskpro_dlc',1);
+      req.onupgradeneeded=function(e){
+        var db=e.target.result;
+        if(!db.objectStoreNames.contains('kv'))db.createObjectStore('kv');
+      };
+      req.onsuccess=function(e){
+        var db=e.target.result;
+        var tx=db.transaction('kv','readwrite');
+        tx.objectStore('kv').put(JSON.stringify(items),'dlc_items');
+        tx.objectStore('kv').put(new Date().toISOString(),'dlc_updated');
+      };
+    }catch(e){}
+  }
+
+  // ── التحقق من DLC وإرسال إشعارات ──
+  function runDlcNotifCheck(){
+    try{
+      var items=JSON.parse(localStorage.getItem('tp10_dlc')||'[]');
+      if(!items.length)return;
+      var now=new Date(); now.setHours(0,0,0,0);
+      var todayStr=now.toISOString().split('T')[0];
+      var alertedKey='tp10_dlcSysAlerted';
+      var alerted={};
+      try{alerted=JSON.parse(localStorage.getItem(alertedKey)||'{}');}catch(e){}
+
+      items.forEach(function(item){
+        if(!item.date)return;
+        var dlcDate=new Date(item.date); dlcDate.setHours(0,0,0,0);
+        var diff=Math.round((dlcDate-now)/86400000);
+        var aKey=(item.id||item.name)+'_'+todayStr;
+        if(alerted[aKey])return;
+
+        var title='',body='';
+        if(diff<0){
+          title='⛔ DLC EXPIRÉE — '+item.name;
+          body='🗑️ Retirer du rayon immédiatement !'+(item.rayon?' · '+item.rayon:'');
+        } else if(diff===0){
+          title='🔴 DLC AUJOURD\'HUI — '+item.name;
+          body='⚠️ Expire aujourd\'hui !'+(item.rayon?' · '+item.rayon:'');
+        } else if(diff===1){
+          title='🟠 DLC DEMAIN — '+item.name;
+          body='Ce produit expire demain.'+(item.rayon?' · '+item.rayon:'');
+        } else if(diff<=3){
+          title='🟡 DLC dans '+diff+'j — '+item.name;
+          body='Date limite approche.'+(item.rayon?' · '+item.rayon:'');
+        } else { return; }
+
+        sendSystemNotif(title, body, 'dlc-'+(item.id||item.name));
+        alerted[aKey]=true;
+      });
+
+      localStorage.setItem(alertedKey,JSON.stringify(alerted));
+    }catch(e){}
+  }
+
+  // ── Sync DLC (appelé depuis saveDLC) ──
+  function syncDlcToSW(){
+    try{
+      var items=JSON.parse(localStorage.getItem('tp10_dlc')||'[]');
+      saveDlcToIDB(items);
+    }catch(e){}
+  }
+
+  // ── Demander permission au premier chargement ──
+  window.addEventListener('load',function(){
+    setTimeout(function(){
+      requestNotifPermission(function(granted){
+        if(granted) runDlcNotifCheck();
+      });
+    },2500);
+  });
+  </script>
 </head>
 <body>
 <div class="bg-mesh"></div>
@@ -19595,6 +19698,12 @@ window.addEventListener('DOMContentLoaded',()=>{
   checkDlcNotifications();
   // Vérifier toutes les heures
   setInterval(checkDlcNotifications, 60*60*1000);
+  // ← Sync DLC vers IndexedDB + إشعارات نظام عند الفتح
+  setTimeout(function(){
+    var dlItems=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    if(typeof saveDlcToIDB==='function') saveDlcToIDB(dlItems);
+    if(typeof runDlcNotifCheck==='function') runDlcNotifCheck();
+  }, 3000);
   // Alarmes DLC — synchronisées avec le début de chaque minute
   checkDlcAlarms();
   (function scheduleAlarmCheck(){
@@ -19785,12 +19894,15 @@ function saveDLC(){
   // ← إشعار فوري عند الإضافة إذا كانت DLC قريبة أو منتهية
   var _newDiff=Math.round((new Date(date)-tn())/86400000);
   var _newKey='dlcal_'+name+'_'+date;
-  localStorage.removeItem(_newKey); // نزيل المفتاح لضمان ظهور الإشعار
+  localStorage.removeItem(_newKey);
   if(_newDiff<0){addN('bell','🔴 DLC EXPIRÉE',name+' — retirez du rayon !');}
   else if(_newDiff===0){addN('bell','🔴 DLC aujourd\'hui !',name+(rayon?' · '+rayon:''));}
   else if(_newDiff===1){addN('bell','⚠️ DLC demain',name+(rayon?' · '+rayon:''));}
   else if(_newDiff<=3){addN('bell','⏰ DLC dans '+_newDiff+'j',name+(rayon?' · '+rayon:''));}
   localStorage.setItem(_newKey,'1');
+  // ← حفظ في IndexedDB حتى يقرأها Service Worker عند إغلاق التطبيق
+  if(typeof saveDlcToIDB==='function') saveDlcToIDB(dl);
+  if(typeof syncDlcToSW==='function') syncDlcToSW();
 }
 function delDLC(i){
   var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
