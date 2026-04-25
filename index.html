@@ -609,15 +609,29 @@ body.light #pgChaineFroid [style*="color:#f8faff"]{color:#0d1117!important;}
 body.light #pgChaineFroid .scroll > div > div[style*="background:rgba(34,197"]{background:rgba(34,197,94,.1)!important;}
 body.light #pgChaineFroid .scroll > div > div[style*="background:rgba(239,68"]{background:rgba(239,68,68,.08)!important;}
 body.light #pgChaineFroid .scroll > div > div[style*="background:rgba(251,191"]{background:rgba(251,191,36,.08)!important;}
-
-/* Forcer le form CDF toujours dark */
-#cdfForm > div{background:#0d1b2a!important;border-color:rgba(56,189,248,.4)!important;}
-#cdfForm label{color:#7dd3fc!important;}
-#cdfForm input, #cdfForm select, #cdfForm textarea{
+/* ══ CDF FORM: always dark regardless of theme ══ */
+#cdfForm > div{background:#020f1a!important;color-scheme:dark!important;}
+#cdfForm label{color:inherit!important;}
+#cdfForm input,#cdfForm select,#cdfForm textarea{
   color:#f8faff!important;
   -webkit-text-fill-color:#f8faff!important;
-  background:rgba(56,189,248,.07)!important;
+  color-scheme:dark!important;
 }
+#cdfForm input::placeholder,#cdfForm textarea::placeholder{color:rgba(255,255,255,.3)!important;}
+#cdfForm select option{background:#0d1b2a;color:#f8faff;}
+body.light #cdfForm [style*="color:#f8faff"]{color:#f8faff!important;}
+body.light #cdfForm [style*="color:#94a3b8"]{color:#94a3b8!important;}
+body.light #cdfForm [style*="color:#64748b"]{color:#64748b!important;}
+/* light mode: force dark text on all cdfForm inputs */
+body.light #cdfForm input,
+body.light #cdfForm select,
+body.light #cdfForm textarea{
+  color:#0d1117!important;
+  -webkit-text-fill-color:#0d1117!important;
+}
+body.light #cdfForm input::placeholder,
+body.light #cdfForm textarea::placeholder{color:rgba(0,0,0,.35)!important;}
+body.light #cdfForm select option{background:#fff;color:#0d1117;}
 #cdfForm input[id="cdfTemp"]{background:rgba(251,146,60,.08)!important;}
 #cdfForm select[id="cdfAction"]{background:rgba(239,68,68,.08)!important;}
 #cdfForm textarea[id="cdfObs"]{background:rgba(255,255,255,.06)!important;}
@@ -658,6 +672,9 @@ body.light input::placeholder,body.light textarea::placeholder{color:#9ca3af!imp
 body.light .pg [style*="color:#f8faff"],
 body.light .pg [style*="color:#fff"],
 body.light .pg [style*="color:white"]{color:#0d1117!important;}
+/* Exceptions: forms that must stay dark */
+body.light #cdfForm [style*="color:#f8faff"],
+body.light #cdfForm [style*="color:#fff"]{color:#f8faff!important;}
 /* ══ EXCEPTIONS: texte blanc sur fonds sombres en light mode ══ */
 /* Cas 1: parent gradient sombre → enfant color:#fff (cartes nav) */
 body.light .pg [style*="linear-gradient(145deg,#"] [style*="color:#fff"],
@@ -935,6 +952,13 @@ body.light [data-vg] { color: #0d1117 !important; background: rgba(0,0,0,.07) !i
 body.light #planningGrid > div { background: rgba(255,255,255,.8) !important; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
 body.light #planningGrid > div > div:first-child { background: rgba(0,0,0,.06) !important; }
 body.light #planningGrid > div > div { border-top-color: rgba(0,0,0,.06) !important; }
+body.light #planningGrid [style*="border-bottom:1px solid rgba(255,255,255"] { border-bottom-color: rgba(0,0,0,.08) !important; }
+/* Planning summary pills */
+body.light #planningSummary { display:flex !important; gap:8px; margin-bottom:10px; }
+body.light #planningSummary > div { background: rgba(0,0,0,.05) !important; }
+/* Rayon planning grid */
+body.light #rayonPlanningGrid [style*="border-top:1px solid rgba(255,255,255"] { border-top-color: rgba(0,0,0,.07) !important; }
+body.light #rayonPlanningGrid [style*="background:rgba(0,0,0,.15)"] { background: rgba(0,0,0,.06) !important; }
 body.light .vigilanceModal > div, body.light .planningModal > div, 
 
 
@@ -944,6 +968,24 @@ body.light .vigilanceModal > div, body.light .planningModal > div,
   -webkit-text-fill-color: #ffffff !important;
 }
 #bestSellerModal input::placeholder { color: rgba(255,255,255,.35) !important; }
+
+/* Planning modal — light mode */
+body.light #planningModal > div { background:#1e293b !important; }
+body.light #planningModal select,
+body.light #planningModal input[type="time"] {
+  background:#2d3748 !important;
+  color:#f8faff !important;
+  -webkit-text-fill-color:#f8faff !important;
+  border-color:rgba(255,255,255,.15) !important;
+  color-scheme:dark !important;
+}
+body.light #planningModal select option { background:#2d3748; color:#f8faff; }
+body.light #planningModal label { color:rgba(255,255,255,.6) !important; }
+body.light #planningModal button[onclick="setPlanRepos()"] {
+  background:rgba(255,255,255,.08) !important;
+  color:rgba(255,255,255,.6) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
 
 .drawer{color-scheme:dark;}
 .dr-tit{color:#f8faff!important;font-weight:900!important;}
@@ -1696,6 +1738,16 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
           </div>
         </div>
       </div>
+      <!-- Photo du TG -->
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:800;color:rgba(56,189,248,.7);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:6px;">📷 PHOTO DU TG (après mise en avant)</label>
+        <input type="file" id="tgPhotoInputM" accept="image/*" capture="environment" style="display:none;" onchange="tgPreviewPhotoM(this)">
+        <div id="tgPhotoPreviewM" style="display:none;position:relative;margin-bottom:6px;">
+          <img id="tgPhotoImgM" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3);">
+          <div onclick="tgClearPhotoM()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+        </div>
+        <button type="button" onclick="document.getElementById('tgPhotoInputM').click()" style="width:100%;background:rgba(56,189,248,.08);border:1.5px dashed rgba(56,189,248,.35);color:#38bdf8;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Photographier le TG après mise en avant</button>
+      </div>
       <div style="display:flex;gap:10px;">
         <button onclick="tgCloseForm()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:13px;cursor:pointer;">Annuler</button>
         <button onclick="tgSaveMultiple()" style="flex:2;background:linear-gradient(135deg,#0c4a6e,#0369a1,#38bdf8);border:none;color:#fff;font-size:14px;font-weight:800;padding:13px;border-radius:13px;cursor:pointer;font-family:'Syne';">💾 Tout enregistrer</button>
@@ -1776,6 +1828,16 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
             <div style="font-size:9px;opacity:.6;margin-top:2px;">de réduction</div>
           </div>
         </div>
+      </div>
+      <!-- Photo du TG -->
+      <div style="margin-bottom:14px;">
+        <label style="font-size:10px;font-weight:800;color:rgba(56,189,248,.7);letter-spacing:.8px;text-transform:uppercase;display:block;margin-bottom:6px;">📷 PHOTO DU TG (Mise en avant réalisée)</label>
+        <input type="file" id="tgPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="tgPreviewPhoto(this)">
+        <div id="tgPhotoPreview" style="display:none;position:relative;margin-bottom:6px;">
+          <img id="tgPhotoImg" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3);">
+          <div onclick="tgClearPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+        </div>
+        <button type="button" onclick="document.getElementById('tgPhotoInput').click()" style="width:100%;background:rgba(56,189,248,.08);border:1.5px dashed rgba(56,189,248,.35);color:#38bdf8;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Photographier le TG après mise en avant</button>
       </div>
       <!-- Boutons edit -->
       <div id="tgFormDelRow" style="display:none;margin-bottom:8px;">
@@ -3571,13 +3633,14 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   </div>
   <div class="scroll" style="padding:12px 12px 90px;">
 
-    <!-- ADD FORM -->
+    <!-- ADD FORM (multi-lignes) -->
     <div id="briefAddForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(59,130,246,.3);">
-      <div style="font-size:12px;font-weight:800;color:#60a5fa;margin-bottom:8px;">+ Nouveau point</div>
-      <div style="display:flex;gap:8px;">
-        <input id="briefNewItem" class="fi" placeholder="Ex: Vérifier températures froid..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addBriefingItem()" />
-        <button onclick="addBriefingItem()" style="background:#3b82f6;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;">✓ OK</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:800;color:#60a5fa;">+ Nouveaux points</div>
+        <button onclick="briefAddRow()" style="background:rgba(59,130,246,.2);border:1.5px solid rgba(59,130,246,.5);color:#60a5fa;font-size:16px;font-weight:900;width:30px;height:30px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
       </div>
+      <div id="briefRowsContainer" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px;"></div>
+      <button onclick="saveBriefingRows()" style="width:100%;background:#3b82f6;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:10px;cursor:pointer;">✓ Enregistrer tout</button>
     </div>
 
     <!-- CHECKLIST -->
@@ -4268,6 +4331,17 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <textarea id="cdObs" rows="2" placeholder="Remarques, type de déchets, état des cartons..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
     </div>
 
+    <!-- Photo du bon de sortie -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#84cc16;display:block;margin-bottom:6px;">📷 PHOTO DU BON DE SORTIE <span style="color:#475569;font-weight:400;">(document de collecte)</span></label>
+      <input type="file" id="cdPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="cdPreviewPhoto(this)">
+      <div id="cdPhotoPreview" style="display:none;position:relative;margin-bottom:6px;">
+        <img id="cdPhotoImg" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px;border:1px solid rgba(132,204,22,.3);">
+        <div onclick="cdClearPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+      </div>
+      <button type="button" onclick="document.getElementById('cdPhotoInput').click()" style="width:100%;background:rgba(132,204,22,.08);border:1.5px dashed rgba(132,204,22,.35);color:#84cc16;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Photographier le bon de sortie</button>
+    </div>
+
     <div id="cdDelRow" style="display:none;margin-bottom:10px;">
       <button onclick="delCollecte(_cdEid);document.getElementById('collecteForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer cette collecte</button>
     </div>
@@ -4637,11 +4711,11 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
       <div>
         <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">📅 DATE *</label>
-        <input id="cdfDate" type="date" style="width:100%;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;-webkit-text-fill-color:#f8faff !important;">
+        <input id="cdfDate" type="date" style="width:100%;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
       </div>
       <div>
         <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:4px;">⏰ HEURE *</label>
-        <input id="cdfHeure" type="time" style="width:100%;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;-webkit-text-fill-color:#f8faff !important;">
+        <input id="cdfHeure" type="time" style="width:100%;background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
       </div>
     </div>
 
@@ -4655,14 +4729,14 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="margin-bottom:12px;">
       <label style="font-size:10px;font-weight:700;color:#fb923c;display:block;margin-bottom:4px;">🌡️ TEMPÉRATURE RELEVÉE *</label>
       <div style="position:relative;">
-        <input id="cdfTemp" type="number" step="0.1" placeholder="Ex : 3.5" style="width:100%;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.3);border-radius:10px;padding:11px 50px 11px 14px;color:#f8faff;font-size:22px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;-webkit-text-fill-color:#f8faff !important;" oninput="cdfCheckTemp()">
+        <input id="cdfTemp" type="number" step="0.1" placeholder="Ex : 3.5" style="width:100%;background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.3);border-radius:10px;padding:11px 50px 11px 14px;color:#f8faff;font-size:22px;font-weight:900;box-sizing:border-box;font-family:'IBM Plex Mono',monospace;" oninput="cdfCheckTemp()">
         <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#64748b;">°C</span>
       </div>
       <div id="cdfTempFeedback" style="margin-top:5px;font-size:11px;font-weight:700;min-height:16px;"></div>
     </div>
 
     <!-- Action corrective -->
-    <div style="margin-bottom:12px;" id="cdfActionRow" style="display:none;">
+    <div id="cdfActionRow" style="display:none;margin-bottom:12px;">
       <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">⚠️ ACTION CORRECTIVE</label>
       <select id="cdfAction" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:11px 14px;color:#f8faff;font-size:13px;box-sizing:border-box;color-scheme:dark !important;">
         <option value="">— Sélectionner une action —</option>
@@ -4679,7 +4753,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <!-- Observation -->
     <div style="margin-bottom:18px;">
       <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATION</label>
-      <textarea id="cdfObs" rows="2" placeholder="État du matériel, remarques, context..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;-webkit-text-fill-color:#f8faff !important;"></textarea>
+      <textarea id="cdfObs" rows="2" placeholder="État du matériel, remarques, context..." style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
     </div>
 
     <div id="cdfDelRow" style="display:none;margin-bottom:10px;">
@@ -4920,6 +4994,17 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="margin-bottom:16px;">
       <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:4px;">📝 OBSERVATIONS</label>
       <textarea id="avObs" placeholder="Motif du retour, état du produit, remarques..." rows="2" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Photo de la demande d'avoir -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#10b981;display:block;margin-bottom:6px;">📷 PHOTO DE LA DEMANDE D'AVOIR <span style="color:#475569;font-weight:400;">(document système)</span></label>
+      <input type="file" id="avPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="avPreviewPhoto(this)">
+      <div id="avPhotoPreview" style="display:none;position:relative;margin-bottom:6px;">
+        <img id="avPhotoImg" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px;border:1px solid rgba(16,185,129,.3);">
+        <div onclick="avClearPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+      </div>
+      <button type="button" onclick="document.getElementById('avPhotoInput').click()" style="width:100%;background:rgba(16,185,129,.08);border:1.5px dashed rgba(16,185,129,.35);color:#34d399;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Photographier / Importer la DA</button>
     </div>
 
     <div id="avDelRow" style="display:none;margin-bottom:10px;">
@@ -5627,6 +5712,22 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <textarea id="majAjoutes" rows="3" placeholder="Ex:&#10;- Gel douche Z 400ml (ref. 11223344)&#10;- Lait corporel W (ref. 44332211)" style="width:100%;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.6;"></textarea>
     </div>
 
+    <!-- Photos AVANT -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#94a3b8;display:block;margin-bottom:6px;">📷 PHOTOS AVANT</label>
+      <input type="file" id="majPhotoAvantInput" accept="image/*" capture="environment" multiple style="display:none;" onchange="addMajPhotos(this,'avant')">
+      <div id="majPhotosAvant" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
+      <button type="button" onclick="document.getElementById('majPhotoAvantInput').click()" style="width:100%;background:rgba(148,163,184,.08);border:1.5px dashed rgba(148,163,184,.3);color:#94a3b8;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Ajouter photo(s) AVANT</button>
+    </div>
+
+    <!-- Photos APRÈS -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:10px;font-weight:700;color:#4ade80;display:block;margin-bottom:6px;">🖼️ PHOTOS APRÈS</label>
+      <input type="file" id="majPhotoApresInput" accept="image/*" capture="environment" multiple style="display:none;" onchange="addMajPhotos(this,'apres')">
+      <div id="majPhotosApres" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
+      <button type="button" onclick="document.getElementById('majPhotoApresInput').click()" style="width:100%;background:rgba(74,222,128,.08);border:1.5px dashed rgba(74,222,128,.3);color:#4ade80;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🖼️ Ajouter photo(s) APRÈS</button>
+    </div>
+
     <!-- Statut -->
     <div style="margin-bottom:16px;">
       <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:6px;">📊 STATUT D'AVANCEMENT</label>
@@ -5776,6 +5877,17 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
     <div style="margin-bottom:10px;">
       <label style="font-size:10px;font-weight:700;color:#f87171;display:block;margin-bottom:4px;">⚠️ PANNE / DÉFAUT CONSTATÉ *</label>
       <textarea id="savPanne" rows="2" placeholder="Ex: Écran cassé, ne s'allume plus, compresseur défaillant, porte qui ferme mal..." style="width:100%;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
+    </div>
+
+    <!-- Photo du produit -->
+    <div style="margin-bottom:10px;">
+      <label style="font-size:10px;font-weight:700;color:#c084fc;display:block;margin-bottom:6px;">📷 PHOTO DE L'ÉTAT DU PRODUIT</label>
+      <input type="file" id="savPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="previewSAVPhoto(this)">
+      <div id="savPhotoPreview" style="display:none;position:relative;margin-bottom:8px;">
+        <img id="savPhotoImg" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;border:1px solid rgba(192,132,252,.3);">
+        <div onclick="clearSAVPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+      </div>
+      <button type="button" onclick="document.getElementById('savPhotoInput').click()" style="width:100%;background:rgba(192,132,252,.1);border:1.5px dashed rgba(192,132,252,.4);color:#c084fc;font-size:13px;font-weight:700;padding:11px;border-radius:10px;cursor:pointer;">📷 Prendre / Choisir une photo</button>
     </div>
 
     <!-- Reçu par + Nom client -->
@@ -5949,6 +6061,14 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <textarea id="shkObs" rows="2" placeholder="Circonstances, détails supplémentaires..." style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;color:#f8faff;font-size:12px;box-sizing:border-box;resize:none;line-height:1.5;"></textarea>
     </div>
 
+    <!-- Photos du produit -->
+    <div style="margin-bottom:14px;">
+      <label style="font-size:10px;font-weight:700;color:#f472b6;display:block;margin-bottom:6px;">📷 PHOTOS DU PRODUIT / INCIDENT</label>
+      <input type="file" id="shkPhotoInput" accept="image/*" capture="environment" multiple style="display:none;" onchange="shkAddPhotos(this)">
+      <div id="shkPhotosGrid" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
+      <button type="button" onclick="document.getElementById('shkPhotoInput').click()" style="width:100%;background:rgba(236,72,153,.08);border:1.5px dashed rgba(236,72,153,.35);color:#f472b6;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Ajouter photo(s) du produit</button>
+    </div>
+
     <div id="shkDelRow" style="display:none;margin-bottom:10px;">
       <button onclick="delShrinkage(_shkEid);document.getElementById('shrinkageForm').style.display='none'" style="width:100%;background:rgba(239,68,68,.1);color:#f87171;border:1.5px solid rgba(239,68,68,.3);border-radius:13px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;">🗑️ Supprimer</button>
     </div>
@@ -6055,6 +6175,16 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
           <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Qté actuelle</label>
           <input id="ltBackQte" type="number" min="0" class="fi" placeholder="0" style="width:100%;box-sizing:border-box;"/>
         </div>
+      </div>
+
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:#38bdf8;display:block;margin-bottom:6px;">📷 PHOTO DU PRODUIT</label>
+        <input type="file" id="ltPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="ltPreviewPhoto(this)">
+        <div id="ltPhotoPreview" style="display:none;position:relative;margin-bottom:6px;">
+          <img id="ltPhotoImg" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px;border:1px solid rgba(14,165,233,.3);">
+          <div onclick="ltClearPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+        </div>
+        <button type="button" onclick="document.getElementById('ltPhotoInput').click()" style="width:100%;background:rgba(14,165,233,.08);border:1.5px dashed rgba(14,165,233,.35);color:#38bdf8;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Prendre / Choisir une photo</button>
       </div>
 
       <div style="margin-bottom:14px;">
@@ -9333,6 +9463,9 @@ const TASK_COLORS={daily:'col-blue',weekly3:'col-orange',weekly2:'col-purple',cu
 const PRIO_COLORS={red:'col-red',yellow:'col-orange',green:'col-green',blue:'col-blue'};
 
 // ══ SECURITY — XSS Sanitizer ══
+function safeNotif(title,opts){
+  try{if(typeof Notification!=="undefined"&&Notification.permission==="granted"){new Notification(title,opts||{});}}catch(e){}
+}
 function escHtml(str){
   if(!str)return '';
   return String(str)
@@ -10345,7 +10478,7 @@ function checkTN(){
         function sendTaskNotif(){
           if(Notification.permission==='granted'){
             try{
-              new Notification('🔔 Rappel : '+t.name,{
+              safeNotif('🔔 Rappel : '+t.name,{
                 body:'⏰ Il est '+t.time+' — Tâche à effectuer maintenant !',
                 tag:'task_'+t.id,
                 requireInteraction:true,
@@ -11038,19 +11171,19 @@ function checkDlcNotifications(){
       // Notification système navigateur
       if(Notification.permission==='granted'&&!alerted[key]){
         if(diff<0){
-          new Notification('⛔ DLC DÉPASSÉE !',{body:item.name+(item.rayon?' — '+item.rayon:''),icon:'',tag:item.id});
+          safeNotif('⛔ DLC DÉPASSÉE !',{body:item.name+(item.rayon?' — '+item.rayon:''),icon:'',tag:item.id});
           alerted[key]=true;hasAlerte=true;
         } else if(diff===0){
-          new Notification('🔴 DLC AUJOURD\'HUI !',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
+          safeNotif('🔴 DLC AUJOURD\'HUI !',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
           alerted[key]=true;hasAlerte=true;
         } else if(diff===1){
-          new Notification('⚠️ DLC demain !',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
+          safeNotif('⚠️ DLC demain !',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
           alerted[key]=true;hasAlerte=true;
         } else if(diff===3){
-          new Notification('🟡 DLC dans 3 jours',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
+          safeNotif('🟡 DLC dans 3 jours',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
           alerted[key]=true;
         } else if(diff===7){
-          new Notification('📅 DLC dans 7 jours',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
+          safeNotif('📅 DLC dans 7 jours',{body:item.name+(item.rayon?' — '+item.rayon:''),tag:item.id});
           alerted[key]=true;
         }
       }
@@ -11172,7 +11305,32 @@ function toggleBriefingAdd(){
   f.style.display=showing?'none':'block';
   var btn=document.getElementById('briefAddBtn');
   if(btn){btn.textContent=showing?'+ Point':'✕';btn.style.background=showing?'#3b82f6':'rgba(255,255,255,.12)';}
-  if(!showing){var inp=document.getElementById('briefNewItem');if(inp){inp.value='';inp.focus();}}
+  if(!showing){
+    // Initialiser avec une seule ligne vide
+    var c=document.getElementById('briefRowsContainer');
+    if(c){c.innerHTML='';briefAddRow();}
+  }
+}
+function briefAddRow(){
+  var c=document.getElementById('briefRowsContainer'); if(!c)return;
+  var idx=Date.now();
+  var row=document.createElement('div');
+  row.id='brow_'+idx;
+  row.style.cssText='display:flex;gap:7px;align-items:center;';
+  row.innerHTML='<input class="fi" placeholder="Ex: Vérifier températures..." style="flex:1;box-sizing:border-box;font-size:13px;" onkeydown="if(event.key===\'Enter\')briefAddRow()"/>'+'<div onclick="this.parentElement.remove()" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>';
+  c.appendChild(row);
+  // Focus sur le nouvel input
+  setTimeout(function(){var inp=row.querySelector('input');if(inp)inp.focus();},60);
+}
+function saveBriefingRows(){
+  var c=document.getElementById('briefRowsContainer'); if(!c)return;
+  var inputs=c.querySelectorAll('input');
+  var vals=[]; inputs.forEach(function(inp){var v=inp.value.trim();if(v)vals.push(v);});
+  if(!vals.length){showT('⚠️','Aucun point saisi');return;}
+  var d=loadEQ(); var br=getBriefingItems();
+  vals.forEach(function(v){br.items.push(v);}); d.briefing=br; saveEQ(d);
+  toggleBriefingAdd(); renderBriefing();
+  showT('✅', vals.length+' point'+(vals.length>1?'s':'')+' ajouté'+(vals.length>1?'s':''));
 }
 function addBriefingItem(){
   var inp=document.getElementById('briefNewItem'); if(!inp)return;
@@ -11311,6 +11469,7 @@ function renderPlanning(){
   if(summary){
     var total=todayItems.length;
     var repos=todayItems.filter(function(p){return p.horaire==='Repos';}).length;
+    summary.style.display='flex';summary.style.gap='8px';summary.style.marginBottom='10px';
     summary.innerHTML='<div style="flex:1;background:var(--card);border-radius:10px;padding:8px;text-align:center;">'
       +'<div style="font-size:18px;font-weight:900;color:#a78bfa;">'+total+'</div>'
       +'<div style="font-size:10px;color:var(--t2);">Affectés</div></div>'
@@ -15071,10 +15230,41 @@ function renderShrinkProducts(){
 }
 
 // ── Open form ────────────────────────────────────────────────
+function shkAddPhotos(input){
+  if(!input.files||!input.files.length)return;
+  window._shkPhotos=window._shkPhotos||[];
+  Array.from(input.files).forEach(function(f){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      window._shkPhotos.push(e.target.result);
+      _shkRenderPhotos();
+    };
+    reader.readAsDataURL(f);
+  });
+  input.value='';
+}
+function _shkRenderPhotos(){
+  var container=document.getElementById('shkPhotosGrid');
+  if(!container)return;
+  var photos=window._shkPhotos||[];
+  container.innerHTML=photos.map(function(src,i){
+    return '<div style="position:relative;width:72px;height:72px;flex-shrink:0;">'+
+      '<img src="'+src+'" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(236,72,153,.2);">'+
+      '<div onclick="_shkRemovePhoto('+i+')" style="position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:#ef4444;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</div>'+
+    '</div>';
+  }).join('');
+}
+function _shkRemovePhoto(i){
+  window._shkPhotos=window._shkPhotos||[];
+  window._shkPhotos.splice(i,1);
+  _shkRenderPhotos();
+}
 function openShrinkageForm(eid){
   _shkEid = eid||null;
   _shkType = '';
   _shkProducts = [{nom:'', qte:'1', unite:'Unité', prixUnit:''}];
+  window._shkPhotos=[];
+  _shkRenderPhotos();
   var d = new Date();
   document.getElementById('shkFormTit').textContent = eid ? '✏️ Modifier la Déclaration' : '🔍 Nouvelle Déclaration';
   document.getElementById('shkDelRow').style.display = eid ? 'block' : 'none';
@@ -15099,6 +15289,7 @@ function openShrinkageForm(eid){
       document.getElementById('shkDeclare').value = item.declare||'';
       document.getElementById('shkMesures').value = item.mesures||'';
       document.getElementById('shkObs').value = item.obs||'';
+      if(item.photos&&item.photos.length){window._shkPhotos=item.photos.slice();_shkRenderPhotos();}
       if(_shkType){
         var btn=document.querySelector('#shkTypeGrid [data-shkt="'+_shkType+'"]');
         if(btn) setShrinkType(btn,_shkType);
@@ -15128,7 +15319,8 @@ function saveShrinkage(){
     rayon: document.getElementById('shkRayon').value.trim(),
     declare: document.getElementById('shkDeclare').value.trim(),
     mesures: document.getElementById('shkMesures').value.trim(),
-    obs: document.getElementById('shkObs').value.trim()
+    obs: document.getElementById('shkObs').value.trim(),
+    photos: (window._shkPhotos||[]).slice()
   };
   if(_shkEid){ var idx=data.findIndex(function(x){return x.id===_shkEid;}); if(idx>-1)data[idx]=entry; else data.unshift(entry); }
   else data.unshift(entry);
@@ -15331,6 +15523,9 @@ function renderShrinkage(){
           }).join('')
           +'</div>'
           +(x.mesures?'<div style="font-size:10px;color:#38bdf8;margin-top:6px;">🎯 '+x.mesures+'</div>':'')
+          +(x.photos&&x.photos.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">'+x.photos.map(function(src){
+            return '<img src="'+src+'" onclick="event.stopPropagation();(function(s){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\"\'+s+\'\" style=\"max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\">\';document.body.appendChild(lb);})(this.src)" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid rgba(236,72,153,.2);cursor:pointer;">';
+          }).join('')+'</div>':'')
         +'</div>';
       }).join('');
     }
@@ -15728,12 +15923,32 @@ function setSAVFilter(f,btn){
 }
 
 // ── Open form ───────────────────────────────────────────────
+function previewSAVPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._savPhotoB64=e.target.result;
+    var img=document.getElementById('savPhotoImg');
+    var prev=document.getElementById('savPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function clearSAVPhoto(){
+  window._savPhotoB64=null;
+  var prev=document.getElementById('savPhotoPreview');
+  var inp=document.getElementById('savPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
 function openSAVForm(eid, cat){
   _savEid=eid||null; _savCurrentCat=cat||_savCurrentCat; _savStatutVal='attente';
   var d=new Date();
   document.getElementById('savFormTit').textContent=eid?'✏️ Modifier Instance SAV':'🔧 Nouvelle Instance SAV';
   document.getElementById('savDelRow').style.display=eid?'block':'none';
   ['savCode','savNumero','savNom','savDateAchat','savPanne','savRecuPar','savClient','savCamionDate','savCamionHeure'].forEach(function(id){document.getElementById(id).value='';});
+  clearSAVPhoto(); window._savPhotoB64=null;;
   document.getElementById('savDateReception').value=tstr();
   document.getElementById('savHeureReception').value=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
   if(eid){
@@ -15751,6 +15966,7 @@ function openSAVForm(eid, cat){
       document.getElementById('savCamionDate').value=item.camionDate||'';
       document.getElementById('savCamionHeure').value=item.camionHeure||'';
       _savStatutVal=item.statut||'attente';
+      if(item.photo){window._savPhotoB64=item.photo;var img=document.getElementById('savPhotoImg');var prev=document.getElementById('savPhotoPreview');if(img)img.src=item.photo;if(prev)prev.style.display='block';}
     }
   }
   // Reset statut buttons
@@ -15783,7 +15999,8 @@ function saveSAV(){
     client:document.getElementById('savClient').value.trim(),
     camionDate:document.getElementById('savCamionDate').value,
     camionHeure:document.getElementById('savCamionHeure').value,
-    statut:_savStatutVal
+    statut:_savStatutVal,
+    photo:window._savPhotoB64||null
   };
   if(_savEid){ var idx=list.findIndex(function(x){return x.id===_savEid;}); if(idx>-1)list[idx]=entry; else list.unshift(entry); }
   else list.unshift(entry);
@@ -17090,6 +17307,25 @@ function _avMigrateItems(av){
   }];
 }
 
+function avPreviewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._avPhotoB64=e.target.result;
+    var img=document.getElementById('avPhotoImg');
+    var prev=document.getElementById('avPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function avClearPhoto(){
+  window._avPhotoB64=null;
+  var prev=document.getElementById('avPhotoPreview');
+  var inp=document.getElementById('avPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
 function openAvoirForm(eid){
   _avEid = eid||null;
   _avStatut = 'attente';
@@ -17108,12 +17344,15 @@ function openAvoirForm(eid){
       document.getElementById('avObs').value = av.obs||'';
       _avStatut = av.statut||'attente';
       _avItems = _avMigrateItems(av);
+      if(av.photo){window._avPhotoB64=av.photo;var img=document.getElementById('avPhotoImg');var prev=document.getElementById('avPhotoPreview');if(img)img.src=av.photo;if(prev)prev.style.display='block';}
+      else{avClearPhoto();}
     }
   } else {
     ['avCamion','avLivreur','avEffPar','avNumero','avObs'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('avDate').value = tstr();
     document.getElementById('avHeure').value = ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);
     _avItems = [{codeMeti:'', designation:'', qte:'', unite:'Unité'}];
+    avClearPhoto(); window._avPhotoB64=null;
   }
   _renderAvItemsForm();
   // reset + apply statut
@@ -17144,7 +17383,8 @@ function saveAvoir(){
     effPar: document.getElementById('avEffPar').value.trim(),
     numero: document.getElementById('avNumero').value.trim(),
     statut: _avStatut,
-    obs: document.getElementById('avObs').value.trim()
+    obs: document.getElementById('avObs').value.trim(),
+    photo: window._avPhotoB64||(_avEid?(loadAvoirs().find(function(x){return x.id===_avEid;})||{}).photo||null:null)
   };
   if(_avEid){
     var idx=data.findIndex(function(x){return x.id===_avEid;});
@@ -17311,6 +17551,7 @@ function renderAvoirs(){
         '</div>'+
       '</div>'+
       (av.numero?'<div style="background:rgba(167,139,250,.1);border-radius:8px;padding:5px 9px;margin-top:5px;font-size:11px;font-weight:700;color:#c4b5fd;">🧾 N° Avoir : '+av.numero+'</div>':'')+
+      (av.photo?'<div style="margin-top:8px;"><img src="'+av.photo+'" onclick="event.stopPropagation();(function(s){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\"\'+s+\'\" style=\"max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\">\';document.body.appendChild(lb);})(this.src)" style="width:100%;max-height:150px;object-fit:cover;border-radius:10px;border:1px solid rgba(16,185,129,.2);cursor:pointer;"></div>':'')+
     '</div>';
   }).join('');
 }
@@ -18215,14 +18456,14 @@ function checkDlcAlarms(){
         function sendNotif(){
           if(Notification.permission==='granted'){
             try{
-              var n=new Notification(titre,{
+              var n=safeNotif(titre,{
                 body:corps,
                 tag:'dlc_alarm_'+item.id,
                 requireInteraction:true,
                 icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⏰</text></svg>'
               });
               // Re-notifier après 30s si pas fermée
-              setTimeout(function(){ try{ n.close(); new Notification(titre,{body:corps,requireInteraction:true}); }catch(e){} },30000);
+              setTimeout(function(){ try{ n.close(); safeNotif(titre,{body:corps,requireInteraction:true}); }catch(e){} },30000);
             }catch(e){}
           } else if(Notification.permission==='default'){
             Notification.requestPermission().then(function(p){
@@ -19975,10 +20216,30 @@ function addDLC(){window._dlcGrav='';document.querySelectorAll('[data-grav]').fo
   document.getElementById('dlcDate').value=tstr();
   document.getElementById('dlcRayon').value='';
   var at=document.getElementById('dlcAlarmTime');if(at)at.value='';
+  dlcClearPhoto(); window._dlcPhotoB64=null;
   setTimeout(function(){
     f.style.display='flex';
     document.getElementById('dlcName').focus();
   },300);
+}
+function dlcPreviewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._dlcPhotoB64=e.target.result;
+    var img=document.getElementById('dlcPhotoImg');
+    var prev=document.getElementById('dlcPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function dlcClearPhoto(){
+  window._dlcPhotoB64=null;
+  var prev=document.getElementById('dlcPhotoPreview');
+  var inp=document.getElementById('dlcPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
 }
 function saveDLC(){
   var name=document.getElementById('dlcName').value.trim();
@@ -19988,7 +20249,7 @@ function saveDLC(){
   if(!name){showT('⚠️','Entrez le nom du produit');return;}
   if(!date){showT('⚠️','Entrez la date DLC');return;}
   var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
-  dl.push({id:uid(),name:name,date:date,rayon:rayon,gravite:window._dlcGrav||'attention',alarmTime:alarmTime});
+  dl.push({id:uid(),name:name,date:date,rayon:rayon,gravite:window._dlcGrav||'attention',alarmTime:alarmTime,photo:window._dlcPhotoB64||null});
   dl.sort(function(a,b){return new Date(a.date)-new Date(b.date);});
   localStorage.setItem(SK+'_dlc',JSON.stringify(dl));
   document.getElementById('dlcForm').style.display='none';
@@ -20392,6 +20653,7 @@ function renderDlcPage(){
     if(item.alarmTime) html+='<span style="font-size:10px;font-weight:700;color:#06b6d4;background:rgba(6,182,212,.12);border:1px solid rgba(6,182,212,.3);border-radius:20px;padding:1px 7px;">⏰ '+item.alarmTime+'</span>';
     html+='</div></div>';
     html+='<div onclick="confirmDelDlc(\''+item.id+'\',\''+item.name.replace(/'/g,"\\'")+ '\',\''+item.date+'\')" style="color:#ef4444;font-size:20px;cursor:pointer;padding:4px 8px;margin-left:8px;">×</div>';
+    if(item.photo) html+='<div style="margin-top:6px;"><img src="'+item.photo+'" onclick="(function(src){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\'\'+src+\'\' style=\'max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\'>\'  ;document.body.appendChild(lb);})(this.src)" style="width:100%;max-height:120px;object-fit:cover;border-radius:10px;border:1px solid rgba(6,182,212,.2);cursor:pointer;"></div>';
     html+='</div>';
   });
   el.innerHTML=html;
@@ -21279,6 +21541,25 @@ function _cdDateFmt(d){
   var p=d.split('-');return p[2]+' '+M[parseInt(p[1])-1]+' '+p[0];
 }
 
+function cdPreviewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._cdPhotoB64=e.target.result;
+    var img=document.getElementById('cdPhotoImg');
+    var prev=document.getElementById('cdPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function cdClearPhoto(){
+  window._cdPhotoB64=null;
+  var prev=document.getElementById('cdPhotoPreview');
+  var inp=document.getElementById('cdPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
 function openCollecteForm(eid){
   _cdEid = eid||null;
   document.getElementById('collecteFormTit').textContent = eid ? '✏️ Modifier la Collecte' : '♻️ Nouvelle Collecte';
@@ -21294,6 +21575,8 @@ function openCollecteForm(eid){
       document.getElementById('cdCamion').value = rec.camion||'';
       document.getElementById('cdCollecteur').value = rec.collecteur||'';
       document.getElementById('cdObs').value = rec.obs||'';
+      if(rec.photo){window._cdPhotoB64=rec.photo;var img=document.getElementById('cdPhotoImg');var prev=document.getElementById('cdPhotoPreview');if(img)img.src=rec.photo;if(prev)prev.style.display='block';}
+      else{cdClearPhoto();}
     }
   } else {
     document.getElementById('cdDate').value = tstr();
@@ -21302,6 +21585,7 @@ function openCollecteForm(eid){
     document.getElementById('cdCamion').value = '';
     document.getElementById('cdCollecteur').value = '';
     document.getElementById('cdObs').value = '';
+    cdClearPhoto(); window._cdPhotoB64=null;
   }
   document.getElementById('collecteForm').style.display = 'flex';
 }
@@ -21319,7 +21603,8 @@ function saveCollecte(){
     kg: kg,
     camion: document.getElementById('cdCamion').value.trim().toUpperCase(),
     collecteur: collecteur,
-    obs: document.getElementById('cdObs').value.trim()
+    obs: document.getElementById('cdObs').value.trim(),
+    photo: window._cdPhotoB64||(_cdEid?(loadCollecte().find(function(x){return x.id===_cdEid;})||{}).photo||null:null)
   };
   if(_cdEid){
     var idx = data.findIndex(function(x){ return x.id===_cdEid; });
@@ -21392,6 +21677,7 @@ function renderCollecte(){
         '</div>'+
       '</div>'+
       (r.obs?'<div style="font-size:10px;color:var(--t2);background:rgba(255,255,255,.03);border-radius:8px;padding:5px 9px;margin-top:7px;">💬 '+r.obs+'</div>':'')+
+      (r.photo?'<div style="margin-top:8px;"><img src="'+r.photo+'" onclick="event.stopPropagation();(function(s){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\"\'+s+\'\" style=\"max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\">\';document.body.appendChild(lb);})(this.src)" style="width:100%;max-height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(132,204,22,.2);cursor:pointer;"></div>':'')+
     '</div>';
   }).join('');
 }
@@ -21535,9 +21821,39 @@ function removeAnomItem(idx){
   _anomRenderItems();
 }
 
+function anomAddPhoto(input){
+  if(!input.files||!input.files.length)return;
+  Array.from(input.files).forEach(function(f){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      window._anomPhotos=window._anomPhotos||[];
+      window._anomPhotos.push(e.target.result);
+      _anomRenderPhotos();
+    };
+    reader.readAsDataURL(f);
+  });
+  input.value='';
+}
+function _anomRenderPhotos(){
+  var container=document.getElementById('_anomPhotosGrid');
+  if(!container)return;
+  var photos=window._anomPhotos||[];
+  container.innerHTML=photos.map(function(src,i){
+    return '<div style="position:relative;width:72px;height:72px;flex-shrink:0;">'+
+      '<img src="'+src+'" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.15);">'+
+      '<div onclick="_anomRemovePhoto('+i+')" style="position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:#ef4444;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;">×</div>'+
+    '</div>';
+  }).join('');
+}
+function _anomRemovePhoto(i){
+  window._anomPhotos=window._anomPhotos||[];
+  window._anomPhotos.splice(i,1);
+  _anomRenderPhotos();
+}
 function openAnomForm(rayon){
   _anomRayon=rayon;
   _anomItems=[{}]; // reset avec 1 ligne vide
+  window._anomPhotos=[];
   var formId='anom'+(rayon==='poissonnerie'?'Poiss':'Fleg')+'Form';
   var color=rayon==='poissonnerie'?'#38bdf8':'#4ade80';
   var bgColor=rayon==='poissonnerie'?'#0369a1':'#15803d';
@@ -21557,6 +21873,15 @@ function openAnomForm(rayon){
       '<input type="text" id="anomFournisseur" placeholder="Ex: STAPS, Ferme X..." style="width:100%;box-sizing:border-box;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 10px;color:#f8faff;font-size:13px;outline:none;"></div>'+
     '</div>'+
     '<div id="_anomItemsContainer"></div>'+
+    // Section photos multiples
+    '<div style="margin:10px 0 8px;">'+
+      '<div style="font-size:10px;font-weight:700;color:#f59e0b;margin-bottom:6px;">📷 PHOTOS (Facture + Produits)</div>'+
+      '<div id="_anomPhotosGrid" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>'+
+      '<label style="width:100%;display:block;background:rgba(245,158,11,.08);border:1.5px dashed rgba(245,158,11,.35);border-radius:10px;padding:8px;text-align:center;color:#fbbf24;font-size:12px;font-weight:700;cursor:pointer;">'+
+        '📷 Ajouter photos'+
+        '<input type="file" accept="image/*" multiple style="display:none;" onchange="anomAddPhoto(this)">'+
+      '</label>'+
+    '</div>'+
     '<div style="display:flex;gap:8px;margin-top:8px;">'+
       '<button onclick="closeAnomForm(\''+rayon+'\')" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>'+
       '<button onclick="saveAnomalie(\''+rayon+'\')" style="flex:2;background:'+bgColor+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer tout</button>'+
@@ -21594,7 +21919,8 @@ function saveAnomalie(rayon){
       qteCde:cde,
       qteRec:rec,
       ecart:parseFloat((rec-cde).toFixed(3)),
-      obs:(row.querySelector('[data-anf="obs"]').value||'').trim()
+      obs:(row.querySelector('[data-anf="obs"]').value||'').trim(),
+      photos:window._anomPhotos||[]
     });
   });
   if(hasError){showT('⚠️','Chaque article doit avoir une désignation');return;}
@@ -21676,6 +22002,9 @@ function renderAnom(rayon){
       '<div style="display:flex;justify-content:flex-end;">'+
       '<button onclick="delAnomalie(\''+rayon+'\',\''+a.id+'\')" style="background:rgba(239,68,68,.1);border:none;color:#f87171;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;">🗑️ Supprimer</button>'+
       '</div>'+
+      (a.photos&&a.photos.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">'+a.photos.map(function(src){
+        return '<img src="'+src+'" onclick="event.stopPropagation();(function(s){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\"\'+s+\'\" style=\"max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\">\';document.body.appendChild(lb);})(this.src)" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid rgba(245,158,11,.25);cursor:pointer;">';
+      }).join('')+'</div>':'')+
       '</div>';
   }).join('');
 }
@@ -22290,6 +22619,25 @@ var _ltTransferId = null;
 function ltLoad(){try{return JSON.parse(localStorage.getItem(SK_LT))||[];}catch(e){return[];}}
 function ltSaveData(d){try{localStorage.setItem(SK_LT,JSON.stringify(d));}catch(e){}}
 
+function ltPreviewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._ltPhotoB64=e.target.result;
+    var img=document.getElementById('ltPhotoImg');
+    var prev=document.getElementById('ltPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function ltClearPhoto(){
+  window._ltPhotoB64=null;
+  var prev=document.getElementById('ltPhotoPreview');
+  var inp=document.getElementById('ltPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
 function ltOpenForm(editId){
   var f=document.getElementById('ltForm');
   if(!f)return;
@@ -22308,6 +22656,7 @@ function ltOpenForm(editId){
       document.getElementById('ltFrontSeuil').value=item.seuil||0;
       document.getElementById('ltBackQte').value=item.back||0;
       document.getElementById('ltNotes').value=item.notes||'';
+      if(item.photo){window._ltPhotoB64=item.photo;var img=document.getElementById('ltPhotoImg');var prev=document.getElementById('ltPhotoPreview');if(img)img.src=item.photo;if(prev)prev.style.display='block';}
       if(title)title.textContent='✏️ Modifier Article';
     }
   } else {
@@ -22318,6 +22667,7 @@ function ltOpenForm(editId){
     document.getElementById('ltFrontSeuil').value='';
     document.getElementById('ltBackQte').value='';
     document.getElementById('ltNotes').value='';
+    ltClearPhoto(); window._ltPhotoB64=null;
     if(title)title.textContent='➕ Nouvel Article';
   }
   f.style.display='block';
@@ -22345,12 +22695,12 @@ function ltSave(){
   var items=ltLoad();
   if(_ltEditId){
     items=items.map(function(x){
-      if(x.id===_ltEditId)return {id:x.id,nom:nom,code:code,cat:cat,front:front,seuil:seuil,back:back,notes:notes,dateAjout:x.dateAjout,lastUpdate:now};
+      if(x.id===_ltEditId)return {id:x.id,nom:nom,code:code,cat:cat,front:front,seuil:seuil,back:back,notes:notes,photo:window._ltPhotoB64||x.photo||null,dateAjout:x.dateAjout,lastUpdate:now};
       return x;
     });
     showT('✅','Article modifié');
   } else {
-    items.push({id:uid(),nom:nom,code:code,cat:cat,front:front,seuil:seuil,back:back,notes:notes,dateAjout:now,lastUpdate:now});
+    items.push({id:uid(),nom:nom,code:code,cat:cat,front:front,seuil:seuil,back:back,notes:notes,photo:window._ltPhotoB64||null,dateAjout:now,lastUpdate:now});
     showT('✅','Article ajouté');
   }
   ltSaveData(items);
@@ -22485,16 +22835,23 @@ function ltRender(){
       +'<div style="font-size:9px;color:var(--t3);">MAJ: '+dateStr+'</div>'
       +(item.notes?'<div style="font-size:9px;color:var(--t3);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">📝 '+item.notes+'</div>':'')
       +'</div>'
+      +(item.photo?'<div style="margin-top:8px;"><img src="'+item.photo+'" onclick="event.stopPropagation();ltViewPhoto(\''+item.id+'\')" style="width:100%;max-height:130px;object-fit:cover;border-radius:10px;border:1px solid rgba(14,165,233,.2);cursor:pointer;"></div>':'')
       +'</div>';
   }).join('');
 }
 
+function ltViewPhoto(id){
+  var item=ltLoad().find(function(x){return x.id===id;});
+  if(!item||!item.photo)return;
+  var lb=document.createElement('div');
+  lb.style.cssText='position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;';
+  lb.onclick=function(){document.body.removeChild(lb);};
+  lb.innerHTML='<img src="'+item.photo+'" style="max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;">';
+  document.body.appendChild(lb);
+}
+
 function ltExportPDF(){
   var items=ltLoad();
-  var now=new Date();
-  var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-  var gen=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
-  var alertes=items.filter(function(x){return x.front<=x.seuil&&x.seuil>0;});
   var totalF=items.reduce(function(s,x){return s+x.front;},0);
   var totalB=items.reduce(function(s,x){return s+x.back;},0);
   var rows=items.map(function(x){
@@ -23417,6 +23774,7 @@ function tgRender(){
           +(pct>0?'<div style="font-size:9px;font-weight:800;color:'+ecoCol+';margin-top:1px;">-'+pct+'%</div>':'')
         +'</div>'
       +'</div>'
+      +(p.photo?'<div style="margin-top:8px;"><img src="'+p.photo+'" onclick="event.stopPropagation();(function(s){var lb=document.createElement(\'div\');lb.style.cssText=\'position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;\';lb.onclick=function(){document.body.removeChild(lb);};lb.innerHTML=\'<img src=\'\'+s+\'\' style=\'max-width:95vw;max-height:90vh;border-radius:12px;object-fit:contain;\'>\'  ;document.body.appendChild(lb);})(this.src)" style="width:100%;max-height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.2);cursor:pointer;"></div>':'')
       +'</div>';
   }).join('');
 
@@ -23546,6 +23904,44 @@ function tgRemoveRow(i){
   tgRenderMultiRows();
 }
 
+function tgPreviewPhotoM(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._tgPhotoB64M=e.target.result;
+    var img=document.getElementById('tgPhotoImgM');
+    var prev=document.getElementById('tgPhotoPreviewM');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function tgClearPhotoM(){
+  window._tgPhotoB64M=null;
+  var prev=document.getElementById('tgPhotoPreviewM');
+  var inp=document.getElementById('tgPhotoInputM');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
+function tgPreviewPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window._tgPhotoB64=e.target.result;
+    var img=document.getElementById('tgPhotoImg');
+    var prev=document.getElementById('tgPhotoPreview');
+    if(img)img.src=e.target.result;
+    if(prev)prev.style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function tgClearPhoto(){
+  window._tgPhotoB64=null;
+  var prev=document.getElementById('tgPhotoPreview');
+  var inp=document.getElementById('tgPhotoInput');
+  if(prev)prev.style.display='none';
+  if(inp)inp.value='';
+}
 function tgOpenPlanForm(idx){
   var data = tgLoad();
   _tgEditIdx = (idx!==undefined) ? idx : null;
@@ -23569,12 +23965,16 @@ function tgOpenPlanForm(idx){
     document.getElementById('tgFormDelRow').style.display = 'block';
     document.getElementById('tgEcoPreview').style.display = 'none';
     tgCalcEco();
+    if(p.photo){window._tgPhotoB64=p.photo;var img=document.getElementById('tgPhotoImg');var prev=document.getElementById('tgPhotoPreview');if(img)img.src=p.photo;if(prev)prev.style.display='block';}
+    else{tgClearPhoto();}
   } else {
     // Mode ajout multiple — reset
     _tgMultiRows = [{nom:'', rayon:'', prixNormal:0, prixPromo:0}];
     document.getElementById('tgMCatDe').value = '';
     document.getElementById('tgMCatAu').value = '';
     tgRenderMultiRows();
+    tgClearPhoto(); window._tgPhotoB64=null;
+    tgClearPhotoM(); window._tgPhotoB64M=null;
   }
 
   document.getElementById('tgFormModal').style.display='flex';
@@ -23600,7 +24000,8 @@ function tgSaveMultiple(){
       catDe: catDe, catAu: catAu,
       rayon: r.rayon,
       prixNormal: r.prixNormal||0,
-      prixPromo: r.prixPromo||0
+      prixPromo: r.prixPromo||0,
+      photo: window._tgPhotoB64M||null
     });
   });
   tgSaveData(data);
@@ -23623,7 +24024,8 @@ function tgSaveProduct(){
   if(!catDe||!catAu){ showT('⚠️','Entrez les dates du catalogue'); return; }
   if(prixN<=0){ showT('⚠️','Entrez le prix normal'); return; }
 
-  var entry = { nom:nom, catDe:catDe, catAu:catAu, rayon:rayon, prixNormal:prixN, prixPromo:prixP };
+  var entry = { nom:nom, catDe:catDe, catAu:catAu, rayon:rayon, prixNormal:prixN, prixPromo:prixP,
+    photo:window._tgPhotoB64||(_tgEditIdx!==null?(tgLoad()[_tgEditIdx]||{}).photo||null:null) };
   var data = tgLoad();
 
   if(_tgEditIdx!==null){
@@ -24154,6 +24556,15 @@ function exportPlanTgPDF(){
         <button type="button" onclick="setDlcGrav(this,'attention')" data-grav="attention" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:10px;color:#f59e0b;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟡 Attention</button>
         <button type="button" onclick="setDlcGrav(this,'ok')" data-grav="ok" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:10px;color:#22c55e;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">🟢 OK</button>
       </div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="font-size:11px;color:#64748b;font-weight:700;display:block;margin-bottom:6px;">📷 PHOTO DU PRODUIT</label>
+      <input type="file" id="dlcPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="dlcPreviewPhoto(this)">
+      <div id="dlcPhotoPreview" style="display:none;position:relative;margin-bottom:6px;">
+        <img id="dlcPhotoImg" style="width:100%;max-height:160px;object-fit:cover;border-radius:10px;border:1px solid rgba(6,182,212,.3);">
+        <div onclick="dlcClearPhoto()" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>
+      </div>
+      <button type="button" onclick="document.getElementById('dlcPhotoInput').click()" style="width:100%;background:rgba(6,182,212,.08);border:1.5px dashed rgba(6,182,212,.35);color:#22d3ee;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📷 Prendre / Choisir une photo</button>
     </div>
     <div style="display:flex;gap:10px;">
       <button onclick="document.getElementById('dlcForm').style.display='none'" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;font-size:14px;font-weight:700;padding:14px;border-radius:14px;cursor:pointer;">✕ Annuler</button>
