@@ -1325,6 +1325,22 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
         <div id="dashCollecteCount" style="font-size:26px;font-weight:900;color:#fff;font-family:'Syne';line-height:1;">0</div>
         <div id="dashCollecteSub" style="font-size:10px;color:rgba(255,255,255,.45);margin-top:4px;"></div>
       </div>
+
+      <!-- SAV Ouvertes -->
+      <div onclick="goPage('instancesSAV')" style="background:var(--card);border-radius:14px;border:1px solid rgba(96,165,250,.3);padding:13px;cursor:pointer;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-4px;bottom:-4px;font-size:38px;opacity:.07;pointer-events:none;">🔧</div>
+        <div style="font-size:9px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🔧 SAV Ouvertes</div>
+        <div id="dashSavCount" style="font-size:26px;font-weight:900;color:#fff;font-family:'Syne';line-height:1;">0</div>
+        <div id="dashSavSub" style="font-size:10px;color:rgba(255,255,255,.45);margin-top:4px;"></div>
+      </div>
+
+      <!-- TG Fin Catalogue -->
+      <div onclick="goPage('planTg')" style="background:var(--card);border-radius:14px;border:1px solid rgba(250,204,21,.3);padding:13px;cursor:pointer;position:relative;overflow:hidden;">
+        <div style="position:absolute;right:-4px;bottom:-4px;font-size:38px;opacity:.07;pointer-events:none;">🏷️</div>
+        <div style="font-size:9px;font-weight:800;color:#facc15;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🏷️ TG — Fin Catalogue</div>
+        <div id="dashTgCount" style="font-size:26px;font-weight:900;color:#fff;font-family:'Syne';line-height:1;">0</div>
+        <div id="dashTgSub" style="font-size:10px;color:rgba(255,255,255,.45);margin-top:4px;"></div>
+      </div>
     </div>
 
     <!-- KPI GRID — Ligne 3 (Froid + CA + Backup) -->
@@ -1661,6 +1677,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar" style="border-bottom:1px solid rgba(56,189,248,.15);">
     <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Modules</div>
     <div style="font-family:'Syne';font-size:16px;font-weight:900;color:#f8faff;">📌 Plan TG</div>
+    <button onclick="waSharePlanTG()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="display:flex;gap:7px;align-items:center;">
       <button onclick="exportPlanTgPDF()" title="Exporter PDF" style="background:rgba(56,189,248,.15);border:1.5px solid rgba(56,189,248,.4);color:#38bdf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
       <button onclick="tgOpenPlanForm()" id="tgAddBtn" style="background:rgba(56,189,248,.2);border:1.5px solid rgba(56,189,248,.5);color:#38bdf8;font-size:18px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -3366,7 +3383,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('taches')">‹ Modules</div>
     <div class="pg-title">⏰ Contrôle DLC</div>
-    <button onclick="printDlcReport()" style="margin-left:auto;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">🖨️</button> <button onclick="addDLC()" style="margin-left:auto;background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 13px;border-radius:20px;cursor:pointer;">+ Ajouter</button>
+    <button onclick="printDlcReport()" style="margin-left:auto;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">🖨️</button> <button onclick="waShareDLC()" style="background:#25d366;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 10px;border-radius:10px;cursor:pointer;">💬</button> <button onclick="addDLC()" style="margin-left:auto;background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 13px;border-radius:20px;cursor:pointer;">+ Ajouter</button>
   </div>
   <div class="scroll"><div style="padding:14px 18px 110px" id="dlcPageContent">
     <div style="background:var(--s2);border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:12px 14px;margin-bottom:12px;">
@@ -3629,6 +3646,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
     <div class="pg-title">🌅 Briefing</div>
+    <button onclick="waShareBriefing()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <button onclick="toggleBriefingAdd()" id="briefAddBtn" style="background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Point</button>
   </div>
   <div class="scroll" style="padding:12px 12px 90px;">
@@ -4242,6 +4260,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#84cc16;cursor:pointer;">‹ Réception</div>
     <div class="pg-title" style="font-size:13px;">♻️ Collecte Déchets</div>
+    <button onclick="waShareCollecte()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="display:flex;gap:6px;">
       <button onclick="exportCollectePDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Exporter PDF">📄</button>
       <button onclick="openCollecteForm()" style="background:#365314;border:1.5px solid #84cc16;color:#84cc16;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -4600,6 +4619,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Réception</div>
     <div class="pg-title" style="font-size:13px;">🌡️ Chaîne du Froid</div>
+    <button onclick="waShareCDF()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="display:flex;gap:6px;">
       <button onclick="cdfExportPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Exporter PDF">📄</button>
       <button onclick="cdfOpenForm()" style="background:#0c3b5e;border:1.5px solid #38bdf8;color:#38bdf8;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
@@ -4770,6 +4790,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Avancées</div>
     <div class="pg-title" style="font-size:13px;">⚖️ Anomalies Quantités</div>
+    <button onclick="waShareAnomalie(_anomRayon||'poissonnerie')" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
@@ -4886,6 +4907,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#34d399;cursor:pointer;">‹ Réception</div>
     <div class="pg-title" style="font-size:13px;">↩️ Demande d'Avoir</div>
+    <button onclick="waShareAvoir()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="display:flex;gap:6px;">
       <button onclick="exportAllAvoirsPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
       <button onclick="openAvoirForm()" style="background:#064e3b;border:1.5px solid #10b981;color:#10b981;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
@@ -5760,7 +5782,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('gestionStock')" style="font-size:13px;font-weight:700;color:#60a5fa;cursor:pointer;">‹ Stock</div>
     <div style="font-size:14px;font-weight:900;color:var(--t1);font-family:'Syne';">🔧 Instances SAV</div>
-    <div style="width:34px;"></div>
+    <button onclick="waShareSAV()" style="background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
   </div>
   <div class="scroll" style="padding:12px 16px 100px;">
 
@@ -5938,6 +5960,7 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('gestionStock')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Stock</div>
     <div style="font-size:14px;font-weight:900;color:var(--t1);font-family:'Syne';">🔍 Pertes & Vols</div>
+    <button onclick="waShareShrinkage()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
     <div style="display:flex;gap:6px;">
       <button onclick="exportShrinkagePDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
       <button onclick="openShrinkageForm()" style="background:#701a75;border:1.5px solid #ec4899;color:#f9a8d4;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
@@ -7969,6 +7992,16 @@ input[type="date"][style*="color-scheme:dark"]{color:#fff!important;-webkit-text
       <div style="display:flex;gap:8px;margin-bottom:8px;">
         <input id="paretoProd" class="fi" placeholder="Produit / Rayon..." style="flex:2;box-sizing:border-box;"/>
         <input id="paretoCA" class="fi" type="number" placeholder="CA (TND)" style="flex:1;box-sizing:border-box;"/>
+      </div>
+      <!-- Sélection groupe manuel -->
+      <div style="margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:6px;">🏷️ GROUPE (optionnel — calculé automatiquement sinon)</div>
+        <div style="display:flex;gap:6px;" id="paretoGrpBtns">
+          <button type="button" onclick="setParetoGrp('AUTO',this)" data-grp="AUTO" style="flex:1;padding:8px 4px;border-radius:10px;border:1.5px solid rgba(96,165,250,.5);background:rgba(96,165,250,.15);color:#60a5fa;font-size:11px;font-weight:800;cursor:pointer;">🤖 Auto</button>
+          <button type="button" onclick="setParetoGrp('A',this)" data-grp="A" style="flex:1;padding:8px 4px;border-radius:10px;border:1.5px solid rgba(34,197,94,.2);background:rgba(34,197,94,.05);color:#22c55e;font-size:11px;font-weight:800;cursor:pointer;">A — 80%</button>
+          <button type="button" onclick="setParetoGrp('B',this)" data-grp="B" style="flex:1;padding:8px 4px;border-radius:10px;border:1.5px solid rgba(245,158,11,.2);background:rgba(245,158,11,.05);color:#f59e0b;font-size:11px;font-weight:800;cursor:pointer;">B — 15%</button>
+          <button type="button" onclick="setParetoGrp('C',this)" data-grp="C" style="flex:1;padding:8px 4px;border-radius:10px;border:1.5px solid rgba(239,68,68,.2);background:rgba(239,68,68,.05);color:#ef4444;font-size:11px;font-weight:800;cursor:pointer;">C — 5%</button>
+        </div>
       </div>
       <div style="display:flex;gap:8px;">
         <button onclick="addParetoProduct()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
@@ -11153,6 +11186,65 @@ function exportTachesPDF(mode){
 
 function toggleBoost(el){
   el.classList.toggle('open');
+}
+
+// ══ ALERTES FIN CATALOGUE TG ══
+function checkTGCatalogues(){
+  try{
+    var data=JSON.parse(localStorage.getItem(SK_TG)||'[]');
+    var now=new Date(); now.setHours(0,0,0,0);
+    var today=now.toISOString().split('T')[0];
+    var alerted=JSON.parse(localStorage.getItem(SK+'_tgAlerted')||'{}');
+
+    // Regrouper par date de fin (catAu) pour éviter spam — une notif par catalogue par jour
+    var cats={};
+    data.forEach(function(p){
+      if(!p.catAu) return;
+      var key=p.catAu;
+      if(!cats[key]) cats[key]={au:p.catAu, prods:[]};
+      cats[key].prods.push(p.nom||'TG');
+    });
+
+    Object.keys(cats).forEach(function(au){
+      var cat=cats[au];
+      var end=new Date(cat.au); end.setHours(0,0,0,0);
+      var diff=Math.round((end-now)/(1000*60*60*24));
+      var alertKey=au+'_'+today;
+      var count=cat.prods.length;
+      var label=count+' TG (fin catalogue '+cat.au+')';
+
+      // 1 jour avant — alerte principale
+      if(diff===1 && !alerted[alertKey]){
+        safeNotif('🔔 TG à renouveler demain !',{
+          body:label+' — Préparez le prochain catalogue.',
+          tag:'tg_'+au
+        });
+        addN('bell','🔔 TG à renouveler demain !',label+' — Changement catalogue requis.');
+        alerted[alertKey]=true;
+      }
+      // Jour J — le catalogue est terminé aujourd'hui
+      if(diff===0 && !alerted[alertKey+'_0']){
+        safeNotif('⚠️ Catalogue TG terminé aujourd\'hui !',{
+          body:label+' — À remplacer maintenant.',
+          tag:'tg_exp_'+au
+        });
+        addN('bell','⚠️ Catalogue TG expiré !',label+' — Mettez à jour vos TG.');
+        alerted[alertKey+'_0']=true;
+      }
+      // Dépassé — rappel
+      if(diff<0 && diff>=-3 && !alerted[alertKey+'_over']){
+        addN('bell','❗ TG non renouvelé !',label+' — Catalogue expiré depuis '+Math.abs(diff)+' jour(s).');
+        alerted[alertKey+'_over']=true;
+      }
+    });
+
+    // Nettoyer les vieilles clés
+    var cleaned={};
+    Object.keys(alerted).forEach(function(k){
+      if(k.indexOf(today)>=0 || k.split('_')[1]>today.substring(0,10))cleaned[k]=alerted[k];
+    });
+    localStorage.setItem(SK+'_tgAlerted', JSON.stringify(cleaned));
+  }catch(e){}
 }
 
 function checkDlcNotifications(){
@@ -14391,6 +14483,19 @@ function loadExc(){try{return JSON.parse(localStorage.getItem(SKEQ)||'{}');}catc
 function saveExc(d){localStorage.setItem(SKEQ,JSON.stringify(d));}
 
 // ── PARETO 80/20 ──
+var _paretoGrp='AUTO';
+function setParetoGrp(grp,btn){
+  _paretoGrp=grp;
+  var btns=document.querySelectorAll('#paretoGrpBtns button');
+  var colors={AUTO:'rgba(96,165,250,.15)',A:'rgba(34,197,94,.15)',B:'rgba(245,158,11,.15)',C:'rgba(239,68,68,.15)'};
+  var borders={AUTO:'rgba(96,165,250,.8)',A:'rgba(34,197,94,.8)',B:'rgba(245,158,11,.8)',C:'rgba(239,68,68,.8)'};
+  btns.forEach(function(b){
+    var g=b.getAttribute('data-grp');
+    b.style.background=g===grp?colors[g]:colors[g].replace('.15','.05');
+    b.style.borderColor=g===grp?borders[g]:borders[g].replace('.8','.2');
+    b.style.transform=g===grp?'scale(1.04)':'scale(1)';
+  });
+}
 function addParetoProduct(){
   var f=document.getElementById('paretoForm');if(!f)return;
   var s=f.style.display!=='none';
@@ -14398,6 +14503,8 @@ function addParetoProduct(){
   if(!s){
     document.getElementById('paretoProd').value='';
     document.getElementById('paretoCA').value='';
+    _paretoGrp='AUTO';
+    setParetoGrp('AUTO',null);
     var sc=f.closest('.scroll')||f.parentElement;
     if(sc)sc.scrollTo({top:0,behavior:'smooth'});
     setTimeout(function(){var inp=document.getElementById('paretoProd');if(inp)inp.focus();},300);
@@ -14408,7 +14515,7 @@ function saveParetoProduct(){
   var ca=parseFloat((document.getElementById('paretoCA')||{value:0}).value)||0;
   if(!prod||!ca){showT('⚠️','Produit et CA requis');return;}
   var d=loadExc();if(!d.pareto)d.pareto=[];
-  d.pareto.push({id:uid(),produit:prod,ca:ca,date:tstr()});
+  d.pareto.push({id:uid(),produit:prod,ca:ca,date:tstr(),manualGroup:_paretoGrp==='AUTO'?null:_paretoGrp});
   saveExc(d);addParetoProduct();renderPareto();showT('✅','Produit ajouté');
 }
 function delPareto(id){var d=loadExc();d.pareto=(d.pareto||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPareto();}
@@ -14421,9 +14528,10 @@ function renderPareto(){
   var cumul=0;var groups={A:[],B:[],C:[]};
   items.forEach(function(p){
     cumul+=p.ca;var pct=cumul/total*100;
-    if(pct<=80)groups.A.push(p);else if(pct<=95)groups.B.push(p);else groups.C.push(p);
-    p._group=pct<=80?'A':pct<=95?'B':'C';
+    var autoGrp=pct<=80?'A':pct<=95?'B':'C';
+    p._group=p.manualGroup||autoGrp;
     p._pct=Math.round(p.ca/total*100);
+    groups[p._group].push(p);
   });
   // Summary
   if(sumEl){
@@ -18909,6 +19017,153 @@ function buildResumeText(){
   return msg;
 }
 
+// ══ WHATSAPP SHARE — HELPER & MODULES ══
+function shareWA(msg){ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank'); }
+
+function waShareDLC(){
+  var items=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+  var now=new Date(); now.setHours(0,0,0,0);
+  var urgent=[],today=[],soon=[];
+  items.forEach(function(x){
+    var d=new Date(x.date); d.setHours(0,0,0,0);
+    var diff=Math.round((d-now)/(1000*60*60*24));
+    if(diff<0) urgent.push(x);
+    else if(diff===0) today.push(x);
+    else if(diff<=3) soon.push(x);
+  });
+  var lines=['🏪 *MG MAXI DENDEN*','📅 *Contrôle DLC — '+new Date().toLocaleDateString('fr-FR')+'*',''];
+  if(urgent.length){ lines.push('⛔ *DÉPASSÉS ('+urgent.length+') :*'); urgent.forEach(function(x){lines.push('  • '+x.nom+(x.rayon?' ['+x.rayon+']':'')+' → '+x.date);}); lines.push(''); }
+  if(today.length){  lines.push('🔴 *EXPIRE AUJOURD\'HUI ('+today.length+') :*'); today.forEach(function(x){lines.push('  • '+x.nom+(x.rayon?' ['+x.rayon+']':'')); }); lines.push(''); }
+  if(soon.length){   lines.push('🟡 *DANS 3 JOURS ('+soon.length+') :*'); soon.forEach(function(x){lines.push('  • '+x.nom+' → '+x.date+(x.rayon?' ['+x.rayon+']':'')); }); lines.push(''); }
+  if(!urgent.length&&!today.length&&!soon.length) lines.push('✅ Aucune alerte DLC critique.');
+  lines.push('_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareSAV(){
+  var cats=['electronique','electro','hifi','informatique','cuisine','autre'];
+  var all=[];
+  cats.forEach(function(c){ try{ var d=JSON.parse(localStorage.getItem(SK+'_sav_'+c)||'[]'); d.forEach(function(x){x._cat=c;all.push(x);}); }catch(e){} });
+  var open=all.filter(function(x){return x.statut==='attente'||x.statut==='encours';});
+  var lines=['🏪 *MG MAXI DENDEN*','🔧 *Instances SAV — '+new Date().toLocaleDateString('fr-FR')+'*','','📊 Total: '+all.length+' | En cours: '+open.length,''];
+  open.slice(0,10).forEach(function(x,i){
+    lines.push((i+1)+'. *'+x.nom+'*');
+    lines.push('   Client: '+(x.client||'—')+' | Panne: '+(x.panne||'—'));
+    lines.push('   Statut: '+(x.statut==='attente'?'⏳ Attente':'🔄 En cours'));
+  });
+  if(open.length>10) lines.push('  ...et '+(open.length-10)+' autres.');
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareAnomalie(rayon){
+  var today=tstr();
+  var items=loadAnom(rayon).filter(function(x){return x.date===today;});
+  var r=rayon==='poissonnerie'?'🐟 Poissonnerie':'🥦 FLEG';
+  var lines=['🏪 *MG MAXI DENDEN*',r+' *Anomalies Quantités — '+today+'*','','📦 '+items.length+' anomalie(s) relevée(s)',''];
+  items.forEach(function(x,i){
+    lines.push((i+1)+'. *'+x.produit+'*'+' | Fournisseur: '+(x.fournisseur||'—'));
+    lines.push('   Commandé: '+x.qteCde+' | Reçu: '+x.qteRec+' | Écart: *('+( x.ecart>0?'+':'')+x.ecart+')*');
+  });
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareShrinkage(){
+  var data=JSON.parse(localStorage.getItem(SK+'_shrinkage')||'[]');
+  var today=tstr();
+  var todayItems=data.filter(function(x){return x.date===today;});
+  var totalVal=todayItems.reduce(function(s,x){return s+(x.valeur||0);},0);
+  var lines=['🏪 *MG MAXI DENDEN*','🔍 *Pertes & Vols — '+today+'*','','📊 Déclarations aujourd\'hui: '+todayItems.length,'💸 Valeur totale: *'+totalVal.toFixed(3)+' TND*',''];
+  todayItems.forEach(function(x,i){
+    lines.push((i+1)+'. *'+( x.products&&x.products[0]?x.products[0].nom:'Incident')+'*');
+    lines.push('   Type: '+(x.type||'—')+' | Valeur: '+(x.valeur?x.valeur.toFixed(3)+' TND':'—'));
+    if(x.obs) lines.push('   Note: '+x.obs);
+  });
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareCollecte(){
+  var data=loadCollecte();
+  var today=tstr();
+  var todayItems=data.filter(function(x){return x.date===today;});
+  var totalKg=todayItems.reduce(function(s,x){return s+(parseFloat(x.kg)||0);},0);
+  var lines=['🏪 *MG MAXI DENDEN*','♻️ *Collecte Déchets — '+today+'*','','🗑️ Collectes: '+todayItems.length+' | Total: *'+totalKg+' kg*',''];
+  todayItems.forEach(function(x,i){
+    lines.push((i+1)+'. Camion: '+(x.camion||'—')+' | '+x.kg+' kg | '+x.heure);
+    if(x.collecteur) lines.push('   Collecteur: '+x.collecteur);
+  });
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareAvoir(){
+  var data=loadAvoirs();
+  var today=tstr();
+  var todayItems=data.filter(function(x){return x.date===today;});
+  var lines=['🏪 *MG MAXI DENDEN*','↩️ *Demandes d\'Avoir — '+today+'*','','📋 '+todayItems.length+' demande(s)',''];
+  todayItems.forEach(function(x,i){
+    var tot=(_avMigrateItems(x)||[]).reduce(function(s,p){return s+(parseFloat(p.qte)||0)*(parseFloat(p.prixUnit)||0);},0);
+    lines.push((i+1)+'. Camion: '+(x.camion||'—')+' | Livreur: '+(x.livreur||'—'));
+    lines.push('   Montant estimé: *'+tot.toFixed(3)+' TND* | Statut: '+(x.statut||'attente'));
+  });
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waSharePlanTG(){
+  var data=tgLoad();
+  if(!data.length){showT('⚠️','Aucun TG enregistré');return;}
+  var today=tstr();
+  var lines=['🏪 *MG MAXI DENDEN*','🏷️ *Plan TG — Mise en Avant*','','📦 '+data.length+' produit(s) en promotion',''];
+  var cats={};
+  data.forEach(function(p){
+    var k=(p.catDe||'?')+' → '+(p.catAu||'?');
+    if(!cats[k])cats[k]=[];
+    cats[k].push(p);
+  });
+  Object.keys(cats).forEach(function(k){
+    lines.push('📅 *Catalogue '+k+' :*');
+    cats[k].forEach(function(p){
+      var eco=((parseFloat(p.prixNormal)||0)-(parseFloat(p.prixPromo)||0)).toFixed(3);
+      lines.push('  • '+p.nom+(p.rayon?' ['+p.rayon+']':'')+' — '+p.prixPromo+' TND'+(eco>0?' (-'+eco+')':''));
+    });
+    lines.push('');
+  });
+  lines.push('_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareCDF(){
+  var data=JSON.parse(localStorage.getItem(SK+'_cdf')||'[]');
+  var today=tstr();
+  var todayItems=data.filter(function(x){return x.date===today;});
+  var alertes=todayItems.filter(function(x){return x.gravite==='alarme';});
+  var lines=['🏪 *MG MAXI DENDEN*','🌡️ *Chaîne de Froid — '+today+'*','','📊 Relevés: '+todayItems.length+' | ⚠️ Alarmes: '+alertes.length,''];
+  todayItems.forEach(function(x){
+    var ico=x.gravite==='alarme'?'🔴':x.gravite==='attention'?'🟡':'🟢';
+    lines.push(ico+' *'+x.zone+'* : '+x.temp+'°C à '+x.heure);
+    if(x.action) lines.push('   Action: '+x.action);
+  });
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
+function waShareBriefing(){
+  var d=loadEQ(); var br=getBriefingItems();
+  var done=br.done||{};
+  var lines=['🏪 *MG MAXI DENDEN*','🌅 *Briefing du Matin — '+tstr()+'*',''];
+  if(!br.items||!br.items.length){lines.push('Aucun point enregistré.');} 
+  else{
+    br.items.forEach(function(item,i){
+      lines.push((done[i]?'✅':'⬜')+' '+(i+1)+'. '+item);
+    });
+  }
+  lines.push('','_Envoyé via TaskPro Field_');
+  shareWA(lines.join('\n'));
+}
+
 function shareResume(){
   var msg=buildResumeText();
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
@@ -19548,6 +19803,36 @@ function renderDashboard(){
     ?allEvents.map(function(r){return '<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">'+r.ico+'</span><div><div style="font-size:12px;font-weight:700;color:var(--t1);">'+escH(r.titre)+'</div><div style="font-size:10px;color:var(--t2);">⏰ '+r.heure+'</div></div></div>';}).join('')
     :'<div style="font-size:12px;color:rgba(255,255,255,.35);">Aucune réunion ni événement aujourd\'hui</div>';
 
+  // ── 🔧 SAV Ouvertes ──
+  (function(){
+    var cats=['electronique','electro','hifi','informatique','cuisine','autre'];
+    var allSav=[];
+    cats.forEach(function(c){try{JSON.parse(localStorage.getItem(SK+'_sav_'+c)||'[]').forEach(function(x){allSav.push(x);});}catch(e){} });
+    var open=allSav.filter(function(x){return x.statut==='attente'||x.statut==='encours';});
+    var eSav=document.getElementById('dashSavCount'); if(eSav){eSav.textContent=open.length; eSav.style.color=open.length>5?'#f87171':open.length>0?'#fbbf24':'#4ade80';}
+    var eSavS=document.getElementById('dashSavSub'); if(eSavS)eSavS.textContent=open.length?'En cours · Total: '+allSav.length:'Aucune en attente';
+    if(open.length>5) alertes.push({col:'#60a5fa',txt:'🔧 '+open.length+' SAV en attente de traitement',link:"goPage('instancesSAV')"});
+  })();
+
+  // ── 🏷️ TG Fin Catalogue ──
+  (function(){
+    var tgData=tgLoad();
+    var now3=new Date(); now3.setHours(0,0,0,0);
+    var expiring=[];
+    var cats3={};
+    tgData.forEach(function(p){if(!p.catAu)return; if(!cats3[p.catAu])cats3[p.catAu]=0; cats3[p.catAu]++;});
+    Object.keys(cats3).forEach(function(au){
+      var end=new Date(au); end.setHours(0,0,0,0);
+      var diff=Math.round((end-now3)/(1000*60*60*24));
+      if(diff>=0&&diff<=3) expiring.push({au:au,nb:cats3[au],diff:diff});
+    });
+    expiring.sort(function(a,b){return a.diff-b.diff;});
+    var eTg=document.getElementById('dashTgCount'); if(eTg){eTg.textContent=expiring.length; eTg.style.color=expiring.length?'#facc15':'#4ade80';}
+    var eTgS=document.getElementById('dashTgSub');
+    if(eTgS) eTgS.textContent=expiring.length?expiring.map(function(e){return e.nb+' TG · J-'+e.diff;}).join(' / '):'Tous les catalogues OK';
+    if(expiring.length) alertes.push({col:'#facc15',txt:'🏷️ '+expiring.length+' catalogue(s) TG expirent dans ≤3 jours',link:"goPage('planTg')"});
+  })();
+
   // ── 🌡️ Chaîne du Froid ──
   var cdfList=cdfLoad();
   var cdfAuj=cdfList.filter(function(e){return e.date===td;});
@@ -20045,6 +20330,23 @@ window.addEventListener('DOMContentLoaded',()=>{
   checkDlcNotifications();
   // Vérifier toutes les heures
   setInterval(checkDlcNotifications, 60*60*1000);
+  // ── Alertes fin de catalogue TG ──
+  checkTGCatalogues();
+  setInterval(checkTGCatalogues, 60*60*1000);
+  // ── Tنبيه Rapport Hebdomadaire le dimanche ──
+  (function checkSundayRapport(){
+    var now=new Date();
+    if(now.getDay()===0){ // Dimanche
+      var key=SK+'_hebdoAlert_'+tstr();
+      if(!localStorage.getItem(key)){
+        setTimeout(function(){
+          addN('bell','📊 Rapport Hebdomadaire','C\'est dimanche — consultez le bilan de la semaine !');
+          safeNotif('📊 Rapport Hebdo',{body:'C\'est dimanche — bilan et comparaison de la semaine disponibles.',tag:'hebdo_sunday'});
+          localStorage.setItem(key,'1');
+        },4000);
+      }
+    }
+  })();
   // Alertes intelligentes multi-modules — au démarrage + toutes les 15 min
   setTimeout(checkSmartAlertes, 5000);
   setInterval(checkSmartAlertes, 15*60*1000);
@@ -24155,7 +24457,10 @@ function exportPlanTgPDF(){
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Modules</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🌙 Résumé du Jour</div>
-    <button onclick="shareResume()" style="background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;cursor:pointer;">💬</button>
+    <div style="display:flex;gap:6px;">
+      <button onclick="goPage('rapportHebdo')" style="background:rgba(96,165,250,.15);border:1.5px solid rgba(96,165,250,.4);color:#60a5fa;font-size:10px;font-weight:800;padding:5px 8px;border-radius:10px;cursor:pointer;">📊</button>
+      <button onclick="shareResume()" style="background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;cursor:pointer;">💬</button>
+    </div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
 
@@ -26714,8 +27019,8 @@ function rapportRender(){
   var allAdv    = JSON.parse(localStorage.getItem(SK+'_adv2')||'{}');
   var allRupts  = allAdv.ruptures||[];
   var allTasks  = JSON.parse(localStorage.getItem(SK+'_t')||'[]');
-  var allCols   = JSON.parse(localStorage.getItem(SK+'_c')||'[]');
-  var allAvoirs = JSON.parse(localStorage.getItem(SK+'_h')||'[]');
+  var allCols   = (typeof loadCollecte==='function'?loadCollecte():[]);
+  var allAvoirs = (typeof loadAvoirs==='function'?loadAvoirs():[]);
 
   function inWeek(d){ return dates.indexOf(d)>=0; }
 
@@ -27429,6 +27734,10 @@ function _weekStats(dates){
     total+=dayT.length;
     dayT.forEach(function(t){if(localStorage.getItem(SK+'_done_'+date+'_'+t.id)==='1') done++;});
   });
+  var avoirs = loadAvoirs().filter(function(a){return dates.indexOf(a.date)>=0;});
+  var cats=['electronique','electro','hifi','informatique','cuisine','autre'];
+  var savAll=[]; cats.forEach(function(c){try{JSON.parse(localStorage.getItem(SK+'_sav_'+c)||'[]').forEach(function(x){if(dates.indexOf(x.dateAjout&&x.dateAjout.substring(0,10))>=0)savAll.push(x);});}catch(e){}});
+  var cols = loadCollecte().filter(function(c){return dates.indexOf(c.date)>=0;});
   return {
     anoms  : anoms.length,
     rupts  : rupts.length,
@@ -27438,7 +27747,11 @@ function _weekStats(dates){
     cdfRel : cdfs.length,
     done   : done,
     total  : total,
-    rate   : total>0?Math.round(done/total*100):0
+    rate   : total>0?Math.round(done/total*100):0,
+    avoirs : avoirs.length,
+    sav    : savAll.length,
+    cols   : cols.length,
+    colKg  : cols.reduce(function(s,c){return s+(parseFloat(c.kg)||0);},0)
   };
 }
 
@@ -27469,6 +27782,9 @@ function renderComparaison(){
     {label:'💸 Démarques',  a:s0.dmqs,       b:s1.dmqs,       c:s4.dmqs,       delta:_delta(s0.dmqs,s1.dmqs,true)},
     {label:'🌡️ Alertes T°',a:s0.cdfAl,     b:s1.cdfAl,     c:s4.cdfAl,     delta:_delta(s0.cdfAl,s1.cdfAl,true)},
     {label:'💰 Démarq. TND',a:s0.dmqT.toFixed(2),b:s1.dmqT.toFixed(2),c:s4.dmqT.toFixed(2),delta:_delta(s0.dmqT,s1.dmqT,true)},
+    {label:'🔧 SAV',        a:s0.sav,        b:s1.sav,        c:s4.sav,        delta:_delta(s0.sav,s1.sav,true)},
+    {label:'↩️ Avoirs',    a:s0.avoirs,     b:s1.avoirs,     c:s4.avoirs,     delta:_delta(s0.avoirs,s1.avoirs,true)},
+    {label:'♻️ Collecte',  a:s0.cols,       b:s1.cols,       c:s4.cols,       delta:_delta(s0.cols,s1.cols,false)},
   ];
 
   var html = '<div style="overflow-x:auto;">'
