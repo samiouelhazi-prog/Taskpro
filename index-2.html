@@ -3965,6 +3965,15 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
       <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
     </div>
 
+    <div onclick="goPage('fac')" style="background:linear-gradient(135deg,#0c2340,#0284c7);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🎯</div>
+      <div style="flex:1;">
+        <div style="font-size:15px;font-weight:800;color:#fff;">Actions Correctives (FAC)</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;">Problème → Cause → Action → Résultat · Anti-récurrence</div>
+      </div>
+      <div style="color:rgba(255,255,255,.6);font-size:20px;">›</div>
+    </div>
+
   </div>
 </div>
 
@@ -12039,7 +12048,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage'];
+  var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();}
   if(p==='taches')renderTaches();
@@ -12560,6 +12569,7 @@ function renderDr(){
     {ico:'📈',name:'Statistiques & Historique',a:"closeDr();goPage('stats')"},
     {ico:'📊',name:'Tableau de Bord KPI',a:"closeDr();goPage('dashboard')"},
     {ico:'📄',name:'Rapport Absences',a:"openRapportAbsences();closeDr()"},
+    {ico:'🎯',name:'Actions Correctives (FAC)',a:"closeDr();goPage('fac')"},
     {ico:'😤',name:'Réclamations Clients',a:"closeDr();goPage('reclamations')"},
     {ico:'📦',name:'Comptage Ciblé',a:"closeDr();goPage('comptage')"},
     {ico:'📉',name:'Pertes & Déchets',a:"closeDr();goPage('pertesHub')"},
@@ -22307,6 +22317,18 @@ function renderDashboard(){
       else elEA.style.display='none';
     }
     if(absentCount>2) alertes.push({col:'#f59e0b',txt:'👥 '+absentCount+' absent(s) aujourd\'hui',link:"goPage('pointage')"});
+  })();
+
+  // ── Alerte FAC en retard ──
+  (function(){
+    var facAll=[];try{facAll=JSON.parse(localStorage.getItem(SK+'_fac')||'[]');}catch(e){}
+    var today=new Date().toISOString().split('T')[0];
+    var overdue=facAll.filter(function(f){return f.delai&&f.delai<today&&f.statut!=='resolue'&&f.statut!=='verifie';});
+    var openFac=facAll.filter(function(f){return f.statut==='ouverte';});
+    var recFac=facAll.filter(function(f){return f.isRecurrence&&f.statut!=='resolue'&&f.statut!=='verifie';});
+    if(overdue.length>0) alertes.push({col:'#f97316',txt:'🎯 '+overdue.length+' FAC en retard de délai',link:"goPage('fac')"});
+    if(recFac.length>0) alertes.push({col:'#ef4444',txt:'🔁 '+recFac.length+' problème(s) récurrent(s) non résolu(s)',link:"goPage('fac')"});
+    else if(openFac.length>=3) alertes.push({col:'#fbbf24',txt:'🎯 '+openFac.length+' actions correctives ouvertes',link:"goPage('fac')"});
   })();
 
   // ── Alerte pertes vs seuil ──
@@ -32465,6 +32487,226 @@ function exportPertesHubPDF() {
 }
 
 // ════════════════════════════════════════════════════════════
+// 🎯 MODULE FICHES D'ACTION CORRECTIVE (FAC)
+// ════════════════════════════════════════════════════════════
+var FAC_KEY = SK + '_fac';
+var _facFilter = 'all';
+var _facEditId = null;
+var _facStatut = 'ouverte';
+
+function facLoad(){ try{ return JSON.parse(localStorage.getItem(FAC_KEY)||'[]'); }catch(e){ return []; } }
+function facSaveAll(arr){ localStorage.setItem(FAC_KEY, JSON.stringify(arr)); }
+
+function facSetFilter(f, btn) {
+  _facFilter = f;
+  document.querySelectorAll('#pgFAC button[id^="facF"]').forEach(function(b){
+    b.style.background='transparent'; b.style.color='var(--t2)'; b.style.borderColor='rgba(255,255,255,.1)';
+  });
+  btn.style.background='rgba(14,165,233,.15)'; btn.style.color='#38bdf8'; btn.style.borderColor='rgba(14,165,233,.4)';
+  renderFAC();
+}
+
+function facSelectStatut(btn, statut) {
+  _facStatut = statut;
+  document.querySelectorAll('[data-facstatut]').forEach(function(b){ b.style.opacity='.5'; b.style.transform='scale(.97)'; });
+  btn.style.opacity='1'; btn.style.transform='scale(1.04)';
+  var rRow=document.getElementById('facResultatRow');
+  if(rRow) rRow.style.display=(statut==='resolue'||statut==='verifie')?'block':'none';
+}
+
+function facCheckRecurrence() {
+  var prob=(document.getElementById('facProbleme')||{}).value||'';
+  var rayon=(document.getElementById('facRayon')||{}).value||'';
+  var source=(document.getElementById('facSource')||{}).value||'';
+  if(prob.length<10||!rayon){var al=document.getElementById('facRecurrenceAlert');if(al)al.style.display='none';return;}
+  var all=facLoad();
+  var now2=new Date(); var cutoff=new Date(now2); cutoff.setDate(now2.getDate()-60);
+  var similar=all.filter(function(f){
+    if(_facEditId&&f.id===_facEditId)return false;
+    if(new Date(f.createdAt)<cutoff)return false;
+    var sameRayon=f.rayon===rayon;
+    var sameSource=source&&f.source===source;
+    var pWords=prob.toLowerCase().split(' ').filter(function(w){return w.length>4;});
+    var fWords=(f.probleme||'').toLowerCase();
+    var wordMatch=pWords.some(function(w){return fWords.includes(w);});
+    return sameRayon&&(sameSource||wordMatch);
+  });
+  var alertDiv=document.getElementById('facRecurrenceAlert');
+  var alertMsg=document.getElementById('facRecurrenceMsg');
+  if(similar.length>0&&alertDiv&&alertMsg){
+    alertDiv.style.display='block';
+    alertMsg.textContent=similar.length+' fiche(s) similaire(s) sur le rayon "'+rayon+'" dans les 60 derniers jours. Vérifiez si la cause racine a été traitée.';
+  } else if(alertDiv) alertDiv.style.display='none';
+}
+
+function facOpenForm(id, prefill) {
+  _facEditId=id||null; _facStatut='ouverte';
+  var now3=new Date();
+  var modal=document.getElementById('facFormModal'); if(!modal)return;
+  ['facProbleme','facCause','facAction','facResultat'].forEach(function(f){var el=document.getElementById(f);if(el)el.value='';});
+  ['facDate','facResp','facDelai'].forEach(function(f){var el=document.getElementById(f);if(el)el.value='';});
+  document.getElementById('facSource').value='manuel';
+  document.getElementById('facRayon').value='';
+  document.getElementById('facPriorite').value='normale';
+  document.querySelectorAll('[data-facstatut]').forEach(function(b){b.style.opacity='.5';b.style.transform='scale(.97)';});
+  var rRow=document.getElementById('facResultatRow');if(rRow)rRow.style.display='none';
+  var recDiv=document.getElementById('facRecurrenceAlert');if(recDiv)recDiv.style.display='none';
+  var delRow=document.getElementById('facDelRow');if(delRow)delRow.style.display='none';
+  document.getElementById('facFormTitle').textContent=id?'✏️ Modifier la FAC':'🎯 Nouvelle FAC';
+  document.getElementById('facDate').value=now3.toISOString().split('T')[0];
+  var sb=document.querySelector('[data-facstatut="ouverte"]'); if(sb)facSelectStatut(sb,'ouverte');
+  if(prefill){
+    if(prefill.source)document.getElementById('facSource').value=prefill.source;
+    if(prefill.rayon)document.getElementById('facRayon').value=prefill.rayon;
+    if(prefill.probleme)document.getElementById('facProbleme').value=prefill.probleme;
+  }
+  if(id){
+    var allF=facLoad(); var rF=allF.find(function(x){return x.id===id;});
+    if(rF){
+      document.getElementById('facDate').value=rF.date||'';
+      document.getElementById('facSource').value=rF.source||'manuel';
+      document.getElementById('facRayon').value=rF.rayon||'';
+      document.getElementById('facResp').value=rF.responsable||'';
+      document.getElementById('facProbleme').value=rF.probleme||'';
+      document.getElementById('facCause').value=rF.cause||'';
+      document.getElementById('facAction').value=rF.action||'';
+      document.getElementById('facResultat').value=rF.resultat||'';
+      document.getElementById('facDelai').value=rF.delai||'';
+      document.getElementById('facPriorite').value=rF.priorite||'normale';
+      _facStatut=rF.statut||'ouverte';
+      var sb2=document.querySelector('[data-facstatut="'+_facStatut+'"]'); if(sb2)facSelectStatut(sb2,_facStatut);
+      if(delRow)delRow.style.display='block';
+    }
+  }
+  modal.style.display='flex'; facCheckRecurrence();
+}
+
+function facCloseForm(){var m=document.getElementById('facFormModal');if(m)m.style.display='none';_facEditId=null;}
+
+function facSave(){
+  var prob=(document.getElementById('facProbleme').value||'').trim();
+  var action=(document.getElementById('facAction').value||'').trim();
+  if(!prob){showT('⚠️','Décrivez le problème constaté');return;}
+  if(!action){showT('⚠️','Définissez une action corrective');return;}
+  var allS=facLoad(); var now4=new Date();
+  var rec={
+    id:_facEditId||('fac_'+Date.now()),
+    date:document.getElementById('facDate').value,
+    source:document.getElementById('facSource').value,
+    rayon:document.getElementById('facRayon').value,
+    responsable:document.getElementById('facResp').value.trim(),
+    probleme:prob, cause:document.getElementById('facCause').value.trim(),
+    action:action, resultat:document.getElementById('facResultat').value.trim(),
+    delai:document.getElementById('facDelai').value,
+    priorite:document.getElementById('facPriorite').value,
+    statut:_facStatut, createdAt:now4.toISOString(), updatedAt:now4.toISOString()
+  };
+  var cutoff2=new Date(now4); cutoff2.setDate(now4.getDate()-60);
+  var similar2=allS.filter(function(f){return f.id!==rec.id&&f.rayon===rec.rayon&&new Date(f.createdAt)>cutoff2;});
+  rec.isRecurrence=similar2.length>0;
+  if(_facEditId){var ix=allS.findIndex(function(x){return x.id===_facEditId;});if(ix>-1){rec.createdAt=allS[ix].createdAt;allS[ix]=rec;}else allS.unshift(rec);}
+  else allS.unshift(rec);
+  facSaveAll(allS); facCloseForm(); renderFAC();
+  showT('✅',_facEditId?'FAC mise à jour':'Fiche créée');
+}
+
+function facDelete(){
+  if(!_facEditId)return;
+  showConfirm('Supprimer cette fiche d\'action corrective ?',function(){
+    facSaveAll(facLoad().filter(function(r){return r.id!==_facEditId;}));
+    facCloseForm(); renderFAC(); showT('🗑️','FAC supprimée');
+  });
+}
+
+function facAiCause(){
+  var prob=(document.getElementById('facProbleme').value||'').trim();
+  var rayon=(document.getElementById('facRayon').value||'');
+  var source=(document.getElementById('facSource').value||'');
+  if(!prob){showT('⚠️','Saisissez d\'abord le problème');return;}
+  var btn=document.getElementById('btnFacAi');
+  if(btn){btn.textContent='⏳ Analyse...';btn.disabled=true;}
+  var prompt='Tu es consultant amélioration continue pour supermarché. Rayon: '+rayon+'. Source: '+source+'.\nProblème: '+prob+'\nDonne en 3 lignes max: 1) Cause racine probable 2) Action corrective recommandée. Sois direct et concret.';
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})
+  }).then(function(r){return r.json();}).then(function(d){
+    var t=d.content&&d.content[0]?d.content[0].text:'';
+    if(t){var c=document.getElementById('facCause');if(c)c.value=t;}
+  }).catch(function(){}).finally(function(){if(btn){btn.textContent='✨ Analyser avec IA';btn.disabled=false;}});
+}
+
+function renderFAC(){
+  var all=facLoad();
+  var ouv=all.filter(function(f){return f.statut==='ouverte';}).length;
+  var enc=all.filter(function(f){return f.statut==='en_cours';}).length;
+  var res=all.filter(function(f){return f.statut==='resolue'||f.statut==='verifie';}).length;
+  var rec=all.filter(function(f){return f.isRecurrence;}).length;
+  function se2(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  se2('facKpiOuvert',ouv);se2('facKpiEnCours',enc);se2('facKpiResolu',res);se2('facKpiRecurrence',rec);
+  var filtered=all;
+  if(_facFilter==='ouverte')filtered=all.filter(function(f){return f.statut==='ouverte';});
+  else if(_facFilter==='en_cours')filtered=all.filter(function(f){return f.statut==='en_cours';});
+  else if(_facFilter==='resolue')filtered=all.filter(function(f){return f.statut==='resolue'||f.statut==='verifie';});
+  else if(_facFilter==='recurrence')filtered=all.filter(function(f){return f.isRecurrence;});
+  filtered.sort(function(a,b){var po={critique:0,haute:1,normale:2,faible:3};var pd=(po[a.priorite]||2)-(po[b.priorite]||2);return pd!==0?pd:new Date(b.createdAt)-new Date(a.createdAt);});
+  var listEl=document.getElementById('facList');
+  var emptyEl=document.getElementById('facEmpty');
+  if(!listEl)return;
+  if(filtered.length===0){listEl.innerHTML='';if(emptyEl)emptyEl.style.display='block';return;}
+  if(emptyEl)emptyEl.style.display='none';
+  var sC={ouverte:'#f87171',en_cours:'#fbbf24',resolue:'#4ade80',verifie:'#38bdf8'};
+  var sL={ouverte:'🔴 Ouverte',en_cours:'🟡 En cours',resolue:'🟢 Résolue',verifie:'✅ Vérifié'};
+  var pC={critique:'#ef4444',haute:'#f97316',normale:'#94a3b8',faible:'#4ade80'};
+  var sIco={reclamation:'😤',perte:'📉',dlc:'🧬',comptage:'📦',audit:'🔍',hygiene:'🧹',autre:'📋',manuel:'✏️'};
+  listEl.innerHTML=filtered.map(function(f){
+    var sc=sC[f.statut]||'#94a3b8';
+    var d=f.date||(f.createdAt||'').split('T')[0];
+    var od=f.delai&&f.statut!=='resolue'&&f.statut!=='verifie'&&new Date(f.delai)<new Date();
+    return '<div onclick="facOpenForm(\''+f.id+'\')" style="background:var(--s2);border:1px solid rgba(255,255,255,.07);border-left:3px solid '+sc+';border-radius:14px;padding:13px 14px;margin-bottom:8px;cursor:pointer;">'+
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;">'+
+        '<div style="display:flex;align-items:center;gap:8px;">'+
+          '<span style="font-size:18px;">'+(sIco[f.source]||'📋')+'</span>'+
+          '<div>'+
+            '<div style="font-size:12px;font-weight:800;color:#f8faff;line-height:1.3;">'+(f.rayon?'['+escHtml(f.rayon)+'] ':'')+escHtml((f.probleme||'').substring(0,55))+((f.probleme||'').length>55?'…':'')+'</div>'+
+            '<div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px;">'+d+(f.responsable?' · '+escHtml(f.responsable):'')+(f.delai?' · ⏰ '+f.delai:'')+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;">'+
+          '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(0,0,0,.25);color:'+sc+';">'+(sL[f.statut]||f.statut)+'</span>'+
+          (f.priorite&&f.priorite!=='normale'?'<span style="font-size:8px;font-weight:800;color:'+(pC[f.priorite]||'#94a3b8')+';">'+f.priorite.toUpperCase()+'</span>':'')+
+          (f.isRecurrence?'<span style="font-size:8px;font-weight:800;color:#f97316;">🔁 RÉCURRENCE</span>':'')+
+        '</div>'+
+      '</div>'+
+      (f.action?'<div style="font-size:10px;color:#38bdf8;border-top:1px solid rgba(255,255,255,.05);padding-top:5px;">🎯 '+escHtml((f.action||'').substring(0,80))+((f.action||'').length>80?'…':'')+'</div>':'')+
+      (od?'<div style="font-size:9px;font-weight:800;color:#ef4444;margin-top:4px;">⚠️ Délai dépassé</div>':'')+
+    '</div>';
+  }).join('');
+}
+
+function facExportPDF(){
+  var all=facLoad();
+  if(!all.length){showT('⚠️','Aucune FAC à exporter');return;}
+  var now5=new Date(); var mag=getMagName();
+  var sC2={ouverte:'#dc2626',en_cours:'#d97706',resolue:'#16a34a',verifie:'#0284c7'};
+  var rows=all.map(function(f,i){
+    return '<tr style="background:'+(i%2?'#fff':'#ecfeff')+'"><td style="padding:5px 7px;font-size:9px;">'+f.date+'</td><td style="padding:5px 7px;font-size:9px;">'+(f.rayon||'—')+'</td><td style="padding:5px 7px;font-size:9px;">'+(f.source||'—')+'</td><td style="padding:5px 7px;font-size:9px;max-width:160px;">'+escHtml(f.probleme||'—')+'</td><td style="padding:5px 7px;font-size:9px;">'+escHtml(f.cause||'—')+'</td><td style="padding:5px 7px;font-size:9px;">'+escHtml(f.action||'—')+'</td><td style="padding:5px 7px;font-size:9px;font-weight:700;color:'+(sC2[f.statut]||'#374151')+'">'+(f.statut||'—')+'</td><td style="padding:5px 7px;font-size:9px;font-weight:'+(f.isRecurrence?'800':'400')+';color:'+(f.isRecurrence?'#dc2626':'#374151')+'">'+(f.isRecurrence?'🔁 OUI':'—')+'</td></tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>FAC — '+mag+'</title><style>body{font-family:Arial,sans-serif;margin:0;padding:16px;}.hdr{background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#fff;padding:14px;border-radius:8px;margin-bottom:14px;} h1{margin:0;font-size:16px;}.kpis{display:flex;gap:10px;margin-bottom:14px;}.kpi{background:#ecfeff;border:1px solid #a5f3fc;border-radius:6px;padding:8px 12px;flex:1;text-align:center;}.kn{font-size:18px;font-weight:900;color:#0284c7;}.kl{font-size:8px;color:#6b7280;font-weight:700;}table{width:100%;border-collapse:collapse;}th{background:#0284c7;color:#fff;padding:6px 7px;font-size:9px;text-align:left;}td{border-bottom:1px solid #e5e7eb;vertical-align:top;word-break:break-word;}</style></head><body>'+
+    '<div class="hdr"><h1>🎯 Fiches d\'Action Corrective — '+mag+'</h1><div style="font-size:10px;opacity:.8;">'+now5.toLocaleDateString('fr-FR')+' '+now5.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'</div></div>'+
+    '<div class="kpis"><div class="kpi"><div class="kn">'+all.length+'</div><div class="kl">TOTAL</div></div><div class="kpi"><div class="kn" style="color:#dc2626">'+all.filter(function(f){return f.statut==='ouverte';}).length+'</div><div class="kl">OUVERTES</div></div><div class="kpi"><div class="kn" style="color:#16a34a">'+all.filter(function(f){return f.statut==='resolue'||f.statut==='verifie';}).length+'</div><div class="kl">RÉSOLUES</div></div><div class="kpi"><div class="kn" style="color:#dc2626">'+all.filter(function(f){return f.isRecurrence;}).length+'</div><div class="kl">RÉCURRENCES</div></div></div>'+
+    '<table><thead><tr><th>Date</th><th>Rayon</th><th>Source</th><th>Problème</th><th>Cause</th><th>Action</th><th>Statut</th><th>Récurrence</th></tr></thead><tbody>'+rows+'</tbody></table></body></html>';
+  var w=window.open('','_blank','width=1000,height=700');
+  if(w){w.document.write(html);w.document.close();setTimeout(function(){w.print();},400);}
+}
+
+function facFromReclamation(rcId){
+  var allRC=JSON.parse(localStorage.getItem(SK+'_reclamations')||'[]');
+  var rc=allRC.find(function(r){return r.id===rcId;});
+  if(!rc)return;
+  goPage('fac');
+  setTimeout(function(){facOpenForm(null,{source:'reclamation',rayon:rc.rayon||'',probleme:'Réclamation ('+(rc.type||'')+') : '+(rc.description||'')});},200);
+}
+
+// ════════════════════════════════════════════════════════════
 var RC_KEY = SK + '_reclamations';
 var _rcFilter = 'all';
 var _rcEditId = null;
@@ -32560,6 +32802,7 @@ function renderReclamations() {
       '</div>' +
       (r.action ? '<div style="font-size:10px;color:#4ade80;margin-top:4px;padding-top:6px;border-top:1px solid rgba(255,255,255,.05);">✅ ' + escHtml(r.action.substring(0,80)) + (r.action.length>80?'…':'') + '</div>' : '') +
       (stars ? '<div style="font-size:11px;margin-top:4px;">' + stars + '</div>' : '') +
+      '<div style="margin-top:6px;"><button onclick="event.stopPropagation();facFromReclamation(\''+r.id+'\')" style="background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.25);color:#38bdf8;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;cursor:pointer;">🎯 Créer une FAC</button></div>' +
     '</div>';
   }).join('');
 }
