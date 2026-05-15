@@ -10803,13 +10803,49 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔤 Méthode ABCDE</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="abcdeExportPDF()" style="background:rgba(244,114,182,.15);border:1.5px solid rgba(244,114,182,.35);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
       <button onclick="addABCDE()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
   <div class="scroll" style="padding:14px 16px 90px;">
+    <!-- Stats bar -->
+    <div id="abcdeStats" style="display:flex;gap:0;background:rgba(255,255,255,.03);border:1px solid rgba(244,114,182,.15);border-radius:14px;overflow:hidden;margin-bottom:12px;">
+      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
+        <div id="abcdeSA" style="font-size:17px;font-weight:900;color:#f87171;font-family:'IBM Plex Mono',monospace;">0</div>
+        <div style="font-size:9px;font-weight:800;color:#f87171;margin-top:1px;">A</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
+        <div id="abcdeSB" style="font-size:17px;font-weight:900;color:#fb923c;font-family:'IBM Plex Mono',monospace;">0</div>
+        <div style="font-size:9px;font-weight:800;color:#fb923c;margin-top:1px;">B</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
+        <div id="abcdeSC" style="font-size:17px;font-weight:900;color:#facc15;font-family:'IBM Plex Mono',monospace;">0</div>
+        <div style="font-size:9px;font-weight:800;color:#facc15;margin-top:1px;">C</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
+        <div id="abcdeSD" style="font-size:17px;font-weight:900;color:#60a5fa;font-family:'IBM Plex Mono',monospace;">0</div>
+        <div style="font-size:9px;font-weight:800;color:#60a5fa;margin-top:1px;">D</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
+        <div id="abcdeSE" style="font-size:17px;font-weight:900;color:#94a3b8;font-family:'IBM Plex Mono',monospace;">0</div>
+        <div style="font-size:9px;font-weight:800;color:#94a3b8;margin-top:1px;">E</div>
+      </div>
+      <div style="flex:1.4;text-align:center;padding:9px 4px;">
+        <div id="abcdeSRate" style="font-size:17px;font-weight:900;color:#4ade80;font-family:'IBM Plex Mono',monospace;">0%</div>
+        <div style="font-size:9px;font-weight:800;color:#4ade80;margin-top:1px;">FAIT</div>
+      </div>
+    </div>
+    <!-- Filters -->
+    <div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;">
+      <button onclick="abcdeSetFilter('all',this)" id="abcdeFAll" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(244,114,182,.4);background:rgba(244,114,182,.15);color:#f472b6;cursor:pointer;">Toutes</button>
+      <button onclick="abcdeSetFilter('todo',this)" id="abcdeFTodo" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--t2);cursor:pointer;">⏳ En cours</button>
+      <button onclick="abcdeSetFilter('done',this)" id="abcdeFDone" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--t2);cursor:pointer;">✅ Terminées</button>
+    </div>
+    <!-- Form -->
     <div id="abcdeForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
       <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Nouvelle tâche ABCDE</div>
       <div style="margin-bottom:8px;"><input id="abcdeInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="margin-bottom:8px;"><textarea id="abcdeNote" class="fi" rows="2" placeholder="Note / Contexte (optionnel)..." style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-family:'IBM Plex Sans',sans-serif;"></textarea></div>
       <div style="display:flex;gap:6px;margin-bottom:10px;">
         <button type="button" onclick="setABCDE(this,'A')" data-abc="A" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">A</button>
         <button type="button" onclick="setABCDE(this,'B')" data-abc="B" style="flex:1;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">B</button>
@@ -10830,7 +10866,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
       <div style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">D</div><div style="font-size:13px;font-weight:900;color:#60a5fa;">À Déléguer · Quelqu'un d'autre peut le faire</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Mise en rayon standard, nettoyage de routine</div></div>
       <div style="background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#475569;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">E</div><div style="font-size:13px;font-weight:900;color:#94a3b8;">À Éliminer · Sans valeur ajoutée</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Réunions inutiles, tâches redondantes</div></div>
     </div>
-    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Mes Tâches ABCDE</div>
+    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📋 Mes Tâches ABCDE</div>
     <div id="abcdeList"></div>
     <div id="abcdeEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">🔤 Aucune tâche · Appuyez sur +</div>
   </div>
@@ -18961,16 +18997,43 @@ function renderRegle2min(){
 
 // ── ABCDE ──
 var _abcdeLevel='A';
+var _abcdeFilter='all';
 function setABCDE(btn,v){_abcdeLevel=v;document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity=b.dataset.abc===v?'1':'0.4';});}
-function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
-function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,level:_abcdeLevel,done:false});saveNM(d);addABCDE();renderABCDE();}
+function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';var ni=document.getElementById('abcdeNote');if(ni)ni.value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
+function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var noteEl=document.getElementById('abcdeNote');var note=noteEl?noteEl.value.trim():'';var now=new Date();var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,note:note,level:_abcdeLevel,done:false,date:now.toLocaleDateString('fr-FR'),time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});saveNM(d);addABCDE();renderABCDE();showT('✅','Tâche ajoutée');}
 function toggleABCDE(id){var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
-function delABCDE(id){var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
+function delABCDE(id){if(!confirm('Supprimer cette tâche ?'))return;var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
+function abcdeSetFilter(f,btn){_abcdeFilter=f;['abcdeFAll','abcdeFTodo','abcdeFDone'].forEach(function(id){var b=document.getElementById(id);if(!b)return;b.style.background='transparent';b.style.color='var(--t2)';b.style.borderColor='rgba(255,255,255,.1)';});if(btn){btn.style.background='rgba(244,114,182,.15)';btn.style.color='#f472b6';btn.style.borderColor='rgba(244,114,182,.4)';}renderABCDE();}
 function renderABCDE(){
-  var d=loadNM();var items=d.abcde||[];var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
+  var d=loadNM();var allItems=d.abcde||[];
+  var items=allItems.filter(function(x){if(_abcdeFilter==='todo')return !x.done;if(_abcdeFilter==='done')return x.done;return true;});
+  var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
+  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};
+  ['A','B','C','D','E'].forEach(function(lv){var s=document.getElementById('abcdeS'+lv);if(s)s.textContent=allItems.filter(function(x){return x.level===lv;}).length;});
+  var doneCount=allItems.filter(function(x){return x.done;}).length;
+  var sr=document.getElementById('abcdeSRate');if(sr)sr.textContent=allItems.length?Math.round(doneCount/allItems.length*100)+'%':'0%';
   if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
-  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
-  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:4px;">'+lv+' — '+lbls[lv]+'</div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid var(--bord);border-radius:10px;padding:9px 12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div onclick="toggleABCDE(\''+item.id+'\')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.2)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delABCDE(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('')+'</div>';}).join('');
+  var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
+  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:14px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:7px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;background:'+cols[lv]+';color:#000;font-size:10px;font-weight:900;text-align:center;line-height:18px;">'+lv+'</span>'+lbls[lv]+'<span style="margin-left:auto;background:'+bgs[lv]+';border:1px solid '+cols[lv]+'40;color:'+cols[lv]+';font-size:9px;font-weight:900;padding:2px 8px;border-radius:20px;">'+gr.length+'</span></div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid '+(item.done?cols[lv]+'60':'var(--bord)')+';border-radius:12px;padding:11px 12px;margin-bottom:6px;transition:opacity .2s;">'+'<div style="display:flex;align-items:flex-start;gap:10px;">'+'<div onclick="toggleABCDE(\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.25)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div>'+'<div style="flex:1;min-width:0;">'+'<div style="font-size:13px;font-weight:700;color:'+(item.done?'var(--t3)':'var(--t1)')+';text-decoration:'+(item.done?'line-through':'none')+';line-height:1.35;">'+item.text+'</div>'+(item.note?'<div style="font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4;'+(item.done?'opacity:.5;':'')+'">📝 '+item.note+'</div>':'')+'<div style="font-size:10px;color:var(--t3);margin-top:4px;">🕐 '+(item.date||'')+(item.time?' · '+item.time:'')+'</div>'+'</div>'+'<div onclick="delABCDE(\''+item.id+'\')" style="color:rgba(239,68,68,.5);font-size:20px;cursor:pointer;flex-shrink:0;width:24px;text-align:center;line-height:1;">×</div>'+'</div>'+'</div>';}).join('')+'</div>';}).join('');
+}
+function abcdeExportPDF(){
+  var d=loadNM();var items=d.abcde||[];
+  if(!items.length){showT('⚠️','Aucune tâche à exporter');return;}
+  var cols={A:'#ef4444',B:'#f97316',C:'#eab308',D:'#3b82f6',E:'#64748b'};
+  var bgs={A:'#fff1f1',B:'#fff7ed',C:'#fefce8',D:'#eff6ff',E:'#f8fafc'};
+  var lbls={A:'A — TRÈS IMPORTANT',B:'B — IMPORTANT',C:'C — OPTIONNEL',D:'D — À DÉLÉGUER',E:'E — À ÉLIMINER'};
+  var descs={A:'Conséquences graves si non fait',B:'Conséquences mineures si non fait',C:'Aucune conséquence réelle',D:"Quelqu'un d'autre peut le faire",E:'Sans valeur ajoutée'};
+  var doneCount=items.filter(function(x){return x.done;}).length;
+  var now=new Date();
+  var dateStr=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var sections=['A','B','C','D','E'].map(function(lv){
+    var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';
+    var doneGr=gr.filter(function(x){return x.done;}).length;
+    var rows=gr.map(function(item){return '<tr style="border-bottom:1px solid #e2e8f0;'+(item.done?'background:#f8fafc;':'')+'"><td style="padding:10px 12px;text-align:center;width:32px;">'+(item.done?'<span style="color:'+cols[lv]+';font-size:17px;font-weight:900;">✓</span>':'<span style="color:#cbd5e1;font-size:15px;">○</span>')+'</td><td style="padding:10px 12px;"><div style="font-size:13px;font-weight:600;color:'+(item.done?'#94a3b8':'#1e293b')+';text-decoration:'+(item.done?'line-through':'none')+';">'+item.text+'</div>'+(item.note?'<div style="font-size:11px;color:#64748b;margin-top:3px;">📝 '+item.note+'</div>':'')+'</td><td style="padding:10px 12px;font-size:11px;color:#94a3b8;white-space:nowrap;">'+(item.date||'')+(item.time?'<br>'+item.time:'')+'</td></tr>';}).join('');
+    return '<div style="margin-bottom:24px;border-radius:14px;overflow:hidden;border:1.5px solid '+cols[lv]+'55;box-shadow:0 2px 8px '+cols[lv]+'15;">'+'<div style="background:'+cols[lv]+';padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">'+'<div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;">'+lv+'</div>'+'<div style="flex:1;"><div style="color:#fff;font-size:15px;font-weight:900;">'+lbls[lv]+'</div><div style="color:rgba(255,255,255,.8);font-size:11px;margin-top:2px;">'+descs[lv]+'</div></div>'+'<div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">'+'<div style="background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">'+gr.length+' tâche'+(gr.length>1?'s':'')+'</div>'+'<div style="background:rgba(255,255,255,.35);color:#fff;font-size:12px;font-weight:900;padding:4px 12px;border-radius:20px;">'+doneGr+'/'+gr.length+' ✓</div>'+'</div>'+'</div>'+'<table style="width:100%;border-collapse:collapse;background:#fff;">'+'<thead><tr style="background:'+bgs[lv]+';border-bottom:2px solid '+cols[lv]+'30;">'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:center;width:32px;">✓</th>'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;">TÂCHE</th>'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;white-space:nowrap;">DATE / HEURE</th>'+'</tr></thead>'+'<tbody>'+rows+'</tbody>'+'</table>'+'</div>';
+  }).join('');
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Méthode ABCDE — TaskPro</title><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}@media print{body{background:#fff;padding:0;}.no-print{display:none;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>'+'<div style="max-width:820px;margin:0 auto;">'+'<div style="background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:16px;padding:28px 32px;margin-bottom:28px;color:#fff;">'+'<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">MG MAXI DENDEN — TaskPro</div>'+'<div style="font-size:28px;font-weight:900;margin-bottom:6px;letter-spacing:-.5px;">🔤 Méthode ABCDE</div>'+'<div style="font-size:13px;opacity:.85;margin-bottom:20px;">Rapport de priorisation · '+dateStr+'</div>'+'<div style="display:flex;gap:12px;flex-wrap:wrap;">'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+items.length+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+doneCount+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Faites</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(items.length?Math.round(doneCount/items.length*100):0)+'%</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Taux</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(items.length-doneCount)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Restantes</div></div>'+'</div>'+'</div>'+sections+'<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:24px;">Généré par TaskPro · MG MAXI DENDEN · '+now.toLocaleString('fr-FR')+'</div>'+'</div></body></html>';
+  var b=new Blob([html],{type:'text/html;charset=utf-8'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='ABCDE_'+now.toISOString().slice(0,10)+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},2000);showT('📄','Rapport exporté !');
 }
 
 // ── MOSCOW ──
