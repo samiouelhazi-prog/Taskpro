@@ -3980,337 +3980,84 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
 <!-- ══ RÉUNION D'ÉQUIPE ══ -->
 <div class="pg" id="pgReunion">
   <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📝 Réunion d'Équipe</div>
+    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Équipe</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">📝 Briefings & Réunions</div>
     <div style="display:flex;gap:6px;">
-      <button onclick="addReunion()" style="background:#0369a1;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
-      <button onclick="exportReunionPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="exportReunionPDF()" style="background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.4);color:#38bdf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="openReunionForm()" style="background:#0369a1;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
-  <div class="scroll" style="padding:12px 14px 90px;">
+  <div class="scroll" style="padding:14px 16px 90px;">
 
-    <!-- ADD FORM -->
-    <div id="reunionForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(3,105,161,.3);">
-      <div style="font-size:12px;font-weight:800;color:#38bdf8;margin-bottom:10px;">📝 Nouvelle Réunion</div>
+    <!-- ── FORM ── -->
+    <div id="reunionForm" style="display:none;background:var(--s2);border-radius:16px;padding:14px;margin-bottom:14px;border:1px solid rgba(56,189,248,.3);">
+      <div style="font-size:12px;font-weight:900;color:#38bdf8;margin-bottom:12px;">📝 Nouveau compte-rendu</div>
 
-      <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Sujet de la réunion *</label>
-        <input id="reunSujet" class="fi" placeholder="Ex: Réunion hebdomadaire équipe..." style="width:100%;box-sizing:border-box;" />
+      <!-- Type toggle -->
+      <div style="display:flex;gap:0;background:rgba(255,255,255,.05);border-radius:12px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,255,255,.08);">
+        <button id="rTypeBriefing" onclick="setReunType('briefing')" style="flex:1;padding:9px;font-size:12px;font-weight:800;border:none;background:rgba(34,197,94,.2);color:#4ade80;cursor:pointer;border-radius:12px 0 0 12px;">🌅 Briefing</button>
+        <button id="rTypeReunion" onclick="setReunType('reunion')" style="flex:1;padding:9px;font-size:12px;font-weight:800;border:none;background:transparent;color:var(--t2);cursor:pointer;border-radius:0 12px 12px 0;">📋 Réunion</button>
       </div>
 
+      <!-- Titre -->
       <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Présents</label>
-        <div id="reunPresentsEmps" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
-        <input id="reunPresentsExtra" class="fi" placeholder="Autres participants (si non listés)..." style="width:100%;box-sizing:border-box;margin-top:4px;" />
+        <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">Titre / Sujet *</div>
+        <input id="rTitre" class="fi" placeholder="Ex: Briefing matin équipe, Réunion résultats..." style="width:100%;box-sizing:border-box;"/>
       </div>
 
-      <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Points abordés</label>
-        <textarea id="reunPoints" class="fi" placeholder="1. ...&#10;2. ...&#10;3. ..." style="width:100%;min-height:80px;resize:none;box-sizing:border-box;"></textarea>
+      <!-- Date + Heure -->
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <div style="flex:1;">
+          <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">Date</div>
+          <input id="rDate" type="date" class="fi" style="width:100%;box-sizing:border-box;"/>
+        </div>
+        <div style="flex:1;">
+          <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">Heure</div>
+          <input id="rHeure" type="time" class="fi" style="width:100%;box-sizing:border-box;"/>
+        </div>
       </div>
 
-      <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Décisions prises</label>
-        <textarea id="reunDecisions" class="fi" placeholder="Décisions et actions retenues..." style="width:100%;min-height:70px;resize:none;box-sizing:border-box;"></textarea>
-      </div>
-
+      <!-- Participants -->
       <div style="margin-bottom:12px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Prochaine réunion</label>
-        <input id="reunProchaine" class="fi" placeholder="Ex: Lundi 21 Mars à 08h00..." style="width:100%;box-sizing:border-box;" />
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;">👥 Participants</div>
+          <button onclick="addRParticipant()" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.3);color:#38bdf8;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;cursor:pointer;">+ Ajouter</button>
+        </div>
+        <div id="rParticipantsList" style="display:flex;flex-direction:column;gap:6px;"></div>
       </div>
 
+      <!-- Points -->
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;">📋 Points abordés</div>
+          <button onclick="addRPoint()" style="background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.3);color:#38bdf8;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;cursor:pointer;">+ Point</button>
+        </div>
+        <div id="rPointsList" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+
+      <!-- Sections supplémentaires -->
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;">📌 Sections supplémentaires</div>
+          <button onclick="addRSection()" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);color:#fbbf24;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;cursor:pointer;">+ Titre</button>
+        </div>
+        <div id="rSectionsList" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+
+      <!-- Actions -->
       <div style="display:flex;gap:8px;">
-        <button onclick="addReunion()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="openReunionForm()" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
         <button onclick="saveReunion()" style="flex:2;background:#0369a1;border:none;color:#fff;font-size:13px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
       </div>
     </div>
 
-    <!-- LIST -->
-    <div id="reunionList" style="display:flex;flex-direction:column;gap:10px;"></div>
-    <div id="reunionEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:13px;">
-      <div style="font-size:40px;margin-bottom:10px;">📝</div>
-      Aucune réunion enregistrée<br>
-      <span style="font-size:11px;opacity:.7;">Appuyez sur + pour créer un compte-rendu</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══ BRIEFING DU MATIN ══ -->
-<div id="pgBriefing" class="pg">
-  <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div class="pg-title">🌅 Briefing</div>
-    <button onclick="waShareBriefing()" style="margin-left:auto;background:#25d366;border:none;color:#fff;font-size:12px;font-weight:700;padding:7px 11px;border-radius:10px;cursor:pointer;">💬</button>
-    <button onclick="toggleBriefingAdd()" id="briefAddBtn" style="background:#3b82f6;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Point</button>
-  </div>
-  <div class="scroll" style="padding:12px 12px 90px;">
-
-    <!-- ADD FORM (multi-lignes) -->
-    <div id="briefAddForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid rgba(59,130,246,.3);">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-        <div style="font-size:12px;font-weight:800;color:#60a5fa;">+ Nouveaux points</div>
-        <button onclick="briefAddRow()" style="background:rgba(59,130,246,.2);border:1.5px solid rgba(59,130,246,.5);color:#60a5fa;font-size:16px;font-weight:900;width:30px;height:30px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
-      </div>
-      <div id="briefRowsContainer" style="display:flex;flex-direction:column;gap:7px;margin-bottom:10px;"></div>
-      <button onclick="saveBriefingRows()" style="width:100%;background:#3b82f6;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:10px;cursor:pointer;">✓ Enregistrer tout</button>
-    </div>
-
-    <!-- CHECKLIST -->
-    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
-      <div style="font-size:12px;font-weight:800;color:#60a5fa;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">📋 Points à aborder</div>
-      <div id="briefingChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
-      <div id="briefingEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:12px 0;display:none;">Aucun point — appuyez sur + Point</div>
-    </div>
-
-    <!-- NOTES -->
-    <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;">
-      <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;">📝 Notes du jour</div>
-      <textarea id="briefingNote" placeholder="Objectifs, priorités, remarques..." style="width:100%;min-height:90px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;color:var(--t1);font-size:13px;resize:none;box-sizing:border-box;" oninput="saveBriefing()"></textarea>
-    <button onclick="aiAnalyzeBriefing()" id="briefAiBtn" style="width:100%;margin:6px 0 10px;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(99,102,241,.12));border:1.5px solid rgba(139,92,246,.45);border-radius:12px;color:#c084fc;font-size:12px;font-weight:800;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;">
-      <span style="font-size:16px;">🤖</span> Suggestions IA pour aujourd'hui
-    </button>
-    <div id="briefAiResult" style="display:none;margin-bottom:10px;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(99,102,241,.07));border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:12px;"></div>
-    </div>
-
-    <button onclick="resetBriefing()" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">🔄 Réinitialiser le briefing</button>
-  </div>
-</div>
-
-<!-- ══ ZONE DE VIGILANCE ══ -->
-<div id="pgVigilance" class="pg">
-  <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('equipe')" style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div class="pg-title">🔍 Vigilance</div>
-    <button onclick="toggleVigForm()" id="vigAddBtn" style="background:#ef4444;border:none;color:#fff;font-size:11px;font-weight:700;padding:7px 12px;border-radius:10px;cursor:pointer;">+ Alerte</button>
-  </div>
-  <div class="scroll" style="padding:12px 12px 90px;">
-
-    <!-- INLINE ADD FORM -->
-    <div id="vigForm" style="display:none;background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid rgba(239,68,68,.3);">
-      <div style="font-size:13px;font-weight:800;color:#ef4444;margin-bottom:12px;">⚠️ Nouvelle Alerte</div>
-      <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Description *</label>
-        <input id="vigDesc" class="fi" placeholder="Ex: Rupture rayon frais..." style="width:100%;box-sizing:border-box;" />
-      </div>
-      <div style="margin-bottom:10px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;">Rayon / Zone</label>
-        <select id="vigZone" class="fi" style="width:100%;box-sizing:border-box;">
-          <option value="">-- Choisir --</option>
-          <option value="20-Traiteur">🛒 20-Traiteur</option>
-          <option value="21-Poisso.">🛒 21-Poisso.</option>
-          <option value="22-FLEG">🛒 22-FLEG</option>
-          <option value="23-Boul-Pat">🛒 23-Boul-Pat</option>
-          <option value="24-Boucherie">🛒 24-Boucherie</option>
-          <option value="12-PFLS">🛒 12-PFLS</option>
-          <option value="Caisse">💰 Caisse</option>
-          <option value="Réception">📦 Réception</option>
-          <option value="Entrée magasin">🚪 Entrée magasin</option>
-          <option value="Réserve">📦 Réserve</option>
-        </select>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Gravité</label>
-        <div style="display:flex;gap:8px;">
-          <button type="button" onclick="setVigGrav(this,'high')" data-vg="high" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:10px;color:#ef4444;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🔴 Critique</button>
-          <button type="button" onclick="setVigGrav(this,'med')" data-vg="med" style="flex:1;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);border-radius:10px;color:#f59e0b;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🟡 Modéré</button>
-          <button type="button" onclick="setVigGrav(this,'low')" data-vg="low" style="flex:1;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);border-radius:10px;color:#22c55e;font-size:12px;font-weight:700;padding:10px 4px;cursor:pointer;">🟢 Faible</button>
-        </div>
-      </div>
-
-      <button onclick="aiAnalyzeVigilance()" id="vigAiBtn" style="width:100%;margin-bottom:10px;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(99,102,241,.12));border:1.5px solid rgba(139,92,246,.45);border-radius:12px;color:#c084fc;font-size:12px;font-weight:800;padding:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;">
-        <span style="font-size:16px;">🤖</span> Analyser avec l'IA
-      </button>
-      <div id="vigAiResult" style="display:none;margin-bottom:10px;background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(99,102,241,.07));border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:12px;"></div>
-
-      <!-- Photos -->
-      <div style="margin-bottom:12px;">
-        <div style="font-size:10px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">📷 Photo(s) — Preuve visuelle</div>
-        <div id="vigPhotosGrid" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;"></div>
-        <label style="width:100%;display:block;background:rgba(245,158,11,.07);border:1.5px dashed rgba(245,158,11,.3);border-radius:10px;padding:10px;text-align:center;color:#fbbf24;font-size:12px;font-weight:700;cursor:pointer;">
-          📷 Prendre / Choisir une photo
-          <input type="file" accept="image/*" capture="environment" multiple style="display:none;" onchange="vigAddPhoto(this)">
-        </label>
-      </div>
-
-      <div style="display:flex;gap:8px;">
-        <button onclick="toggleVigForm()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
-        <button onclick="saveVigilance()" style="flex:2;background:#ef4444;border:none;color:#fff;font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">✅ Enregistrer</button>
-      </div>
-    </div>
-
-    <!-- ALERTS LIST -->
-    <div id="vigilanceList" style="display:flex;flex-direction:column;gap:8px;"></div>
-    <div id="vigilanceEmpty" style="text-align:center;padding:40px 20px;color:var(--t2);font-size:13px;">✅ Aucune alerte active</div>
-  </div>
-</div>
-
-<!-- ══ PLANNING ══ -->
-<div id="pgPlanning" class="pg">
-  <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div class="pg-title">📅 Planning</div>
-    <div style="width:34px;"></div>
-  </div>
-  <div class="scroll" style="padding:12px 12px 90px;">
-    <div id="planningDate" style="text-align:center;font-size:12px;font-weight:700;color:var(--t2);margin-bottom:12px;padding:8px;background:var(--card);border-radius:10px;"></div>
-
-    <!-- Ajouter Planning Caisse -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-      <div style="font-size:12px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;">💰 Planning Caisse</div>
-      <button onclick="addPlanningItem()" style="background:#6d28d9;border:none;color:#fff;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
-    </div>
-    <div id="planningGrid" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;"></div>
-    <div id="planningEmpty" style="display:none;text-align:center;padding:16px;color:var(--t2);font-size:12px;">💰 Aucune caisse affectée · Appuyez sur +</div>
-    <div id="planningSummary" style="display:none;"></div>
-
-    <!-- ─── Planning Rayons ─── -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;margin-top:4px;">
-      <div style="font-size:12px;font-weight:800;color:#34d399;text-transform:uppercase;letter-spacing:.5px;">🛒 Planning Rayons</div>
-      <button onclick="openRayonPlanningModal()" style="background:#047857;border:none;color:#fff;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
-    </div>
-    <div id="rayonPlanningGrid" style="display:flex;flex-direction:column;gap:8px;"></div>
-    <div id="rayonPlanningEmpty" style="text-align:center;padding:16px;color:var(--t2);font-size:12px;">🛒 Aucun rayon affecté · Appuyez sur +</div>
-  </div>
-</div>
-
-<!-- ══ HYGIÈNE & SÉCURITÉ ══ -->
-<div id="pgHygiene" class="pg">
-  <div class="pg-topbar">
-    <div class="pg-back" onclick="goPage('equipe')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Équipe</div>
-    <div class="pg-title">🧹 Hygiène & Sécurité</div>
-    <div style="width:34px;"></div>
-  </div>
-  <div class="scroll" style="padding:12px 12px 90px;">
-
-    <!-- Date du jour -->
-    <div id="hygieneDate" style="text-align:center;font-size:12px;color:var(--t2);margin-bottom:12px;padding:8px;background:var(--card);border-radius:10px;"></div>
-
-    <!-- ══ TABS ══ -->
-    <div style="display:flex;gap:6px;margin-bottom:14px;">
-      <button onclick="setHygieneTab('quotidien')" id="hygTab_quotidien" style="flex:1;background:#059669;border:none;color:#fff;font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🌅 Contrôle Quotidien</button>
-      <button onclick="setHygieneTab('journee')" id="hygTab_journee" style="flex:1;background:var(--s1);border:1px solid var(--bord);color:var(--t2);font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🏆 Journée Hygiène</button>
-    </div>
-
-    <!-- ══ SECTION QUOTIDIEN ══ -->
-    <div id="hygSec_quotidien">
-      <!-- Score -->
-      <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
-        <div style="flex:1;">
-          <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score conformité quotidien</div>
-          <div id="hygieneBar" style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
-            <div id="hygieneBarFill" style="height:6px;background:#22c55e;border-radius:3px;width:0%;transition:width .4s;"></div>
-          </div>
-        </div>
-        <div id="hygieneScore" style="font-size:22px;font-weight:900;color:#22c55e;min-width:44px;text-align:right;">—</div>
-      </div>
-
-      <!-- Add form quotidien -->
-      <div style="display:flex;gap:8px;margin-bottom:10px;">
-        <input id="hygNewItem" class="fi" placeholder="+ Ajouter un point de contrôle..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygieneItem()"/>
-        <button onclick="addHygieneItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;flex-shrink:0;">✓</button>
-      </div>
-
-      <!-- Checklist quotidien -->
-      <div id="hygieneChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
-      <div id="hygieneEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point de contrôle</div>
-    </div>
-
-    <!-- ══ SECTION JOURNÉE HYGIÈNE ══ -->
-    <div id="hygSec_journee" style="display:none;">
-
-      <!-- Info bannière -->
-      <div style="background:linear-gradient(135deg,rgba(5,150,105,.15),rgba(4,120,87,.08));border:1px solid rgba(5,150,105,.3);border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;">
-        <div style="font-size:28px;">🏆</div>
-        <div>
-          <div style="font-size:12px;font-weight:900;color:#34d399;margin-bottom:2px;">Journée Hygiène — Mardi</div>
-          <div style="font-size:11px;color:var(--t2);">Campagne de nettoyage complète et approfondie · Chaque mardi</div>
-        </div>
-      </div>
-
-      <!-- Score journée -->
-      <div style="background:var(--card);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;align-items:center;gap:14px;">
-        <div style="flex:1;">
-          <div style="font-size:11px;color:var(--t2);margin-bottom:2px;">Score Journée Hygiène</div>
-          <div style="height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">
-            <div id="hygJBar" style="height:6px;background:#10b981;border-radius:3px;width:0%;transition:width .4s;"></div>
-          </div>
-        </div>
-        <div id="hygJScore" style="font-size:22px;font-weight:900;color:#10b981;min-width:44px;text-align:right;">—</div>
-      </div>
-
-      <!-- Add form journée -->
-      <div style="display:flex;gap:8px;margin-bottom:10px;">
-        <input id="hygJNewItem" class="fi" placeholder="+ Ajouter un point journée hygiène..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')addHygJItem()"/>
-        <button onclick="addHygJItem()" style="background:#059669;border:none;color:#fff;font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;cursor:pointer;flex-shrink:0;">✓</button>
-      </div>
-
-      <!-- Checklist journée -->
-      <div id="hygJChecks" style="display:flex;flex-direction:column;gap:6px;"></div>
-      <div id="hygJEmpty" style="font-size:12px;color:var(--t2);text-align:center;padding:20px 0;display:none;">Aucun point</div>
-    </div>
-
-  </div>
-</div>
-
-<!-- MODALS EQUIPE -->
-
-
-<div id="planningModal" class="mov" style="display:none;">
-  <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #6d28d9;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
-    <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <div style="font-size:17px;font-weight:900;color:#fff;font-family:'Syne';">💰 Planning Caisse</div>
-      <div onclick="closeM('planningModal')" style="color:rgba(255,255,255,.4);font-size:22px;cursor:pointer;line-height:1;">×</div>
-    </div>
-    <div style="margin-bottom:14px;">
-      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">Caissier(e)</label>
-      <select id="planEmp" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;appearance:none;"></select>
-    </div>
-    <div style="margin-bottom:14px;">
-      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;">Caisse</label>
-      <select id="planZone" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 14px;color:#fff;font-size:14px;box-sizing:border-box;outline:none;appearance:none;">
-        <option value="">-- Choisir --</option>
-        <option value="Caisse-1">💰 Caisse 1</option>
-        <option value="Caisse-2">💰 Caisse 2</option>
-        <option value="Caisse-3">💰 Caisse 3</option>
-        <option value="Caisse-4">💰 Caisse 4</option>
-        <option value="Caisse-5">💰 Caisse 5</option>
-        <option value="Caisse-6">💰 Caisse 6</option>
-      </select>
-    </div>
-    <div style="margin-bottom:20px;">
-      <label style="font-size:10px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px;">Horaire</label>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-        <div style="flex:1;">
-          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">De</label>
-          <input type="time" id="planHeureDebut" value="08:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
-        </div>
-        <div style="color:rgba(255,255,255,.4);font-size:18px;margin-top:16px;">→</div>
-        <div style="flex:1;">
-          <label style="font-size:9px;color:rgba(255,255,255,.4);display:block;margin-bottom:4px;">À</label>
-          <input type="time" id="planHeureFin" value="16:00" style="width:100%;background:#1a1f30;border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 10px;color:#fff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;color-scheme:dark;-webkit-text-fill-color:#fff;" />
-        </div>
-      </div>
-      <button onclick="setPlanRepos()" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:12px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">🏖️ Repos (journée)</button>
-    </div>
-    <div style="display:flex;gap:10px;">
-      <button onclick="closeM('planningModal')" style="flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:14px;font-weight:700;padding:13px;border-radius:14px;cursor:pointer;">Annuler</button>
-      <button onclick="savePlanningItem()" style="flex:2;background:#6d28d9;border:none;color:#fff;font-size:14px;font-weight:800;padding:13px;border-radius:14px;cursor:pointer;">💾 Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<div id="bestSellerModal" class="mov" style="display:none;">
-  <div class="msh"><div class="mhdl"></div><div class="mtit">📦 Ajouter Produit</div></div>
-  <div class="mbd">
-    <div class="fg"><label class="fl">Nom du produit</label><input class="fi" id="bsName" placeholder="Ex: Yaourt Danone 125g" /></div>
-    <div class="fg"><label class="fl">Rayon</label><input class="fi" id="bsRayon" placeholder="Ex: 20-Traiteur" /></div>
-    <button onclick="saveBestSeller()" style="width:100%;background:#dc2626;border:none;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;margin-top:8px;">✅ Ajouter</button>
+    <!-- ── LIST ── -->
+    <div id="reunionList"></div>
+    <div id="reunionEmpty" style="text-align:center;padding:30px 0;color:var(--t2);font-size:12px;">📝 Aucun compte-rendu<br><span style="font-size:11px;color:var(--t3);">Appuyez sur + pour commencer</span></div>
   </div>
 </div>
 
 
-<!-- ══ TÂCHES AVANCÉES HUB ══ -->
 <div class="pg" id="pgAvancees">
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Tâches</div>
@@ -5669,7 +5416,10 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div class="pg-topbar" style="background:linear-gradient(90deg,rgba(20,184,166,.2),transparent);">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#2dd4bf;cursor:pointer;">‹ Réception</div>
     <div class="pg-title" style="font-size:13px;">🚚 Suivi BL</div>
-    <button onclick="blOpenForm()" style="background:rgba(20,184,166,.15);border:1.5px solid #2dd4bf;color:#2dd4bf;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    <div style="display:flex;gap:6px;">
+      <button onclick="blExportPDF()" style="background:rgba(20,184,166,.15);border:1.5px solid rgba(20,184,166,.4);color:#2dd4bf;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      <button onclick="blOpenForm()" style="background:rgba(20,184,166,.15);border:1.5px solid #2dd4bf;color:#2dd4bf;font-size:20px;font-weight:300;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
   </div>
   <div class="scroll" style="padding:14px 14px 90px;">
 
@@ -8078,6 +7828,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">👥 Présences</div>
     <div style="display:flex;gap:8px;">
       <button onclick="paOpenAddModal()" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);border:none;color:#fff;font-size:11px;font-weight:800;padding:7px 14px;border-radius:10px;cursor:pointer;">+ Employé</button>
+      <button onclick="paExportPDF()" style="background:rgba(59,130,246,.15);border:1.5px solid rgba(59,130,246,.4);color:#60a5fa;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">ð</button>
     </div>
   </div>
   <!-- Date nav -->
@@ -8133,6 +7884,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
     <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">📋 Ronde Magasin</div>
     <div style="display:flex;gap:8px;">
+      <button onclick="rondeExportPDF()" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">ð</button>
       <button onclick="rondeReset()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:6px 12px;border-radius:10px;cursor:pointer;">↺ Reset</button>
     </div>
   </div>
@@ -10728,6 +10480,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('gestiontemps')" style="font-size:13px;font-weight:700;color:#4ade80;cursor:pointer;">‹ Temps</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">⚡ Règle des 2 Minutes</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="r2mExportPDF()" style="background:rgba(74,222,128,.12);border:1.5px solid rgba(74,222,128,.4);color:#4ade80;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addRegle2min()" style="background:#15803d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -10803,49 +10556,13 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔤 Méthode ABCDE</div>
     <div style="display:flex;gap:6px;">
-      <button onclick="abcdeExportPDF()" style="background:rgba(244,114,182,.15);border:1.5px solid rgba(244,114,182,.35);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
       <button onclick="addABCDE()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
   <div class="scroll" style="padding:14px 16px 90px;">
-    <!-- Stats bar -->
-    <div id="abcdeStats" style="display:flex;gap:0;background:rgba(255,255,255,.03);border:1px solid rgba(244,114,182,.15);border-radius:14px;overflow:hidden;margin-bottom:12px;">
-      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
-        <div id="abcdeSA" style="font-size:17px;font-weight:900;color:#f87171;font-family:'IBM Plex Mono',monospace;">0</div>
-        <div style="font-size:9px;font-weight:800;color:#f87171;margin-top:1px;">A</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
-        <div id="abcdeSB" style="font-size:17px;font-weight:900;color:#fb923c;font-family:'IBM Plex Mono',monospace;">0</div>
-        <div style="font-size:9px;font-weight:800;color:#fb923c;margin-top:1px;">B</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
-        <div id="abcdeSC" style="font-size:17px;font-weight:900;color:#facc15;font-family:'IBM Plex Mono',monospace;">0</div>
-        <div style="font-size:9px;font-weight:800;color:#facc15;margin-top:1px;">C</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
-        <div id="abcdeSD" style="font-size:17px;font-weight:900;color:#60a5fa;font-family:'IBM Plex Mono',monospace;">0</div>
-        <div style="font-size:9px;font-weight:800;color:#60a5fa;margin-top:1px;">D</div>
-      </div>
-      <div style="flex:1;text-align:center;padding:9px 4px;border-right:1px solid rgba(255,255,255,.06);">
-        <div id="abcdeSE" style="font-size:17px;font-weight:900;color:#94a3b8;font-family:'IBM Plex Mono',monospace;">0</div>
-        <div style="font-size:9px;font-weight:800;color:#94a3b8;margin-top:1px;">E</div>
-      </div>
-      <div style="flex:1.4;text-align:center;padding:9px 4px;">
-        <div id="abcdeSRate" style="font-size:17px;font-weight:900;color:#4ade80;font-family:'IBM Plex Mono',monospace;">0%</div>
-        <div style="font-size:9px;font-weight:800;color:#4ade80;margin-top:1px;">FAIT</div>
-      </div>
-    </div>
-    <!-- Filters -->
-    <div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;">
-      <button onclick="abcdeSetFilter('all',this)" id="abcdeFAll" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(244,114,182,.4);background:rgba(244,114,182,.15);color:#f472b6;cursor:pointer;">Toutes</button>
-      <button onclick="abcdeSetFilter('todo',this)" id="abcdeFTodo" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--t2);cursor:pointer;">⏳ En cours</button>
-      <button onclick="abcdeSetFilter('done',this)" id="abcdeFDone" style="white-space:nowrap;font-size:11px;font-weight:800;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:transparent;color:var(--t2);cursor:pointer;">✅ Terminées</button>
-    </div>
-    <!-- Form -->
     <div id="abcdeForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
       <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Nouvelle tâche ABCDE</div>
       <div style="margin-bottom:8px;"><input id="abcdeInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
-      <div style="margin-bottom:8px;"><textarea id="abcdeNote" class="fi" rows="2" placeholder="Note / Contexte (optionnel)..." style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-family:'IBM Plex Sans',sans-serif;"></textarea></div>
       <div style="display:flex;gap:6px;margin-bottom:10px;">
         <button type="button" onclick="setABCDE(this,'A')" data-abc="A" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">A</button>
         <button type="button" onclick="setABCDE(this,'B')" data-abc="B" style="flex:1;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">B</button>
@@ -10866,7 +10583,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
       <div style="background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">D</div><div style="font-size:13px;font-weight:900;color:#60a5fa;">À Déléguer · Quelqu'un d'autre peut le faire</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Mise en rayon standard, nettoyage de routine</div></div>
       <div style="background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;"><div style="width:26px;height:26px;border-radius:8px;background:#475569;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;">E</div><div style="font-size:13px;font-weight:900;color:#94a3b8;">À Éliminer · Sans valeur ajoutée</div></div><div style="font-size:11px;color:var(--t2);margin-left:34px;">Ex: Réunions inutiles, tâches redondantes</div></div>
     </div>
-    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">📋 Mes Tâches ABCDE</div>
+    <div style="font-size:10px;font-weight:700;color:#f472b6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">📋 Mes Tâches ABCDE</div>
     <div id="abcdeList"></div>
     <div id="abcdeEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">🔤 Aucune tâche · Appuyez sur +</div>
   </div>
@@ -10878,6 +10595,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🎯 Méthode MoSCoW</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="moscowExportPDF()" style="background:rgba(244,114,182,.12);border:1.5px solid rgba(244,114,182,.4);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addMoscow()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -10914,6 +10632,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">5️⃣ Règle 5/25 Buffett</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="warrenExportPDF()" style="background:rgba(244,114,182,.12);border:1.5px solid rgba(244,114,182,.4);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addWarren()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -10997,6 +10716,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">📋 Tableau Kanban</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="kanbanExportPDF()" style="background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.4);color:#38bdf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addKanban()" style="background:#0369a1;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -11040,6 +10760,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔄 GTD — Faire Avancer</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="gtdExportPDF()" style="background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.4);color:#38bdf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addGTD()" style="background:#0369a1;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -13599,7 +13320,7 @@ function printDlcReport(){
     +'@media print{button{display:none!important;}}</style>'
     +'</head><body>'
     +'<h1>📦 Contrôle DLC</h1>'
-    +'<div style="font-size:11px;color:#666;margin-bottom:8px;">Généré le '+dateStr+(prof&&prof.store?' · '+prof.store:'')+'</div>'
+    +'<div style="font-size:11px;color:#666;margin-bottom:8px;">'+getMagName()+' - Genere le '+dateStr+'</div>'
     +'<button onclick="window.print()" style="background:#1e3a8a;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;margin-bottom:10px;">🖨️ Imprimer</button>'
     +'<div>'
     +'<span class="stat">Total : '+items.length+'</span>'
@@ -14409,7 +14130,7 @@ function exportRetenuPdf(){
   var total=filtered.reduce(function(s,r){return s+(parseFloat(r.montant)||0);},0);
   var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Rapport '+labels[type]+'</title>'
     +'<style>body{font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px;color:#1a1a2e;}h1{color:'+colors[type]+';}table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px;}th{background:'+colors[type]+';color:#fff;padding:8px 10px;text-align:left;}td{padding:7px 10px;border-bottom:1px solid #e2e8f0;}.total{font-weight:700;font-size:14px;}.emp-head{background:#f1f5f9;font-weight:700;}.meta{font-size:11px;color:#666;margin-bottom:20px;}</style></head><body>'
-    +'<h1>'+labels[type]+'</h1><div class="meta">Période : '+from+' → '+to+' · Généré le '+genDate+'</div>'
+    +'<div style="font-size:11px;color:#64748b;margin-bottom:6px;">'+getMagName()+'</div>'+'<h1>'+labels[type]+'</h1><div class="meta">Periode : '+from+' - '+to+' - Genere le '+genDate+'</div>'
     +'<table><thead><tr><th>Employé</th><th>Matricule</th><th>Note</th><th>Date</th><th>Montant</th></tr></thead><tbody>';
   Object.values(byEmp).forEach(function(emp){
     html+='<tr class="emp-head"><td colspan="4" style="background:#f8fafc;font-weight:700;">'+emp.nom+(emp.mat?' — '+emp.mat:'')+'</td><td style="font-weight:900;text-align:right;">'+emp.total.toFixed(2)+' TND</td></tr>';
@@ -16191,106 +15912,302 @@ function _dlPDFFallback(blob,filename){
 
 // ══ RÉUNION D'ÉQUIPE ══
 var SKR=SK+'_reunions';
+var _reunType='briefing';
+var _rParticipants=[];
+var _rPoints=[];
+var _rSections=[];
+
 function loadReunions(){try{return JSON.parse(localStorage.getItem(SKR)||'[]');}catch(e){return[];}}
 function saveReunions(d){localStorage.setItem(SKR,JSON.stringify(d));}
 
-function addReunion(){
-  var f=document.getElementById('reunionForm');if(!f)return;
-  var showing=f.style.display!=='none';
-  f.style.display=showing?'none':'block';
-  if(!showing){
-    document.getElementById('reunSujet').value='';
-    document.getElementById('reunPoints').value='';
-    document.getElementById('reunDecisions').value='';
-    document.getElementById('reunProchaine').value='';
-    document.getElementById('reunPresentsExtra').value='';
-    // Load employees as chips
-    var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
-    var chipsEl=document.getElementById('reunPresentsEmps');
-    if(chipsEl){
-      chipsEl.innerHTML=emps.map(function(e){
-        return '<button type="button" onclick="toggleReunEmp(this)" data-emp="'+e.name+'" '
-          +'style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;color:rgba(255,255,255,.7);'
-          +'font-size:11px;font-weight:700;padding:5px 10px;cursor:pointer;">'+e.name+'</button>';
-      }).join('');
-    }
+function setReunType(t){
+  _reunType=t;
+  var bB=document.getElementById('rTypeBriefing');
+  var bR=document.getElementById('rTypeReunion');
+  if(!bB||!bR)return;
+  if(t==='briefing'){
+    bB.style.background='rgba(34,197,94,.2)';bB.style.color='#4ade80';
+    bR.style.background='transparent';bR.style.color='var(--t2)';
+  }else{
+    bR.style.background='rgba(56,189,248,.2)';bR.style.color='#38bdf8';
+    bB.style.background='transparent';bB.style.color='var(--t2)';
   }
 }
-function toggleReunEmp(btn){
-  var on=btn.dataset.sel==='1';
-  btn.dataset.sel=on?'':'1';
-  btn.style.background=on?'rgba(255,255,255,.06)':'rgba(3,105,161,.3)';
-  btn.style.borderColor=on?'rgba(255,255,255,.15)':'#38bdf8';
-  btn.style.color=on?'rgba(255,255,255,.7)':'#38bdf8';
+
+function openReunionForm(){
+  var f=document.getElementById('reunionForm');if(!f)return;
+  var open=f.style.display!=='none';
+  f.style.display=open?'none':'block';
+  if(!open){
+    _reunType='briefing';setReunType('briefing');
+    _rParticipants=[];_rPoints=[];_rSections=[];
+    document.getElementById('rTitre').value='';
+    var now=new Date();
+    document.getElementById('rDate').value=now.toISOString().slice(0,10);
+    document.getElementById('rHeure').value=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    renderRParticipants();renderRPoints();renderRSections();
+    f.closest('.scroll').scrollTo({top:0,behavior:'smooth'});
+  }
 }
-function saveReunion(){
-  var sujet=document.getElementById('reunSujet').value.trim();
-  if(!sujet){showT('⚠️','Sujet requis');return;}
-  var points=document.getElementById('reunPoints').value.trim();
-  var decisions=document.getElementById('reunDecisions').value.trim();
-  var prochaine=document.getElementById('reunProchaine').value.trim();
-  var extra=document.getElementById('reunPresentsExtra').value.trim();
-  // Collect selected employees
-  var presents=[];
-  document.querySelectorAll('[data-emp]').forEach(function(b){if(b.dataset.sel==='1')presents.push(b.dataset.emp);});
-  if(extra)extra.split(',').forEach(function(s){var t=s.trim();if(t)presents.push(t);});
-  var list=loadReunions();
-  list.unshift({id:uid(),sujet:sujet,presents:presents,points:points,decisions:decisions,prochaine:prochaine,
-    date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
-  saveReunions(list);addReunion();renderReunions();logAction('Réunion','add',document.getElementById('reunTitre')?document.getElementById('reunTitre').value||'Réunion':'Réunion','');
-  showT('✅','Réunion enregistrée');
+
+// ── Participants ──
+function addRParticipant(){
+  _rParticipants.push({id:uid(),nom:'',matricule:'',poste:''});
+  renderRParticipants();
+  var el=document.getElementById('rParticipantsList');
+  if(el){var inputs=el.querySelectorAll('input[data-field="nom"]');if(inputs.length)inputs[inputs.length-1].focus();}
 }
-function delReunion(id){
-  var list=loadReunions().filter(function(r){return r.id!==id;});
-  saveReunions(list);renderReunions();
+function delRParticipant(id){
+  _rParticipants=_rParticipants.filter(function(p){return p.id!==id;});
+  renderRParticipants();
 }
-function renderReunions(){
-  var list=loadReunions();
-  var el=document.getElementById('reunionList');var empty=document.getElementById('reunionEmpty');if(!el)return;
-  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
-  if(empty)empty.style.display='none';
-  el.innerHTML=list.map(function(r){
-    return '<div style="background:var(--card);border-radius:14px;padding:14px;border:1px solid rgba(3,105,161,.2);">'
-      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">'
-      +'<div style="flex:1;">'
-      +'<div style="font-size:14px;font-weight:900;color:var(--t1);">📝 '+r.sujet+'</div>'
-      +'<div style="font-size:11px;color:#38bdf8;margin-top:2px;">📅 '+r.date+' à '+r.time+'</div>'
+function updateRParticipant(id,field,val){
+  var p=_rParticipants.find(function(x){return x.id===id;});
+  if(p)p[field]=val;
+}
+function renderRParticipants(){
+  var el=document.getElementById('rParticipantsList');if(!el)return;
+  if(!_rParticipants.length){el.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:6px;">Aucun participant — appuyez sur + Ajouter</div>';return;}
+  el.innerHTML=_rParticipants.map(function(p,i){
+    return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px;">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;">'
+      +'<div style="font-size:10px;font-weight:800;color:#38bdf8;">👤 Participant '+(i+1)+'</div>'
+      +'<div onclick="delRParticipant(\''+p.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;width:22px;text-align:center;">×</div>'
       +'</div>'
-      +'<div onclick="delReunion(\''+r.id+'\')" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:8px;">×</div>'
+      +'<input class="fi" data-field="nom" placeholder="Nom & Prénom *" value="'+escH(p.nom)+'" oninput="updateRParticipant(\''+p.id+'\',\'nom\',this.value)" style="width:100%;box-sizing:border-box;margin-bottom:6px;"/>'
+      +'<div style="display:flex;gap:6px;">'
+      +'<input class="fi" data-field="matricule" placeholder="Matricule" value="'+escH(p.matricule)+'" oninput="updateRParticipant(\''+p.id+'\',\'matricule\',this.value)" style="flex:1;box-sizing:border-box;"/>'
+      +'<input class="fi" data-field="poste" placeholder="Poste / Fonction" value="'+escH(p.poste)+'" oninput="updateRParticipant(\''+p.id+'\',\'poste\',this.value)" style="flex:1.5;box-sizing:border-box;"/>'
       +'</div>'
-      +(r.presents&&r.presents.length?'<div style="margin-bottom:8px;"><div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:4px;">👥 PRÉSENTS</div><div style="font-size:12px;color:var(--t1);">'+r.presents.join(' · ')+'</div></div>':'')
-      +(r.points?'<div style="margin-bottom:8px;"><div style="font-size:10px;font-weight:700;color:var(--t2);margin-bottom:4px;">📋 POINTS ABORDÉS</div><div style="font-size:12px;color:var(--t1);white-space:pre-line;">'+r.points+'</div></div>':'')
-      +(r.decisions?'<div style="margin-bottom:8px;"><div style="font-size:10px;font-weight:700;color:#22c55e;margin-bottom:4px;">✅ DÉCISIONS</div><div style="font-size:12px;color:var(--t1);">'+r.decisions+'</div></div>':'')
-      +(r.prochaine?'<div style="background:rgba(3,105,161,.1);border-radius:8px;padding:6px 10px;"><div style="font-size:10px;font-weight:700;color:#38bdf8;">🗓️ PROCHAINE RÉUNION</div><div style="font-size:12px;color:var(--t1);">'+r.prochaine+'</div></div>':'')
       +'</div>';
   }).join('');
 }
+
+// ── Points ──
+function addRPoint(){
+  _rPoints.push({id:uid(),titre:'',detail:'',expanded:true});
+  renderRPoints();
+  var el=document.getElementById('rPointsList');
+  if(el){var inputs=el.querySelectorAll('input[data-pfield="titre"]');if(inputs.length)inputs[inputs.length-1].focus();}
+}
+function delRPoint(id){_rPoints=_rPoints.filter(function(p){return p.id!==id;});renderRPoints();}
+function updateRPoint(id,field,val){var p=_rPoints.find(function(x){return x.id===id;});if(p)p[field]=val;}
+function toggleRPoint(id){var p=_rPoints.find(function(x){return x.id===id;});if(p){p.expanded=!p.expanded;renderRPoints();}}
+function renderRPoints(){
+  var el=document.getElementById('rPointsList');if(!el)return;
+  if(!_rPoints.length){el.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:6px;">Aucun point — appuyez sur + Point</div>';return;}
+  el.innerHTML=_rPoints.map(function(p,i){
+    return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;">'
+      +'<div style="display:flex;align-items:center;gap:8px;padding:9px 10px;">'
+      +'<div style="width:22px;height:22px;border-radius:7px;background:#0369a1;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+(i+1)+'</div>'
+      +'<input class="fi" data-pfield="titre" placeholder="Titre du point *" value="'+escH(p.titre)+'" oninput="updateRPoint(\''+p.id+'\',\'titre\',this.value)" style="flex:1;border:none;background:transparent;padding:0;font-size:13px;font-weight:700;color:var(--t1);outline:none;"/>'
+      +'<div onclick="toggleRPoint(\''+p.id+'\')" style="color:var(--t2);cursor:pointer;font-size:14px;flex-shrink:0;transition:.2s;">'+(p.expanded?'▲':'▼')+'</div>'
+      +'<div onclick="delRPoint(\''+p.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;flex-shrink:0;">×</div>'
+      +'</div>'
+      +(p.expanded?'<div style="padding:0 10px 10px;">'
+        +'<textarea data-pfield="detail" placeholder="Développement, décisions, notes sur ce point..." oninput="updateRPoint(\''+p.id+'\',\'detail\',this.value)" style="width:100%;min-height:70px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px;color:var(--t1);font-size:12px;resize:none;box-sizing:border-box;outline:none;line-height:1.5;">'+escH(p.detail)+'</textarea>'
+        +'</div>':'')
+      +'</div>';
+  }).join('');
+}
+
+// ── Sections supplémentaires ──
+function addRSection(){
+  _rSections.push({id:uid(),titre:'',contenu:''});
+  renderRSections();
+  var el=document.getElementById('rSectionsList');
+  if(el){var inputs=el.querySelectorAll('input[data-sfield="titre"]');if(inputs.length)inputs[inputs.length-1].focus();}
+}
+function delRSection(id){_rSections=_rSections.filter(function(s){return s.id!==id;});renderRSections();}
+function updateRSection(id,field,val){var s=_rSections.find(function(x){return x.id===id;});if(s)s[field]=val;}
+function renderRSections(){
+  var el=document.getElementById('rSectionsList');if(!el)return;
+  if(!_rSections.length){el.innerHTML='<div style="font-size:11px;color:var(--t3);text-align:center;padding:6px;">Aucune section — appuyez sur + Titre</div>';return;}
+  el.innerHTML=_rSections.map(function(s){
+    return '<div style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:10px;overflow:hidden;">'
+      +'<div style="display:flex;align-items:center;gap:8px;padding:9px 10px;">'
+      +'<span style="font-size:14px;">📌</span>'
+      +'<input class="fi" data-sfield="titre" placeholder="Titre de la section *" value="'+escH(s.titre)+'" oninput="updateRSection(\''+s.id+'\',\'titre\',this.value)" style="flex:1;border:none;background:transparent;padding:0;font-size:13px;font-weight:800;color:#fbbf24;outline:none;"/>'
+      +'<div onclick="delRSection(\''+s.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;flex-shrink:0;">×</div>'
+      +'</div>'
+      +'<div style="padding:0 10px 10px;">'
+      +'<textarea data-sfield="contenu" placeholder="Contenu de cette section..." oninput="updateRSection(\''+s.id+'\',\'contenu\',this.value)" style="width:100%;min-height:60px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px;color:var(--t1);font-size:12px;resize:none;box-sizing:border-box;outline:none;line-height:1.5;">'+escH(s.contenu)+'</textarea>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+// ── Save ──
+function saveReunion(){
+  var titre=document.getElementById('rTitre').value.trim();
+  if(!titre){showT('⚠️','Titre requis');return;}
+  var date=document.getElementById('rDate').value;
+  var heure=document.getElementById('rHeure').value;
+  var participants=_rParticipants.filter(function(p){return p.nom.trim();});
+  var points=_rPoints.filter(function(p){return p.titre.trim();}).map(function(p){return {titre:p.titre,detail:p.detail};});
+  var sections=_rSections.filter(function(s){return s.titre.trim();}).map(function(s){return {titre:s.titre,contenu:s.contenu};});
+  var list=loadReunions();
+  list.unshift({id:uid(),type:_reunType,titre:titre,date:date,heure:heure,participants:participants,points:points,sections:sections});
+  saveReunions(list);
+  openReunionForm();
+  renderReunions();
+  showT('✅','Compte-rendu enregistré');
+}
+
+// ── Delete ──
+function delReunion(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce compte-rendu ?',function(){
+    saveReunions(loadReunions().filter(function(r){return r.id!==id;}));
+    renderReunions();showT('🗑️','Supprimé');
+  });
+}
+
+// ── Render list ──
+function renderReunions(){
+  var list=loadReunions();
+  var el=document.getElementById('reunionList');
+  var empty=document.getElementById('reunionEmpty');
+  if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var typeColors={briefing:{col:'#4ade80',bg:'rgba(34,197,94,.12)',ico:'🌅',lbl:'BRIEFING'},reunion:{col:'#38bdf8',bg:'rgba(56,189,248,.12)',ico:'📋',lbl:'RÉUNION'}};
+  el.innerHTML=list.map(function(r){
+    var tc=typeColors[r.type||'reunion']||typeColors.reunion;
+    var dateStr=r.date?new Date(r.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}):'—';
+    var partsHtml=(r.participants&&r.participants.length)?'<div style="margin-bottom:10px;">'
+      +'<div style="font-size:10px;font-weight:800;color:var(--t2);margin-bottom:6px;">👥 PARTICIPANTS ('+r.participants.length+')</div>'
+      +'<div style="background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);">'
+      +'<table style="width:100%;border-collapse:collapse;">'
+      +'<thead><tr style="background:rgba(255,255,255,.05);">'
+      +'<th style="padding:7px 10px;font-size:9px;font-weight:800;color:var(--t2);text-align:left;text-transform:uppercase;">Nom</th>'
+      +'<th style="padding:7px 10px;font-size:9px;font-weight:800;color:var(--t2);text-align:left;text-transform:uppercase;">Matricule</th>'
+      +'<th style="padding:7px 10px;font-size:9px;font-weight:800;color:var(--t2);text-align:left;text-transform:uppercase;">Poste</th>'
+      +'</tr></thead><tbody>'
+      +r.participants.map(function(p,i){
+        return '<tr style="border-top:1px solid rgba(255,255,255,.05);background:'+(i%2?'rgba(255,255,255,.02)':'transparent')+';">'
+          +'<td style="padding:7px 10px;font-size:12px;font-weight:700;color:var(--t1);">'+escH(p.nom)+'</td>'
+          +'<td style="padding:7px 10px;font-size:11px;color:#38bdf8;">'+escH(p.matricule||'—')+'</td>'
+          +'<td style="padding:7px 10px;font-size:11px;color:var(--t2);">'+escH(p.poste||'—')+'</td>'
+          +'</tr>';
+      }).join('')
+      +'</tbody></table></div></div>':'';
+    var pointsHtml=(r.points&&r.points.length)?'<div style="margin-bottom:10px;">'
+      +'<div style="font-size:10px;font-weight:800;color:var(--t2);margin-bottom:6px;">📋 POINTS ABORDÉS</div>'
+      +'<div style="display:flex;flex-direction:column;gap:5px;">'
+      +r.points.map(function(p,i){
+        return '<div style="background:rgba(255,255,255,.04);border-radius:9px;border:1px solid rgba(255,255,255,.07);overflow:hidden;">'
+          +'<div style="padding:8px 11px;display:flex;align-items:center;gap:8px;">'
+          +'<div style="width:20px;height:20px;border-radius:6px;background:#0369a1;color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+(i+1)+'</div>'
+          +'<div style="font-size:12px;font-weight:700;color:var(--t1);">'+escH(p.titre)+'</div>'
+          +'</div>'
+          +(p.detail?'<div style="padding:0 11px 9px;margin-left:28px;font-size:12px;color:var(--t2);line-height:1.5;white-space:pre-line;">'+escH(p.detail)+'</div>':'')
+          +'</div>';
+      }).join('')+'</div></div>':'';
+    var sectionsHtml=(r.sections&&r.sections.length)?r.sections.map(function(s){
+      return '<div style="margin-bottom:8px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:10px;padding:10px 12px;">'
+        +'<div style="font-size:11px;font-weight:800;color:#fbbf24;margin-bottom:5px;">📌 '+escH(s.titre)+'</div>'
+        +(s.contenu?'<div style="font-size:12px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+escH(s.contenu)+'</div>':'')
+        +'</div>';
+    }).join(''):'';
+    return '<div style="background:var(--card);border-radius:16px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,.07);">'
+      +'<div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;">'
+      +'<div style="background:'+tc.bg+';border-radius:10px;padding:5px 10px;flex-shrink:0;">'
+      +'<div style="font-size:10px;font-weight:900;color:'+tc.col+';">'+tc.ico+' '+tc.lbl+'</div>'
+      +'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:14px;font-weight:900;color:var(--t1);line-height:1.3;">'+escH(r.titre)+'</div>'
+      +'<div style="font-size:11px;color:'+tc.col+';margin-top:3px;font-weight:700;">📅 '+dateStr+(r.heure?' · ⏰ '+r.heure:'')+'</div>'
+      +'</div>'
+      +'<div onclick="delReunion(\''+r.id+'\')" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">×</div>'
+      +'</div>'
+      +partsHtml+pointsHtml+sectionsHtml
+      +'</div>';
+  }).join('');
+}
+
+// ── Export PDF ──
 function exportReunionPDF(){
   var list=loadReunions();
-  var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
-  var genDate=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear()+' à '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Réunions Équipe</title>'
-    +'<style>body{font-family:Arial,sans-serif;max-width:750px;margin:0 auto;padding:20px;color:#1a1a2e;}h1{color:#0369a1;}.reunion{border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px;page-break-inside:avoid;}.date{font-size:11px;color:#0369a1;font-weight:700;margin-bottom:8px;}.sujet{font-size:16px;font-weight:700;margin-bottom:12px;color:#1a1a2e;}.section{margin-bottom:10px;}.section-title{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}.section-content{font-size:12px;color:#374151;white-space:pre-line;}.presents{background:#f0f9ff;border-radius:6px;padding:8px 12px;font-size:12px;}.prochaine{background:#f0fdf4;border-radius:6px;padding:8px 12px;font-size:12px;color:#166534;font-weight:600;}.meta{font-size:11px;color:#666;margin-bottom:20px;}</style>'
-    +'</head><body><h1>📝 Réunions d\'Équipe</h1>'
-    +'<div class="meta">Généré le '+genDate+' · '+getMagName()+' · '+list.length+' réunion(s)</div>'
-    +list.map(function(r){
-      return '<div class="reunion">'
-        +'<div class="date">📅 '+r.date+' à '+r.time+'</div>'
-        +'<div class="sujet">'+r.sujet+'</div>'
-        +(r.presents&&r.presents.length?'<div class="presents">👥 <b>Présents :</b> '+r.presents.join(', ')+'</div><br>':'')
-        +(r.points?'<div class="section"><div class="section-title">Points abordés</div><div class="section-content">'+r.points+'</div></div>':'')
-        +(r.decisions?'<div class="section"><div class="section-title">Décisions prises</div><div class="section-content">'+r.decisions+'</div></div>':'')
-        +(r.prochaine?'<div class="prochaine">🗓️ Prochaine réunion : '+r.prochaine+'</div>':'')
+  if(!list.length){showT('⚠️','Aucun compte-rendu');return;}
+  var now=new Date();var mag=getMagName();
+  var typeColors={briefing:{col:'#16a34a',bg:'#f0fdf4',ico:'🌅',lbl:'BRIEFING'},reunion:{col:'#0369a1',bg:'#f0f9ff',ico:'📋',lbl:'REUNION'}};
+  var cards=list.map(function(r){
+    var tc=typeColors[r.type||'reunion']||typeColors.reunion;
+    var dateStr=r.date?new Date(r.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}):'—';
+    var partsTable=(r.participants&&r.participants.length)?
+      '<div style="margin-bottom:14px;">'
+      +'<div style="font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">👥 Participants</div>'
+      +'<table style="width:100%;border-collapse:collapse;font-size:12px;">'
+      +'<thead><tr style="background:#f8fafc;">'
+      +'<th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;">Nom</th>'
+      +'<th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;">Matricule</th>'
+      +'<th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;">Poste</th>'
+      +'</tr></thead><tbody>'
+      +r.participants.map(function(p,i){return '<tr style="background:'+(i%2===0?'#fff':'#f8fafc')+';border-bottom:1px solid #e2e8f0;">'
+        +'<td style="padding:7px 10px;font-weight:700;color:#0f172a;">'+(p.nom||'—')+'</td>'
+        +'<td style="padding:7px 10px;color:#0369a1;">'+(p.matricule||'—')+'</td>'
+        +'<td style="padding:7px 10px;color:#64748b;">'+(p.poste||'—')+'</td>'
+        +'</tr>';}).join('')
+      +'</tbody></table></div>':'';
+    var pointsHtml=(r.points&&r.points.length)?
+      '<div style="margin-bottom:14px;">'
+      +'<div style="font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">📋 Points abordés</div>'
+      +r.points.map(function(p,i){return '<div style="margin-bottom:8px;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0;">'
+        +'<div style="background:'+tc.bg+';padding:8px 12px;display:flex;align-items:center;gap:8px;">'
+        +'<div style="width:22px;height:22px;border-radius:6px;background:'+tc.col+';color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;">'+(i+1)+'</div>'
+        +'<div style="font-size:13px;font-weight:700;color:#1e293b;">'+(p.titre||'')+'</div>'
+        +'</div>'
+        +(p.detail?'<div style="padding:8px 12px;font-size:12px;color:#374151;line-height:1.6;white-space:pre-line;">'+(p.detail||'')+'</div>':'')
+        +'</div>';}).join('')
+      +'</div>':'';
+    var sectionsHtml=(r.sections&&r.sections.length)?r.sections.map(function(s){
+      return '<div style="margin-bottom:10px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;">'
+        +'<div style="font-size:11px;font-weight:800;color:#d97706;margin-bottom:5px;">📌 '+(s.titre||'')+'</div>'
+        +(s.contenu?'<div style="font-size:12px;color:#374151;line-height:1.5;white-space:pre-line;">'+(s.contenu||'')+'</div>':'')
         +'</div>';
-    }).join('')
-    +'</body></html>';
+    }).join(''):'';
+    return '<div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:20px;border:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,.06);page-break-inside:avoid;">'
+      +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid '+tc.col+'22;">'
+      +'<div style="background:'+tc.bg+';border-radius:10px;padding:6px 14px;flex-shrink:0;border:1px solid '+tc.col+'33;">'
+      +'<div style="font-size:11px;font-weight:900;color:'+tc.col+';">'+tc.ico+' '+tc.lbl+'</div>'
+      +'</div>'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:16px;font-weight:900;color:#0f172a;">'+(r.titre||'')+'</div>'
+      +'<div style="font-size:11px;color:'+tc.col+';margin-top:3px;font-weight:700;">'+dateStr+(r.heure?' · '+r.heure:'')+'</div>'
+      +'</div>'
+      +'</div>'
+      +partsTable+pointsHtml+sectionsHtml
+      +'</div>';
+  }).join('');
+  var briefCount=list.filter(function(r){return r.type==='briefing';}).length;
+  var reunCount=list.filter(function(r){return r.type!=='briefing';}).length;
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Briefings & Reunions - ',mag,'</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}',
+    '@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#1e40af,#0369a1);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Briefings & Reunions</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),'</div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;">',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',list.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',briefCount,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Briefings</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',reunCount,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Reunions</div></div>',
+    '</div></div>',
+    cards,
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',now.toLocaleString('fr-FR'),'</div>',
+    '</div></body></html>'
+  ].join('');
   var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='reunions_equipe_'+tstr()+'.html';
-  a.style.display='none';document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);document.body.removeChild(a);},1000);
-  showT('📄','Rapport téléchargé !');
+  var u=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=u;a.download='Reunions_'+now.toISOString().slice(0,10)+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},2000);
+  showT('📄','Rapport exporté !');
 }
+
 
 
 // ══ PILOTAGE & PROSPECTIVE ══
@@ -18997,43 +18914,16 @@ function renderRegle2min(){
 
 // ── ABCDE ──
 var _abcdeLevel='A';
-var _abcdeFilter='all';
 function setABCDE(btn,v){_abcdeLevel=v;document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity=b.dataset.abc===v?'1':'0.4';});}
-function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';var ni=document.getElementById('abcdeNote');if(ni)ni.value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
-function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var noteEl=document.getElementById('abcdeNote');var note=noteEl?noteEl.value.trim():'';var now=new Date();var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,note:note,level:_abcdeLevel,done:false,date:now.toLocaleDateString('fr-FR'),time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});saveNM(d);addABCDE();renderABCDE();showT('✅','Tâche ajoutée');}
+function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
+function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,level:_abcdeLevel,done:false});saveNM(d);addABCDE();renderABCDE();}
 function toggleABCDE(id){var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
-function delABCDE(id){if(!confirm('Supprimer cette tâche ?'))return;var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
-function abcdeSetFilter(f,btn){_abcdeFilter=f;['abcdeFAll','abcdeFTodo','abcdeFDone'].forEach(function(id){var b=document.getElementById(id);if(!b)return;b.style.background='transparent';b.style.color='var(--t2)';b.style.borderColor='rgba(255,255,255,.1)';});if(btn){btn.style.background='rgba(244,114,182,.15)';btn.style.color='#f472b6';btn.style.borderColor='rgba(244,114,182,.4)';}renderABCDE();}
+function delABCDE(id){var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
 function renderABCDE(){
-  var d=loadNM();var allItems=d.abcde||[];
-  var items=allItems.filter(function(x){if(_abcdeFilter==='todo')return !x.done;if(_abcdeFilter==='done')return x.done;return true;});
-  var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
-  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};
-  ['A','B','C','D','E'].forEach(function(lv){var s=document.getElementById('abcdeS'+lv);if(s)s.textContent=allItems.filter(function(x){return x.level===lv;}).length;});
-  var doneCount=allItems.filter(function(x){return x.done;}).length;
-  var sr=document.getElementById('abcdeSRate');if(sr)sr.textContent=allItems.length?Math.round(doneCount/allItems.length*100)+'%':'0%';
+  var d=loadNM();var items=d.abcde||[];var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
   if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
-  var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
-  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:14px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:7px;display:flex;align-items:center;gap:6px;"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;background:'+cols[lv]+';color:#000;font-size:10px;font-weight:900;text-align:center;line-height:18px;">'+lv+'</span>'+lbls[lv]+'<span style="margin-left:auto;background:'+bgs[lv]+';border:1px solid '+cols[lv]+'40;color:'+cols[lv]+';font-size:9px;font-weight:900;padding:2px 8px;border-radius:20px;">'+gr.length+'</span></div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid '+(item.done?cols[lv]+'60':'var(--bord)')+';border-radius:12px;padding:11px 12px;margin-bottom:6px;transition:opacity .2s;">'+'<div style="display:flex;align-items:flex-start;gap:10px;">'+'<div onclick="toggleABCDE(\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.25)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div>'+'<div style="flex:1;min-width:0;">'+'<div style="font-size:13px;font-weight:700;color:'+(item.done?'var(--t3)':'var(--t1)')+';text-decoration:'+(item.done?'line-through':'none')+';line-height:1.35;">'+item.text+'</div>'+(item.note?'<div style="font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4;'+(item.done?'opacity:.5;':'')+'">📝 '+item.note+'</div>':'')+'<div style="font-size:10px;color:var(--t3);margin-top:4px;">🕐 '+(item.date||'')+(item.time?' · '+item.time:'')+'</div>'+'</div>'+'<div onclick="delABCDE(\''+item.id+'\')" style="color:rgba(239,68,68,.5);font-size:20px;cursor:pointer;flex-shrink:0;width:24px;text-align:center;line-height:1;">×</div>'+'</div>'+'</div>';}).join('')+'</div>';}).join('');
-}
-function abcdeExportPDF(){
-  var d=loadNM();var items=d.abcde||[];
-  if(!items.length){showT('⚠️','Aucune tâche à exporter');return;}
-  var cols={A:'#ef4444',B:'#f97316',C:'#eab308',D:'#3b82f6',E:'#64748b'};
-  var bgs={A:'#fff1f1',B:'#fff7ed',C:'#fefce8',D:'#eff6ff',E:'#f8fafc'};
-  var lbls={A:'A — TRÈS IMPORTANT',B:'B — IMPORTANT',C:'C — OPTIONNEL',D:'D — À DÉLÉGUER',E:'E — À ÉLIMINER'};
-  var descs={A:'Conséquences graves si non fait',B:'Conséquences mineures si non fait',C:'Aucune conséquence réelle',D:"Quelqu'un d'autre peut le faire",E:'Sans valeur ajoutée'};
-  var doneCount=items.filter(function(x){return x.done;}).length;
-  var now=new Date();
-  var dateStr=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  var sections=['A','B','C','D','E'].map(function(lv){
-    var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';
-    var doneGr=gr.filter(function(x){return x.done;}).length;
-    var rows=gr.map(function(item){return '<tr style="border-bottom:1px solid #e2e8f0;'+(item.done?'background:#f8fafc;':'')+'"><td style="padding:10px 12px;text-align:center;width:32px;">'+(item.done?'<span style="color:'+cols[lv]+';font-size:17px;font-weight:900;">✓</span>':'<span style="color:#cbd5e1;font-size:15px;">○</span>')+'</td><td style="padding:10px 12px;"><div style="font-size:13px;font-weight:600;color:'+(item.done?'#94a3b8':'#1e293b')+';text-decoration:'+(item.done?'line-through':'none')+';">'+item.text+'</div>'+(item.note?'<div style="font-size:11px;color:#64748b;margin-top:3px;">📝 '+item.note+'</div>':'')+'</td><td style="padding:10px 12px;font-size:11px;color:#94a3b8;white-space:nowrap;">'+(item.date||'')+(item.time?'<br>'+item.time:'')+'</td></tr>';}).join('');
-    return '<div style="margin-bottom:24px;border-radius:14px;overflow:hidden;border:1.5px solid '+cols[lv]+'55;box-shadow:0 2px 8px '+cols[lv]+'15;">'+'<div style="background:'+cols[lv]+';padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">'+'<div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;">'+lv+'</div>'+'<div style="flex:1;"><div style="color:#fff;font-size:15px;font-weight:900;">'+lbls[lv]+'</div><div style="color:rgba(255,255,255,.8);font-size:11px;margin-top:2px;">'+descs[lv]+'</div></div>'+'<div style="display:flex;gap:8px;align-items:center;flex-shrink:0;">'+'<div style="background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">'+gr.length+' tâche'+(gr.length>1?'s':'')+'</div>'+'<div style="background:rgba(255,255,255,.35);color:#fff;font-size:12px;font-weight:900;padding:4px 12px;border-radius:20px;">'+doneGr+'/'+gr.length+' ✓</div>'+'</div>'+'</div>'+'<table style="width:100%;border-collapse:collapse;background:#fff;">'+'<thead><tr style="background:'+bgs[lv]+';border-bottom:2px solid '+cols[lv]+'30;">'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:center;width:32px;">✓</th>'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;">TÂCHE</th>'+'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;white-space:nowrap;">DATE / HEURE</th>'+'</tr></thead>'+'<tbody>'+rows+'</tbody>'+'</table>'+'</div>';
-  }).join('');
-  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Méthode ABCDE — TaskPro</title><style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}@media print{body{background:#fff;padding:0;}.no-print{display:none;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>'+'<div style="max-width:820px;margin:0 auto;">'+'<div style="background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:16px;padding:28px 32px;margin-bottom:28px;color:#fff;">'+'<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">MG MAXI DENDEN — TaskPro</div>'+'<div style="font-size:28px;font-weight:900;margin-bottom:6px;letter-spacing:-.5px;">🔤 Méthode ABCDE</div>'+'<div style="font-size:13px;opacity:.85;margin-bottom:20px;">Rapport de priorisation · '+dateStr+'</div>'+'<div style="display:flex;gap:12px;flex-wrap:wrap;">'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+items.length+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+doneCount+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Faites</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(items.length?Math.round(doneCount/items.length*100):0)+'%</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Taux</div></div>'+'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(items.length-doneCount)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Restantes</div></div>'+'</div>'+'</div>'+sections+'<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:24px;">Généré par TaskPro · MG MAXI DENDEN · '+now.toLocaleString('fr-FR')+'</div>'+'</div></body></html>';
-  var b=new Blob([html],{type:'text/html;charset=utf-8'});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='ABCDE_'+now.toISOString().slice(0,10)+'.html';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},2000);showT('📄','Rapport exporté !');
+  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
+  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:4px;">'+lv+' — '+lbls[lv]+'</div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid var(--bord);border-radius:10px;padding:9px 12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div onclick="toggleABCDE(\''+item.id+'\')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.2)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delABCDE(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('')+'</div>';}).join('');
 }
 
 // ── MOSCOW ──
@@ -22787,6 +22677,176 @@ function updateMsgBadge(){
 }
 
 
+
+
+// ── EXCELLENCE PDF EXPORTS ──
+
+function r2mExportPDF(){
+  var d=loadNM();var items=d.r2m||[];
+  if(!items.length){showT('!','Aucune tache');return;}
+  var mag=getMagName();var now=new Date();
+  var done=items.filter(function(x){return x.done;}).length;
+  var rows=items.map(function(item,i){
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;text-align:center;width:32px;font-size:18px;">'+(item.done?'v':'o')+'</td>'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;'+(item.done?'text-decoration:line-through;color:#94a3b8;':'')+'">'+(item.text||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(item.ts||'-')+'</td>'
+      +'</tr>';
+  }).join('');
+  var html=_excelPDFWrap(mag,'Regle des 2 Minutes','#15803d','#14532d',
+    _excelStats([items.length,'Total'],[done,'Faites'],[items.length-done,'Restantes'],[items.length?Math.round(done/items.length*100):0+'%','Taux']),
+    '<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:linear-gradient(135deg,#15803d,#166534);">'
+    +'<th style="color:#fff;padding:10px 12px;text-align:center;width:32px;">OK</th>'
+    +'<th style="color:#fff;padding:10px 12px;text-align:left;">TACHE (Moins de 2 min)</th>'
+    +'<th style="color:#fff;padding:10px 12px;text-align:left;">HEURE</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table>',now);
+  _dlPDFBlob(html,'Regle2min_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function moscowExportPDF(){
+  var d=loadNM();var items=d.moscow||[];
+  if(!items.length){showT('!','Aucune tache');return;}
+  var mag=getMagName();var now=new Date();
+  var info={M:{lbl:'Must Have',col:'#dc2626',bg:'#fef2f2'},S:{lbl:'Should Have',col:'#d97706',bg:'#fffbeb'},C:{lbl:'Could Have',col:'#16a34a',bg:'#f0fdf4'},W:{lbl:"Won't Have",col:'#6b7280',bg:'#f9fafb'}};
+  var sections=['M','S','C','W'].map(function(lv){
+    var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';
+    var inf=info[lv];var doneGr=gr.filter(function(x){return x.done;}).length;
+    var rows=gr.map(function(item,i){
+      return '<tr style="background:'+(i%2===0?'#fff':'#f8fafc')+';border-bottom:1px solid #e2e8f0;">'
+        +'<td style="padding:9px 12px;text-align:center;width:32px;font-size:16px;color:'+(item.done?inf.col:'#cbd5e1')+';font-weight:900;">'+(item.done?'v':'o')+'</td>'
+        +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;'+(item.done?'text-decoration:line-through;color:#94a3b8;':'')+'">'+(item.text||'-')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div style="margin-bottom:20px;border-radius:12px;overflow:hidden;border:1.5px solid '+inf.col+'44;">'
+      +'<div style="background:'+inf.col+';padding:11px 16px;display:flex;justify-content:space-between;align-items:center;">'
+      +'<div style="font-size:14px;font-weight:900;color:#fff;">'+lv+' - '+inf.lbl+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85);">'+doneGr+'/'+gr.length+' faites</div>'
+      +'</div>'
+      +'<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:'+inf.bg+';">'
+      +'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+inf.col+';text-align:center;width:32px;">OK</th>'
+      +'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+inf.col+';text-align:left;">TACHE</th>'
+      +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }).join('');
+  var done=items.filter(function(x){return x.done;}).length;
+  var html=_excelPDFWrap(mag,'Methode MoSCoW','#be185d','#9d174d',
+    _excelStats([items.length,'Total'],[done,'Faites'],[items.length-done,'Restantes'],[items.length?Math.round(done/items.length*100):0+'%','Taux']),
+    sections,now);
+  _dlPDFBlob(html,'MoSCoW_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function warrenExportPDF(){
+  var d=loadNM();var items=d.warren||[];
+  if(!items.length){showT('!','Aucun objectif');return;}
+  var mag=getMagName();var now=new Date();
+  var rows=items.map(function(item,i){
+    var isTop=i<5;
+    var bg=isTop?'#f0fdf4':'#fef2f2';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;text-align:center;width:40px;"><div style="width:28px;height:28px;border-radius:8px;background:'+(isTop?'#15803d':'#dc2626')+';color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto;">'+(i+1)+'</div></td>'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;">'+(item.text||'-')+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;"><span style="background:'+(isTop?'#dcfce7':'#fee2e2')+';color:'+(isTop?'#15803d':'#dc2626')+';font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;">'+(isTop?'FOCUS':'EVITER')+'</span></td>'
+      +'</tr>';
+  }).join('');
+  var html=_excelPDFWrap(mag,'Regle 5/25 Warren Buffett','#be185d','#9d174d',
+    _excelStats([items.length,'Total'],[Math.min(5,items.length),'TOP 5 Focus'],[Math.max(0,items.length-5),'A Eviter']),
+    '<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:linear-gradient(135deg,#be185d,#9d174d);">'
+    +'<th style="color:#fff;padding:10px 12px;text-align:center;width:40px;">#</th>'
+    +'<th style="color:#fff;padding:10px 12px;text-align:left;">OBJECTIF / PRIORITE</th>'
+    +'<th style="color:#fff;padding:10px 12px;text-align:center;">STATUT</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table>',now);
+  _dlPDFBlob(html,'Warren525_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function kanbanExportPDF(){
+  var d=loadNM();var items=d.kanban||[];
+  if(!items.length){showT('!','Aucune tache');return;}
+  var mag=getMagName();var now=new Date();
+  var cols={todo:{lbl:'A Faire',col:'#64748b',bg:'#f8fafc'},doing:{lbl:'En Cours',col:'#d97706',bg:'#fffbeb'},done:{lbl:'Termine',col:'#16a34a',bg:'#f0fdf4'}};
+  var sections=Object.keys(cols).map(function(c){
+    var inf=cols[c];var gr=items.filter(function(x){return x.col===c;});
+    if(!gr.length)return'';
+    var rows=gr.map(function(item,i){
+      return '<tr style="background:'+(i%2===0?'#fff':'#f8fafc')+';border-bottom:1px solid #e2e8f0;">'
+        +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;">'+(item.text||'-')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div style="margin-bottom:20px;border-radius:12px;overflow:hidden;border:1.5px solid '+inf.col+'44;">'
+      +'<div style="background:'+inf.col+';padding:11px 16px;display:flex;justify-content:space-between;align-items:center;">'
+      +'<div style="font-size:14px;font-weight:900;color:#fff;">'+inf.lbl+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85);">'+gr.length+' tache'+(gr.length>1?'s':'')+'</div>'
+      +'</div>'
+      +'<table style="width:100%;border-collapse:collapse;"><tbody>'+rows+'</tbody></table></div>';
+  }).join('');
+  var todo=items.filter(function(x){return x.col==='todo';}).length;
+  var doing=items.filter(function(x){return x.col==='doing';}).length;
+  var done=items.filter(function(x){return x.col==='done';}).length;
+  var html=_excelPDFWrap(mag,'Tableau Kanban','#0369a1','#075985',
+    _excelStats([items.length,'Total'],[todo,'A Faire'],[doing,'En Cours'],[done,'Termines']),
+    sections,now);
+  _dlPDFBlob(html,'Kanban_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function gtdExportPDF(){
+  var d=loadNM();var items=d.gtd||[];
+  if(!items.length){showT('!','Aucune tache');return;}
+  var mag=getMagName();var now=new Date();
+  var done=items.filter(function(x){return x.done;}).length;
+  var rows=items.map(function(item,i){
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;text-align:center;width:32px;font-size:16px;color:'+(item.done?'#38bdf8':'#cbd5e1')+';font-weight:900;">'+(item.done?'v':'o')+'</td>'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;'+(item.done?'text-decoration:line-through;color:#94a3b8;':'')+'">'+(item.text||'-')+'</td>'
+      +'</tr>';
+  }).join('');
+  var html=_excelPDFWrap(mag,'GTD - Faire Avancer','#0369a1','#075985',
+    _excelStats([items.length,'Total'],[done,'Faites'],[items.length-done,'Restantes'],[items.length?Math.round(done/items.length*100):0+'%','Taux']),
+    '<table style="width:100%;border-collapse:collapse;"><thead><tr style="background:linear-gradient(135deg,#0369a1,#075985);">'
+    +'<th style="color:#fff;padding:10px 12px;text-align:center;width:32px;">OK</th>'
+    +'<th style="color:#fff;padding:10px 12px;text-align:left;">ACTION / TACHE</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table>',now);
+  _dlPDFBlob(html,'GTD_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+// Helpers PDF Excellence
+function _excelStats(){
+  var args=Array.prototype.slice.call(arguments);
+  return args.map(function(a){
+    return '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">'+a[0]+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">'+a[1]+'</div></div>';
+  }).join('');
+}
+function _excelPDFWrap(mag,title,c1,c2,stats,body,now){
+  var dateStr=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var genStr=now.toLocaleString('fr-FR');
+  var bodyHtml=(typeof body==='string'?'<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">'+body+'</div>':body);
+  return [
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>',title,'</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}',
+    '@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,',c1,',',c2,');border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:26px;font-weight:900;margin-bottom:6px;">',title,'</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',dateStr,'</div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;">',stats,'</div></div>',
+    bodyHtml,
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',genStr,'</div>',
+    '</div></body></html>'
+  ].join('');
+}
+function _dlPDFBlob(html,fname){
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var u=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=u;a.download=fname;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},2000);
+}
 
 // ══ PWA SERVICE WORKER INLINE ══
 // Le SW est injecté en blob pour fonctionner sans fichier sw.js externe
@@ -27000,10 +27060,6 @@ function exportPlanTgPDF(){
 }
 </script>
 
-</body>
-</html>
-</body>
-</html>
 
 <!-- ══ RÉSUMÉ FIN DE JOURNÉE ══ -->
 <div class="pg" id="pgResume">
@@ -31316,6 +31372,101 @@ function rondeToggle(key){
 }
 function rondeReset(){ showConfirm('↺','Remettre à zéro cette ronde ?',function(){ localStorage.removeItem(rondeKey()); rondeRender(); showT('↺','Ronde réinitialisée'); }); }
 
+function paExportPDF(){
+  var emps=paLoadEmps();
+  if(!emps.length){showT('!','Aucun employe');return;}
+  var mag=getMagName();
+  var date=PA_CUR_DATE||paDateStr(new Date());
+  var dateLabel=paFmtDate(date);
+  var now=new Date();
+  var sL={present:'Present',absent:'Absent',conge:'Conge',retard:'Retard'};
+  var sC={present:'#16a34a',absent:'#dc2626',conge:'#0891b2',retard:'#d97706'};
+  var sBg={present:'#f0fdf4',absent:'#fef2f2',conge:'#ecfeff',retard:'#fffbeb'};
+  var counts={present:0,absent:0,conge:0,retard:0};
+  var rows=emps.map(function(emp,i){
+    var st=paGetStatus(emp.id);
+    if(counts[st]!==undefined)counts[st]++;
+    var col=sC[st]||'#64748b';
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:700;color:#0f172a;">'+(emp.name||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(emp.matricule||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(emp.poste||'-')+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;"><span style="background:'+(sBg[st]||'#f8fafc')+';color:'+col+';font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;">'+(sL[st]||st)+'</span></td>'
+      +'</tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Presences</title>'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>'
+    +'<div style="max-width:820px;margin:0 auto;">'
+    +'<div style="background:linear-gradient(135deg,#1e40af,#0891b2);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">'+mag+' - TaskPro</div>'
+    +'<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Presences Equipe</div>'
+    +'<div style="font-size:13px;opacity:.85;margin-bottom:20px;">'+dateLabel+'</div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">'+emps.length+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>'
+    +'<div style="background:rgba(255,255,255,.2);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">'+(counts.present||0)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Presents</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">'+(counts.absent||0)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Absents</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">'+(counts.retard||0)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Retards</div></div>'
+    +'</div></div>'
+    +'<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">'
+    +'<table><thead><tr style="background:linear-gradient(135deg,#1e40af,#0891b2);"><th style="color:#fff;">NOM</th><th style="color:#fff;">MATRICULE</th><th style="color:#fff;">POSTE</th><th style="color:#fff;text-align:center;">STATUT</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - '+mag+' - '+now.toLocaleString('fr-FR')+'</div>'
+    +'</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var u=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=u;a.download='Presences_'+date+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},2000);
+  showT('ok','Rapport presences exporte !');
+}
+
+function rondeExportPDF(){
+  var mag=getMagName();
+  var now=new Date();
+  var months=['Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec'];
+  var tLabels={matin:'Ronde Matin',apmidi:'Ronde Apres-midi',fermeture:'Ronde Fermeture'};
+  var zones=RONDE_ZONES[RONDE_TYPE]||[];
+  var done=rondeGetDone();
+  var total=0,checked=0;
+  var sections=zones.map(function(z,zi){
+    var items=z.items.map(function(item,ii){
+      var key=zi+'_'+ii;var isDone=!!done[key];total++;if(isDone)checked++;
+      return '<tr style="border-bottom:1px solid #e2e8f0;background:'+(isDone?'#f0fdf4':'#fff')+';"><td style="padding:8px 12px;width:32px;text-align:center;font-weight:900;color:'+(isDone?'#16a34a':'#cbd5e1')+';font-size:16px;">'+(isDone?'v':'o')+'</td>'
+        +'<td style="padding:8px 12px;font-size:12px;color:'+(isDone?'#64748b':'#1e293b')+';'+(isDone?'text-decoration:line-through;':'')+'">'+(item||'-')+'</td></tr>';
+    }).join('');
+    var zDone=z.items.filter(function(_,ii){return !!done[zi+'_'+ii];}).length;
+    return '<div style="margin-bottom:16px;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;">'
+      +'<div style="background:#1e40af;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;">'
+      +'<div style="font-size:13px;font-weight:800;color:#fff;">'+z.zone+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.8);">'+zDone+'/'+z.items.length+'</div>'
+      +'</div><table style="width:100%;border-collapse:collapse;"><tbody>'+items+'</tbody></table></div>';
+  }).join('');
+  var pct=total?Math.round(checked/total*100):0;
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Ronde Magasin</title>'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>'
+    +'<div style="max-width:820px;margin:0 auto;">'
+    +'<div style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">'+mag+' - TaskPro</div>'
+    +'<div style="font-size:28px;font-weight:900;margin-bottom:6px;">'+(tLabels[RONDE_TYPE]||'Ronde Magasin')+'</div>'
+    +'<div style="font-size:13px;opacity:.85;margin-bottom:20px;">'+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear()+'</div>'
+    +'<div style="display:flex;gap:10px;">'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+checked+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Valides</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(total-checked)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Restants</div></div>'
+    +'<div style="background:rgba(255,255,255,.2);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+pct+'%</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Complet</div></div>'
+    +'</div></div>'
+    +sections
+    +'<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - '+mag+' - '+now.toLocaleString('fr-FR')+'</div>'
+    +'</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var u=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=u;a.download='Ronde_'+now.toISOString().slice(0,10)+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},2000);
+  showT('ok','Rapport ronde exporte !');
+}
+
 // ══════════════════════════════════════════════════════
 // PRÉPARATION J+1
 // ══════════════════════════════════════════════════════
@@ -33074,6 +33225,67 @@ function exportReclamationsPDF() {
   var w = window.open('','_blank','width=900,height=700');
   if(w){ w.document.write(html); w.document.close(); setTimeout(function(){ w.print(); },400); }
 }
+
+function blExportPDF(){
+  var list=blLoad();
+  if(!list.length){showT('!','Aucun BL a exporter');return;}
+  var now=new Date();
+  var mag=getMagName();
+  var dateStr=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var attente=list.filter(function(b){return b.statut==='attente';}).length;
+  var valide=list.filter(function(b){return b.statut==='valide';}).length;
+  var litige=list.filter(function(b){return b.statut==='litige';}).length;
+  var refuse=list.filter(function(b){return b.statut==='refuse';}).length;
+  var montantTotal=list.reduce(function(s,b){return s+(parseFloat(b.montant)||0);},0);
+  var sorted=list.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+  var sColors={attente:'#d97706',valide:'#16a34a',litige:'#ea580c',refuse:'#dc2626'};
+  var sBgs={attente:'#fffbeb',valide:'#f0fdf4',litige:'#fff7ed',refuse:'#fef2f2'};
+  var sLabels={attente:'Attente',valide:'Valide',litige:'Litige',refuse:'Refuse'};
+  var rows=sorted.map(function(b,i){
+    var col=sColors[b.statut]||'#64748b';
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;white-space:nowrap;">'+(b.date||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:12px;font-weight:800;color:#0f172a;">'+(b.num||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:12px;color:#1e293b;">'+(b.fourn||'-')+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;"><span style="background:'+sBgs[b.statut]+';color:'+col+';font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;">'+(sLabels[b.statut]||b.statut)+'</span></td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#d97706;font-weight:700;text-align:right;">'+(b.montant?parseFloat(b.montant).toFixed(2)+' TND':'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;text-align:center;">'+(b.palettes||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(b.obs||'')+'</td>'
+      +'</tr>';
+  }).join('');
+  var html='<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Suivi BL</title>'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}'
+    +'table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}'
+    +'@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>'
+    +'<div style="max-width:960px;margin:0 auto;">'
+    +'<div style="background:linear-gradient(135deg,#0d9488,#0f766e);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">'+mag+' - TaskPro</div>'
+    +'<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Suivi Bons de Livraison</div>'
+    +'<div style="font-size:13px;opacity:.85;margin-bottom:20px;">'+dateStr+'</div>'
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+list.length+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+valide+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Valides</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+attente+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Attente</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+(litige+refuse)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Litige/Refuse</div></div>'
+    +'<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">'+montantTotal.toFixed(2)+'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">TND Total</div></div>'
+    +'</div></div>'
+    +'<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">'
+    +'<table><thead><tr style="background:linear-gradient(135deg,#0d9488,#0f766e);">'
+    +'<th style="color:#fff;">DATE</th><th style="color:#fff;">N BL</th><th style="color:#fff;">FOURNISSEUR</th>'
+    +'<th style="color:#fff;text-align:center;">STATUT</th><th style="color:#fff;text-align:right;">MONTANT</th>'
+    +'<th style="color:#fff;text-align:center;">PALETTES</th><th style="color:#fff;">OBS</th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - '+mag+' - '+now.toLocaleString('fr-FR')+'</div>'
+    +'</div></body></html>';
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  var u=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=u;a.download='SuiviBL_'+now.toISOString().slice(0,10)+'.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(u);},2000);
+  showT('ok','Rapport BL exporte !');
+}
 </script>
 <div id="directeurModal" onclick="if(event.target===this)closeDirecteurModal()">
   <div class="dm-sheet">
@@ -33163,3 +33375,6 @@ function exportReclamationsPDF() {
     <button onclick="closeDirecteurModal()" style="width:100%;margin-top:6px;padding:13px;border-radius:14px;background:var(--s2);border:1px solid var(--bord2);color:var(--t2);font-size:13px;font-weight:700;cursor:pointer;">Fermer</button>
   </div>
 </div>
+
+</body>
+</html>
