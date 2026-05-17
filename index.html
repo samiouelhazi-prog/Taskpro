@@ -28,7 +28,7 @@
   --orange:#f97316;
   --yellow:#eab308;
   --purple:#a855f7;
-  --t1:#f8faff;--t2:#94a3b8;--t3:#334155;
+  --t1:#f8faff;--t2:#94a3b8;--t3:#64748b;
   /* Rayon colors */
   --ray-liquides:#0ea5e9;
   --ray-sale:#f97316;
@@ -667,7 +667,7 @@ body.light .tli-name,body.light .tli-n{color:#0d1117!important;}
 body.light .drawer,body.light .msh,body.light .cmsh{background:#f8fafc!important;border-color:rgba(0,0,0,.1)!important;}
 body.light .dr-item:active,body.light .dr-it:active{background:rgba(0,0,0,.06)!important;}
 body.light .fi,body.light .fs{background:rgba(255,255,255,.92)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;color-scheme:light!important;}
-body.light input[type="date"].fi{color:#0d1117!important;-webkit-text-fill-color:#0d1117!important;}
+body.light input[type="date"]body:not(.light) .fi,body:not(.light) .fs{color:var(--t1)!important;-webkit-text-fill-color:var(--t1)!important;}
 /* ══ SIGNATURE JOURNÉE ══ */
 .sj-doc-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:12px;cursor:pointer;}
 .sj-doc-row.checked{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.3);}
@@ -1373,6 +1373,14 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   </div>
 
 
+  <!-- ══ ALERTES & BADGES ══ -->
+  <div id="homeAlertsPanel" style="display:none;margin:10px 16px 0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <div style="font-size:11px;font-weight:900;color:#f87171;text-transform:uppercase;letter-spacing:1px;">⚡ Alertes du jour</div>
+      <div id="homeAlertCount" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;font-size:10px;font-weight:900;padding:2px 10px;border-radius:20px;"></div>
+    </div>
+    <div id="homeAlertsList" style="display:flex;flex-direction:column;gap:6px;"></div>
+  </div>
 
   <!-- SWIPE CARDS -->
   <div class="cards-section">
@@ -1561,6 +1569,27 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
         <div style="font-size:9px;font-weight:800;color:#f87171;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🔍 Anomalies</div>
         <div id="dashAnomCount" style="font-size:26px;font-weight:900;color:#fff;font-family:'Syne';line-height:1;">0</div>
         <div id="dashAnomSub" style="font-size:10px;color:rgba(255,255,255,.45);margin-top:4px;"></div>
+      </div>
+
+      <!-- Suivi BL -->
+      <div onclick="goPage('suiviBL')" style="background:var(--card);border-radius:14px;border:1px solid rgba(20,184,166,.25);padding:13px;cursor:pointer;position:relative;">
+        <div style="font-size:9px;font-weight:900;color:#2dd4bf;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">🚚 BONS DE LIVRAISON</div>
+        <div style="display:flex;align-items:baseline;gap:8px;">
+          <div id="dashBlAttente" style="font-size:24px;font-weight:900;color:#fff;font-family:'IBM Plex Mono',monospace;">—</div>
+          <div style="font-size:11px;color:var(--t2);">en attente</div>
+          <div id="dashBlTotal" style="margin-left:auto;font-size:11px;color:var(--t2);"></div>
+        </div>
+        <div id="dashBlSub" style="font-size:11px;color:var(--t2);margin-top:4px;"></div>
+      </div>
+
+      <!-- ABCDE Tâches A -->
+      <div onclick="goPage('methodeABCDE')" style="background:var(--card);border-radius:14px;border:1px solid rgba(244,114,182,.25);padding:13px;cursor:pointer;position:relative;">
+        <div style="font-size:9px;font-weight:900;color:#f472b6;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">🔤 ABCDE — PRIORITÉ A</div>
+        <div style="display:flex;align-items:baseline;gap:8px;">
+          <div id="dashAbcdeA" style="font-size:24px;font-weight:900;color:#fff;font-family:'IBM Plex Mono',monospace;">—</div>
+          <div style="font-size:11px;color:var(--t2);">tâches A restantes</div>
+        </div>
+        <div id="dashAbcdeSub" style="font-size:11px;color:var(--t2);margin-top:4px;"></div>
       </div>
 
       <!-- Collecte déchets -->
@@ -3554,7 +3583,10 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('adminRH')" style="font-size:13px;font-weight:700;color:#38bdf8;cursor:pointer;">‹ RH</div>
     <div style="font-size:16px;font-weight:900;color:#1e3a8a;font-family:'Syne';">👥 Liste Personnel</div>
-    <button onclick="addEmp()" style="background:#0369a1;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+<div style="display:flex;gap:6px;">
+      <button onclick="listePersonnelPDF()" style="background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.4);color:#38bdf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
+          <button onclick="addEmp()" style="background:#0369a1;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
     <div id="listePersonnelContent"></div>
@@ -3747,6 +3779,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('taches')">‹ Modules</div>
     <div class="pg-title">Tableau</div>
+    <button onclick="chifExportPDF()" style="background:rgba(52,211,153,.12);border:1.5px solid rgba(52,211,153,.4);color:#34d399;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
   </div>
   <div class="tabs3">
     <div class="tab3 on" id="tabCA3" onclick="switchTab3('ca')">📈 Chiffre</div>
@@ -6397,7 +6430,10 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('avancees')" style="font-size:13px;font-weight:700;color:#818cf8;cursor:pointer;">‹ Avancées</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🔎 Veille</div>
-    <button onclick="openVeilleAdd()" style="background:#4338ca;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+<div style="display:flex;gap:6px;">
+      <button onclick="veilleExportPDF()" style="background:rgba(129,140,248,.12);border:1.5px solid rgba(129,140,248,.4);color:#818cf8;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
+          <button onclick="openVeilleAdd()" style="background:#4338ca;border:none;color:#fff;font-size:18px;font-weight:900;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
 
@@ -10556,6 +10592,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🔤 Méthode ABCDE</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="abcdeExportPDF()" style="background:rgba(244,114,182,.15);border:1.5px solid rgba(244,114,182,.35);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
       <button onclick="addABCDE()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
@@ -10563,6 +10600,7 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div id="abcdeForm" style="display:none;background:var(--s2);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(244,114,182,.4);">
       <div style="font-size:12px;font-weight:800;color:#f472b6;margin-bottom:10px;">➕ Nouvelle tâche ABCDE</div>
       <div style="margin-bottom:8px;"><input id="abcdeInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
+      <div style="margin-bottom:8px;"><textarea id="abcdeObs" class="fi" rows="2" placeholder="Observation (optionnel)..." style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-size:12px;"></textarea></div>
       <div style="display:flex;gap:6px;margin-bottom:10px;">
         <button type="button" onclick="setABCDE(this,'A')" data-abc="A" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">A</button>
         <button type="button" onclick="setABCDE(this,'B')" data-abc="B" style="flex:1;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:12px;font-weight:900;padding:8px;cursor:pointer;">B</button>
@@ -10672,7 +10710,8 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f472b6;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🫙 Méthode Pickle Jar</div>
     <div style="display:flex;gap:6px;">
-      <button onclick="addPickle()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="pickleExportPDF()" style="background:rgba(244,114,182,.12);border:1.5px solid rgba(244,114,182,.4);color:#f472b6;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
+            <button onclick="addPickle()" style="background:#be185d;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
   </div>
   <div class="scroll" style="padding:14px 16px 90px;">
@@ -10955,7 +10994,10 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb7185;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🤝 Responsabilisation</div>
-    <button onclick="partOpenForm()" style="background:rgba(251,113,133,.2);border:1.5px solid rgba(251,113,133,.5);color:#fb7185;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    <div style="display:flex;gap:6px;">
+      <button onclick="partExportPDF()" style="background:rgba(251,113,133,.12);border:1.5px solid rgba(251,113,133,.4);color:#fb7185;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">PDF</button>
+          <button onclick="partOpenForm()" style="background:rgba(251,113,133,.2);border:1.5px solid rgba(251,113,133,.5);color:#fb7185;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
   </div>
   <div style="height:3px;background:linear-gradient(90deg,#9f1239,#fb7185,#fda4af);flex-shrink:0;"></div>
   <div class="scroll" style="padding:14px 14px 90px;">
@@ -11808,6 +11850,7 @@ function goPage(p){
   var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();}
+    updateHomeAlerts();
   if(p==='taches')renderTaches();
   if(p==='dlc')renderDlcPage();
   if(p==='commercial')renderTaches();
@@ -16100,13 +16143,13 @@ function renderReunions(){
           +'<div style="width:20px;height:20px;border-radius:6px;background:#0369a1;color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+(i+1)+'</div>'
           +'<div style="font-size:12px;font-weight:700;color:var(--t1);">'+escH(p.titre)+'</div>'
           +'</div>'
-          +(p.detail?'<div style="padding:0 11px 9px;margin-left:28px;font-size:12px;color:var(--t2);line-height:1.5;white-space:pre-line;">'+escH(p.detail)+'</div>':'')
+          +(p.detail?'<div style="padding:0 11px 9px;margin-left:28px;font-size:12px;color:var(--t1);opacity:.85;line-height:1.5;white-space:pre-line;">'+escH(p.detail)+'</div>':'')
           +'</div>';
       }).join('')+'</div></div>':'';
     var sectionsHtml=(r.sections&&r.sections.length)?r.sections.map(function(s){
       return '<div style="margin-bottom:8px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:10px;padding:10px 12px;">'
         +'<div style="font-size:11px;font-weight:800;color:#fbbf24;margin-bottom:5px;">📌 '+escH(s.titre)+'</div>'
-        +(s.contenu?'<div style="font-size:12px;color:var(--t1);line-height:1.5;white-space:pre-line;">'+escH(s.contenu)+'</div>':'')
+        +(s.contenu?'<div style="font-size:12px;color:var(--t1);opacity:.9;line-height:1.5;white-space:pre-line;">'+escH(s.contenu)+'</div>':'')
         +'</div>';
     }).join(''):'';
     return '<div style="background:var(--card);border-radius:16px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,.07);">'
@@ -18915,15 +18958,61 @@ function renderRegle2min(){
 // ── ABCDE ──
 var _abcdeLevel='A';
 function setABCDE(btn,v){_abcdeLevel=v;document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity=b.dataset.abc===v?'1':'0.4';});}
-function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
-function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,level:_abcdeLevel,done:false});saveNM(d);addABCDE();renderABCDE();}
-function toggleABCDE(id){var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
-function delABCDE(id){var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
+function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('abcdeInput').value='';var obsEl=document.getElementById('abcdeObs');if(obsEl)obsEl.value='';_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
+function saveABCDE(){var v=document.getElementById('abcdeInput').value.trim();if(!v){showT('⚠️','Entrez une tâche');return;}var obsEl=document.getElementById('abcdeObs');var obs=obsEl?obsEl.value.trim():'';var now=new Date();var d=loadNM();if(!d.abcde)d.abcde=[];d.abcde.push({id:uid(),text:v,obs:obs,level:_abcdeLevel,done:false,date:now.toLocaleDateString('fr-FR'),time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});saveNM(d);addABCDE();renderABCDE();showT('✅','Tâche ajoutée');}
+function toggleABCDE(el){var id=el.dataset?el.dataset.id:el;var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
+function delABCDE(el){var id=el.dataset?el.dataset.id:el;var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);renderABCDE();}
 function renderABCDE(){
-  var d=loadNM();var items=d.abcde||[];var el=document.getElementById('abcdeList');var em=document.getElementById('abcdeEmpty');if(!el)return;
-  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}if(em)em.style.display='none';
-  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};var lbls={A:'TRÈS IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'À DÉLÉGUER',E:'À ÉLIMINER'};
-  el.innerHTML=['A','B','C','D','E'].map(function(lv){var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';return '<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;margin-bottom:4px;">'+lv+' — '+lbls[lv]+'</div>'+gr.map(function(item){return '<div style="background:'+bgs[lv]+';border:1px solid var(--bord);border-radius:10px;padding:9px 12px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div onclick="toggleABCDE(\''+item.id+'\')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?cols[lv]:'rgba(255,255,255,.2)')+';background:'+(item.done?cols[lv]:'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+(item.done?'<svg width="9" height="9" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'')+'</div><div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'">'+item.text+'</div><div onclick="delABCDE(\''+item.id+'\')" style="color:#ef4444;font-size:16px;cursor:pointer;">×</div></div>';}).join('')+'</div>';}).join('');
+  var d=loadNM();var items=d.abcde||[];
+  var el=document.getElementById('abcdeList');
+  var em=document.getElementById('abcdeEmpty');
+  if(!el)return;
+  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}
+  if(em)em.style.display='none';
+  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};
+  var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};
+  var lbls={A:'TRES IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'A DELEGUER',E:'A ELIMINER'};
+  var html='';
+  ['A','B','C','D','E'].forEach(function(lv){
+    var gr=items.filter(function(x){return x.level===lv;});
+    if(!gr.length)return;
+    var doneGr=gr.filter(function(x){return x.done;}).length;
+    html+='<div style="margin-bottom:14px;">';
+    html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;">';
+    html+='<span style="display:inline-flex;width:20px;height:20px;border-radius:6px;background:'+cols[lv]+';color:#000;font-size:10px;font-weight:900;align-items:center;justify-content:center;">'+lv+'</span>';
+    html+='<span style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;">'+lbls[lv]+'</span>';
+    html+='<span style="margin-left:auto;font-size:9px;font-weight:800;color:'+cols[lv]+';background:'+bgs[lv]+';border:1px solid '+cols[lv]+'40;padding:2px 8px;border-radius:20px;">'+doneGr+'/'+gr.length+'</span>';
+    html+='</div>';
+    gr.forEach(function(item){
+      var brd=item.done?cols[lv]+'60':'rgba(255,255,255,.07)';
+      var opa=item.done?'.65':'1';
+      html+='<div style="background:'+bgs[lv]+';border:1px solid '+brd+';border-radius:12px;padding:11px 12px;margin-bottom:6px;opacity:'+opa+';transition:opacity .2s;">';
+      html+='<div style="display:flex;align-items:flex-start;gap:10px;">';
+      // Checkbox
+      var cbBorder=item.done?cols[lv]:'rgba(255,255,255,.2)';
+      var cbBg=item.done?cols[lv]:'transparent';
+      var cbCheck=item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'';
+      html+='<div onclick="toggleABCDE(this)" data-id="'+item.id+'" style="width:22px;height:22px;border-radius:7px;border:2px solid '+cbBorder+';background:'+cbBg+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+cbCheck+'</div>';
+      // Content
+      var textColor=item.done?'var(--t3)':'var(--t1)';
+      var textDeco=item.done?'line-through':'none';
+      html+='<div style="flex:1;min-width:0;">';
+      html+='<div style="font-size:13px;font-weight:700;color:'+textColor+';text-decoration:'+textDeco+';line-height:1.35;">'+escH(item.text)+'</div>';
+      if(item.obs){
+        html+='<div style="font-size:11px;color:var(--t1);margin-top:4px;line-height:1.5;padding:6px 9px;background:rgba(255,255,255,.06);border-radius:7px;border-left:2px solid '+cols[lv]+';opacity:.9;">'+escH(item.obs)+'</div>';
+      }
+      html+='<div style="font-size:10px;color:var(--t3);margin-top:5px;display:flex;align-items:center;gap:8px;">';
+      if(item.date) html+='<span>📅 '+item.date+(item.time?' · ⏰ '+item.time:'')+'</span>';
+      if(item.done) html+='<span style="color:'+cols[lv]+';font-weight:800;">✓ Accomplie</span>';
+      html+='</div>';
+      html+='</div>';
+      // Delete
+      html+='<div onclick="delABCDE(this)" data-id="'+item.id+'" style="color:rgba(239,68,68,.5);font-size:20px;cursor:pointer;flex-shrink:0;width:24px;text-align:center;">×</div>';
+      html+='</div></div>';
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
 }
 
 // ── MOSCOW ──
@@ -21983,6 +22072,32 @@ function renderDashboard(){
   var ean=document.getElementById('dashAnomCount');if(ean)ean.textContent=totalAnom;
   var eans=document.getElementById('dashAnomSub');if(eans)eans.textContent=totalAnom?'Anomalie(s) signalée(s)':'RAS';
   var anomScore=totalAnom===0?100:totalAnom<=2?70:40;
+
+  // ── Suivi BL ──
+  try {
+    var blAll = blLoad ? blLoad() : [];
+    var blAtt2 = blAll.filter(function(b){return b.statut==='attente';}).length;
+    var blVal = blAll.filter(function(b){return b.statut==='valide';}).length;
+    var elBlA = document.getElementById('dashBlAttente');
+    var elBlT = document.getElementById('dashBlTotal');
+    var elBlS = document.getElementById('dashBlSub');
+    if(elBlA){ elBlA.textContent=blAtt2; elBlA.style.color=blAtt2>3?'#f87171':blAtt2>0?'#fbbf24':'#4ade80'; }
+    if(elBlT) elBlT.textContent='Total: '+blAll.length;
+    if(elBlS) elBlS.textContent=blVal+' validé(s) · '+(blAll.filter(function(b){return b.statut==='litige'||b.statut==='refuse';}).length)+' litige/refus';
+  } catch(e){}
+
+  // ── ABCDE Tâches A ──
+  try {
+    var abcdeAll = (loadNM().abcde||[]);
+    var abcdeATotal = abcdeAll.filter(function(x){return x.level==='A';}).length;
+    var abcdeADone  = abcdeAll.filter(function(x){return x.level==='A'&&x.done;}).length;
+    var abcdeARest  = abcdeATotal - abcdeADone;
+    var elAA = document.getElementById('dashAbcdeA');
+    var elAS = document.getElementById('dashAbcdeSub');
+    if(elAA){ elAA.textContent=abcdeARest; elAA.style.color=abcdeARest>3?'#f87171':abcdeARest>0?'#fbbf24':'#4ade80'; }
+    if(elAS) elAS.textContent=abcdeADone+'/'+abcdeATotal+' accomplies · '+(abcdeAll.filter(function(x){return x.level==='B'&&!x.done;}).length)+' tâches B restantes';
+    if(abcdeARest>0) scorePoints-=Math.min(abcdeARest*10,30); // impact score
+  } catch(e){}
   scorePoints+=anomScore; scoreMax+=100;
 
   // ── Collecte Déchets ──
@@ -22846,6 +22961,332 @@ function _dlPDFBlob(html,fname){
   a.href=u;a.download=fname;
   document.body.appendChild(a);a.click();document.body.removeChild(a);
   setTimeout(function(){URL.revokeObjectURL(u);},2000);
+}
+
+
+// ══ PDF EXPORTS MANQUANTS ══
+
+function listePersonnelPDF(){
+  var emps=JSON.parse(localStorage.getItem(SK+'_emp')||'[]');
+  if(!emps.length){showT('!','Aucun employe');return;}
+  var mag=getMagName();var now=new Date();
+  var rows=emps.map(function(e,i){
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:700;color:#0f172a;">'+(e.name||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#0369a1;font-weight:700;">'+(e.matricule||e.mat||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:12px;color:#374151;">'+(e.role||e.poste||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(e.date||e.created||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;">'+(e.notes||'')+'</td>'
+      +'</tr>';
+  }).join('');
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Liste Personnel</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#0369a1,#0ea5e9);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Liste du Personnel</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),'</div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;display:inline-block;"><div style="font-size:26px;font-weight:900;">',emps.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Employes</div></div>',
+    '</div>',
+    '<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">',
+    '<table><thead><tr style="background:linear-gradient(135deg,#0369a1,#0ea5e9);">',
+    '<th style="color:#fff;">NOM & PRENOM</th><th style="color:#fff;">MATRICULE</th><th style="color:#fff;">POSTE</th><th style="color:#fff;">DATE ENTREE</th><th style="color:#fff;">NOTES</th>',
+    '</tr></thead><tbody>',rows,'</tbody></table></div>',
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',now.toLocaleString('fr-FR'),'</div>',
+    '</div></body></html>'
+  ].join('');
+  _dlPDFBlob(html,'ListePersonnel_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function veilleExportPDF(){
+  var list=loadVeille();
+  if(!list.length){showT('!','Aucune observation');return;}
+  var mag=getMagName();var now=new Date();
+  var typeLabels={prix:'Prix',promo:'Promo',produit:'Produit',lineaire:'Lineaire',autre:'Autre'};
+  var typeColors={prix:'#0369a1',promo:'#dc2626',produit:'#16a34a',lineaire:'#d97706',autre:'#6b7280'};
+  var rows=list.map(function(v,i){
+    var col=typeColors[v.type]||'#64748b';
+    var lbl=typeLabels[v.type]||v.type||'-';
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;white-space:nowrap;">'+(v.date||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:700;color:#0f172a;">'+(v.concurrent||'-')+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;"><span style="background:'+col+'18;color:'+col+';font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;">'+lbl+'</span></td>'
+      +'<td style="padding:9px 12px;font-size:12px;color:#374151;">'+(v.obs||'-')+'</td>'
+      +'</tr>';
+  }).join('');
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Veille Concurrentielle</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#4338ca,#6366f1);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Veille Concurrentielle</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),'</div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;display:inline-block;"><div style="font-size:26px;font-weight:900;">',list.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Observations</div></div>',
+    '</div>',
+    '<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">',
+    '<table><thead><tr style="background:linear-gradient(135deg,#4338ca,#6366f1);">',
+    '<th style="color:#fff;">DATE</th><th style="color:#fff;">CONCURRENT</th><th style="color:#fff;text-align:center;">TYPE</th><th style="color:#fff;">OBSERVATION</th>',
+    '</tr></thead><tbody>',rows,'</tbody></table></div>',
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',now.toLocaleString('fr-FR'),'</div>',
+    '</div></body></html>'
+  ].join('');
+  _dlPDFBlob(html,'Veille_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function pickleExportPDF(){
+  var d=loadNM();var items=d.pickle||[];
+  if(!items.length){showT('!','Aucune tache');return;}
+  var mag=getMagName();var now=new Date();
+  var types={rock:{col:'#dc2626',bg:'#fef2f2',lbl:'Rocher (Important)'},gravel:{col:'#d97706',bg:'#fffbeb',lbl:'Gravier (Moyen)'},sand:{col:'#ca8a04',bg:'#fefce8',lbl:'Sable (Secondaire)'}};
+  var sections=Object.keys(types).map(function(t){
+    var inf=types[t];var gr=items.filter(function(x){return x.type===t;});if(!gr.length)return'';
+    var done=gr.filter(function(x){return x.done;}).length;
+    var rows=gr.map(function(item,i){
+      return '<tr style="background:'+(i%2===0?'#fff':'#f8fafc')+';border-bottom:1px solid #e2e8f0;">'
+        +'<td style="padding:9px 12px;text-align:center;width:32px;font-weight:900;color:'+(item.done?inf.col:'#cbd5e1')+';font-size:16px;">'+(item.done?'v':'o')+'</td>'
+        +'<td style="padding:9px 12px;font-size:13px;font-weight:600;color:#0f172a;'+(item.done?'text-decoration:line-through;color:#94a3b8;':'')+'">'+(item.text||'-')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div style="margin-bottom:20px;border-radius:12px;overflow:hidden;border:1.5px solid '+inf.col+'44;">'
+      +'<div style="background:'+inf.col+';padding:11px 16px;display:flex;justify-content:space-between;">'
+      +'<div style="font-size:14px;font-weight:900;color:#fff;">'+inf.lbl+'</div>'
+      +'<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.85);">'+done+'/'+gr.length+' faites</div></div>'
+      +'<table style="width:100%;border-collapse:collapse;"><tbody>'+rows+'</tbody></table></div>';
+  }).join('');
+  var done=items.filter(function(x){return x.done;}).length;
+  var html=_excelPDFWrap(mag,'Methode Pickle Jar','#be185d','#9d174d',
+    _excelStats([items.length,'Total'],[done,'Faites'],[items.length-done,'Restantes']),
+    sections,now);
+  _dlPDFBlob(html,'PickleJar_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function partExportPDF(){
+  var list=partLoad();
+  if(!list.length){showT('!','Aucun engagement');return;}
+  var mag=getMagName();var now=new Date();
+  var sC={cours:'#d97706',atteint:'#16a34a',echoue:'#dc2626'};
+  var sL={cours:'En cours',atteint:'Atteint',echoue:'Echoue'};
+  var rows=list.map(function(p,i){
+    var col=sC[p.statut]||'#64748b';
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:700;color:#0f172a;">'+(p.nom||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:12px;color:#374151;">'+(p.objectif||'-')+'</td>'
+      +'<td style="padding:9px 12px;font-size:11px;color:#64748b;white-space:nowrap;">'+(p.date||p.created||'-')+'</td>'
+      +'<td style="padding:9px 12px;text-align:center;"><span style="background:'+col+'18;color:'+col+';font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;">'+(sL[p.statut]||p.statut||'-')+'</span></td>'
+      +'</tr>';
+  }).join('');
+  var atteint=list.filter(function(x){return x.statut==='atteint';}).length;
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Responsabilisation</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#be123c,#fb7185);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Responsabilisation & Engagements</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),'</div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;">',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">',list.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>',
+    '<div style="background:rgba(255,255,255,.2);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">',atteint,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Atteints</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 18px;text-align:center;"><div style="font-size:24px;font-weight:900;">',list.length-atteint,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">En cours</div></div>',
+    '</div></div>',
+    '<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">',
+    '<table><thead><tr style="background:linear-gradient(135deg,#be123c,#fb7185);">',
+    '<th style="color:#fff;">PARTENAIRE</th><th style="color:#fff;">OBJECTIF</th><th style="color:#fff;">DATE</th><th style="color:#fff;text-align:center;">STATUT</th>',
+    '</tr></thead><tbody>',rows,'</tbody></table></div>',
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',now.toLocaleString('fr-FR'),'</div>',
+    '</div></body></html>'
+  ].join('');
+  _dlPDFBlob(html,'Partenaires_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport exporte !');
+}
+
+function chifExportPDF(){
+  var mag=getMagName();var now=new Date();
+  var caKey='ca10_'+new Date().getFullYear()+'_'+new Date().getMonth();
+  var caData=JSON.parse(localStorage.getItem(caKey)||'{}');
+  var days=Object.keys(caData).sort();
+  if(!days.length){showT('!','Aucune donnee CA');return;}
+  var total=days.reduce(function(s,d){return s+(parseFloat(caData[d])||0);},0);
+  var rows=days.map(function(d,i){
+    var val=parseFloat(caData[d])||0;
+    var bg=i%2===0?'#fff':'#f8fafc';
+    return '<tr style="background:'+bg+';border-bottom:1px solid #e2e8f0;">'
+      +'<td style="padding:9px 12px;font-size:12px;color:#374151;">'+d+'</td>'
+      +'<td style="padding:9px 12px;font-size:13px;font-weight:800;color:#16a34a;text-align:right;">'+val.toFixed(3)+' TND</td>'
+      +'</tr>';
+  }).join('');
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Chiffres CA</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}table{width:100%;border-collapse:collapse;}th{text-align:left;padding:10px 12px;font-size:10px;font-weight:800;text-transform:uppercase;}@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#059669,#10b981);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Tableau de Bord CA</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),'</div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;">',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:24px;font-weight:900;">',days.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Jours</div></div>',
+    '<div style="background:rgba(255,255,255,.2);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:24px;font-weight:900;">',total.toFixed(3),'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">TND Total</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:24px;font-weight:900;">',(total/days.length).toFixed(3),'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Moy/Jour</div></div>',
+    '</div></div>',
+    '<div style="background:#fff;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;">',
+    '<table><thead><tr style="background:linear-gradient(135deg,#059669,#10b981);">',
+    '<th style="color:#fff;">DATE</th><th style="color:#fff;text-align:right;">CHIFFRE D\'AFFAIRES</th>',
+    '</tr></thead><tbody>',rows,'</tbody></table></div>',
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:20px;">Genere par TaskPro - ',mag,' - ',now.toLocaleString('fr-FR'),'</div>',
+    '</div></body></html>'
+  ].join('');
+  _dlPDFBlob(html,'ChiffreCA_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport CA exporte !');
+}
+
+
+// ══ HOME ALERTS & BADGES ══
+function updateHomeAlerts(){
+  var alerts = [];
+  var today = new Date(); today.setHours(0,0,0,0);
+
+  // ── DLC expirées ou urgentes ──
+  try {
+    var dlcItems = JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    var dlcExp = dlcItems.filter(function(i){
+      var d=new Date(i.date);d.setHours(0,0,0,0);
+      return Math.round((d-today)/86400000) < 0;
+    }).length;
+    var dlcUrg = dlcItems.filter(function(i){
+      var d=new Date(i.date);d.setHours(0,0,0,0);
+      var df=Math.round((d-today)/86400000);
+      return df>=0 && df<=3;
+    }).length;
+    if(dlcExp>0) alerts.push({ico:'⛔',label:'DLC expirées',val:dlcExp,col:'#ef4444',bg:'rgba(239,68,68,.1)',page:'dlc'});
+    else if(dlcUrg>0) alerts.push({ico:'⏰',label:'DLC urgentes (≤3j)',val:dlcUrg,col:'#f97316',bg:'rgba(249,115,22,.1)',page:'dlc'});
+  } catch(e){}
+
+  // ── BL en attente ──
+  try {
+    var blItems = blLoad ? blLoad() : [];
+    var blAtt = blItems.filter(function(b){return b.statut==='attente';}).length;
+    if(blAtt>0) alerts.push({ico:'🚚',label:'BL en attente',val:blAtt,col:'#fbbf24',bg:'rgba(251,191,36,.1)',page:'suiviBL'});
+  } catch(e){}
+
+  // ── Tâches ABCDE priorité A non faites ──
+  try {
+    var d=loadNM();
+    var abcdeA=(d.abcde||[]).filter(function(x){return x.level==='A'&&!x.done;}).length;
+    if(abcdeA>0) alerts.push({ico:'🔴',label:'Tâches A non faites',val:abcdeA,col:'#f87171',bg:'rgba(248,113,113,.1)',page:'methodeABCDE'});
+  } catch(e){}
+
+  // ── Absents aujourd'hui ──
+  try {
+    var emps=paLoadEmps ? paLoadEmps() : [];
+    var absToday=emps.filter(function(e){return paGetStatus(e.id)==='absent';}).length;
+    if(absToday>0) alerts.push({ico:'👤',label:'Absents aujourd\'hui',val:absToday,col:'#60a5fa',bg:'rgba(96,165,250,.1)',page:'presences'});
+  } catch(e){}
+
+  // ── Réunions / Briefings aujourd'hui ──
+  try {
+    var todayStr = today.toISOString().slice(0,10);
+    var reunToday = loadReunions().filter(function(r){return r.date===todayStr;}).length;
+    if(reunToday>0) alerts.push({ico:'📝',label:'Briefing/Réunion aujourd\'hui',val:reunToday,col:'#34d399',bg:'rgba(52,211,153,.1)',page:'reunion'});
+  } catch(e){}
+
+  // ── Anomalies ouvertes ──
+  try {
+    var anoms=JSON.parse(localStorage.getItem(SK+'_anomalies')||'[]');
+    var anomOpen=anoms.filter(function(a){return a.statut!=='resolu' && a.statut!=='clos';}).length;
+    if(anomOpen>0) alerts.push({ico:'⚠️',label:'Anomalies ouvertes',val:anomOpen,col:'#fb923c',bg:'rgba(251,146,60,.1)',page:'anomaliesQte'});
+  } catch(e){}
+
+  // ── Render panel ──
+  var panel = document.getElementById('homeAlertsPanel');
+  var list  = document.getElementById('homeAlertsList');
+  var count = document.getElementById('homeAlertCount');
+  if(!panel || !list) return;
+
+  if(!alerts.length){
+    panel.style.display='none';
+    return;
+  }
+
+  panel.style.display='block';
+  if(count) count.textContent = alerts.length + ' alerte'+(alerts.length>1?'s':'');
+
+  list.innerHTML = alerts.map(function(a){
+    return '<div onclick="goPage(\''+a.page+'\')" style="display:flex;align-items:center;gap:12px;background:'+a.bg+';border:1px solid '+a.col+'33;border-radius:12px;padding:11px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;">'
+      +'<div style="font-size:22px;flex-shrink:0;">'+a.ico+'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);">'+a.label+'</div>'
+      +'</div>'
+      +'<div style="background:'+a.col+';color:#fff;font-size:13px;font-weight:900;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+a.val+'</div>'
+      +'<div style="color:var(--t2);font-size:16px;">›</div>'
+      +'</div>';
+  }).join('');
+}
+
+
+function abcdeExportPDF(){
+  var d=loadNM();var items=d.abcde||[];
+  if(!items.length){showT('!','Aucune tache ABCDE');return;}
+  var mag=getMagName();var now=new Date();
+  var cols={A:'#ef4444',B:'#f97316',C:'#eab308',D:'#3b82f6',E:'#64748b'};
+  var bgs={A:'#fff1f1',B:'#fff7ed',C:'#fefce8',D:'#eff6ff',E:'#f8fafc'};
+  var lbls={A:'A — TRES IMPORTANT',B:'B — IMPORTANT',C:'C — OPTIONNEL',D:'D — A DELEGUER',E:'E — A ELIMINER'};
+  var descs={A:'Consequences graves si non fait',B:'Consequences mineures si non fait',C:'Aucune consequence reelle',D:"Quelqu'un d'autre peut le faire",E:'Sans valeur ajoutee'};
+  var doneCount=items.filter(function(x){return x.done;}).length;
+  var dateStr=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var genStr=now.toLocaleString('fr-FR');
+  var sections=['A','B','C','D','E'].map(function(lv){
+    var gr=items.filter(function(x){return x.level===lv;});if(!gr.length)return'';
+    var doneGr=gr.filter(function(x){return x.done;}).length;
+    var rows=gr.map(function(item){
+      return '<tr style="border-bottom:1px solid #e2e8f0;background:'+(item.done?'#f8fafc':'#fff')+'">'
+        +'<td style="padding:9px 12px;text-align:center;width:32px;"><span style="color:'+(item.done?cols[lv]:'#cbd5e1')+';font-weight:900;font-size:16px;">'+(item.done?'v':'o')+'</span></td>'
+        +'<td style="padding:9px 12px;"><div style="font-size:13px;font-weight:600;color:'+(item.done?'#94a3b8':'#0f172a')+';text-decoration:'+(item.done?'line-through':'none')+';">'+(item.text||'')+'</div>'
+        +(item.obs?'<div style="font-size:11px;color:#64748b;margin-top:3px;padding-left:8px;border-left:2px solid '+cols[lv]+'60;">'+(item.obs||'')+'</div>':'')+'</td>'
+        +'<td style="padding:9px 12px;font-size:10px;color:#94a3b8;white-space:nowrap;">'+(item.date||'')+(item.time?'<br>'+item.time:'')+'</td>'
+        +'</tr>';
+    }).join('');
+    return '<div style="margin-bottom:20px;border-radius:14px;overflow:hidden;border:1.5px solid '+cols[lv]+'55;box-shadow:0 2px 8px '+cols[lv]+'15;">'
+      +'<div style="background:'+cols[lv]+';padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">'
+      +'<div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;">'+lv+'</div>'
+      +'<div style="flex:1;"><div style="color:#fff;font-size:15px;font-weight:900;">'+lbls[lv]+'</div><div style="color:rgba(255,255,255,.8);font-size:11px;margin-top:2px;">'+descs[lv]+'</div></div>'
+      +'<div style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:900;padding:4px 12px;border-radius:20px;">'+doneGr+'/'+gr.length+'</div>'
+      +'</div>'
+      +'<table style="width:100%;border-collapse:collapse;background:#fff;">'
+      +'<thead><tr style="background:'+bgs[lv]+';border-bottom:2px solid '+cols[lv]+'30;">'
+      +'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:center;width:32px;">OK</th>'
+      +'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;">TACHE</th>'
+      +'<th style="padding:8px 12px;font-size:10px;font-weight:800;color:'+cols[lv]+';text-align:left;">DATE</th>'
+      +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }).join('');
+  var html=[
+    '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ABCDE - ',mag,'</title>',
+    '<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Arial,sans-serif;background:#f1f5f9;padding:20px;}',
+    '@media print{body{background:#fff;padding:0;}*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}</style></head><body>',
+    '<div style="max-width:820px;margin:0 auto;">',
+    '<div style="background:linear-gradient(135deg,#be185d,#7c3aed);border-radius:16px;padding:28px 32px;margin-bottom:28px;color:#fff;">',
+    '<div style="font-size:11px;font-weight:700;letter-spacing:2px;opacity:.75;margin-bottom:8px;text-transform:uppercase;">',mag,' - TaskPro</div>',
+    '<div style="font-size:28px;font-weight:900;margin-bottom:6px;">Methode ABCDE</div>',
+    '<div style="font-size:13px;opacity:.85;margin-bottom:20px;">',dateStr,'</div>',
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;">',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',items.length,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Total</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',doneCount,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Faites</div></div>',
+    '<div style="background:rgba(255,255,255,.2);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',(items.length?Math.round(doneCount/items.length*100):0)+'%','</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Taux</div></div>',
+    '<div style="background:rgba(255,255,255,.15);border-radius:12px;padding:12px 20px;text-align:center;"><div style="font-size:26px;font-weight:900;">',items.length-doneCount,'</div><div style="font-size:10px;opacity:.85;font-weight:700;text-transform:uppercase;margin-top:2px;">Restantes</div></div>',
+    '</div></div>',
+    sections,
+    '<div style="text-align:center;color:#94a3b8;font-size:11px;margin-top:24px;">Genere par TaskPro - ',mag,' - ',genStr,'</div>',
+    '</div></body></html>'
+  ].join('');
+  _dlPDFBlob(html,'ABCDE_'+now.toISOString().slice(0,10)+'.html');
+  showT('ok','Rapport ABCDE exporte !');
 }
 
 // ══ PWA SERVICE WORKER INLINE ══
@@ -33375,6 +33816,7 @@ function blExportPDF(){
     <button onclick="closeDirecteurModal()" style="width:100%;margin-top:6px;padding:13px;border-radius:14px;background:var(--s2);border:1px solid var(--bord2);color:var(--t2);font-size:13px;font-weight:700;cursor:pointer;">Fermer</button>
   </div>
 </div>
+</div><!-- /app -->
 
 </body>
 </html>
