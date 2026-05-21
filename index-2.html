@@ -1595,6 +1595,17 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
         <div id="dashAbcdeSub" style="font-size:11px;color:var(--t2);margin-top:4px;"></div>
       </div>
 
+      <!-- Réunions & Briefings -->
+      <div onclick="goPage('reunion')" style="background:var(--card);border-radius:14px;border:1px solid rgba(56,189,248,.25);padding:13px;cursor:pointer;position:relative;">
+        <div style="font-size:9px;font-weight:900;color:#38bdf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">📝 RÉUNIONS & BRIEFINGS</div>
+        <div style="display:flex;align-items:baseline;gap:8px;">
+          <div id="dashReunTotal" style="font-size:24px;font-weight:900;color:#fff;font-family:'IBM Plex Mono',monospace;">—</div>
+          <div style="font-size:11px;color:var(--t2);">ce mois</div>
+          <div id="dashReunToday" style="margin-left:auto;font-size:11px;font-weight:800;"></div>
+        </div>
+        <div id="dashReunSub" style="font-size:11px;color:var(--t2);margin-top:4px;"></div>
+      </div>
+
       <!-- Collecte déchets -->
       <div onclick="goPage('collecteDechets')" style="background:var(--card);border-radius:14px;border:1px solid rgba(34,197,94,.2);padding:13px;cursor:pointer;position:relative;overflow:hidden;">
         <div style="position:absolute;right:-4px;bottom:-4px;font-size:38px;opacity:.07;pointer-events:none;">♻️</div>
@@ -10602,6 +10613,10 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
       <div style="margin-bottom:8px;"><input id="abcdeInput" class="fi" placeholder="Nom de la tâche..." style="width:100%;box-sizing:border-box;"/></div>
       <div style="margin-bottom:8px;"><textarea id="abcdeObs" class="fi" rows="2" placeholder="Observation / contexte (optionnel)..." style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-size:12px;"></textarea></div>
       <div style="margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:800;color:#fbbf24;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">⏰ Alarme rappel (optionnel)</div>
+        <input id="abcdeAlarm" type="time" class="fi" style="width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="margin-bottom:8px;">
         <div style="font-size:10px;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;">🎯 Plan d'action</div>
         <textarea id="abcdePlan" class="fi" rows="2" placeholder="Que vas-tu faire pour résoudre ce problème ?" style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-size:12px;"></textarea>
       </div>
@@ -11869,6 +11884,7 @@ function goPage(p){
   if(p==='home'){renderHome();updateHomeSLBadge();}
     updateHomeAlerts();
   updateBnBadge();
+  checkABCDEAlarms();
   if(p==='taches')renderTaches();
   if(p==='dlc')renderDlcPage();
   if(p==='commercial')renderTaches();
@@ -19057,14 +19073,14 @@ function showAbcdeResultatSection(show){
     lbl.style.color=cols[_abcdeResultat]||'#94a3b8';
   }
 }
-function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){_abcdeEditId=null;_abcdeResultat=null;document.getElementById('abcdeInput').value='';var obsEl=document.getElementById('abcdeObs');if(obsEl)obsEl.value='';var planEl=document.getElementById('abcdePlan');if(planEl)planEl.value='';var resNoteEl=document.getElementById('abcdeResultatNote');if(resNoteEl)resNoteEl.value='';showAbcdeResultatSection(false);document.querySelectorAll('[data-res]').forEach(function(b){b.style.opacity='1';});_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
+function addABCDE(){var f=document.getElementById('abcdeForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){_abcdeEditId=null;_abcdeResultat=null;document.getElementById('abcdeInput').value='';var obsEl=document.getElementById('abcdeObs');if(obsEl)obsEl.value='';var alEl=document.getElementById('abcdeAlarm');if(alEl)alEl.value='';var planEl=document.getElementById('abcdePlan');if(planEl)planEl.value='';var resNoteEl=document.getElementById('abcdeResultatNote');if(resNoteEl)resNoteEl.value='';showAbcdeResultatSection(false);document.querySelectorAll('[data-res]').forEach(function(b){b.style.opacity='1';});_abcdeLevel='A';document.querySelectorAll('[data-abc]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('abcdeInput').focus();},300);}}
 function saveABCDE(){
   var v=document.getElementById('abcdeInput').value.trim();
   if(!v){showT('!','Entrez une tache');return;}
   var obsEl=document.getElementById('abcdeObs');
   var planEl=document.getElementById('abcdePlan');
   var resNoteEl=document.getElementById('abcdeResultatNote');
-  var obs=obsEl?obsEl.value.trim():'';
+  var obs=obsEl?obsEl.value.trim():'';var alarmEl=document.getElementById('abcdeAlarm');var alarm=alarmEl?alarmEl.value:'';
   var plan=planEl?planEl.value.trim():'';
   var resNote=resNoteEl?resNoteEl.value.trim():'';
   var now=new Date();
@@ -19083,7 +19099,7 @@ function saveABCDE(){
     if(btn)btn.textContent='Ajouter';if(title)title.textContent='Nouvelle tache ABCDE';
     addABCDE();renderABCDE();showT('ok','Tache modifiee');
   } else {
-    d.abcde.push({id:uid(),text:v,obs:obs,plan:plan,level:_abcdeLevel,done:false,
+    d.abcde.push({id:uid(),text:v,obs:obs,plan:plan,alarm:alarm,level:_abcdeLevel,done:false,
       date:now.toLocaleDateString('fr-FR'),time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
     saveNM(d);logAction('ABCDE','add','Tache '+_abcdeLevel,v);
     addABCDE();renderABCDE();showT('ok','Tache ajoutee');
@@ -19105,7 +19121,7 @@ function editABCDE(el){
   var btn=document.getElementById('abcdeSaveBtn');
   var title=document.getElementById('abcdeFormTitle');
   if(inp)inp.value=item.text||'';
-  if(obs)obs.value=item.obs||'';
+  if(obs)obs.value=item.obs||'';var alEl=document.getElementById('abcdeAlarm');if(alEl)alEl.value=item.alarm||'';
   if(planEl)planEl.value=item.plan||'';
   if(resNoteEl)resNoteEl.value=item.resultatNote||'';
   if(btn)btn.textContent='Modifier';
@@ -19190,7 +19206,7 @@ function renderABCDE(){
       }
       // date
       html+='<div style="font-size:10px;color:var(--t3);margin-top:5px;display:flex;align-items:center;gap:8px;">';
-      if(item.date) html+='<span>📅 '+item.date+(item.time?' · '+item.time:'')+'</span>';
+      if(item.date) html+='<span>📅 '+item.date+(item.time?' · '+item.time:'')+'</span>';if(item.alarm) html+='<span style="color:#fbbf24;"> · ⏰ '+item.alarm+'</span>';
       if(item.done) html+='<span style="color:'+cols[lv]+';font-weight:800;">Accomplie</span>';
       html+='</div>';
       html+='</div>';
@@ -22373,6 +22389,24 @@ function renderDashboard(){
     if(elBlS) elBlS.textContent=blVal+' validé(s) · '+(blAll.filter(function(b){return b.statut==='litige'||b.statut==='refuse';}).length)+' litige/refus';
   } catch(e){}
 
+  // ── Réunions & Briefings ──
+  try {
+    var reuList = loadReunions ? loadReunions() : [];
+    var now2 = new Date();
+    var thisMonth = now2.getFullYear()+'-'+String(now2.getMonth()+1).padStart(2,'0');
+    var todayStr2 = now2.toISOString().slice(0,10);
+    var reuMonth = reuList.filter(function(r){ return (r.date||'').startsWith(thisMonth); }).length;
+    var reuToday = reuList.filter(function(r){ return r.date===todayStr2; }).length;
+    var briefCount = reuList.filter(function(r){ return r.type==='briefing'; }).length;
+    var reunCount  = reuList.filter(function(r){ return r.type!=='briefing'; }).length;
+    var elRT = document.getElementById('dashReunTotal');
+    var elRTd = document.getElementById('dashReunToday');
+    var elRS = document.getElementById('dashReunSub');
+    if(elRT){ elRT.textContent=reuMonth; elRT.style.color=reuMonth>0?'#38bdf8':'#94a3b8'; }
+    if(elRTd && reuToday>0) { elRTd.textContent='📝 '+reuToday+" auj."; elRTd.style.color='#38bdf8'; }
+    if(elRS) elRS.textContent=briefCount+' briefing(s) · '+reunCount+' réunion(s) au total';
+  } catch(e){}
+
   // ── ABCDE Tâches A ──
   try {
     var abcdeAll = (loadNM().abcde||[]);
@@ -23877,6 +23911,94 @@ function saveExcellenceRes(){
   showT('ok','Résultat enregistré !');
 }
 
+
+// ══ RAPPELS & ALARMES ══
+function checkABCDEAlarms(){
+  // Check if there are undone A-level tasks and show reminder
+  try {
+    var d = loadNM();
+    var tasksA = (d.abcde||[]).filter(function(x){ return x.level==='A' && !x.done; });
+    if(!tasksA.length) return;
+    
+    // Check if we already reminded today
+    var today = new Date().toISOString().slice(0,10);
+    var lastRemind = localStorage.getItem(SK+'_abcde_reminded');
+    if(lastRemind === today) return;
+    
+    // Show reminder toast after 8 seconds
+    setTimeout(function(){
+      var count = tasksA.length;
+      var toast = document.getElementById('toast');
+      if(toast){
+        document.getElementById('te').textContent = '🔴';
+        document.getElementById('tm').textContent = count + ' tâche'+(count>1?'s':'')+' A non faite'+(count>1?'s':'')+'  → ABCDE';
+        toast.classList.add('on');
+        toast.style.background = 'linear-gradient(135deg,rgba(239,68,68,.25),rgba(220,38,38,.15))';
+        toast.style.border = '1px solid rgba(239,68,68,.4)';
+        toast.style.cursor = 'pointer';
+        toast.onclick = function(){ goPage('methodeABCDE'); toast.classList.remove('on'); toast.onclick=null; toast.style.cursor=''; };
+        clearTimeout(window._tt2);
+        window._tt2 = setTimeout(function(){
+          toast.classList.remove('on');
+          toast.style.background='';
+          toast.style.border='';
+          toast.style.cursor='';
+          toast.onclick=null;
+        }, 5000);
+      }
+      // Mark reminded today
+      localStorage.setItem(SK+'_abcde_reminded', today);
+    }, 8000);
+  } catch(e){}
+}
+
+// ── Alarm personnalisée par heure ──
+var _alarmCheckInterval = null;
+
+function startAlarmClock(){
+  if(_alarmCheckInterval) clearInterval(_alarmCheckInterval);
+  _alarmCheckInterval = setInterval(function(){
+    checkHourlyAlarms();
+  }, 60000); // check every minute
+  checkHourlyAlarms(); // check immediately
+}
+
+function checkHourlyAlarms(){
+  try {
+    var now = new Date();
+    var hhmm = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    var d = loadNM();
+    var tasksA = (d.abcde||[]).filter(function(x){ return x.level==='A' && !x.done && x.alarm && x.alarm===hhmm; });
+    tasksA.forEach(function(task){
+      var alarmKey = SK+'_alarm_fired_'+task.id+'_'+hhmm+'_'+now.toISOString().slice(0,10);
+      if(localStorage.getItem(alarmKey)) return;
+      localStorage.setItem(alarmKey,'1');
+      var toast = document.getElementById('toast');
+      if(toast){
+        document.getElementById('te').textContent='⏰';
+        document.getElementById('tm').textContent='Rappel A: '+task.text.slice(0,35);
+        toast.classList.add('on');
+        toast.style.background='linear-gradient(135deg,rgba(239,68,68,.25),rgba(220,38,38,.15))';
+        toast.style.border='1px solid rgba(239,68,68,.4)';
+        toast.style.cursor='pointer';
+        toast.onclick=function(){ goPage('methodeABCDE'); toast.classList.remove('on'); toast.onclick=null; toast.style.cursor=''; };
+        clearTimeout(window._tt2);
+        window._tt2=setTimeout(function(){ toast.classList.remove('on'); toast.style.background=''; toast.style.border=''; toast.style.cursor=''; toast.onclick=null; }, 6000);
+      }
+      // Browser notification if permission granted
+      if(window.Notification && Notification.permission==='granted'){
+        new Notification('TaskPro — Rappel', { body: 'Tâche A: '+task.text, icon: '' });
+      }
+    });
+  } catch(e){}
+}
+
+function requestNotifPermission(){
+  if(window.Notification && Notification.permission==='default'){
+    Notification.requestPermission();
+  }
+}
+
 // ══ PWA SERVICE WORKER INLINE ══
 // Le SW est injecté en blob pour fonctionner sans fichier sw.js externe
 (function(){
@@ -23941,7 +24063,9 @@ function saveExcellenceRes(){
 })();
 
 window.addEventListener('DOMContentLoaded',()=>{
-  loadTheme();load();initDef();unlockA();
+  loadTheme();
+  startAlarmClock();
+  requestNotifPermission();load();initDef();unlockA();
   cleanOldStorageKeys(); // nettoyage localStorage automatique
   checkStorageQuota(); // vérification quota au démarrage
   if(notifs.length)document.getElementById('nb').style.display='block';
