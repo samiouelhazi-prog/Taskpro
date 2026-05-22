@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-DZ">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -100,19 +100,25 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 }
 
 /* — Cards stagger (tiles tâches) — */
-#pgTaches .scroll > div > div:nth-child(1){animation:slideInBottom .25s .04s both;}
-#pgTaches .scroll > div > div:nth-child(2){animation:slideInBottom .25s .09s both;}
-#pgTaches .scroll > div > div:nth-child(3){animation:slideInBottom .25s .14s both;}
-#pgTaches .scroll > div > div:nth-child(4){animation:slideInBottom .25s .18s both;}
-#pgTaches .scroll > div > div:nth-child(5){animation:slideInBottom .25s .22s both;}
-#pgTaches .scroll > div > div:nth-child(6){animation:slideInBottom .25s .26s both;}
-#pgTaches .scroll > div > div:nth-child(7){animation:slideInBottom .25s .30s both;}
-#pgTaches .scroll > div > div:nth-child(8){animation:slideInBottom .25s .34s both;}
-#pgTaches .scroll > div > div:nth-child(9){animation:slideInBottom .25s .38s both;}
-#pgTaches .scroll > div > div:nth-child(10){animation:slideInBottom .25s .42s both;}
-#pgTaches .scroll > div > div:nth-child(11){animation:slideInBottom .25s .46s both;}
-#pgTaches .scroll > div > div:nth-child(12){animation:slideInBottom .25s .50s both;}
-#pgTaches .scroll > div > div:nth-child(13){animation:slideInBottom .25s .54s both;}
+#pgTaches .scroll > div > div{
+  animation:slideInBottom .25s calc(var(--i,0) * 40ms + 40ms) both;
+}
+
+/* JS should set style="--i:0" style="--i:1" etc. on each card.
+   Fallback: progressive delay via nth-child for first 13 items */
+#pgTaches .scroll > div > div:nth-child(1){--i:0}
+#pgTaches .scroll > div > div:nth-child(2){--i:1}
+#pgTaches .scroll > div > div:nth-child(3){--i:2}
+#pgTaches .scroll > div > div:nth-child(4){--i:3}
+#pgTaches .scroll > div > div:nth-child(5){--i:4}
+#pgTaches .scroll > div > div:nth-child(6){--i:5}
+#pgTaches .scroll > div > div:nth-child(7){--i:6}
+#pgTaches .scroll > div > div:nth-child(8){--i:7}
+#pgTaches .scroll > div > div:nth-child(9){--i:8}
+#pgTaches .scroll > div > div:nth-child(10){--i:9}
+#pgTaches .scroll > div > div:nth-child(11){--i:10}
+#pgTaches .scroll > div > div:nth-child(12){--i:11}
+#pgTaches .scroll > div > div:nth-child(13){--i:12}
 
 /* — Swipe cards stagger — */
 .swipe-card.top{animation:slideInBottom .26s .05s both;}
@@ -212,9 +218,8 @@ button:active:not([disabled]),
 .clock-info{}
 .clock-time{font-size:26px;font-weight:400;font-family:'IBM Plex Mono',monospace;line-height:1;letter-spacing:-0.5px;color:var(--t2);margin-top:2px;}
 .clock-date{font-size:22px;font-weight:700;font-family:'Syne',sans-serif;line-height:1;letter-spacing:-.3px;margin-bottom:0;}
-.motto-mg{font-style:normal;font-weight:700;font-family:'IBM Plex Sans',sans-serif;letter-spacing:.8px;color:#f87171;margin-left:2px;}
+.motto-mg{font-style:normal;font-weight:700;font-family:'IBM Plex Sans',sans-serif;letter-spacing:.8px;color:#f87171;margin-left:4px;}
 .clock-motto{font-size:9.5px;color:#f87171;font-weight:400;margin-top:6px;line-height:1.4;font-style:italic;opacity:.88;direction:rtl;text-align:right;unicode-bidi:bidi-override;}
-.motto-mg{font-style:normal;font-weight:700;font-family:'IBM Plex Sans',sans-serif;letter-spacing:.8px;margin-left:4px;}
 
 /* ══════════════ FOCUS MODE ══════════════ */
 .focus-wrap{padding:12px 18px 0;flex-shrink:0;}
@@ -667,7 +672,10 @@ body.light .tli-name,body.light .tli-n{color:#0d1117!important;}
 body.light .drawer,body.light .msh,body.light .cmsh{background:#f8fafc!important;border-color:rgba(0,0,0,.1)!important;}
 body.light .dr-item:active,body.light .dr-it:active{background:rgba(0,0,0,.06)!important;}
 body.light .fi,body.light .fs{background:rgba(255,255,255,.92)!important;border-color:rgba(0,0,0,.12)!important;color:#0d1117!important;color-scheme:light!important;}
-body.light input[type="date"]body:not(.light) .fi,body:not(.light) .fs{color:var(--t1)!important;-webkit-text-fill-color:var(--t1)!important;}
+/* Fix: couleur explicite pour dark mode (corrige WebView Android) */
+body:not(.light) .fi,body:not(.light) .fs{color:var(--t1)!important;-webkit-text-fill-color:var(--t1)!important;background:rgba(255,255,255,.055)!important;}
+input[type="date"].fi,input[type="date"].fs{color-scheme:dark;}
+body.light input[type="date"].fi,body.light input[type="date"].fs{color-scheme:light;}
 /* ══ SIGNATURE JOURNÉE ══ */
 .sj-doc-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);border-radius:12px;cursor:pointer;}
 .sj-doc-row.checked{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.3);}
@@ -1132,7 +1140,72 @@ body.light #navActions.on .bi-l{color:#5b21b6;font-weight:900;}
 .rj-lbl{font-size:11px;color:var(--t2);}
 .rj-val{font-size:12px;font-weight:800;font-family:'IBM Plex Mono',monospace;color:#fff;}
 
-#navDirecteur .bi-ico{background:linear-gradient(135deg,rgba(99,102,241,.22),rgba(129,140,248,.15));border:1.5px solid rgba(99,102,241,.55);color:#818cf8;box-shadow:0 2px 12px rgba(99,102,241,.25);}
+/* Use class="ar" on any Arabic text element */
+.ar{
+  direction:rtl;
+  text-align:right;
+  font-family:'IBM Plex Sans',sans-serif;
+  unicode-bidi:embed;
+}
+/* Mixed content blocks (French label + Arabic value) */
+.bidi-auto{unicode-bidi:plaintext;}
+
+/* ══════════════ LOADING SKELETON ══════════════ */
+#appSkeleton{
+  position:fixed;inset:0;z-index:9998;
+  background:linear-gradient(160deg,#090f1f 0%,#07080f 60%,#040608 100%);
+  display:flex;flex-direction:column;
+  max-width:430px;margin:0 auto;
+  padding:18px;
+  transition:opacity .35s ease;
+}
+#appSkeleton.hidden{opacity:0;pointer-events:none;}
+
+@keyframes skshimmer{
+  0%{background-position:-400px 0}
+  100%{background-position:400px 0}
+}
+.sk{
+  background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);
+  background-size:800px 100%;
+  animation:skshimmer 1.4s infinite linear;
+  border-radius:10px;
+}
+/* Skeleton topbar */
+.sk-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.sk-avatar{width:70px;height:70px;border-radius:50%;flex-shrink:0;}
+.sk-tb-right{display:flex;gap:8px;}
+.sk-circle{width:36px;height:36px;border-radius:50%;}
+
+/* Skeleton hero */
+.sk-hero{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.sk-hero-text{flex:1;display:flex;flex-direction:column;gap:8px;}
+.sk-line-lg{height:22px;width:70%;}
+.sk-line-md{height:14px;width:50%;}
+.sk-line-sm{height:12px;width:40%;}
+
+/* Skeleton stats row */
+.sk-stats{display:flex;gap:8px;margin-bottom:20px;}
+.sk-stat{flex:1;height:90px;border-radius:16px;}
+
+/* Skeleton cards */
+.sk-card{height:72px;border-radius:18px;margin-bottom:10px;}
+
+/* Skeleton bottom nav */
+.sk-bnav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  height:68px;border-radius:24px 24px 0 0;
+  background:rgba(255,255,255,.03);
+  border-top:1px solid rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:space-around;
+  padding:0 16px;
+}
+.sk-nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.sk-nav-ico{width:36px;height:36px;border-radius:12px;}
+.sk-nav-lbl{width:28px;height:8px;border-radius:4px;}
+
+
 #navDirecteur .bi-l{color:#818cf8;}
 #navDirecteur.on .bi-ico{background:linear-gradient(135deg,rgba(99,102,241,.45),rgba(129,140,248,.35));border-color:#6366f1;color:#fff;box-shadow:0 2px 18px rgba(99,102,241,.45);}
 #navDirecteur.on .bi-l{color:#c7d2fe;font-weight:900;}
@@ -1199,6 +1272,57 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
+
+<!-- ══ LOADING SKELETON ══ -->
+<div id="appSkeleton" role="status" aria-label="Chargement de l'application…">
+  <!-- Topbar -->
+  <div class="sk-topbar">
+    <div class="sk sk-circle" style="width:32px;height:32px;"></div>
+    <div class="sk sk-line-md" style="width:120px;height:14px;border-radius:8px;"></div>
+    <div class="sk-tb-right">
+      <div class="sk sk-circle"></div>
+      <div class="sk sk-circle"></div>
+      <div class="sk sk-circle"></div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="sk-hero">
+    <div class="sk sk-avatar"></div>
+    <div class="sk-hero-text">
+      <div class="sk sk-line-lg"></div>
+      <div class="sk sk-line-md"></div>
+      <div class="sk sk-line-sm"></div>
+    </div>
+  </div>
+
+  <!-- Stats circles -->
+  <div class="sk-stats">
+    <div class="sk sk-stat" style="border-radius:50%;width:80px;height:80px;flex:unset;"></div>
+    <div class="sk sk-stat" style="border-radius:50%;width:80px;height:80px;flex:unset;margin:0 auto;"></div>
+    <div class="sk sk-stat" style="border-radius:50%;width:80px;height:80px;flex:unset;margin-left:auto;"></div>
+  </div>
+
+  <!-- Section label -->
+  <div class="sk sk-line-sm" style="width:120px;height:10px;margin:10px 0 12px;border-radius:6px;"></div>
+
+  <!-- Task cards -->
+  <div class="sk sk-card"></div>
+  <div class="sk sk-card" style="opacity:.8;"></div>
+  <div class="sk sk-card" style="opacity:.6;"></div>
+  <div class="sk sk-card" style="opacity:.4;"></div>
+
+  <!-- Bottom nav skeleton -->
+  <div class="sk-bnav">
+    <div class="sk-nav-item"><div class="sk sk-nav-ico"></div><div class="sk sk-nav-lbl"></div></div>
+    <div class="sk-nav-item"><div class="sk sk-nav-ico"></div><div class="sk sk-nav-lbl"></div></div>
+    <div class="sk-nav-item"><div class="sk sk-nav-ico"></div><div class="sk sk-nav-lbl"></div></div>
+    <div class="sk-nav-item"><div class="sk sk-nav-ico"></div><div class="sk sk-nav-lbl"></div></div>
+    <div class="sk-nav-item"><div class="sk sk-nav-ico"></div><div class="sk sk-nav-lbl"></div></div>
+  </div>
+</div>
+<!-- ══ END SKELETON ══ -->
+
 <div class="bg-mesh"></div>
 
 <!-- ══ OFFLINE INDICATOR ══ -->
@@ -1964,11 +2088,16 @@ body.light #navCA.on .bi-l{color:#15803d;font-weight:900;}
         <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#a5f3fc;font-weight:700;align-self:flex-start;">Stratégie</span>
       </div>
 
-      <!-- 8 — TAUX DE SERVICE — Orange vif pour contraste -->
-      <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#431407,#c2410c);border:1px solid rgba(249,115,22,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+      <!-- 8 — TAUX DE SERVICE -->
+      <div onclick="goPage('tauxService')" id="tileTSCard" style="background:linear-gradient(145deg,#431407,#c2410c);border:1px solid rgba(249,115,22,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:4px;min-height:90px;">
         <div style="position:absolute;right:-4px;bottom:-8px;font-size:48px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#fb923c;pointer-events:none;">%</div>
-        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#fb923c;">%</div>
+        <!-- Taux principal -->
+        <div id="tileTSNum" style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#fb923c;">—%</div>
         <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Taux de Service</div>
+        <!-- Ligne manquantes -->
+        <div id="tileTSManq" style="font-size:9px;font-weight:700;color:rgba(251,146,60,.7);display:none;">
+          <span id="tileTSManqVal"></span> manquantes
+        </div>
         <span id="tileTSBadge" style="background:rgba(251,146,60,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#fed7aa;font-weight:700;align-self:flex-start;">KPI</span>
       </div>
 
@@ -11748,6 +11877,77 @@ function renderHome(){
       else dashAlBtn.style.display='none';
     }
   }catch(e){}
+
+  // ── Mise à jour Taux de Service tile ──
+  updateTSTile();
+}
+
+// ══ UPDATE TAUX DE SERVICE TILE (Home) ══
+function updateTSTile(){
+  try{
+    var badge  = document.getElementById('tileTSBadge');
+    var numEl  = document.getElementById('tileTSNum');
+    var manqEl = document.getElementById('tileTSManq');
+    var manqV  = document.getElementById('tileTSManqVal');
+    var card   = document.getElementById('tileTSCard');
+    if(!badge || !numEl) return;
+
+    var data = loadTS ? loadTS() : [];
+    var today = tstr ? tstr() : '';
+    var sessions = data.filter(function(s){ return s.date===today && s.archived && s.totalCom>0; });
+
+    if(!sessions.length){
+      // Pas de données aujourd'hui
+      numEl.textContent = '—%';
+      numEl.style.color = '#fb923c';
+      badge.textContent = 'KPI';
+      badge.style.background = 'rgba(251,146,60,.2)';
+      badge.style.color = '#fed7aa';
+      badge.style.border = 'none';
+      if(manqEl) manqEl.style.display = 'none';
+      if(card){ card.style.background='linear-gradient(145deg,#431407,#c2410c)'; card.style.borderColor='rgba(249,115,22,.55)'; }
+      return;
+    }
+
+    // Calcul consolidé de la journée
+    var totalCom = 0, totalRec = 0;
+    sessions.forEach(function(s){ totalCom += s.totalCom; totalRec += s.totalRec; });
+    var taux     = Math.round(totalRec / totalCom * 100);
+    var manq     = totalCom - totalRec;
+    var col      = typeof getTauxColor === 'function' ? getTauxColor(taux) : {color:'#fb923c',bg:'rgba(251,146,60,.1)',border:'rgba(251,146,60,.3)'};
+
+    // Affichage taux
+    numEl.textContent = taux + '%';
+    numEl.style.color = col.color;
+
+    // Badge
+    badge.textContent = taux + '%';
+    badge.style.color = col.color;
+    badge.style.background = col.bg;
+    badge.style.border = '1px solid ' + col.border;
+
+    // Manquantes
+    if(manqEl && manqV && manq > 0){
+      manqV.textContent = manq;
+      manqEl.style.display = 'block';
+    } else if(manqEl){
+      manqEl.style.display = 'none';
+    }
+
+    // Couleur de fond de la carte selon performance
+    if(card){
+      if(taux >= 95){
+        card.style.background = 'linear-gradient(145deg,#064e3b,#059669)';
+        card.style.borderColor = 'rgba(16,185,129,.55)';
+      } else if(taux >= 85){
+        card.style.background = 'linear-gradient(145deg,#431407,#c2410c)';
+        card.style.borderColor = 'rgba(249,115,22,.55)';
+      } else {
+        card.style.background = 'linear-gradient(145deg,#450a0a,#b91c1c)';
+        card.style.borderColor = 'rgba(239,68,68,.55)';
+      }
+    }
+  }catch(e){}
 }
 
 // ══ SWIPE CARDS ══
@@ -11882,8 +12082,7 @@ function goPage(p){
   var equipePages=['equipe','briefing','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();}
-    updateHomeAlerts();
-  updateBnBadge();
+  updateHomeAlerts();
   checkABCDEAlarms();
   if(p==='taches')renderTaches();
   if(p==='dlc')renderDlcPage();
@@ -23667,195 +23866,6 @@ function histoExportPDF(){
 // ══ BLOC-NOTES RAPIDE ══
 var _bnEditId = null;
 
-function bnKey(){ return SK+'_blocnotes'; }
-function bnLoad(){ try{ return JSON.parse(localStorage.getItem(bnKey())||'[]'); }catch(e){ return []; } }
-function bnSaveAll(d){ localStorage.setItem(bnKey(), JSON.stringify(d)); }
-
-function openBlocNotes(){
-  var m=document.getElementById('blocNotesModal');
-  if(!m)return;
-  m.style.display='flex';
-  bnRender();
-  setTimeout(function(){
-    var inp=document.getElementById('bnInput');
-    if(inp){inp.value='';inp.focus();}
-  },200);
-}
-
-function closeBlocNotes(){
-  var m=document.getElementById('blocNotesModal');
-  if(m)m.style.display='none';
-  _bnEditId=null;
-}
-
-function bnSave(){
-  var inp=document.getElementById('bnInput');
-  if(!inp)return;
-  var text=inp.value.trim();
-  if(!text){showT('!','Ecris quelque chose !');return;}
-  var list=bnLoad();
-  var now=new Date();
-  if(_bnEditId){
-    var item=list.find(function(x){return x.id===_bnEditId;});
-    if(item){item.text=text;item.editedAt=now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});}
-    _bnEditId=null;
-    var btn=document.getElementById('bnSaveBtn');
-    if(btn)btn.textContent='Sauvegarder l\'idee';
-  } else {
-    list.unshift({
-      id:uid(),
-      text:text,
-      date:now.toLocaleDateString('fr-FR'),
-      time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
-    });
-  }
-  bnSaveAll(list);
-  inp.value='';
-  bnRender();
-  showT('ok','Idee sauvegardee !');
-}
-
-function bnEdit(id){
-  var list=bnLoad();
-  var item=list.find(function(x){return x.id===id;});
-  if(!item)return;
-  _bnEditId=id;
-  var inp=document.getElementById('bnInput');
-  var btn=document.getElementById('bnSaveBtn');
-  if(inp){inp.value=item.text;inp.focus();}
-  if(btn)btn.textContent='Modifier';
-}
-
-function bnDelete(id){
-  var list=bnLoad().filter(function(x){return x.id!==id;});
-  bnSaveAll(list);
-  if(_bnEditId===id){
-    _bnEditId=null;
-    var inp=document.getElementById('bnInput');
-    if(inp)inp.value='';
-  }
-  bnRender();
-}
-
-function bnRender(){
-  var list=bnLoad();
-  var el=document.getElementById('bnList');
-  var em=document.getElementById('bnEmpty');
-  var cnt=document.getElementById('bnCount');
-  if(!el)return;
-  if(cnt) cnt.textContent=list.length ? list.length+' idee'+(list.length>1?'s':'')+' en attente':'';
-  if(!list.length){el.innerHTML='';if(em)em.style.display='block';return;}
-  if(em)em.style.display='none';
-  el.innerHTML=list.map(function(item){
-    return '<div style="background:var(--s2);border:1px solid rgba(124,58,237,.2);border-radius:14px;padding:12px 14px;margin-bottom:8px;">'
-      +'<div style="font-size:13px;font-weight:600;color:var(--t1);line-height:1.4;margin-bottom:8px;">'+escH(item.text)+'</div>'
-      +'<div style="font-size:10px;color:var(--t3);margin-bottom:10px;">📅 '+item.date+' · ⏰ '+item.time+'</div>'
-      +'<div style="display:flex;gap:6px;">'
-      +'<button onclick="openBnTransfer(\''+item.id+'\')" style="flex:2;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(168,85,247,.15));border:1px solid rgba(124,58,237,.35);color:#a78bfa;font-size:11px;font-weight:800;padding:8px;border-radius:10px;cursor:pointer;">📤 Transférer</button>'
-      +'<button onclick="bnEdit(\''+item.id+'\')" style="flex:1;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);color:#fbbf24;font-size:11px;font-weight:800;padding:8px;border-radius:10px;cursor:pointer;">✏️</button>'
-      +'<button onclick="bnDelete(\''+item.id+'\')" style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171;font-size:11px;font-weight:800;padding:8px;border-radius:10px;cursor:pointer;">🗑️</button>'
-      +'</div>'
-      +'</div>';
-  }).join('');
-}
-
-// ── Transfer ──
-var _bnTransferId = null;
-
-function openBnTransfer(id){
-  _bnTransferId=id;
-  var list=bnLoad();
-  var item=list.find(function(x){return x.id===id;});
-  if(!item)return;
-  var el=document.getElementById('bnTransferText');
-  if(el)el.textContent=item.text;
-  var m=document.getElementById('bnTransferModal');
-  if(m)m.style.display='flex';
-}
-
-function closeBnTransfer(){
-  var m=document.getElementById('bnTransferModal');
-  if(m)m.style.display='none';
-  _bnTransferId=null;
-}
-
-function bnGetItem(){
-  if(!_bnTransferId)return null;
-  return bnLoad().find(function(x){return x.id===_bnTransferId;});
-}
-
-function bnRemoveAfterTransfer(){
-  if(!_bnTransferId)return;
-  bnSaveAll(bnLoad().filter(function(x){return x.id!==_bnTransferId;}));
-  _bnTransferId=null;
-  bnRender();
-  closeBnTransfer();
-}
-
-function bnTransferABCDE(level){
-  var item=bnGetItem();if(!item)return;
-  var now=new Date();
-  var d=loadNM();if(!d.abcde)d.abcde=[];
-  d.abcde.push({
-    id:uid(),text:item.text,obs:'Transfere depuis Bloc-Notes',
-    level:level,done:false,
-    date:now.toLocaleDateString('fr-FR'),
-    time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
-  });
-  saveNM(d);
-  logAction('ABCDE','add','[BN] Tache '+level,item.text);
-  bnRemoveAfterTransfer();
-  if(typeof renderABCDE==='function') renderABCDE();
-  showT('ok','Transfere vers ABCDE '+level+' !');
-}
-
-function bnTransferReunion(){
-  var item=bnGetItem();if(!item)return;
-  var list=loadReunions();
-  // Add as a new standalone note with the text as a point
-  list.unshift({
-    id:uid(),type:'briefing',
-    titre:'[BN] '+item.text.slice(0,50),
-    date:new Date().toISOString().slice(0,10),
-    heure:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),
-    participants:[],
-    points:[{titre:item.text,detail:'Transfere depuis Bloc-Notes'}],
-    sections:[]
-  });
-  saveReunions(list);
-  logAction('Reunion','add','[BN] Note transferee',item.text.slice(0,40));
-  bnRemoveAfterTransfer();
-  if(typeof renderReunions==='function') renderReunions();
-  showT('ok','Transfere vers Reunions !');
-}
-
-function bnTransferTache(){
-  var item=bnGetItem();if(!item)return;
-  var now=new Date();
-  var d=loadNM();if(!d.abcde)d.abcde=[];
-  d.abcde.push({
-    id:uid(),text:item.text,obs:'Transfere depuis Bloc-Notes',
-    level:'A',done:false,
-    date:now.toLocaleDateString('fr-FR'),
-    time:now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})
-  });
-  saveNM(d);
-  logAction('ABCDE','add','[BN] Tache A',item.text);
-  bnRemoveAfterTransfer();
-  if(typeof renderABCDE==='function') renderABCDE();
-  showT('ok','Ajoute comme Tache A !');
-}
-
-// Badge on FAB when notes exist
-function updateBnBadge(){
-  var fab=document.getElementById('blocNotesFab');
-  if(!fab)return;
-  var count=bnLoad().length;
-  fab.style.boxShadow=count>0
-    ?'0 4px 18px rgba(124,58,237,.7),0 0 0 3px rgba(168,85,247,.3)'
-    :'0 4px 18px rgba(124,58,237,.5)';
-}
-
 
 // ══ EXCELLENCE RÉSULTAT SYSTEM ══
 var _excellenceResContext = null; // {module, id, renderFn}
@@ -23999,67 +24009,353 @@ function requestNotifPermission(){
   }
 }
 
-// ══ PWA SERVICE WORKER INLINE ══
-// Le SW est injecté en blob pour fonctionner sans fichier sw.js externe
+// ══ PWA SERVICE WORKER — PRODUCTION READY ══
 (function(){
   if(!('serviceWorker' in navigator))return;
-  var swCode=[
-    'var CACHE="taskpro-v12";',
-    'var ASSETS=["/"];',
-    'self.addEventListener("install",function(e){',
-    '  e.waitUntil(caches.open(CACHE).then(function(c){',
-    '    return c.addAll(ASSETS).catch(function(){});',
-    '  }));',
-    '  self.skipWaiting();',
-    '});',
-    'self.addEventListener("activate",function(e){',
-    '  e.waitUntil(caches.keys().then(function(keys){',
-    '    return Promise.all(keys.filter(function(k){return k!==CACHE;}).map(function(k){return caches.delete(k);}));',
-    '  }));',
-    '  self.clients.claim();',
-    '});',
-    'self.addEventListener("fetch",function(e){',
-    '  if(e.request.method!=="GET")return;',
-    '  e.respondWith(fetch(e.request).then(function(r){',
-    '    if(!r||r.status!==200)return r;',
-    '    var rc=r.clone();',
-    '    caches.open(CACHE).then(function(c){c.put(e.request,rc);});',
-    '    return r;',
-    '  }).catch(function(){return caches.match(e.request);}));',
-    '});',
-  ].join('\n');
-  try{
-    var blob=new Blob([swCode],{type:'text/javascript'});
-    var swUrl=URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl,{scope:'./'})
-      .then(function(r){console.log('[TaskPro] SW actif, offline prêt');})
-      .catch(function(){
-        // Fallback: essayer sw.js externe si blob échoue (HTTPS requis)
-        navigator.serviceWorker.register('./sw.js').catch(function(){});
+
+  // ── SW code complet (Cache-First pour assets, Network-First pour pages) ──
+  var swCode=`
+'use strict';
+
+const CACHE_NAME   = 'taskpro-v20';
+const CACHE_STATIC = 'taskpro-static-v20';
+const CACHE_FONTS  = 'taskpro-fonts-v20';
+
+// Ressources critiques à pré-cacher à l'installation
+const PRECACHE_ASSETS = [
+  './',
+  'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'
+];
+
+// ── INSTALL : pré-cache les ressources critiques ──
+self.addEventListener('install', function(e){
+  e.waitUntil(
+    caches.open(CACHE_STATIC).then(function(cache){
+      return Promise.allSettled(
+        PRECACHE_ASSETS.map(function(url){
+          return cache.add(url).catch(function(err){
+            console.warn('[TaskPro SW] Impossible de cacher:', url, err);
+          });
+        })
+      );
+    }).then(function(){
+      return self.skipWaiting();
+    })
+  );
+});
+
+// ── ACTIVATE : supprime les vieux caches ──
+self.addEventListener('activate', function(e){
+  var validCaches = [CACHE_NAME, CACHE_STATIC, CACHE_FONTS];
+  e.waitUntil(
+    caches.keys().then(function(keys){
+      return Promise.all(
+        keys.filter(function(k){ return !validCaches.includes(k); })
+            .map(function(k){ return caches.delete(k); })
+      );
+    }).then(function(){
+      return self.clients.claim();
+    })
+  );
+});
+
+// ── FETCH : stratégie intelligente par type de ressource ──
+self.addEventListener('fetch', function(e){
+  var req = e.request;
+  if(req.method !== 'GET') return;
+
+  var url = new URL(req.url);
+
+  // 1) Polices Google Fonts → Cache-First (immuables)
+  if(url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com'){
+    e.respondWith(
+      caches.open(CACHE_FONTS).then(function(cache){
+        return cache.match(req).then(function(hit){
+          if(hit) return hit;
+          return fetch(req).then(function(res){
+            if(res && res.status === 200) cache.put(req, res.clone());
+            return res;
+          }).catch(function(){ return new Response('', {status: 503}); });
+        });
+      })
+    );
+    return;
+  }
+
+  // 2) CDN libs (Chart.js, SheetJS, etc.) → Cache-First
+  if(url.hostname === 'cdnjs.cloudflare.com'){
+    e.respondWith(
+      caches.open(CACHE_STATIC).then(function(cache){
+        return cache.match(req).then(function(hit){
+          if(hit) return hit;
+          return fetch(req).then(function(res){
+            if(res && res.status === 200) cache.put(req, res.clone());
+            return res;
+          }).catch(function(){ return caches.match(req); });
+        });
+      })
+    );
+    return;
+  }
+
+  // 3) Page principale → Network-First avec fallback cache
+  if(url.pathname === '/' || url.pathname.endsWith('.html')){
+    e.respondWith(
+      fetch(req).then(function(res){
+        if(res && res.status === 200){
+          caches.open(CACHE_NAME).then(function(cache){ cache.put(req, res.clone()); });
+        }
+        return res;
+      }).catch(function(){
+        return caches.match(req).then(function(cached){
+          return cached || caches.match('./');
+        });
+      })
+    );
+    return;
+  }
+
+  // 4) Tout le reste → Stale-While-Revalidate
+  e.respondWith(
+    caches.open(CACHE_NAME).then(function(cache){
+      return cache.match(req).then(function(cached){
+        var fetchPromise = fetch(req).then(function(res){
+          if(res && res.status === 200) cache.put(req, res.clone());
+          return res;
+        }).catch(function(){ return cached; });
+        return cached || fetchPromise;
       });
-  }catch(e){}
+    })
+  );
+});
+
+// ── BACKGROUND SYNC : synchronise les données en attente ──
+self.addEventListener('sync', function(e){
+  if(e.tag === 'taskpro-sync'){
+    e.waitUntil(
+      self.clients.matchAll().then(function(clients){
+        clients.forEach(function(client){
+          client.postMessage({type:'SYNC_READY'});
+        });
+      })
+    );
+  }
+});
+
+// ── PUSH NOTIFICATIONS ──
+self.addEventListener('push', function(e){
+  var data = e.data ? e.data.json() : {title:'TaskPro', body:'Nouvelle notification'};
+  e.waitUntil(
+    self.registration.showNotification(data.title || 'TaskPro', {
+      body: data.body || '',
+      icon: data.icon || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%2307080f"/><text y=".85em" font-size="72" text-anchor="middle" x="50">📋</text></svg>',
+      badge: data.badge || '',
+      tag: data.tag || 'taskpro',
+      data: data.url || './',
+      vibrate: [200, 100, 200]
+    })
+  );
+});
+
+// ── NOTIFICATION CLICK : ouvre l'app ──
+self.addEventListener('notificationclick', function(e){
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({type:'window', includeUncontrolled:true}).then(function(clients){
+      for(var i=0; i<clients.length; i++){
+        if(clients[i].url && 'focus' in clients[i]) return clients[i].focus();
+      }
+      if(self.clients.openWindow) return self.clients.openWindow(e.notification.data || './');
+    })
+  );
+});
+`;
+
+  // ── Génération du fichier sw.js dynamiquement ──
+
+  // ⚠️ Le Service Worker nécessite HTTP/HTTPS — ne fonctionne pas sur file://
+  if(location.protocol === 'file:'){
+    console.info('[TaskPro] ℹ️ SW désactivé — ouvrez le fichier via un serveur HTTP pour activer le mode offline.');
+    return; // sortie silencieuse, pas d'erreur rouge
+  }
+
+  try{
+    var blob = new Blob([swCode], {type:'text/javascript'});
+    var swUrl = URL.createObjectURL(blob);
+
+    navigator.serviceWorker.register(swUrl, {scope:'./'})
+      .then(function(reg){
+        console.log('[TaskPro] ✅ Service Worker actif — PWA offline prêt');
+
+        // Vérifier les mises à jour toutes les 60 min
+        setInterval(function(){ reg.update(); }, 60 * 60 * 1000);
+
+        // Notifier l'app quand une nouvelle version est disponible
+        reg.addEventListener('updatefound', function(){
+          var newSW = reg.installing;
+          if(!newSW) return;
+          newSW.addEventListener('statechange', function(){
+            if(newSW.state === 'installed' && navigator.serviceWorker.controller){
+              if(typeof showT === 'function'){
+                showT('🔄','Mise à jour disponible — rechargez pour activer');
+              }
+            }
+          });
+        });
+      })
+      .catch(function(err){
+        // Blob URL échoue sur certains navigateurs Android — essayer sw.js externe
+        navigator.serviceWorker.register('./sw.js', {scope:'./'})
+          .then(function(){ console.log('[TaskPro] ✅ SW externe actif'); })
+          .catch(function(){ console.info('[TaskPro] ℹ️ SW non disponible sur ce navigateur.'); });
+      });
+
+    // Écouter les messages du SW
+    navigator.serviceWorker.addEventListener('message', function(e){
+      if(e.data && e.data.type === 'SYNC_READY'){
+        console.log('[TaskPro] Background sync déclenché');
+      }
+    });
+
+    // Background Sync si supporté
+    navigator.serviceWorker.ready.then(function(reg){
+      if('sync' in reg) reg.sync.register('taskpro-sync').catch(function(){});
+    });
+
+  }catch(err){
+    console.info('[TaskPro] ℹ️ SW non supporté sur cet environnement.');
+  }
 })();
 
 
 
 
 
-// ══ PWA MANIFEST (inline) ══
+// ══ PWA MANIFEST — COMPLET ══
 (function(){
   try{
-    var manifest={
-      name:'TaskPro',short_name:'TaskPro',
-      description:'Application de gestion de rayon — '+getMagName()+'',
-      start_url:'./',display:'standalone',
-      background_color:'#07080f',theme_color:'#07080f',
-      orientation:'portrait-primary',
-      icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%2307080f"/><text y=".85em" font-size="72" text-anchor="middle" x="50">📋</text></svg>',sizes:'192x192',type:'image/svg+xml'}]
+    var magName = getMagName();
+    var manifest = {
+      name: 'TaskPro Field — ' + magName,
+      short_name: 'TaskPro',
+      description: 'Gestion de rayon & suivi des tâches — ' + magName,
+      start_url: './?source=pwa',
+      display: 'standalone',
+      display_override: ['standalone', 'minimal-ui'],
+      background_color: '#07080f',
+      theme_color: '#07080f',
+      orientation: 'portrait-primary',
+      lang: 'fr-DZ',
+      scope: './',
+      categories: ['productivity', 'business'],
+      icons: [
+        {
+          src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%2307080f"/><text y=".85em" font-size="72" text-anchor="middle" x="50">📋</text></svg>',
+          sizes: '192x192',
+          type: 'image/svg+xml',
+          purpose: 'any'
+        },
+        {
+          src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%2307080f"/><text y=".85em" font-size="72" text-anchor="middle" x="50">📋</text></svg>',
+          sizes: '512x512',
+          type: 'image/svg+xml',
+          purpose: 'maskable'
+        }
+      ],
+      shortcuts: [
+        {
+          name: 'Mes Tâches',
+          short_name: 'Tâches',
+          description: 'Voir les tâches du jour',
+          url: './?page=taches',
+          icons: [{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="80">✅</text></svg>', sizes:'96x96'}]
+        },
+        {
+          name: 'Chiffres CA',
+          short_name: 'CA',
+          description: 'Saisie chiffre d\'affaires',
+          url: './?page=chiffres',
+          icons: [{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="80">📊</text></svg>', sizes:'96x96'}]
+        },
+        {
+          name: 'Équipe',
+          short_name: 'Équipe',
+          description: 'Présences & absences',
+          url: './?page=presences',
+          icons: [{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="80">👥</text></svg>', sizes:'96x96'}]
+        }
+      ],
+      screenshots: [
+        {
+          label: 'Tableau de bord TaskPro',
+          sizes: '390x844',
+          type: 'image/svg+xml',
+          form_factor: 'narrow',
+          src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844"><rect width="390" height="844" fill="%2307080f"/></svg>'
+        }
+      ]
     };
-    var blob=new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
-    var link=document.createElement('link');
-    link.rel='manifest';link.href=URL.createObjectURL(blob);
+
+    var blob = new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'});
+    var link = document.createElement('link');
+    link.rel = 'manifest';
+    link.href = URL.createObjectURL(blob);
     document.head.appendChild(link);
-  }catch(e){}
+
+    // ── Gestion bouton "Installer l'app" ──
+    window.addEventListener('beforeinstallprompt', function(e){
+      e.preventDefault();
+      window._pwaPrompt = e;
+      var banner = document.getElementById('installBanner');
+      if(banner) setTimeout(function(){ banner.style.display='block'; }, 3000);
+    });
+
+    window.addEventListener('appinstalled', function(){
+      window._pwaPrompt = null;
+      var banner = document.getElementById('installBanner');
+      if(banner) banner.style.display = 'none';
+      if(typeof showT === 'function') showT('📲','TaskPro installé avec succès !');
+    });
+
+    // Boutons install/dismiss
+    var btnAccept = document.getElementById('installAccept');
+    var btnDismiss = document.getElementById('installDismiss');
+    if(btnAccept){
+      btnAccept.addEventListener('click', function(){
+        if(window._pwaPrompt){
+          window._pwaPrompt.prompt();
+          window._pwaPrompt.userChoice.then(function(r){
+            if(r.outcome === 'accepted' && typeof showT === 'function'){
+              showT('📲','Installation en cours…');
+            }
+            window._pwaPrompt = null;
+          });
+        }
+        var banner = document.getElementById('installBanner');
+        if(banner) banner.style.display='none';
+      });
+    }
+    if(btnDismiss){
+      btnDismiss.addEventListener('click', function(){
+        var banner = document.getElementById('installBanner');
+        if(banner) banner.style.display='none';
+        // Ne plus afficher pendant 7 jours
+        try{ localStorage.setItem('tp_install_dismiss', Date.now()); }catch(e){}
+      });
+    }
+
+    // Vérifier si déjà dismissé
+    try{
+      var dismissed = parseInt(localStorage.getItem('tp_install_dismiss')||'0');
+      if(dismissed && Date.now() - dismissed < 7*24*60*60*1000){
+        window.removeEventListener('beforeinstallprompt', function(){});
+      }
+    }catch(e){}
+
+  }catch(err){
+    console.warn('[TaskPro] Manifest PWA non chargé:', err);
+  }
 })();
 
 window.addEventListener('DOMContentLoaded',()=>{
@@ -24071,6 +24367,29 @@ window.addEventListener('DOMContentLoaded',()=>{
   if(notifs.length)document.getElementById('nb').style.display='block';
   renderHome();
   var _bn=document.querySelector('.bnav');if(_bn)_bn.style.display='flex';
+
+  // ── Gérer les raccourcis PWA (?page=...) ──
+  (function(){
+    try{
+      var params = new URLSearchParams(window.location.search);
+      var targetPage = params.get('page');
+      if(targetPage && typeof goPage === 'function'){
+        setTimeout(function(){ goPage(targetPage); }, 200);
+      }
+    }catch(e){}
+  })();
+
+  // ══ HIDE LOADING SKELETON ══
+  // Give the DOM a frame to paint before hiding skeleton
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      var sk=document.getElementById('appSkeleton');
+      if(sk){
+        sk.classList.add('hidden');
+        setTimeout(function(){sk.style.display='none';},380);
+      }
+    });
+  });
   updateDlcBadge();
   updateClock();
   // Demander permission notifications (tâches + DLC)
@@ -29196,6 +29515,7 @@ function archiveTSSession(){
   var savedTaux = _tsCurSession.taux;
   _tsCurSession = null;
   showT('📦','Session archivée · Taux : '+savedTaux+'%');
+  if(typeof updateTSTile === 'function') updateTSTile();
   goPage('tauxService');
 }
 
@@ -29268,26 +29588,6 @@ document.addEventListener('DOMContentLoaded', function(){
   window.goPage = function(p){
     _origGP(p);
     if(p === 'tauxService') setTimeout(renderTSMain, 80);
-    if(p === 'taches') setTimeout(function(){
-      var data = loadTS();
-      var today = tstr();
-      var todaySessions = data.filter(function(s){ return s.date===today && s.archived && s.totalCom>0; });
-      var badge = document.getElementById('tileTSBadge');
-      if(!badge) return;
-      if(todaySessions.length){
-        var tc7=0,tr7=0; todaySessions.forEach(function(s){tc7+=s.totalCom;tr7+=s.totalRec;});
-        var t7=Math.round(tr7/tc7*100);
-        var col=getTauxColor(t7);
-        badge.textContent=t7+'%';
-        badge.style.color=col.color;
-        badge.style.background=col.bg;
-        badge.style.borderColor=col.border;
-        badge.style.border='1px solid '+col.border;
-      } else {
-        badge.textContent='KPI'; badge.style.color='#a7f3d0';
-        badge.style.background='rgba(255,255,255,.15)'; badge.style.border='none';
-      }
-    }, 80);
   };
 });
 
@@ -34532,92 +34832,3 @@ function blExportPDF(){
   </div>
 </div>
 <!-- ══ BLOC-NOTES MODAL ══ -->
-<div id="blocNotesModal" onclick="if(event.target===this)closeBlocNotes()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1100;align-items:flex-end;justify-content:center;-webkit-tap-highlight-color:transparent;">
-  <div style="background:var(--bg);border-radius:24px 24px 0 0;width:100%;max-width:430px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;padding-bottom:env(safe-area-inset-bottom);">
-
-    <!-- Header -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;border-bottom:1px solid var(--bord);flex-shrink:0;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="font-size:22px;">✍️</div>
-        <div>
-          <div style="font-size:15px;font-weight:900;color:var(--t1);">Bloc-Notes Rapide</div>
-          <div style="font-size:10px;color:var(--t2);margin-top:1px;">Capture tes idées · transfère-les ensuite</div>
-        </div>
-      </div>
-      <div onclick="closeBlocNotes()" style="width:30px;height:30px;border-radius:50%;background:var(--s2);border:1px solid var(--bord);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:18px;">×</div>
-    </div>
-
-    <!-- Quick Input -->
-    <div style="padding:14px 18px 10px;flex-shrink:0;border-bottom:1px solid var(--bord);">
-      <textarea id="bnInput" class="fi" rows="3" placeholder="💡 Tape ton idée ici... (rapide !)" style="width:100%;box-sizing:border-box;resize:none;line-height:1.5;font-size:14px;"></textarea>
-      <button id="bnSaveBtn" onclick="bnSave()" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;color:#fff;font-size:13px;font-weight:800;padding:12px;border-radius:14px;cursor:pointer;">✍️ Sauvegarder l'idée</button>
-    </div>
-
-    <!-- Notes List -->
-    <div style="flex:1;overflow-y:auto;padding:10px 18px 16px;">
-      <div id="bnCount" style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;"></div>
-      <div id="bnList"></div>
-      <div id="bnEmpty" style="text-align:center;padding:20px 0;color:var(--t2);font-size:12px;">Aucune idée sauvegardée 💭</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ TRANSFER MODAL ══ -->
-<div id="bnTransferModal" onclick="if(event.target===this)closeBnTransfer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1200;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;">
-  <div style="background:var(--bg);border-radius:20px;width:calc(100% - 40px);max-width:380px;padding:20px;">
-    <div style="font-size:13px;font-weight:900;color:var(--t1);margin-bottom:6px;">📤 Transférer vers...</div>
-    <div id="bnTransferText" style="font-size:12px;color:var(--t2);margin-bottom:14px;padding:10px;background:var(--s2);border-radius:10px;line-height:1.4;"></div>
-
-    <!-- ABCDE -->
-    <div style="margin-bottom:10px;">
-      <div style="font-size:10px;font-weight:800;color:#f472b6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">🔤 ABCDE — Choisir niveau</div>
-      <div style="display:flex;gap:5px;">
-        <button onclick="bnTransferABCDE('A')" style="flex:1;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);border-radius:8px;color:#f87171;font-size:12px;font-weight:900;padding:9px;cursor:pointer;">A</button>
-        <button onclick="bnTransferABCDE('B')" style="flex:1;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.4);border-radius:8px;color:#fb923c;font-size:12px;font-weight:900;padding:9px;cursor:pointer;">B</button>
-        <button onclick="bnTransferABCDE('C')" style="flex:1;background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.4);border-radius:8px;color:#facc15;font-size:12px;font-weight:900;padding:9px;cursor:pointer;">C</button>
-        <button onclick="bnTransferABCDE('D')" style="flex:1;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);border-radius:8px;color:#60a5fa;font-size:12px;font-weight:900;padding:9px;cursor:pointer;">D</button>
-        <button onclick="bnTransferABCDE('E')" style="flex:1;background:rgba(100,116,139,.15);border:1px solid rgba(100,116,139,.3);border-radius:8px;color:#94a3b8;font-size:12px;font-weight:900;padding:9px;cursor:pointer;">E</button>
-      </div>
-    </div>
-
-    <!-- Réunion -->
-    <button onclick="bnTransferReunion()" style="width:100%;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.3);color:#38bdf8;font-size:13px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;margin-bottom:8px;text-align:left;">
-      📝 Ajouter comme point de Réunion
-    </button>
-
-    <!-- Tâche -->
-    <button onclick="bnTransferTache()" style="width:100%;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#60a5fa;font-size:13px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;margin-bottom:14px;text-align:left;">
-      ✅ Ajouter comme Tâche ABCDE priorité A
-    </button>
-
-    <button onclick="closeBnTransfer()" style="width:100%;background:var(--s2);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
-  </div>
-</div>
-<!-- ══ RESULTAT MODAL (Excellence) ══ -->
-<div id="excellenceResModal" onclick="if(event.target===this)closeExcellenceRes()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1100;align-items:flex-end;justify-content:center;">
-  <div style="background:var(--bg);border-radius:24px 24px 0 0;width:100%;max-width:430px;padding:20px 18px 32px;">
-    <div style="font-size:13px;font-weight:900;color:var(--t1);margin-bottom:6px;">📊 Enregistrer le Résultat</div>
-    <div id="excellenceResText" style="font-size:12px;color:var(--t2);margin-bottom:14px;padding:9px;background:var(--s2);border-radius:10px;line-height:1.4;"></div>
-    <div style="display:flex;gap:6px;margin-bottom:10px;">
-      <button onclick="setExcellenceRes('resolu')" data-eres="resolu" style="flex:1;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:10px;color:#34d399;font-size:12px;font-weight:900;padding:10px;cursor:pointer;">✅ Résolu</button>
-      <button onclick="setExcellenceRes('partiel')" data-eres="partiel" style="flex:1;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);border-radius:10px;color:#fbbf24;font-size:12px;font-weight:900;padding:10px;cursor:pointer;">⚡ Partiel</button>
-      <button onclick="setExcellenceRes('non_resolu')" data-eres="non_resolu" style="flex:1;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#f87171;font-size:12px;font-weight:900;padding:10px;cursor:pointer;">❌ Non résolu</button>
-    </div>
-    <textarea id="excellenceResNote" class="fi" rows="2" placeholder="Détails (optionnel)..." style="width:100%;box-sizing:border-box;resize:none;margin-bottom:12px;font-size:12px;"></textarea>
-    <div style="display:flex;gap:8px;">
-      <button onclick="closeExcellenceRes()" style="flex:1;background:var(--s2);border:1px solid var(--bord);color:var(--t2);font-size:13px;font-weight:700;padding:11px;border-radius:12px;cursor:pointer;">Annuler</button>
-      <button onclick="saveExcellenceRes()" style="flex:2;background:linear-gradient(135deg,#059669,#10b981);border:none;color:#fff;font-size:13px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
-    </div>
-  </div>
-</div>
-</div><!-- /app -->
-
-<!-- ══ BLOC-NOTES FAB ══ -->
-<button id="blocNotesFab" onclick="openBlocNotes()" style="position:fixed;bottom:80px;right:16px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:900;box-shadow:0 4px 18px rgba(124,58,237,.5);-webkit-tap-highlight-color:transparent;" title="Bloc-notes rapide">
-  ✍️
-</button>
-
-
-
-</body>
-</html>
