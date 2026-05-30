@@ -684,33 +684,28 @@ body.light input,body.light textarea,body.light select{color:#0d1117!important;b
 body.light input::placeholder,body.light textarea::placeholder{color:#9ca3af!important;}
 
 /* ══ GLOBAL LIGHT MODE — texte lisible sur toutes les pages ══ */
-/* Textes blancs hardcodés → sombres en light mode */
+/* Textes blancs → sombres SEULEMENT hors des cartes gradient sombres */
 body.light .pg [style*="color:#f8faff"],
 body.light .pg [style*="color:#fff"],
 body.light .pg [style*="color:white"]{color:#0d1117!important;}
 /* Exceptions: forms that must stay dark */
 body.light #cdfForm [style*="color:#f8faff"],
 body.light #cdfForm [style*="color:#fff"]{color:#f8faff!important;}
-/* ══ EXCEPTIONS: texte blanc sur fonds sombres en light mode ══ */
-/* Cas 1: parent gradient sombre → enfant color:#fff (cartes nav) */
-body.light .pg [style*="linear-gradient(145deg,#"] [style*="color:#fff"],
-body.light .pg [style*="linear-gradient(145deg,#"] [style*="color:#f8faff"],
-body.light .pg [style*="linear-gradient(135deg,#"] [style*="color:#fff"],
-body.light .pg [style*="linear-gradient(135deg,#"] [style*="color:#f8faff"]{color:#fff!important;}
-/* Cas 2: même élément gradient hex sombre + color:#fff (boutons, etc.) */
-body.light .pg [style*="linear-gradient(145deg,#"][style*="color:#fff"],
-body.light .pg [style*="linear-gradient(145deg,#"][style*="color:#f8faff"],
-body.light .pg [style*="linear-gradient(135deg,#"][style*="color:#fff"],
-body.light .pg [style*="linear-gradient(135deg,#"][style*="color:#f8faff"]{color:#fff!important;}
-/* Cas 3: fonds solides sombres (PDF=#0033A0, WhatsApp=#25d366, etc.) */
+/* ══ CARTES À FOND GRADIENT SOMBRE → tout le texte reste blanc ══ */
+body.light .pg [style*="linear-gradient(145deg,#"] *,
+body.light .pg [style*="linear-gradient(135deg,#"] *{color:#fff!important;}
+/* Sub-textes dans les cartes gradient → légèrement atténués */
+body.light .pg [style*="linear-gradient(145deg,#"] [style*="color:var(--t2)"],
+body.light .pg [style*="linear-gradient(135deg,#"] [style*="color:var(--t2)"]{color:rgba(255,255,255,.75)!important;}
+/* Cas 3: fonds solides sombres */
 body.light .pg [style*="background:#0033A0"]{color:#fff!important;}
 body.light .pg [style*="background:#25d366"]{color:#fff!important;}
-/* Cas 4: sous-titres rgba dans les cartes à fond gradient sombre */
-body.light .pg [style*="linear-gradient(145deg,#"] [style*="color:rgba(255,255,255,"],
-body.light .pg [style*="linear-gradient(135deg,#"] [style*="color:rgba(255,255,255,"]{color:var(--t2)!important;}
-/* Cas 5: fonds semi-transparents des sous-éléments dans les cartes sombres */
+/* Cas 5: fonds semi-transparents dans les cartes sombres */
 body.light .pg [style*="linear-gradient(145deg,#"] [style*="background:rgba(255,255,255,"],
-body.light .pg [style*="linear-gradient(135deg,#"] [style*="background:rgba(255,255,255,"]{background:rgba(255,255,255,.1)!important;}
+body.light .pg [style*="linear-gradient(135deg,#"] [style*="background:rgba(255,255,255,"]{background:rgba(255,255,255,.15)!important;}
+/* Mini pills inside hub cards */
+body.light .pg [style*="linear-gradient(135deg,#"] [style*="grid"] > div[style*="background:rgba(255,255,255,.06)"],
+body.light .pg [style*="linear-gradient(145deg,#"] [style*="grid"] > div[style*="background:rgba(255,255,255,.06)"]{background:rgba(255,255,255,.18)!important;border:1px solid rgba(255,255,255,.35)!important;}
 /* Labels et titres de sections */
 body.light .pg [style*="color:rgba(255,255,255,.9"],
 body.light .pg [style*="color:rgba(255,255,255,.8"],
@@ -3123,6 +3118,8 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       </div>
       <div style="color:var(--t2);font-size:22px;">›</div>
     </div>
+
+    <div onclick="goPage('congesGlobal')" style="background:linear-gradient(135deg,#0c2d4a,#0369a1);border:1px solid rgba(56,189,248,.35);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
       <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.07;line-height:1;">🏖️</div>
       <div style="font-size:34px;">🏖️</div>
       <div style="flex:1;">
