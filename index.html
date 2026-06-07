@@ -113,6 +113,14 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;bac
 #pgTaches .scroll > div > div:nth-child(11){animation:slideInBottom .25s .46s both;}
 #pgTaches .scroll > div > div:nth-child(12){animation:slideInBottom .25s .50s both;}
 #pgTaches .scroll > div > div:nth-child(13){animation:slideInBottom .25s .54s both;}
+/* — Cards stagger (tiles terrain) — */
+#pgTerrain .scroll > div > div:nth-child(1){animation:slideInBottom .25s .04s both;}
+#pgTerrain .scroll > div > div:nth-child(2){animation:slideInBottom .25s .09s both;}
+#pgTerrain .scroll > div > div:nth-child(3){animation:slideInBottom .25s .14s both;}
+#pgTerrain .scroll > div > div:nth-child(4){animation:slideInBottom .25s .18s both;}
+#pgTerrain .scroll > div > div:nth-child(5){animation:slideInBottom .25s .22s both;}
+#pgTerrain .scroll > div > div:nth-child(6){animation:slideInBottom .25s .26s both;}
+#pgTerrain .scroll > div > div:nth-child(7){animation:slideInBottom .25s .30s both;}
 
 /* — Swipe cards stagger — */
 .swipe-card.top{animation:slideInBottom .26s .05s both;}
@@ -2013,66 +2021,18 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="font-size:9px;font-weight:900;color:rgba(59,130,246,.85);letter-spacing:1.5px;text-transform:uppercase;">🏪 Terrain & Commerce</div>
       <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,.35),transparent);"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+    <div style="margin-bottom:8px;">
 
-      <!-- 1 — COMMERCIAL -->
-      <div onclick="goPage('commercial')" style="background:linear-gradient(145deg,#1e3a8a,#2563eb);border:1px solid rgba(96,165,250,.6);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🛒</div>
-        <div style="font-size:22px;line-height:1;">🛒</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Tâches Commerciales</div>
-      </div>
-
-      <!-- 2 — GESTION DE STOCK -->
-      <div onclick="goPage('gestionStock')" style="background:linear-gradient(145deg,#052e16,#166534);border:1px solid rgba(34,197,94,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.12;line-height:1;pointer-events:none;">📊</div>
-        <div style="font-size:22px;line-height:1;">📊</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Gestion de Stock</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#bbf7d0;font-weight:700;align-self:flex-start;">Stock</span>
-      </div>
-
-      <!-- 3 — PILOTAGE -->
-      <div onclick="goPage('pilotage')" style="background:linear-gradient(145deg,#1e1b4b,#4338ca);border:1px solid rgba(139,92,246,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🧭</div>
-        <div style="font-size:22px;line-height:1;">🧭</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Pilotage &amp; Prospective</div>
-        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#a5f3fc;font-weight:700;align-self:flex-start;">Stratégie</span>
-      </div>
-
-      <!-- 8 — TAUX DE SERVICE — Orange vif pour contraste -->
-      <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#431407,#ea580c);border:1px solid rgba(249,115,22,.6);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-4px;bottom:-8px;font-size:48px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#fb923c;pointer-events:none;">%</div>
-        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#fb923c;">%</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Taux de Service</div>
-        <span id="tileTSBadge" style="background:rgba(251,146,60,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#fed7aa;font-weight:700;align-self:flex-start;">KPI</span>
-      </div>
-
-      <!-- 9 — PLAN TG — full width -->
-      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c4a6e,#0891b2);border:1px solid rgba(6,182,212,.55);border-radius:16px;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;min-height:64px;grid-column:span 2;">
-        <div style="position:absolute;right:-8px;bottom:-8px;font-size:60px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.08;line-height:1;color:#818cf8;pointer-events:none;">TG</div>
-        <div style="font-size:28px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#818cf8;letter-spacing:2px;">TG</div>
+      <!-- TERRAIN — carte unique full width -->
+      <div onclick="goPage('terrain')" style="background:linear-gradient(145deg,#0a1628,#1e3a8a,#1d4ed8);border:1.5px solid rgba(96,165,250,.65);border-radius:20px;padding:18px 20px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;min-height:80px;">
+        <div style="position:absolute;right:-10px;bottom:-10px;font-size:72px;opacity:.07;line-height:1;pointer-events:none;">🏪</div>
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.7),transparent);"></div>
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(59,130,246,.2);border:1.5px solid rgba(96,165,250,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:24px;">🏪</div>
         <div style="flex:1;">
-          <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';">Plan TG — Mise en Avant</div>
-          <div style="font-size:10px;color:var(--t2);margin-top:2px;">Promotions · Rayons · Suivi hebdo</div>
+          <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';letter-spacing:-.2px;">Terrain</div>
+          <div style="font-size:10px;color:rgba(148,163,184,.85);margin-top:3px;line-height:1.4;">Commercial · Stock · Pilotage · KPI · Promo</div>
         </div>
-        <span id="tileTGBadge" style="background:rgba(99,102,241,.2);border-radius:20px;padding:3px 10px;font-size:9px;color:#c7d2fe;font-weight:700;white-space:nowrap;">Mise en Avant</span>
-        <div style="color:var(--t2);font-size:18px;">›</div>
-      </div>
-
-      <!-- ENGAGEMENTS COMMERCIAUX -->
-      <div onclick="goPage('offresCommerciales')" style="background:linear-gradient(145deg,#451a03,#b45309);border:1px solid rgba(251,191,36,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🏷️</div>
-        <div style="font-size:22px;line-height:1;">🏷️</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Engagements OC</div>
-        <span style="background:rgba(251,191,36,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#fde68a;font-weight:700;align-self:flex-start;">OC · ONC</span>
-      </div>
-
-      <!-- CALENDRIER PROMO -->
-      <div onclick="goPage('calendPromo');cpRender()" style="background:linear-gradient(145deg,#1e0a3c,#7c3aed);border:1px solid rgba(167,139,250,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
-        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.15;line-height:1;pointer-events:none;">📅</div>
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a78bfa,#7c3aed,transparent);"></div>
-        <div style="font-size:22px;line-height:1;">📅</div>
-        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Calendrier Promo</div>
-        <span style="background:rgba(167,139,250,.25);border-radius:20px;padding:2px 7px;font-size:9px;color:#ddd6fe;font-weight:700;align-self:flex-start;">Animations</span>
+        <div style="color:rgba(148,163,184,.7);font-size:20px;">›</div>
       </div>
 
     </div>
@@ -2148,6 +2108,87 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     </div><!-- /grid groupe3 -->
   </div><!-- /scroll -->
 </div><!-- /pgTaches -->
+
+<!-- ══════════════════════════════════════════════
+     TERRAIN — Sous-page Terrain & Commerce
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgTerrain">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('taches')">‹</div>
+    <div class="pg-title">Terrain</div>
+  </div>
+  <div class="scroll" style="padding:8px 12px 90px;">
+
+    <!-- ══ GROUPE : Terrain & Commerce ══ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 8px;">
+      <div style="font-size:9px;font-weight:900;color:rgba(59,130,246,.85);letter-spacing:1.5px;text-transform:uppercase;">🏪 Terrain & Commerce</div>
+      <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,.35),transparent);"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+
+      <!-- 1 — COMMERCIAL -->
+      <div onclick="goPage('commercial')" style="background:linear-gradient(145deg,#1e3a8a,#2563eb);border:1px solid rgba(96,165,250,.6);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🛒</div>
+        <div style="font-size:22px;line-height:1;">🛒</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Tâches Commerciales</div>
+      </div>
+
+      <!-- 2 — GESTION DE STOCK -->
+      <div onclick="goPage('gestionStock')" style="background:linear-gradient(145deg,#052e16,#166534);border:1px solid rgba(34,197,94,.4);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.12;line-height:1;pointer-events:none;">📊</div>
+        <div style="font-size:22px;line-height:1;">📊</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Gestion de Stock</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#bbf7d0;font-weight:700;align-self:flex-start;">Stock</span>
+      </div>
+
+      <!-- 3 — PILOTAGE -->
+      <div onclick="goPage('pilotage')" style="background:linear-gradient(145deg,#1e1b4b,#4338ca);border:1px solid rgba(139,92,246,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🧭</div>
+        <div style="font-size:22px;line-height:1;">🧭</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Pilotage &amp; Prospective</div>
+        <span style="background:rgba(255,255,255,.15);border-radius:20px;padding:2px 7px;font-size:9px;color:#a5f3fc;font-weight:700;align-self:flex-start;">Stratégie</span>
+      </div>
+
+      <!-- 8 — TAUX DE SERVICE -->
+      <div onclick="goPage('tauxService')" style="background:linear-gradient(145deg,#431407,#ea580c);border:1px solid rgba(249,115,22,.6);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-4px;bottom:-8px;font-size:48px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.12;line-height:1;color:#fb923c;pointer-events:none;">%</div>
+        <div style="font-size:22px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#fb923c;">%</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Taux de Service</div>
+        <span id="tileTSBadge2" style="background:rgba(251,146,60,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#fed7aa;font-weight:700;align-self:flex-start;">KPI</span>
+      </div>
+
+      <!-- 9 — PLAN TG — full width -->
+      <div onclick="goPage('planTg')" style="background:linear-gradient(145deg,#0c4a6e,#0891b2);border:1px solid rgba(6,182,212,.55);border-radius:16px;padding:14px 16px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;min-height:64px;grid-column:span 2;">
+        <div style="position:absolute;right:-8px;bottom:-8px;font-size:60px;font-weight:900;font-family:'IBM Plex Mono',monospace;opacity:.08;line-height:1;color:#818cf8;pointer-events:none;">TG</div>
+        <div style="font-size:28px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;color:#818cf8;letter-spacing:2px;">TG</div>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';">Plan TG — Mise en Avant</div>
+          <div style="font-size:10px;color:var(--t2);margin-top:2px;">Promotions · Rayons · Suivi hebdo</div>
+        </div>
+        <span id="tileTGBadge2" style="background:rgba(99,102,241,.2);border-radius:20px;padding:3px 10px;font-size:9px;color:#c7d2fe;font-weight:700;white-space:nowrap;">Mise en Avant</span>
+        <div style="color:var(--t2);font-size:18px;">›</div>
+      </div>
+
+      <!-- ENGAGEMENTS COMMERCIAUX -->
+      <div onclick="goPage('offresCommerciales')" style="background:linear-gradient(145deg,#451a03,#b45309);border:1px solid rgba(251,191,36,.45);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.1;line-height:1;pointer-events:none;">🏷️</div>
+        <div style="font-size:22px;line-height:1;">🏷️</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Engagements OC</div>
+        <span style="background:rgba(251,191,36,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#fde68a;font-weight:700;align-self:flex-start;">OC · ONC</span>
+      </div>
+
+      <!-- CALENDRIER PROMO -->
+      <div onclick="goPage('calendPromo');cpRender()" style="background:linear-gradient(145deg,#1e0a3c,#7c3aed);border:1px solid rgba(167,139,250,.55);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.15;line-height:1;pointer-events:none;">📅</div>
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a78bfa,#7c3aed,transparent);"></div>
+        <div style="font-size:22px;line-height:1;">📅</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Calendrier Promo</div>
+        <span style="background:rgba(167,139,250,.25);border-radius:20px;padding:2px 7px;font-size:9px;color:#ddd6fe;font-weight:700;align-self:flex-start;">Animations</span>
+      </div>
+
+    </div>
+  </div><!-- /scroll -->
+</div><!-- /pgTerrain -->
 
 <!-- ══════════════════════════════════════════════
      PLAN TG — Mise en Avant Promotionnelle
@@ -12296,6 +12337,93 @@ function checkBackupReminder(){
   }
 }
 
+
+// ══ EXPORT EXCEL (CSV) — Réceptions & Taux de Service ══
+function exportExcelReceptions(){
+  try{
+    var SK2=typeof SK!=='undefined'?SK:'tp10';
+    var data=[];
+    try{data=JSON.parse(localStorage.getItem(SK2+'_tsr')||'[]');}catch(e){}
+    if(!data.length){showT('⚠️','Aucune réception à exporter');return;}
+
+    // BOM UTF-8 pour Excel
+    var bom='\uFEFF';
+    var headers=['N° BC','Fournisseur','Date','Rayon','Qté Commandée','Qté Reçue','Taux %','Anomalies'];
+    var rows=[headers.join(';')];
+    data.forEach(function(r){
+      var taux=r.qteCom>0?Math.round(r.qteRec/r.qteCom*100):0;
+      var anoms=(r.anomalies||[]).map(function(a){return a.type+(a.desc?' ('+a.desc+')':'');}).join(' | ');
+      rows.push([
+        r.bc||'',
+        r.fournisseur||'',
+        r.date||'',
+        r.rayon||'',
+        r.qteCom||0,
+        r.qteRec||0,
+        taux,
+        anoms
+      ].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(';'));
+    });
+    var csv=bom+rows.join('\n');
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download='receptions_'+new Date().toISOString().slice(0,10)+'.csv';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+    showT('📊','Export Excel — '+data.length+' réception(s) exportée(s) !');
+  }catch(e){showT('❌','Erreur export Excel: '+e.message);}
+}
+
+// ══ EXPORT EXCEL — Toutes les tâches ══
+function exportExcelTaches(){
+  try{
+    var SK2=typeof SK!=='undefined'?SK:'tp10';
+    var tachesData=[];
+    try{tachesData=JSON.parse(localStorage.getItem(SK2+'_t')||'[]');}catch(e){}
+    if(!tachesData.length){showT('⚠️','Aucune tâche à exporter');return;}
+
+    var bom='\uFEFF';
+    var headers=['Nom','Rayon','Priorité','Statut','Date','Heure'];
+    var rows=[headers.join(';')];
+    var priMap={r:'Urgent',y:'Moyen',g:'Normal',b:'Info'};
+    tachesData.forEach(function(t){
+      rows.push([
+        t.name||'',
+        t.rayon||'',
+        priMap[t.prio]||t.prio||'',
+        t.done?'Terminée':'En cours',
+        t.date||'',
+        t.time||''
+      ].map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(';'));
+    });
+    var csv=bom+rows.join('\n');
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download='taches_'+new Date().toISOString().slice(0,10)+'.csv';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+    showT('📊','Export Excel — '+tachesData.length+' tâche(s) exportée(s) !');
+  }catch(e){showT('❌','Erreur export Excel: '+e.message);}
+}
+
+// ══ PANNEAU EXPORT — ouvre le modal d'export ══
+function openExportPanel(){
+  var mo=document.getElementById('exportPanelModal');
+  if(mo){mo.style.display='flex';}
+}
+function closeExportPanel(){
+  var mo=document.getElementById('exportPanelModal');
+  if(mo){mo.style.display='none';}
+}
+
 function importBackup(){
   var inp=document.createElement('input');
   inp.type='file';
@@ -12704,7 +12832,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC'};
+  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -14198,12 +14326,14 @@ function addBriefingItem(){
   inp.value=''; toggleBriefingAdd(); renderBriefing(); showT('✅','Point ajouté');
 }
 function delBriefingItem(i){
-  var d=loadEQ(); var br=getBriefingItems();
-  br.items.splice(i,1); delete br.checks[i];
-  // re-index checks
-  var newChecks={};
-  Object.keys(br.checks).forEach(function(k){var ki=parseInt(k);if(ki<i)newChecks[ki]=br.checks[k];else if(ki>i)newChecks[ki-1]=br.checks[k];});
-  br.checks=newChecks; d.briefing=br; saveEQ(d); renderBriefing();
+  showConfirm('🗑️ Supprimer','Supprimer cet élément du briefing ?',function(){
+    var d=loadEQ(); var br=getBriefingItems();
+    br.items.splice(i,1); delete br.checks[i];
+    var newChecks={};
+    Object.keys(br.checks).forEach(function(k){var ki=parseInt(k);if(ki<i)newChecks[ki]=br.checks[k];else if(ki>i)newChecks[ki-1]=br.checks[k];});
+    br.checks=newChecks; d.briefing=br; saveEQ(d); renderBriefing();
+    showT('🗑️','Élément supprimé');
+  });
 }
 function renderBriefing(){
   var br=getBriefingItems();
@@ -14353,8 +14483,10 @@ function saveVigNew(){
 
 // ─── DELETE ───
 function delVigItem(id){
-  var d=loadVig(); d.items=(d.items||[]).filter(function(i){return i.id!==id;});
-  saveVig(d); renderVigilance();
+  showConfirm('🗑️ Supprimer','Supprimer cette observation ?',function(){
+    var d=loadVig(); d.items=(d.items||[]).filter(function(i){return i.id!==id;});
+    saveVig(d); renderVigilance(); showT('🗑️','Observation supprimée');
+  });
 }
 
 // ─── RENDER MAIN ───
@@ -14484,9 +14616,11 @@ function toggleVigForm(){}
 function addVigilance(){ openVigModal(); }
 function saveVigilance(){ saveVigNew(); }
 function delVigilance(i){
-  var d=loadVig(); var items=d.items||[];
+  showConfirm('🗑️ Supprimer','Supprimer cette entrée vigilance ?',function(){
+    var d=loadVig(); var items=d.items||[];
   if(items[i])items.splice(i,1);
   d.items=items; saveVig(d); renderVigilance();
+  });
 }
 function vigAddPhoto(){}
 function _vigRenderPhotos(){}
@@ -14637,11 +14771,14 @@ function saveCaissier(){
   showT('✅','Caissier affecté · '+_currentCaisse);
 }
 function delCaissier(id){
-  var d=loadPlan();
-  d.caissiers=(d.caissiers||[]).filter(function(c){return c.id!==id;});
-  savePlan(d);
-  renderCaisses();
-  showT('🗑️','Supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer ce caissier ?',function(){
+    var d=loadPlan();
+    d.caissiers=(d.caissiers||[]).filter(function(c){return c.id!==id;});
+    savePlan(d);
+    renderCaisses();
+    showT('🗑️','Supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 function addCaisse(){
   var d=loadPlan();
@@ -14736,11 +14873,14 @@ function saveRayonEmp(){
   showT('✅','Affecté · '+_currentRayon.label);
 }
 function delRayonEmp(id){
-  var d=loadPlan();
-  d.rayonEmps=(d.rayonEmps||[]).filter(function(e){return e.id!==id;});
-  savePlan(d);
-  renderRayonsPlanning();
-  showT('🗑️','Supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer cet employé du rayon ?',function(){
+    var d=loadPlan();
+    d.rayonEmps=(d.rayonEmps||[]).filter(function(e){return e.id!==id;});
+    savePlan(d);
+    renderRayonsPlanning();
+    showT('🗑️','Supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 
 // ══ HYGIÈNE ══
@@ -14968,10 +15108,12 @@ function hygMardiUploadPhoto(input,idx){
   input.value='';
 }
 function delHygMardiPhoto(idx){
-  var today=tstr();
+  showConfirm('🗑️ Supprimer','Supprimer cette photo hygiène ?',function(){
+    var today=tstr();
   var d=loadHyg();
   if(d.mardi&&d.mardi[today])delete d.mardi[today]['photo_'+idx];
   saveHyg(d); renderHygMardi();
+  });
 }
 function resetHygMardi(){
   var today=tstr();
@@ -15008,9 +15150,12 @@ function addScore(id,val){
   saveEQ(d); renderTopVentes();
 }
 function delBestSeller(id){
-  var d=loadEQ(); if(!d.bestSellers)return;
-  d.bestSellers=d.bestSellers.filter(function(b){return b.id!==id;});
-  saveEQ(d); renderTopVentes();
+  showConfirm('🗑️ Supprimer','Supprimer ce best-seller ?',function(){
+    var d=loadEQ(); if(!d.bestSellers)return;
+    d.bestSellers=d.bestSellers.filter(function(b){return b.id!==id;});
+    saveEQ(d); renderTopVentes();
+    showT('🗑️','Supprimé');
+  });
 }
 var DEFAULT_INVENTAIRE=['Vérifier stock Produit 1','Vérifier stock Produit 2','Compter ruptures','Mise à jour commandes','Rapport stocks critiques'];
 function getInvItems(){var d=loadEQ();if(!d.invItems)d.invItems=DEFAULT_INVENTAIRE.slice();return d.invItems;}
@@ -15090,11 +15235,14 @@ function addInvItem(){
   inp.value=''; toggleInvAdd(); renderTopVentes(); showT('✅','Point ajouté');
 }
 function delInvItem(i){
-  var d=loadEQ(); d.invItems=getInvItems();
-  d.invItems.splice(i,1);
-  var newC={}; var inv=d.inventaire||{};
-  Object.keys(inv).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=inv[k];else if(ki>i)newC[ki-1]=inv[k];});
-  d.inventaire=newC; saveEQ(d); renderTopVentes();
+  showConfirm('🗑️ Supprimer','Supprimer cet article ?',function(){
+    var d=loadEQ(); d.invItems=getInvItems();
+    d.invItems.splice(i,1);
+    var newC={}; var inv=d.inventaire||{};
+    Object.keys(inv).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=inv[k];else if(ki>i)newC[ki-1]=inv[k];});
+    d.inventaire=newC; saveEQ(d); renderTopVentes();
+    showT('🗑️','Supprimé');
+  });
 }
 function toggleInventaire(i){
   var d=loadEQ(); if(!d.inventaire)d.inventaire={};
@@ -15177,9 +15325,11 @@ function renderCongePage(){
   }).join('');
 }
 function delConge(i){
-  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+  showConfirm('🗑️ Supprimer','Supprimer ce congé ?',function(){
+    var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
   conges.splice(i,1); localStorage.setItem(SK+'_conges',JSON.stringify(conges));
   renderCongePage();
+  });
 }
 
 // ══ RETENUS LIST ══
@@ -15233,10 +15383,12 @@ function renderCongeList(){
   }).join('');
 }
 function delCongeItem(i){
-  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+  showConfirm('🗑️ Supprimer','Supprimer cet élément de congé ?',function(){
+    var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
   conges.splice(i,1);
   localStorage.setItem(SK+'_conges',JSON.stringify(conges));
   renderCongeList();
+  });
 }
 
 function addRetenu(type){
@@ -15400,10 +15552,13 @@ function saveDemarque(){
   showT('✅','Constat enregistré');
 }
 function delDemarque(id){
-  var item=loadDemarque().find(function(d){return d.id===id;});
-  var data = loadDemarque().filter(function(d){return d.id!==id;});
-  logAction('Démarque','delete',item?item.produit:'Démarque','');
-  saveDemarqueData(data); renderDemarque();
+  showConfirm('🗑️ Supprimer','Supprimer cette démarque ?',function(){
+    var item=loadDemarque().find(function(d){return d.id===id;});
+    var data = loadDemarque().filter(function(d){return d.id!==id;});
+    logAction('Démarque','delete',item?item.produit:'Démarque','');
+    saveDemarqueData(data); renderDemarque();
+    showT('🗑️','Supprimé');
+  });
 }
 
 // ── Calculateur taux de démarque ──
@@ -15552,8 +15707,11 @@ function saveVeille(){
   logAction('Veille','add','Observation concurrente','');
 }
 function delVeille(id){
-  var data = loadVeille().filter(function(d){return d.id!==id;});
-  saveVeilleData(data); renderVeille();
+  showConfirm('🗑️ Supprimer','Supprimer cette veille concurrentielle ?',function(){
+    var data = loadVeille().filter(function(d){return d.id!==id;});
+    saveVeilleData(data); renderVeille();
+    showT('🗑️','Supprimé');
+  });
 }
 function renderVeille(){
   var all = loadVeille();
@@ -15694,9 +15852,12 @@ function saveRayonPlanning(){
   closeM('rayonPlanningModal'); renderRayonPlanning(); showT('✅','Rayon affecté');
 }
 function delRayonPlanning(id){
-  var d=loadEQ(); if(!d.rayonPlanning)return;
-  d.rayonPlanning=d.rayonPlanning.filter(function(r){return r.id!==id;});
-  saveEQ(d); renderRayonPlanning();
+  showConfirm('🗑️ Supprimer','Supprimer ce planning rayon ?',function(){
+    var d=loadEQ(); if(!d.rayonPlanning)return;
+    d.rayonPlanning=d.rayonPlanning.filter(function(r){return r.id!==id;});
+    saveEQ(d); renderRayonPlanning();
+    showT('🗑️','Supprimé');
+  });
 }
 function renderRayonPlanning(){
   var d = loadEQ(); var items = (d.rayonPlanning||[]).filter(function(r){return r.date===tstr();});
@@ -15802,14 +15963,17 @@ function saveAuditItem(){
   renderAudit();showT('✅','Point ajouté');
 }
 function delAuditItem(i){
-  var d=loadAdv();d.auditItems=getAuditItems();
-  d.auditItems.splice(i,1);
-  // Re-index checks
-  var today=tstr();if(d.auditChecks&&d.auditChecks[today]){
-    var newC={};Object.keys(d.auditChecks[today]).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=d.auditChecks[today][k];else if(ki>i)newC[ki-1]=d.auditChecks[today][k];});
-    d.auditChecks[today]=newC;
-  }
-  saveAdv(d);renderAudit();
+  showConfirm('🗑️ Supprimer','Supprimer cet élément d\'audit ?',function(){
+    var d=loadAdv();d.auditItems=getAuditItems();
+    d.auditItems.splice(i,1);
+    // Re-index checks
+    var today=tstr();if(d.auditChecks&&d.auditChecks[today]){
+      var newC={};Object.keys(d.auditChecks[today]).forEach(function(k){var ki=parseInt(k);if(ki<i)newC[ki]=d.auditChecks[today][k];else if(ki>i)newC[ki-1]=d.auditChecks[today][k];});
+      d.auditChecks[today]=newC;
+    }
+    saveAdv(d);renderAudit();
+    showT('🗑️','Supprimé');
+  });
 }
 function toggleAuditItem(i){
   var d=loadAdv();if(!d.auditChecks)d.auditChecks={};var today=tstr();if(!d.auditChecks[today])d.auditChecks[today]={};
@@ -16320,7 +16484,12 @@ function saveRupture(){
   d.ruptures.unshift({id:uid(),produit:prod,rayon:rayon,qte:parseInt(qte)||0,cause:_ruptCause,action:action,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
   saveAdv(d);addRupture();renderRuptures();showT('✅','Rupture enregistrée');
 }
-function delRupture(id){var d=loadAdv();d.ruptures=(d.ruptures||[]).filter(function(r){return r.id!==id;});saveAdv(d);renderRuptures();}
+function delRupture(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette rupture ?',function(){
+    var d=loadAdv();d.ruptures=(d.ruptures||[]).filter(function(r){return r.id!==id;
+    showT('🗑️','Supprimé');
+  });
+});saveAdv(d);renderRuptures();}
 function renderRuptures(){
   var d=loadAdv();var list=(d.ruptures||[]);var el=document.getElementById('ruptureList');var empty=document.getElementById('ruptureEmpty');if(!el)return;
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
@@ -16598,7 +16767,12 @@ function saveNonConf(){
   saveAdv(d);addNonConf();renderNonConf();showT('✅','Non-conformité enregistrée');
 }
 function toggleNcResolved(id){var d=loadAdv();var nc=(d.nonConf||[]).find(function(n){return n.id===id;});if(nc)nc.resolved=!nc.resolved;saveAdv(d);renderNonConf();}
-function delNonConf(id){var d=loadAdv();d.nonConf=(d.nonConf||[]).filter(function(n){return n.id!==id;});saveAdv(d);renderNonConf();}
+function delNonConf(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette non-conformité ?',function(){
+    var d=loadAdv();d.nonConf=(d.nonConf||[]).filter(function(n){return n.id!==id;
+    showT('🗑️','Supprimé');
+  });
+});saveAdv(d);renderNonConf();}
 function renderNonConf(){
   var d=loadAdv();var list=d.nonConf||[];var el=document.getElementById('nonConfList');var empty=document.getElementById('nonConfEmpty');if(!el)return;
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
@@ -16649,7 +16823,12 @@ function saveFournisseur(){
   d.fournisseurs.unshift({id:uid(),nom:nom,rep:rep,objet:objet,obs:obs,note:_fournNote,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
   saveAdv(d);addFournisseur();renderFournisseurs();showT('✅','Compte-rendu enregistré');
 }
-function delFournisseur(id){var d=loadAdv();d.fournisseurs=(d.fournisseurs||[]).filter(function(f){return f.id!==id;});saveAdv(d);renderFournisseurs();}
+function delFournisseur(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce fournisseur ?',function(){
+    var d=loadAdv();d.fournisseurs=(d.fournisseurs||[]).filter(function(f){return f.id!==id;
+    showT('🗑️','Supprimé');
+  });
+});saveAdv(d);renderFournisseurs();}
 function renderFournisseurs(){
   var d=loadAdv();var list=d.fournisseurs||[];var el=document.getElementById('fournisseurList');var empty=document.getElementById('fournisseurEmpty');if(!el)return;
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
@@ -17151,8 +17330,11 @@ function addRParticipant(){
   if(el){var inputs=el.querySelectorAll('input[data-field="nom"]');if(inputs.length)inputs[inputs.length-1].focus();}
 }
 function delRParticipant(id){
-  _rParticipants=_rParticipants.filter(function(p){return p.id!==id;});
-  renderRParticipants();
+  showConfirm('🗑️ Supprimer','Retirer ce participant ?',function(){
+    _rParticipants=_rParticipants.filter(function(p){return p.id!==id;});
+    renderRParticipants();
+    showT('🗑️','Supprimé');
+  });
 }
 function updateRParticipant(id,field,val){
   var p=_rParticipants.find(function(x){return x.id===id;});
@@ -17183,7 +17365,12 @@ function addRPoint(){
   var el=document.getElementById('rPointsList');
   if(el){var inputs=el.querySelectorAll('input[data-pfield="titre"]');if(inputs.length)inputs[inputs.length-1].focus();}
 }
-function delRPoint(id){_rPoints=_rPoints.filter(function(p){return p.id!==id;});renderRPoints();}
+function delRPoint(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce point de réunion ?',function(){
+    _rPoints=_rPoints.filter(function(p){return p.id!==id;});renderRPoints();
+    showT('🗑️','Supprimé');
+  });
+}
 function updateRPoint(id,field,val){var p=_rPoints.find(function(x){return x.id===id;});if(p)p[field]=val;}
 function toggleRPoint(id){var p=_rPoints.find(function(x){return x.id===id;});if(p){p.expanded=!p.expanded;renderRPoints();}}
 function renderRPoints(){
@@ -17211,7 +17398,12 @@ function addRSection(){
   var el=document.getElementById('rSectionsList');
   if(el){var inputs=el.querySelectorAll('input[data-sfield="titre"]');if(inputs.length)inputs[inputs.length-1].focus();}
 }
-function delRSection(id){_rSections=_rSections.filter(function(s){return s.id!==id;});renderRSections();}
+function delRSection(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette section ?',function(){
+    _rSections=_rSections.filter(function(s){return s.id!==id;});renderRSections();
+    showT('🗑️','Supprimé');
+  });
+}
 function updateRSection(id,field,val){var s=_rSections.find(function(x){return x.id===id;});if(s)s[field]=val;}
 function renderRSections(){
   var el=document.getElementById('rSectionsList');if(!el)return;
@@ -17460,7 +17652,12 @@ function savePrevision(){
   d.previsions.unshift({id:uid(),titre:titre,periode:periode,objectif:objectif,produits:produits,notes:notes,date:tstr()});
   savePilo(d);addPrevision();renderPrevisions();showT('✅','Prévision enregistrée');
 }
-function delPrevision(id){var d=loadPilo();d.previsions=(d.previsions||[]).filter(function(p){return p.id!==id;});savePilo(d);renderPrevisions();}
+function delPrevision(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette prévision ?',function(){
+    var d=loadPilo();d.previsions=(d.previsions||[]).filter(function(p){return p.id!==id;});savePilo(d);renderPrevisions();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderPrevisions(){
   var d=loadPilo();var list=d.previsions||[];
   var el=document.getElementById('previsionList');var empty=document.getElementById('previsionEmpty');if(!el)return;
@@ -17625,9 +17822,12 @@ function toggleChecklistSaison(id){
   saveSaisonData(_curSaison,d);renderChecklistSaison();
 }
 function delChecklistSaison(id){
-  var d=getSaisonData(_curSaison);
-  d.checklist=(d.checklist||[]).filter(function(x){return x.id!==id;});
-  saveSaisonData(_curSaison,d);renderChecklistSaison();
+  showConfirm('🗑️ Supprimer','Supprimer cet élément de checklist ?',function(){
+    var d=getSaisonData(_curSaison);
+    d.checklist=(d.checklist||[]).filter(function(x){return x.id!==id;});
+    saveSaisonData(_curSaison,d);renderChecklistSaison();
+    showT('🗑️','Supprimé');
+  });
 }
 function addDefaultChecklist(){
   var defaults=CHECKLIST_DEFAULT[_curSaison]||[];
@@ -17771,7 +17971,9 @@ function saveProduitStar(){
   renderSaisonDetail();showT('⭐','Produit ajouté');
 }
 function delProduitStar(i){
-  var data=getSaisonData(_curSaison);data.produits.splice(i,1);saveSaisonData(_curSaison,data);renderSaisonDetail();
+  showConfirm('🗑️ Supprimer','Supprimer ce produit star ?',function(){
+    var data=getSaisonData(_curSaison);data.produits.splice(i,1);saveSaisonData(_curSaison,data);renderSaisonDetail();
+  });
 }
 function openJalonTask(jalon){
   var ji=JALONS.indexOf(jalon);if(ji<0)return;
@@ -17789,8 +17991,10 @@ function saveJalonTask(jalon,ji){
   renderSaisonDetail();
 }
 function delJalonTask(jalon,ti){
-  var data=getSaisonData(_curSaison);if(!data.jalons[jalon])return;
+  showConfirm('🗑️ Supprimer','Supprimer cette tâche jalon ?',function(){
+    var data=getSaisonData(_curSaison);if(!data.jalons[jalon])return;
   data.jalons[jalon].splice(ti,1);saveSaisonData(_curSaison,data);renderSaisonDetail();
+  });
 }
 function saveKpiSaison(){
   var data=getSaisonData(_curSaison);
@@ -17876,7 +18080,12 @@ function saveTendance(){
   d.tendances.unshift({id:uid(),produit:prod,dir:_tendDir,obs:obs,date:tstr()});
   savePilo(d);addTendance();renderTendances();showT('✅','Tendance enregistrée');
 }
-function delTendance(id){var d=loadPilo();d.tendances=(d.tendances||[]).filter(function(t){return t.id!==id;});savePilo(d);renderTendances();}
+function delTendance(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette tendance ?',function(){
+    var d=loadPilo();d.tendances=(d.tendances||[]).filter(function(t){return t.id!==id;});savePilo(d);renderTendances();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderTendances(){
   var d=loadPilo();var list=d.tendances||[];
   var el=document.getElementById('tendanceList');var empty=document.getElementById('tendanceEmpty');if(!el)return;
@@ -17986,7 +18195,12 @@ function saveParetoProduct(){
   d.pareto.push({id:uid(),produit:prod,ca:ca,date:tstr(),manualGroup:_paretoGrp==='AUTO'?null:_paretoGrp});
   saveExc(d);addParetoProduct();renderPareto();showT('✅','Produit ajouté');
 }
-function delPareto(id){var d=loadExc();d.pareto=(d.pareto||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPareto();}
+function delPareto(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément Pareto ?',function(){
+    var d=loadExc();d.pareto=(d.pareto||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPareto();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderPareto(){
   var d=loadExc();var items=(d.pareto||[]).slice().sort(function(a,b){return b.ca-a.ca;});
   var el=document.getElementById('paretoList');var empty=document.getElementById('paretoEmpty');var sumEl=document.getElementById('paretoSummary');if(!el)return;
@@ -18072,7 +18286,12 @@ function savePdcaAction(){
   saveExc(d);addPdcaAction();renderPdca();showT('✅','Action PDCA créée');
 }
 function movePdca(id,step){var d=loadExc();var item=(d.pdca||[]).find(function(p){return p.id===id;});if(item)item.step=step;saveExc(d);renderPdca();}
-function delPdca(id){var d=loadExc();d.pdca=(d.pdca||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPdca();}
+function delPdca(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce PDCA ?',function(){
+    var d=loadExc();d.pdca=(d.pdca||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPdca();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderPdca(){
   var d=loadExc();var all=d.pdca||[];
   var steps=['plan','do','check','act'];
@@ -18215,7 +18434,12 @@ function saveGoulot(){
   saveExc(d);addGoulot();renderContraintes();showT('⚙️','Goulot enregistré');
 }
 function toggleGoulot(id){var d=loadExc();var g=(d.goulots||[]).find(function(g){return g.id===id;});if(g)g.resolved=!g.resolved;saveExc(d);renderContraintes();}
-function delGoulot(id){var d=loadExc();d.goulots=(d.goulots||[]).filter(function(g){return g.id!==id;});saveExc(d);renderContraintes();}
+function delGoulot(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce goulot ?',function(){
+    var d=loadExc();d.goulots=(d.goulots||[]).filter(function(g){return g.id!==id;});saveExc(d);renderContraintes();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderContraintes(){
   var d=loadExc();var list=d.goulots||[];
   var el=document.getElementById('goulotList');var empty=document.getElementById('goulotEmpty');if(!el)return;
@@ -18335,7 +18559,12 @@ function saveEisTache(){
   d.eisManual.push({id:uid(),name:name,quadrant:_eisQ});
   saveExc(d);addEisTache();renderEisenhower();showT('✅','Tâche ajoutée');
 }
-function delEisManual(id){var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();}
+function delEisManual(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette tâche Eisenhower ?',function(){
+    var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();
+    showT('🗑️','Supprimé');
+  });
+}
 
 
 // ══ DOCUMENTS TÉLÉCHARGÉS ══
@@ -18391,9 +18620,11 @@ function redownloadDoc(id){
   showT('📄','Re-téléchargé !');
 }
 function deleteDoc(id){
-  var docs=JSON.parse(localStorage.getItem(SK+'_docs')||'[]');
-  docs=docs.filter(function(d){return d.id!==id;});
-  localStorage.setItem(SK+'_docs',JSON.stringify(docs));renderDocs();
+  showConfirm('🗑️ Supprimer','Supprimer ce document ?',function(){
+    var docs=JSON.parse(localStorage.getItem(SK+'_docs')||'[]');
+    docs=docs.filter(function(d){return d.id!==id;});
+    localStorage.setItem(SK+'_docs',JSON.stringify(docs));renderDocs();showT('🗑️','Document supprimé');
+  });
 }
 function clearDocs(){
   showConfirm('🗑️','Vider tous les documents ?',function(){
@@ -18428,7 +18659,12 @@ function toggleCrapaud(id){
   saveTM(d);renderCrapaud();
   if(c&&c.done)showT('🎉','Crapaud avalé ! Bravo !');
 }
-function delCrapaud(id){var d=loadTM();d.crapauds=(d.crapauds||[]).filter(function(x){return x.id!==id;});saveTM(d);renderCrapaud();}
+function delCrapaud(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce crapaud ?',function(){
+    var d=loadTM();d.crapauds=(d.crapauds||[]).filter(function(x){return x.id!==id;});saveTM(d);renderCrapaud();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderCrapaud(){
   var d=loadTM();var list=d.crapauds||[];
   var today=list.filter(function(x){return x.date===tstr();});
@@ -18495,7 +18731,12 @@ function saveDeepwork(){
   d.deepwork.unshift({id:uid(),sujet:sujet,duree:_dwDuree,resultat:resultat,date:tstr(),time:tn().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})});
   saveTM(d);addDeepwork();renderDeepwork();showT('🧠','Session enregistrée !');
 }
-function delDeepwork(id){var d=loadTM();d.deepwork=(d.deepwork||[]).filter(function(x){return x.id!==id;});saveTM(d);renderDeepwork();}
+function delDeepwork(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette session Deep Work ?',function(){
+    var d=loadTM();d.deepwork=(d.deepwork||[]).filter(function(x){return x.id!==id;});saveTM(d);renderDeepwork();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderDeepwork(){
   var d=loadTM();var list=d.deepwork||[];
   var today=list.filter(function(x){return x.date===tstr();});
@@ -18595,7 +18836,11 @@ function saveM135Item(type){
   renderMethode135();
 }
 function toggleM135(type,i){var data=getM135();data[type][i].done=!data[type][i].done;saveM135(data);renderMethode135();}
-function delM135(type,i){var data=getM135();data[type].splice(i,1);saveM135(data);renderMethode135();}
+function delM135(type,i){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément 1-3-5 ?',function(){
+    var data=getM135();data[type].splice(i,1);saveM135(data);renderMethode135();
+  });
+}
 function exportMethode135PDF(){
   var data=getM135();
   var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Méthode 1-3-5</title>'
@@ -18631,7 +18876,12 @@ function saveTimeBlock(){
   saveTM(d);addTimeBlock();renderTimeblocking();showT('📅','Créneau ajouté !');
 }
 function toggleTimeBlock(id){var d=loadTM();var tb=(d.timeblocks||[]).find(function(x){return x.id===id;});if(tb)tb.done=!tb.done;saveTM(d);renderTimeblocking();}
-function delTimeBlock(id){var d=loadTM();d.timeblocks=(d.timeblocks||[]).filter(function(x){return x.id!==id;});saveTM(d);renderTimeblocking();}
+function delTimeBlock(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce bloc de temps ?',function(){
+    var d=loadTM();d.timeblocks=(d.timeblocks||[]).filter(function(x){return x.id!==id;});saveTM(d);renderTimeblocking();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderTimeblocking(){
   var d=loadTM();var all=d.timeblocks||[];var list=all.filter(function(x){return x.date===tstr();});
   var lEl=document.getElementById('tbList');var eEl=document.getElementById('tbEmpty');if(!lEl)return;
@@ -18702,8 +18952,11 @@ function togglePhilo(type,id){
   if(item)item.done=!item.done;savePhilo(d);renderPhilo(type);
 }
 function delPhilo(type,id){
-  var d=loadPhilo();d[type]=(d[type]||[]).filter(function(x){return x.id!==id;});
-  savePhilo(d);renderPhilo(type);
+  showConfirm('🗑️ Supprimer','Supprimer cet élément ?',function(){
+    var d=loadPhilo();d[type]=(d[type]||[]).filter(function(x){return x.id!==id;});
+    savePhilo(d);renderPhilo(type);
+    showT('🗑️','Supprimé');
+  });
 }
 function renderPhilo(type){
   var d=loadPhilo();var list=d[type]||[];
@@ -19903,9 +20156,12 @@ function saveSL(){
 }
 
 function delSL(id){
-  var items=loadSL().filter(function(x){return x.id!==id;});
-  saveSL_data(items);renderSL();updateHomeSLBadge();
-  showT('🗑️','Article supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer cet article de la liste ?',function(){
+    var items=loadSL().filter(function(x){return x.id!==id;});
+    saveSL_data(items);renderSL();updateHomeSLBadge();
+    showT('🗑️','Article supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 
 function setSLFilter(f){
@@ -20134,7 +20390,12 @@ function addRegle2min(){var f=document.getElementById('regle2minForm');if(!f)ret
 function saveRegle2min(){var v=document.getElementById('regle2minInput').value.trim();var regle2minPlanEl=document.getElementById('regle2minPlan');var regle2minPlan=(regle2minPlanEl?regle2minPlanEl.value.trim():'');if(!v)return;var d=loadNM();if(!d.r2m)d.r2m=[];d.r2m.unshift({id:uid(),text:v,done:false,ts:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',plan:regle2minPlan})});saveNM(d);addRegle2min();renderRegle2min();showT('⚡','Fait !');  logAction('Règle 2min','add','Tâche ajoutée','');
 }
 function toggleR2m(id){var d=loadNM();var i=(d.r2m||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderRegle2min();}
-function delR2m(id){var d=loadNM();d.r2m=(d.r2m||[]).filter(function(x){return x.id!==id;});saveNM(d);renderRegle2min();}
+function delR2m(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette règle des 2 min ?',function(){
+    var d=loadNM();d.r2m=(d.r2m||[]).filter(function(x){return x.id!==id;});saveNM(d);renderRegle2min();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderRegle2min(){
   var d=loadNM();var items=d.r2m||[];
   var el=document.getElementById('regle2minList');
@@ -20246,92 +20507,94 @@ function editABCDE(el){
   var sc=f&&f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});
 }
 function toggleABCDE(el){var id=el.dataset?el.dataset.id:el;var d=loadNM();var i=(d.abcde||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderABCDE();}
-function delABCDE(el){var id=el.dataset?el.dataset.id:el;var item=(loadNM().abcde||[]).find(function(x){return x.id===id;});var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);logAction('ABCDE','delete',item?item.text:'Tâche','');renderABCDE();}
+function delABCDE(el){
+  showConfirm('🗑️ Supprimer','Supprimer cette tâche ABCDE ?',function(){var id=el.dataset?el.dataset.id:el;var item=(loadNM().abcde||[]).find(function(x){return x.id===id;});var d=loadNM();d.abcde=(d.abcde||[]).filter(function(x){return x.id!==id;});saveNM(d);logAction('ABCDE','delete',item?item.text:'Tâche','');renderABCDE();showT('🗑️','Supprimé');});
+}
 function renderABCDE(){
-  var d=loadNM();var items=d.abcde||[];
-  var el=document.getElementById('abcdeList');
-  var em=document.getElementById('abcdeEmpty');
-  if(!el)return;
-  if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}
-  if(em)em.style.display='none';
-  var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};
-  var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};
-  var lbls={A:'TRES IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'A DELEGUER',E:'A ELIMINER'};
-  var resColors={resolu:'#34d399',partiel:'#fbbf24',non_resolu:'#f87171'};
-  var resLabels={resolu:'Resolu',partiel:'Partiel',non_resolu:'Non resolu'};
-  var resIcos={resolu:'OK',partiel:'!!',non_resolu:'XX'};
-  // filter
-  var filtered=items;
-  if(_abcdeFilter==='todo') filtered=items.filter(function(x){return !x.done;});
-  else if(_abcdeFilter==='done') filtered=items.filter(function(x){return x.done;});
-  // stats
-  ['A','B','C','D','E'].forEach(function(lv){
-    var s2=document.getElementById('abcdeS'+lv);
-    if(s2)s2.textContent=items.filter(function(x){return x.level===lv;}).length;
-  });
-  var doneCount=items.filter(function(x){return x.done;}).length;
-  var sr=document.getElementById('abcdeSRate');
-  if(sr)sr.textContent=items.length?Math.round(doneCount/items.length*100)+'%':'0%';
-  var html='';
-  ['A','B','C','D','E'].forEach(function(lv){
-    var gr=filtered.filter(function(x){return x.level===lv;});
-    if(!gr.length)return;
-    var doneGr=gr.filter(function(x){return x.done;}).length;
-    html+='<div style="margin-bottom:14px;">';
-    html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;">';
-    html+='<span style="display:inline-flex;width:20px;height:20px;border-radius:6px;background:'+cols[lv]+';color:#000;font-size:10px;font-weight:900;align-items:center;justify-content:center;">'+lv+'</span>';
-    html+='<span style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;">'+lbls[lv]+'</span>';
-    html+='<span style="margin-left:auto;font-size:9px;font-weight:800;color:'+cols[lv]+';background:'+bgs[lv]+';border:1px solid '+cols[lv]+'40;padding:2px 8px;border-radius:20px;">'+doneGr+'/'+gr.length+'</span>';
-    html+='</div>';
-    gr.forEach(function(item){
-      var brd=item.done?cols[lv]+'60':'rgba(255,255,255,.07)';
-      var opa=item.done?'.65':'1';
-      var resC=item.resultat?resColors[item.resultat]:'';
-      html+='<div style="background:'+bgs[lv]+';border:1px solid '+brd+';border-radius:12px;padding:11px 12px;margin-bottom:6px;opacity:'+opa+';">';
-      html+='<div style="display:flex;align-items:flex-start;gap:10px;">';
-      // checkbox
-      var cbBorder=item.done?cols[lv]:'rgba(255,255,255,.2)';
-      var cbBg=item.done?cols[lv]:'transparent';
-      var cbCheck=item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'';
-      html+='<div onclick="toggleABCDE(this)" data-id="'+item.id+'" style="width:22px;height:22px;border-radius:7px;border:2px solid '+cbBorder+';background:'+cbBg+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+cbCheck+'</div>';
-      html+='<div style="flex:1;min-width:0;">';
-      // title
-      var textColor=item.done?'var(--t3)':'var(--t1)';
-      var textDeco=item.done?'line-through':'none';
-      html+='<div style="font-size:13px;font-weight:700;color:'+textColor+';text-decoration:'+textDeco+';line-height:1.35;">'+escH(item.text)+'</div>';
-      // obs
-      if(item.obs){
-        html+='<div style="font-size:11px;color:var(--t1);opacity:.9;margin-top:4px;padding:5px 8px;background:rgba(255,255,255,.06);border-radius:7px;border-left:2px solid '+cols[lv]+';line-height:1.4;">'+escH(item.obs)+'</div>';
-      }
-      // plan
-      if(item.plan){
-        html+='<div style="font-size:11px;color:#60a5fa;margin-top:5px;padding:5px 8px;background:rgba(59,130,246,.07);border-radius:7px;border-left:2px solid #60a5fa;line-height:1.4;">';
-        html+='<span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px;">Plan d\'action</span>';
-        html+=escH(item.plan)+'</div>';
-      }
-      // resultat
-      if(item.resultat){
-        html+='<div style="font-size:11px;color:'+resC+';margin-top:5px;padding:5px 8px;background:'+resC+'15;border-radius:7px;border-left:2px solid '+resC+';line-height:1.4;">';
-        html+='<span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px;">Resultat — '+resLabels[item.resultat]+(item.resultatAt?' · '+item.resultatAt:'')+'</span>';
-        if(item.resultatNote) html+=escH(item.resultatNote);
-        html+='</div>';
-      }
-      // date
-      html+='<div style="font-size:10px;color:var(--t3);margin-top:5px;display:flex;align-items:center;gap:8px;">';
-      if(item.date) html+='<span>📅 '+item.date+(item.time?' · '+item.time:'')+'</span>';if(item.alarm) html+='<span style="color:#fbbf24;"> · ⏰ '+item.alarm+'</span>';
-      if(item.done) html+='<span style="color:'+cols[lv]+';font-weight:800;">Accomplie</span>';
-      html+='</div>';
-      html+='</div>';
-      // buttons
-      html+='<div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">';
-      html+='<div onclick="editABCDE(this)" data-id="'+item.id+'" style="color:rgba(244,114,182,.6);font-size:16px;cursor:pointer;width:24px;text-align:center;">&#9998;</div>';
-      html+='<div onclick="delABCDE(this)" data-id="'+item.id+'" style="color:rgba(239,68,68,.4);font-size:20px;cursor:pointer;width:24px;text-align:center;">&#x2715;</div>';
-      html+='</div>';
-      html+='</div></div>';
+    var d=loadNM();var items=d.abcde||[];
+    var el=document.getElementById('abcdeList');
+    var em=document.getElementById('abcdeEmpty');
+    if(!el)return;
+    if(!items.length){el.innerHTML='';if(em)em.style.display='block';return;}
+    if(em)em.style.display='none';
+    var cols={A:'#f87171',B:'#fb923c',C:'#facc15',D:'#60a5fa',E:'#94a3b8'};
+    var bgs={A:'rgba(239,68,68,.1)',B:'rgba(249,115,22,.1)',C:'rgba(234,179,8,.08)',D:'rgba(59,130,246,.1)',E:'rgba(100,116,139,.08)'};
+    var lbls={A:'TRES IMPORTANT',B:'IMPORTANT',C:'OPTIONNEL',D:'A DELEGUER',E:'A ELIMINER'};
+    var resColors={resolu:'#34d399',partiel:'#fbbf24',non_resolu:'#f87171'};
+    var resLabels={resolu:'Resolu',partiel:'Partiel',non_resolu:'Non resolu'};
+    var resIcos={resolu:'OK',partiel:'!!',non_resolu:'XX'};
+    // filter
+    var filtered=items;
+    if(_abcdeFilter==='todo') filtered=items.filter(function(x){return !x.done;});
+    else if(_abcdeFilter==='done') filtered=items.filter(function(x){return x.done;});
+    // stats
+    ['A','B','C','D','E'].forEach(function(lv){
+      var s2=document.getElementById('abcdeS'+lv);
+      if(s2)s2.textContent=items.filter(function(x){return x.level===lv;}).length;
     });
-    html+='</div>';
-  });
-  el.innerHTML=html;
+    var doneCount=items.filter(function(x){return x.done;}).length;
+    var sr=document.getElementById('abcdeSRate');
+    if(sr)sr.textContent=items.length?Math.round(doneCount/items.length*100)+'%':'0%';
+    var html='';
+    ['A','B','C','D','E'].forEach(function(lv){
+      var gr=filtered.filter(function(x){return x.level===lv;});
+      if(!gr.length)return;
+      var doneGr=gr.filter(function(x){return x.done;}).length;
+      html+='<div style="margin-bottom:14px;">';
+      html+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:7px;">';
+      html+='<span style="display:inline-flex;width:20px;height:20px;border-radius:6px;background:'+cols[lv]+';color:#000;font-size:10px;font-weight:900;align-items:center;justify-content:center;">'+lv+'</span>';
+      html+='<span style="font-size:10px;font-weight:900;color:'+cols[lv]+';letter-spacing:.5px;">'+lbls[lv]+'</span>';
+      html+='<span style="margin-left:auto;font-size:9px;font-weight:800;color:'+cols[lv]+';background:'+bgs[lv]+';border:1px solid '+cols[lv]+'40;padding:2px 8px;border-radius:20px;">'+doneGr+'/'+gr.length+'</span>';
+      html+='</div>';
+      gr.forEach(function(item){
+        var brd=item.done?cols[lv]+'60':'rgba(255,255,255,.07)';
+        var opa=item.done?'.65':'1';
+        var resC=item.resultat?resColors[item.resultat]:'';
+        html+='<div style="background:'+bgs[lv]+';border:1px solid '+brd+';border-radius:12px;padding:11px 12px;margin-bottom:6px;opacity:'+opa+';">';
+        html+='<div style="display:flex;align-items:flex-start;gap:10px;">';
+        // checkbox
+        var cbBorder=item.done?cols[lv]:'rgba(255,255,255,.2)';
+        var cbBg=item.done?cols[lv]:'transparent';
+        var cbCheck=item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2.5"/></svg>':'';
+        html+='<div onclick="toggleABCDE(this)" data-id="'+item.id+'" style="width:22px;height:22px;border-radius:7px;border:2px solid '+cbBorder+';background:'+cbBg+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+cbCheck+'</div>';
+        html+='<div style="flex:1;min-width:0;">';
+        // title
+        var textColor=item.done?'var(--t3)':'var(--t1)';
+        var textDeco=item.done?'line-through':'none';
+        html+='<div style="font-size:13px;font-weight:700;color:'+textColor+';text-decoration:'+textDeco+';line-height:1.35;">'+escH(item.text)+'</div>';
+        // obs
+        if(item.obs){
+          html+='<div style="font-size:11px;color:var(--t1);opacity:.9;margin-top:4px;padding:5px 8px;background:rgba(255,255,255,.06);border-radius:7px;border-left:2px solid '+cols[lv]+';line-height:1.4;">'+escH(item.obs)+'</div>';
+        }
+        // plan
+        if(item.plan){
+          html+='<div style="font-size:11px;color:#60a5fa;margin-top:5px;padding:5px 8px;background:rgba(59,130,246,.07);border-radius:7px;border-left:2px solid #60a5fa;line-height:1.4;">';
+          html+='<span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px;">Plan d\'action</span>';
+          html+=escH(item.plan)+'</div>';
+        }
+        // resultat
+        if(item.resultat){
+          html+='<div style="font-size:11px;color:'+resC+';margin-top:5px;padding:5px 8px;background:'+resC+'15;border-radius:7px;border-left:2px solid '+resC+';line-height:1.4;">';
+          html+='<span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px;">Resultat — '+resLabels[item.resultat]+(item.resultatAt?' · '+item.resultatAt:'')+'</span>';
+          if(item.resultatNote) html+=escH(item.resultatNote);
+          html+='</div>';
+        }
+        // date
+        html+='<div style="font-size:10px;color:var(--t3);margin-top:5px;display:flex;align-items:center;gap:8px;">';
+        if(item.date) html+='<span>📅 '+item.date+(item.time?' · '+item.time:'')+'</span>';if(item.alarm) html+='<span style="color:#fbbf24;"> · ⏰ '+item.alarm+'</span>';
+        if(item.done) html+='<span style="color:'+cols[lv]+';font-weight:800;">Accomplie</span>';
+        html+='</div>';
+        html+='</div>';
+        // buttons
+        html+='<div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">';
+        html+='<div onclick="editABCDE(this)" data-id="'+item.id+'" style="color:rgba(244,114,182,.6);font-size:16px;cursor:pointer;width:24px;text-align:center;">&#9998;</div>';
+        html+='<div onclick="delABCDE(this)" data-id="'+item.id+'" style="color:rgba(239,68,68,.4);font-size:20px;cursor:pointer;width:24px;text-align:center;">&#x2715;</div>';
+        html+='</div>';
+        html+='</div></div>';
+      });
+      html+='</div>';
+    });
+    el.innerHTML=html;
 }
 
 // ── MOSCOW ──
@@ -20341,7 +20604,12 @@ function addMoscow(){var f=document.getElementById('moscowForm');if(!f)return;va
 function saveMoscow(){var v=document.getElementById('moscowInput').value.trim();var moscowPlanEl=document.getElementById('moscowPlan');var moscowPlan=(moscowPlanEl?moscowPlanEl.value.trim():'');if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.moscow)d.moscow=[];d.moscow.push({id:uid(),text:v,level:_moscowLevel,done:false,plan:moscowPlan});saveNM(d);addMoscow();renderMoscow();  logAction('MoSCoW','add','Tâche MoSCoW','');
 }
 function toggleMoscow(id){var d=loadNM();var i=(d.moscow||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderMoscow();}
-function delMoscow(id){var d=loadNM();d.moscow=(d.moscow||[]).filter(function(x){return x.id!==id;});saveNM(d);renderMoscow();}
+function delMoscow(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément MoSCoW ?',function(){
+    var d=loadNM();d.moscow=(d.moscow||[]).filter(function(x){return x.id!==id;});saveNM(d);renderMoscow();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderMoscow(){
   var d=loadNM();var items=d.moscow||[];
   var el=document.getElementById('moscowList');
@@ -20379,7 +20647,12 @@ function renderMoscow(){
 // ── WARREN BUFFETT 5/25 ──
 function addWarren(){var f=document.getElementById('warrenForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('warrenInput').value='';var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('warrenInput').focus();},300);}}
 function saveWarren(){var v=document.getElementById('warrenInput').value.trim();if(!v)return;var d=loadNM();if(!d.warren)d.warren=[];if(d.warren.length>=25){showT('⚠️','Maximum 25 objectifs');return;}d.warren.push({id:uid(),text:v,rank:d.warren.length+1});saveNM(d);addWarren();renderWarren();}
-function delWarren(id){var d=loadNM();d.warren=(d.warren||[]).filter(function(x){return x.id!==id;});d.warren.forEach(function(x,i){x.rank=i+1;});saveNM(d);renderWarren();}
+function delWarren(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément Warren ?',function(){
+    var d=loadNM();d.warren=(d.warren||[]).filter(function(x){return x.id!==id;});d.warren.forEach(function(x,i){x.rank=i+1;});saveNM(d);renderWarren();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderWarren(){
   var d=loadNM();var items=d.warren||[];var el=document.getElementById('warrenList');var em=document.getElementById('warrenEmpty');if(!el)return;
   var t5=document.getElementById('warrenTop5Count');var av=document.getElementById('warrenAvoidCount');
@@ -20394,7 +20667,12 @@ function setPickle(btn,v){_pickleType=v;document.querySelectorAll('[data-pkl]').
 function addPickle(){var f=document.getElementById('pickleForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('pickleInput').value='';var _clPl=document.getElementById('picklePlan');if(_clPl)_clPl.value='';_pickleType='rock';document.querySelectorAll('[data-pkl]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('pickleInput').focus();},300);}}
 function savePickle(){var v=document.getElementById('pickleInput').value.trim();var picklePlanEl=document.getElementById('picklePlan');var picklePlan=(picklePlanEl?picklePlanEl.value.trim():'');if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.pickle)d.pickle=[];d.pickle.push({id:uid(),text:v,type:_pickleType,done:false,plan:picklePlan});saveNM(d);addPickle();renderPickle();}
 function togglePickle(id){var d=loadNM();var i=(d.pickle||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderPickle();}
-function delPickle(id){var d=loadNM();d.pickle=(d.pickle||[]).filter(function(x){return x.id!==id;});saveNM(d);renderPickle();}
+function delPickle(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément Pickle Jar ?',function(){
+    var d=loadNM();d.pickle=(d.pickle||[]).filter(function(x){return x.id!==id;});saveNM(d);renderPickle();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderPickle(){
   var d=loadNM();var items=d.pickle||[];
   var el=document.getElementById('pickleList');
@@ -20435,7 +20713,12 @@ function setKanbanCol(btn,v){_kanbanCol=v;document.querySelectorAll('[data-kcol]
 function addKanban(){var f=document.getElementById('kanbanForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('kanbanInput').value='';var _clPl=document.getElementById('kanbanPlan');if(_clPl)_clPl.value='';_kanbanCol='todo';document.querySelectorAll('[data-kcol]').forEach(function(b){b.style.opacity='1';});var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('kanbanInput').focus();},300);}}
 function saveKanban(){var v=document.getElementById('kanbanInput').value.trim();var kanbanPlanEl=document.getElementById('kanbanPlan');var kanbanPlan=(kanbanPlanEl?kanbanPlanEl.value.trim():'');if(!v){showT('⚠️','Entrez une tâche');return;}var d=loadNM();if(!d.kanban)d.kanban=[];d.kanban.push({id:uid(),text:v,col:_kanbanCol,plan:kanbanPlan});saveNM(d);addKanban();renderKanban();}
 function moveKanban(id,col){var d=loadNM();var i=(d.kanban||[]).find(function(x){return x.id===id;});if(i)i.col=col;saveNM(d);renderKanban();}
-function delKanban(id){var d=loadNM();d.kanban=(d.kanban||[]).filter(function(x){return x.id!==id;});saveNM(d);renderKanban();}
+function delKanban(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette carte Kanban ?',function(){
+    var d=loadNM();d.kanban=(d.kanban||[]).filter(function(x){return x.id!==id;});saveNM(d);renderKanban();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderKanban(){
   var d=loadNM();var items=d.kanban||[];
   var cols={todo:{el:'kanbanTodo',col:'#94a3b8',lbl:'A FAIRE'},doing:{el:'kanbanDoing',col:'#f59e0b',lbl:'EN COURS'},done:{el:'kanbanDone',col:'#4ade80',lbl:'TERMINE'}};
@@ -20464,7 +20747,12 @@ function renderKanban(){
 function addGTD(){var f=document.getElementById('gtdForm');if(!f)return;var open=f.style.display!=='none';f.style.display=open?'none':'block';if(!open){document.getElementById('gtdInput').value='';var _clPl=document.getElementById('gtdPlan');if(_clPl)_clPl.value='';var sc=f.closest('.scroll');if(sc)sc.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('gtdInput').focus();},300);}}
 function saveGTD(){var v=document.getElementById('gtdInput').value.trim();var gtdPlanEl=document.getElementById('gtdPlan');var gtdPlan=(gtdPlanEl?gtdPlanEl.value.trim():'');if(!v)return;var d=loadNM();if(!d.gtd)d.gtd=[];d.gtd.unshift({id:uid(),text:v,done:false,plan:gtdPlan});saveNM(d);addGTD();renderGTD();}
 function toggleGTD(id){var d=loadNM();var i=(d.gtd||[]).find(function(x){return x.id===id;});if(i)i.done=!i.done;saveNM(d);renderGTD();}
-function delGTD(id){var d=loadNM();d.gtd=(d.gtd||[]).filter(function(x){return x.id!==id;});saveNM(d);renderGTD();}
+function delGTD(id){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément GTD ?',function(){
+    var d=loadNM();d.gtd=(d.gtd||[]).filter(function(x){return x.id!==id;});saveNM(d);renderGTD();
+    showT('🗑️','Supprimé');
+  });
+}
 function renderGTD(){
   var d=loadNM();var items=d.gtd||[];
   var el=document.getElementById('gtdList');
@@ -21592,9 +21880,12 @@ function toggleSanctStatut(id){
   saveSanct(list); renderSanctions();
 }
 function delSanction(id){
-  var list=loadSanct().filter(function(x){return x.id!==id;});
-  saveSanct(list); renderSanctions();
-  showT('🗑️','Supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer cette sanction ?',function(){
+    var list=loadSanct().filter(function(x){return x.id!==id;});
+    saveSanct(list); renderSanctions();
+    showT('🗑️','Supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 function filterSanctions(f){
   _sanctFilter=f;
@@ -21734,9 +22025,12 @@ function saveCongeGlobal(){
   showT('✅',diff+' jour'+(diff>1?'s':'')+' enregistré'+(diff>1?'s':''));
 }
 function delCongeGlobal(id){
-  saveCG(loadCG().filter(function(x){return x.id!==id;}));
-  renderCongesGlobal();
-  showT('🗑️','Supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer ce congé ?',function(){
+    saveCG(loadCG().filter(function(x){return x.id!==id;}));
+    renderCongesGlobal();
+    showT('🗑️','Supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 function cgPrevMonth(){_cgMonth--;if(_cgMonth<0){_cgMonth=11;_cgYear--;}renderCongesGlobal();}
 function cgNextMonth(){_cgMonth++;if(_cgMonth>11){_cgMonth=0;_cgYear++;}renderCongesGlobal();}
@@ -21888,8 +22182,11 @@ function saveFormation(){
   showT('✅','Formation enregistrée · '+parts.length+' participant'+(parts.length>1?'s':''));
 }
 function delFormation(id){
-  saveForm(loadForm().filter(function(x){return x.id!==id;}));
-  renderFormations();showT('🗑️','Supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer cette formation ?',function(){
+    saveForm(loadForm().filter(function(x){return x.id!==id;}));
+    renderFormations();showT('🗑️','Supprimé');
+    showT('🗑️','Supprimé');
+  });
 }
 function filterFormations(f){
   _formFilter=f;
@@ -23096,7 +23393,11 @@ function save5SItem(key){
   render5S();
 }
 function toggle5S(key,i){var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key][i].done=!d['5s_'+key][i].done;savePhilo(d);render5S();}
-function del5S(key,i){var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key].splice(i,1);savePhilo(d);render5S();}
+function del5S(key,i){
+  showConfirm('🗑️ Supprimer','Supprimer cet élément 5S ?',function(){
+    var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key].splice(i,1);savePhilo(d);render5S();showT('🗑️','Supprimé');
+  });
+}
 function export5SPDF(){
   var d=loadPhilo();
   var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
@@ -25823,7 +26124,11 @@ function renderRPics(){
   }).join('');
   w.innerHTML=add+imgs;
 }
-function delRPic(i){_rPics.splice(i,1);renderRPics();}
+function delRPic(i){
+  showConfirm('🗑️ Supprimer','Supprimer cette photo ?',function(){
+    _rPics.splice(i,1);renderRPics();
+  });
+}
 function saveRpt(){
   var note=document.getElementById('rptTxt').value.trim();
   if(!note&&!_rPics.length){showT('⚠️','Écrivez un résumé ou ajoutez une photo');return;}
@@ -25859,10 +26164,12 @@ function loadRptHist(){
   el.innerHTML=html;
 }
 function delRpt(i){
-  var rpts=JSON.parse(localStorage.getItem(SK+'_rpts')||'[]');
+  showConfirm('🗑️ Supprimer','Supprimer ce rapport ?',function(){
+    var rpts=JSON.parse(localStorage.getItem(SK+'_rpts')||'[]');
   rpts.splice(i,1);
   localStorage.setItem(SK+'_rpts',JSON.stringify(rpts));
   loadRptHist();
+  });
 }
 function sendWA(){
   var note=document.getElementById('rptTxt').value.trim();
@@ -25961,10 +26268,12 @@ function saveDLC(){
   }
 }
 function delDLC(i){
-  var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
-  dl.splice(i,1);
-  localStorage.setItem(SK+'_dlc',JSON.stringify(dl));
-  openDr('dlc');
+  showConfirm('🗑️ Supprimer','Supprimer cet article DLC ?',function(){
+    var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
+    dl.splice(i,1);
+    localStorage.setItem(SK+'_dlc',JSON.stringify(dl));
+    openDr('dlc');showT('🗑️','DLC supprimé');
+  });
 }
 function delDlcItem(id){
   var dl=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');
@@ -26199,10 +26508,12 @@ function updateConge(i,field,val){
   showAdminTab('conge');
 }
 function delConge(i){
-  var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
-  conges.splice(i,1);
-  localStorage.setItem(SK+'_conges',JSON.stringify(conges));
-  showAdminTab('conge');
+  showConfirm('🗑️ Supprimer','Supprimer ce congé ?',function(){
+    var conges=JSON.parse(localStorage.getItem(SK+'_conges')||'[]');
+    conges.splice(i,1);
+    localStorage.setItem(SK+'_conges',JSON.stringify(conges));
+    showAdminTab('conge');showT('🗑️','Congé supprimé');
+  });
 }
 
 // ── ACCOMPTE ──
@@ -26407,8 +26718,10 @@ function toggleSjDocIdx(i){
   renderSjDocList();
 }
 function delSjDocIdx(i){
-  _sjDocs.splice(i,1);
-  renderSjDocList();
+  showConfirm('🗑️ Supprimer','Supprimer ce document ?',function(){
+    _sjDocs.splice(i,1);
+    renderSjDocList();showT('🗑️','Document supprimé');
+  });
 }
 function openSjAddDoc(){
   var r=document.getElementById('sjAddDocRow');
@@ -26631,8 +26944,10 @@ function saveCatalogue(){
 }
 
 function delCatalogue(id){
-  var list=loadCat().filter(function(x){return x.id!==id;});
-  saveCat(list);renderCatalogue();showT('🗑️','Catalogue supprimé');
+  showConfirm('🗑️ Supprimer','Supprimer ce catalogue ?',function(){
+    var list=loadCat().filter(function(x){return x.id!==id;});
+    saveCat(list);renderCatalogue();showT('🗑️','Catalogue supprimé');
+  });
 }
 
 function openCatalogueDetail(id){
@@ -28955,7 +29270,11 @@ var DEC_PRIO_INFO={haute:{ico:'🔴',color:'#f87171'},moyenne:{ico:'🟡',color:
 function setDecCat(btn,cat){_decCat=cat;document.querySelectorAll('.dec-cat-btn').forEach(function(b){b.style.opacity='0.5';});btn.style.opacity='1';}
 function setDecPrio(btn,prio){_decPrio=prio;document.querySelectorAll('.dec-prio-btn').forEach(function(b){b.style.borderWidth='1px';b.style.opacity='0.6';});btn.style.borderWidth='2px';btn.style.opacity='1';}
 function saveDecision(){var inp=document.getElementById('decInput');if(!inp)return;var text=inp.value.trim();if(!text){if(typeof showT==='function')showT('⚠️','Saisissez une décision');return;}var now=new Date();var list=decLoad();list.unshift({id:Date.now().toString(),text:text,cat:_decCat,prio:_decPrio,date:tstr?tstr():'',time:now.getHours()+':'+String(now.getMinutes()).padStart(2,'0'),ts:Date.now()});decSaveAll(list);inp.value='';renderDecisions();updateDmDecisionsTile();if(typeof showT==='function')showT('✅','Décision enregistrée');}
-function deleteDecision(id){decSaveAll(decLoad().filter(function(d){return d.id!==id;}));renderDecisions();updateDmDecisionsTile();}
+function deleteDecision(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette décision ?',function(){
+    decSaveAll(decLoad().filter(function(d){return d.id!==id;}));renderDecisions();updateDmDecisionsTile();showT('🗑️','Supprimée');
+  });
+}
 function filterDec(f){_decFilter=f;renderDecisions();}
 function renderDecisions(){
   var list=decLoad();var today=tstr?tstr():'';var now=new Date();
@@ -28989,6 +29308,52 @@ function exportDecisions(){
 function initDecisions(){_decFilter='today';renderDecisions();}
 
 </script>
+<!-- ══ EXPORT PANEL MODAL ══ -->
+<div id="exportPanelModal" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;">
+  <div style="background:#0d1117;border:1px solid rgba(255,255,255,.12);border-radius:24px 24px 0 0;padding:24px 20px 36px;width:100%;max-width:430px;animation:slideInBottom .3s cubic-bezier(.34,1.56,.64,1) both;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div>
+        <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;color:#f8faff;">📤 Exporter les données</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:3px;">Sauvegardez vos données sur votre appareil</div>
+      </div>
+      <div onclick="closeExportPanel()" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:18px;">×</div>
+    </div>
+
+    <!-- Sauvegarde complète JSON -->
+    <div onclick="exportBackup();closeExportPanel();" style="display:flex;align-items:center;gap:14px;padding:16px;background:rgba(59,130,246,.1);border:1.5px solid rgba(59,130,246,.3);border-radius:16px;cursor:pointer;margin-bottom:10px;transition:all .2s;" onmousedown="this.style.transform='scale(.98)'" onmouseup="this.style.transform=''">
+      <div style="width:46px;height:46px;border-radius:14px;background:rgba(59,130,246,.2);border:1px solid rgba(59,130,246,.4);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💾</div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:800;color:#60a5fa;">Sauvegarde complète (JSON)</div>
+        <div style="font-size:11px;color:rgba(148,163,184,.8);margin-top:2px;">Toutes vos données — tâches, réceptions, employés, historique…</div>
+        <div style="font-size:10px;color:rgba(96,165,250,.7);margin-top:4px;font-weight:700;">✅ Recommandé — permet la restauration</div>
+      </div>
+      <div style="color:rgba(96,165,250,.6);font-size:18px;">›</div>
+    </div>
+
+    <!-- Export Réceptions Excel -->
+    <div onclick="exportExcelReceptions();closeExportPanel();" style="display:flex;align-items:center;gap:14px;padding:16px;background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.25);border-radius:16px;cursor:pointer;margin-bottom:10px;transition:all .2s;" onmousedown="this.style.transform='scale(.98)'" onmouseup="this.style.transform=''">
+      <div style="width:46px;height:46px;border-radius:14px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📊</div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:800;color:#34d399;">Réceptions → Excel (CSV)</div>
+        <div style="font-size:11px;color:rgba(148,163,184,.8);margin-top:2px;">Historique des réceptions avec taux de service et anomalies</div>
+        <div style="font-size:10px;color:rgba(52,211,153,.7);margin-top:4px;font-weight:700;">📋 Ouvrable dans Excel / Google Sheets</div>
+      </div>
+      <div style="color:rgba(52,211,153,.6);font-size:18px;">›</div>
+    </div>
+
+    <!-- Export Tâches Excel -->
+    <div onclick="exportExcelTaches();closeExportPanel();" style="display:flex;align-items:center;gap:14px;padding:16px;background:rgba(168,85,247,.08);border:1.5px solid rgba(168,85,247,.25);border-radius:16px;cursor:pointer;transition:all .2s;" onmousedown="this.style.transform='scale(.98)'" onmouseup="this.style.transform=''">
+      <div style="width:46px;height:46px;border-radius:14px;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.35);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✅</div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:800;color:#c084fc;">Tâches → Excel (CSV)</div>
+        <div style="font-size:11px;color:rgba(148,163,184,.8);margin-top:2px;">Liste des tâches avec priorités, rayons et statuts</div>
+        <div style="font-size:10px;color:rgba(192,132,252,.7);margin-top:4px;font-weight:700;">📋 Ouvrable dans Excel / Google Sheets</div>
+      </div>
+      <div style="color:rgba(192,132,252,.6);font-size:18px;">›</div>
+    </div>
+  </div>
+</div>
+
 <div id="printDLC" style="display:none;padding:20px;"></div>
 
 <!-- ══ GLOBAL SEARCH ══ -->
@@ -31013,7 +31378,6 @@ function exportPlanTgPDF(){
 
 <!-- ══ RAPPORT ABSENCES MODAL ══ -->
 <div id="absRptModal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding-top:20px;overflow-y:auto;"><div style="background:#0e1117;border:1px solid rgba(255,255,255,.1);border-radius:20px;width:calc(100% - 32px);max-width:420px;padding:20px;margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><div style="font-family:'Syne';font-size:16px;font-weight:800;color:#f8faff;">📋 Rapport Absences</div><div onclick="document.getElementById('absRptModal').style.display='none'" style="color:#64748b;font-size:20px;cursor:pointer;">×</div></div><div id="absRptPeriod" style="font-size:11px;color:#64748b;margin-bottom:6px;"></div><div id="absRptDate" style="font-size:10px;color:#475569;margin-bottom:14px;"></div><button onclick="exportAbsencesPDF()" style="width:100%;background:#0033A0;border:none;color:#fff;font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;margin-bottom:14px;">📄 Exporter PDF</button><div id="absRptContent"></div></div></div>
-<!-- ══ PIN MODAL ══ -->
 <!-- ══ CONFIRM MODAL ══ -->
 <div id="confirmModal" style="display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
   <div style="background:#12161f;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:26px 22px;width:280px;text-align:center;">
@@ -31027,17 +31391,6 @@ function exportPlanTgPDF(){
   </div>
 </div>
 
-  <div style="display:flex;align-items:center;gap:8px;margin:10px 0 6px;">
-    <div style="flex:1;height:1px;background:rgba(255,255,255,.08);"></div>
-    <div style="font-size:9px;color:rgba(148,163,184,.5);font-weight:700;letter-spacing:.5px;">OU</div>
-    <div style="flex:1;height:1px;background:rgba(255,255,255,.08);"></div>
-  </div>
-  <button class="bio-btn" onclick="authBiometric()">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.5 2 5.5 3.5 3.5 6"/><path d="M21 6c-2-2.5-5-4-9-4"/><path d="M3 10a9.5 9.5 0 0 0-.5 3"/><path d="M21.5 13A9.5 9.5 0 0 0 21 10"/><path d="M12 8a4 4 0 0 1 4 4c0 1.5-.5 2.8-1.3 3.8"/><path d="M8.3 15.8A4 4 0 0 1 8 12"/><path d="M12 14v3"/><path d="M9 17.5c1 1 3 1.5 3 1.5s2-.5 3-1.5"/></svg>
-    Empreinte digitale / Face ID
-  </button>
-</div><div id="pinErr" style="font-size:11px;color:#ef4444;min-height:16px;"></div></div></div>
-
 
 
 <!-- ══════════════════════════════════════════════
@@ -31045,12 +31398,17 @@ function exportPlanTgPDF(){
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgTauxService">
   <div class="pg-topbar" style="border-bottom:1px solid rgba(16,185,129,.15);">
-    <div class="pg-back" onclick="goPage('taches')" style="font-size:13px;font-weight:700;color:#10b981;cursor:pointer;">‹ Tâches</div>
+    <div class="pg-back" onclick="goPage('terrain')" style="font-size:13px;font-weight:700;color:#10b981;cursor:pointer;">‹ Terrain</div>
     <div style="font-family:'Syne';font-size:16px;font-weight:900;color:#f8faff;">📦 Taux de Service</div>
-    <div onclick="exportTauxServicePDF()" style="font-size:11px;font-weight:700;color:#10b981;cursor:pointer;padding:4px 8px;border:1px solid rgba(16,185,129,.35);border-radius:10px;">PDF</div>
+    <div style="display:flex;gap:6px;align-items:center;">
+      <div onclick="openTSReceptionModal()" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#047857,#10b981);border:none;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;cursor:pointer;box-shadow:0 0 12px rgba(16,185,129,.4);">+</div>
+      <div onclick="exportTauxServicePDF()" style="font-size:11px;font-weight:700;color:#10b981;cursor:pointer;padding:4px 8px;border:1px solid rgba(16,185,129,.35);border-radius:10px;">PDF</div>
+    </div>
   </div>
-  <div class="scroll" style="padding-bottom:20px;">
-    <div style="margin:16px 16px 0;background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(5,150,105,.06));border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:18px 20px;position:relative;overflow:hidden;">
+  <div class="scroll" style="padding-bottom:100px;">
+
+    <!-- KPI GLOBAL -->
+    <div style="margin:14px 14px 0;background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(5,150,105,.06));border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:16px 18px;position:relative;overflow:hidden;">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#10b981,transparent);"></div>
       <div style="font-size:10px;font-weight:800;color:rgba(16,185,129,.7);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Taux Global — Aujourd'hui</div>
       <div style="display:flex;align-items:center;gap:16px;">
@@ -31059,58 +31417,163 @@ function exportPlanTgPDF(){
           <div style="height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-bottom:8px;">
             <div id="tsGlobalBar" style="height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#10b981,#34d399);transition:width .8s ease;"></div>
           </div>
-          <div id="tsGlobalDesc" style="font-size:11px;color:rgba(148,163,184,.8);font-weight:600;">Aucune session enregistrée aujourd&#39;hui</div>
+          <div id="tsGlobalDesc" style="font-size:11px;color:rgba(148,163,184,.8);font-weight:600;">Aucune réception enregistrée aujourd'hui</div>
         </div>
+      </div>
+      <!-- Stats mini -->
+      <div id="tsStatsRow" style="display:none;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+    </div>
+
+    <!-- FILTRES -->
+    <div style="padding:10px 14px 0;display:flex;gap:6px;overflow-x:auto;flex-shrink:0;">
+      <button id="tsFiltAll" onclick="tsSwitchFilter('all',this)" style="white-space:nowrap;padding:5px 12px;border-radius:20px;border:1px solid rgba(16,185,129,.5);background:rgba(16,185,129,.2);color:#10b981;font-size:11px;font-weight:700;cursor:pointer;">Tout</button>
+      <button id="tsFiltToday" onclick="tsSwitchFilter('today',this)" style="white-space:nowrap;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;">Aujourd'hui</button>
+      <button id="tsFiltAnom" onclick="tsSwitchFilter('anomalies',this)" style="white-space:nowrap;padding:5px 12px;border-radius:20px;border:1px solid rgba(239,68,68,.3);background:transparent;color:#f87171;font-size:11px;font-weight:700;cursor:pointer;">⚠️ Avec anomalies</button>
+      <button id="tsFiltBad" onclick="tsSwitchFilter('bad',this)" style="white-space:nowrap;padding:5px 12px;border-radius:20px;border:1px solid rgba(239,68,68,.25);background:transparent;color:#f87171;font-size:11px;font-weight:700;cursor:pointer;">🔴 Taux &lt;80%</button>
+    </div>
+
+    <!-- LISTE RÉCEPTIONS -->
+    <div style="padding:10px 14px 0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:11px;font-weight:800;color:rgba(148,163,184,.6);letter-spacing:1px;text-transform:uppercase;">📋 Réceptions</div>
+        <div id="tsReceptionCount" style="font-size:10px;color:rgba(16,185,129,.7);font-weight:700;"></div>
+      </div>
+      <div id="tsReceptionList"></div>
+      <div id="tsReceptionEmpty" style="text-align:center;padding:32px 16px;color:rgba(148,163,184,.35);font-size:12px;border:1px dashed rgba(255,255,255,.07);border-radius:14px;">
+        <div style="font-size:40px;margin-bottom:10px;">📦</div>
+        <div style="font-size:13px;font-weight:700;color:rgba(148,163,184,.5);">Aucune réception enregistrée</div>
+        <div style="margin-top:6px;font-size:11px;">Appuyez sur <b style="color:#10b981;">+</b> en haut pour ajouter une réception</div>
       </div>
     </div>
-    <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:10px;">
-      <div onclick="openTauxSecteur('alim')" style="cursor:pointer;background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(5,150,105,.06));border:1px solid rgba(16,185,129,.25);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#10b981,transparent);"></div>
-        <div style="width:48px;height:48px;border-radius:14px;background:rgba(16,185,129,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🥗</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:13px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:2px;">Secteur Alimentaire</div>
-          <div style="font-size:10px;color:rgba(148,163,184,.7);font-weight:600;">Liquides · Salé · PFLS · Sucré · Vrac</div>
-          <div style="margin-top:6px;height:4px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;"><div id="tsBarAlim" style="height:100%;width:0%;border-radius:99px;background:#10b981;transition:width .6s ease;"></div></div>
+
+  </div>
+</div>
+
+<!-- ══ MODAL NOUVELLE RÉCEPTION ══ -->
+<div id="tsReceptionModal" onclick="if(event.target===this)closeTSReceptionModal()" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;">
+  <div style="background:#0e1420;border-radius:24px 24px 0 0;width:100%;max-width:430px;max-height:92dvh;overflow-y:auto;border-top:2px solid rgba(16,185,129,.35);padding:20px 18px 38px;">
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <div style="font-family:'Syne';font-size:17px;font-weight:900;color:#f8faff;">📦 Nouvelle Réception</div>
+      <div onclick="closeTSReceptionModal()" style="color:#64748b;font-size:24px;cursor:pointer;line-height:1;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.05);">×</div>
+    </div>
+
+    <!-- BC + Fournisseur — Zone principale bien visible -->
+    <div style="background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(5,150,105,.06));border:1.5px solid rgba(16,185,129,.35);border-radius:18px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:800;color:rgba(16,185,129,.9);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px;">🧾 Identification Commande</div>
+
+      <!-- N° BON DE COMMANDE -->
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:800;color:rgba(16,185,129,.8);display:block;margin-bottom:6px;letter-spacing:.5px;">N° BON DE COMMANDE *</label>
+        <div style="display:flex;gap:8px;align-items:stretch;">
+          <input id="tsRecBC" type="text" inputmode="text" placeholder="Ex: BC-2024-001234" style="flex:1;background:rgba(16,185,129,.08);border:1.5px solid rgba(16,185,129,.4);border-radius:12px;padding:12px 14px;color:#10b981;font-size:16px;font-weight:900;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px;box-sizing:border-box;outline:none;" autocomplete="off">
+          <button onclick="tsBC_clear()" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);border-radius:10px;color:#10b981;font-size:16px;width:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;" title="Effacer">✕</button>
         </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div id="tsValAlim" style="font-size:20px;font-weight:900;font-family:'IBM Plex Mono';color:#10b981;">—</div>
-          <div style="font-size:9px;color:rgba(148,163,184,.6);font-weight:700;letter-spacing:.5px;margin-top:1px;">TAUX</div>
-        </div>
-        <svg fill="none" stroke="rgba(16,185,129,.4)" stroke-width="2" width="16" height="16" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-      <div onclick="openTauxSecteur('nonAlim')" style="cursor:pointer;background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(79,70,229,.06));border:1px solid rgba(99,102,241,.25);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#6366f1,transparent);"></div>
-        <div style="width:48px;height:48px;border-radius:14px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🧴</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:13px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:2px;">Secteur Non Alimentaire</div>
-          <div style="font-size:10px;color:rgba(148,163,184,.7);font-weight:600;">Parfumerie · Droguerie · Bazar · EM</div>
-          <div style="margin-top:6px;height:4px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;"><div id="tsBarNonAlim" style="height:100%;width:0%;border-radius:99px;background:#6366f1;transition:width .6s ease;"></div></div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div id="tsValNonAlim" style="font-size:20px;font-weight:900;font-family:'IBM Plex Mono';color:#6366f1;">—</div>
-          <div style="font-size:9px;color:rgba(148,163,184,.6);font-weight:700;letter-spacing:.5px;margin-top:1px;">TAUX</div>
-        </div>
-        <svg fill="none" stroke="rgba(99,102,241,.4)" stroke-width="2" width="16" height="16" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-      </div>
-      <div onclick="openTauxSecteur('mba')" style="cursor:pointer;background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(234,88,12,.06));border:1px solid rgba(249,115,22,.25);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f97316,transparent);"></div>
-        <div style="width:48px;height:48px;border-radius:14px;background:rgba(249,115,22,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🥩</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:13px;font-weight:900;font-family:'Syne';color:#f8faff;margin-bottom:2px;">Secteur MBA</div>
-          <div style="font-size:10px;color:rgba(148,163,184,.7);font-weight:600;">Traiteur · Poissonnerie · FLEG · Boul-Pat. · Boucher.</div>
-          <div style="margin-top:6px;height:4px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;"><div id="tsBarMba" style="height:100%;width:0%;border-radius:99px;background:#f97316;transition:width .6s ease;"></div></div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div id="tsValMba" style="font-size:20px;font-weight:900;font-family:'IBM Plex Mono';color:#f97316;">—</div>
-          <div style="font-size:9px;color:rgba(148,163,184,.6);font-weight:700;letter-spacing:.5px;margin-top:1px;">TAUX</div>
-        </div>
-        <svg fill="none" stroke="rgba(249,115,22,.4)" stroke-width="2" width="16" height="16" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+
+      <!-- FOURNISSEUR -->
+      <div>
+        <label style="font-size:10px;font-weight:800;color:rgba(148,163,184,.8);display:block;margin-bottom:6px;letter-spacing:.5px;">FOURNISSEUR *</label>
+        <input id="tsRecFournisseur" type="text" placeholder="Nom du fournisseur..." style="width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:12px 14px;color:#f8faff;font-size:14px;font-weight:700;box-sizing:border-box;outline:none;" autocomplete="off">
       </div>
     </div>
-    <div style="padding:16px 16px 0;">
-      <div style="font-size:11px;font-weight:800;color:rgba(148,163,184,.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">📋 Sessions Archivées</div>
-      <div id="tsHistoryList"></div>
-      <div id="tsHistoryEmpty" style="text-align:center;padding:24px 16px;color:rgba(148,163,184,.4);font-size:12px;">Aucune session archivée</div>
+
+    <!-- Date + Rayon -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">📅 DATE</label>
+        <input type="date" id="tsRecDate" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:10px 12px;color:#f8faff;font-size:12px;font-weight:700;box-sizing:border-box;color-scheme:dark;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">🗂️ RAYON / SECTEUR</label>
+        <input id="tsRecRayon" type="text" placeholder="Rayon..." style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:10px 12px;color:#f8faff;font-size:12px;font-weight:700;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <!-- Quantités + Calcul auto -->
+    <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:14px;margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:800;color:rgba(59,130,246,.8);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">📊 Quantités</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div>
+          <label style="font-size:10px;font-weight:700;color:rgba(59,130,246,.8);display:block;margin-bottom:5px;">QTÉ COMMANDÉE</label>
+          <input type="number" id="tsRecQteCom" min="0" placeholder="0" style="width:100%;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);border-radius:11px;padding:13px;color:#60a5fa;font-size:24px;font-weight:900;font-family:'IBM Plex Mono',monospace;box-sizing:border-box;text-align:center;" oninput="tsRecalcTaux()">
+        </div>
+        <div>
+          <label style="font-size:10px;font-weight:700;color:rgba(16,185,129,.8);display:block;margin-bottom:5px;">QTÉ REÇUE</label>
+          <input type="number" id="tsRecQteRec" min="0" placeholder="0" style="width:100%;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:11px;padding:13px;color:#34d399;font-size:24px;font-weight:900;font-family:'IBM Plex Mono',monospace;box-sizing:border-box;text-align:center;" oninput="tsRecalcTaux()">
+        </div>
+      </div>
+      <!-- Résultat auto -->
+      <div id="tsRecTauxBox" style="display:none;border-radius:13px;padding:14px;text-align:center;transition:all .3s;">
+        <div style="font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:.7;margin-bottom:3px;" id="tsRecTauxLabel">TAUX DE SERVICE</div>
+        <div style="font-size:52px;font-weight:900;font-family:'IBM Plex Mono',monospace;line-height:1;" id="tsRecTauxNum">—</div>
+        <div style="font-size:11px;font-weight:700;margin-top:6px;" id="tsRecTauxMsg"></div>
+        <div style="margin-top:10px;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;">
+          <div id="tsRecTauxBar" style="height:100%;width:0%;border-radius:99px;transition:width 1s cubic-bezier(.34,1.56,.64,1);"></div>
+        </div>
+      </div>
+      <div id="tsRecTauxPh" style="text-align:center;padding:10px 0;color:rgba(148,163,184,.35);font-size:11px;">Entrez les quantités pour calculer le taux</div>
+    </div>
+
+    <!-- Anomalies -->
+    <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:14px;margin-bottom:18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:800;color:rgba(239,68,68,.8);letter-spacing:1px;text-transform:uppercase;">⚠️ Anomalies</div>
+        <div onclick="tsAddAnomalie()" style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:11px;font-weight:700;color:#f87171;">+ Ajouter</div>
+      </div>
+      <div id="tsAnomalieList"></div>
+      <div id="tsAnomalieEmpty" style="font-size:11px;color:rgba(148,163,184,.35);text-align:center;padding:8px 0;">Aucune anomalie — Réception conforme</div>
+    </div>
+
+    <!-- Boutons -->
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeTSReceptionModal()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:14px;border-radius:13px;cursor:pointer;">Annuler</button>
+      <button onclick="saveTSReception()" style="flex:2;background:linear-gradient(135deg,#047857,#059669,#10b981);border:none;color:#fff;font-size:14px;font-weight:800;padding:14px;border-radius:13px;cursor:pointer;font-family:'Syne';">✅ Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL ANOMALIE ══ -->
+<div id="tsAnomalieModal" onclick="if(event.target===this)closeTSAnomalieModal()" style="display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);align-items:flex-end;justify-content:center;">
+  <div style="background:#0e1420;border-radius:24px 24px 0 0;width:100%;max-width:430px;padding:22px 18px 38px;border-top:2px solid rgba(239,68,68,.35);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <div style="font-family:'Syne';font-size:16px;font-weight:900;color:#f8faff;">⚠️ Nouvelle Anomalie</div>
+      <div onclick="closeTSAnomalieModal()" style="color:#64748b;font-size:24px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.05);">×</div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">TYPE D'ANOMALIE</label>
+      <select id="tsAnomType" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(239,68,68,.3);border-radius:11px;padding:11px 13px;color:#f8faff;font-size:13px;font-weight:700;box-sizing:border-box;">
+        <option value="Manque de produits">📦 Manque de produits</option>
+        <option value="Produits endommagés">💥 Produits endommagés</option>
+        <option value="DLC dépassée / proche">🗓️ DLC dépassée / proche</option>
+        <option value="Erreur de référence">🔄 Erreur de référence</option>
+        <option value="Colis ouvert / abîmé">📫 Colis ouvert / abîmé</option>
+        <option value="Température non conforme">🌡️ Température non conforme</option>
+        <option value="Étiquetage incorrect">🏷️ Étiquetage incorrect</option>
+        <option value="Autre">✏️ Autre</option>
+      </select>
+    </div>
+    <div style="margin-bottom:12px;">
+      <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">DESCRIPTION (optionnel)</label>
+      <textarea id="tsAnomDesc" rows="2" placeholder="Détails de l'anomalie..." style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:11px;padding:11px 13px;color:#f8faff;font-size:13px;resize:none;box-sizing:border-box;"></textarea>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">QTÉ CONCERNÉE</label>
+        <input type="number" id="tsAnomQte" min="0" placeholder="0" style="width:100%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:11px;padding:11px;color:#f87171;font-size:18px;font-weight:900;font-family:'IBM Plex Mono',monospace;box-sizing:border-box;text-align:center;">
+      </div>
+      <div>
+        <label style="font-size:10px;font-weight:700;color:rgba(148,163,184,.7);display:block;margin-bottom:5px;">GRAVITÉ</label>
+        <select id="tsAnomGravite" style="width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:11px;color:#f8faff;font-size:12px;font-weight:700;box-sizing:border-box;">
+          <option value="mineure">🟡 Mineure</option>
+          <option value="majeure">🟠 Majeure</option>
+          <option value="critique">🔴 Critique</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeTSAnomalieModal()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;font-size:13px;font-weight:700;padding:13px;border-radius:13px;cursor:pointer;">Annuler</button>
+      <button onclick="saveTSAnomalie()" style="flex:2;background:linear-gradient(135deg,#7f1d1d,#dc2626);border:none;color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:13px;cursor:pointer;">⚠️ Ajouter</button>
     </div>
   </div>
 </div>
@@ -31243,324 +31706,78 @@ function openTauxService(){
   renderTSMain();
 }
 
-function renderTSMain(){
-  var data = loadTS();
-  var today = tstr();
-  var todaySessions = data.filter(function(s){ return s.date === today && s.archived; });
+/* renderTSMain — redéfinie dans le module v2 ci-dessous */
+function renderTSMain(){ /* sera surchargée */ }
 
-  // Compute global taux today
-  var totalCom = 0, totalRec = 0, count = 0;
-  todaySessions.forEach(function(s){ if(s.totalCom>0){ totalCom+=s.totalCom; totalRec+=s.totalRec; count++; } });
+/* ── OPEN SECTEUR PAGE (legacy — désactivé) ── */
+function openTauxSecteur(sk){ /* désactivé v2 */ }
+function tsSaveSession(){ /* désactivé v2 */ }
+function renderTSProducts(){ /* désactivé v2 */ }
+function openTSProductForm(){ /* désactivé v2 */ }
+function closeTSProductForm(){ /* désactivé v2 */ }
+function archiveTSSession(){ /* désactivé v2 */ }
+function deleteTSSession(id){ /* désactivé v2 */ }
 
-  var gv = document.getElementById('tsGlobalVal');
-  var gb = document.getElementById('tsGlobalBar');
-  var gd = document.getElementById('tsGlobalDesc');
-  if(count > 0 && totalCom > 0){
-    var gt = Math.round(totalRec/totalCom*100);
-    var gc = getTauxColor(gt);
-    gv.textContent = gt + '%';
-    gv.style.color = gc.color;
-    gb.style.width = Math.min(gt,100)+'%';
-    gb.style.background = gc.color;
-    gd.textContent = count + ' session(s) · ' + totalRec + '/' + totalCom + ' unités';
-  } else {
-    gv.textContent = '—';
-    gv.style.color = '#10b981';
-    gb.style.width = '0%';
-    gd.textContent = "Aucune session enregistrée aujourd&#39;hui";
-  }
+function previewEcart(){ /* désactivé v2 */ }
+function saveTSProduct(){ /* désactivé v2 */ }
+function deleteTSProduct(pid){ /* désactivé v2 */ }
+function calcTauxSatisfaction(){ /* désactivé v2 */ }
 
-  // Per secteur
-  ['alim','nonAlim','mba'].forEach(function(sk){
-    var s = todaySessions.filter(function(x){ return x.secteur===sk && x.totalCom>0; });
-    var bar = document.getElementById('tsBar'+sk.charAt(0).toUpperCase()+sk.slice(1));
-    var val = document.getElementById('tsVal'+sk.charAt(0).toUpperCase()+sk.slice(1));
-    if(!bar) return;
-    if(s.length > 0){
-      var tc2=0,tr2=0; s.forEach(function(x){tc2+=x.totalCom;tr2+=x.totalRec;});
-      var t2 = Math.round(tr2/tc2*100);
-      var c2 = getTauxColor(t2);
-      val.textContent = t2+'%';
-      val.style.color = c2.color;
-      bar.style.width = Math.min(t2,100)+'%';
-      bar.style.background = c2.color;
-    } else {
-      val.textContent = '—';
-      bar.style.width = '0%';
-    }
-  });
-
-  // History list
-  var archived = data.filter(function(s){ return s.archived; }).slice().reverse();
-  var hl = document.getElementById('tsHistoryList');
-  var he = document.getElementById('tsHistoryEmpty');
-  if(!archived.length){ hl.innerHTML=''; he.style.display='block'; return; }
-  he.style.display='none';
-  hl.innerHTML = archived.map(function(s){
-    var cfg2 = TS_CFG[s.secteur]||{};
-    var tc = s.totalCom||0, tr3 = s.totalRec||0;
-    var t3 = tc>0?Math.round(tr3/tc*100):0;
-    var col = getTauxColor(t3);
-    return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">'
-      +'<div style="font-size:18px;flex-shrink:0;">'+cfg2.icon+'</div>'
-      +'<div style="flex:1;min-width:0;">'
-      +'<div style="font-size:12px;font-weight:800;color:#f1f5f9;font-family:\'Syne\';">'+cfg2.label+'</div>'
-      +'<div style="font-size:10px;color:rgba(148,163,184,.6);margin-top:2px;">'+s.date+' · '+s.rayon+(s.numCommande?' · 🧾 '+s.numCommande:'')+'</div>'
-      +'<div style="font-size:10px;color:rgba(148,163,184,.5);margin-top:1px;">'+s.produits.length+' produit(s) · '+tr3+'/'+tc+' unités</div>'
-      +'</div>'
-      +'<div style="text-align:right;flex-shrink:0;">'
-      +'<div style="font-size:18px;font-weight:900;font-family:\'IBM Plex Mono\';color:'+col.color+';">'+t3+'%</div>'
-      +'<div onclick="deleteTSSession(\''+s.id+'\')" style="font-size:9px;color:rgba(239,68,68,.55);cursor:pointer;margin-top:2px;font-weight:700;">Supprimer</div>'
-      +'</div></div>';
-  }).join('');
-}
-
-/* ── OPEN SECTEUR PAGE ── */
-function openTauxSecteur(sk){
-  _tsCurSecteur = sk;
-  var cfg2 = TS_CFG[sk];
-  document.getElementById('tsSecteurTitle').textContent = cfg2.icon + ' ' + cfg2.label;
-
-  // Populate rayon selector
-  var sel = document.getElementById('tsRayonSel');
-  sel.innerHTML = cfg2.rayons.map(function(r){ return '<option value="'+r+'">'+r+'</option>'; }).join('');
-  sel.style.borderColor = cfg2.color.replace(')',', .4)').replace('rgb','rgba');
-
-  // Set date to today
-  document.getElementById('tsSessDate').value = tstr();
-
-  // Load or create working session
-  var data = loadTS();
-  var existing = data.find(function(s){ return s.secteur===sk && !s.archived; });
-  if(existing){
-    _tsCurSession = existing;
-    sel.value = existing.rayon || cfg2.rayons[0];
-    document.getElementById('tsSessDate').value = existing.date || tstr();
-    document.getElementById('tsTotalCom').value = existing.totalCom || '';
-    document.getElementById('tsTotalRec').value = existing.totalRec || '';
-    document.getElementById('tsNumCommande').value = existing.numCommande || '';
-  } else {
-    _tsCurSession = { id:uid(), secteur:sk, rayon:sel.value, date:tstr(), numCommande:'', produits:[], totalCom:0, totalRec:0, taux:0, archived:false };
-    data.push(_tsCurSession);
-    saveTS(data);
-    document.getElementById('tsTotalCom').value = '';
-    document.getElementById('tsTotalRec').value = '';
-    document.getElementById('tsNumCommande').value = '';
-  }
-
-  document.getElementById('tsTauxResult').style.display = 'none';
-  document.getElementById('tsTauxPlaceholder').style.display = 'block';
-
-  if(_tsCurSession.totalCom > 0) calcTauxSatisfaction();
-
-  renderTSProducts();
-  goPage('tauxSecteur');
-}
-
-function tsSaveSession(){
-  if(!_tsCurSession) return;
-  var data = loadTS();
-  var idx = data.findIndex(function(s){ return s.id === _tsCurSession.id; });
-  _tsCurSession.rayon = document.getElementById('tsRayonSel').value;
-  _tsCurSession.date = document.getElementById('tsSessDate').value;
-  _tsCurSession.numCommande = document.getElementById('tsNumCommande').value.trim();
-  if(idx >= 0) data[idx] = _tsCurSession;
-  saveTS(data);
-}
-
-/* ── PRODUCTS ── */
-function renderTSProducts(){
-  var list = _tsCurSession ? _tsCurSession.produits : [];
-  var el = document.getElementById('tsProductList');
-  var em = document.getElementById('tsProductEmpty');
-  if(!list.length){ el.innerHTML=''; em.style.display='block'; return; }
-  em.style.display='none';
-  el.innerHTML = list.map(function(p){
-    var ecart = (p.qteRec||0)-(p.qteCom||0);
-    var ecartCol = ecart < 0 ? '#ef4444' : ecart > 0 ? '#10b981' : '#94a3b8';
-    return '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 26px;gap:4px;align-items:center;padding:9px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:11px;margin-bottom:6px;">'
-      +'<div style="min-width:0;">'
-      +'<div style="font-size:11px;font-weight:800;font-family:\'IBM Plex Mono\';color:#f1f5f9;letter-spacing:.5px;">'+p.code+'</div>'
-      +(p.nom?'<div style="font-size:9px;color:rgba(148,163,184,.6);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+p.nom+'</div>':'')
-      +'</div>'
-      +'<div style="font-size:13px;font-weight:900;font-family:\'IBM Plex Mono\';color:#3b82f6;text-align:center;">'+p.qteCom+'</div>'
-      +'<div style="font-size:13px;font-weight:900;font-family:\'IBM Plex Mono\';color:#10b981;text-align:center;">'+p.qteRec+'</div>'
-      +'<div style="font-size:13px;font-weight:900;font-family:\'IBM Plex Mono\';color:'+ecartCol+';text-align:center;">'+(ecart>0?'+':'')+ecart+'</div>'
-      +'<div onclick="deleteTSProduct(\''+p.id+'\')" style="cursor:pointer;color:rgba(239,68,68,.5);font-size:16px;line-height:1;text-align:center;">×</div>'
-      +'</div>';
-  }).join('');
-}
-
-function openTSProductForm(){
-  document.getElementById('tsProdCode').value = '';
-  document.getElementById('tsProdNom').value = '';
-  document.getElementById('tsProdCom').value = '';
-  document.getElementById('tsProdRec').value = '';
-  document.getElementById('tsEcartPreview').style.display = 'none';
-  var f = document.getElementById('tsProductForm');
-  f.style.display = 'flex';
-  setTimeout(function(){ document.getElementById('tsProdCode').focus(); }, 100);
-}
-
-function closeTSProductForm(){
-  document.getElementById('tsProductForm').style.display = 'none';
-}
-
-function previewEcart(){
-  var c = parseFloat(document.getElementById('tsProdCom').value)||0;
-  var r = parseFloat(document.getElementById('tsProdRec').value)||0;
-  var ep = document.getElementById('tsEcartPreview');
-  if(c===0 && r===0){ ep.style.display='none'; return; }
-  var ecart = r - c;
-  ep.style.display = 'block';
-  if(ecart < 0){
-    ep.style.background = 'rgba(239,68,68,.12)';
-    ep.style.color = '#ef4444';
-    ep.textContent = 'Écart : ' + ecart + ' unités manquantes';
-  } else if(ecart > 0){
-    ep.style.background = 'rgba(16,185,129,.12)';
-    ep.style.color = '#10b981';
-    ep.textContent = 'Écart : +' + ecart + ' unités en surplus';
-  } else {
-    ep.style.background = 'rgba(148,163,184,.08)';
-    ep.style.color = '#94a3b8';
-    ep.textContent = 'Écart : 0 — Livraison conforme';
-  }
-}
-
-function saveTSProduct(){
-  var code = document.getElementById('tsProdCode').value.trim();
-  var nom = document.getElementById('tsProdNom').value.trim();
-  var qteCom = parseInt(document.getElementById('tsProdCom').value)||0;
-  var qteRec = parseInt(document.getElementById('tsProdRec').value)||0;
-  if(!code || code.length < 6){ showT('⚠️','Code produit requis (min 6 chiffres)'); return; }
-  if(qteCom <= 0){ showT('⚠️','Quantité commandée requise'); return; }
-  var prod = { id:uid(), code:code, nom:nom, qteCom:qteCom, qteRec:qteRec };
-  _tsCurSession.produits.push(prod);
-  var data = loadTS();
-  var idx = data.findIndex(function(s){ return s.id===_tsCurSession.id; });
-  if(idx>=0) data[idx]=_tsCurSession; else data.push(_tsCurSession);
-  saveTS(data);
-  closeTSProductForm();
-  renderTSProducts();
-  showT('✅','Produit ajouté');
-}
-
-function deleteTSProduct(pid){
-  if(!_tsCurSession) return;
-  _tsCurSession.produits = _tsCurSession.produits.filter(function(p){ return p.id!==pid; });
-  var data = loadTS();
-  var idx = data.findIndex(function(s){ return s.id===_tsCurSession.id; });
-  if(idx>=0) data[idx]=_tsCurSession;
-  saveTS(data);
-  renderTSProducts();
-}
-
-/* ── CALCULATEUR TAUX ── */
-function calcTauxSatisfaction(){
-  var tc = parseFloat(document.getElementById('tsTotalCom').value)||0;
-  var tr4 = parseFloat(document.getElementById('tsTotalRec').value)||0;
-  var res = document.getElementById('tsTauxResult');
-  var ph = document.getElementById('tsTauxPlaceholder');
-  if(tc <= 0 || tr4 < 0){ res.style.display='none'; ph.style.display='block'; return; }
-  var taux = Math.round(tr4/tc*100);
-  var col = getTauxColor(taux);
-  res.style.display='block'; ph.style.display='none';
-  res.style.background = col.bg;
-  res.style.borderColor = col.border;
-  document.getElementById('tsTauxNum').textContent = taux+'%';
-  document.getElementById('tsTauxNum').style.color = col.color;
-  document.getElementById('tsTauxLabel').style.color = col.color;
-  document.getElementById('tsTauxMsg').textContent = col.msg;
-  document.getElementById('tsTauxMsg').style.color = col.color;
-  document.getElementById('tsTauxBar').style.width = Math.min(taux,100)+'%';
-  document.getElementById('tsTauxBar').style.background = col.color;
-  if(_tsCurSession){ _tsCurSession.totalCom=tc; _tsCurSession.totalRec=tr4; _tsCurSession.taux=taux; tsSaveSession(); }
-}
-
-/* ── ARCHIVE SESSION ── */
-function archiveTSSession(){
-  if(!_tsCurSession){ showT('⚠️','Aucune session active'); return; }
-  var tc = parseFloat(document.getElementById('tsTotalCom').value)||0;
-  var tr5 = parseFloat(document.getElementById('tsTotalRec').value)||0;
-  if(tc <= 0){ showT('⚠️','Entrez la quantité commandée totale'); return; }
-  _tsCurSession.totalCom = tc;
-  _tsCurSession.totalRec = tr5;
-  _tsCurSession.taux = Math.round(tr5/tc*100);
-  _tsCurSession.rayon = document.getElementById('tsRayonSel').value;
-  _tsCurSession.date = document.getElementById('tsSessDate').value;
-  _tsCurSession.numCommande = document.getElementById('tsNumCommande').value.trim();
-  _tsCurSession.archived = true;
-  var data = loadTS();
-  var idx = data.findIndex(function(s){ return s.id===_tsCurSession.id; });
-  if(idx>=0) data[idx]=_tsCurSession; else data.push(_tsCurSession);
-  saveTS(data);
-  var savedTaux = _tsCurSession.taux;
-  _tsCurSession = null;
-  showT('📦','Session archivée · Taux : '+savedTaux+'%');
-  goPage('tauxService');
-}
+/* ── ARCHIVE SESSION (legacy) ── */
+function archiveTSSession(){ /* désactivé v2 */ }
 
 function deleteTSSession(id){
-  var data = loadTS().filter(function(s){ return s.id!==id; });
-  saveTS(data);
-  renderTSMain();
-  showT('🗑️','Session supprimée');
+  showConfirm('🗑️ Supprimer','Supprimer cette session ?',function(){
+    var data = loadTS().filter(function(s){ return s.id!==id; });
+    saveTS(data);
+    renderTSMain();
+    showT('🗑️','Session supprimée');
+  });
 }
 
 /* ── PDF EXPORT ── */
 function exportTauxServicePDF(){
-  var data = loadTS().filter(function(s){ return s.archived; });
-  if(!data.length){ showT('⚠️','Aucune session à exporter'); return; }
-  var today = tstr();
+  var data = loadTSR ? loadTSR() : [];
+  if(!data.length){ showT('⚠️','Aucune réception à exporter'); return; }
+  var today = tstr ? tstr() : new Date().toISOString().slice(0,10);
   var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
     +'<style>body{font-family:\'Segoe UI\',sans-serif;background:#fff;color:#0d1117;padding:20px;max-width:700px;margin:0 auto;}'
     +'.header{background:linear-gradient(135deg,#047857,#10b981);color:#fff;padding:20px 24px;border-radius:12px;margin-bottom:20px;}'
-    +'.title{font-size:22px;font-weight:900;margin-bottom:4px;}' 
+    +'.title{font-size:22px;font-weight:900;margin-bottom:4px;}'
     +'.sub{font-size:12px;opacity:.8;}'
-    +'.secteur{background:#f8faff;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:16px;overflow:hidden;}'
-    +'.sect-hdr{padding:12px 16px;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center;}'
-    +'.taux-green{color:#16a34a;}.taux-orange{color:#ea580c;}.taux-red{color:#dc2626;}'
-    +'.table{width:100%;border-collapse:collapse;}'
-    +'.table th{background:#f1f5f9;padding:8px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;text-align:left;}'
-    +'.table td{padding:8px 12px;font-size:12px;border-top:1px solid #f1f5f9;}'
-    +'.ecart-neg{color:#dc2626;font-weight:700;}.ecart-pos{color:#16a34a;font-weight:700;}'
+    +'.rec{background:#f8faff;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:16px;padding:14px 16px;}'
+    +'.rec-title{font-size:15px;font-weight:800;margin-bottom:4px;}'
+    +'.rec-meta{font-size:11px;color:#64748b;margin-bottom:8px;}'
+    +'.taux-green{color:#16a34a;font-weight:900;font-size:18px;}'
+    +'.taux-orange{color:#ea580c;font-weight:900;font-size:18px;}'
+    +'.taux-red{color:#dc2626;font-weight:900;font-size:18px;}'
+    +'.anom{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:8px 12px;margin-top:6px;font-size:11px;color:#dc2626;}'
     +'.footer{text-align:center;font-size:10px;color:#94a3b8;margin-top:20px;padding-top:12px;border-top:1px solid #f1f5f9;}'
     +'</style></head><body>'
     +'<div class="header"><div class="title">📦 Rapport Taux de Service</div>'
-    +'<div class="sub">Généré le '+today+' · '+getMagName()+'</div></div>';
-
-  ['alim','nonAlim','mba'].forEach(function(sk){
-    var cfg2 = TS_CFG[sk];
-    var sessions = data.filter(function(s){ return s.secteur===sk; });
-    if(!sessions.length) return;
-    var tc6=0, tr6=0;
-    sessions.forEach(function(s){ tc6+=s.totalCom||0; tr6+=s.totalRec||0; });
-    var t6 = tc6>0?Math.round(tr6/tc6*100):0;
-    var cls = t6>=80?'taux-green':t6>=70?'taux-orange':'taux-red';
-    html += '<div class="secteur"><div class="sect-hdr"><span>'+cfg2.icon+' '+cfg2.label+'</span><span class="'+cls+'">'+t6+'%</span></div>';
-    sessions.forEach(function(s){
-      html += '<div style="padding:8px 16px 4px;font-size:11px;font-weight:700;color:#64748b;background:#fafafa;">'+s.date+' · '+s.rayon+(s.numCommande?' · 🧾 Cde N°'+s.numCommande:'')+' · Qté: '+s.totalRec+'/'+s.totalCom+'</div>';
-      if(s.produits.length){
-        html += '<table class="table"><tr><th>Code</th><th>Désignation</th><th>Commandé</th><th>Reçu</th><th>Écart</th></tr>';
-        s.produits.forEach(function(p){
-          var e = (p.qteRec||0)-(p.qteCom||0);
-          html += '<tr><td><b>'+p.code+'</b></td><td>'+(p.nom||'—')+'</td><td>'+p.qteCom+'</td><td>'+p.qteRec+'</td>'
-            +'<td class="'+(e<0?'ecart-neg':'ecart-pos')+'">'+(e>0?'+':'')+e+'</td></tr>';
-        });
-        html += '</table>';
-      }
-    });
+    +'<div class="sub">Généré le '+today+'</div></div>';
+  data.slice().reverse().forEach(function(r){
+    var taux = r.qteCom>0?Math.round(r.qteRec/r.qteCom*100):0;
+    var cls = taux>=80?'taux-green':taux>=70?'taux-orange':'taux-red';
+    html += '<div class="rec"><div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+      +'<div><div class="rec-title">🧾 '+(r.bc||'BC?')+'</div>'
+      +'<div class="rec-meta">🏭 '+(r.fournisseur||'—')+' · 📅 '+r.date+(r.rayon?' · '+r.rayon:'')+'</div>'
+      +'<div style="font-size:12px;">CMD: <b>'+r.qteCom+'</b> · REC: <b>'+r.qteRec+'</b> · ÉCT: <b>'+(r.qteRec-r.qteCom)+'</b></div></div>'
+      +'<div class="'+cls+'">'+taux+'%</div></div>';
+    if(r.anomalies && r.anomalies.length){
+      r.anomalies.forEach(function(a){
+        html += '<div class="anom">⚠️ <b>'+a.type+'</b>'+(a.desc?' — '+a.desc:'')+(a.qte?' ('+a.qte+' u.)':'')+' ['+a.gravite.toUpperCase()+']</div>';
+      });
+    }
     html += '</div>';
   });
-
-  html += '<div class="footer">TaskPro · '+getMagName()+' · Taux de Service</div></body></html>';
+  html += '<div class="footer">TaskPro · Taux de Service</div></body></html>';
   var blob = new Blob([html],{type:'text/html'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'taux-service-'+today+'.html';
   a.click();
-  showT('📄','PDF exporté');
+  showT('📄','Rapport exporté');
 }
 
 /* Hook into goPage for init */
@@ -31573,7 +31790,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(p === 'taches') setTimeout(function(){
       var data = loadTS();
       var today = tstr();
-      var todaySessions = data.filter(function(s){ return s.date===today && s.archived && s.totalCom>0; });
+      var todaySessions = data.filter(function(s){ return s.date===today && s.totalCom>0; });
       var badge = document.getElementById('tileTSBadge');
       if(!badge) return;
       if(todaySessions.length){
@@ -37486,5 +37703,300 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 
+<script>
+/* ══════════════════════════════════════════
+   MODULE — RÉCEPTIONS TAUX DE SERVICE (v2)
+══════════════════════════════════════════ */
+var SK_TSR = 'tp10_tsReceptions';
+var _tsrAnomalies = []; // anomalies en cours de saisie
+
+function loadTSR(){ try{ return JSON.parse(localStorage.getItem(SK_TSR)||'[]'); }catch(e){ return []; } }
+function saveTSR(d){ try{ localStorage.setItem(SK_TSR, JSON.stringify(d)); }catch(e){} }
+
+var _tsrFilter = 'all'; // filtre actif
+
+function tsSwitchFilter(f, btn){
+  _tsrFilter = f;
+  document.querySelectorAll('#pgTauxService button[id^="tsFilt"]').forEach(function(b){
+    b.style.background='transparent';
+    b.style.color='var(--t2)';
+    b.style.borderColor='rgba(255,255,255,.12)';
+  });
+  if(btn){
+    if(f==='all'){ btn.style.background='rgba(16,185,129,.2)'; btn.style.color='#10b981'; btn.style.borderColor='rgba(16,185,129,.5)'; }
+    else if(f==='today'){ btn.style.background='rgba(59,130,246,.15)'; btn.style.color='#60a5fa'; btn.style.borderColor='rgba(59,130,246,.4)'; }
+    else if(f==='anomalies'){ btn.style.background='rgba(239,68,68,.15)'; btn.style.color='#f87171'; btn.style.borderColor='rgba(239,68,68,.4)'; }
+    else if(f==='bad'){ btn.style.background='rgba(239,68,68,.1)'; btn.style.color='#f87171'; btn.style.borderColor='rgba(239,68,68,.3)'; }
+  }
+  renderTSMain();
+}
+
+/* ── RENDER MAIN ── */
+function renderTSMain(){
+  var data = loadTSR();
+  var today = (typeof tstr==='function') ? tstr() : new Date().toISOString().slice(0,10);
+  var todayRecs = data.filter(function(r){ return r.date === today; });
+
+  // Global KPI (toujours basé sur aujourd'hui)
+  var totalCom=0, totalRec=0;
+  todayRecs.forEach(function(r){ totalCom+=r.qteCom||0; totalRec+=r.qteRec||0; });
+  var gv = document.getElementById('tsGlobalVal');
+  var gb = document.getElementById('tsGlobalBar');
+  var gd = document.getElementById('tsGlobalDesc');
+  var sr = document.getElementById('tsStatsRow');
+  if(gv){
+    if(totalCom>0){
+      var gt = Math.round(totalRec/totalCom*100);
+      var gc = getTauxColor(gt);
+      gv.textContent = gt+'%';
+      gv.style.color = gc.color;
+      if(gb){ gb.style.width=Math.min(gt,100)+'%'; gb.style.background=gc.color; }
+      if(gd) gd.textContent = todayRecs.length+' réception(s) · '+totalRec+'/'+totalCom+' unités · '+gc.msg.replace(/^[🟢🟡🔴]\s*/,'');
+    } else {
+      gv.textContent='—'; gv.style.color='#10b981';
+      if(gb) gb.style.width='0%';
+      if(gd) gd.textContent="Aucune réception enregistrée aujourd'hui";
+    }
+  }
+  // Stats mini
+  if(sr){
+    var withAnom = data.filter(function(r){ return r.anomalies&&r.anomalies.length>0; }).length;
+    var badCount = data.filter(function(r){ return r.qteCom>0 && Math.round(r.qteRec/r.qteCom*100)<80; }).length;
+    if(data.length>0){
+      sr.style.display='flex';
+      sr.innerHTML = '<div style="background:rgba(255,255,255,.07);border-radius:10px;padding:6px 12px;text-align:center;flex:1;">'
+        +'<div style="font-size:16px;font-weight:900;color:#f8faff;font-family:\'IBM Plex Mono\';">'+data.length+'</div>'
+        +'<div style="font-size:9px;color:rgba(148,163,184,.6);margin-top:1px;font-weight:700;">TOTAL</div></div>'
+        +'<div style="background:rgba(239,68,68,.1);border-radius:10px;padding:6px 12px;text-align:center;flex:1;">'
+        +'<div style="font-size:16px;font-weight:900;color:#f87171;font-family:\'IBM Plex Mono\';">'+withAnom+'</div>'
+        +'<div style="font-size:9px;color:rgba(248,113,113,.5);margin-top:1px;font-weight:700;">ANOMALIES</div></div>'
+        +'<div style="background:rgba(239,68,68,.08);border-radius:10px;padding:6px 12px;text-align:center;flex:1;">'
+        +'<div style="font-size:16px;font-weight:900;color:#ef4444;font-family:\'IBM Plex Mono\';">'+badCount+'</div>'
+        +'<div style="font-size:9px;color:rgba(239,68,68,.5);margin-top:1px;font-weight:700;">&lt;80%</div></div>';
+    } else {
+      sr.style.display='none';
+    }
+  }
+
+  // Appliquer filtre
+  var filtered = data.slice();
+  if(_tsrFilter==='today') filtered = data.filter(function(r){ return r.date===today; });
+  else if(_tsrFilter==='anomalies') filtered = data.filter(function(r){ return r.anomalies&&r.anomalies.length>0; });
+  else if(_tsrFilter==='bad') filtered = data.filter(function(r){ return r.qteCom>0 && Math.round(r.qteRec/r.qteCom*100)<80; });
+
+  // List
+  var list = document.getElementById('tsReceptionList');
+  var empty = document.getElementById('tsReceptionEmpty');
+  var count = document.getElementById('tsReceptionCount');
+  if(!list) return;
+
+  var sorted = filtered.slice().reverse();
+  if(count) count.textContent = sorted.length ? sorted.length+' réception(s)' : '';
+
+  if(!sorted.length){
+    list.innerHTML='';
+    if(empty) empty.style.display='block';
+    return;
+  }
+  if(empty) empty.style.display='none';
+
+  list.innerHTML = sorted.map(function(r){
+    var taux = r.qteCom>0 ? Math.round(r.qteRec/r.qteCom*100) : 0;
+    var col = getTauxColor(taux);
+    var anomBadge = (r.anomalies && r.anomalies.length)
+      ? '<span style="background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:6px;padding:2px 6px;font-size:9px;color:#f87171;font-weight:700;margin-left:6px;">⚠️ '+r.anomalies.length+' anomalie(s)</span>'
+      : '';
+    var gravColors = {mineure:'#eab308',majeure:'#f97316',critique:'#ef4444'};
+    var anomList = (r.anomalies && r.anomalies.length)
+      ? '<div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;">'
+        + r.anomalies.map(function(a){
+            return '<div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:rgba(239,68,68,.08);border-radius:8px;border:1px solid rgba(239,68,68,.15);">'
+              +'<span style="font-size:9px;font-weight:800;color:'+(gravColors[a.gravite]||'#f87171')+';">'+a.gravite.toUpperCase()+'</span>'
+              +'<span style="font-size:10px;color:rgba(248,113,113,.9);flex:1;">'+a.type+(a.desc?' — '+a.desc:'')+(a.qte?' ('+a.qte+' u.)':'')+'</span>'
+              +'</div>';
+          }).join('')
+        +'</div>'
+      : '';
+
+    return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px;margin-bottom:10px;">'
+      +'<div style="display:flex;align-items:flex-start;gap:12px;">'
+      +'<div style="width:46px;height:46px;border-radius:12px;background:'+col.bg+';border:1px solid '+col.border+';display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+      +'<div style="font-size:18px;font-weight:900;font-family:\'IBM Plex Mono\',monospace;color:'+col.color+';">'+taux+'<span style="font-size:10px;">%</span></div>'
+      +'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:3px;">'
+      +'<div style="font-size:13px;font-weight:900;color:#f1f5f9;font-family:\'Syne\';">'+(r.bc||'BC non renseigné')+'</div>'
+      +anomBadge
+      +'</div>'
+      +'<div style="font-size:11px;color:rgba(148,163,184,.7);margin-bottom:2px;">🏭 '+(r.fournisseur||'—')+'</div>'
+      +'<div style="font-size:10px;color:rgba(148,163,184,.5);">📅 '+r.date+(r.rayon?' · 🗂️ '+r.rayon:'')+'</div>'
+      +'<div style="margin-top:6px;display:flex;align-items:center;gap:8px;">'
+      +'<div style="font-size:10px;color:rgba(59,130,246,.8);font-weight:700;">CMD: '+r.qteCom+'</div>'
+      +'<div style="font-size:10px;color:rgba(16,185,129,.8);font-weight:700;">REC: '+r.qteRec+'</div>'
+      +'<div style="font-size:10px;color:'+(r.qteRec<r.qteCom?'#f87171':'#34d399')+';font-weight:700;">ÉCT: '+(r.qteRec-r.qteCom)+'</div>'
+      +'</div>'
+      +anomList
+      +'</div>'
+      +'<div onclick="deleteTSReception(\''+r.id+'\')" style="color:rgba(239,68,68,.4);font-size:18px;cursor:pointer;line-height:1;flex-shrink:0;padding:2px 4px;">×</div>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+/* ── OPEN MODAL RÉCEPTION ── */
+function openTSReceptionModal(){
+  _tsrAnomalies = [];
+  var today = tstr ? tstr() : new Date().toISOString().slice(0,10);
+  document.getElementById('tsRecBC').value = '';
+  document.getElementById('tsRecFournisseur').value = '';
+  document.getElementById('tsRecDate').value = today;
+  document.getElementById('tsRecRayon').value = '';
+  document.getElementById('tsRecQteCom').value = '';
+  document.getElementById('tsRecQteRec').value = '';
+  document.getElementById('tsRecTauxBox').style.display = 'none';
+  document.getElementById('tsRecTauxPh').style.display = 'block';
+  renderTSRAnomalieList();
+  document.getElementById('tsReceptionModal').style.display = 'flex';
+  setTimeout(function(){ document.getElementById('tsRecBC').focus(); }, 150);
+}
+
+function closeTSReceptionModal(){
+  document.getElementById('tsReceptionModal').style.display = 'none';
+}
+
+/* ── CALCUL AUTO TAUX ── */
+function tsRecalcTaux(){
+  var qc = parseFloat(document.getElementById('tsRecQteCom').value)||0;
+  var qr = parseFloat(document.getElementById('tsRecQteRec').value)||0;
+  var box = document.getElementById('tsRecTauxBox');
+  var ph = document.getElementById('tsRecTauxPh');
+  if(qc<=0){ box.style.display='none'; ph.style.display='block'; return; }
+  var taux = Math.round(qr/qc*100);
+  var col = getTauxColor(taux);
+  box.style.display='block'; ph.style.display='none';
+  box.style.background = col.bg;
+  box.style.border = '2px solid '+col.border;
+  document.getElementById('tsRecTauxNum').textContent = taux+'%';
+  document.getElementById('tsRecTauxNum').style.color = col.color;
+  document.getElementById('tsRecTauxLabel').style.color = col.color;
+  document.getElementById('tsRecTauxMsg').textContent = col.msg;
+  document.getElementById('tsRecTauxMsg').style.color = col.color;
+  document.getElementById('tsRecTauxBar').style.width = Math.min(taux,100)+'%';
+  document.getElementById('tsRecTauxBar').style.background = col.color;
+}
+
+/* ── SAVE RÉCEPTION ── */
+function saveTSReception(){
+  var bc = document.getElementById('tsRecBC').value.trim();
+  var fournisseur = document.getElementById('tsRecFournisseur').value.trim();
+  var date = document.getElementById('tsRecDate').value;
+  var rayon = document.getElementById('tsRecRayon').value.trim();
+  var qteCom = parseFloat(document.getElementById('tsRecQteCom').value)||0;
+  var qteRec = parseFloat(document.getElementById('tsRecQteRec').value)||0;
+
+  if(!bc){ showT('⚠️','Renseignez le N° Bon de Commande'); return; }
+  if(!fournisseur){ showT('⚠️','Renseignez le fournisseur'); return; }
+  if(qteCom<=0){ showT('⚠️','Quantité commandée requise'); return; }
+
+  var taux = Math.round(qteRec/qteCom*100);
+  var rec = {
+    id: (typeof uid==='function'?uid():Date.now().toString(36)),
+    bc: bc,
+    fournisseur: fournisseur,
+    date: date,
+    rayon: rayon,
+    qteCom: qteCom,
+    qteRec: qteRec,
+    taux: taux,
+    anomalies: _tsrAnomalies.slice(),
+    createdAt: Date.now()
+  };
+
+  var data = loadTSR();
+  data.push(rec);
+  saveTSR(data);
+
+  closeTSReceptionModal();
+  renderTSMain();
+  var col = getTauxColor(taux);
+  showT(taux>=80?'✅':'⚠️', 'Réception enregistrée · Taux: '+taux+'%');
+}
+
+function deleteTSReception(id){
+  showConfirm('🗑️ Supprimer','Supprimer cette réception ?',function(){
+    var data = loadTSR().filter(function(r){ return r.id!==id; });
+    saveTSR(data);
+    renderTSMain();
+    showT('🗑️','Réception supprimée');
+  });
+}
+
+/* ── ANOMALIES ── */
+function tsAddAnomalie(){
+  document.getElementById('tsAnomType').value = 'Manque de produits';
+  document.getElementById('tsAnomDesc').value = '';
+  document.getElementById('tsAnomQte').value = '';
+  document.getElementById('tsAnomGravite').value = 'mineure';
+  document.getElementById('tsAnomalieModal').style.display = 'flex';
+}
+
+function closeTSAnomalieModal(){
+  document.getElementById('tsAnomalieModal').style.display = 'none';
+}
+
+function saveTSAnomalie(){
+  var type = document.getElementById('tsAnomType').value;
+  var desc = document.getElementById('tsAnomDesc').value.trim();
+  var qte = parseInt(document.getElementById('tsAnomQte').value)||0;
+  var gravite = document.getElementById('tsAnomGravite').value;
+  _tsrAnomalies.push({ id:Date.now().toString(36), type:type, desc:desc, qte:qte, gravite:gravite });
+  closeTSAnomalieModal();
+  renderTSRAnomalieList();
+  showT('⚠️','Anomalie ajoutée');
+}
+
+function renderTSRAnomalieList(){
+  var list = document.getElementById('tsAnomalieList');
+  var empty = document.getElementById('tsAnomalieEmpty');
+  if(!list) return;
+  if(!_tsrAnomalies.length){ list.innerHTML=''; if(empty) empty.style.display='block'; return; }
+  if(empty) empty.style.display='none';
+  var gColors={mineure:'#eab308',majeure:'#f97316',critique:'#ef4444'};
+  list.innerHTML = _tsrAnomalies.map(function(a,i){
+    return '<div style="display:flex;align-items:center;gap:8px;padding:9px 10px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;margin-bottom:6px;">'
+      +'<div style="flex:1;">'
+      +'<div style="font-size:12px;font-weight:800;color:#f87171;">'+a.type+'</div>'
+      +(a.desc?'<div style="font-size:10px;color:rgba(248,113,113,.6);margin-top:1px;">'+a.desc+'</div>':'')
+      +'<div style="margin-top:3px;display:flex;gap:6px;">'
+      +(a.qte?'<span style="font-size:9px;color:rgba(148,163,184,.6);">Qté: '+a.qte+'</span>':'')
+      +'<span style="font-size:9px;font-weight:700;color:'+(gColors[a.gravite]||'#f87171')+';">'+a.gravite.toUpperCase()+'</span>'
+      +'</div></div>'
+      +'<div onclick="tsRemoveAnomalie('+i+')" style="color:rgba(239,68,68,.5);font-size:18px;cursor:pointer;line-height:1;">×</div>'
+      +'</div>';
+  }).join('');
+}
+
+function tsRemoveAnomalie(idx){
+  _tsrAnomalies.splice(idx,1);
+  renderTSRAnomalieList();
+}
+
+// Init — s'assurer que renderTSMain tourne quand la page est chargée
+document.addEventListener('DOMContentLoaded', function(){
+  // déjà définie ci-dessus — OK
+  // Fix : appeler renderTSMain dès le chargement si on est sur la page tauxService
+  setTimeout(function(){
+    if(document.getElementById('pgTauxService') && typeof renderTSMain==='function'){
+      renderTSMain();
+    }
+  }, 200);
+});
+
+/* ── HELPERS ── */
+function tsBC_clear(){
+  var el = document.getElementById('tsRecBC');
+  if(el){ el.value=''; el.focus(); }
+}
+</script>
 </body>
 </html>
