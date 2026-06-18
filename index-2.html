@@ -10670,6 +10670,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">📊 Pareto 80/20</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addParetoProduct()" style="background:#2563eb;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="shareParetoAll()" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
       <button onclick="exportParetoPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -10780,6 +10781,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🔄 Boucle PDCA</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addPdcaAction()" style="background:#16a34a;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="sharePdcaAll()" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:.85;">📤</button>
       <button onclick="exportPdcaPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -10965,6 +10967,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">⚙️ Théorie des Contraintes</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addGoulot()" style="background:#4338ca;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="shareGoulotAll()" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
       <button onclick="exportGoulotsPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -11093,6 +11096,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">⚡ Lean Management</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addPhiloAction('lean')" style="background:#eab308;border:none;color:#000;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="sharePhiloAll('lean')" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
       <button onclick="exportPhiloPDF('lean')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -11201,6 +11205,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🎯 Six Sigma</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addPhiloAction('sixsigma')" style="background:#a21caf;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="sharePhiloAll('sixsigma')" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
       <button onclick="exportPhiloPDF('sixsigma')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -11295,6 +11300,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="font-size:14px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🌱 Kaizen</div>
     <div style="display:flex;gap:6px;">
       <button onclick="addPhiloAction('kaizen')" style="background:#16a34a;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+      <button onclick="sharePhiloAll('kaizen')" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
       <button onclick="exportPhiloPDF('kaizen')" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
     </div>
   </div>
@@ -18459,6 +18465,17 @@ function delPareto(id){
     showT('🗑️','Supprimé');
   });
 }
+function shareParetoAll(){
+  var d=loadExc();var items=(d.pareto||[]).slice().sort(function(a,b){return b.ca-a.ca;});
+  if(!items.length){showT('⚠️','Aucun produit à partager');return;}
+  var total=items.reduce(function(s,p){return s+p.ca;},0);var cumul=0;
+  items.forEach(function(p){cumul+=p.ca;p._group=cumul/total*100<=80?'A':cumul/total*100<=95?'B':'C';p._pct=Math.round(p.ca/total*100);});
+  var msg='📊 *Analyse Pareto 80/20* — '+getMagName()+'\n'
+    +'CA Total : '+total.toLocaleString('fr-FR')+' TND\n━━━━━━━━━━━━━━━\n\n'
+    +items.map(function(p,i){return (i+1)+'. ['+p._group+'] '+p.produit+' — '+p.ca.toLocaleString('fr-FR')+' TND ('+p._pct+'%)';}).join('\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
 function renderPareto(){
   var d=loadExc();var items=(d.pareto||[]).slice().sort(function(a,b){return b.ca-a.ca;});
   var el=document.getElementById('paretoList');var empty=document.getElementById('paretoEmpty');var sumEl=document.getElementById('paretoSummary');if(!el)return;
@@ -18550,6 +18567,43 @@ function delPdca(id){
     showT('🗑️','Supprimé');
   });
 }
+var _pdcaEditingId=null;
+function startEditPdca(id){_pdcaEditingId=id;renderPdca();setTimeout(function(){var ta=document.getElementById('pdcaEditTitle_'+id);if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}},30);}
+function cancelEditPdca(){_pdcaEditingId=null;renderPdca();}
+function saveEditPdca(id){
+  var tt=document.getElementById('pdcaEditTitle_'+id);var td=document.getElementById('pdcaEditDesc_'+id);
+  if(!tt)return;
+  var titleVal=tt.value.trim();if(!titleVal){showT('⚠️','Le titre ne peut pas être vide');return;}
+  var descVal=td?td.value.trim():'';
+  var d=loadExc();var item=(d.pdca||[]).find(function(p){return p.id===id;});
+  if(item){item.title=titleVal;item.desc=descVal;item.editedAt=tstr();}
+  saveExc(d);_pdcaEditingId=null;renderPdca();showT('✏️','Action PDCA modifiée');
+}
+function sharePdcaOne(id){
+  var d=loadExc();var p=(d.pdca||[]).find(function(x){return x.id===id;});if(!p)return;
+  var icons={plan:'📋 PLAN',do:'⚡ DO',check:'🔍 CHECK',act:'✅ ACT'};
+  var msg='🔄 Boucle PDCA — '+getMagName()+'\n\n'
+    +'Étape : '+(icons[p.step]||p.step)+'\n'
+    +'📝 '+p.title+'\n'
+    +(p.desc?'📄 '+p.desc+'\n':'')
+    +'📅 '+p.date+(p.editedAt?' (modifié le '+p.editedAt+')':'')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+function sharePdcaAll(){
+  var d=loadExc();var all=d.pdca||[];
+  if(!all.length){showT('⚠️','Aucune action PDCA à partager');return;}
+  var icons={plan:'📋',do:'⚡',check:'🔍',act:'✅'};
+  var msg='🔄 *Boucle PDCA* — '+getMagName()+'\n'
+    +'📊 '+all.length+' action(s)\n━━━━━━━━━━━━━━━\n\n'
+    +['plan','do','check','act'].map(function(s){
+      var items=all.filter(function(p){return p.step===s;});
+      if(!items.length)return null;
+      return icons[s]+' *'+s.toUpperCase()+'*\n'+items.map(function(p){return '  • '+p.title;}).join('\n');
+    }).filter(Boolean).join('\n\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
 function renderPdca(){
   var d=loadExc();var all=d.pdca||[];
   var steps=['plan','do','check','act'];
@@ -18561,23 +18615,40 @@ function renderPdca(){
   var el=document.getElementById('pdcaList');var empty=document.getElementById('pdcaEmpty');var fEl=document.getElementById('pdcaFilter');if(!el)return;
   if(fEl)fEl.textContent=_pdcaFilter?'Filtre: '+_pdcaFilter.toUpperCase()+' — Cliquez à nouveau pour tout voir':'';
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
-  el.innerHTML=list.map(function(p){
+  el.innerHTML=(all.length?'<div style="display:flex;justify-content:flex-end;margin-bottom:6px;"><button onclick="sharePdcaAll()" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button></div>':'')
+    +list.map(function(p){
     var col=cols[p.step];
     var nextSteps=steps.filter(function(s){return s!==p.step;});
+    var isEd=(_pdcaEditingId===p.id);
+    if(isEd){
+      return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border:1.5px solid '+col+';">'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre</label>'
+        +'<textarea id="pdcaEditTitle_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:36px;margin-bottom:8px;">'+escHtml(p.title)+'</textarea>'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Description</label>'
+        +'<textarea id="pdcaEditDesc_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:50px;">'+escHtml(p.desc||'')+'</textarea>'
+        +'<div style="display:flex;gap:6px;margin-top:8px;">'
+        +'<button onclick="saveEditPdca(\''+p.id+'\')" style="flex:1;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
+        +'<button onclick="cancelEditPdca()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
+        +'</div></div>';
+    }
     return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:3px solid '+col+';">'
       +'<div style="display:flex;align-items:flex-start;justify-content:space-between;">'
       +'<div style="flex:1;">'
       +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">'
       +'<span style="font-size:13px;font-weight:800;background:'+col+'22;color:'+col+';padding:2px 8px;border-radius:8px;">'+icons[p.step]+' '+p.step.toUpperCase()+'</span>'
       +'</div>'
-      +'<div style="font-size:14px;font-weight:900;color:#0f172a;">'+p.title+'</div>'
-      +(p.desc?'<div style="font-size:12px;font-weight:600;color:#334155;margin-top:3px;line-height:1.4;">'+p.desc+'</div>':'')
-      +'<div style="font-size:11px;font-weight:700;color:#475569;margin-top:4px;">'+p.date+'</div>'
+      +'<div style="font-size:14px;font-weight:900;color:#0f172a;">'+escHtml(p.title)+'</div>'
+      +(p.desc?'<div style="font-size:12px;font-weight:600;color:#334155;margin-top:3px;line-height:1.4;">'+escHtml(p.desc)+'</div>':'')
+      +'<div style="font-size:10.5px;font-weight:700;color:#475569;margin-top:4px;">'+p.date+(p.editedAt?'  ·  ✏️ modifié '+p.editedAt:'')+'</div>'
       +'<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">'
       +nextSteps.map(function(s){return '<button onclick="movePdca(\''+p.id+'\',\''+s+'\')" style="background:'+cols[s]+'22;border:1px solid '+cols[s]+'44;border-radius:8px;color:'+cols[s]+';font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;">→ '+s.toUpperCase()+'</button>';}).join('')
       +'</div>'
       +'</div>'
-      +'<div onclick="delPdca(\''+p.id+'\')" style="color:#ef4444;font-size:18px;cursor:pointer;padding:2px 6px;margin-left:8px;">×</div>'
+      +'<div style="display:flex;flex-direction:column;gap:4px;margin-left:8px;">'
+      +'<div onclick="startEditPdca(\''+p.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#3b82f6;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✏️</div>'
+      +'<div onclick="sharePdcaOne(\''+p.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</div>'
+      +'<div onclick="delPdca(\''+p.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+      +'</div>'
       +'</div></div>';
   }).join('');
 }
@@ -18698,14 +18769,67 @@ function delGoulot(id){
     showT('🗑️','Supprimé');
   });
 }
+var _goulotEditingId=null;
+function startEditGoulot(id){_goulotEditingId=id;renderContraintes();setTimeout(function(){var ta=document.getElementById('goulotEditTa_'+id);if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}var ts=document.getElementById('goulotEditSol_'+id);if(ts){}},30);}
+function cancelEditGoulot(){_goulotEditingId=null;renderContraintes();}
+function saveEditGoulot(id){
+  var ta=document.getElementById('goulotEditTa_'+id);var ts=document.getElementById('goulotEditSol_'+id);
+  if(!ta)return;
+  var val=ta.value.trim();if(!val){showT('⚠️','Le titre ne peut pas être vide');return;}
+  var sol=ts?ts.value.trim():'';
+  var d=loadExc();var g=(d.goulots||[]).find(function(x){return x.id===id;});
+  if(g){g.titre=val;g.solution=sol;g.editedAt=tstr();}
+  saveExc(d);_goulotEditingId=null;renderContraintes();showT('✏️','Goulot modifié');
+}
+function shareGoulotOne(id){
+  var d=loadExc();var g=(d.goulots||[]).find(function(x){return x.id===id;});if(!g)return;
+  var catLbl={caisse:'🏧 Caisse',stock:'📦 Stock',equipe:'👥 Équipe',process:'🔄 Process'};
+  var impactLbl={critique:'🔴 Critique',modere:'🟡 Modéré',faible:'🟢 Faible'};
+  var msg='⚙️ Théorie des Contraintes — '+getMagName()+'\n\n'
+    +'📍 '+g.titre+'\n'
+    +'Catégorie : '+(catLbl[g.cat]||g.cat)+'\n'
+    +'Impact : '+(impactLbl[g.impact]||g.impact)+'\n'
+    +(g.solution?'💡 Solution : '+g.solution+'\n':'')
+    +'Statut : '+(g.resolved?'✅ Résolu':'⏳ Actif')+(g.editedAt?'\n✏️ Modifié le '+g.editedAt:'')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+function shareGoulotAll(){
+  var d=loadExc();var list=d.goulots||[];
+  if(!list.length){showT('⚠️','Aucun goulot à partager');return;}
+  var resolved=list.filter(function(g){return g.resolved;}).length;
+  var impactLbl={critique:'🔴',modere:'🟡',faible:'🟢'};
+  var msg='⚙️ *Théorie des Contraintes* — '+getMagName()+'\n'
+    +'📊 '+resolved+'/'+list.length+' résolu(s)\n━━━━━━━━━━━━━━━\n\n'
+    +list.map(function(g,i){
+      return (g.resolved?'✅':(impactLbl[g.impact]||'⚙️'))+' '+(i+1)+'. '+g.titre+(g.solution?' → '+g.solution:'');
+    }).join('\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
 function renderContraintes(){
   var d=loadExc();var list=d.goulots||[];
   var el=document.getElementById('goulotList');var empty=document.getElementById('goulotEmpty');if(!el)return;
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
   var impactCols={critique:'#ef4444',modere:'#f59e0b',faible:'#22c55e'};
   var catIcons={caisse:'🏧',stock:'📦',equipe:'👥',process:'🔄'};
-  el.innerHTML=list.map(function(g){
+  el.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:6px;">'
+    +'<button onclick="shareGoulotAll()" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button>'
+    +'</div>'
+    +list.map(function(g){
     var col=impactCols[g.impact||'critique'];
+    var isEd=(_goulotEditingId===g.id);
+    if(isEd){
+      return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border:1.5px solid '+col+';">'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre</label>'
+        +'<textarea id="goulotEditTa_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;margin-bottom:8px;">'+escHtml(g.titre)+'</textarea>'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Solution</label>'
+        +'<textarea id="goulotEditSol_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(g.solution||'')+'</textarea>'
+        +'<div style="display:flex;gap:6px;margin-top:8px;">'
+        +'<button onclick="saveEditGoulot(\''+g.id+'\')" style="flex:1;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
+        +'<button onclick="cancelEditGoulot()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
+        +'</div></div>';
+    }
     return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid '+col+';opacity:'+(g.resolved?'.6':'1')+'">'
       +'<div style="display:flex;align-items:flex-start;gap:8px;">'
       +'<span style="font-size:20px;">'+catIcons[g.cat||'process']+'</span>'
@@ -18714,13 +18838,15 @@ function renderContraintes(){
       +'<span style="font-size:9px;font-weight:700;color:'+col+';background:'+col+'22;padding:2px 7px;border-radius:8px;text-transform:uppercase;">'+g.impact+'</span>'
       +(g.resolved?'<span style="font-size:9px;font-weight:700;color:#22c55e;">✅ Résolu</span>':'')
       +'</div>'
-      +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(g.resolved?'text-decoration:line-through;':'')+'">'+g.titre+'</div>'
-      +(g.solution?'<div style="font-size:11px;color:#22c55e;margin-top:3px;">💡 '+g.solution+'</div>':'')
-      +'<div style="font-size:10px;color:var(--t2);margin-top:3px;">'+g.date+'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(g.resolved?'text-decoration:line-through;':'')+'">'+escHtml(g.titre)+'</div>'
+      +(g.solution?'<div style="font-size:11px;color:#22c55e;margin-top:3px;">💡 '+escHtml(g.solution)+'</div>':'')
+      +'<div style="font-size:9.5px;color:var(--t3);margin-top:3px;">'+g.date+(g.editedAt?'  ·  ✏️ modifié '+g.editedAt:'')+'</div>'
       +'</div>'
       +'<div style="display:flex;flex-direction:column;gap:4px;">'
-      +'<div onclick="toggleGoulot(\''+g.id+'\')" style="width:28px;height:28px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✓</div>'
-      +'<div onclick="delGoulot(\''+g.id+'\')" style="width:28px;height:28px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+      +'<div onclick="toggleGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✓</div>'
+      +'<div onclick="startEditGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#3b82f6;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✏️</div>'
+      +'<div onclick="shareGoulotOne(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</div>'
+      +'<div onclick="delGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
       +'</div></div></div>';
   }).join('');
 }
@@ -19200,22 +19326,80 @@ function savePhiloAction(type){
   var inp=document.getElementById('philoInput_'+type);if(!inp)return;
   var val=inp.value.trim();if(!val)return;
   var d=loadPhilo();if(!d[type])d[type]=[];
-  d[type].unshift({id:uid(),text:val,done:false,date:tstr()});
+  d[type].unshift({id:uid(),text:val,done:false,date:tstr(),editedAt:null});
   savePhilo(d);
   inp.value='';var f=document.getElementById('philoForm_'+type);if(f)f.style.display='none';
-  renderPhilo(type);showT('✅','Action ajoutée');
+  renderPhilo(type);showT('✅','Note ajoutée');
 }
 function togglePhilo(type,id){
   var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
   if(item)item.done=!item.done;savePhilo(d);renderPhilo(type);
 }
 function delPhilo(type,id){
-  showConfirm('🗑️ Supprimer','Supprimer cet élément ?',function(){
+  showConfirm('🗑️ Supprimer','Supprimer cette note ?',function(){
     var d=loadPhilo();d[type]=(d[type]||[]).filter(function(x){return x.id!==id;});
     savePhilo(d);renderPhilo(type);
     showT('🗑️','Supprimé');
   });
 }
+
+// ── ÉDITION D'UNE NOTE ──
+var _philoEditingId=null;
+function startEditPhilo(type,id){
+  _philoEditingId=id;
+  renderPhilo(type);
+  setTimeout(function(){
+    var ta=document.getElementById('philoEditTa_'+id);
+    if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}
+  },30);
+}
+function cancelEditPhilo(type){
+  _philoEditingId=null;
+  renderPhilo(type);
+}
+function saveEditPhilo(type,id){
+  var ta=document.getElementById('philoEditTa_'+id);if(!ta)return;
+  var val=ta.value.trim();
+  if(!val){showT('⚠️','Le texte ne peut pas être vide');return;}
+  var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
+  if(item){item.text=val;item.editedAt=tstr();}
+  savePhilo(d);
+  _philoEditingId=null;
+  renderPhilo(type);
+  showT('✏️','Note modifiée');
+}
+
+// ── PARTAGE WHATSAPP — UNE SEULE NOTE ──
+function sharePhiloOne(type,id){
+  var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
+  if(!item)return;
+  var meta=PHILO_META[type];
+  var statusTxt=item.done?'✅ Accompli':'⏳ En cours';
+  var msg=meta.icon+' '+meta.label+' — '+getMagName()+'\n\n'
+    +'📝 '+item.text+'\n'
+    +'📅 '+item.date+(item.editedAt?' (modifié le '+item.editedAt+')':'')+'\n'
+    +'Statut : '+statusTxt+'\n\n'
+    +'— Envoyé depuis TaskPro Field';
+  shareWA(msg);
+}
+
+// ── PARTAGE WHATSAPP — JOURNAL COMPLET ──
+function sharePhiloAll(type){
+  var d=loadPhilo();var list=d[type]||[];
+  var meta=PHILO_META[type];
+  if(!list.length){showT('⚠️','Aucune note à partager');return;}
+  var done=list.filter(function(x){return x.done;}).length;
+  var msg=meta.icon+' *'+meta.label+'* — '+getMagName()+'\n'
+    +'📊 '+done+'/'+list.length+' accompli(s)\n'
+    +'━━━━━━━━━━━━━━━\n\n'
+    +list.map(function(x,i){
+      var st=x.done?'✅':'⏳';
+      return st+' '+(i+1)+'. '+x.text+'  ('+x.date+')';
+    }).join('\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+
 function renderPhilo(type){
   var d=loadPhilo();var list=d[type]||[];
   var meta=PHILO_META[type];
@@ -19223,13 +19407,35 @@ function renderPhilo(type){
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
   if(empty)empty.style.display='none';
   var done=list.filter(function(x){return x.done;}).length;
-  el.innerHTML='<div style="font-size:10px;color:var(--t2);margin-bottom:8px;">'+done+'/'+list.length+' accomplis</div>'
+
+  el.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+    +'<div style="font-size:10px;color:var(--t2);">'+done+'/'+list.length+' accomplis</div>'
+    +'<button onclick="sharePhiloAll(\''+type+'\')" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button>'
+    +'</div>'
     +list.map(function(item){
-      return '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1px solid '+(item.done?meta.color+'44':'rgba(255,255,255,.06)')+'">'
-        +'<div onclick="togglePhilo(\''+type+'\',\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?meta.color:'rgba(255,255,255,.2)')+';background:'+(item.done?meta.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(item.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
-        +'<div style="flex:1;font-size:13px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;" onclick="togglePhilo(\''+type+'\',\''+item.id+'\')">'+item.text+'</div>'
-        +'<div style="font-size:10px;color:var(--t2);">'+item.date+'</div>'
-        +'<div onclick="delPhilo(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">×</div>'
+      var isEditing=(_philoEditingId===item.id);
+
+      if(isEditing){
+        return '<div style="padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1.5px solid '+meta.color+';">'
+          +'<textarea id="philoEditTa_'+item.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+meta.color+'55;border-radius:8px;padding:8px 10px;color:var(--t1);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\'">'+escHtml(item.text)+'</textarea>'
+          +'<div style="display:flex;gap:6px;margin-top:8px;">'
+          +'<button onclick="saveEditPhilo(\''+type+'\',\''+item.id+'\')" style="flex:1;background:'+meta.color+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
+          +'<button onclick="cancelEditPhilo(\''+type+'\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
+          +'</div>'
+          +'</div>';
+      }
+
+      return '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1px solid '+(item.done?meta.color+'44':'rgba(255,255,255,.06)')+'">'
+        +'<div onclick="togglePhilo(\''+type+'\',\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?meta.color:'rgba(255,255,255,.2)')+';background:'+(item.done?meta.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(item.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+        +'<div style="flex:1;min-width:0;">'
+        +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;word-break:break-word;" onclick="togglePhilo(\''+type+'\',\''+item.id+'\')">'+escHtml(item.text)+'</div>'
+        +'<div style="font-size:9.5px;color:var(--t3);margin-top:3px;">'+item.date+(item.editedAt?'  ·  ✏️ modifié '+item.editedAt:'')+'</div>'
+        +'</div>'
+        +'<div style="display:flex;gap:4px;flex-shrink:0;">'
+        +'<div onclick="startEditPhilo(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#3b82f6;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;">✏️</div>'
+        +'<div onclick="sharePhiloOne(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;">📤</div>'
+        +'<div onclick="delPhilo(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;">×</div>'
+        +'</div>'
         +'</div>';
     }).join('');
 }
@@ -23572,6 +23778,7 @@ var CINQ_S=[
   {key:'seiketsu',num:'4S',label:'Seiketsu — Standardiser',icon:'📋',color:'#3b82f6',desc:'Créer des standards visuels et des procédures. Rendre les bonnes pratiques automatiques.'},
   {key:'shitsuke',num:'5S',label:'Shitsuke — Suivre',icon:'👁️',color:'#a855f7',desc:'Discipline et amélioration continue. Maintenir les 4S dans le temps avec rigueur.'}
 ];
+var _5sEditingKey=null,_5sEditingIdx=null;
 function render5S(){
   var d=loadPhilo();var el=document.getElementById('cinqs5sContent');if(!el)return;
   el.innerHTML=CINQ_S.map(function(s){
@@ -23584,7 +23791,10 @@ function render5S(){
       +'<div style="font-size:9px;font-weight:800;color:'+s.color+';letter-spacing:.5px;">'+s.num+'</div>'
       +'<div style="font-size:13px;font-weight:900;color:var(--t1);">'+s.label+'</div>'
       +'</div></div>'
+      +'<div style="display:flex;gap:5px;">'
+      +(items.length?'<button onclick="share5SAll(\''+s.key+'\')" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:13px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>':'')
       +(items.length<6?'<button onclick="add5SItem(\''+s.key+'\')" style="background:'+s.color+';border:none;color:#fff;font-size:16px;width:26px;height:26px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>':'')
+      +'</div>'
       +'</div>'
       +'<div style="font-size:11px;color:var(--t2);margin-bottom:10px;line-height:1.4;">'+s.desc+'</div>'
       +'<div id="5sForm_'+s.key+'" style="display:none;margin-bottom:8px;">'
@@ -23594,14 +23804,54 @@ function render5S(){
       +'</div></div>'
       +(done+'/'+items.length?'<div style="font-size:10px;color:var(--t2);margin-bottom:6px;">'+done+'/'+items.length+' accomplis</div>':'')
       +items.map(function(item,i){
-        return '<div style="display:flex;align-items:center;gap:6px;padding:7px 10px;background:'+(item.done?s.color+'11':'rgba(255,255,255,.03)')+';border-radius:8px;margin-bottom:3px;">'
-          +'<div onclick="toggle5S(\''+s.key+'\','+i+')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?s.color:'rgba(255,255,255,.2)')+';background:'+(item.done?s.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
-          +'<div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;" onclick="toggle5S(\''+s.key+'\','+i+')">'+item.text+'</div>'
-          +'<div onclick="del5S(\''+s.key+'\','+i+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:1px 4px;">×</div>'
+        var isEd=(_5sEditingKey===s.key&&_5sEditingIdx===i);
+        if(isEd){
+          return '<div style="padding:8px 10px;background:rgba(255,255,255,.04);border-radius:8px;margin-bottom:4px;border:1.5px solid '+s.color+';">'
+            +'<textarea id="5sEditTa" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+s.color+'55;border-radius:7px;padding:6px 8px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(item.text)+'</textarea>'
+            +'<div style="display:flex;gap:5px;margin-top:6px;">'
+            +'<button onclick="saveEdit5S(\''+s.key+'\','+i+')" style="flex:1;background:'+s.color+';border:none;color:#fff;font-size:10px;font-weight:800;padding:6px;border-radius:7px;cursor:pointer;">✓ Enregistrer</button>'
+            +'<button onclick="cancelEdit5S()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:10px;font-weight:700;padding:6px 10px;border-radius:7px;cursor:pointer;">Annuler</button>'
+            +'</div></div>';
+        }
+        return '<div style="display:flex;align-items:flex-start;gap:6px;padding:7px 10px;background:'+(item.done?s.color+'11':'rgba(255,255,255,.03)')+';border-radius:8px;margin-bottom:3px;">'
+          +'<div onclick="toggle5S(\''+s.key+'\','+i+')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?s.color:'rgba(255,255,255,.2)')+';background:'+(item.done?s.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+          +'<div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;word-break:break-word;" onclick="toggle5S(\''+s.key+'\','+i+')">'+escHtml(item.text)+(item.editedAt?'<div style="font-size:8.5px;color:var(--t3);font-weight:400;margin-top:2px;">✏️ modifié '+item.editedAt+'</div>':'')+'</div>'
+          +'<div onclick="startEdit5S(\''+s.key+'\','+i+')" style="color:#3b82f6;font-size:12px;cursor:pointer;padding:1px 4px;flex-shrink:0;">✏️</div>'
+          +'<div onclick="share5SOne(\''+s.key+'\','+i+')" style="color:#22c55e;font-size:12px;cursor:pointer;padding:1px 4px;flex-shrink:0;">📤</div>'
+          +'<div onclick="del5S(\''+s.key+'\','+i+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:1px 4px;flex-shrink:0;">×</div>'
           +'</div>';
       }).join('')
       +'</div>';
   }).join('');
+}
+function startEdit5S(key,i){_5sEditingKey=key;_5sEditingIdx=i;render5S();setTimeout(function(){var ta=document.getElementById('5sEditTa');if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}},30);}
+function cancelEdit5S(){_5sEditingKey=null;_5sEditingIdx=null;render5S();}
+function saveEdit5S(key,i){
+  var ta=document.getElementById('5sEditTa');if(!ta)return;
+  var val=ta.value.trim();if(!val){showT('⚠️','Le texte ne peut pas être vide');return;}
+  var d=loadPhilo();if(!d['5s_'+key]||!d['5s_'+key][i])return;
+  d['5s_'+key][i].text=val;d['5s_'+key][i].editedAt=tstr();
+  savePhilo(d);_5sEditingKey=null;_5sEditingIdx=null;render5S();showT('✏️','Action modifiée');
+}
+function share5SOne(key,i){
+  var d=loadPhilo();var item=(d['5s_'+key]||[])[i];if(!item)return;
+  var s=CINQ_S.find(function(x){return x.key===key;});
+  var msg=(s?s.icon+' '+s.label:'5S')+' — '+getMagName()+'\n\n'
+    +'📝 '+item.text+'\n'
+    +'Statut : '+(item.done?'✅ Accompli':'⏳ En cours')+(item.editedAt?'\n✏️ Modifié le '+item.editedAt:'')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+function share5SAll(key){
+  var d=loadPhilo();var items=d['5s_'+key]||[];
+  var s=CINQ_S.find(function(x){return x.key===key;});
+  if(!items.length){showT('⚠️','Aucune action à partager');return;}
+  var done=items.filter(function(x){return x.done;}).length;
+  var msg=(s?s.icon+' *'+s.label+'*':'*5S*')+' — '+getMagName()+'\n'
+    +'📊 '+done+'/'+items.length+' accompli(s)\n━━━━━━━━━━━━━━━\n\n'
+    +items.map(function(x,i){return (x.done?'✅':'⏳')+' '+(i+1)+'. '+x.text;}).join('\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
 }
 // ── 5S QUICK FORM (bouton + topbar) ──
 var _quick5SKey = 'seiri';
