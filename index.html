@@ -1675,6 +1675,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
   body.light .stat-inner{background:radial-gradient(circle at 40% 35%,#1e2a3a,#0d1520)!important;box-shadow:0 4px 16px rgba(0,0,0,.6),inset 0 2px 8px rgba(0,0,0,.7)!important;}
   </style>
 
+  <!-- ══ RÉSUMÉ INSTANTANÉ DU JOUR ══ -->
+  <div id="homeSummaryPanel" style="margin:10px 16px 0;display:flex;flex-direction:column;gap:8px;"></div>
+
   <!-- YESTERDAY SUMMARY -->
   <div id="yesterdayBar" style="display:none;margin:8px 16px 0;background:var(--card);border-radius:12px;padding:10px 14px;border:1px solid rgba(168,85,247,.2);">
     <div style="font-size:10px;font-weight:700;color:#a855f7;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">📊 Hier</div>
@@ -10792,6 +10795,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="font-size:12px;font-weight:800;color:#4ade80;margin-bottom:10px;">➕ Nouvelle Action PDCA</div>
       <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Action / Problème *</label><input id="pdcaTitle" class="fi" placeholder="Ex: Réduire les ruptures Liquide..." style="width:100%;box-sizing:border-box;"/></div>
       <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Description</label><textarea id="pdcaDesc" class="fi" placeholder="Contexte, objectif visé..." style="width:100%;min-height:60px;resize:none;box-sizing:border-box;"></textarea></div>
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">📋 Plan d'action</label><textarea id="pdcaPlan" class="fi" placeholder="Étapes, ressources, délai, responsable..." style="width:100%;min-height:55px;resize:vertical;box-sizing:border-box;font-size:11px;"></textarea></div>
       <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:6px;">Étape actuelle</label>
         <div style="display:flex;gap:6px;">
           <button type="button" onclick="setPdcaStep(this,'plan')" data-ps="plan" style="flex:1;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);border-radius:8px;color:#60a5fa;font-size:11px;font-weight:700;padding:8px 4px;cursor:pointer;">📋 Plan</button>
@@ -10883,7 +10887,10 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
   <div class="pg-topbar">
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#fb923c;cursor:pointer;">‹ Excellence</div>
     <div style="font-size:15px;font-weight:900;color:#1e3a8a;font-family:'Syne';">🎯 Matrice Eisenhower</div>
-    <div style="display:flex;gap:6px;"><button onclick="addEisTache()" style="background:#c2410c;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button><button onclick="exportEisenhowerPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button></div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="shareEisAll()" style="background:#16a34a;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</button>
+      <button onclick="exportEisenhowerPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>
+      </div>
   </div>
   <div class="scroll" style="padding:12px 14px 90px;">
 
@@ -10957,6 +10964,14 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="font-size:11px;font-weight:700;color:var(--t2);margin-bottom:8px;">📋 Assigner les tâches du jour aux quadrants</div>
       <div id="eisTaskAssign"></div>
     </div>
+    <!-- ══ TÂCHES MANUELLES EISENHOWER ══ -->
+    <div style="margin-top:10px;background:var(--card);border-radius:14px;padding:12px;border:1px solid rgba(251,146,60,.2);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-size:12px;font-weight:900;color:#fb923c;">🎯 Mes tâches Eisenhower</div>
+        <button onclick="addEisTache()" style="background:#c2410c;border:none;color:#fff;font-size:12px;font-weight:800;padding:5px 12px;border-radius:10px;cursor:pointer;">+ Ajouter</button>
+      </div>
+      <div id="eisManualPanel"></div>
+    </div>
   </div>
 </div>
 
@@ -10992,7 +11007,8 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
           <button type="button" onclick="setGoulotImpact(this,'faible')" data-gi="faible" style="flex:1;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:8px;color:#22c55e;font-size:11px;font-weight:700;padding:7px;cursor:pointer;">🟢 Faible</button>
         </div>
       </div>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Solution proposée</label><textarea id="goulotSolution" class="fi" placeholder="Piste de résolution, action à prendre..." style="width:100%;min-height:60px;resize:none;box-sizing:border-box;"></textarea></div>
+      <div style="margin-bottom:8px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Solution proposée</label><textarea id="goulotSolution" class="fi" placeholder="Piste de résolution, action à prendre..." style="width:100%;min-height:55px;resize:vertical;box-sizing:border-box;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">📋 Plan d'action</label><textarea id="goulotPlan" class="fi" placeholder="Étapes, responsable, délai, ressources..." style="width:100%;min-height:55px;resize:vertical;box-sizing:border-box;font-size:11px;"></textarea></div>
       <div style="display:flex;gap:8px;">
         <button onclick="addGoulot()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">✕ Annuler</button>
         <button onclick="saveGoulot()" style="flex:2;background:#4338ca;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Enregistrer</button>
@@ -11192,6 +11208,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <input id="philoInput_lean" class="fi" placeholder="Action Lean à mettre en place..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('lean')"/>
         <button onclick="savePhiloAction('lean')" style="background:#eab308;border:none;color:#000;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
       </div>
+      <textarea id="philoPlanInput_lean" class="fi" placeholder="📋 Plan d'action (optionnel) — étapes, ressources, délai..." style="width:100%;box-sizing:border-box;margin-top:8px;min-height:50px;resize:vertical;font-size:11px;"></textarea>
     </div>
     <div id="philoList_lean"></div>
     <div id="philoEmpty_lean" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune action · Appuyez sur +</div>
@@ -11287,6 +11304,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <input id="philoInput_sixsigma" class="fi" placeholder="Non-conformité ou défaut à éliminer..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('sixsigma')"/>
         <button onclick="savePhiloAction('sixsigma')" style="background:#a21caf;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
       </div>
+      <textarea id="philoPlanInput_sixsigma" class="fi" placeholder="📋 Plan d'action (optionnel) — étapes, ressources, délai..." style="width:100%;box-sizing:border-box;margin-top:8px;min-height:50px;resize:vertical;font-size:11px;"></textarea>
     </div>
     <div id="philoList_sixsigma"></div>
     <div id="philoEmpty_sixsigma" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune action · Appuyez sur +</div>
@@ -11389,6 +11407,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <input id="philoInput_kaizen" class="fi" placeholder="Petite amélioration du jour..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key==='Enter')savePhiloAction('kaizen')"/>
         <button onclick="savePhiloAction('kaizen')" style="background:#16a34a;border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>
       </div>
+      <textarea id="philoPlanInput_kaizen" class="fi" placeholder="📋 Plan d'action (optionnel) — étapes, ressources, délai..." style="width:100%;box-sizing:border-box;margin-top:8px;min-height:50px;resize:vertical;font-size:11px;"></textarea>
     </div>
     <div id="philoList_kaizen"></div>
     <div id="philoEmpty_kaizen" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucune amélioration · Appuyez sur +</div>
@@ -12977,6 +12996,8 @@ function renderHome(){
       else dashAlBtn.style.display='none';
     }
   }catch(e){}
+  // Render rich summary
+  renderHomeSummary();
 }
 
 // ══ SWIPE CARDS ══
@@ -18556,11 +18577,24 @@ function addPdcaAction(){
 function savePdcaAction(){
   var title=(document.getElementById('pdcaTitle')||{value:''}).value.trim();if(!title){showT('⚠️','Titre requis');return;}
   var desc=(document.getElementById('pdcaDesc')||{value:''}).value.trim();
+  var planEl=document.getElementById('pdcaPlan');var plan=planEl?planEl.value.trim():'';
+  var now=new Date();
   var d=loadExc();if(!d.pdca)d.pdca=[];
-  d.pdca.unshift({id:uid(),title:title,desc:desc,step:_pdcaStep,date:tstr()});
+  d.pdca.unshift({id:uid(),title:title,desc:desc,plan:plan,step:_pdcaStep,date:tstr(),doneAt:null,editedAt:null});
   saveExc(d);addPdcaAction();renderPdca();showT('✅','Action PDCA créée');
 }
-function movePdca(id,step){var d=loadExc();var item=(d.pdca||[]).find(function(p){return p.id===id;});if(item)item.step=step;saveExc(d);renderPdca();}
+function movePdca(id,step){
+  var d=loadExc();var item=(d.pdca||[]).find(function(p){return p.id===id;});
+  if(!item)return;
+  item.step=step;
+  if(step==='act'&&!item.doneAt){
+    var now=new Date();
+    item.doneAt=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  } else if(step!=='act'){
+    item.doneAt=null;
+  }
+  saveExc(d);renderPdca();
+}
 function delPdca(id){
   showConfirm('🗑️ Supprimer','Supprimer ce PDCA ?',function(){
     var d=loadExc();d.pdca=(d.pdca||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPdca();
@@ -18571,12 +18605,13 @@ var _pdcaEditingId=null;
 function startEditPdca(id){_pdcaEditingId=id;renderPdca();setTimeout(function(){var ta=document.getElementById('pdcaEditTitle_'+id);if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}},30);}
 function cancelEditPdca(){_pdcaEditingId=null;renderPdca();}
 function saveEditPdca(id){
-  var tt=document.getElementById('pdcaEditTitle_'+id);var td=document.getElementById('pdcaEditDesc_'+id);
+  var tt=document.getElementById('pdcaEditTitle_'+id);var td=document.getElementById('pdcaEditDesc_'+id);var tp=document.getElementById('pdcaEditPlan_'+id);
   if(!tt)return;
   var titleVal=tt.value.trim();if(!titleVal){showT('⚠️','Le titre ne peut pas être vide');return;}
   var descVal=td?td.value.trim():'';
+  var planVal=tp?tp.value.trim():'';
   var d=loadExc();var item=(d.pdca||[]).find(function(p){return p.id===id;});
-  if(item){item.title=titleVal;item.desc=descVal;item.editedAt=tstr();}
+  if(item){item.title=titleVal;item.desc=descVal;item.plan=planVal;item.editedAt=tstr();}
   saveExc(d);_pdcaEditingId=null;renderPdca();showT('✏️','Action PDCA modifiée');
 }
 function sharePdcaOne(id){
@@ -18586,7 +18621,9 @@ function sharePdcaOne(id){
     +'Étape : '+(icons[p.step]||p.step)+'\n'
     +'📝 '+p.title+'\n'
     +(p.desc?'📄 '+p.desc+'\n':'')
-    +'📅 '+p.date+(p.editedAt?' (modifié le '+p.editedAt+')':'')
+    +(p.plan?'📋 Plan : '+p.plan+'\n':'')
+    +'📅 '+p.date+(p.editedAt?' · modifié le '+p.editedAt:'')
+    +(p.doneAt?'\n✅ ACT accompli le '+p.doneAt:'')
     +'\n\n— TaskPro Field';
   shareWA(msg);
 }
@@ -18609,37 +18646,43 @@ function renderPdca(){
   var steps=['plan','do','check','act'];
   var cols={plan:'#60a5fa',do:'#4ade80',check:'#fbbf24',act:'#c084fc'};
   var icons={plan:'📋',do:'⚡',check:'🔍',act:'✅'};
-  // Update counts
   steps.forEach(function(s){var el=document.getElementById('pdcaCount_'+s);if(el)el.textContent=all.filter(function(p){return p.step===s;}).length;});
   var list=_pdcaFilter?all.filter(function(p){return p.step===_pdcaFilter;}):all;
   var el=document.getElementById('pdcaList');var empty=document.getElementById('pdcaEmpty');var fEl=document.getElementById('pdcaFilter');if(!el)return;
   if(fEl)fEl.textContent=_pdcaFilter?'Filtre: '+_pdcaFilter.toUpperCase()+' — Cliquez à nouveau pour tout voir':'';
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
+  var actDone=all.filter(function(p){return p.step==='act';}).length;
   el.innerHTML=(all.length?'<div style="display:flex;justify-content:flex-end;margin-bottom:6px;"><button onclick="sharePdcaAll()" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button></div>':'')
     +list.map(function(p){
     var col=cols[p.step];
     var nextSteps=steps.filter(function(s){return s!==p.step;});
     var isEd=(_pdcaEditingId===p.id);
+    var isAct=(p.step==='act');
     if(isEd){
       return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border:1.5px solid '+col+';">'
         +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre</label>'
         +'<textarea id="pdcaEditTitle_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:36px;margin-bottom:8px;">'+escHtml(p.title)+'</textarea>'
         +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Description</label>'
-        +'<textarea id="pdcaEditDesc_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:50px;">'+escHtml(p.desc||'')+'</textarea>'
+        +'<textarea id="pdcaEditDesc_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:45px;margin-bottom:8px;">'+escHtml(p.desc||'')+'</textarea>'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Plan d&#39;action</label>'
+        +'<textarea id="pdcaEditPlan_'+p.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:45px;">'+escHtml(p.plan||'')+'</textarea>'
         +'<div style="display:flex;gap:6px;margin-top:8px;">'
         +'<button onclick="saveEditPdca(\''+p.id+'\')" style="flex:1;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
         +'<button onclick="cancelEditPdca()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
         +'</div></div>';
     }
-    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:3px solid '+col+';">'
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border-left:3px solid '+col+';opacity:'+(isAct?.75:1)+';">'
       +'<div style="display:flex;align-items:flex-start;justify-content:space-between;">'
       +'<div style="flex:1;">'
       +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">'
-      +'<span style="font-size:13px;font-weight:800;background:'+col+'22;color:'+col+';padding:2px 8px;border-radius:8px;">'+icons[p.step]+' '+p.step.toUpperCase()+'</span>'
+      +'<span style="font-size:12px;font-weight:800;background:'+col+'22;color:'+col+';padding:2px 8px;border-radius:8px;">'+icons[p.step]+' '+p.step.toUpperCase()+'</span>'
+      +(isAct?'<span style="font-size:9px;font-weight:700;color:#22c55e;">✅ Accompli</span>':'')
       +'</div>'
-      +'<div style="font-size:14px;font-weight:900;color:#0f172a;">'+escHtml(p.title)+'</div>'
-      +(p.desc?'<div style="font-size:12px;font-weight:600;color:#334155;margin-top:3px;line-height:1.4;">'+escHtml(p.desc)+'</div>':'')
-      +'<div style="font-size:10.5px;font-weight:700;color:#475569;margin-top:4px;">'+p.date+(p.editedAt?'  ·  ✏️ modifié '+p.editedAt:'')+'</div>'
+      +'<div style="font-size:14px;font-weight:900;color:var(--t1);'+(isAct?'text-decoration:line-through;opacity:.7;':'')+'">'+escHtml(p.title)+'</div>'
+      +(p.desc?'<div style="font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4;">'+escHtml(p.desc)+'</div>':'')
+      +(p.plan?'<div style="font-size:10px;color:#fb923c;margin-top:4px;font-style:italic;">📋 '+escHtml(p.plan)+'</div>':'')
+      +'<div style="font-size:9.5px;color:var(--t3);margin-top:4px;">'+p.date+(p.editedAt?'  ·  ✏️ modifié '+p.editedAt:'')+'</div>'
+      +(p.doneAt?'<div style="font-size:9px;color:#22c55e;margin-top:2px;font-weight:700;">✅ Accompli le '+p.doneAt+'</div>':'')
       +'<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">'
       +nextSteps.map(function(s){return '<button onclick="movePdca(\''+p.id+'\',\''+s+'\')" style="background:'+cols[s]+'22;border:1px solid '+cols[s]+'44;border-radius:8px;color:'+cols[s]+';font-size:10px;font-weight:700;padding:3px 8px;cursor:pointer;">→ '+s.toUpperCase()+'</button>';}).join('')
       +'</div>'
@@ -18715,6 +18758,8 @@ function renderEisenhower(){
       +'</select>'
       +'</div>';
   }).join('');
+  // Render manual tasks panel
+  if(typeof _eisRenderManualPanel==='function') _eisRenderManualPanel();
 }
 function assignEisenhower(taskId,quadrant){var d=loadExc();if(!d.eisenhower)d.eisenhower={};d.eisenhower[taskId]=quadrant;saveExc(d);renderEisenhower();}
 function exportEisenhowerPDF(){
@@ -18758,11 +18803,20 @@ function addGoulot(){
 function saveGoulot(){
   var titre=(document.getElementById('goulotTitre')||{value:''}).value.trim();if(!titre){showT('⚠️','Description requise');return;}
   var solution=(document.getElementById('goulotSolution')||{value:''}).value.trim();
+  var planEl=document.getElementById('goulotPlan');var plan=planEl?planEl.value.trim():'';
   var d=loadExc();if(!d.goulots)d.goulots=[];
-  d.goulots.unshift({id:uid(),titre:titre,cat:_goulotCat,impact:_goulotImpact,solution:solution,resolved:false,date:tstr()});
+  d.goulots.unshift({id:uid(),titre:titre,cat:_goulotCat,impact:_goulotImpact,solution:solution,plan:plan,resolved:false,date:tstr(),doneAt:null,editedAt:null});
   saveExc(d);addGoulot();renderContraintes();showT('⚙️','Goulot enregistré');
 }
-function toggleGoulot(id){var d=loadExc();var g=(d.goulots||[]).find(function(g){return g.id===id;});if(g)g.resolved=!g.resolved;saveExc(d);renderContraintes();}
+function toggleGoulot(id){
+  var d=loadExc();var g=(d.goulots||[]).find(function(x){return x.id===id;});if(!g)return;
+  g.resolved=!g.resolved;
+  if(g.resolved){
+    var now=new Date();
+    g.doneAt=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  } else { g.doneAt=null; }
+  saveExc(d);renderContraintes();
+}
 function delGoulot(id){
   showConfirm('🗑️ Supprimer','Supprimer ce goulot ?',function(){
     var d=loadExc();d.goulots=(d.goulots||[]).filter(function(g){return g.id!==id;});saveExc(d);renderContraintes();
@@ -18773,12 +18827,13 @@ var _goulotEditingId=null;
 function startEditGoulot(id){_goulotEditingId=id;renderContraintes();setTimeout(function(){var ta=document.getElementById('goulotEditTa_'+id);if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}var ts=document.getElementById('goulotEditSol_'+id);if(ts){}},30);}
 function cancelEditGoulot(){_goulotEditingId=null;renderContraintes();}
 function saveEditGoulot(id){
-  var ta=document.getElementById('goulotEditTa_'+id);var ts=document.getElementById('goulotEditSol_'+id);
+  var ta=document.getElementById('goulotEditTa_'+id);var ts=document.getElementById('goulotEditSol_'+id);var tp=document.getElementById('goulotEditPlan_'+id);
   if(!ta)return;
   var val=ta.value.trim();if(!val){showT('⚠️','Le titre ne peut pas être vide');return;}
   var sol=ts?ts.value.trim():'';
+  var plan=tp?tp.value.trim():'';
   var d=loadExc();var g=(d.goulots||[]).find(function(x){return x.id===id;});
-  if(g){g.titre=val;g.solution=sol;g.editedAt=tstr();}
+  if(g){g.titre=val;g.solution=sol;g.plan=plan;g.editedAt=tstr();}
   saveExc(d);_goulotEditingId=null;renderContraintes();showT('✏️','Goulot modifié');
 }
 function shareGoulotOne(id){
@@ -18813,37 +18868,43 @@ function renderContraintes(){
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
   var impactCols={critique:'#ef4444',modere:'#f59e0b',faible:'#22c55e'};
   var catIcons={caisse:'🏧',stock:'📦',equipe:'👥',process:'🔄'};
-  el.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:6px;">'
+  var resolved=list.filter(function(g){return g.resolved;}).length;
+  el.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+    +'<div style="font-size:10px;color:var(--t2);">'+resolved+'/'+list.length+' résolu(s)</div>'
     +'<button onclick="shareGoulotAll()" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button>'
     +'</div>'
     +list.map(function(g){
     var col=impactCols[g.impact||'critique'];
     var isEd=(_goulotEditingId===g.id);
     if(isEd){
-      return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border:1.5px solid '+col+';">'
+      return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:8px;border:1.5px solid '+col+';">'
         +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre</label>'
         +'<textarea id="goulotEditTa_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;margin-bottom:8px;">'+escHtml(g.titre)+'</textarea>'
         +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Solution</label>'
-        +'<textarea id="goulotEditSol_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(g.solution||'')+'</textarea>'
+        +'<textarea id="goulotEditSol_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;margin-bottom:8px;">'+escHtml(g.solution||'')+'</textarea>'
+        +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Plan d&#39;action</label>'
+        +'<textarea id="goulotEditPlan_'+g.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+col+'55;border-radius:8px;padding:7px 9px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(g.plan||'')+'</textarea>'
         +'<div style="display:flex;gap:6px;margin-top:8px;">'
         +'<button onclick="saveEditGoulot(\''+g.id+'\')" style="flex:1;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
         +'<button onclick="cancelEditGoulot()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
         +'</div></div>';
     }
-    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid '+col+';opacity:'+(g.resolved?'.6':'1')+'">'
+    return '<div style="background:var(--card);border-radius:12px;padding:12px 14px;border-left:3px solid '+col+';margin-bottom:8px;opacity:'+(g.resolved?.65:1)+';">'
       +'<div style="display:flex;align-items:flex-start;gap:8px;">'
-      +'<span style="font-size:20px;">'+catIcons[g.cat||'process']+'</span>'
-      +'<div style="flex:1;">'
-      +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">'
+      +'<span style="font-size:20px;flex-shrink:0;">'+catIcons[g.cat||'process']+'</span>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;">'
       +'<span style="font-size:9px;font-weight:700;color:'+col+';background:'+col+'22;padding:2px 7px;border-radius:8px;text-transform:uppercase;">'+g.impact+'</span>'
       +(g.resolved?'<span style="font-size:9px;font-weight:700;color:#22c55e;">✅ Résolu</span>':'')
       +'</div>'
-      +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(g.resolved?'text-decoration:line-through;':'')+'">'+escHtml(g.titre)+'</div>'
+      +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(g.resolved?'text-decoration:line-through;opacity:.7;':'')+'word-break:break-word;">'+escHtml(g.titre)+'</div>'
       +(g.solution?'<div style="font-size:11px;color:#22c55e;margin-top:3px;">💡 '+escHtml(g.solution)+'</div>':'')
+      +(g.plan?'<div style="font-size:10px;color:#fb923c;margin-top:3px;font-style:italic;">📋 '+escHtml(g.plan)+'</div>':'')
       +'<div style="font-size:9.5px;color:var(--t3);margin-top:3px;">'+g.date+(g.editedAt?'  ·  ✏️ modifié '+g.editedAt:'')+'</div>'
+      +(g.doneAt?'<div style="font-size:9px;color:#22c55e;margin-top:2px;font-weight:700;">✅ Résolu le '+g.doneAt+'</div>':'')
       +'</div>'
-      +'<div style="display:flex;flex-direction:column;gap:4px;">'
-      +'<div onclick="toggleGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✓</div>'
+      +'<div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0;">'
+      +'<div onclick="toggleGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Marquer résolu">✓</div>'
       +'<div onclick="startEditGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);color:#3b82f6;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✏️</div>'
       +'<div onclick="shareGoulotOne(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#22c55e;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">📤</div>'
       +'<div onclick="delGoulot(\''+g.id+'\')" style="width:26px;height:26px;border-radius:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#ef4444;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
@@ -18925,6 +18986,17 @@ function addEisTache(){
   cancelBtn.textContent='Annuler';
   cancelBtn.addEventListener('click',addEisTache);
 
+  // Plan d'action field
+  var planWrap=document.createElement('div');planWrap.style.marginBottom='10px';
+  var planLbl=document.createElement('label');
+  planLbl.style.cssText='font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;';
+  planLbl.textContent="📋 Plan d'action (optionnel)";planWrap.appendChild(planLbl);
+  var planInp=document.createElement('textarea');
+  planInp.id='eisTaskPlan';planInp.className='fi';
+  planInp.placeholder="Étapes, ressources, délai...";
+  planInp.style.cssText='width:100%;box-sizing:border-box;min-height:55px;resize:vertical;';
+  planWrap.appendChild(planInp);f.appendChild(planWrap);
+
   var saveBtn=document.createElement('button');
   saveBtn.type='button';
   saveBtn.style.cssText='flex:2;background:#c2410c;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;';
@@ -18940,14 +19012,101 @@ function saveEisTache(){
   var inp=document.getElementById('eisTaskName');if(!inp)return;
   var name=inp.value.trim();if(!name){showT('⚠️','Nom requis');return;}
   var d=loadExc();if(!d.eisManual)d.eisManual=[];
-  d.eisManual.push({id:uid(),name:name,quadrant:_eisQ});
+  // Get plan d'action if present
+  var planInp=document.getElementById('eisTaskPlan');var plan=planInp?planInp.value.trim():'';
+  var now=new Date();
+  var dateStr=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  var timeStr=now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  d.eisManual.push({id:uid(),name:name,quadrant:_eisQ,plan:plan,date:dateStr,time:timeStr,done:false,doneAt:null,editedAt:null});
   saveExc(d);addEisTache();renderEisenhower();showT('✅','Tâche ajoutée');
+}
+function toggleEisManual(id){
+  var d=loadExc();var t=(d.eisManual||[]).find(function(x){return x.id===id;});
+  if(!t)return;
+  t.done=!t.done;
+  if(t.done){
+    var now=new Date();
+    t.doneAt=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  } else {
+    t.doneAt=null;
+  }
+  saveExc(d);renderEisenhower();
 }
 function delEisManual(id){
   showConfirm('🗑️ Supprimer','Supprimer cette tâche Eisenhower ?',function(){
     var d=loadExc();d.eisManual=(d.eisManual||[]).filter(function(t){return t.id!==id;});saveExc(d);renderEisenhower();
     showT('🗑️','Supprimé');
   });
+}
+var _eisEditingId=null;
+function startEditEisManual(id){_eisEditingId=id;_eisRenderManualPanel();}
+function cancelEditEisManual(){_eisEditingId=null;_eisRenderManualPanel();}
+function saveEditEisManual(id){
+  var tn=document.getElementById('eisEditName_'+id);var tp=document.getElementById('eisEditPlan_'+id);
+  if(!tn)return;
+  var name=tn.value.trim();if(!name){showT('⚠️','Le nom ne peut pas être vide');return;}
+  var plan=tp?tp.value.trim():'';
+  var d=loadExc();var t=(d.eisManual||[]).find(function(x){return x.id===id;});
+  if(t){t.name=name;t.plan=plan;t.editedAt=tstr();}
+  saveExc(d);_eisEditingId=null;renderEisenhower();showT('✏️','Tâche modifiée');
+}
+function shareEisAll(){
+  var d=loadExc();var list=d.eisManual||[];
+  if(!list.length){showT('⚠️','Aucune tâche à partager');return;}
+  var qLabels={q1:'🔴 Urgent+Important',q2:'🟢 Important',q3:'🟡 Urgent',q4:'⚪ Ni l\'un ni l\'autre'};
+  var done=list.filter(function(t){return t.done;}).length;
+  var msg='🎯 *Matrice Eisenhower* — '+getMagName()+'\n'
+    +'📊 '+done+'/'+list.length+' accompli(s)\n━━━━━━━━━━━━━━━\n\n'
+    +['q1','q2','q3','q4'].map(function(q){
+      var items=list.filter(function(t){return t.quadrant===q;});
+      if(!items.length)return null;
+      return qLabels[q]+'\n'+items.map(function(t){return (t.done?'✅':'⏳')+' '+t.name+(t.doneAt?' (fait le '+t.doneAt+')':'')+(t.plan?'\n   Plan : '+t.plan:'');}).join('\n');
+    }).filter(Boolean).join('\n\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+// Render the manual tasks panel (called from renderEisenhower)
+function _eisRenderManualPanel(){
+  var d=loadExc();var list=d.eisManual||[];
+  var panelEl=document.getElementById('eisManualPanel');if(!panelEl)return;
+  var qColors={q1:'#ef4444',q2:'#22c55e',q3:'#f59e0b',q4:'#94a3b8'};
+  var qLabels={q1:'🔴 Urgent+Important',q2:'🟢 Important',q3:'🟡 Urgent',q4:'⚪ Autre'};
+  if(!list.length){panelEl.innerHTML='<div style="font-size:11px;color:var(--t2);text-align:center;padding:8px;">Aucune tâche manuelle — Appuyez sur +</div>';return;}
+  var done=list.filter(function(t){return t.done;}).length;
+  panelEl.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+    +'<div style="font-size:10px;color:var(--t2);">'+done+'/'+list.length+' accompli(s)</div>'
+    +'<button onclick="shareEisAll()" style="display:flex;align-items:center;gap:4px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:4px 9px;border-radius:20px;cursor:pointer;">📤 Partager</button>'
+    +'</div>'
+    +list.map(function(t){
+      var col=qColors[t.quadrant||'q1'];
+      var isEd=(_eisEditingId===t.id);
+      if(isEd){
+        return '<div style="background:var(--card);border-radius:10px;padding:10px 12px;margin-bottom:6px;border:1.5px solid '+col+';">'
+          +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Tâche</label>'
+          +'<input id="eisEditName_'+t.id+'" class="fi" value="'+escHtml(t.name)+'" style="width:100%;box-sizing:border-box;margin-bottom:7px;"/>'
+          +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Plan d\'action</label>'
+          +'<textarea id="eisEditPlan_'+t.id+'" class="fi" placeholder="Étapes, ressources, délai..." style="width:100%;box-sizing:border-box;min-height:55px;resize:vertical;">'+escHtml(t.plan||'')+'</textarea>'
+          +'<div style="display:flex;gap:6px;margin-top:8px;">'
+          +'<button onclick="saveEditEisManual(\''+t.id+'\')" style="flex:1;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:7px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
+          +'<button onclick="cancelEditEisManual()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:7px 11px;border-radius:8px;cursor:pointer;">Annuler</button>'
+          +'</div></div>';
+      }
+      return '<div style="background:var(--card);border-radius:10px;padding:10px 12px;margin-bottom:6px;border-left:3px solid '+col+';opacity:'+(t.done?.65:1)+';">'
+        +'<div style="display:flex;align-items:flex-start;gap:8px;">'
+        +'<div onclick="toggleEisManual(\''+t.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(t.done?col:'rgba(255,255,255,.2)')+';background:'+(t.done?col:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(t.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
+        +'<div style="flex:1;min-width:0;">'
+        +'<div style="font-size:12px;font-weight:800;color:var(--t1);'+(t.done?'text-decoration:line-through;':'')+'word-break:break-word;cursor:pointer;" onclick="toggleEisManual(\''+t.id+'\')">'+escHtml(t.name)+'</div>'
+        +'<div style="font-size:9px;color:var(--t3);margin-top:2px;">'+(qLabels[t.quadrant||'q1'])+' · '+(t.date||'')+'</div>'
+        +(t.plan?'<div style="font-size:10px;color:#fb923c;margin-top:3px;font-style:italic;">📋 '+escHtml(t.plan)+'</div>':'')
+        +(t.doneAt?'<div style="font-size:9px;color:#22c55e;margin-top:3px;">✅ Accompli le '+t.doneAt+'</div>':'')
+        +(t.editedAt?'<div style="font-size:9px;color:var(--t3);margin-top:2px;">✏️ Modifié le '+t.editedAt+'</div>':'')
+        +'</div>'
+        +'<div style="display:flex;flex-direction:column;gap:3px;flex-shrink:0;">'
+        +'<div onclick="startEditEisManual(\''+t.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#3b82f6;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✏️</div>'
+        +'<div onclick="delEisManual(\''+t.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</div>'
+        +'</div>'
+        +'</div></div>';
+    }).join('');
 }
 
 
@@ -19325,15 +19484,24 @@ function addPhiloAction(type){
 function savePhiloAction(type){
   var inp=document.getElementById('philoInput_'+type);if(!inp)return;
   var val=inp.value.trim();if(!val)return;
+  var planInp=document.getElementById('philoPlanInput_'+type);
+  var plan=planInp?planInp.value.trim():'';
   var d=loadPhilo();if(!d[type])d[type]=[];
-  d[type].unshift({id:uid(),text:val,done:false,date:tstr(),editedAt:null});
+  d[type].unshift({id:uid(),text:val,plan:plan,done:false,date:tstr(),doneAt:null,editedAt:null});
   savePhilo(d);
-  inp.value='';var f=document.getElementById('philoForm_'+type);if(f)f.style.display='none';
+  inp.value='';if(planInp)planInp.value='';
+  var f=document.getElementById('philoForm_'+type);if(f)f.style.display='none';
   renderPhilo(type);showT('✅','Note ajoutée');
 }
 function togglePhilo(type,id){
   var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
-  if(item)item.done=!item.done;savePhilo(d);renderPhilo(type);
+  if(!item)return;
+  item.done=!item.done;
+  if(item.done){
+    var now=new Date();
+    item.doneAt=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  } else { item.doneAt=null; }
+  savePhilo(d);renderPhilo(type);
 }
 function delPhilo(type,id){
   showConfirm('🗑️ Supprimer','Supprimer cette note ?',function(){
@@ -19361,8 +19529,9 @@ function saveEditPhilo(type,id){
   var ta=document.getElementById('philoEditTa_'+id);if(!ta)return;
   var val=ta.value.trim();
   if(!val){showT('⚠️','Le texte ne peut pas être vide');return;}
+  var pa=document.getElementById('philoEditPlan_'+id);var plan=pa?pa.value.trim():'';
   var d=loadPhilo();var item=(d[type]||[]).find(function(x){return x.id===id;});
-  if(item){item.text=val;item.editedAt=tstr();}
+  if(item){item.text=val;item.plan=plan;item.editedAt=tstr();}
   savePhilo(d);
   _philoEditingId=null;
   renderPhilo(type);
@@ -19407,29 +19576,30 @@ function renderPhilo(type){
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}
   if(empty)empty.style.display='none';
   var done=list.filter(function(x){return x.done;}).length;
-
   el.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
     +'<div style="font-size:10px;color:var(--t2);">'+done+'/'+list.length+' accomplis</div>'
     +'<button onclick="sharePhiloAll(\''+type+'\')" style="display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10px;font-weight:800;padding:5px 10px;border-radius:20px;cursor:pointer;">📤 Partager tout</button>'
     +'</div>'
     +list.map(function(item){
       var isEditing=(_philoEditingId===item.id);
-
       if(isEditing){
         return '<div style="padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1.5px solid '+meta.color+';">'
-          +'<textarea id="philoEditTa_'+item.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+meta.color+'55;border-radius:8px;padding:8px 10px;color:var(--t1);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\'">'+escHtml(item.text)+'</textarea>'
+          +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Note</label>'
+          +'<textarea id="philoEditTa_'+item.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+meta.color+'55;border-radius:8px;padding:8px 10px;color:var(--t1);font-size:13px;font-family:inherit;resize:vertical;min-height:50px;margin-bottom:8px;">'+escHtml(item.text)+'</textarea>'
+          +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Plan d&#39;action</label>'
+          +'<textarea id="philoEditPlan_'+item.id+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+meta.color+'55;border-radius:8px;padding:8px 10px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:45px;">'+escHtml(item.plan||'')+'</textarea>'
           +'<div style="display:flex;gap:6px;margin-top:8px;">'
           +'<button onclick="saveEditPhilo(\''+type+'\',\''+item.id+'\')" style="flex:1;background:'+meta.color+';border:none;color:#fff;font-size:11px;font-weight:800;padding:8px;border-radius:8px;cursor:pointer;">✓ Enregistrer</button>'
           +'<button onclick="cancelEditPhilo(\''+type+'\')" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:8px 12px;border-radius:8px;cursor:pointer;">Annuler</button>'
-          +'</div>'
-          +'</div>';
+          +'</div></div>';
       }
-
       return '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--card);border-radius:10px;margin-bottom:6px;border:1px solid '+(item.done?meta.color+'44':'rgba(255,255,255,.06)')+'">'
         +'<div onclick="togglePhilo(\''+type+'\',\''+item.id+'\')" style="width:22px;height:22px;border-radius:7px;border:2px solid '+(item.done?meta.color:'rgba(255,255,255,.2)')+';background:'+(item.done?meta.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(item.done?'<svg width="12" height="12" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
         +'<div style="flex:1;min-width:0;">'
         +'<div style="font-size:13px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;word-break:break-word;" onclick="togglePhilo(\''+type+'\',\''+item.id+'\')">'+escHtml(item.text)+'</div>'
-        +'<div style="font-size:9.5px;color:var(--t3);margin-top:3px;">'+item.date+(item.editedAt?'  ·  ✏️ modifié '+item.editedAt:'')+'</div>'
+        +(item.plan?'<div style="font-size:10px;color:#fb923c;margin-top:4px;font-style:italic;">📋 '+escHtml(item.plan)+'</div>':'')
+        +'<div style="font-size:9px;color:var(--t3);margin-top:3px;">'+item.date+(item.editedAt?'  ·  ✏️ modifié '+item.editedAt:'')+'</div>'
+        +(item.doneAt?'<div style="font-size:9px;color:#22c55e;margin-top:2px;font-weight:700;">✅ Accompli le '+item.doneAt+'</div>':'')
         +'</div>'
         +'<div style="display:flex;gap:4px;flex-shrink:0;">'
         +'<div onclick="startEditPhilo(\''+type+'\',\''+item.id+'\')" style="width:24px;height:24px;border-radius:7px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#3b82f6;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;">✏️</div>'
@@ -23797,28 +23967,38 @@ function render5S(){
       +'</div>'
       +'</div>'
       +'<div style="font-size:11px;color:var(--t2);margin-bottom:10px;line-height:1.4;">'+s.desc+'</div>'
-      +'<div id="5sForm_'+s.key+'" style="display:none;margin-bottom:8px;">'
-      +'<div style="display:flex;gap:6px;">'
-      +'<input id="5sInput_'+s.key+'" class="fi" placeholder="Action à réaliser..." style="flex:1;box-sizing:border-box;" onkeydown="if(event.key===\'Enter\')save5SItem(\''+s.key+'\')"/>'
-      +'<button onclick="save5SItem(\''+s.key+'\')" style="background:'+s.color+';border:none;color:#fff;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer;">✓</button>'
-      +'</div></div>'
-      +(done+'/'+items.length?'<div style="font-size:10px;color:var(--t2);margin-bottom:6px;">'+done+'/'+items.length+' accomplis</div>':'')
+      +'<div id="5sForm_'+s.key+'" style="display:none;margin-bottom:8px;background:var(--card);border-radius:10px;padding:10px;border:1px solid '+s.color+'44;">'
+      +'<input id="5sInput_'+s.key+'" class="fi" placeholder="Action à réaliser..." style="width:100%;box-sizing:border-box;margin-bottom:8px;" onkeydown="if(event.key===\'Enter\')save5SItem(\''+s.key+'\')"/>'
+      +'<textarea id="5sPlanInput_'+s.key+'" class="fi" placeholder="📋 Plan d\'action (optionnel) — étapes, ressources, délai..." style="width:100%;box-sizing:border-box;min-height:45px;resize:vertical;font-size:11px;margin-bottom:8px;"></textarea>'
+      +'<button onclick="save5SItem(\''+s.key+'\')" style="width:100%;background:'+s.color+';border:none;color:#fff;font-size:13px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;">✓ Ajouter</button>'
+      +'</div>'
+      +(items.length?'<div style="font-size:10px;color:var(--t2);margin-bottom:6px;">'+done+'/'+items.length+' accomplis</div>':'')
       +items.map(function(item,i){
         var isEd=(_5sEditingKey===s.key&&_5sEditingIdx===i);
         if(isEd){
           return '<div style="padding:8px 10px;background:rgba(255,255,255,.04);border-radius:8px;margin-bottom:4px;border:1.5px solid '+s.color+';">'
-            +'<textarea id="5sEditTa" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+s.color+'55;border-radius:7px;padding:6px 8px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(item.text)+'</textarea>'
-            +'<div style="display:flex;gap:5px;margin-top:6px;">'
-            +'<button onclick="saveEdit5S(\''+s.key+'\','+i+')" style="flex:1;background:'+s.color+';border:none;color:#fff;font-size:10px;font-weight:800;padding:6px;border-radius:7px;cursor:pointer;">✓ Enregistrer</button>'
-            +'<button onclick="cancelEdit5S()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:10px;font-weight:700;padding:6px 10px;border-radius:7px;cursor:pointer;">Annuler</button>'
+            +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Action</label>'
+            +'<textarea id="5sEditTa" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+s.color+'55;border-radius:7px;padding:6px 8px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;margin-bottom:8px;">'+escHtml(item.text)+'</textarea>'
+            +'<label style="font-size:9px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;">Plan d&#39;action</label>'
+            +'<textarea id="5sEditPlan" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid '+s.color+'55;border-radius:7px;padding:6px 8px;color:var(--t1);font-size:12px;font-family:inherit;resize:vertical;min-height:40px;">'+escHtml(item.plan||'')+'</textarea>'
+            +'<div style="display:flex;gap:5px;margin-top:8px;">'
+            +'<button onclick="saveEdit5S(\''+s.key+'\','+i+')" style="flex:1;background:'+s.color+';border:none;color:#fff;font-size:10px;font-weight:800;padding:7px;border-radius:7px;cursor:pointer;">✓ Enregistrer</button>'
+            +'<button onclick="cancelEdit5S()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:10px;font-weight:700;padding:7px 10px;border-radius:7px;cursor:pointer;">Annuler</button>'
             +'</div></div>';
         }
-        return '<div style="display:flex;align-items:flex-start;gap:6px;padding:7px 10px;background:'+(item.done?s.color+'11':'rgba(255,255,255,.03)')+';border-radius:8px;margin-bottom:3px;">'
+        return '<div style="display:flex;align-items:flex-start;gap:6px;padding:8px 10px;background:'+(item.done?s.color+'11':'rgba(255,255,255,.03)')+';border-radius:8px;margin-bottom:4px;">'
           +'<div onclick="toggle5S(\''+s.key+'\','+i+')" style="width:20px;height:20px;border-radius:6px;border:2px solid '+(item.done?s.color:'rgba(255,255,255,.2)')+';background:'+(item.done?s.color:'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;margin-top:1px;">'+(item.done?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" fill="none" stroke="#fff" stroke-width="2"/></svg>':'')+'</div>'
-          +'<div style="flex:1;font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;word-break:break-word;" onclick="toggle5S(\''+s.key+'\','+i+')">'+escHtml(item.text)+(item.editedAt?'<div style="font-size:8.5px;color:var(--t3);font-weight:400;margin-top:2px;">✏️ modifié '+item.editedAt+'</div>':'')+'</div>'
-          +'<div onclick="startEdit5S(\''+s.key+'\','+i+')" style="color:#3b82f6;font-size:12px;cursor:pointer;padding:1px 4px;flex-shrink:0;">✏️</div>'
-          +'<div onclick="share5SOne(\''+s.key+'\','+i+')" style="color:#22c55e;font-size:12px;cursor:pointer;padding:1px 4px;flex-shrink:0;">📤</div>'
-          +'<div onclick="del5S(\''+s.key+'\','+i+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:1px 4px;flex-shrink:0;">×</div>'
+          +'<div style="flex:1;min-width:0;">'
+          +'<div style="font-size:12px;font-weight:700;color:var(--t1);'+(item.done?'text-decoration:line-through;opacity:.5;':'')+'cursor:pointer;word-break:break-word;" onclick="toggle5S(\''+s.key+'\','+i+')">'+escHtml(item.text)+'</div>'
+          +(item.plan?'<div style="font-size:10px;color:#fb923c;margin-top:3px;font-style:italic;">📋 '+escHtml(item.plan)+'</div>':'')
+          +'<div style="font-size:9px;color:var(--t3);margin-top:2px;">'+(item.date||'')+(item.editedAt?'  ·  ✏️ modifié '+item.editedAt:'')+'</div>'
+          +(item.doneAt?'<div style="font-size:9px;color:#22c55e;margin-top:2px;font-weight:700;">✅ Accompli le '+item.doneAt+'</div>':'')
+          +'</div>'
+          +'<div style="display:flex;gap:3px;flex-shrink:0;">'
+          +'<div onclick="startEdit5S(\''+s.key+'\','+i+')" style="color:#3b82f6;font-size:12px;cursor:pointer;padding:2px 4px;">✏️</div>'
+          +'<div onclick="share5SOne(\''+s.key+'\','+i+')" style="color:#22c55e;font-size:12px;cursor:pointer;padding:2px 4px;">📤</div>'
+          +'<div onclick="del5S(\''+s.key+'\','+i+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:1px 4px;">×</div>'
+          +'</div>'
           +'</div>';
       }).join('')
       +'</div>';
@@ -23829,8 +24009,9 @@ function cancelEdit5S(){_5sEditingKey=null;_5sEditingIdx=null;render5S();}
 function saveEdit5S(key,i){
   var ta=document.getElementById('5sEditTa');if(!ta)return;
   var val=ta.value.trim();if(!val){showT('⚠️','Le texte ne peut pas être vide');return;}
+  var pa=document.getElementById('5sEditPlan');var plan=pa?pa.value.trim():'';
   var d=loadPhilo();if(!d['5s_'+key]||!d['5s_'+key][i])return;
-  d['5s_'+key][i].text=val;d['5s_'+key][i].editedAt=tstr();
+  d['5s_'+key][i].text=val;d['5s_'+key][i].plan=plan;d['5s_'+key][i].editedAt=tstr();
   savePhilo(d);_5sEditingKey=null;_5sEditingIdx=null;render5S();showT('✏️','Action modifiée');
 }
 function share5SOne(key,i){
@@ -23895,12 +24076,26 @@ function add5SItem(key){
 function save5SItem(key){
   var inp=document.getElementById('5sInput_'+key);if(!inp)return;
   var val=inp.value.trim();if(!val)return;
+  var planInp=document.getElementById('5sPlanInput_'+key);var plan=planInp?planInp.value.trim():'';
+  var now=new Date();
+  var dateStr=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'});
   var d=loadPhilo();if(!d['5s_'+key])d['5s_'+key]=[];
-  d['5s_'+key].push({text:val,done:false});
-  savePhilo(d);inp.value='';var f=document.getElementById('5sForm_'+key);if(f)f.style.display='none';
+  d['5s_'+key].push({text:val,plan:plan,done:false,date:dateStr,doneAt:null,editedAt:null});
+  savePhilo(d);
+  inp.value='';if(planInp)planInp.value='';
+  var f=document.getElementById('5sForm_'+key);if(f)f.style.display='none';
   render5S();
 }
-function toggle5S(key,i){var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key][i].done=!d['5s_'+key][i].done;savePhilo(d);render5S();}
+function toggle5S(key,i){
+  var d=loadPhilo();if(!d['5s_'+key])return;
+  var item=d['5s_'+key][i];if(!item)return;
+  item.done=!item.done;
+  if(item.done){
+    var now=new Date();
+    item.doneAt=now.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'})+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  } else { item.doneAt=null; }
+  savePhilo(d);render5S();
+}
 function del5S(key,i){
   showConfirm('🗑️ Supprimer','Supprimer cet élément 5S ?',function(){
     var d=loadPhilo();if(!d['5s_'+key])return;d['5s_'+key].splice(i,1);savePhilo(d);render5S();showT('🗑️','Supprimé');
@@ -40435,6 +40630,121 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 2000);
 });
+
+
+// ════════════════════════════════════════════════════════════
+// ══ HOME SUMMARY — Résumé instantané ══
+// ════════════════════════════════════════════════════════════
+function renderHomeSummary(){
+  var el=document.getElementById('homeSummaryPanel');if(!el)return;
+  var today=tstr?tstr():new Date().toISOString().slice(0,10);
+  var now=new Date();
+  var html='';
+
+  // ── 1. TÂCHES URGENTES NON FAITES ──
+  var tasks=[];
+  try{tasks=JSON.parse(localStorage.getItem(SK+'_t')||'[]');}catch(e){}
+  var urgent=tasks.filter(function(t){
+    return (t.prio==='red'||t.prio==='r')&&!(typeof isDone==='function'?isDone(t.id):false);
+  });
+  if(urgent.length>0){
+    html+='<div onclick="goPage(\'taches\')" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.3);border-radius:14px;cursor:pointer;animation:pulseUrgent 2s ease-in-out infinite;">'
+      +'<div style="width:38px;height:38px;border-radius:12px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔴</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:12px;font-weight:900;color:#f87171;">'+urgent.length+' tâche(s) urgente(s) non faite(s)</div>'
+      +'<div style="font-size:10px;color:rgba(248,113,113,.7);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+urgent.slice(0,2).map(function(t){return t.name;}).join('  ·  ')+(urgent.length>2?' + '+(urgent.length-2)+' autres':'')+'</div>'
+      +'</div>'
+      +'<div style="color:rgba(248,113,113,.5);font-size:18px;flex-shrink:0;">›</div>'
+      +'</div>';
+  }
+
+  // ── 2. DLC CRITIQUES ──
+  var dlc=[];
+  try{dlc=JSON.parse(localStorage.getItem(SK+'_dlc')||'[]');}catch(e){}
+  var dlcExpired=dlc.filter(function(d){return d.date&&d.date<today;});
+  var dlcSoon=dlc.filter(function(d){if(!d.date)return false;var diff=(new Date(d.date)-now)/86400000;return diff>=0&&diff<=3;});
+  if(dlcExpired.length>0||dlcSoon.length>0){
+    var dlcTotal=dlcExpired.length+dlcSoon.length;
+    var dlcCol=dlcExpired.length>0?'#f87171':'#fbbf24';
+    var dlcBg=dlcExpired.length>0?'rgba(239,68,68,.1)':'rgba(251,191,36,.08)';
+    var dlcBorder=dlcExpired.length>0?'rgba(239,68,68,.3)':'rgba(251,191,36,.25)';
+    var dlcIco=dlcExpired.length>0?'⛔':'⚠️';
+    var dlcMsg=dlcExpired.length>0?dlcExpired.length+' expiré(s)':dlcSoon.length+' expire(nt) dans 3j';
+    var dlcSub=(dlcExpired.length>0?dlcExpired:dlcSoon).slice(0,2).map(function(d){return d.name||'?';}).join('  ·  ');
+    html+='<div onclick="goPage(\'dlc\')" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:'+dlcBg+';border:1px solid '+dlcBorder+';border-radius:14px;cursor:pointer;">'
+      +'<div style="width:38px;height:38px;border-radius:12px;background:'+dlcBg+';border:1px solid '+dlcBorder+';display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">'+dlcIco+'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:12px;font-weight:900;color:'+dlcCol+';">DLC — '+dlcMsg+'</div>'
+      +'<div style="font-size:10px;color:'+dlcCol+';opacity:.7;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+dlcSub+'</div>'
+      +'</div>'
+      +'<div style="color:'+dlcCol+';opacity:.5;font-size:18px;flex-shrink:0;">›</div>'
+      +'</div>';
+  }
+
+  // ── 3. DERNIÈRE ANOMALIE DU JOUR ──
+  var lastAnom=null;
+  try{
+    ['poissonnerie','fleg','qte'].forEach(function(r){
+      try{
+        loadAnom(r).filter(function(a){return a.date===today;}).forEach(function(a){
+          if(!lastAnom||a.heure>lastAnom.heure)lastAnom=Object.assign({},a,{rayon:r});
+        });
+      }catch(e){}
+    });
+  }catch(e){}
+  var anomTotal=0;
+  try{
+    ['poissonnerie','fleg','qte'].forEach(function(r){
+      try{anomTotal+=loadAnom(r).filter(function(a){return a.date===today;}).length;}catch(e){}
+    });
+  }catch(e){}
+  if(anomTotal>0&&lastAnom){
+    html+='<div onclick="goPage(\'anomaliesQte\')" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.25);border-radius:14px;cursor:pointer;">'
+      +'<div style="width:38px;height:38px;border-radius:12px;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚠️</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:12px;font-weight:900;color:#fb923c;">'+anomTotal+' anomalie(s) aujourd\'hui</div>'
+      +'<div style="font-size:10px;color:rgba(251,146,60,.7);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dernière : '+(lastAnom.fournisseur||'?')+' — '+(lastAnom.produit||lastAnom.rayon||'?')+'</div>'
+      +'</div>'
+      +'<div style="color:rgba(251,146,60,.5);font-size:18px;flex-shrink:0;">›</div>'
+      +'</div>';
+  }
+
+  // ── 4. TAUX DE SERVICE DU JOUR ──
+  var recs=[];
+  try{recs=JSON.parse(localStorage.getItem(SK+'_tsr')||'[]');}catch(e){}
+  var recsToday=recs.filter(function(r){return r.date===today;});
+  if(recsToday.length>0){
+    var totCom=recsToday.reduce(function(s,r){return s+(r.qteCom||0);},0);
+    var totRec=recsToday.reduce(function(s,r){return s+(r.qteRec||0);},0);
+    var taux=totCom>0?Math.round(totRec/totCom*100):0;
+    var tauxCol=taux>=90?'#4ade80':taux>=70?'#fbbf24':'#f87171';
+    var tauxBg=taux>=90?'rgba(34,197,94,.08)':taux>=70?'rgba(251,191,36,.08)':'rgba(239,68,68,.08)';
+    var tauxBorder=taux>=90?'rgba(34,197,94,.25)':taux>=70?'rgba(251,191,36,.25)':'rgba(239,68,68,.25)';
+    html+='<div onclick="goPage(\'tauxService\')" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:'+tauxBg+';border:1px solid '+tauxBorder+';border-radius:14px;cursor:pointer;">'
+      +'<div style="width:38px;height:38px;border-radius:12px;background:'+tauxBg+';border:1px solid '+tauxBorder+';display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;font-weight:900;color:'+tauxCol+';font-family:\'Syne\',sans-serif;">'+taux+'%</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:12px;font-weight:900;color:'+tauxCol+';">Taux de service du jour</div>'
+      +'<div style="font-size:10px;color:'+tauxCol+';opacity:.7;margin-top:2px;">'+recsToday.length+' réception(s)  ·  '+totRec+'/'+totCom+' unités</div>'
+      +'</div>'
+      +'<div style="color:'+tauxCol+';opacity:.5;font-size:18px;flex-shrink:0;">›</div>'
+      +'</div>';
+  }
+
+  // ── 5. MESSAGE POSITIF SI TOUT VA BIEN ──
+  if(!html){
+    var msgs=[
+      '✅ Tout est sous contrôle — continuez comme ça !',
+      '🚀 Bonne journée productive devant vous !',
+      '💪 Aucune alerte — vous gérez bien !',
+    ];
+    var msg=msgs[new Date().getDay()%msgs.length];
+    html='<div style="padding:12px 14px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.15);border-radius:14px;text-align:center;">'
+      +'<div style="font-size:12px;font-weight:700;color:#4ade80;">'+msg+'</div>'
+      +'</div>';
+  }
+
+  el.innerHTML=html;
+}
 
 </script>
 
