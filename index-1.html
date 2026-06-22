@@ -18733,10 +18733,29 @@ function renderEisenhower(){
       var emptyEl=document.createElement('div');emptyEl.style.cssText='font-size:10px;color:var(--t2);font-style:italic;';emptyEl.textContent='—';listEl.appendChild(emptyEl);
     } else {
       qItems.forEach(function(t){
-        var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--t1);background:rgba(255,255,255,.06);border-radius:6px;padding:4px 7px;margin-bottom:3px;';
-        var nameEl=document.createElement('span');nameEl.style.cssText='flex:1;font-weight:800;color:#0f172a;';nameEl.textContent=t.name;row.appendChild(nameEl);
+        var td2=(d.eisManual||[]).find(function(x){return x.id===t.id;})||{};
+        var isDoneT=td2&&td2.done;
+        var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--t1);background:'+(t.manual&&isDoneT?'rgba(34,197,94,.08)':'rgba(255,255,255,.06)')+';border-radius:6px;padding:4px 7px;margin-bottom:3px;opacity:'+(t.manual&&isDoneT?'.65':'1')+';';
+        var nameEl=document.createElement('span');nameEl.style.cssText='flex:1;font-weight:800;color:#0f172a;'+(t.manual&&isDoneT?'text-decoration:line-through;opacity:.6;':'');nameEl.textContent=t.name;row.appendChild(nameEl);
         if(t.manual){
-          var delEl=document.createElement('span');delEl.style.cssText='color:#ef4444;font-size:16px;cursor:pointer;padding:0 4px;line-height:1;';delEl.textContent='×';
+          // Find full task data for done state
+          var td2=(d.eisManual||[]).find(function(x){return x.id===t.id;})||{};
+          // Toggle done (✓)
+          var chkEl=document.createElement('span');
+          chkEl.style.cssText='width:18px;height:18px;border-radius:5px;border:2px solid '+(td2.done?'#22c55e':'rgba(255,255,255,.25)')+';background:'+(td2.done?'#22c55e':'transparent')+';display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:10px;color:#fff;';
+          chkEl.innerHTML=td2.done?'✓':'';
+          chkEl.title='Marquer accompli';
+          (function(tid){chkEl.addEventListener('click',function(e){e.stopPropagation();toggleEisManual(tid);});})(t.id);
+          row.appendChild(chkEl);
+          // Edit (✏️)
+          var editEl=document.createElement('span');
+          editEl.style.cssText='color:#3b82f6;font-size:13px;cursor:pointer;padding:0 3px;line-height:1;flex-shrink:0;';
+          editEl.textContent='✏️';
+          editEl.title='Modifier';
+          (function(tid){editEl.addEventListener('click',function(e){e.stopPropagation();startEditEisManual(tid);});})(t.id);
+          row.appendChild(editEl);
+          // Delete (×)
+          var delEl=document.createElement('span');delEl.style.cssText='color:#ef4444;font-size:16px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0;';delEl.textContent='×';
           (function(tid){delEl.addEventListener('click',function(e){e.stopPropagation();delEisManual(tid);});})(t.id);
           row.appendChild(delEl);
         }
@@ -19039,8 +19058,41 @@ function delEisManual(id){
   });
 }
 var _eisEditingId=null;
-function startEditEisManual(id){_eisEditingId=id;_eisRenderManualPanel();}
-function cancelEditEisManual(){_eisEditingId=null;_eisRenderManualPanel();}
+function startEditEisManual(id){
+  var d=loadExc();var t=(d.eisManual||[]).find(function(x){return x.id===id;});if(!t)return;
+  _eisEditingId=id;
+  var mo=document.getElementById('eisEditModal');
+  if(!mo){
+    mo=document.createElement('div');mo.id='eisEditModal';
+    mo.style.cssText='position:fixed;inset:0;z-index:850;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);display:flex;align-items:flex-end;justify-content:center;';
+    document.body.appendChild(mo);
+  }
+  var qColors={q1:'#ef4444',q2:'#22c55e',q3:'#f59e0b',q4:'#94a3b8'};
+  var col=qColors[t.quadrant||'q1'];
+  mo.innerHTML='<div style="background:#0d1117;border:1px solid '+col+'44;border-radius:24px 24px 0 0;padding:20px 18px 36px;width:100%;max-width:430px;animation:slideInBottom .3s cubic-bezier(.34,1.56,.64,1) both;">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">'
+    +'<div style="font-size:15px;font-weight:900;font-family:Syne,sans-serif;color:'+col+';">✏️ Modifier la tâche</div>'
+    +'<div onclick="closeEisEditModal()" style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:17px;">×</div>'
+    +'</div>'
+    +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Tâche</label>'
+    +'<input id="eisModalName" class="fi" style="width:100%;box-sizing:border-box;margin-bottom:12px;" value="'+escHtml(t.name)+'">'
+    +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Plan d\'action</label>'
+    +'<textarea id="eisModalPlan" class="fi" placeholder="Étapes, ressources, délai..." style="width:100%;box-sizing:border-box;min-height:70px;resize:vertical;margin-bottom:14px;">'+escHtml(t.plan||'')+'</textarea>'
+    +'<button onclick="saveEisModalEdit(\''+id+'\')" style="width:100%;background:'+col+';border:none;border-top:1px solid rgba(255,255,255,.15);color:#fff;font-size:13px;font-weight:800;padding:13px;border-radius:12px;cursor:pointer;">✓ Enregistrer</button>'
+    +'</div>';
+  mo.style.display='flex';
+  setTimeout(function(){var inp=document.getElementById('eisModalName');if(inp){inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length);}},200);
+}
+function closeEisEditModal(){var mo=document.getElementById('eisEditModal');if(mo)mo.style.display='none';_eisEditingId=null;}
+function saveEisModalEdit(id){
+  var name=(document.getElementById('eisModalName')||{value:''}).value.trim();
+  var plan=(document.getElementById('eisModalPlan')||{value:''}).value.trim();
+  if(!name){showT('⚠️','Le nom ne peut pas être vide');return;}
+  var d=loadExc();var t=(d.eisManual||[]).find(function(x){return x.id===id;});
+  if(t){t.name=name;t.plan=plan;t.editedAt=tstr();}
+  saveExc(d);closeEisEditModal();renderEisenhower();showT('✏️','Tâche modifiée');
+}
+function cancelEditEisManual(){closeEisEditModal();}
 function saveEditEisManual(id){
   var tn=document.getElementById('eisEditName_'+id);var tp=document.getElementById('eisEditPlan_'+id);
   if(!tn)return;
