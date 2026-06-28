@@ -41167,7 +41167,6 @@ function ngCollectAll() {
 
 function openNotesGlobales() {
   goPage('notesGlobales');
-  setTimeout(renderNotesGlobales, 80);
 }
 
 var _ngOpenDone = false;
@@ -41544,7 +41543,7 @@ function logSync(ss, mag, ts, data) {
 
 
 <!-- ══ NOTES GLOBALES EXCELLENCE ══ -->
-<div class="pg" id="pgNotesGlobales" style="display:none;">
+<div class="pg" id="pgNotesGlobales">
   <div class="pg-topbar">
     <div onclick="goBack()" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
     <div class="pg-title" style="font-size:15px;font-weight:900;font-family:'Syne';">📝 Notes Excellence</div>
@@ -41555,7 +41554,7 @@ function logSync(ss, mag, ts, data) {
   <div class="ng-kpi-row" id="ngKpiRow"></div>
 
   <!-- Sections -->
-  <div class="scroll" style="padding-bottom:90px;" id="ngContent">
+  <div class="scroll" id="ngContent" style="padding-bottom:90px;">
     <div style="text-align:center;padding:30px;color:var(--t3);font-size:12px;">Chargement…</div>
   </div>
 </div>
