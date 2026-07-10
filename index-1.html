@@ -1523,32 +1523,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
 .ng-item-badge{font-size:8px;font-weight:800;padding:2px 6px;border-radius:6px;flex-shrink:0;align-self:center;}
 
 /* ══ ONBOARDING IKEA EFFECT ══ */
-#pgOnboarding{position:fixed;inset:0;z-index:1000;background:#07080f;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
-#pgOnboarding.hidden{display:none;}
-.ob-step{display:none;flex-direction:column;align-items:center;width:100%;max-width:380px;animation:slideInBottom .4s cubic-bezier(.34,1.2,.64,1) both;}
-.ob-step.active{display:flex;}
-.ob-ico{font-size:56px;margin-bottom:16px;animation:obBounce .6s ease both;}
-@keyframes obBounce{0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
-.ob-title{font-size:24px;font-weight:900;font-family:'Syne',sans-serif;color:#f8faff;text-align:center;margin-bottom:8px;}
-.ob-sub{font-size:13px;color:#64748b;text-align:center;margin-bottom:28px;line-height:1.5;}
-.ob-input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 18px;color:#f8faff;font-size:16px;font-family:'IBM Plex Sans';outline:none;text-align:center;transition:border-color .2s;}
-.ob-input:focus{border-color:var(--blue);}
-.ob-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:8px;}
-.ob-kpi-card{padding:14px 12px;border-radius:14px;border:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);cursor:pointer;text-align:center;transition:all .2s;}
-.ob-kpi-card.sel{border-color:var(--blue);background:rgba(59,130,246,.12);}
-.ob-kpi-card .k-ico{font-size:24px;margin-bottom:6px;}
-.ob-kpi-card .k-lbl{font-size:11px;font-weight:800;color:var(--t1);}
-.ob-colors{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
-.ob-color-btn{width:44px;height:44px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .2s;position:relative;}
-.ob-color-btn.sel{border-color:#fff;transform:scale(1.15);}
-.ob-color-btn.sel::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:900;}
-.ob-btn{width:100%;padding:15px;border-radius:16px;background:linear-gradient(135deg,#3b82f6,#06b6d4);border:none;border-top:1px solid rgba(255,255,255,.2);color:#fff;font-size:15px;font-weight:800;cursor:pointer;margin-top:20px;box-shadow:0 4px 20px rgba(59,130,246,.4);transition:transform .15s;}
-.ob-btn:active{transform:scale(.97);}
-.ob-btn:disabled{opacity:.4;cursor:not-allowed;}
-.ob-progress{display:flex;gap:6px;margin-bottom:32px;}
-.ob-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s;}
-.ob-dot.active{background:#3b82f6;width:24px;border-radius:4px;}
-.ob-dot.done{background:rgba(59,130,246,.4);}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
@@ -12941,8 +12916,6 @@ function renderHome(){
   const h=d.getHours();
   const greet=h<12?'Bonjour 🌅':h<18?'Bon après-midi ☀️':'Bonsoir 🌙';
   const el=document.getElementById('tbGreet');if(el)el.textContent=greet;
-  // Apply saved accent color
-  try{var _p=JSON.parse(localStorage.getItem(SK+'_prof')||'{}');if(_p.accentColor)obApplyColor(_p.accentColor);}catch(e){}
   const n=prof.name||'';
   var _hi=document.getElementById('hinit');if(_hi)_hi.textContent=(n.split(' ').map(x=>x[0]||'').join('').slice(0,2).toUpperCase())||'?';
   document.getElementById('hname').textContent=n||'Configurer profil';
@@ -13700,7 +13673,6 @@ ${(function(){var info=getLastBackupInfo();var days=info?info.days:999;var bkCol
       <button onclick="closeDr();openExcelExport()" style="width:100%;background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(5,150,105,.1));border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:12px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;margin-bottom:2px;">📊 Exporter Excel (.xlsx)</button>
       <button id="gsSyncBtn" onclick="closeDr();gsSyncAll()" style="width:100%;background:linear-gradient(135deg,rgba(22,163,74,.2),rgba(5,150,105,.12));border:1px solid rgba(34,197,94,.35);color:#4ade80;font-size:12px;font-weight:800;padding:11px;border-radius:12px;cursor:pointer;margin-bottom:2px;display:flex;align-items:center;justify-content:center;gap:7px;"><span style="font-size:14px;">📊</span> Sync Google Sheets</button>
       <button onclick="closeDr();openGSConfig()" style="width:100%;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.18);color:#64748b;font-size:11px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;margin-bottom:2px;">⚙️ Configurer Google Sheets</button>
-      <button onclick="closeDr();obReset()" style="width:100%;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.18);color:#a78bfa;font-size:11px;font-weight:700;padding:8px;border-radius:10px;cursor:pointer;margin-bottom:2px;">🎨 Reconfigurer mon profil</button>
       <button class="addbtn" style="background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(6,182,212,.15));border:1px solid rgba(59,130,246,.3);color:#60a5fa;" onclick="closeDr();exportBackup()">💾 Exporter sauvegarde JSON</button>
       <button class="addbtn" style="background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(22,163,74,.1));border:1px solid rgba(34,197,94,.3);color:#4ade80;" onclick="closeDr();importBackup()">📥 Restaurer sauvegarde JSON</button>
       <button class="addbtn" style="background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25);" onclick="showConfirm('🗑️ Réinitialiser','Effacer <b>toutes les données</b> de TaskPro Field ?<br><span style=\\'color:#ef4444;font-size:11px;\\'>⚠️ Action irréversible — faites une sauvegarde d\\'abord !</span>',function(){localStorage.clear();location.reload();},'🗑️')">🗑️ Réinitialiser toutes les données</button>
@@ -41029,32 +41001,6 @@ function renderHomeSummary(){
       +'</div>';
   }
 
-  // ── 5. NOTES EXCELLENCE ──
-  var ngAll = ngCollectAll();
-  var ngDone = ngAll.filter(function(n){return n.done;}).length;
-  var ngRest = ngAll.length - ngDone;
-  if(true){
-    var ngPct = Math.round(ngDone/ngAll.length*100);
-    var ngCol = ngPct>=80?'#4ade80':ngPct>=40?'#fbbf24':'#a78bfa';
-    var ngBg = ngPct>=80?'rgba(34,197,94,.08)':ngPct>=40?'rgba(251,191,36,.08)':'rgba(139,92,246,.08)';
-    var ngBorder = ngPct>=80?'rgba(34,197,94,.25)':ngPct>=40?'rgba(251,191,36,.25)':'rgba(139,92,246,.25)';
-    html+='<div onclick="openNotesGlobales()" style="display:flex;align-items:center;gap:12px;padding:11px 14px;background:'+ngBg+';border:1px solid '+ngBorder+';border-radius:14px;cursor:pointer;">'
-      +'<div style="width:38px;height:38px;border-radius:12px;background:'+ngBg+';border:1px solid '+ngBorder+';display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📝</div>'
-      +'<div style="flex:1;min-width:0;">'
-      +'<div style="font-size:12px;font-weight:900;color:'+ngCol+';">'+ngAll.length+' notes Excellence Opérationnelle</div>'
-      +'<div style="font-size:10px;margin-top:3px;">'
-      +'<span style="color:#22c55e;font-weight:700;">✅ '+ngDone+' accomplies</span>'
-      +'  ·  '
-      +'<span style="color:#fb923c;font-weight:700;">⏳ '+ngRest+' restantes</span>'
-      +'</div>'
-      +'<div style="height:4px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:5px;overflow:hidden;">'
-      +'<div style="height:100%;width:'+ngPct+'%;background:'+ngCol+';border-radius:2px;transition:width .6s;"></div>'
-      +'</div>'
-      +'</div>'
-      +'<div style="color:'+ngCol+';opacity:.5;font-size:18px;flex-shrink:0;">›</div>'
-      +'</div>';
-  }
-
   // ── 6. MESSAGE POSITIF SI TOUT VA BIEN ──
   if(!html && ngAll.length===0){
     var msgs=[
@@ -41333,163 +41279,6 @@ function ngScrollTo(id) {
 }
 
 
-// ════════════════════════════════════════════════════════════
-// ══ ONBOARDING — IKEA EFFECT ══
-// ════════════════════════════════════════════════════════════
-
-var _obKpiSelected = [];
-var _obColor = '#3b82f6';
-var _obStep = 1;
-
-function obInit() {
-  var done = localStorage.getItem(SK+'_obDone');
-  if(!done) {
-    document.getElementById('pgOnboarding').classList.remove('hidden');
-    document.getElementById('app').style.display = 'none';
-  }
-}
-
-function obCheckStep1() {
-  var p = (document.getElementById('obPrenom')||{value:''}).value.trim();
-  var m = (document.getElementById('obMagasin')||{value:''}).value.trim();
-  var btn = document.getElementById('obBtn1');
-  if(btn) btn.disabled = !(p.length >= 2 && m.length >= 2);
-}
-
-function obToggleKpi(card) {
-  var kpi = card.getAttribute('data-kpi');
-  var idx = _obKpiSelected.indexOf(kpi);
-  if(idx >= 0) {
-    _obKpiSelected.splice(idx, 1);
-    card.classList.remove('sel');
-  } else {
-    if(_obKpiSelected.length >= 3) {
-      showT('⚠️', 'Maximum 3 priorités');
-      return;
-    }
-    _obKpiSelected.push(kpi);
-    card.classList.add('sel');
-  }
-  var hint = document.getElementById('obKpiHint');
-  var btn = document.getElementById('obBtn2');
-  var n = _obKpiSelected.length;
-  if(hint) hint.textContent = n === 3 ? '✅ Parfait !' : 'Sélectionnez '+(3-n)+' priorité(s) de plus';
-  if(btn) btn.disabled = n !== 3;
-}
-
-function obSelectColor(btn) {
-  _obColor = btn.getAttribute('data-color');
-  document.querySelectorAll('.ob-color-btn').forEach(function(b){ b.classList.remove('sel'); });
-  btn.classList.add('sel');
-  // Update preview
-  var preview = document.getElementById('obPreview');
-  var previewName = document.getElementById('obPreviewName');
-  if(preview) {
-    preview.style.background = _obColor + '18';
-    preview.style.borderColor = _obColor + '44';
-  }
-  if(previewName) {
-    var p = (document.getElementById('obPrenom')||{value:''}).value.trim() || 'Votre espace';
-    var m = (document.getElementById('obMagasin')||{value:''}).value.trim();
-    previewName.style.color = _obColor;
-    previewName.textContent = p + (m?' — '+m:'');
-  }
-}
-
-function obNext(step) {
-  // Hide current
-  document.getElementById('obStep'+_obStep).classList.remove('active');
-  document.getElementById('obDot'+_obStep).classList.remove('active');
-  document.getElementById('obDot'+_obStep).classList.add('done');
-  _obStep = step;
-  // Show next
-  var nextStep = document.getElementById('obStep'+step);
-  var nextDot = document.getElementById('obDot'+step);
-  if(nextStep) nextStep.classList.add('active');
-  if(nextDot) nextDot.classList.add('active');
-  // Update preview on step 3
-  if(step === 3) {
-    var p = (document.getElementById('obPrenom')||{value:''}).value.trim();
-    var pn = document.getElementById('obPreviewName');
-    var m = (document.getElementById('obMagasin')||{value:''}).value.trim();
-    if(pn) { pn.textContent = p + (m?' — '+m:''); pn.style.color = _obColor; }
-  }
-}
-
-function obApplyColor(color) {
-  // Apply accent color to CSS variables
-  var root = document.documentElement;
-  root.style.setProperty('--blue', color);
-  // Also update gradient buttons etc
-  var styleEl = document.getElementById('obColorStyle');
-  if(!styleEl) {
-    styleEl = document.createElement('style');
-    styleEl.id = 'obColorStyle';
-    document.head.appendChild(styleEl);
-  }
-  styleEl.textContent = ':root{--blue:'+color+';} .addbtn,.fab-btn-main,.ob-btn{background:linear-gradient(135deg,'+color+','+color+'cc)!important;}';
-}
-
-function obFinish() {
-  var prenom = (document.getElementById('obPrenom')||{value:''}).value.trim();
-  var magasin = (document.getElementById('obMagasin')||{value:''}).value.trim();
-
-  // Save profile
-  var profData = {};
-  try { profData = JSON.parse(localStorage.getItem(SK+'_prof')||'{}'); } catch(e){}
-  profData.name = prenom + ' — ' + magasin;
-  profData.prenom = prenom;
-  profData.magasin = magasin;
-  profData.accentColor = _obColor;
-  profData.kpiPriorities = _obKpiSelected;
-  localStorage.setItem(SK+'_prof', JSON.stringify(profData));
-  localStorage.setItem(SK+'_obDone', '1');
-
-  // Apply color
-  obApplyColor(_obColor);
-
-  // Apply profile to app
-  if(typeof prof !== 'undefined') {
-    prof.name = profData.name;
-    prof.accentColor = _obColor;
-  }
-
-  // Animate finish
-  var ob = document.getElementById('pgOnboarding');
-  ob.style.transition = 'opacity .5s';
-  ob.style.opacity = '0';
-  setTimeout(function() {
-    ob.classList.add('hidden');
-    document.getElementById('app').style.display = '';
-    if(typeof renderHome === 'function') renderHome();
-    if(typeof renderHomeSummary === 'function') renderHomeSummary();
-    showT('🎉', 'Bienvenue ' + prenom + ' ! Votre TaskPro est prêt.');
-  }, 500);
-}
-
-// ── Apply saved color on startup ──
-function obApplySaved() {
-  try {
-    var p = JSON.parse(localStorage.getItem(SK+'_prof')||'{}');
-    if(p.accentColor) obApplyColor(p.accentColor);
-  } catch(e){}
-}
-
-// ── INIT on load ──
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    obApplySaved();
-    obInit();
-  }, 300);
-});
-
-
-function obReset() {
-  showConfirm('🎨 Reconfigurer','Voulez-vous reconfigurer votre profil TaskPro ?', function(){
-    localStorage.removeItem(SK+'_obDone');
-    location.reload();
-  });
-}
 
 </script>
 
