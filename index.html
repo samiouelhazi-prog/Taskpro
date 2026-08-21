@@ -1563,6 +1563,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
   </div>
 </div>
 
+<!-- ══ NOTE VOCALE — BOUTON FLOTTANT ══ -->
+<button id="vnFabBtn" onclick="openVoiceNote()" title="Note vocale rapide" style="position:fixed;bottom:96px;right:16px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#2563eb);border:none;color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:120;box-shadow:0 6px 20px rgba(124,58,237,.5);">🎙️</button>
+
 <div id="app">
 
 <!-- ══ HOME ══ -->
@@ -10504,6 +10507,203 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="color:var(--t2);font-size:18px;">›</div>
     </div>
 
+    <!-- ════ VII. LOIS DU TEMPS + IA ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(167,139,250,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#a78bfa;letter-spacing:1.5px;text-transform:uppercase;">VII. Lois du Temps &amp; Assistant IA</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">6 principes universels, avec un prompt IA prêt à l'emploi pour chacun</div>
+
+    <div onclick="goPage('loistemps')" style="background:linear-gradient(135deg,#3730a3,#6d28d9);border:1px solid rgba(167,139,250,.4);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⚖️</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#a78bfa;margin-bottom:2px;">VII-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">6 Lois de Gestion du Temps</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Murphy, Carlson, Fraisse, Fliess, Hofstadter, Eisenhower</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ VIII. TECHNIQUES DE PRODUCTIVITÉ EXPRESS ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(45,212,191,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#2dd4bf;letter-spacing:1.5px;text-transform:uppercase;">VIII. Techniques de Productivité Express</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(45,212,191,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">8 méthodes courtes pour reprendre le contrôle de sa journée</div>
+
+    <div onclick="goPage('crapaud')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🐸</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Avalez le Crapaud</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Commencer par la tâche la plus difficile</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('pomodoro')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🍅</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-2</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Technique Pomodoro</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Blocs de 25 min avec pauses</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('deepwork')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🧠</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-3</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Deep Work</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">3h de concentration totale</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('methode333')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:20px;font-weight:900;color:#fff;">333</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-4</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode 3-3-3</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">3h focus + 3 urgentes + 3 routine</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('methode135')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:20px;font-weight:900;color:#fff;">135</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-5</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Méthode 1-3-5</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">1 majeure + 3 moyennes + 5 petites</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('regle2min')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⚡</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-6</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Règle des 2 Minutes</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Moins de 2 min → faire maintenant</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('batching')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🔀</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-7</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Regrouper les Tâches (Batching)</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Tâches similaires ensemble</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('timeblocking')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">⏰</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-8</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Time Blocking</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Découper sa journée en créneaux dédiés</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <!-- ════ IX. PLANS D'ACTION ════ -->
+    <div style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;">
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,rgba(167,139,250,.6),transparent);"></div>
+      <div style="font-size:10px;font-weight:900;color:#a78bfa;letter-spacing:1.5px;text-transform:uppercase;">IX. Plans d'Action Correctifs</div>
+      <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(167,139,250,.6));"></div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">Transformer un constat en actions suivies</div>
+
+    <div onclick="goPage('planAction')" style="background:linear-gradient(135deg,#2e1065,#4c1d95);border:1px solid rgba(167,139,250,.35);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">📋</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#a78bfa;margin-bottom:2px;">IX-1</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">Plans d'Action</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Constat → actions, responsables, échéances, suivi</div>
+      </div>
+      <div id="paHomeBadge" style="display:none;background:#ef4444;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;"></div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE PLANS D'ACTION
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgPlanAction">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Excellence</div>
+    <div class="pg-title" style="font-size:14px;">📋 Plans d'Action</div>
+    <div style="display:flex;gap:6px;">
+      <button onclick="exportPaPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;">📄</button>
+      <button onclick="paToggleForm()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+    </div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <!-- KPI -->
+    <div style="display:flex;gap:7px;margin-bottom:12px;">
+      <div style="flex:1;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:9px 4px;text-align:center;">
+        <div id="paKpiTotal" style="font-size:19px;font-weight:900;color:#a78bfa;font-family:'IBM Plex Mono';">0</div>
+        <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">PLANS</div>
+      </div>
+      <div style="flex:1;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:9px 4px;text-align:center;">
+        <div id="paKpiCours" style="font-size:19px;font-weight:900;color:#f59e0b;font-family:'IBM Plex Mono';">0</div>
+        <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">EN COURS</div>
+      </div>
+      <div style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:9px 4px;text-align:center;">
+        <div id="paKpiRetard" style="font-size:19px;font-weight:900;color:#ef4444;font-family:'IBM Plex Mono';">0</div>
+        <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">EN RETARD</div>
+      </div>
+      <div style="flex:1;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:9px 4px;text-align:center;">
+        <div id="paKpiDone" style="font-size:19px;font-weight:900;color:#22c55e;font-family:'IBM Plex Mono';">0</div>
+        <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">TERMINÉS</div>
+      </div>
+    </div>
+
+    <!-- Filtres -->
+    <div style="display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;">
+      <button onclick="paFilter('all',this)" class="paft on" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:#7c3aed;color:#fff;border:none;">Tous</button>
+      <button onclick="paFilter('cours',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);">🔵 En cours</button>
+      <button onclick="paFilter('retard',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);">⚠️ Retard</button>
+      <button onclick="paFilter('done',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.3);">✅ Terminés</button>
+    </div>
+
+    <!-- Formulaire nouveau plan -->
+    <div id="paForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(167,139,250,.3);">
+      <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:10px;">📋 Nouveau Plan d'Action</div>
+      <div style="margin-bottom:8px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre du plan *</label>
+        <input id="paTitre" class="fi" placeholder="Ex: Révision procédures sondage DI..." style="width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="margin-bottom:8px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Origine / Constat</label>
+        <input id="paOrigine" class="fi" placeholder="Ex: Résultat DI non satisfaisant, flop catégories..." style="width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="margin-bottom:8px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Indicateur de suivi</label>
+        <input id="paIndicateur" class="fi" placeholder="Ex: Taux DI hebdomadaire par catégorie..." style="width:100%;box-sizing:border-box;"/>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Date de contrôle prévue</label>
+        <input id="paDateControle" type="date" class="fi" style="width:100%;box-sizing:border-box;color-scheme:dark;"/>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="paToggleForm()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
+        <button onclick="paSavePlan()" style="flex:2;background:#7c3aed;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Créer le plan</button>
+      </div>
+    </div>
+
+    <div id="paList" style="display:flex;flex-direction:column;gap:10px;"></div>
+    <div id="paEmpty" style="text-align:center;padding:30px;color:var(--t2);font-size:12px;">📋 Aucun plan d'action · Appuyez sur +</div>
   </div>
 </div>
 <!-- ══ GESTION DU TEMPS ══ -->
@@ -10561,6 +10761,12 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div onclick="goPage('timeblocking')" style="background:linear-gradient(135deg,#581c87,#7c3aed);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:32px;">📅</div>
       <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Time Blocking</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">Découper sa journée en créneaux dédiés</div></div>
+      <div style="color:var(--t2);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('loistemps')" style="background:linear-gradient(135deg,#3730a3,#6d28d9);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;border:1px solid rgba(196,181,253,.4);">
+      <div style="font-size:32px;">⚖️</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">6 Lois de Gestion du Temps</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">Murphy, Carlson, Fraisse… + prompts IA prêts à l'emploi</div></div>
       <div style="color:var(--t2);font-size:20px;">›</div>
     </div>
   </div>
@@ -10692,6 +10898,84 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     </div>
     <div id="tbList" style="display:flex;flex-direction:column;gap:6px;"></div>
     <div id="tbEmpty" style="text-align:center;padding:20px;color:var(--t2);font-size:12px;">Aucun créneau · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══ 6 LOIS DE GESTION DU TEMPS ══ -->
+<div class="pg" id="pgLoisTemps">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Excellence</div>
+    <div class="pg-title" style="color:#1e3a8a;">⚖️ 6 Lois du Temps</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">6 principes de gestion du temps, chacun avec un prompt prêt à envoyer à l'Assistant IA</div>
+
+    <!-- 1. Murphy -->
+    <div style="background:linear-gradient(135deg,#312e81,#4c1d95);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#4338ca;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi de Murphy</div>
+      </div>
+      <div style="font-size:12px;color:#e0e7ff;font-weight:700;margin-bottom:6px;">Tout ce qui peut mal tourner, va mal tourner.</div>
+      <div style="font-size:11px;color:#c7d2fe;line-height:1.5;margin-bottom:12px;">Anticipez les risques d'un projet ou d'une action magasin, avec un plan B et un plan C pour chaque risque.</div>
+      <button onclick="loiPromptIA('murphy')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
+
+    <!-- 2. Carlson -->
+    <div style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#c2410c;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi de Carlson</div>
+      </div>
+      <div style="font-size:12px;color:#fed7aa;font-weight:700;margin-bottom:6px;">Limiter les interruptions.</div>
+      <div style="font-size:11px;color:#fdba8c;line-height:1.5;margin-bottom:12px;">Organisez votre journée en blocs de concentration sans interruptions, avec des pauses efficaces.</div>
+      <button onclick="loiPromptIA('carlson')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
+
+    <!-- 3. Fraisse -->
+    <div style="background:linear-gradient(135deg,#0c4a6e,#1d4ed8);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#1d4ed8;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi de Fraisse</div>
+      </div>
+      <div style="font-size:12px;color:#bfdbfe;font-weight:700;margin-bottom:6px;">Le temps est subjectif.</div>
+      <div style="font-size:11px;color:#93c5fd;line-height:1.5;margin-bottom:12px;">Rendez une tâche répétitive plus agréable et stimulante pour que le temps passe plus vite.</div>
+      <button onclick="loiPromptIA('fraisse')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
+
+    <!-- 4. Fliess -->
+    <div style="background:linear-gradient(135deg,#14532d,#166534);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#166534;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi de Fliess</div>
+      </div>
+      <div style="font-size:12px;color:#bbf7d0;font-weight:700;margin-bottom:6px;">Respecter son horloge biologique.</div>
+      <div style="font-size:11px;color:#86efac;line-height:1.5;margin-bottom:12px;">Analysez vos pics d'énergie et de fatigue pour un emploi du temps aligné sur vos cycles naturels.</div>
+      <button onclick="loiPromptIA('fliess')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
+
+    <!-- 5. Hofstadter -->
+    <div style="background:linear-gradient(135deg,#831843,#be123c);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#be123c;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi de Hofstadter</div>
+      </div>
+      <div style="font-size:12px;color:#fecdd3;font-weight:700;margin-bottom:6px;">Tout prend plus de temps que prévu.</div>
+      <div style="font-size:11px;color:#fda4af;line-height:1.5;margin-bottom:12px;">Obtenez un planning ajusté avec marges de sécurité pour vos projets et échéances magasin.</div>
+      <button onclick="loiPromptIA('hofstadter')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
+
+    <!-- 6. Eisenhower -->
+    <div style="background:linear-gradient(135deg,#164e63,#0e7490);border-radius:16px;padding:16px;margin-bottom:6px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:26px;height:26px;border-radius:50%;background:#fff;color:#0e7490;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</div>
+        <div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">Loi d'Eisenhower</div>
+      </div>
+      <div style="font-size:12px;color:#a5f3fc;font-weight:700;margin-bottom:6px;">L'urgence ≠ l'importance.</div>
+      <div style="font-size:11px;color:#67e8f9;line-height:1.5;margin-bottom:12px;">Classez vos tâches du jour dans une matrice urgent/important pour un ordre de traitement clair.</div>
+      <button onclick="loiPromptIA('eisenhower')" style="width:100%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;">🤖 Utiliser avec l'Assistant IA</button>
+    </div>
   </div>
 </div>
 
@@ -13143,8 +13427,8 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
+  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',loistemps:'pgLoisTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales',notesVocales:'pgVoiceNotes',planAction:'pgPlanAction'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',planAction:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
     if(activePg){
@@ -13158,7 +13442,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline'];
+  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','loistemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','planAction','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline','notesVocales'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();setTimeout(renderHomeSummary,100);}
     updateHomeAlerts();
@@ -13181,6 +13465,9 @@ function goPage(p){
   if(p==='congesGlobal')renderCongesGlobal();
   if(p==='suiviFormations')renderFormations();
   if(p==='notesGlobales')setTimeout(function(){renderNotesGlobales();},100);
+  if(p==='notesVocales')setTimeout(function(){renderVoiceNotes();},100);
+  if(p==='planAction')setTimeout(function(){renderPlanActions();},80);
+  if(p==='excellence')setTimeout(function(){if(typeof paUpdateHomeBadge==='function')paUpdateHomeBadge();},80);
 
   if(p==='reunion')renderReunions();
   if(p==='demarque')renderDemarque();
@@ -18473,6 +18760,189 @@ function exportPiloPDF(type){
 var SKEQ=SK+'_excellence';
 function loadExc(){try{return JSON.parse(localStorage.getItem(SKEQ)||'{}');}catch(e){return{};}}
 function saveExc(d){localStorage.setItem(SKEQ,JSON.stringify(d));}
+
+// ══════════ PLANS D'ACTION ══════════
+var _paFilter='all';
+var _paExpanded={};
+function paToggleForm(){
+  var f=document.getElementById('paForm');if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){
+    ['paTitre','paOrigine','paIndicateur','paDateControle'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    var sc=f.closest('.scroll')||f.parentElement;if(sc)sc.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){var inp=document.getElementById('paTitre');if(inp)inp.focus();},300);
+  }
+}
+function paSavePlan(){
+  var titre=(document.getElementById('paTitre')||{value:''}).value.trim();
+  if(!titre){showT('⚠️','Titre du plan requis');return;}
+  var origine=(document.getElementById('paOrigine')||{value:''}).value.trim();
+  var indicateur=(document.getElementById('paIndicateur')||{value:''}).value.trim();
+  var dateControle=(document.getElementById('paDateControle')||{value:''}).value;
+  var d=loadExc();if(!d.planActions)d.planActions=[];
+  var id=uid();
+  d.planActions.unshift({id:id,titre:titre,origine:origine,indicateur:indicateur,dateControle:dateControle,createdAt:tstr(),items:[]});
+  saveExc(d);paToggleForm();_paExpanded[id]=true;renderPlanActions();showT('✅','Plan d\'action créé');
+}
+function paDelPlan(id){
+  showConfirm('🗑️ Supprimer','Supprimer ce plan d\'action et toutes ses actions ?',function(){
+    var d=loadExc();d.planActions=(d.planActions||[]).filter(function(p){return p.id!==id;});saveExc(d);renderPlanActions();
+    showT('🗑️','Plan supprimé');
+  });
+}
+function paToggleExpand(id){_paExpanded[id]=!_paExpanded[id];renderPlanActions();}
+function paToggleItemForm(planId){
+  var f=document.getElementById('paItemForm_'+planId);if(!f)return;
+  var s=f.style.display!=='none';f.style.display=s?'none':'block';
+  if(!s){
+    ['paItemTexte_','paItemResp_','paItemEch_'].forEach(function(pfx){var el=document.getElementById(pfx+planId);if(el)el.value='';});
+    setTimeout(function(){var inp=document.getElementById('paItemTexte_'+planId);if(inp)inp.focus();},150);
+  }
+}
+function paSaveItem(planId){
+  var t=document.getElementById('paItemTexte_'+planId);var r=document.getElementById('paItemResp_'+planId);var e=document.getElementById('paItemEch_'+planId);
+  var texte=t?t.value.trim():'';if(!texte){showT('⚠️','Action requise');return;}
+  var resp=r?r.value.trim():'';var ech=e?e.value:'';
+  var d=loadExc();var plan=(d.planActions||[]).find(function(p){return p.id===planId;});if(!plan)return;
+  if(!plan.items)plan.items=[];
+  plan.items.push({id:uid(),texte:texte,resp:resp,ech:ech,statut:'todo'});
+  saveExc(d);paToggleItemForm(planId);renderPlanActions();showT('✅','Action ajoutée');
+}
+function paCycleItem(planId,itemId){
+  var d=loadExc();var plan=(d.planActions||[]).find(function(p){return p.id===planId;});if(!plan)return;
+  var item=(plan.items||[]).find(function(i){return i.id===itemId;});if(!item)return;
+  var order={todo:'cours',cours:'fait',fait:'todo'};
+  item.statut=order[item.statut]||'todo';
+  saveExc(d);renderPlanActions();
+}
+function paDelItem(planId,itemId){
+  var d=loadExc();var plan=(d.planActions||[]).find(function(p){return p.id===planId;});if(!plan)return;
+  plan.items=(plan.items||[]).filter(function(i){return i.id!==itemId;});
+  saveExc(d);renderPlanActions();
+}
+function paPlanStatus(plan){
+  var items=plan.items||[];
+  if(!items.length)return 'cours';
+  var today=tstr();
+  var allDone=items.every(function(i){return i.statut==='fait';});
+  if(allDone)return 'done';
+  var late=items.some(function(i){return i.statut!=='fait'&&i.ech&&i.ech<today;});
+  if(late)return 'retard';
+  return 'cours';
+}
+function paFilter(f,btn){
+  _paFilter=f;
+  document.querySelectorAll('.paft').forEach(function(b){b.classList.remove('on');b.style.opacity='0.55';});
+  if(btn){btn.classList.add('on');btn.style.opacity='1';}
+  renderPlanActions();
+}
+function paShareOne(id){
+  var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===id;});if(!p)return;
+  var stLbl={todo:'À faire',cours:'En cours',fait:'✅ Fait'};
+  var msg='📋 Plan d\'Action — '+getMagName()+'\n\n'
+    +'📝 '+p.titre+'\n'
+    +(p.origine?'📌 Origine: '+p.origine+'\n':'')
+    +(p.indicateur?'📊 Indicateur: '+p.indicateur+'\n':'')
+    +(p.dateControle?'📅 Contrôle prévu: '+p.dateControle+'\n':'')
+    +'\nActions:\n'
+    +(p.items||[]).map(function(i){return '• '+i.texte+(i.resp?' ('+i.resp+')':'')+(i.ech?' — éch. '+i.ech:'')+' ['+(stLbl[i.statut]||i.statut)+']';}).join('\n')
+    +'\n\n— TaskPro Field';
+  shareWA(msg);
+}
+function paUpdateHomeBadge(){
+  var d=loadExc();var all=d.planActions||[];
+  var late=all.filter(function(p){return paPlanStatus(p)==='retard';}).length;
+  var b=document.getElementById('paHomeBadge');if(!b)return;
+  if(late>0){b.style.display='block';b.textContent=late+' en retard';}else{b.style.display='none';}
+}
+function renderPlanActions(){
+  var d=loadExc();var all=d.planActions||[];
+  var withStatus=all.map(function(p){return {p:p,st:paPlanStatus(p)};});
+  document.getElementById('paKpiTotal').textContent=all.length;
+  document.getElementById('paKpiCours').textContent=withStatus.filter(function(x){return x.st==='cours';}).length;
+  document.getElementById('paKpiRetard').textContent=withStatus.filter(function(x){return x.st==='retard';}).length;
+  document.getElementById('paKpiDone').textContent=withStatus.filter(function(x){return x.st==='done';}).length;
+  paUpdateHomeBadge();
+  var list=_paFilter==='all'?withStatus:withStatus.filter(function(x){return x.st===_paFilter;});
+  var el=document.getElementById('paList');var empty=document.getElementById('paEmpty');if(!el)return;
+  if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
+  var cols={cours:'#f59e0b',retard:'#ef4444',done:'#22c55e'};
+  var labels={cours:'🔵 En cours',retard:'⚠️ En retard',done:'✅ Terminé'};
+  var itemCols={todo:'#64748b',cours:'#f59e0b',fait:'#22c55e'};
+  var itemIcons={todo:'○',cours:'◐',fait:'✓'};
+  el.innerHTML=list.map(function(x){
+    var p=x.p,st=x.st,col=cols[st];
+    var items=p.items||[];
+    var doneCount=items.filter(function(i){return i.statut==='fait';}).length;
+    var pct=items.length?Math.round(doneCount/items.length*100):0;
+    var exp=!!_paExpanded[p.id];
+    return '<div style="background:var(--card);border-radius:14px;padding:14px;border-left:3px solid '+col+';">'
+      +'<div style="display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="paToggleExpand(\''+p.id+'\')">'
+      +'<div style="flex:1;">'
+      +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;">'
+      +'<span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(255,255,255,.06);padding:2px 7px;border-radius:8px;">'+labels[st]+'</span>'
+      +(items.length?'<span style="font-size:9px;color:var(--t2);">'+doneCount+'/'+items.length+' actions</span>':'')
+      +'</div>'
+      +'<div style="font-size:14px;font-weight:900;color:var(--t1);">'+escHtml(p.titre)+'</div>'
+      +(p.origine?'<div style="font-size:11px;color:var(--t2);margin-top:2px;">📌 '+escHtml(p.origine)+'</div>':'')
+      +(items.length?'<div style="height:5px;background:rgba(255,255,255,.06);border-radius:4px;margin-top:8px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:4px;"></div></div>':'')
+      +'</div>'
+      +'<div style="color:var(--t2);font-size:16px;margin-left:8px;">'+(exp?'▾':'▸')+'</div>'
+      +'</div>'
+      +(exp?(
+        '<div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06);">'
+        +(p.indicateur?'<div style="font-size:11px;color:#38bdf8;margin-bottom:4px;">📊 <b>Indicateur:</b> '+escHtml(p.indicateur)+'</div>':'')
+        +(p.dateControle?'<div style="font-size:11px;color:#fb923c;margin-bottom:8px;">📅 <b>Contrôle prévu:</b> '+p.dateControle+'</div>':'')
+        +items.map(function(i){
+          var ic=itemCols[i.statut];var lateItem=(i.statut!=='fait'&&i.ech&&i.ech<tstr());
+          return '<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);">'
+            +'<div onclick="paCycleItem(\''+p.id+'\',\''+i.id+'\')" style="width:20px;height:20px;border-radius:50%;border:2px solid '+ic+';color:'+ic+';font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+itemIcons[i.statut]+'</div>'
+            +'<div style="flex:1;">'
+            +'<div style="font-size:12px;color:var(--t1);'+(i.statut==='fait'?'text-decoration:line-through;opacity:.6;':'')+'">'+escHtml(i.texte)+'</div>'
+            +'<div style="font-size:9.5px;color:'+(lateItem?'#ef4444':'var(--t3)')+';margin-top:2px;">'+(i.resp?'👤 '+escHtml(i.resp)+'  ':'')+(i.ech?'📅 '+i.ech+(lateItem?' ⚠️ en retard':''):'')+'</div>'
+            +'</div>'
+            +'<div onclick="paDelItem(\''+p.id+'\',\''+i.id+'\')" style="color:#ef4444;font-size:15px;cursor:pointer;padding:2px 4px;">×</div>'
+            +'</div>';
+        }).join('')
+        +'<div id="paItemForm_'+p.id+'" style="display:none;margin-top:8px;background:rgba(255,255,255,.03);border-radius:10px;padding:10px;">'
+        +'<input id="paItemTexte_'+p.id+'" class="fi" placeholder="Nouvelle action..." style="width:100%;box-sizing:border-box;margin-bottom:6px;"/>'
+        +'<div style="display:flex;gap:6px;margin-bottom:6px;">'
+        +'<input id="paItemResp_'+p.id+'" class="fi" placeholder="Responsable" style="flex:1;box-sizing:border-box;"/>'
+        +'<input id="paItemEch_'+p.id+'" type="date" class="fi" style="flex:1;box-sizing:border-box;color-scheme:dark;"/>'
+        +'</div>'
+        +'<div style="display:flex;gap:6px;">'
+        +'<button onclick="paToggleItemForm(\''+p.id+'\')" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">Annuler</button>'
+        +'<button onclick="paSaveItem(\''+p.id+'\')" style="flex:2;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:7px;border-radius:8px;cursor:pointer;">✓ Ajouter</button>'
+        +'</div></div>'
+        +'<div style="display:flex;gap:6px;margin-top:10px;">'
+        +'<div onclick="paToggleItemForm(\''+p.id+'\')" style="flex:1;text-align:center;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:#a78bfa;font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">+ Action</div>'
+        +'<div onclick="paShareOne(\''+p.id+'\')" style="width:34px;text-align:center;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e;font-size:12px;padding:7px;border-radius:8px;cursor:pointer;">📤</div>'
+        +'<div onclick="paDelPlan(\''+p.id+'\')" style="width:34px;text-align:center;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:12px;padding:7px;border-radius:8px;cursor:pointer;">🗑️</div>'
+        +'</div>'
+        +'</div>'
+      ):'')
+      +'</div>';
+  }).join('');
+}
+function exportPaPDF(){
+  var d=loadExc();var all=d.planActions||[];
+  var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
+  var gen=now.getDate()+' '+MFR[now.getMonth()]+' '+now.getFullYear();
+  var stLbl={todo:'À faire',cours:'En cours',fait:'Fait'};
+  var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Plans d\'Action</title>'
+    +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#4c1d95;}.card{border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-bottom:14px;}.titre{font-size:15px;font-weight:700;color:#1a1a2e;}.origine{font-size:12px;color:#666;margin-top:2px;}.ind{font-size:12px;color:#0369a1;margin-top:6px;}.ctrl{font-size:12px;color:#c2410c;margin-top:2px;}.item{font-size:12px;padding:6px 0;border-top:1px solid #f1f5f9;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
+    +'</head><body><h1>📋 Plans d\'Action</h1><div class="meta">Généré le '+gen+' · '+getMagName()+' · '+all.length+' plan(s)</div>'
+    +all.map(function(p){
+      return '<div class="card"><div class="titre">'+escHtml(p.titre)+'</div>'
+        +(p.origine?'<div class="origine">📌 '+escHtml(p.origine)+'</div>':'')
+        +(p.indicateur?'<div class="ind">📊 Indicateur: '+escHtml(p.indicateur)+'</div>':'')
+        +(p.dateControle?'<div class="ctrl">📅 Contrôle prévu: '+p.dateControle+'</div>':'')
+        +(p.items||[]).map(function(i){return '<div class="item">'+(i.statut==='fait'?'✅':'⬜')+' '+escHtml(i.texte)+(i.resp?' — '+escHtml(i.resp):'')+(i.ech?' — éch. '+i.ech:'')+' ['+stLbl[i.statut]+']</div>';}).join('')
+        +'</div>';
+    }).join('')
+    +'</body></html>';
+  _dlPDF(html,'plans_action_'+tstr()+'.html');
+}
 
 // ── PARETO 80/20 ──
 var _paretoGrp='AUTO';
@@ -30339,6 +30809,8 @@ function initDecisions(){_decFilter='today';renderDecisions();}
 
 <script>
 var _GS=[
+  {ico:'🎙️',bg:'#4c1d95',n:'Notes Vocales IA',d:'Enregistrer une idée à voix haute, classée par IA',p:'notesVocales',t:'voix vocal note idee ia enregistrer parler micro'},
+  {ico:'⚖️',bg:'#3730a3',n:'6 Lois de Gestion du Temps',d:'Murphy, Carlson, Fraisse… + prompts IA',p:'loistemps',t:'lois temps murphy carlson fraisse fliess hofstadter eisenhower'},
   {ico:'📒',bg:'#312e81',n:'Catalogue',d:'Ruptures par rayon · Erratums · Suivi catalogue',p:'catalogue',t:'catalogue rupture erratum rayon'},
   {ico:'📋',bg:'#1e3a8a',n:'Tâches Commerciales',d:'Tâches urgentes, quotidiennes, hebdomadaires',p:'commercial',t:'tache commercial quotidien priorite urgent'},
   {ico:'📋',bg:'#1e3a8a',n:'Toutes les Tâches',d:'Liste complète des tâches et statuts',p:'taches',t:'tache liste statut accompli'},
@@ -30374,6 +30846,7 @@ var _GS=[
   {ico:'🔍',bg:'#1e293b',n:'Veille Concurrentielle',d:'Suivi concurrence et alertes',p:'veille',t:'veille concurrence strategie'},
   {ico:'📈',bg:'#166534',n:'Optimisation',d:'Optimisation des performances',p:'optimisation',t:'optimisation performance amelioration'},
   {ico:'🏆',bg:'#312e81',n:'Excellence Opérationnelle',d:'Méthodes managériales',p:'excellence',t:'excellence methode management qualite'},
+  {ico:'📋',bg:'#4c1d95',n:'Plans d\'Action',d:'Constat → actions, responsables, échéances',p:'planAction',t:'plan action correctif suivi responsable echeance sondage di flop categorie planning tenue commerciale'},
   {ico:'📊',bg:'#431407',n:'Pareto 80/20',d:'Les 20% d\'actions qui font 80% des résultats',p:'pareto',t:'pareto 80 20 analyse priorite'},
   {ico:'🔄',bg:'#0c4a6e',n:'PDCA',d:'Plan-Do-Check-Act',p:'pdca',t:'pdca amelioration cycle'},
   {ico:'⚖️',bg:'#7f1d1d',n:'Matrice Eisenhower',d:'Prioriser par urgence et importance',p:'eisenhower',t:'eisenhower matrice urgence importance'},
@@ -39634,6 +40107,265 @@ async function aiThink(question) {
   document.getElementById('aiStatusTxt').textContent = '● En ligne — Claude AI';
 }
 
+// ── 6 LOIS DE GESTION DU TEMPS — prompts prêts pour l'Assistant IA ──
+var LOI_PROMPTS = {
+  murphy: "Agis comme un consultant en gestion de risques pour un magasin de grande distribution. J'ai ce projet ou cette tâche : [décrivez-le]. Identifie tout ce qui pourrait mal se passer, et propose-moi un plan B et un plan C pour chaque risque. Ne te limite pas aux aspects techniques : prends aussi en compte les facteurs humains, financiers et organisationnels. Présente la réponse sous forme de tableau clair avec colonnes : risque / conséquence / plan B / plan C.",
+  carlson: "Agis comme un coach en gestion du temps pour un responsable de rayon en grande distribution. Aide-moi à organiser ma journée de travail en blocs de concentration (deep work) sans interruptions. Propose des durées de blocs adaptées et des pauses efficaces pour garder de l'énergie. Présente le tout sous forme de planning simple à suivre. Ajoute 3 conseils pratiques pour réduire les distractions numériques (emails, notifications, réunions).",
+  fraisse: "Agis comme un coach en productivité pour une équipe de magasin. Donne-moi 5 techniques pour rendre une tâche répétitive ou ennuyeuse : [décrivez la tâche] plus agréable et stimulante afin que le temps semble passer plus vite. Propose des techniques variées (gamification, récompenses, changement de contexte, musique, etc.). Classe-les par impact estimé : faible, moyen ou fort.",
+  fliess: "Agis comme un spécialiste de la chronobiologie. Aide-moi à analyser mes pics d'énergie et mes moments de fatigue dans une journée type de responsable de magasin. Propose un emploi du temps qui respecte mes cycles naturels pour maximiser concentration et productivité. Appuie-toi sur les moments clés (matin, après-midi, soir) et précise le type de tâches adaptées à chaque phase. Donne-moi aussi 3 conseils pratiques pour mieux respecter mon rythme biologique.",
+  hofstadter: "Agis comme un chef de projet réaliste. J'ai prévu de terminer [tâche/projet magasin] en [X jours/semaines]. Propose-moi un planning ajusté avec marges de sécurité, en tenant compte des imprévus et retards possibles. Inclue une méthode pour estimer correctement le temps à accorder à chaque étape. Présente un calendrier simplifié avec échéances réalistes.",
+  eisenhower: "Agis comme un formateur en gestion des priorités pour une équipe de magasin. J'ai cette liste de tâches : [listez-les]. Classe-les dans une matrice Eisenhower (urgent/important, urgent/non important, important/non urgent, ni urgent ni important), et propose-moi un ordre de traitement clair. Ajoute pour chaque tâche une durée estimée et une recommandation d'action (faire, déléguer, planifier, éliminer). Présente tout sous forme de tableau."
+};
+function loiPromptIA(key){
+  var text = LOI_PROMPTS[key];
+  if(!text) return;
+  openAI();
+  setTimeout(function(){
+    var inp = document.getElementById('aiInput');
+    if(inp){
+      inp.value = text;
+      try{ inp.style.height='auto'; inp.style.height=(inp.scrollHeight)+'px'; }catch(e){}
+      inp.focus();
+    }
+  }, 450);
+}
+
+// ══════════════════════════════════════════════════════════
+// ══ NOTES VOCALES IA — capture + transcription + classement ══
+// ══════════════════════════════════════════════════════════
+var SK_VN = SK+'_voicenotes';
+var VN_CATS = {
+  tache:    {label:'Tâche à faire',        ico:'📋', color:'#3b82f6', page:'taches'},
+  anomalie: {label:'Anomalie / Rupture',   ico:'⚠️', color:'#ef4444', page:'ruptures'},
+  kaizen:   {label:"Idée d'amélioration",  ico:'💡', color:'#a855f7', page:'kaizen'},
+  rh:       {label:'RH / Équipe',          ico:'👥', color:'#06b6d4', page:'adminRH'},
+  reunion:  {label:'Point réunion',        ico:'🤝', color:'#22c55e', page:'reunion'},
+  autre:    {label:'Autre',                ico:'📌', color:'#94a3b8', page:null}
+};
+var _vnRecognition=null, _vnListening=false, _vnPendingText='', _vnPendingCat='autre';
+
+function vnLoad(){ try{ return JSON.parse(localStorage.getItem(SK_VN))||[]; }catch(e){ return []; } }
+function vnSaveArr(arr){ try{ localStorage.setItem(SK_VN, JSON.stringify(arr)); }catch(e){} }
+
+function openVoiceNote(){
+  var m = document.getElementById('voiceNoteModal');
+  if(!m) return;
+  vnResetUI();
+  m.style.display='flex';
+  setTimeout(function(){ m.classList.add('on'); }, 10);
+}
+function closeVoiceNote(){
+  if(_vnListening) vnStopRecording();
+  var m = document.getElementById('voiceNoteModal');
+  if(!m) return;
+  m.classList.remove('on');
+  setTimeout(function(){ m.style.display='none'; }, 250);
+}
+function vnResetUI(){
+  _vnPendingText=''; _vnPendingCat='autre';
+  var tb=document.getElementById('vnTranscriptBox');
+  if(tb){ tb.value=''; tb.setAttribute('readonly','readonly'); }
+  var st=document.getElementById('vnStatus');
+  if(st) st.textContent='Appuyez sur le micro et parlez librement';
+  var mic=document.getElementById('vnMicBtn');
+  if(mic) mic.classList.remove('recording');
+  var sb=document.getElementById('vnStructureBtn'); if(sb){ sb.style.display='none'; sb.disabled=false; }
+  var rb=document.getElementById('vnRawSaveBtn'); if(rb) rb.style.display='none';
+  var rr=document.getElementById('vnResultBox'); if(rr) rr.style.display='none';
+}
+
+function vnToggleMic(){
+  if(_vnListening){ vnStopRecording(); return; }
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var st=document.getElementById('vnStatus');
+  if(!SR){
+    if(st) st.textContent="⚠️ Reconnaissance vocale non disponible sur ce navigateur (utilisez Chrome sur Android). Écrivez votre note ci-dessous à la place.";
+    var tb=document.getElementById('vnTranscriptBox');
+    if(tb) tb.removeAttribute('readonly');
+    var sb=document.getElementById('vnStructureBtn'); if(sb) sb.style.display='block';
+    var rb=document.getElementById('vnRawSaveBtn'); if(rb) rb.style.display='block';
+    return;
+  }
+  try{
+    _vnRecognition = new SR();
+    _vnRecognition.lang = 'fr-FR';
+    _vnRecognition.continuous = true;
+    _vnRecognition.interimResults = true;
+    _vnRecognition.onresult = function(ev){
+      var interim='', fin='';
+      for(var i=0;i<ev.results.length;i++){
+        if(ev.results[i].isFinal) fin += ev.results[i][0].transcript + ' ';
+        else interim += ev.results[i][0].transcript;
+      }
+      var tb=document.getElementById('vnTranscriptBox');
+      if(tb) tb.value = (fin + interim).trim();
+    };
+    _vnRecognition.onerror = function(ev){
+      if(st) st.textContent = '⚠️ Erreur micro : ' + ev.error;
+      vnStopRecording();
+    };
+    _vnRecognition.onend = function(){
+      if(_vnListening){ try{ _vnRecognition.start(); }catch(e){} }
+    };
+    _vnRecognition.start();
+    _vnListening = true;
+    var mic=document.getElementById('vnMicBtn'); if(mic) mic.classList.add('recording');
+    if(st) st.textContent = '🔴 Écoute en cours… appuyez à nouveau pour arrêter';
+    var sb=document.getElementById('vnStructureBtn'); if(sb) sb.style.display='none';
+    var rb=document.getElementById('vnRawSaveBtn'); if(rb) rb.style.display='none';
+  }catch(e){
+    if(st) st.textContent = '⚠️ Impossible de démarrer le micro.';
+  }
+}
+function vnStopRecording(){
+  _vnListening = false;
+  if(_vnRecognition){ try{ _vnRecognition.onend=null; _vnRecognition.stop(); }catch(e){} }
+  var mic=document.getElementById('vnMicBtn'); if(mic) mic.classList.remove('recording');
+  var tb=document.getElementById('vnTranscriptBox');
+  var txt = tb ? tb.value.trim() : '';
+  var st=document.getElementById('vnStatus');
+  if(txt){
+    if(st) st.textContent = '✅ Transcription terminée. Corrigez si besoin puis structurez.';
+    if(tb) tb.removeAttribute('readonly');
+    var sb=document.getElementById('vnStructureBtn'); if(sb) sb.style.display='block';
+    var rb=document.getElementById('vnRawSaveBtn'); if(rb) rb.style.display='block';
+  } else {
+    if(st) st.textContent = 'Appuyez sur le micro et parlez librement';
+  }
+}
+
+async function vnStructureIA(){
+  var tb=document.getElementById('vnTranscriptBox');
+  var raw = tb ? tb.value.trim() : '';
+  if(!raw) return;
+  var st=document.getElementById('vnStatus');
+  if(st) st.textContent = '🧠 Analyse en cours…';
+  var sb=document.getElementById('vnStructureBtn'); if(sb) sb.disabled=true;
+
+  var catKeys = Object.keys(VN_CATS);
+  var catList = catKeys.map(function(k){ return k+' ('+VN_CATS[k].label+')'; }).join(', ');
+  var systemPrompt = "Tu aides un directeur de magasin de grande distribution à structurer une note vocale transcrite automatiquement (elle peut contenir des fautes de transcription à corriger). "
+    +'Réponds UNIQUEMENT avec un objet JSON valide, sans texte autour ni balises markdown, au format exact : {"texte":"note reformulée clairement en français professionnel, concise","categorie":"une seule clé"}. '
+    +"Catégories possibles (utilise exactement une de ces clés) : "+catList+". Choisis la catégorie la plus pertinente selon le contenu.";
+
+  try{
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens: 500,
+        system: systemPrompt,
+        messages:[{role:'user', content: raw}]
+      })
+    });
+    var data = await response.json();
+    var parsed = null;
+    if(data.content && data.content[0] && data.content[0].text){
+      var t = data.content[0].text.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+      try{ parsed = JSON.parse(t); }catch(e){ parsed = null; }
+    }
+    if(parsed && parsed.texte){
+      _vnPendingText = parsed.texte;
+      _vnPendingCat = VN_CATS[parsed.categorie] ? parsed.categorie : 'autre';
+      if(st) st.textContent = 'Vérifiez puis enregistrez';
+    } else {
+      _vnPendingText = raw; _vnPendingCat = 'autre';
+      if(st) st.textContent = "⚠️ L'IA n'a pas pu structurer — note brute conservée, vous pouvez la modifier.";
+    }
+  }catch(e){
+    _vnPendingText = raw; _vnPendingCat = 'autre';
+    if(st) st.textContent = '⚠️ IA indisponible (vérifiez votre connexion) — note brute conservée.';
+  }
+  if(sb) sb.disabled=false;
+  vnShowResult();
+}
+
+function vnShowResult(){
+  var box=document.getElementById('vnResultBox');
+  if(box) box.style.display='block';
+  var rt=document.getElementById('vnResultText');
+  if(rt) rt.value = _vnPendingText;
+  vnRenderCatPicker();
+}
+function vnRenderCatPicker(){
+  var el=document.getElementById('vnCatPicker');
+  if(!el) return;
+  var html='';
+  Object.keys(VN_CATS).forEach(function(k){
+    var c=VN_CATS[k];
+    var on=(k===_vnPendingCat);
+    html += '<span onclick="vnSetCat(\''+k+'\')" style="display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:20px;margin:0 6px 6px 0;cursor:pointer;font-size:11px;font-weight:800;background:'+(on?c.color:'rgba(255,255,255,.06)')+';color:'+(on?'#fff':'var(--t2)')+';border:1px solid '+(on?c.color:'rgba(255,255,255,.15)')+';">'+c.ico+' '+c.label+'</span>';
+  });
+  el.innerHTML = html;
+}
+function vnSetCat(k){ _vnPendingCat = k; vnRenderCatPicker(); }
+
+function vnSaveRaw(){
+  var tb=document.getElementById('vnTranscriptBox');
+  var raw = tb ? tb.value.trim() : '';
+  if(!raw) return;
+  _vnPendingText = raw; _vnPendingCat = 'autre';
+  vnCommitNote();
+}
+function vnSaveNote(){
+  var rt=document.getElementById('vnResultText');
+  if(rt) _vnPendingText = rt.value.trim();
+  vnCommitNote();
+}
+function vnCommitNote(){
+  if(!_vnPendingText) return;
+  var arr = vnLoad();
+  arr.unshift({
+    id: (typeof uid==='function') ? uid() : ('vn'+Date.now()),
+    texte: _vnPendingText,
+    categorie: _vnPendingCat || 'autre',
+    done: false,
+    ts: Date.now(),
+    date: new Date().toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+  });
+  vnSaveArr(arr);
+  if(typeof showT==='function') showT('🎙️','Note enregistrée !');
+  closeVoiceNote();
+  if(document.getElementById('pgVoiceNotes') && document.getElementById('pgVoiceNotes').classList.contains('on')) renderVoiceNotes();
+}
+
+function renderVoiceNotes(){
+  var arr = vnLoad();
+  var el = document.getElementById('vnListContent');
+  if(!el) return;
+  if(!arr.length){
+    el.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--t3);font-size:12px;line-height:1.6;">🎙️ Aucune note vocale pour l\'instant.<br>Appuyez sur le micro flottant, où que vous soyez dans l\'app, pour enregistrer votre première idée.</div>';
+    return;
+  }
+  var html='';
+  arr.forEach(function(n){
+    var c = VN_CATS[n.categorie] || VN_CATS.autre;
+    html += '<div style="background:var(--card);border:1px solid var(--bord);border-radius:14px;padding:14px;margin-bottom:10px;'+(n.done?'opacity:.55;':'')+'">'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
+      +'<span style="font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;background:'+c.color+'22;color:'+c.color+';white-space:nowrap;">'+c.ico+' '+c.label+'</span>'
+      +'<span style="font-size:10px;color:var(--t3);margin-left:auto;white-space:nowrap;">'+n.date+'</span>'
+      +'</div>'
+      +'<div style="font-size:13px;color:var(--t1);line-height:1.5;margin-bottom:10px;'+(n.done?'text-decoration:line-through;':'')+'">'+String(n.texte||'').replace(/</g,'&lt;')+'</div>'
+      +'<div style="display:flex;gap:8px;">'
+      +'<button onclick="vnToggleDone(\''+n.id+'\')" style="flex:1;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10.5px;font-weight:800;padding:9px;border-radius:10px;cursor:pointer;">'+(n.done?'↩️ Rouvrir':'✅ Traité')+'</button>'
+      +(c.page?'<button onclick="goPage(\''+c.page+'\')" style="flex:1;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#3b82f6;font-size:10.5px;font-weight:800;padding:9px;border-radius:10px;cursor:pointer;">→ '+c.label+'</button>':'')
+      +'<button onclick="vnDeleteNote(\''+n.id+'\')" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#ef4444;font-size:12px;font-weight:800;padding:9px 12px;border-radius:10px;cursor:pointer;">🗑️</button>'
+      +'</div></div>';
+  });
+  el.innerHTML = html;
+}
+function vnToggleDone(id){
+  var arr = vnLoad();
+  arr.forEach(function(n){ if(n.id===id) n.done = !n.done; });
+  vnSaveArr(arr); renderVoiceNotes();
+}
+function vnDeleteNote(id){
+  var arr = vnLoad().filter(function(n){ return n.id!==id; });
+  vnSaveArr(arr); renderVoiceNotes();
+}
+
+
 // ════════════════════════════════════════════════════════════
 // ══ LONG PRESS — activer sur tout le body ══
 // ════════════════════════════════════════════════════════════
@@ -41323,7 +42055,45 @@ function ngScrollTo(id) {
   </div>
 </div>
 
-<!-- ══ RAPPORTS PDF MODAL ══ -->
+<!-- ══ NOTE VOCALE MODAL ══ -->
+<style>
+#voiceNoteModal{position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);display:none;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s;}
+#voiceNoteModal.on{opacity:1;}
+#pgVoiceNotes.on{position:fixed;inset:0;z-index:50;background:var(--bg);}
+#vnMicBtn{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#2563eb);border:none;color:#fff;font-size:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 auto;box-shadow:0 6px 24px rgba(124,58,237,.5);transition:transform .15s;}
+#vnMicBtn:active{transform:scale(.92);}
+#vnMicBtn.recording{background:linear-gradient(135deg,#dc2626,#ef4444);animation:vnPulse 1.4s ease-out infinite;}
+@keyframes vnPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55);}70%{box-shadow:0 0 0 22px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}
+</style>
+<div id="voiceNoteModal" onclick="if(event.target===this)closeVoiceNote()">
+  <div style="background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-width:430px;max-height:88vh;overflow-y:auto;animation:slideInBottom .3s cubic-bezier(.34,1.56,.64,1) both;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div style="font-size:17px;font-weight:900;font-family:'Syne',sans-serif;color:#fff;">🎙️ Note Vocale Rapide</div>
+      <div onclick="closeVoiceNote()" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:18px;">×</div>
+    </div>
+    <div style="font-size:10px;color:var(--t2);margin-bottom:18px;">Dites votre idée à voix haute, l'IA la reformule et la classe pour vous</div>
+
+    <button id="vnMicBtn" onclick="vnToggleMic()">🎤</button>
+    <div id="vnStatus" style="text-align:center;font-size:12px;color:var(--t2);margin:14px 0 16px;line-height:1.5;">Appuyez sur le micro et parlez librement</div>
+
+    <textarea id="vnTranscriptBox" readonly placeholder="La transcription apparaîtra ici…" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;color:var(--t1);font-size:13px;font-family:inherit;line-height:1.5;resize:none;min-height:70px;margin-bottom:10px;"></textarea>
+
+    <div style="display:flex;gap:8px;margin-bottom:14px;">
+      <button id="vnStructureBtn" onclick="vnStructureIA()" style="display:none;flex:1;background:linear-gradient(135deg,#7c3aed,#2563eb);border:none;color:#fff;font-size:12.5px;font-weight:800;padding:12px;border-radius:12px;cursor:pointer;">🧠 Structurer avec l'IA</button>
+      <button id="vnRawSaveBtn" onclick="vnSaveRaw()" style="display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--t2);font-size:12px;font-weight:700;padding:12px 14px;border-radius:12px;cursor:pointer;">💾 Direct</button>
+    </div>
+
+    <div id="vnResultBox" style="display:none;">
+      <div style="font-size:10px;font-weight:800;color:#a78bfa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">✨ Note structurée</div>
+      <textarea id="vnResultText" style="width:100%;box-sizing:border-box;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:12px;color:var(--t1);font-size:13px;font-family:inherit;line-height:1.5;resize:none;min-height:60px;margin-bottom:10px;"></textarea>
+      <div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Catégorie</div>
+      <div id="vnCatPicker" style="margin-bottom:16px;"></div>
+      <button onclick="vnSaveNote()" style="width:100%;background:linear-gradient(135deg,#16a34a,#22c55e);border:none;color:#fff;font-size:13px;font-weight:900;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer la note</button>
+    </div>
+  </div>
+</div>
+
+
 <div id="rapportsPDFModal" style="display:none;position:fixed;inset:0;z-index:850;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;">
   <div style="background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:24px 24px 0 0;padding:20px 18px 36px;width:100%;max-width:430px;animation:slideInBottom .3s cubic-bezier(.34,1.56,.64,1) both;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
@@ -41538,6 +42308,26 @@ function logSync(ss, mag, ts, data) {
   <!-- Sections -->
   <div class="scroll" id="ngContent" style="flex:1;padding:0 0 90px;">
     <div style="text-align:center;padding:30px;color:var(--t3);font-size:12px;">Chargement…</div>
+  </div>
+</div>
+
+<!-- ══ NOTES VOCALES IA ══ -->
+<div class="pg" id="pgVoiceNotes">
+  <div class="pg-topbar" style="display:flex;align-items:center;gap:10px;padding:14px 18px 12px;flex-shrink:0;background:linear-gradient(180deg,rgba(7,8,15,.92),rgba(7,8,15,.75));backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);">
+    <div onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;min-width:50px;">‹ Accueil</div>
+    <div style="flex:1;text-align:center;font-size:15px;font-weight:900;font-family:'Syne',sans-serif;color:var(--t1);">🎙️ Notes Vocales IA</div>
+    <div style="min-width:50px;"></div>
+  </div>
+  <div class="scroll" style="flex:1;padding:14px 16px 90px;">
+    <div onclick="openVoiceNote()" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#3730a3,#6d28d9);border:1px solid rgba(167,139,250,.4);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;">
+      <div style="font-size:26px;">🎤</div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:900;color:#fff;">Enregistrer une nouvelle idée</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Parlez, l'IA structure et classe pour vous</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+    <div id="vnListContent"></div>
   </div>
 </div>
 
