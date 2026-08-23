@@ -10679,26 +10679,33 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
 
     <!-- Formulaire nouveau plan -->
     <div id="paForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(167,139,250,.3);">
-      <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:10px;">📋 Nouveau Plan d'Action</div>
+      <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:2px;">📋 Nouveau Plan d'Action</div>
+      <div style="font-size:9.5px;color:var(--t2);margin-bottom:10px;">Étape 1/4 · Décrivez d'abord le problème</div>
       <div style="margin-bottom:8px;">
         <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre du plan *</label>
         <input id="paTitre" class="fi" placeholder="Ex: Révision procédures sondage DI..." style="width:100%;box-sizing:border-box;"/>
       </div>
       <div style="margin-bottom:8px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Origine / Constat</label>
-        <input id="paOrigine" class="fi" placeholder="Ex: Résultat DI non satisfaisant, flop catégories..." style="width:100%;box-sizing:border-box;"/>
+        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">🔴 Le Problème (constat) *</label>
+        <textarea id="paProbDesc" class="fi" rows="3" placeholder="Ex: Résultat DI non satisfaisant sur les flop catégories..." style="width:100%;box-sizing:border-box;resize:vertical;font-family:'IBM Plex Sans';"></textarea>
       </div>
-      <div style="margin-bottom:8px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Indicateur de suivi</label>
-        <input id="paIndicateur" class="fi" placeholder="Ex: Taux DI hebdomadaire par catégorie..." style="width:100%;box-sizing:border-box;"/>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Date de contrôle prévue</label>
-        <input id="paDateControle" type="date" class="fi" style="width:100%;box-sizing:border-box;color-scheme:dark;"/>
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Priorité</label>
+          <select id="paPriorite" class="fi" style="width:100%;box-sizing:border-box;">
+            <option value="basse">🟢 Basse</option>
+            <option value="moyenne" selected>🟠 Moyenne</option>
+            <option value="haute">🔴 Haute</option>
+          </select>
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Date d'observation</label>
+          <input id="paProbDate" type="date" class="fi" style="width:100%;box-sizing:border-box;"/>
+        </div>
       </div>
       <div style="display:flex;gap:8px;">
         <button onclick="paToggleForm()" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:13px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">Annuler</button>
-        <button onclick="paSavePlan()" style="flex:2;background:#7c3aed;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Créer le plan</button>
+        <button onclick="paSavePlan()" style="flex:2;background:#7c3aed;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">💾 Créer et continuer →</button>
       </div>
     </div>
 
@@ -18764,11 +18771,14 @@ function saveExc(d){localStorage.setItem(SKEQ,JSON.stringify(d));}
 // ══════════ PLANS D'ACTION ══════════
 var _paFilter='all';
 var _paExpanded={};
+var _paViewStep={};
 function paToggleForm(){
   var f=document.getElementById('paForm');if(!f)return;
   var s=f.style.display!=='none';f.style.display=s?'none':'block';
   if(!s){
-    ['paTitre','paOrigine','paIndicateur','paDateControle'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    ['paTitre','paProbDesc'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    var pr=document.getElementById('paPriorite');if(pr)pr.value='moyenne';
+    var pd=document.getElementById('paProbDate');if(pd)pd.value=tstr();
     var sc=f.closest('.scroll')||f.parentElement;if(sc)sc.scrollTo({top:0,behavior:'smooth'});
     setTimeout(function(){var inp=document.getElementById('paTitre');if(inp)inp.focus();},300);
   }
@@ -18776,13 +18786,22 @@ function paToggleForm(){
 function paSavePlan(){
   var titre=(document.getElementById('paTitre')||{value:''}).value.trim();
   if(!titre){showT('⚠️','Titre du plan requis');return;}
-  var origine=(document.getElementById('paOrigine')||{value:''}).value.trim();
-  var indicateur=(document.getElementById('paIndicateur')||{value:''}).value.trim();
-  var dateControle=(document.getElementById('paDateControle')||{value:''}).value;
+  var desc=(document.getElementById('paProbDesc')||{value:''}).value.trim();
+  if(!desc){showT('⚠️','Décrivez le problème');return;}
+  var priorite=(document.getElementById('paPriorite')||{value:'moyenne'}).value;
+  var probDate=(document.getElementById('paProbDate')||{value:''}).value||tstr();
   var d=loadExc();if(!d.planActions)d.planActions=[];
   var id=uid();
-  d.planActions.unshift({id:id,titre:titre,origine:origine,indicateur:indicateur,dateControle:dateControle,createdAt:tstr(),items:[]});
-  saveExc(d);paToggleForm();_paExpanded[id]=true;renderPlanActions();showT('✅','Plan d\'action créé');
+  d.planActions.unshift({
+    id:id,version:'v2',titre:titre,priorite:priorite,
+    probleme:{description:desc,date:probDate},
+    step:1,items:[],indicateur:'',dateControle:'',
+    resultats:{positifs:'',negatifs:'',avant:'',apres:''},
+    solution:{texte:'',resolu:false,preventif:'',lecon:''},
+    termine:false,termineDate:'',
+    createdAt:tstr()
+  });
+  saveExc(d);paToggleForm();_paExpanded[id]=true;_paViewStep[id]=1;renderPlanActions();showT('✅','Plan créé · Étape 1/4');
 }
 function paDelPlan(id){
   showConfirm('🗑️ Supprimer','Supprimer ce plan d\'action et toutes ses actions ?',function(){
@@ -18790,7 +18809,61 @@ function paDelPlan(id){
     showT('🗑️','Plan supprimé');
   });
 }
-function paToggleExpand(id){_paExpanded[id]=!_paExpanded[id];renderPlanActions();}
+function paToggleExpand(id){
+  _paExpanded[id]=!_paExpanded[id];
+  if(_paExpanded[id]&&!_paViewStep[id]){
+    var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===id;});
+    _paViewStep[id]=p?(p.step||1):1;
+  }
+  renderPlanActions();
+}
+function paGoStep(planId,step){
+  var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===planId;});if(!p)return;
+  if(step>(p.step||1))return; // étape non atteinte encore — navigation bloquée
+  _paViewStep[planId]=step;renderPlanActions();
+}
+function paNextStep(planId){
+  var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===planId;});if(!p)return;
+  var cur=_paViewStep[planId]||p.step||1;
+  if(cur===1){
+    var desc=(document.getElementById('paProbDescV_'+planId)||{value:''}).value.trim();
+    if(!desc){showT('⚠️','Décrivez le problème');return;}
+    var prio=(document.getElementById('paPrioriteV_'+planId)||{value:p.priorite}).value;
+    var pdate=(document.getElementById('paProbDateV_'+planId)||{value:p.probleme.date}).value;
+    p.probleme.description=desc;p.priorite=prio;p.probleme.date=pdate||p.probleme.date;
+    p.step=Math.max(p.step,2);_paViewStep[planId]=2;
+  }else if(cur===2){
+    if(!(p.items&&p.items.length)){showT('⚠️','Ajoutez au moins une action');return;}
+    var indic=(document.getElementById('paIndicV_'+planId)||{value:p.indicateur}).value.trim();
+    var dctrl=(document.getElementById('paDCtrlV_'+planId)||{value:p.dateControle}).value;
+    p.indicateur=indic;p.dateControle=dctrl;
+    p.step=Math.max(p.step,3);_paViewStep[planId]=3;
+  }else if(cur===3){
+    var pos=(document.getElementById('paResPosV_'+planId)||{value:''}).value.trim();
+    var neg=(document.getElementById('paResNegV_'+planId)||{value:''}).value.trim();
+    if(!pos&&!neg){showT('⚠️','Renseignez au moins un résultat');return;}
+    var av=(document.getElementById('paResAvantV_'+planId)||{value:''}).value.trim();
+    var ap=(document.getElementById('paResApresV_'+planId)||{value:''}).value.trim();
+    p.resultats={positifs:pos,negatifs:neg,avant:av,apres:ap};
+    p.step=Math.max(p.step,4);_paViewStep[planId]=4;
+  }
+  saveExc(d);renderPlanActions();
+}
+function paFinishPlan(planId){
+  var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===planId;});if(!p)return;
+  var texte=(document.getElementById('paSolTexteV_'+planId)||{value:''}).value.trim();
+  if(!texte){showT('⚠️','Décrivez la solution retenue');return;}
+  var resolu=!!(document.getElementById('paSolResoluV_'+planId)||{}).checked;
+  var prev=(document.getElementById('paSolPrevV_'+planId)||{value:''}).value.trim();
+  var lec=(document.getElementById('paSolLeconV_'+planId)||{value:''}).value.trim();
+  p.solution={texte:texte,resolu:resolu,preventif:prev,lecon:lec};
+  p.termine=true;p.termineDate=tstr();
+  saveExc(d);renderPlanActions();showT('🎉','Plan clôturé avec succès');
+}
+function paReopenPlan(planId){
+  var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===planId;});if(!p)return;
+  p.termine=false;saveExc(d);renderPlanActions();showT('↩️','Plan rouvert');
+}
 function paToggleItemForm(planId){
   var f=document.getElementById('paItemForm_'+planId);if(!f)return;
   var s=f.style.display!=='none';f.style.display=s?'none':'block';
@@ -18821,6 +18894,13 @@ function paDelItem(planId,itemId){
   saveExc(d);renderPlanActions();
 }
 function paPlanStatus(plan){
+  if(plan.version==='v2'){
+    if(plan.termine)return 'done';
+    var items2=plan.items||[];var today2=tstr();
+    var late2=items2.some(function(i){return i.statut!=='fait'&&i.ech&&i.ech<today2;});
+    if(late2)return 'retard';
+    return 'cours';
+  }
   var items=plan.items||[];
   if(!items.length)return 'cours';
   var today=tstr();
@@ -18839,14 +18919,27 @@ function paFilter(f,btn){
 function paShareOne(id){
   var d=loadExc();var p=(d.planActions||[]).find(function(x){return x.id===id;});if(!p)return;
   var stLbl={todo:'À faire',cours:'En cours',fait:'✅ Fait'};
-  var msg='📋 Plan d\'Action — '+getMagName()+'\n\n'
-    +'📝 '+p.titre+'\n'
-    +(p.origine?'📌 Origine: '+p.origine+'\n':'')
-    +(p.indicateur?'📊 Indicateur: '+p.indicateur+'\n':'')
-    +(p.dateControle?'📅 Contrôle prévu: '+p.dateControle+'\n':'')
-    +'\nActions:\n'
-    +(p.items||[]).map(function(i){return '• '+i.texte+(i.resp?' ('+i.resp+')':'')+(i.ech?' — éch. '+i.ech:'')+' ['+(stLbl[i.statut]||i.statut)+']';}).join('\n')
-    +'\n\n— TaskPro Field';
+  var msg;
+  if(p.version==='v2'){
+    var r=p.resultats||{},s=p.solution||{};
+    msg='📋 Plan d\'Action — '+getMagName()+'\n\n'
+      +'📝 '+p.titre+'\n\n'
+      +'🔴 PROBLÈME:\n'+(p.probleme.description||'')+'\n\n'
+      +'📋 ACTIONS:\n'
+      +(p.items||[]).map(function(i){return '• '+i.texte+(i.resp?' ('+i.resp+')':'')+(i.ech?' — éch. '+i.ech:'')+' ['+(stLbl[i.statut]||i.statut)+']';}).join('\n')
+      +(p.step>=3?('\n\n📊 RÉSULTATS:\n'+(r.positifs?'✅ '+r.positifs+'\n':'')+(r.negatifs?'⚠️ '+r.negatifs:'')):'')
+      +(p.termine?('\n\n✅ SOLUTION:\n'+s.texte+(s.preventif?'\n🛡️ Prévention: '+s.preventif:'')):'')
+      +'\n\n— TaskPro Field';
+  }else{
+    msg='📋 Plan d\'Action — '+getMagName()+'\n\n'
+      +'📝 '+p.titre+'\n'
+      +(p.origine?'📌 Origine: '+p.origine+'\n':'')
+      +(p.indicateur?'📊 Indicateur: '+p.indicateur+'\n':'')
+      +(p.dateControle?'📅 Contrôle prévu: '+p.dateControle+'\n':'')
+      +'\nActions:\n'
+      +(p.items||[]).map(function(i){return '• '+i.texte+(i.resp?' ('+i.resp+')':'')+(i.ech?' — éch. '+i.ech:'')+' ['+(stLbl[i.statut]||i.statut)+']';}).join('\n')
+      +'\n\n— TaskPro Field';
+  }
   shareWA(msg);
 }
 function paUpdateHomeBadge(){
@@ -18872,6 +18965,7 @@ function renderPlanActions(){
   var itemIcons={todo:'○',cours:'◐',fait:'✓'};
   el.innerHTML=list.map(function(x){
     var p=x.p,st=x.st,col=cols[st];
+    if(p.version==='v2')return paRenderV2Card(p,st,col,labels[st]);
     var items=p.items||[];
     var doneCount=items.filter(function(i){return i.statut==='fait';}).length;
     var pct=items.length?Math.round(doneCount/items.length*100):0;
@@ -18908,7 +19002,7 @@ function renderPlanActions(){
         +'<input id="paItemTexte_'+p.id+'" class="fi" placeholder="Nouvelle action..." style="width:100%;box-sizing:border-box;margin-bottom:6px;"/>'
         +'<div style="display:flex;gap:6px;margin-bottom:6px;">'
         +'<input id="paItemResp_'+p.id+'" class="fi" placeholder="Responsable" style="flex:1;box-sizing:border-box;"/>'
-        +'<input id="paItemEch_'+p.id+'" type="date" class="fi" style="flex:1;box-sizing:border-box;color-scheme:dark;"/>'
+        +'<input id="paItemEch_'+p.id+'" type="date" class="fi" style="flex:1;box-sizing:border-box;"/>'
         +'</div>'
         +'<div style="display:flex;gap:6px;">'
         +'<button onclick="paToggleItemForm(\''+p.id+'\')" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">Annuler</button>'
@@ -18924,6 +19018,158 @@ function renderPlanActions(){
       +'</div>';
   }).join('');
 }
+function paRenderV2Card(p,st,col,label){
+  var exp=!!_paExpanded[p.id];
+  var items=p.items||[];
+  var doneCount=items.filter(function(i){return i.statut==='fait';}).length;
+  var pct=items.length?Math.round(doneCount/items.length*100):0;
+  var prioMap={basse:{ic:'🟢',lbl:'Basse'},moyenne:{ic:'🟠',lbl:'Moyenne'},haute:{ic:'🔴',lbl:'Haute'}};
+  var prio=prioMap[p.priorite]||prioMap.moyenne;
+  var cur=_paViewStep[p.id]||p.step||1;
+  var steps=[{n:1,ic:'🔴',lbl:'Problème'},{n:2,ic:'📋',lbl:'Plan'},{n:3,ic:'📊',lbl:'Résultats'},{n:4,ic:'✅',lbl:'Solution'}];
+  var header='<div style="display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;" onclick="paToggleExpand(\''+p.id+'\')">'
+    +'<div style="flex:1;">'
+    +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;">'
+    +'<span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(255,255,255,.06);padding:2px 7px;border-radius:8px;">'+label+'</span>'
+    +'<span style="font-size:9px;color:var(--t2);">'+prio.ic+' '+prio.lbl+'</span>'
+    +'<span style="font-size:9px;color:var(--t2);">· Étape '+(p.termine?4:p.step)+'/4</span>'
+    +'</div>'
+    +'<div style="font-size:14px;font-weight:900;color:var(--t1);">'+escHtml(p.titre)+'</div>'
+    +'<div style="font-size:11px;color:var(--t2);margin-top:2px;">🔴 '+escHtml((p.probleme&&p.probleme.description)||'').slice(0,80)+((p.probleme&&p.probleme.description&&p.probleme.description.length>80)?'…':'')+'</div>'
+    +'<div style="height:5px;background:rgba(255,255,255,.06);border-radius:4px;margin-top:8px;overflow:hidden;"><div style="height:100%;width:'+(p.termine?100:Math.round((p.step-1)/4*100))+'%;background:'+col+';border-radius:4px;"></div></div>'
+    +'</div>'
+    +'<div style="color:var(--t2);font-size:16px;margin-left:8px;">'+(exp?'▾':'▸')+'</div>'
+    +'</div>';
+  if(!exp)return '<div style="background:var(--card);border-radius:14px;padding:14px;border-left:3px solid '+col+';">'+header+'</div>';
+
+  var stepper='<div style="display:flex;gap:4px;margin:12px 0;">'
+    +steps.map(function(s){
+      var reached=s.n<=p.step;var active=s.n===cur;
+      var bg=active?col:(reached?'rgba(255,255,255,.08)':'rgba(255,255,255,.03)');
+      var fg=active?'#fff':(reached?'var(--t1)':'var(--t3)');
+      return '<div onclick="'+(reached?'paGoStep(\''+p.id+'\','+s.n+')':'')+'" style="flex:1;text-align:center;padding:6px 2px;border-radius:8px;background:'+bg+';cursor:'+(reached?'pointer':'default')+';">'
+        +'<div style="font-size:13px;">'+(reached?s.ic:'🔒')+'</div>'
+        +'<div style="font-size:8px;font-weight:700;color:'+fg+';margin-top:1px;">'+s.lbl+'</div>'
+        +'</div>';
+    }).join('')
+    +'</div>';
+
+  var content='';
+  if(cur===1){
+    content='<div>'
+      +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">🔴 Le Problème (constat)</label>'
+      +'<textarea id="paProbDescV_'+p.id+'" class="fi" rows="3" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:8px;">'+escHtml(p.probleme.description)+'</textarea>'
+      +'<div style="display:flex;gap:8px;margin-bottom:12px;">'
+      +'<div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Priorité</label>'
+      +'<select id="paPrioriteV_'+p.id+'" class="fi" style="width:100%;box-sizing:border-box;">'
+      +'<option value="basse"'+(p.priorite==='basse'?' selected':'')+'>🟢 Basse</option>'
+      +'<option value="moyenne"'+(p.priorite==='moyenne'?' selected':'')+'>🟠 Moyenne</option>'
+      +'<option value="haute"'+(p.priorite==='haute'?' selected':'')+'>🔴 Haute</option>'
+      +'</select></div>'
+      +'<div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Date d\'observation</label>'
+      +'<input id="paProbDateV_'+p.id+'" type="date" class="fi" value="'+(p.probleme.date||'')+'" style="width:100%;box-sizing:border-box;"/></div>'
+      +'</div>'
+      +'<button onclick="paNextStep(\''+p.id+'\')" style="width:100%;background:'+col+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">Suivant : Plan d\'Action →</button>'
+      +'</div>';
+  }else if(cur===2){
+    var itemCols={todo:'#64748b',cours:'#f59e0b',fait:'#22c55e'};
+    var itemIcons={todo:'○',cours:'◐',fait:'✓'};
+    content='<div>'
+      +'<div style="display:flex;gap:8px;margin-bottom:10px;">'
+      +'<div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">📊 Indicateur de suivi</label>'
+      +'<input id="paIndicV_'+p.id+'" class="fi" placeholder="Ex: Taux DI hebdomadaire..." value="'+escHtml(p.indicateur||'')+'" style="width:100%;box-sizing:border-box;"/></div>'
+      +'</div>'
+      +'<div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">📅 Date de contrôle prévue</label>'
+      +'<input id="paDCtrlV_'+p.id+'" type="date" class="fi" value="'+(p.dateControle||'')+'" style="width:100%;box-sizing:border-box;"/></div>'
+      +items.map(function(i){
+        var ic=itemCols[i.statut];var lateItem=(i.statut!=='fait'&&i.ech&&i.ech<tstr());
+        return '<div style="display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);">'
+          +'<div onclick="paCycleItem(\''+p.id+'\',\''+i.id+'\')" style="width:20px;height:20px;border-radius:50%;border:2px solid '+ic+';color:'+ic+';font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-top:1px;">'+itemIcons[i.statut]+'</div>'
+          +'<div style="flex:1;">'
+          +'<div style="font-size:12px;color:var(--t1);'+(i.statut==='fait'?'text-decoration:line-through;opacity:.6;':'')+'">'+escHtml(i.texte)+'</div>'
+          +'<div style="font-size:9.5px;color:'+(lateItem?'#ef4444':'var(--t3)')+';margin-top:2px;">'+(i.resp?'👤 '+escHtml(i.resp)+'  ':'')+(i.ech?'📅 '+i.ech+(lateItem?' ⚠️ en retard':''):'')+'</div>'
+          +'</div>'
+          +'<div onclick="paDelItem(\''+p.id+'\',\''+i.id+'\')" style="color:#ef4444;font-size:15px;cursor:pointer;padding:2px 4px;">×</div>'
+          +'</div>';
+      }).join('')
+      +(items.length?'':'<div style="text-align:center;padding:10px;color:var(--t3);font-size:11px;">Aucune action pour le moment</div>')
+      +'<div id="paItemForm_'+p.id+'" style="display:none;margin-top:8px;background:rgba(255,255,255,.03);border-radius:10px;padding:10px;">'
+      +'<input id="paItemTexte_'+p.id+'" class="fi" placeholder="Nouvelle action..." style="width:100%;box-sizing:border-box;margin-bottom:6px;"/>'
+      +'<div style="display:flex;gap:6px;margin-bottom:6px;">'
+      +'<input id="paItemResp_'+p.id+'" class="fi" placeholder="Responsable" style="flex:1;box-sizing:border-box;"/>'
+      +'<input id="paItemEch_'+p.id+'" type="date" class="fi" style="flex:1;box-sizing:border-box;"/>'
+      +'</div>'
+      +'<div style="display:flex;gap:6px;">'
+      +'<button onclick="paToggleItemForm(\''+p.id+'\')" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">Annuler</button>'
+      +'<button onclick="paSaveItem(\''+p.id+'\')" style="flex:2;background:'+col+';border:none;color:#fff;font-size:11px;font-weight:800;padding:7px;border-radius:8px;cursor:pointer;">✓ Ajouter</button>'
+      +'</div></div>'
+      +'<div onclick="paToggleItemForm(\''+p.id+'\')" style="text-align:center;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:#a78bfa;font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;margin-top:8px;">+ Action</div>'
+      +'<div style="display:flex;gap:8px;margin-top:12px;">'
+      +'<button onclick="paGoStep(\''+p.id+'\',1)" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">← Problème</button>'
+      +'<button onclick="paNextStep(\''+p.id+'\')" style="flex:2;background:'+col+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">Suivant : Résultats →</button>'
+      +'</div>'
+      +'</div>';
+  }else if(cur===3){
+    var r=p.resultats||{};
+    content='<div>'
+      +'<label style="font-size:10px;font-weight:700;color:#22c55e;display:block;margin-bottom:4px;">✅ Résultats positifs</label>'
+      +'<textarea id="paResPosV_'+p.id+'" class="fi" rows="2" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:8px;">'+escHtml(r.positifs||'')+'</textarea>'
+      +'<label style="font-size:10px;font-weight:700;color:#ef4444;display:block;margin-bottom:4px;">⚠️ Résultats négatifs / obstacles</label>'
+      +'<textarea id="paResNegV_'+p.id+'" class="fi" rows="2" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:8px;">'+escHtml(r.negatifs||'')+'</textarea>'
+      +'<div style="display:flex;gap:8px;margin-bottom:12px;">'
+      +'<div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Valeur avant</label>'
+      +'<input id="paResAvantV_'+p.id+'" class="fi" placeholder="Ex: 62%" value="'+escHtml(r.avant||'')+'" style="width:100%;box-sizing:border-box;"/></div>'
+      +'<div style="flex:1;"><label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Valeur après</label>'
+      +'<input id="paResApresV_'+p.id+'" class="fi" placeholder="Ex: 89%" value="'+escHtml(r.apres||'')+'" style="width:100%;box-sizing:border-box;"/></div>'
+      +'</div>'
+      +'<div style="display:flex;gap:8px;">'
+      +'<button onclick="paGoStep(\''+p.id+'\',2)" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">← Plan</button>'
+      +'<button onclick="paNextStep(\''+p.id+'\')" style="flex:2;background:'+col+';border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">Suivant : Solution →</button>'
+      +'</div>'
+      +'</div>';
+  }else if(cur===4){
+    if(p.termine){
+      var s=p.solution||{};
+      content='<div>'
+        +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:12px;margin-bottom:10px;">'
+        +'<div style="font-size:12px;font-weight:800;color:#22c55e;margin-bottom:6px;">'+(s.resolu?'✅ Problème résolu':'☑️ Plan clôturé')+' · '+p.termineDate+'</div>'
+        +'<div style="font-size:12px;color:var(--t1);white-space:pre-wrap;">'+escHtml(s.texte)+'</div>'
+        +(s.preventif?'<div style="font-size:11px;color:#38bdf8;margin-top:8px;">🛡️ <b>Prévention:</b> '+escHtml(s.preventif)+'</div>':'')
+        +(s.lecon?'<div style="font-size:11px;color:#fbbf24;margin-top:4px;">💡 <b>Leçon:</b> '+escHtml(s.lecon)+'</div>':'')
+        +'</div>'
+        +'<div style="display:flex;gap:8px;">'
+        +'<button onclick="paGoStep(\''+p.id+'\',3)" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">← Résultats</button>'
+        +'<button onclick="paReopenPlan(\''+p.id+'\')" style="flex:2;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#fbbf24;font-size:12px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">↩️ Rouvrir le plan</button>'
+        +'</div>'
+        +'</div>';
+    }else{
+      var s2=p.solution||{};
+      content='<div>'
+        +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">✅ Solution retenue</label>'
+        +'<textarea id="paSolTexteV_'+p.id+'" class="fi" rows="3" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:8px;">'+escHtml(s2.texte||'')+'</textarea>'
+        +'<label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t2);margin-bottom:8px;cursor:pointer;"><input type="checkbox" id="paSolResoluV_'+p.id+'" '+(s2.resolu?'checked':'')+' style="width:16px;height:16px;"/> Le problème est définitivement résolu</label>'
+        +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">🛡️ Action préventive (éviter la récidive)</label>'
+        +'<textarea id="paSolPrevV_'+p.id+'" class="fi" rows="2" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:8px;">'+escHtml(s2.preventif||'')+'</textarea>'
+        +'<label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">💡 Leçon apprise (optionnel)</label>'
+        +'<textarea id="paSolLeconV_'+p.id+'" class="fi" rows="2" style="width:100%;box-sizing:border-box;resize:vertical;font-family:\'IBM Plex Sans\';margin-bottom:12px;">'+escHtml(s2.lecon||'')+'</textarea>'
+        +'<div style="display:flex;gap:8px;">'
+        +'<button onclick="paGoStep(\''+p.id+'\',3)" style="flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:12px;font-weight:700;padding:10px;border-radius:12px;cursor:pointer;">← Résultats</button>'
+        +'<button onclick="paFinishPlan(\''+p.id+'\')" style="flex:2;background:#22c55e;border:none;color:#fff;font-size:13px;font-weight:800;padding:10px;border-radius:12px;cursor:pointer;">🎉 Terminer le plan</button>'
+        +'</div>'
+        +'</div>';
+    }
+  }
+
+  var footer='<div style="display:flex;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);">'
+    +'<div onclick="paShareOne(\''+p.id+'\')" style="flex:1;text-align:center;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);color:#22c55e;font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">📤 Partager</div>'
+    +'<div onclick="paDelPlan(\''+p.id+'\')" style="flex:1;text-align:center;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;font-size:11px;font-weight:700;padding:7px;border-radius:8px;cursor:pointer;">🗑️ Supprimer</div>'
+    +'</div>';
+
+  return '<div style="background:var(--card);border-radius:14px;padding:14px;border-left:3px solid '+col+';">'
+    +header
+    +'<div style="margin-top:4px;padding-top:4px;">'+stepper+content+footer+'</div>'
+    +'</div>';
+}
 function exportPaPDF(){
   var d=loadExc();var all=d.planActions||[];
   var now=new Date();var MFR=['Janv','Févr','Mars','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'];
@@ -18933,6 +19179,17 @@ function exportPaPDF(){
     +'<style>body{font-family:Arial,sans-serif;max-width:700px;margin:0 auto;padding:20px;}h1{color:#4c1d95;}.card{border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-bottom:14px;}.titre{font-size:15px;font-weight:700;color:#1a1a2e;}.origine{font-size:12px;color:#666;margin-top:2px;}.ind{font-size:12px;color:#0369a1;margin-top:6px;}.ctrl{font-size:12px;color:#c2410c;margin-top:2px;}.item{font-size:12px;padding:6px 0;border-top:1px solid #f1f5f9;}.meta{font-size:11px;color:#666;margin-bottom:16px;}</style>'
     +'</head><body><h1>📋 Plans d\'Action</h1><div class="meta">Généré le '+gen+' · '+getMagName()+' · '+all.length+' plan(s)</div>'
     +all.map(function(p){
+      if(p.version==='v2'){
+        var r=p.resultats||{},s=p.solution||{};
+        return '<div class="card"><div class="titre">'+escHtml(p.titre)+'</div>'
+          +'<div class="origine">🔴 <b>Problème:</b> '+escHtml(p.probleme.description||'')+'</div>'
+          +(p.indicateur?'<div class="ind">📊 Indicateur: '+escHtml(p.indicateur)+'</div>':'')
+          +(p.dateControle?'<div class="ctrl">📅 Contrôle prévu: '+p.dateControle+'</div>':'')
+          +(p.items||[]).map(function(i){return '<div class="item">'+(i.statut==='fait'?'✅':'⬜')+' '+escHtml(i.texte)+(i.resp?' — '+escHtml(i.resp):'')+(i.ech?' — éch. '+i.ech:'')+' ['+stLbl[i.statut]+']</div>';}).join('')
+          +(p.step>=3?('<div class="ind" style="margin-top:8px;">📊 <b>Résultats:</b> '+(r.positifs?'✅ '+escHtml(r.positifs)+' ':'')+(r.negatifs?'⚠️ '+escHtml(r.negatifs):'')+'</div>'):'')
+          +(p.termine?('<div class="ind" style="color:#16a34a;">✅ <b>Solution:</b> '+escHtml(s.texte)+(s.preventif?' — Prévention: '+escHtml(s.preventif):'')+'</div>'):'<div class="ind" style="color:#c2410c;">⏳ Plan en cours (étape '+p.step+'/4)</div>')
+          +'</div>';
+      }
       return '<div class="card"><div class="titre">'+escHtml(p.titre)+'</div>'
         +(p.origine?'<div class="origine">📌 '+escHtml(p.origine)+'</div>':'')
         +(p.indicateur?'<div class="ind">📊 Indicateur: '+escHtml(p.indicateur)+'</div>':'')
