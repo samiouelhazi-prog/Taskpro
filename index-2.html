@@ -2122,6 +2122,15 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div id="mdDlcContent" style="font-size:11px;color:var(--t2);"></div>
       </div>
 
+      <!-- PLANS D'ACTION -->
+      <div id="mdPaBlock" style="background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:14px;padding:13px;margin-bottom:10px;cursor:pointer;" onclick="goPage('planAction');closeMorningDash();">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:9px;font-weight:800;color:#a78bfa;text-transform:uppercase;letter-spacing:.8px;">📋 Plans d'Action</div>
+          <div style="font-size:9px;color:#a78bfa;">Voir tout ›</div>
+        </div>
+        <div id="mdPaContent" style="font-size:11px;color:var(--t2);"></div>
+      </div>
+
       <!-- EQUIPE -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
         <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:14px;padding:12px;text-align:center;">
@@ -10643,6 +10652,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Excellence</div>
     <div class="pg-title" style="font-size:14px;">📋 Plans d'Action</div>
     <div style="display:flex;gap:6px;">
+      <button onclick="goPage('planActionStats')" style="background:#0ea5e9;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;">📊</button>
       <button onclick="exportPaPDF()" style="background:#0033A0;border:none;color:#fff;font-size:13px;width:32px;height:32px;border-radius:50%;cursor:pointer;">📄</button>
       <button onclick="paToggleForm()" style="background:#7c3aed;border:none;color:#fff;font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
     </div>
@@ -10711,6 +10721,67 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
 
     <div id="paList" style="display:flex;flex-direction:column;gap:10px;"></div>
     <div id="paEmpty" style="text-align:center;padding:30px;color:var(--t2);font-size:12px;">📋 Aucun plan d'action · Appuyez sur +</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE STATISTIQUES — PLANS D'ACTION
+══════════════════════════════════════════════ -->
+<div class="pg" id="pgPlanActionStats">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('planAction')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Plans d'Action</div>
+    <div class="pg-title" style="font-size:14px;">📊 Statistiques</div>
+    <div style="width:32px;"></div>
+  </div>
+  <div class="scroll" style="padding:12px 14px 90px;">
+
+    <div id="paStatsEmpty" style="display:none;text-align:center;padding:40px 20px;color:var(--t2);font-size:12px;">📊 Pas encore assez de données.<br>Créez et clôturez des plans pour voir vos statistiques.</div>
+
+    <div id="paStatsContent">
+      <!-- KPI globaux -->
+      <div style="display:flex;gap:7px;margin-bottom:14px;">
+        <div style="flex:1;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:10px 4px;text-align:center;">
+          <div id="psKpiTotal" style="font-size:20px;font-weight:900;color:#a78bfa;font-family:'IBM Plex Mono';">0</div>
+          <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">PLANS CRÉÉS</div>
+        </div>
+        <div style="flex:1;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:10px 4px;text-align:center;">
+          <div id="psKpiTaux" style="font-size:20px;font-weight:900;color:#22c55e;font-family:'IBM Plex Mono';">0%</div>
+          <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">TAUX RÉSOLUTION</div>
+        </div>
+        <div style="flex:1;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);border-radius:12px;padding:10px 4px;text-align:center;">
+          <div id="psKpiDuree" style="font-size:20px;font-weight:900;color:#38bdf8;font-family:'IBM Plex Mono';">-</div>
+          <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">DÉLAI MOYEN</div>
+        </div>
+        <div style="flex:1;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:10px 4px;text-align:center;">
+          <div id="psKpiActions" style="font-size:20px;font-weight:900;color:#f59e0b;font-family:'IBM Plex Mono';">0</div>
+          <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">ACTIONS FAITES</div>
+        </div>
+      </div>
+
+      <!-- Évolution mensuelle -->
+      <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:800;color:var(--t1);margin-bottom:10px;">📈 Plans créés vs clôturés (6 derniers mois)</div>
+        <canvas id="psChartEvol" height="130"></canvas>
+      </div>
+
+      <!-- Répartition priorité -->
+      <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:800;color:var(--t1);margin-bottom:10px;">🎯 Répartition par priorité</div>
+        <canvas id="psChartPrio" height="130"></canvas>
+      </div>
+
+      <!-- Top responsables -->
+      <div style="background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;">
+        <div style="font-size:11px;font-weight:800;color:var(--t1);margin-bottom:10px;">🏆 Top responsables (actions terminées)</div>
+        <div id="psTopResp" style="font-size:12px;"></div>
+      </div>
+
+      <!-- Plans les plus lents -->
+      <div style="background:var(--card);border-radius:14px;padding:14px;">
+        <div style="font-size:11px;font-weight:800;color:var(--t1);margin-bottom:10px;">🐢 Plans les plus longs à résoudre</div>
+        <div id="psSlowest" style="font-size:12px;"></div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- ══ GESTION DU TEMPS ══ -->
@@ -13434,8 +13505,8 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',loistemps:'pgLoisTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales',notesVocales:'pgVoiceNotes',planAction:'pgPlanAction'};
-  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',planAction:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
+  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',loistemps:'pgLoisTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales',notesVocales:'pgVoiceNotes',planAction:'pgPlanAction',planActionStats:'pgPlanActionStats'};
+  const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',planAction:'navHome',planActionStats:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
     if(activePg){
@@ -13449,7 +13520,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','loistemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','planAction','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline','notesVocales'];
+  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','loistemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','planAction','planActionStats','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline','notesVocales'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();setTimeout(renderHomeSummary,100);}
     updateHomeAlerts();
@@ -13474,6 +13545,7 @@ function goPage(p){
   if(p==='notesGlobales')setTimeout(function(){renderNotesGlobales();},100);
   if(p==='notesVocales')setTimeout(function(){renderVoiceNotes();},100);
   if(p==='planAction')setTimeout(function(){renderPlanActions();},80);
+  if(p==='planActionStats')setTimeout(function(){renderPlanActionStats();},80);
   if(p==='excellence')setTimeout(function(){if(typeof paUpdateHomeBadge==='function')paUpdateHomeBadge();},80);
 
   if(p==='reunion')renderReunions();
@@ -14295,6 +14367,32 @@ function renderMorningDash(){
         });
         if(dlcCritiques.length>5) html+='<div style="font-size:10px;color:var(--t2);margin-top:4px;">+ '+(dlcCritiques.length-5)+' autres...</div>';
         el('mdDlcContent').innerHTML=html;
+      }
+    }
+  } catch(e){}
+
+  // ── Plans d'Action ──
+  try {
+    var pdExc=loadExc(); var allPlans=pdExc.planActions||[];
+    var withSt=allPlans.map(function(p){return {p:p,st:paPlanStatus(p)};});
+    var lateP=withSt.filter(function(x){return x.st==='retard';});
+    var coursP=withSt.filter(function(x){return x.st==='cours';});
+    if(el('mdPaContent')){
+      if(!allPlans.length){
+        el('mdPaContent').innerHTML='<span style="color:var(--t2);">Aucun plan en cours — <span style="color:#a78bfa;text-decoration:underline;">Créer un plan</span></span>';
+      } else if(!lateP.length){
+        el('mdPaContent').innerHTML='<span style="color:#22c55e;font-weight:700;">✅ Aucun plan en retard</span>'
+          +(coursP.length?'<div style="font-size:10px;color:var(--t2);margin-top:4px;">🔵 '+coursP.length+' en cours</div>':'');
+      } else {
+        var htmlPa='<div style="display:flex;gap:6px;margin-bottom:6px;">'
+          +'<span style="color:#ef4444;font-weight:800;">⚠️ '+lateP.length+' en retard</span>'
+          +(coursP.length?'<span style="color:var(--t2);">· '+coursP.length+' en cours</span>':'')
+          +'</div>';
+        lateP.slice(0,3).forEach(function(x){
+          htmlPa+='<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05);color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">• '+escHtml(x.p.titre)+'</div>';
+        });
+        if(lateP.length>3) htmlPa+='<div style="font-size:10px;color:var(--t2);margin-top:4px;">+ '+(lateP.length-3)+' autres...</div>';
+        el('mdPaContent').innerHTML=htmlPa;
       }
     }
   } catch(e){}
@@ -19199,6 +19297,101 @@ function exportPaPDF(){
     }).join('')
     +'</body></html>';
   _dlPDF(html,'plans_action_'+tstr()+'.html');
+}
+
+// ══════════ STATISTIQUES PLANS D'ACTION ══════════
+var _psChartEvolInst=null,_psChartPrioInst=null;
+function renderPlanActionStats(){
+  var d=loadExc(); var all=d.planActions||[];
+  var empty=document.getElementById('paStatsEmpty'); var content=document.getElementById('paStatsContent');
+  if(!all.length){
+    if(empty)empty.style.display='block'; if(content)content.style.display='none';
+    return;
+  }
+  if(empty)empty.style.display='none'; if(content)content.style.display='block';
+
+  var totalPlans=all.length;
+  var doneAll=all.filter(function(p){return paPlanStatus(p)==='done';}).length;
+  var taux=totalPlans?Math.round(doneAll/totalPlans*100):0;
+
+  var durations=[];
+  all.forEach(function(p){
+    if(p.version==='v2'&&p.termine&&p.createdAt&&p.termineDate){
+      var d1=new Date(p.createdAt),d2=new Date(p.termineDate);
+      var days=Math.round((d2-d1)/86400000);
+      if(days>=0)durations.push({p:p,days:days});
+    }
+  });
+  var avgDelay=durations.length?Math.round(durations.reduce(function(s,x){return s+x.days;},0)/durations.length):null;
+
+  var actionsFaites=0;
+  all.forEach(function(p){(p.items||[]).forEach(function(i){if(i.statut==='fait')actionsFaites++;});});
+
+  var elT=document.getElementById('psKpiTotal');if(elT)elT.textContent=totalPlans;
+  var elTx=document.getElementById('psKpiTaux');if(elTx)elTx.textContent=taux+'%';
+  var elD=document.getElementById('psKpiDuree');if(elD)elD.textContent=avgDelay!==null?(avgDelay+'j'):'-';
+  var elA=document.getElementById('psKpiActions');if(elA)elA.textContent=actionsFaites;
+
+  // Évolution mensuelle (6 derniers mois)
+  var MFR=['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
+  var now=new Date();var months=[];
+  for(var i=5;i>=0;i--){
+    var dt=new Date(now.getFullYear(),now.getMonth()-i,1);
+    months.push({key:dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0'),label:MFR[dt.getMonth()]});
+  }
+  var createdCounts=months.map(function(m){return all.filter(function(p){return(p.createdAt||'').slice(0,7)===m.key;}).length;});
+  var closedCounts=months.map(function(m){return all.filter(function(p){return p.version==='v2'&&p.termine&&(p.termineDate||'').slice(0,7)===m.key;}).length;});
+  if(document.getElementById('psChartEvol')){
+    _psChartEvolInst=_mkChart('psChartEvol',_psChartEvolInst,months.map(function(m){return m.label;}),[
+      {label:'Créés',data:createdCounts,backgroundColor:'rgba(167,139,250,.7)',borderRadius:4},
+      {label:'Clôturés',data:closedCounts,backgroundColor:'rgba(34,197,94,.7)',borderRadius:4}
+    ],'bar');
+  }
+
+  // Répartition priorité (plans v2 uniquement)
+  var v2Plans=all.filter(function(p){return p.version==='v2';});
+  var prioCounts={basse:0,moyenne:0,haute:0};
+  v2Plans.forEach(function(p){if(prioCounts[p.priorite]!==undefined)prioCounts[p.priorite]++;});
+  if(document.getElementById('psChartPrio')){
+    _psChartPrioInst=_mkChart('psChartPrio',_psChartPrioInst,['🟢 Basse','🟠 Moyenne','🔴 Haute'],[
+      {label:'Plans',data:[prioCounts.basse,prioCounts.moyenne,prioCounts.haute],backgroundColor:['rgba(34,197,94,.7)','rgba(245,158,11,.7)','rgba(239,68,68,.7)'],borderRadius:4}
+    ],'bar');
+  }
+
+  // Top responsables (actions terminées)
+  var respMap={};
+  all.forEach(function(p){(p.items||[]).forEach(function(i){if(i.statut==='fait'&&i.resp){var key=i.resp.trim();if(key)respMap[key]=(respMap[key]||0)+1;}});});
+  var respArr=Object.keys(respMap).map(function(k){return{name:k,count:respMap[k]};}).sort(function(a,b){return b.count-a.count;}).slice(0,5);
+  var maxCount=respArr.length?respArr[0].count:1;
+  var elResp=document.getElementById('psTopResp');
+  if(elResp){
+    if(!respArr.length){elResp.innerHTML='<div style="color:var(--t2);text-align:center;padding:10px;">Aucune action terminée avec responsable renseigné</div>';}
+    else{
+      elResp.innerHTML=respArr.map(function(r,idx){
+        var pct=Math.round(r.count/maxCount*100);
+        var medal=idx===0?'🥇':idx===1?'🥈':idx===2?'🥉':'▪️';
+        return '<div style="margin-bottom:8px;">'
+          +'<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;"><span>'+medal+' '+escHtml(r.name)+'</span><span style="font-weight:800;color:#a78bfa;">'+r.count+'</span></div>'
+          +'<div style="height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:#a78bfa;border-radius:4px;"></div></div>'
+          +'</div>';
+      }).join('');
+    }
+  }
+
+  // Plans les plus longs à résoudre
+  var slowest=durations.slice().sort(function(a,b){return b.days-a.days;}).slice(0,5);
+  var elSlow=document.getElementById('psSlowest');
+  if(elSlow){
+    if(!slowest.length){elSlow.innerHTML='<div style="color:var(--t2);text-align:center;padding:10px;">Aucun plan clôturé pour le moment</div>';}
+    else{
+      elSlow.innerHTML=slowest.map(function(x){
+        return '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05);">'
+          +'<span style="font-size:11.5px;color:var(--t1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%;">'+escHtml(x.p.titre)+'</span>'
+          +'<span style="font-size:11px;font-weight:800;color:'+(x.days>14?'#ef4444':x.days>7?'#f59e0b':'#22c55e')+';">'+x.days+'j</span>'
+          +'</div>';
+      }).join('');
+    }
+  }
 }
 
 // ── PARETO 80/20 ──
@@ -40606,11 +40799,38 @@ function renderVoiceNotes(){
       +'<div style="font-size:13px;color:var(--t1);line-height:1.5;margin-bottom:10px;'+(n.done?'text-decoration:line-through;':'')+'">'+String(n.texte||'').replace(/</g,'&lt;')+'</div>'
       +'<div style="display:flex;gap:8px;">'
       +'<button onclick="vnToggleDone(\''+n.id+'\')" style="flex:1;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:10.5px;font-weight:800;padding:9px;border-radius:10px;cursor:pointer;">'+(n.done?'↩️ Rouvrir':'✅ Traité')+'</button>'
+      +((n.categorie==='anomalie'||n.categorie==='kaizen')&&!n.convertedToPlan?'<button onclick="vnConvertToPlan(\''+n.id+'\')" style="flex:1;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3);color:#a78bfa;font-size:10.5px;font-weight:800;padding:9px;border-radius:10px;cursor:pointer;">🔄 Plan d\'Action</button>':'')
+      +(n.convertedToPlan?'<button onclick="goPage(\'planAction\')" style="flex:1;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);color:#a78bfa;font-size:10.5px;font-weight:700;padding:9px;border-radius:10px;cursor:pointer;">📋 Voir le plan</button>':'')
       +(c.page?'<button onclick="goPage(\''+c.page+'\')" style="flex:1;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#3b82f6;font-size:10.5px;font-weight:800;padding:9px;border-radius:10px;cursor:pointer;">→ '+c.label+'</button>':'')
       +'<button onclick="vnDeleteNote(\''+n.id+'\')" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#ef4444;font-size:12px;font-weight:800;padding:9px 12px;border-radius:10px;cursor:pointer;">🗑️</button>'
       +'</div></div>';
   });
   el.innerHTML = html;
+}
+function vnConvertToPlan(id){
+  var arr = vnLoad();
+  var n = arr.find(function(x){return x.id===id;});
+  if(!n) return;
+  var d = loadExc(); if(!d.planActions) d.planActions=[];
+  var titre = String(n.texte||'').trim().slice(0,70) + (n.texte&&n.texte.length>70?'…':'');
+  var priorite = n.categorie==='anomalie' ? 'haute' : 'moyenne';
+  var planId = uid();
+  d.planActions.unshift({
+    id:planId,version:'v2',titre:titre||'Plan sans titre',priorite:priorite,
+    probleme:{description:n.texte||'',date:tstr()},
+    step:1,items:[],indicateur:'',dateControle:'',
+    resultats:{positifs:'',negatifs:'',avant:'',apres:''},
+    solution:{texte:'',resolu:false,preventif:'',lecon:''},
+    termine:false,termineDate:'',
+    createdAt:tstr(),origineNoteVocale:true
+  });
+  saveExc(d);
+  n.convertedToPlan = true; n.linkedPlanId = planId;
+  vnSaveArr(arr);
+  renderVoiceNotes();
+  showT('🔄','Note transformée en Plan d\'Action');
+  _paExpanded[planId]=true; _paViewStep[planId]=1;
+  setTimeout(function(){ goPage('planAction'); },400);
 }
 function vnToggleDone(id){
   var arr = vnLoad();
