@@ -31259,7 +31259,7 @@ function initDecisions(){_decFilter='today';renderDecisions();}
 
 <script>
 var _GS=[
-  {ico:'🎙️',bg:'#4c1d95',n:'Notes Vocales IA',d:'Enregistrer une idée à voix haute, classée par IA',p:'notesVocales',t:'voix vocal note idee ia enregistrer parler micro'},
+  {ico:'🎙️',bg:'#4c1d95',n:'Notes Vocales IA',d:'Voix ou photo de notes papier, classées par IA',p:'notesVocales',t:'voix vocal note idee ia enregistrer parler micro photo photographier papier manuscrit ocr tournee carnet'},
   {ico:'⚖️',bg:'#3730a3',n:'6 Lois de Gestion du Temps',d:'Murphy, Carlson, Fraisse… + prompts IA',p:'loistemps',t:'lois temps murphy carlson fraisse fliess hofstadter eisenhower'},
   {ico:'📒',bg:'#312e81',n:'Catalogue',d:'Ruptures par rayon · Erratums · Suivi catalogue',p:'catalogue',t:'catalogue rupture erratum rayon'},
   {ico:'📋',bg:'#1e3a8a',n:'Tâches Commerciales',d:'Tâches urgentes, quotidiennes, hebdomadaires',p:'commercial',t:'tache commercial quotidien priorite urgent'},
@@ -40592,7 +40592,20 @@ var VN_CATS = {
   reunion:  {label:'Point réunion',        ico:'🤝', color:'#22c55e', page:'reunion'},
   autre:    {label:'Autre',                ico:'📌', color:'#94a3b8', page:null}
 };
-var _vnRecognition=null, _vnListening=false, _vnPendingText='', _vnPendingCat='autre';
+var _vnRecognition=null, _vnListening=false, _vnPendingText='', _vnPendingCat='autre', _vnFinalAccum='', _vnPhotoPending=[];
+function vnDedupeTranscript(str){
+  if(!str) return str;
+  var words = str.split(/\s+/);
+  var out = [];
+  for(var i=0;i<words.length;i++){
+    var w = words[i];
+    var wNorm = w.toLowerCase().replace(/[.,!?;:'’]/g,'');
+    var prevNorm = out.length ? out[out.length-1].toLowerCase().replace(/[.,!?;:'’]/g,'') : null;
+    if(wNorm && wNorm === prevNorm) continue;
+    out.push(w);
+  }
+  return out.join(' ');
+}
 
 function vnLoad(){ try{ return JSON.parse(localStorage.getItem(SK_VN))||[]; }catch(e){ return []; } }
 function vnSaveArr(arr){ try{ localStorage.setItem(SK_VN, JSON.stringify(arr)); }catch(e){} }
@@ -40613,6 +40626,9 @@ function closeVoiceNote(){
 }
 function vnResetUI(){
   _vnPendingText=''; _vnPendingCat='autre';
+  _vnPhotoPending=[];
+  var pr=document.getElementById('vnPhotoReview'); if(pr){ pr.style.display='none'; pr.innerHTML=''; }
+  var ps=document.getElementById('vnPhotoStatus'); if(ps){ ps.style.display='none'; ps.textContent=''; }
   var tb=document.getElementById('vnTranscriptBox');
   if(tb){ tb.value=''; tb.setAttribute('readonly','readonly'); }
   var st=document.getElementById('vnStatus');
@@ -40637,18 +40653,21 @@ function vnToggleMic(){
     return;
   }
   try{
+    var tbInit=document.getElementById('vnTranscriptBox');
+    _vnFinalAccum = tbInit && tbInit.value.trim() ? tbInit.value.trim() + ' ' : '';
     _vnRecognition = new SR();
     _vnRecognition.lang = 'fr-FR';
     _vnRecognition.continuous = true;
     _vnRecognition.interimResults = true;
     _vnRecognition.onresult = function(ev){
       var interim='', fin='';
-      for(var i=0;i<ev.results.length;i++){
+      for(var i=ev.resultIndex;i<ev.results.length;i++){
         if(ev.results[i].isFinal) fin += ev.results[i][0].transcript + ' ';
-        else interim += ev.results[i][0].transcript;
+        else interim += ev.results[i][0].transcript + ' ';
       }
+      if(fin) _vnFinalAccum += fin;
       var tb=document.getElementById('vnTranscriptBox');
-      if(tb) tb.value = (fin + interim).trim();
+      if(tb) tb.value = vnDedupeTranscript((_vnFinalAccum + interim).trim());
     };
     _vnRecognition.onerror = function(ev){
       if(st) st.textContent = '⚠️ Erreur micro : ' + ev.error;
@@ -40776,6 +40795,144 @@ function vnCommitNote(){
   });
   vnSaveArr(arr);
   if(typeof showT==='function') showT('🎙️','Note enregistrée !');
+  closeVoiceNote();
+  if(document.getElementById('pgVoiceNotes') && document.getElementById('pgVoiceNotes').classList.contains('on')) renderVoiceNotes();
+}
+
+// ══════════ PHOTO DE NOTES MANUSCRITES ══════════
+function vnHandlePhotoFile(input){
+  var file = input.files && input.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var dataUrl = e.target.result;
+    var match = /^data:(.+);base64,(.*)$/.exec(dataUrl||'');
+    if(!match) return;
+    vnAnalyzePhoto(match[2], match[1]);
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+async function vnAnalyzePhoto(base64Data, mediaType){
+  var ps = document.getElementById('vnPhotoStatus');
+  if(ps){ ps.style.display='block'; ps.textContent = '🔍 Lecture des notes en cours…'; }
+  var rev = document.getElementById('vnPhotoReview'); if(rev){ rev.style.display='none'; rev.innerHTML=''; }
+  var pbtn = document.getElementById('vnPhotoBtn'); if(pbtn) pbtn.disabled = true;
+
+  var catKeys = Object.keys(VN_CATS);
+  var catList = catKeys.map(function(k){ return k+' ('+VN_CATS[k].label+')'; }).join(', ');
+  var systemPrompt = "Tu aides un directeur de magasin de grande distribution à exploiter une photo de notes manuscrites prises sur un carnet pendant une tournée en magasin. "
+    +"L'écriture peut être rapide, peu soignée ou partiellement illisible : fais de ton mieux pour déchiffrer, en t'aidant du contexte métier (retail, rayon, DLC, équipe, rupture, etc.). "
+    +"Identifie CHAQUE note ou idée distincte sur la photo (même sans puces ni numéros — une nouvelle ligne ou un changement de sujet marque souvent une nouvelle note), reformule-la clairement en français professionnel et concis, et classe-la. "
+    +'Réponds UNIQUEMENT avec un tableau JSON valide, sans texte autour ni balises markdown, au format exact : [{"texte":"note reformulée","categorie":"une des clés"}, ...]. '
+    +"Catégories possibles (utilise exactement une de ces clés) : "+catList+". "
+    +"Si la photo ne contient aucune note exploitable, réponds avec un tableau vide [].";
+
+  try{
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens: 2000,
+        system: systemPrompt,
+        messages:[{role:'user', content:[
+          {type:'image', source:{type:'base64', media_type: mediaType, data: base64Data}},
+          {type:'text', text:'Voici la photo de mes notes manuscrites de tournée.'}
+        ]}]
+      })
+    });
+    var data = await response.json();
+    var parsed = null;
+    if(data.content && data.content[0] && data.content[0].text){
+      var t = data.content[0].text.trim().replace(/^```json/i,'').replace(/^```/,'').replace(/```$/,'').trim();
+      try{ parsed = JSON.parse(t); }catch(e){ parsed = null; }
+    }
+    if(Array.isArray(parsed) && parsed.length){
+      _vnPhotoPending = parsed.map(function(p){ return { texte: (p && p.texte) || '', categorie: (p && VN_CATS[p.categorie]) ? p.categorie : 'autre' }; }).filter(function(p){ return p.texte.trim(); });
+      if(_vnPhotoPending.length){
+        if(ps) ps.textContent = '✅ '+_vnPhotoPending.length+' note(s) détectée(s) — vérifiez avant d\'enregistrer';
+        vnRenderPhotoReview();
+      } else {
+        if(ps) ps.textContent = "⚠️ Aucune note lisible détectée sur cette photo. Réessayez avec plus de lumière.";
+      }
+    } else if(Array.isArray(parsed)){
+      _vnPhotoPending = [];
+      if(ps) ps.textContent = "⚠️ Aucune note lisible détectée sur cette photo. Réessayez avec plus de lumière.";
+    } else {
+      _vnPhotoPending = [];
+      if(ps) ps.textContent = "⚠️ L'IA n'a pas pu analyser la photo. Réessayez.";
+    }
+  }catch(e){
+    _vnPhotoPending = [];
+    if(ps) ps.textContent = '⚠️ IA indisponible (vérifiez votre connexion) — réessayez.';
+  }
+  if(pbtn) pbtn.disabled = false;
+}
+function vnSyncPhotoTextsFromDOM(){
+  _vnPhotoPending.forEach(function(item, idx){
+    var t = document.getElementById('vnPhotoText_'+idx);
+    if(t) item.texte = t.value;
+  });
+}
+function vnRenderPhotoReview(){
+  var rev = document.getElementById('vnPhotoReview');
+  if(!rev) return;
+  if(!_vnPhotoPending.length){ rev.style.display='none'; rev.innerHTML=''; return; }
+  rev.style.display='block';
+  var html = '';
+  _vnPhotoPending.forEach(function(item, idx){
+    html += '<div style="background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2);border-radius:12px;padding:12px;margin-bottom:10px;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">';
+    html += '<div style="font-size:9.5px;font-weight:800;color:#a78bfa;text-transform:uppercase;">Note '+(idx+1)+'</div>';
+    html += '<div onclick="vnRemovePhotoItem('+idx+')" style="color:#ef4444;font-size:14px;cursor:pointer;padding:2px 6px;">×</div>';
+    html += '</div>';
+    html += '<textarea id="vnPhotoText_'+idx+'" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;color:var(--t1);font-size:12.5px;font-family:inherit;line-height:1.45;resize:vertical;min-height:50px;margin-bottom:8px;">'+escHtml(item.texte)+'</textarea>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:5px;">';
+    Object.keys(VN_CATS).forEach(function(k){
+      var c = VN_CATS[k];
+      var on = (k===item.categorie);
+      html += '<span onclick="vnSetPhotoCat('+idx+',\''+k+'\')" style="display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border-radius:16px;cursor:pointer;font-size:9.5px;font-weight:800;background:'+(on?c.color:'rgba(255,255,255,.06)')+';color:'+(on?'#fff':'var(--t2)')+';border:1px solid '+(on?c.color:'rgba(255,255,255,.15)')+';">'+c.ico+' '+c.label+'</span>';
+    });
+    html += '</div></div>';
+  });
+  html += '<button onclick="vnSaveAllPhotoNotes()" style="width:100%;background:linear-gradient(135deg,#16a34a,#22c55e);border:none;color:#fff;font-size:13px;font-weight:900;padding:13px;border-radius:12px;cursor:pointer;margin-top:4px;">💾 Enregistrer '+_vnPhotoPending.length+' note(s)</button>';
+  rev.innerHTML = html;
+}
+function vnSetPhotoCat(idx, key){
+  vnSyncPhotoTextsFromDOM();
+  if(_vnPhotoPending[idx]) _vnPhotoPending[idx].categorie = key;
+  vnRenderPhotoReview();
+}
+function vnRemovePhotoItem(idx){
+  vnSyncPhotoTextsFromDOM();
+  _vnPhotoPending.splice(idx,1);
+  vnRenderPhotoReview();
+  var ps = document.getElementById('vnPhotoStatus');
+  if(ps && _vnPhotoPending.length) ps.textContent = '✅ '+_vnPhotoPending.length+' note(s) détectée(s) — vérifiez avant d\'enregistrer';
+}
+function vnSaveAllPhotoNotes(){
+  vnSyncPhotoTextsFromDOM();
+  var arr = vnLoad();
+  var count = 0;
+  _vnPhotoPending.forEach(function(item){
+    var txt = (item.texte||'').trim();
+    if(!txt) return;
+    arr.unshift({
+      id: (typeof uid==='function') ? uid() : ('vn'+Date.now()+Math.random().toString(36).slice(2)),
+      texte: txt,
+      categorie: VN_CATS[item.categorie] ? item.categorie : 'autre',
+      done: false,
+      ts: Date.now(),
+      date: new Date().toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+    });
+    count++;
+  });
+  vnSaveArr(arr);
+  _vnPhotoPending = [];
+  var rev = document.getElementById('vnPhotoReview'); if(rev){ rev.style.display='none'; rev.innerHTML=''; }
+  var ps = document.getElementById('vnPhotoStatus'); if(ps){ ps.textContent=''; ps.style.display='none'; }
+  if(typeof showT==='function') showT('📷', count+' note(s) enregistrée(s) !');
   closeVoiceNote();
   if(document.getElementById('pgVoiceNotes') && document.getElementById('pgVoiceNotes').classList.contains('on')) renderVoiceNotes();
 }
@@ -42548,7 +42705,7 @@ function ngScrollTo(id) {
       <div style="font-size:17px;font-weight:900;font-family:'Syne',sans-serif;color:#fff;">🎙️ Note Vocale Rapide</div>
       <div onclick="closeVoiceNote()" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:18px;">×</div>
     </div>
-    <div style="font-size:10px;color:var(--t2);margin-bottom:18px;">Dites votre idée à voix haute, l'IA la reformule et la classe pour vous</div>
+    <div style="font-size:10px;color:var(--t2);margin-bottom:18px;">Dites votre idée à voix haute ou photographiez vos notes papier — l'IA reformule et classe pour vous</div>
 
     <button id="vnMicBtn" onclick="vnToggleMic()">🎤</button>
     <div id="vnStatus" style="text-align:center;font-size:12px;color:var(--t2);margin:14px 0 16px;line-height:1.5;">Appuyez sur le micro et parlez librement</div>
@@ -42567,6 +42724,17 @@ function ngScrollTo(id) {
       <div id="vnCatPicker" style="margin-bottom:16px;"></div>
       <button onclick="vnSaveNote()" style="width:100%;background:linear-gradient(135deg,#16a34a,#22c55e);border:none;color:#fff;font-size:13px;font-weight:900;padding:13px;border-radius:12px;cursor:pointer;">💾 Enregistrer la note</button>
     </div>
+
+    <div style="display:flex;align-items:center;gap:8px;margin:18px 0 14px;">
+      <div style="flex:1;height:1px;background:rgba(255,255,255,.08);"></div>
+      <div style="font-size:10px;color:var(--t2);font-weight:700;">OU</div>
+      <div style="flex:1;height:1px;background:rgba(255,255,255,.08);"></div>
+    </div>
+    <input type="file" id="vnPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="vnHandlePhotoFile(this)"/>
+    <button id="vnPhotoBtn" onclick="document.getElementById('vnPhotoInput').click()" style="width:100%;background:rgba(255,255,255,.06);border:1px dashed rgba(167,139,250,.4);color:var(--t1);font-size:12.5px;font-weight:700;padding:13px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">📷 Photographier des notes papier</button>
+    <div style="font-size:9.5px;color:var(--t2);text-align:center;margin-top:6px;">L'IA lit vos notes manuscrites et les répartit automatiquement par catégorie</div>
+    <div id="vnPhotoStatus" style="display:none;text-align:center;font-size:12px;color:var(--t2);margin:12px 0;"></div>
+    <div id="vnPhotoReview" style="display:none;margin-top:12px;"></div>
   </div>
 </div>
 
