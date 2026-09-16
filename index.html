@@ -3378,7 +3378,6 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="color:var(--t2);font-size:22px;">›</div>
     </div>
 
-
   </div>
 </div>
 
@@ -4211,7 +4210,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">VISITES</div>
       </div>
       <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(34,197,94,.25);">
-        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="auConformes">0</div>
+        <div style="font-size:22px;font-weight:900;color:#4ade80;" id="auConformesKpi">0</div>
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">CONFORMES</div>
       </div>
       <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(239,68,68,.25);">
@@ -4272,6 +4271,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <button type="button" onclick="toggleAuditType(this,'Caisse & Financier')" data-type="Caisse & Financier" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">💰 Caisse & Financier</button>
         <button type="button" onclick="toggleAuditType(this,'Hygiène & Sécurité')" data-type="Hygiène & Sécurité" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">🧹 Hygiène & Sécurité</button>
         <button type="button" onclick="toggleAuditType(this,'Administratif général')" data-type="Administratif général" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">📋 Administratif général</button>
+        <button type="button" onclick="toggleAuditType(this,'Commercial')" data-type="Commercial" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.25);border-radius:9px;color:#94a3b8;font-size:11px;font-weight:700;padding:8px 6px;cursor:pointer;">🛒 Commercial</button>
       </div>
     </div>
 
@@ -4760,7 +4760,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
   <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #7c3aed;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
     <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <div id="_" style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Pointage</div>
+      <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Pointage</div>
       <div onclick="closeM('pointagePdfModal')" style="color:var(--t2);font-size:22px;cursor:pointer;">×</div>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;">
@@ -4785,7 +4785,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
   <div style="width:100%;max-width:430px;margin:0 auto;background:#0b0d1a;border:1px solid rgba(255,255,255,.12);border-top:2px solid #2563eb;border-radius:24px 24px 0 0;padding:24px 20px 36px;animation:slideUp .3s cubic-bezier(.4,0,.2,1);">
     <div style="width:36px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 18px;"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <div id="_" style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Congés</div>
+      <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">📊 Rapport Congés</div>
       <div onclick="closeM('congePdfModal')" style="color:var(--t2);font-size:22px;cursor:pointer;">×</div>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;">
@@ -5275,7 +5275,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
           <div style="font-size:14px;font-weight:900;color:#fff;font-family:'Syne';">Lutte contre la Démarque</div>
           <div style="font-size:10px;color:var(--t2);margin-top:1px;">Contrôle pertes · Actions correctives</div>
         </div>
-        <div id="demarqueBadge" style="display:none;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:900;align-items:center;justify-content:center;margin-right:4px;"></div>
+        <div id="demarqueBadgeHub" style="display:none;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:900;align-items:center;justify-content:center;margin-right:4px;"></div>
         <div style="color:var(--t2);font-size:18px;">›</div>
       </div>
 
@@ -5465,7 +5465,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">TOTAL PAL.</div>
       </div>
       <div style="background:var(--s2);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:10px;text-align:center;">
-        <div style="font-size:18px;font-weight:900;color:#f87171;" id="arAnomalies">0</div>
+        <div style="font-size:18px;font-weight:900;color:#f87171;" id="arAnomaliesKpi">0</div>
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">ANOMALIES</div>
       </div>
     </div>
@@ -7191,7 +7191,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">RÉUNIONS</div>
       </div>
       <div style="background:var(--s2);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(249,115,22,.2);">
-        <div style="font-size:22px;font-weight:900;color:#fb923c;" id="rrActions">0</div>
+        <div style="font-size:22px;font-weight:900;color:#fb923c;" id="rrActionsKpi">0</div>
         <div style="font-size:9px;color:var(--t2);font-weight:700;margin-top:2px;">ACTIONS EN COURS</div>
       </div>
     </div>
@@ -7415,7 +7415,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Lutte contre la Démarque</div>
         <div style="font-size:11px;color:var(--t2);margin-top:2px;">Contrôle pertes · Actions correctives</div>
       </div>
-      <div id="demarqueBadge" style="display:none;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-right:4px;"></div>
+      <div id="demarqueBadgeOpti" style="display:none;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-right:4px;"></div>
       <div style="color:var(--t2);font-size:22px;">›</div>
     </div>
 
@@ -10670,7 +10670,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">EN COURS</div>
       </div>
       <div style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:9px 4px;text-align:center;">
-        <div id="paKpiRetard" style="font-size:19px;font-weight:900;color:#ef4444;font-family:'IBM Plex Mono';">0</div>
+        <div id="planActKpiRetard" style="font-size:19px;font-weight:900;color:#ef4444;font-family:'IBM Plex Mono';">0</div>
         <div style="font-size:8.5px;color:var(--t2);font-weight:700;margin-top:2px;">EN RETARD</div>
       </div>
       <div style="flex:1;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:12px;padding:9px 4px;text-align:center;">
@@ -10685,12 +10685,16 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <button onclick="paFilter('cours',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);">🔵 En cours</button>
       <button onclick="paFilter('retard',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);">⚠️ Retard</button>
       <button onclick="paFilter('done',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.3);">✅ Terminés</button>
+      <button onclick="paFilter('audit',this)" class="paft" style="padding:6px 12px;border-radius:99px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;background:rgba(6,182,212,.12);color:#38bdf8;border:1px solid rgba(6,182,212,.3);">🔍 Audit</button>
     </div>
 
     <!-- Formulaire nouveau plan -->
     <div id="paForm" style="display:none;background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border:1px solid rgba(167,139,250,.3);">
       <div style="font-size:12px;font-weight:800;color:#a78bfa;margin-bottom:2px;">📋 Nouveau Plan d'Action</div>
       <div style="font-size:9.5px;color:var(--t2);margin-bottom:10px;">Étape 1/4 · Décrivez d'abord le problème</div>
+      <div id="paOrigineBanner" style="display:none;align-items:center;gap:6px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);border-radius:10px;padding:8px 10px;margin-bottom:10px;">
+        <span style="font-size:10px;font-weight:700;color:#38bdf8;" id="paOrigineText"></span>
+      </div>
       <div style="margin-bottom:8px;">
         <label style="font-size:10px;font-weight:700;color:var(--t2);display:block;margin-bottom:4px;">Titre du plan *</label>
         <input id="paTitre" class="fi" placeholder="Ex: Révision procédures sondage DI..." style="width:100%;box-sizing:border-box;"/>
@@ -10719,8 +10723,8 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       </div>
     </div>
 
-    <div id="paList" style="display:flex;flex-direction:column;gap:10px;"></div>
-    <div id="paEmpty" style="text-align:center;padding:30px;color:var(--t2);font-size:12px;">📋 Aucun plan d'action · Appuyez sur +</div>
+    <div id="planActList" style="display:flex;flex-direction:column;gap:10px;"></div>
+    <div id="planActEmpty" style="text-align:center;padding:30px;color:var(--t2);font-size:12px;">📋 Aucun plan d'action · Appuyez sur +</div>
   </div>
 </div>
 
@@ -13973,6 +13977,7 @@ function saveP(){prof.name=document.getElementById('p_n').value.trim();prof.role
 
 // ══ MODALS ══
 function closeM(id){var el=document.getElementById(id);if(!el)return;el.classList.remove('on');el.style.display='';}
+
 ['tmov','pmov','evtmov','imgmov','snoozmov','catFormMov','catDetailMov','kpiObjectifsModal'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('click',function(e){if(e.target===this)closeM(id);});});
 var _cmov=document.getElementById('cmov');if(_cmov)_cmov.addEventListener('click',function(e){if(e.target===this)closeM('cmov');});
 let _tt2;
@@ -17262,7 +17267,7 @@ async function aiAnalyzeRupture(){
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 600,
         messages: [{ role: 'user', content: prompt }]
       })
@@ -17362,7 +17367,7 @@ async function _aiCall(btnId, resultId, prompt, autoFillId) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 600,
         messages: [{ role: 'user', content: prompt }]
       })
@@ -18868,6 +18873,8 @@ function saveExc(d){localStorage.setItem(SKEQ,JSON.stringify(d));}
 
 // ══════════ PLANS D'ACTION ══════════
 var _paFilter='all';
+var _paIncomingOrigine='';
+var _paIncomingDate='';
 var _paExpanded={};
 var _paViewStep={};
 function paToggleForm(){
@@ -18876,9 +18883,16 @@ function paToggleForm(){
   if(!s){
     ['paTitre','paProbDesc'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
     var pr=document.getElementById('paPriorite');if(pr)pr.value='moyenne';
-    var pd=document.getElementById('paProbDate');if(pd)pd.value=tstr();
+    var pd=document.getElementById('paProbDate');if(pd)pd.value=_paIncomingDate||tstr();
+    var b=document.getElementById('paOrigineBanner'),bt=document.getElementById('paOrigineText');
+    if(b&&bt){
+      if(_paIncomingOrigine){bt.textContent=_paIncomingOrigine;b.style.display='flex';}
+      else{b.style.display='none';}
+    }
     var sc=f.closest('.scroll')||f.parentElement;if(sc)sc.scrollTo({top:0,behavior:'smooth'});
     setTimeout(function(){var inp=document.getElementById('paTitre');if(inp)inp.focus();},300);
+  }else{
+    _paIncomingOrigine='';_paIncomingDate='';
   }
 }
 function paSavePlan(){
@@ -18888,10 +18902,11 @@ function paSavePlan(){
   if(!desc){showT('⚠️','Décrivez le problème');return;}
   var priorite=(document.getElementById('paPriorite')||{value:'moyenne'}).value;
   var probDate=(document.getElementById('paProbDate')||{value:''}).value||tstr();
+  var origine=_paIncomingOrigine||'';
   var d=loadExc();if(!d.planActions)d.planActions=[];
   var id=uid();
   d.planActions.unshift({
-    id:id,version:'v2',titre:titre,priorite:priorite,
+    id:id,version:'v2',titre:titre,priorite:priorite,origine:origine,
     probleme:{description:desc,date:probDate},
     step:1,items:[],indicateur:'',dateControle:'',
     resultats:{positifs:'',negatifs:'',avant:'',apres:''},
@@ -18899,7 +18914,7 @@ function paSavePlan(){
     termine:false,termineDate:'',
     createdAt:tstr()
   });
-  saveExc(d);paToggleForm();_paExpanded[id]=true;_paViewStep[id]=1;renderPlanActions();showT('✅','Plan créé · Étape 1/4');
+  saveExc(d);_paIncomingOrigine='';_paIncomingDate='';paToggleForm();_paExpanded[id]=true;_paViewStep[id]=1;renderPlanActions();showT('✅','Plan créé · Étape 1/4');
 }
 function paDelPlan(id){
   showConfirm('🗑️ Supprimer','Supprimer ce plan d\'action et toutes ses actions ?',function(){
@@ -19051,11 +19066,11 @@ function renderPlanActions(){
   var withStatus=all.map(function(p){return {p:p,st:paPlanStatus(p)};});
   document.getElementById('paKpiTotal').textContent=all.length;
   document.getElementById('paKpiCours').textContent=withStatus.filter(function(x){return x.st==='cours';}).length;
-  document.getElementById('paKpiRetard').textContent=withStatus.filter(function(x){return x.st==='retard';}).length;
+  document.getElementById('planActKpiRetard').textContent=withStatus.filter(function(x){return x.st==='retard';}).length;
   document.getElementById('paKpiDone').textContent=withStatus.filter(function(x){return x.st==='done';}).length;
   paUpdateHomeBadge();
-  var list=_paFilter==='all'?withStatus:withStatus.filter(function(x){return x.st===_paFilter;});
-  var el=document.getElementById('paList');var empty=document.getElementById('paEmpty');if(!el)return;
+  var list=_paFilter==='all'?withStatus:(_paFilter==='audit'?withStatus.filter(function(x){return x.p.origine&&x.p.origine.indexOf('Audit Interne')>-1;}):withStatus.filter(function(x){return x.st===_paFilter;}));
+  var el=document.getElementById('planActList');var empty=document.getElementById('planActEmpty');if(!el)return;
   if(!list.length){el.innerHTML='';if(empty)empty.style.display='block';return;}if(empty)empty.style.display='none';
   var cols={cours:'#f59e0b',retard:'#ef4444',done:'#22c55e'};
   var labels={cours:'🔵 En cours',retard:'⚠️ En retard',done:'✅ Terminé'};
@@ -19131,8 +19146,10 @@ function paRenderV2Card(p,st,col,label){
     +'<span style="font-size:9px;font-weight:700;color:'+col+';background:rgba(255,255,255,.06);padding:2px 7px;border-radius:8px;">'+label+'</span>'
     +'<span style="font-size:9px;color:var(--t2);">'+prio.ic+' '+prio.lbl+'</span>'
     +'<span style="font-size:9px;color:var(--t2);">· Étape '+(p.termine?4:p.step)+'/4</span>'
+    +(items.length?'<span style="font-size:9px;font-weight:700;color:#38bdf8;">· 🎯 Taux de réalisation '+pct+'%</span>':'')
     +'</div>'
     +'<div style="font-size:14px;font-weight:900;color:var(--t1);">'+escHtml(p.titre)+'</div>'
+    +(p.origine?'<div style="font-size:10px;color:#06b6d4;font-weight:700;margin-top:2px;">'+escHtml(p.origine)+'</div>':'')
     +'<div style="font-size:11px;color:var(--t2);margin-top:2px;">🔴 '+escHtml((p.probleme&&p.probleme.description)||'').slice(0,80)+((p.probleme&&p.probleme.description&&p.probleme.description.length>80)?'…':'')+'</div>'
     +'<div style="height:5px;background:rgba(255,255,255,.06);border-radius:4px;margin-top:8px;overflow:hidden;"><div style="height:100%;width:'+(p.termine?100:Math.round((p.step-1)/4*100))+'%;background:'+col+';border-radius:4px;"></div></div>'
     +'</div>'
@@ -19230,7 +19247,8 @@ function paRenderV2Card(p,st,col,label){
       var s=p.solution||{};
       content='<div>'
         +'<div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:12px;margin-bottom:10px;">'
-        +'<div style="font-size:12px;font-weight:800;color:#22c55e;margin-bottom:6px;">'+(s.resolu?'✅ Problème résolu':'☑️ Plan clôturé')+' · '+p.termineDate+'</div>'
+        +'<div style="font-size:12px;font-weight:800;color:#22c55e;margin-bottom:6px;">'+(s.resolu?'✅ Problème résolu':'☑️ Plan clôturé')+'</div>'
+        +'<div style="font-size:10px;font-weight:700;color:#4ade80;margin-bottom:8px;">📅 Date de réalisation : '+_auDateFmt(p.termineDate)+'</div>'
         +'<div style="font-size:12px;color:var(--t1);white-space:pre-wrap;">'+escHtml(s.texte)+'</div>'
         +(s.preventif?'<div style="font-size:11px;color:#38bdf8;margin-top:8px;">🛡️ <b>Prévention:</b> '+escHtml(s.preventif)+'</div>':'')
         +(s.lecon?'<div style="font-size:11px;color:#fbbf24;margin-top:4px;">💡 <b>Leçon:</b> '+escHtml(s.lecon)+'</div>':'')
@@ -19279,13 +19297,17 @@ function exportPaPDF(){
     +all.map(function(p){
       if(p.version==='v2'){
         var r=p.resultats||{},s=p.solution||{};
+        var pdfItems=p.items||[];var pdfDone=pdfItems.filter(function(i){return i.statut==='fait';}).length;
+        var pdfPct=pdfItems.length?Math.round(pdfDone/pdfItems.length*100):0;
         return '<div class="card"><div class="titre">'+escHtml(p.titre)+'</div>'
+          +(p.origine?'<div class="origine">'+escHtml(p.origine)+'</div>':'')
           +'<div class="origine">🔴 <b>Problème:</b> '+escHtml(p.probleme.description||'')+'</div>'
+          +(pdfItems.length?'<div class="ind">🎯 Taux de réalisation : '+pdfPct+'% ('+pdfDone+'/'+pdfItems.length+' actions)</div>':'')
           +(p.indicateur?'<div class="ind">📊 Indicateur: '+escHtml(p.indicateur)+'</div>':'')
           +(p.dateControle?'<div class="ctrl">📅 Contrôle prévu: '+p.dateControle+'</div>':'')
           +(p.items||[]).map(function(i){return '<div class="item">'+(i.statut==='fait'?'✅':'⬜')+' '+escHtml(i.texte)+(i.resp?' — '+escHtml(i.resp):'')+(i.ech?' — éch. '+i.ech:'')+' ['+stLbl[i.statut]+']</div>';}).join('')
           +(p.step>=3?('<div class="ind" style="margin-top:8px;">📊 <b>Résultats:</b> '+(r.positifs?'✅ '+escHtml(r.positifs)+' ':'')+(r.negatifs?'⚠️ '+escHtml(r.negatifs):'')+'</div>'):'')
-          +(p.termine?('<div class="ind" style="color:#16a34a;">✅ <b>Solution:</b> '+escHtml(s.texte)+(s.preventif?' — Prévention: '+escHtml(s.preventif):'')+'</div>'):'<div class="ind" style="color:#c2410c;">⏳ Plan en cours (étape '+p.step+'/4)</div>')
+          +(p.termine?('<div class="ind" style="color:#16a34a;">✅ <b>Solution:</b> '+escHtml(s.texte)+(s.preventif?' — Prévention: '+escHtml(s.preventif):'')+'</div><div class="ind" style="color:#16a34a;">📅 Date de réalisation : '+p.termineDate+'</div>'):'<div class="ind" style="color:#c2410c;">⏳ Plan en cours (étape '+p.step+'/4)</div>')
           +'</div>';
       }
       return '<div class="card"><div class="titre">'+escHtml(p.titre)+'</div>'
@@ -22747,7 +22769,7 @@ function renderReunionReg(){
   var el = document.getElementById('reunionRegList');
   var em = document.getElementById('reunionRegEmpty');
   var tot = document.getElementById('rrTotal');
-  var act = document.getElementById('rrActions');
+  var act = document.getElementById('rrActionsKpi');
   var badge = document.getElementById('reunionRegBadge');
 
   var pending = data.filter(function(x){ return !x.actionsDone && x.actions; }).length;
@@ -24709,7 +24731,7 @@ function renderVisiteAudit(){
   var el = document.getElementById('visiteAuditList');
   var em = document.getElementById('visiteAuditEmpty');
   var totEl = document.getElementById('auTotal');
-  var confElStat = document.getElementById('auConformes');
+  var confElStat = document.getElementById('auConformesKpi');
   var ecEl = document.getElementById('auEcarts');
   var badge = document.getElementById('visiteAuditBadge');
 
@@ -24739,6 +24761,7 @@ function renderVisiteAudit(){
           (v.types&&v.types.length?'<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:3px;">'+v.types.map(function(t){return '<span style="background:rgba(6,182,212,.12);color:#38bdf8;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;">'+t+'</span>';}).join('')+'</div>':'')+
         '</div>'+
         '<div style="display:flex;gap:4px;flex-shrink:0;margin-left:8px;">'+
+          '<button onclick="event.stopPropagation();auCreateTicket(\''+v.id+'\')" title="Créer un ticket (Plan d\'Action)" style="background:#7c3aed;border:none;color:#fff;font-size:12px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">🎫</button>'+
           '<button onclick="event.stopPropagation();exportVisiteAuditPDF(\''+v.id+'\')" style="background:#0033A0;border:none;color:#fff;font-size:11px;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">📄</button>'+
           '<div onclick="delVisiteAudit(\''+v.id+'\')" style="color:#ef4444;font-size:20px;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;line-height:1;">×</div>'+
         '</div>'+
@@ -24751,6 +24774,28 @@ function renderVisiteAudit(){
       (v.obs?'<div style="font-size:10px;color:var(--t2);margin-top:4px;font-style:italic;">📝 '+v.obs+'</div>':'')+
     '</div>';
   }).join('');
+}
+
+// Pont Visite Audit → Plans d'Action : transforme une anomalie constatée en ticket suivi
+function auCreateTicket(visitId){
+  var data = loadVisitesAudit();
+  var v = data.find(function(x){return x.id===visitId;});
+  if(!v){showT('⚠️','Visite introuvable');return;}
+  var typesLabel = (v.types&&v.types.length)?v.types.join(', '):'Général';
+  _paIncomingOrigine = '🔍 Audit Interne — '+typesLabel+' — '+_auDateFmt(v.date);
+  _paIncomingDate = v.date||tstr();
+  goPage('planAction');
+  setTimeout(function(){
+    var f=document.getElementById('paForm');
+    if(f && f.style.display==='none'){paToggleForm();}
+    else if(f){
+      // formulaire déjà ouvert : forcer quand même le pré-remplissage
+      var b=document.getElementById('paOrigineBanner'),bt=document.getElementById('paOrigineText');
+      if(b&&bt){bt.textContent=_paIncomingOrigine;b.style.display='flex';}
+      var pd=document.getElementById('paProbDate');if(pd)pd.value=_paIncomingDate;
+    }
+    showT('🎫','Ticket lié à la visite du '+_auDateFmt(v.date));
+  },250);
 }
 
 // ══════════════════════════════════════════════
@@ -29302,7 +29347,7 @@ function renderArrivage(){
   var em=document.getElementById('arrivageEmpty');
   var totEl=document.getElementById('arTotal');
   var totPal=document.getElementById('arTotalPal');
-  var totAnom=document.getElementById('arAnomalies');
+  var totAnom=document.getElementById('arAnomaliesKpi');
   var totalPal=data.reduce(function(s,x){return s+(x.totalPal||0);},0);
   var anomCount=data.filter(function(x){return x.anomalies||x.plomb==='nok';}).length;
   if(totEl) totEl.textContent=data.length;
@@ -31274,7 +31319,7 @@ var _GS=[
   {ico:'📊',bg:'#0c4a6e',n:'Acomptes',d:'Suivi des acomptes accordés',p:'pgAcompte',t:'acompte salaire'},
   {ico:'⚙️',bg:'#581c87',n:'Administration Rayon',d:'Outils d\'administration et contrôle',p:'admin',t:'admin administration controle'},
   {ico:'🤝',bg:'#0033A0',n:'Réunion d\'Équipe',d:'Ordre du jour, compte-rendu, PV',p:'reunion',t:'reunion ordre jour pv compte rendu'},
-  {ico:'📢',bg:'#1e3a8a',n:'Briefing Journalier',d:'Points du briefing quotidien',p:'briefing',t:'briefing journalier matin equipe'},
+  {ico:'📢',bg:'#1e3a8a',n:'Briefing Journalier',d:'Points du briefing quotidien (dans Réunion)',p:'reunion',t:'briefing journalier matin equipe'},
   {ico:'👁️',bg:'#7f1d1d',n:'Vigilance Sécurité',d:'Incidents et suivi des risques',p:'vigilance',t:'vigilance securite incident risque'},
   {ico:'🧹',bg:'#064e3b',n:'Hygiène & Propreté',d:'Check-lists hygiène et conformité',p:'hygiene',t:'hygiene proprete nettoyage'},
   {ico:'📅',bg:'#1e3a8a',n:'Planning Équipe',d:'Planning hebdomadaire du rayon',p:'planning',t:'planning horaire semaine employe'},
@@ -31327,6 +31372,78 @@ var _GS=[
   {ico:'👔',bg:'#1e3a8a',n:'Visite de la Direction',d:'Préparer et documenter la visite DR',p:'visiteDR',t:'visite direction dr preparation rapport'},
   {ico:'🏛️',bg:'#4c1d95',n:'Réunion Régionale',d:'Préparer la réunion régionale',p:'reunionRegionale',t:'reunion regionale pv preparation'},
   {ico:'📊',bg:'#166534',n:'Avancées & Résultats',d:'Suivi des avancées du rayon',p:'avancees',t:'avancee resultat suivi performance'},
+  {ico:'📈',bg:'#1e3a8a',n:'Actions Commerciales',d:'Suivi actions commerciales : en cours, à venir, terminées',p:'actions',t:'action commercial suivi retard avenir termine'},
+  {ico:'🏛️',bg:'#581c87',n:'Conformité & Autorités',d:'Visites officielles : Commerce, Santé, Municipale, Sécurité',p:'adminAutorites',t:'conformite autorite visite officielle commerce sante municipale securite'},
+  {ico:'📑',bg:'#581c87',n:'Comptabilité',d:'Documents comptables, contrôle interne et suivi mensuel',p:'adminControle',t:'comptabilite controle interne document steg'},
+  {ico:'👥',bg:'#0c4a6e',n:'Ressources Humaines',d:'Équipe, paie, congés et organisation du personnel',p:'adminRH',t:'rh ressources humaines personnel paie organisation'},
+  {ico:'🚨',bg:'#7f1d1d',n:'Centre d\'Alertes',d:'Toutes les alertes du magasin au même endroit',p:'alertesCentre',t:'alerte centre notification urgence'},
+  {ico:'🥦',bg:'#7f1d1d',n:'Anomalies FLEG',d:'Anomalies fruits et légumes : manquant, endommagé, erreur BC',p:'anomaliesFLEG',t:'anomalie fleg fruit legume manquant endommage erreur bc'},
+  {ico:'🐟',bg:'#7f1d1d',n:'Anomalies Poissonnerie',d:'Anomalies poissonnerie : manquant, endommagé, erreur BC',p:'anomaliesPoissonnerie',t:'anomalie poissonnerie poisson manquant endommage erreur bc'},
+  {ico:'⚖️',bg:'#7f1d1d',n:'Anomalies Quantités',d:'Écarts de réception et anomalies de quantités',p:'anomaliesQte',t:'anomalie quantite ecart reception code meti'},
+  {ico:'🗂️',bg:'#1e293b',n:'Détail Journée Archivée',d:'Détail d\'une journée archivée depuis l\'historique',p:'archiveDetail',t:'archive detail journee historique'},
+  {ico:'🗂️',bg:'#1e293b',n:'Historique Journées',d:'Historique des journées archivées avec résumés PDF',p:'archiveResume',t:'historique journee archive resume pdf'},
+  {ico:'🏭',bg:'#7c2d12',n:'Arrivage Dépôt Sec',d:'Palettes, plombage et anomalies des arrivages dépôt',p:'arrivageDepot',t:'arrivage depot sec palette plombage livreur anomalie'},
+  {ico:'💰',bg:'#166534',n:'Indicateurs CA',d:'Chiffre d\'affaires jour, semaine et historique',p:'ca',t:'ca chiffre affaires indicateur vente historique csv'},
+  {ico:'📅',bg:'#78350f',n:'Calendrier Promo',d:'Calendrier des promotions en cours, à venir, expirées',p:'calendPromo',t:'calendrier promo promotion planning'},
+  {ico:'🌡️',bg:'#0e7490',n:'Chaîne du Froid',d:'Contrôle températures HACCP sur 6 zones + alertes',p:'chaineFroid',t:'chaine froid temperature haccp releve alerte'},
+  {ico:'♻️',bg:'#064e3b',n:'Collecte Déchets',d:'Suivi des enlèvements de cartons : camion, poids',p:'collecteDechets',t:'collecte dechet carton camion poids recyclage'},
+  {ico:'📊',bg:'#166534',n:'Comparatif CA',d:'CA semaine en cours vs N-1, évolution',p:'comparatif',t:'comparatif ca semaine evolution n-1'},
+  {ico:'📦',bg:'#134e4a',n:'Comptage Ciblé',d:'Sessions de comptage stock et écarts détectés',p:'comptage',t:'comptage cible stock ecart session inventaire'},
+  {ico:'🏖️',bg:'#0c4a6e',n:'Planning Congés',d:'Vue globale des congés de l\'équipe ce mois',p:'congesGlobal',t:'conge planning global equipe mois vacances'},
+  {ico:'📄',bg:'#0c4a6e',n:'Contrats',d:'Statuts des contrats : attente, légalisé, envoyé, complet',p:'contrats',t:'contrat statut legalise envoye complet employe'},
+  {ico:'⚙️',bg:'#1e293b',n:'Coswin & GLPI',d:'Suivi des pannes techniques Coswin et tickets GLPI',p:'coswinGlpi',t:'coswin glpi panne technique ticket maintenance'},
+  {ico:'📝',bg:'#1e293b',n:'Décisions du Jour',d:'Journal des décisions : commercial, équipe, stock, finance',p:'decisions',t:'decision jour journal commercial equipe stock finance'},
+  {ico:'↩️',bg:'#7c2d12',n:'Demande d\'Avoir',d:'Retours fournisseurs et suivi des avoirs demandés',p:'demandeAvoir',t:'avoir retour fournisseur demande code meti'},
+  {ico:'📲',bg:'#0c4a6e',n:'Digitale',d:'Publications digitales et ruptures par rayon',p:'digitale',t:'digitale publication affichage rupture rayon'},
+  {ico:'👥',bg:'#065f46',n:'Équipe Live',d:'Présents, absents, pauses et congés en temps réel',p:'equipeLive',t:'equipe live present absent pause conge taux presence'},
+  {ico:'🎯',bg:'#831843',n:'Actions Correctives',d:'Actions correctives ouvertes et en cours',p:'fac',t:'fac action corrective ouverte cours'},
+  {ico:'⚡',bg:'#581c87',n:'Facture STEG',d:'Suivi des factures STEG : récupération, envoi mail',p:'factureSteg',t:'facture steg electricite recuperation mail suivi'},
+  {ico:'🗓️',bg:'#134e4a',n:'Traçabilité & FEFO',d:'Articles expirés et urgents selon la méthode FEFO',p:'fefo',t:'fefo tracabilite expire urgent first expired first out dlc'},
+  {ico:'📊',bg:'#134e4a',n:'Gestion de Stock',d:'Hub localisation des stocks et traçabilité FEFO',p:'gestionStock',t:'gestion stock localisation fefo suivi controle'},
+  {ico:'📋',bg:'#1e293b',n:'Journal des Actions',d:'Journal complet de toutes les actions du jour',p:'historique',t:'historique journal action log modules'},
+  {ico:'🏠',bg:'#1e3a8a',n:'Accueil',d:'Écran d\'accueil de l\'application',p:'home',t:'accueil home menu bonjour'},
+  {ico:'🔧',bg:'#134e4a',n:'Instances SAV',d:'Suivi des réparations électroménager en attente/retour',p:'instancesSAV',t:'sav instance reparation electromenager bon sortie'},
+  {ico:'📅',bg:'#1e3a8a',n:'Préparation J+1',d:'Préparer les tâches et livraisons du lendemain',p:'j1',t:'j1 preparation lendemain tache commande livraison'},
+  {ico:'🚫',bg:'#312e81',n:'À Ne Pas Faire',d:'Liste des tâches et habitudes à éviter',p:'listeNonFaire',t:'non faire interdit habitude eviter energie'},
+  {ico:'📍',bg:'#134e4a',n:'Localisation des Stocks',d:'Localisation articles front-store et back-store',p:'locationTracking',t:'localisation stock front store back store article alerte'},
+  {ico:'🗂️',bg:'#134e4a',n:'MAJ Planogrammes',d:'Mises à jour planogrammes CATMAN : produits ajoutés/retirés',p:'majPlano',t:'planogramme catman maj mise a jour produit'},
+  {ico:'💬',bg:'#1e293b',n:'Messagerie Équipe',d:'Messages et alertes échangés avec l\'équipe',p:'messagerie',t:'messagerie chat message equipe alerte'},
+  {ico:'📋',bg:'#0c4a6e',n:'Note de Service',d:'Règles RH et procédures à appliquer par l\'équipe',p:'noteService',t:'note service regle rh procedure organisation badge'},
+  {ico:'📝',bg:'#312e81',n:'Notes Excellence',d:'Notes rattachées au module Excellence Opérationnelle',p:'notesGlobales',t:'notes globales excellence'},
+  {ico:'🏷️',bg:'#78350f',n:'Engagements — Détail OC/ONC',d:'Détail des engagements par statut : à faire, en cours, validée',p:'ocDetail',t:'oc onc engagement detail statut valide'},
+  {ico:'🏷️',bg:'#78350f',n:'Engagements Commerciaux — Rayon',d:'Suivi des engagements officiels du catalogue par rayon',p:'ocRayon',t:'engagement communique rayon catalogue oc onc'},
+  {ico:'🏷️',bg:'#78350f',n:'Engagement',d:'Hub engagements commerciaux par rayon : OC, ONC',p:'offresCommerciales',t:'engagement commercial oc onc rayon calendrier'},
+  {ico:'🗂️',bg:'#78350f',n:'ONC Catalogue',d:'Suivi des ONC catalogue',p:'oncCatalogue',t:'onc catalogue engagement'},
+  {ico:'🥬',bg:'#78350f',n:'ONC FLEG',d:'Suivi des ONC rayon FLEG',p:'oncFleg',t:'onc fleg fruit legume engagement'},
+  {ico:'🐠',bg:'#78350f',n:'ONC Poissonnerie',d:'Suivi des ONC rayon poissonnerie',p:'oncPoissonnerie',t:'onc poissonnerie engagement'},
+  {ico:'🤝',bg:'#312e81',n:'Responsabilisation',d:'Partager tes objectifs avec un partenaire de confiance',p:'partenaire',t:'partenaire responsabilisation objectif accountability engagement'},
+  {ico:'📉',bg:'#7c2d12',n:'Pertes & Déchets',d:'Pertes du jour et du mois en TND',p:'pertesHub',t:'perte dechet hub tnd jour mois'},
+  {ico:'📊',bg:'#4c1d95',n:'Statistiques Plans d\'Action',d:'Statistiques des plans d\'action : taux résolution, délai',p:'planActionStats',t:'statistique plan action taux resolution delai moyen'},
+  {ico:'📌',bg:'#78350f',n:'Plan TG',d:'Têtes de gondole : catalogue, prix, économie client',p:'planTg',t:'plan tg tete gondole promo catalogue prix'},
+  {ico:'📌',bg:'#0c4a6e',n:'Points RH',d:'Note de service, sanctions et suivi disciplinaire',p:'pointsRH',t:'points rh directive procedure sanction disciplinaire'},
+  {ico:'👥',bg:'#065f46',n:'Présences',d:'Présents, absents, congés et retards de l\'équipe',p:'presences',t:'presence absent conge retard employe pointage'},
+  {ico:'💲',bg:'#0c4a6e',n:'Prix Application',d:'Suivi de l\'application des prix en rayon',p:'prixApplication',t:'prix application controle rayon'},
+  {ico:'📊',bg:'#1e293b',n:'Rapport J',d:'Rapport de la journée à copier/partager',p:'rapport',t:'rapport jour copier accueil taches directeur'},
+  {ico:'📊',bg:'#1e293b',n:'Rapport Hebdomadaire',d:'Sélection de semaine et activité par jour',p:'rapportHebdo',t:'rapport hebdomadaire semaine activite'},
+  {ico:'😤',bg:'#7f1d1d',n:'Réclamations',d:'Réclamations clients : ouvertes et résolues',p:'reclamations',t:'reclamation client ouverte resolue'},
+  {ico:'⚡',bg:'#312e81',n:'Règle des 5 Secondes',d:'Méthode Mel Robbins : compte 5-4-3-2-1 et agis',p:'regle5sec',t:'regle 5 secondes mel robbins compte victoire'},
+  {ico:'📋',bg:'#1e3a8a',n:'Ronde Magasin',d:'Ronde matin, après-midi, fermeture',p:'ronde',t:'ronde magasin matin apres-midi fermeture checklist'},
+  {ico:'🌙',bg:'#134e4a',n:'Détail Saisonnalité',d:'Produits prioritaires et planning de mise en place',p:'saisondetail',t:'saison detail produit prioritaire planning etoile'},
+  {ico:'⚠️',bg:'#7f1d1d',n:'Sanctions',d:'Sanctions et avertissements : en cours, clôturés',p:'sanctions',t:'sanction avertissement disciplinaire mise a pied'},
+  {ico:'🔧',bg:'#134e4a',n:'SAV — Détail Catégorie',d:'Instances SAV d\'une catégorie : attente, parti, retourné',p:'savCategorie',t:'sav categorie instance attente parti retourne'},
+  {ico:'🎯',bg:'#166534',n:'Score Performance',d:'Score global du jour sur 100, CA vs N-1',p:'scorePerf',t:'score performance global ca n-1'},
+  {ico:'🔍',bg:'#7c2d12',n:'Pertes & Vols',d:'Archivage automatique des pertes et vols en TND',p:'shrinkage',t:'shrinkage perte vol archivage tnd'},
+  {ico:'🚚',bg:'#7c2d12',n:'Suivi BL',d:'Bons de livraison : attente, validés, litige',p:'suiviBL',t:'suivi bl bon livraison litige valide'},
+  {ico:'🎓',bg:'#0c4a6e',n:'Suivi Formations',d:'Formations suivies par l\'équipe, par mois et année',p:'suiviFormations',t:'formation suivi equipe mois annee'},
+  {ico:'📦',bg:'#166534',n:'Taux de Service — Secteur',d:'Session taux de service par rayon et commande',p:'tauxSecteur',t:'taux service secteur rayon commande'},
+  {ico:'📦',bg:'#166534',n:'Taux de Service',d:'Taux global de service des réceptions du jour',p:'tauxService',t:'taux service reception global pdf'},
+  {ico:'🏪',bg:'#0033A0',n:'Terrain & Commerce',d:'Hub terrain : tâches commerciales et gestion de stock',p:'terrain',t:'terrain commerce tache stock'},
+  {ico:'🛒',bg:'#166534',n:'Flux & Ticket Moyen',d:'Nombre de clients et ticket moyen en TND',p:'ticketMoyen',t:'ticket moyen flux client tnd'},
+  {ico:'🕐',bg:'#1e3a8a',n:'Ma Journée',d:'Timeline de la journée : matin, après-midi, à faire',p:'timeline',t:'timeline journee matin apres-midi tache'},
+  {ico:'🔍',bg:'#581c87',n:'Visite Audit',d:'Audit comptabilité, stocks, RH, hygiène, caisse, administratif',p:'visiteAudit',t:'visite audit comptabilite stock rh hygiene caisse conforme'},
+  {ico:'🏛️',bg:'#581c87',n:'Visites Autorités',d:'Traçabilité des visites officielles des autorités',p:'visiteAutorites',t:'visite autorite officiel tracabilite'},
+  {ico:'🪞',bg:'#312e81',n:'Visualisation',d:'Visualiser les conséquences négatives de ne pas agir',p:'visualisationConseq',t:'visualisation consequence negative declencheur emotionnel'},
+  {ico:'🏷️',bg:'#78350f',n:'VSD',d:'Suivi des articles VSD',p:'vsd',t:'vsd article suivi'},
 ];
 function _gn(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function _gh(str,q){if(!q)return str;var ns=_gn(str),nq=_gn(q),i=ns.indexOf(nq);if(i<0)return str;return str.slice(0,i)+'<mark style="background:rgba(59,130,246,.35);color:#93c5fd;border-radius:3px;padding:0 2px;">'+str.slice(i,i+nq.length)+'</mark>'+str.slice(i+nq.length);}
@@ -35660,7 +35777,7 @@ async function aiWriteNote(){
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-sonnet-4-6',
         max_tokens:400,
         system:'Tu es un assistant de gestion de supermarché. Tu rediges des notes de journee professionnelles et concises en français.',
         messages:[{role:'user',content:parts.filter(Boolean).join('\n')}]
@@ -38409,7 +38526,7 @@ function facAiCause(){
   if(btn){btn.textContent='⏳ Analyse...';btn.disabled=true;}
   var prompt='Tu es consultant amélioration continue pour supermarché. Rayon: '+rayon+'. Source: '+source+'.\nProblème: '+prob+'\nDonne en 3 lignes max: 1) Cause racine probable 2) Action corrective recommandée. Sois direct et concret.';
   fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:400,messages:[{role:'user',content:prompt}]})
   }).then(function(r){return r.json();}).then(function(d){
     var t=d.content&&d.content[0]?d.content[0].text:'';
     if(t){var c=document.getElementById('facCause');if(c)c.value=t;}
