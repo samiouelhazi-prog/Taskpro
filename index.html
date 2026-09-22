@@ -5081,6 +5081,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:13px;font-weight:900;color:#059669;">Aujourd'hui c'est Mardi !</div>
         <div style="font-size:11px;color:var(--t2);margin-top:2px;">Jour de nettoyage approfondi — Grand Tunis 2</div>
       </div>
+      <div style="background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);border-radius:12px;padding:8px 12px;margin:0 0 10px;font-size:9.5px;color:#38bdf8;font-weight:700;">📌 Directive Directeur Régional — briefing obligatoire mardi/jeudi/samedi avec photos systématiques</div>
       <div id="hygMardiInfo" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;margin:10px 0 12px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
           <span style="font-size:12px;font-weight:800;color:#34d399;">🧽 Jour de Nettoyage — Mardi</span>
@@ -15658,15 +15659,38 @@ var _hygFlatItems=(function(){
   return arr;
 })();
 
-// ─── MARDI ITEMS ───
-var HYG_MARDI_ITEMS=[
-  {label:'Propreté à fond — nettoyage complet de toutes les zones',icon:'🧹'},
-  {label:'Contrôle des procédures et normes d\'hygiène',icon:'📋'},
-  {label:'Hygiène corporelle des collaborateurs vérifiée',icon:'🙋'},
-  {label:'Check de tous les points de contrôle rayon par rayon',icon:'✅'},
-  {label:'Briefing équipes',icon:'📸',hasPhoto:true},
-  {label:'Remplir check-list nettoyage complète',icon:'📝'}
+// ─── MARDI ITEMS — Journée d'Hygiène GT2 (directive Directeur Régional) ───
+var HYG_MARDI_CATS=[
+  {icon:'🧽',label:'Journée d\'Hygiène GT2',col:'#34d399',items:[
+    {label:'Propreté à fond — nettoyage complet de toutes les zones',icon:'🧹'},
+    {label:'Contrôle des procédures et normes d\'hygiène',icon:'📋'},
+    {label:'Hygiène corporelle des collaborateurs vérifiée',icon:'🙋'},
+    {label:'Check de tous les points de contrôle rayon par rayon',icon:'✅'},
+    {label:'Briefing équipes',icon:'📸',hasPhoto:true,maxPhotos:1},
+    {label:'Remplir check-list nettoyage complète',icon:'📝'}
+  ]},
+  {icon:'🌡️',label:'Points à Respecter Impérativement',col:'#38bdf8',items:[
+    {label:'Registre de température camions + produits MBA/PFLS tenu à jour',icon:'📊'},
+    {label:'Thermomètre à sonde disponible et fonctionnel',icon:'🌡️'},
+    {label:'Produits stockés immédiatement à réception',icon:'📦'},
+    {label:'Procédures chaîne du froid respectées à 100%',icon:'❄️'},
+    {label:'Traçabilité produits frais et températures assurée',icon:'🔗'}
+  ]},
+  {icon:'🙋',label:'Rappel Hygiène Équipes',col:'#f472b6',items:[
+    {label:'Tenue propre et adaptée',icon:'👔'},
+    {label:'Port des gants et de la coiffe',icon:'🧤'},
+    {label:'Lavage des mains régulier',icon:'🧼'},
+    {label:'Procédures de nettoyage et désinfection respectées',icon:'🧴'},
+    {label:'Analyses copro de toutes les équipes à jour',icon:'🩺'}
+  ]}
 ];
+var _hygMardiFlat=(function(){
+  var arr=[];
+  HYG_MARDI_CATS.forEach(function(cat,ci){
+    cat.items.forEach(function(item,ii){arr.push({ci:ci,ii:ii,key:ci+'_'+ii,item:item});});
+  });
+  return arr;
+})();
 
 var _hygTab2='daily';
 function switchHygTab(tab){
@@ -15751,8 +15775,8 @@ function renderHygMardi(){
   var today=tstr();
   var d=loadHyg();
   var checks=(d.mardi||{})[today]||{};
-  var total=HYG_MARDI_ITEMS.length;
-  var done=HYG_MARDI_ITEMS.filter(function(_,i){return checks[i];}).length;
+  var total=_hygMardiFlat.length;
+  var done=_hygMardiFlat.filter(function(f){return checks[f.key];}).length;
   var pct=total?Math.round(done/total*100):0;
   var col=pct>=80?'#22c55e':pct>=50?'#f59e0b':'#ef4444';
 
@@ -15763,39 +15787,57 @@ function renderHygMardi(){
 
   var c=document.getElementById('hygMardiList'); if(!c)return;
   var html='';
-  HYG_MARDI_ITEMS.forEach(function(item,i){
-    var ok=!!checks[i];
-    var photo=checks['photo_'+i]||null;
-    html+='<div style="background:var(--card);border-radius:14px;overflow:hidden;border:1px solid rgba(52,211,153,'+(ok?'.2':'.06')+');margin-bottom:2px;">';
-    html+='<div onclick="toggleHygMardi('+i+')" style="display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;">'
-      +'<div style="width:24px;height:24px;border-radius:7px;border:2px solid '+(ok?'#34d399':'rgba(255,255,255,.2)')+';background:'+(ok?'#34d399':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">'+(ok?'✓':'')+'</div>'
-      +'<span style="font-size:14px;">'+item.icon+'</span>'
-      +'<span style="flex:1;font-size:13px;font-weight:700;color:'+(ok?'rgba(255,255,255,.35)':'var(--t1)')+';'+(ok?'text-decoration:line-through;':'')+'">'+item.label+'</span>'
-      +(item.hasPhoto?'<label style="cursor:pointer;"><input type="file" accept="image/*" capture="environment" style="display:none;" onchange="hygMardiUploadPhoto(this,'+i+')"><span style="font-size:18px;" title="Ajouter photo">📷</span></label>':'')
+  HYG_MARDI_CATS.forEach(function(cat,ci){
+    html+='<div style="display:flex;align-items:center;gap:6px;padding:9px 4px 6px;">'
+      +'<span style="font-size:14px;">'+cat.icon+'</span>'
+      +'<span style="font-size:11px;font-weight:900;color:'+cat.col+';text-transform:uppercase;letter-spacing:.4px;">'+cat.label+'</span>'
       +'</div>';
-    if(photo){
-      html+='<div style="padding:0 14px 12px;">'
-        +'<div style="position:relative;display:inline-block;">'
-        +'<img src="'+photo+'" style="width:100%;max-width:200px;height:100px;object-fit:cover;border-radius:10px;border:1px solid rgba(52,211,153,.3);" onclick="openImgLightbox(\''+photo+'\')">'
-        +'<button onclick="delHygMardiPhoto('+i+')" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#ef4444;border:none;color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>'
-        +'</div>'
-        +'<div style="font-size:9px;color:#34d399;margin-top:4px;font-weight:700;">📸 Photo briefing enregistrée</div>'
+    cat.items.forEach(function(item,ii){
+      var key=ci+'_'+ii;
+      var ok=!!checks[key];
+      var photos=checks['photos_'+key]||[];
+      html+='<div style="background:var(--card);border-radius:14px;overflow:hidden;border:1px solid rgba(52,211,153,'+(ok?'.2':'.06')+');margin-bottom:6px;">';
+      html+='<div onclick="toggleHygMardi(\''+key+'\')" style="display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;">'
+        +'<div style="width:24px;height:24px;border-radius:7px;border:2px solid '+(ok?'#34d399':'rgba(255,255,255,.2)')+';background:'+(ok?'#34d399':'transparent')+';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">'+(ok?'✓':'')+'</div>'
+        +'<span style="font-size:14px;">'+item.icon+'</span>'
+        +'<span style="flex:1;font-size:13px;font-weight:700;color:'+(ok?'rgba(255,255,255,.35)':'var(--t1)')+';'+(ok?'text-decoration:line-through;':'')+'">'+item.label+'</span>'
+        +(item.hasPhoto?'<span style="font-size:9px;font-weight:800;color:'+(photos.length>=item.maxPhotos?'#34d399':'#fbbf24')+';background:rgba(255,255,255,.06);border-radius:8px;padding:3px 7px;">'+(item.maxPhotos===1?(photos.length?'✓ photo':'📷 photo'):(photos.length+'/'+item.maxPhotos))+'</span>':'')
         +'</div>';
-    }
-    html+='</div>';
+      if(item.hasPhoto){
+        html+='<div style="padding:0 14px 12px;">'
+          +'<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+        photos.forEach(function(ph,pi){
+          html+='<div style="position:relative;">'
+            +'<img src="'+ph+'" style="width:64px;height:64px;object-fit:cover;border-radius:9px;border:1px solid rgba(52,211,153,.3);" onclick="event.stopPropagation();openImgLightbox(\''+ph+'\')">'
+            +'<button onclick="event.stopPropagation();delHygMardiPhoto(\''+key+'\','+pi+')" style="position:absolute;top:-5px;right:-5px;width:17px;height:17px;border-radius:50%;background:#ef4444;border:none;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>'
+            +'</div>';
+        });
+        if(photos.length<item.maxPhotos){
+          html+='<label style="width:64px;height:64px;border-radius:9px;border:1.5px dashed rgba(52,211,153,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'
+            +'<input type="file" accept="image/*" capture="environment" style="display:none;" onchange="hygMardiUploadPhoto(this,\''+key+'\')">'
+            +'<span style="font-size:20px;color:#34d399;">＋</span></label>';
+        }
+        html+='</div>'
+          +'<div style="font-size:9px;color:var(--t2);margin-top:6px;">📸 '+(item.maxPhotos===1?(photos.length?'Photo du magasin enregistrée':'Photo du magasin'):(photos.length+' / '+item.maxPhotos+' photos du briefing'))+'</div>'
+          +'</div>';
+      }
+      html+='</div>';
+    });
   });
   c.innerHTML=html;
 }
 
-function toggleHygMardi(i){
+function toggleHygMardi(key){
   var today=tstr();
   var d=loadHyg(); if(!d.mardi)d.mardi={};
   if(!d.mardi[today])d.mardi[today]={};
-  d.mardi[today][i]=!d.mardi[today][i];
+  d.mardi[today][key]=!d.mardi[today][key];
   saveHyg(d); renderHygMardi();
 }
-function hygMardiUploadPhoto(input,idx){
+function hygMardiUploadPhoto(input,key){
   if(!input.files||!input.files.length)return;
+  var fEntry=_hygMardiFlat.filter(function(f){return f.key===key;})[0];
+  var maxP=fEntry?fEntry.item.maxPhotos:1;
   var reader=new FileReader();
   reader.onload=function(e){
     var img=new Image();
@@ -15809,22 +15851,26 @@ function hygMardiUploadPhoto(input,idx){
       var today=tstr();
       var d=loadHyg(); if(!d.mardi)d.mardi={};
       if(!d.mardi[today])d.mardi[today]={};
-      d.mardi[today]['photo_'+idx]=canvas.toDataURL('image/jpeg',.75);
-      d.mardi[today][idx]=true;
+      var pk='photos_'+key;
+      if(!d.mardi[today][pk])d.mardi[today][pk]=[];
+      if(d.mardi[today][pk].length>=maxP){showT('⚠️','Maximum '+maxP+' photo'+(maxP>1?'s':'')+' atteint');return;}
+      d.mardi[today][pk].push(canvas.toDataURL('image/jpeg',.75));
+      d.mardi[today][key]=true;
       saveHyg(d); renderHygMardi();
-      showT('📸','Photo briefing enregistrée');
+      showT('📸',maxP===1?'Photo enregistrée':'Photo '+d.mardi[today][pk].length+'/'+maxP+' ajoutée');
     };
     img.src=e.target.result;
   };
   reader.readAsDataURL(input.files[0]);
   input.value='';
 }
-function delHygMardiPhoto(idx){
-  showConfirm('🗑️ Supprimer','Supprimer cette photo hygiène ?',function(){
+function delHygMardiPhoto(key,idx){
+  showConfirm('🗑️ Supprimer','Supprimer cette photo ?',function(){
     var today=tstr();
-  var d=loadHyg();
-  if(d.mardi&&d.mardi[today])delete d.mardi[today]['photo_'+idx];
-  saveHyg(d); renderHygMardi();
+    var d=loadHyg();
+    var pk='photos_'+key;
+    if(d.mardi&&d.mardi[today]&&d.mardi[today][pk])d.mardi[today][pk].splice(idx,1);
+    saveHyg(d); renderHygMardi();
   });
 }
 function resetHygMardi(){
