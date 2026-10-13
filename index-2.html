@@ -29,6 +29,7 @@
   --yellow:#eab308;
   --purple:#a855f7;
   --t1:#f8faff;--t2:#94a3b8;--t3:#64748b;
+  --card:rgba(255,255,255,.045);
   /* Rayon colors */
   --ray-liquides:#0ea5e9;
   --ray-sale:#f97316;
@@ -950,6 +951,11 @@ body.light #pgObjectifsKpi [style*="border-bottom:1px solid rgba(255,255,255,.07
 body.light #pgArchiveResume .pg-topbar [style*="color:#f8faff"]{color:#0d1117!important;}
 body.light #pgArchiveDetail .pg-topbar [style*="color:#f8faff"]{color:#0d1117!important;}
 body.light #archiveDetailTitle{color:#0d1117!important;}
+
+/* ══ LIGHT MODE — Objectifs (modal cibles) & Réglages (backup/briefing) : titres blancs sur fond msh devenu clair ══ */
+body.light #kpiObjectifsModal [style*="color:#f8faff"]{color:#0d1117!important;}
+body.light #pmov [style*="color:#f8faff"]{color:#0d1117!important;}
+body.light #pmov input[style*="color:#f8faff"]{color:#f8faff!important;}
 
 /* ══ PROFIL — LIGHT MODE ══ */
 body.light #hname{color:#0d1117!important;}
@@ -2017,7 +2023,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     </div>
 
     <!-- Backup Status -->
-    <div id="dashBackupCard" onclick="openSettings()" style="border-radius:14px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;">
+    <div id="dashBackupCard" onclick="openDr('settings')" style="border-radius:14px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;">
       <div style="display:flex;align-items:center;gap:10px;">
         <div id="dashBackupIco" style="font-size:20px;">💾</div>
         <div>
@@ -2092,7 +2098,8 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
           <div id="mdTime" style="font-size:13px;font-weight:800;color:#60a5fa;font-family:'IBM Plex Mono';"></div>
         </div>
         <div id="mdName" style="font-size:24px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.1;margin-bottom:6px;"></div>
-        <div id="mdDateFull" style="font-size:12px;font-weight:700;color:var(--t2);letter-spacing:.5px;margin-bottom:16px;"></div>
+        <div id="mdDateFull" style="font-size:12px;font-weight:700;color:var(--t2);letter-spacing:.5px;margin-bottom:8px;"></div>
+        <div id="mdSemTheme" onclick="closeMorningDash();goPage('semaineType')" style="display:inline-flex;align-items:center;gap:6px;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.35);border-radius:20px;padding:5px 12px;margin-bottom:14px;cursor:pointer;"></div>
         <!-- Score Santé -->
         <div style="display:flex;align-items:center;gap:12px;">
           <div style="flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;">
@@ -2435,6 +2442,14 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
         <div style="font-size:22px;line-height:1;">📅</div>
         <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Calendrier Promo</div>
         <span style="background:rgba(167,139,250,.25);border-radius:20px;padding:2px 7px;font-size:9px;color:#ddd6fe;font-weight:700;align-self:flex-start;">Animations</span>
+      </div>
+
+      <!-- MERCHANDISING CLIENT -->
+      <div onclick="goPage('merchClient')" style="background:linear-gradient(145deg,#1a1033,#5b21b6);border:1px solid rgba(196,181,253,.5);border-radius:16px;padding:12px 10px;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:5px;min-height:90px;grid-column:span 2;">
+        <div style="position:absolute;right:-6px;bottom:-6px;font-size:44px;opacity:.12;line-height:1;pointer-events:none;">👁️</div>
+        <div style="font-size:22px;line-height:1;">👁️</div>
+        <div style="font-size:12px;font-weight:900;color:#fff;font-family:'Syne';line-height:1.2;flex:1;">Merchandising Côté Client</div>
+        <span style="background:rgba(196,181,253,.2);border-radius:20px;padding:2px 7px;font-size:9px;color:#ddd6fe;font-weight:700;align-self:flex-start;">Coaching</span>
       </div>
 
     </div>
@@ -3942,6 +3957,16 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="color:var(--t2);font-size:22px;">›</div>
     </div>
 
+    <div onclick="goPage('sigJourn')" style="background:linear-gradient(135deg,#1a0a2e,#3d1a5c);border:1px solid rgba(192,132,252,.4);border-radius:18px;padding:18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-8px;bottom:-8px;font-size:62px;opacity:.08;line-height:1;">🖊️</div>
+      <div style="font-size:34px;">🖊️</div>
+      <div style="flex:1;">
+        <div style="font-size:16px;font-weight:900;color:#fff;font-family:'Syne';">Signature Journalière</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:2px;">Documents caissier · Signature quotidienne</div>
+      </div>
+      <div style="color:var(--t2);font-size:22px;">›</div>
+    </div>
+
     <div style="font-size:9px;font-weight:900;letter-spacing:2px;color:var(--t2);text-transform:uppercase;margin-bottom:10px;margin-top:6px;padding-left:4px;">DOCUMENTS COMMERCIAUX</div>
 
 
@@ -4138,6 +4163,23 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
 <!-- ══ SIGNATURE JOURNÉE ══ -->
 
 <!-- ══ SIGNATURE JOURNÉE FORM MODAL ══ -->
+<!-- ══ SIGNATURE JOURNALIÈRE — LISTE ══ -->
+<div class="pg" id="pgSigJourn">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('adminControle')" style="font-size:13px;font-weight:700;color:#c084fc;cursor:pointer;">‹ Comptabilité</div>
+    <div class="pg-title" style="font-size:13px;">🖊️ Signature Journalière</div>
+    <button onclick="openSigJournForm()" style="background:#3d1a5c;border:1.5px solid #c084fc;color:#c084fc;font-size:20px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:300;">+</button>
+  </div>
+  <div class="scroll" style="padding:16px 16px 90px;">
+    <div id="sjList"></div>
+    <div id="sjEmpty" style="display:none;text-align:center;padding:40px 20px;color:var(--t2);">
+      <div style="font-size:36px;margin-bottom:10px;">🖊️</div>
+      <div style="font-size:13px;font-weight:700;">Aucune journée enregistrée</div>
+      <div style="font-size:11px;margin-top:4px;">Appuyez sur + pour ajouter</div>
+    </div>
+  </div>
+</div>
+
 <div class="mov" id="sigJournMov" style="display:none;">
   <div class="msh" style="max-height:92vh;overflow-y:auto;">
     <div class="mhdl"></div>
@@ -5179,6 +5221,17 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     </div>
   </div>
   <div class="scroll" style="padding:14px 16px 90px;">
+
+    <!-- ── CARTE : 4 RÈGLES POUR DES RÉUNIONS ── -->
+    <div onclick="openReglesReunion('reunion')" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);border-radius:16px;padding:14px 16px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-6px;bottom:-8px;font-size:52px;opacity:.1;line-height:1;pointer-events:none;">🍕</div>
+      <div style="font-size:28px;">🍕</div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:900;color:#fff;font-family:'Syne';">4 Règles pour des Réunions</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.75);margin-top:2px;">Qui ne vident pas la pièce · à lire avant chaque réunion</div>
+      </div>
+      <div style="color:rgba(255,255,255,.7);font-size:20px;">›</div>
+    </div>
 
     <!-- ── FORM ── -->
     <div id="reunionForm" style="display:none;background:var(--s2);border-radius:16px;padding:14px;margin-bottom:14px;border:1px solid rgba(56,189,248,.3);">
@@ -6803,14 +6856,6 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="margin-top:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;">
       <div style="font-size:10px;font-weight:900;color:var(--t2);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;">📋 Normes HACCP par zone</div>
       <div id="cdfNormes"></div>
-    </div>
-
-    <!-- IA Analyse -->
-    <div style="margin-top:14px;">
-      <button id="cdfIABtn" onclick="cdfAnalyseIA()" style="width:100%;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(99,102,241,.15));border:1px solid rgba(124,58,237,.4);color:#c084fc;font-size:12px;font-weight:800;padding:12px;border-radius:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
-        <span>🤖</span><span>Analyser la Chaîne du Froid</span>
-      </button>
-      <div id="cdfIAResult" style="margin-top:2px;"></div>
     </div>
   </div>
 </div>
@@ -8645,8 +8690,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
      PAGE TIMELINE — JOURNÉE TYPE DIRECTEUR
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgTimeline">
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
-    <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">🕐 Ma Journée</div>
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:14px;">🕐 Ma Journée</div>
     <div style="display:flex;gap:8px;">
       <button onclick="tlResetDay()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:6px 12px;border-radius:10px;cursor:pointer;">↺ Reset</button>
       <button onclick="openTlAddModal()" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);border:none;color:#fff;font-size:11px;font-weight:800;padding:6px 14px;border-radius:10px;cursor:pointer;">+ Ajouter</button>
@@ -8821,10 +8867,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
      PAGE INDICATEURS COMMERCIAUX
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgCA">
-
-  <!-- TOPBAR -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
-    <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">💰 Indicateurs</div>
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:14px;">💰 Indicateurs</div>
     <div style="display:flex;gap:8px;">
       <div id="caDateNav" style="font-size:11px;font-weight:700;color:var(--t2);display:flex;align-items:center;gap:6px;">
         <button onclick="caNavDay(-1)" style="background:var(--s2);border:1px solid var(--bord);color:var(--t2);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">‹</button>
@@ -9052,8 +9097,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
      PAGE PRÉSENCES & ABSENCES
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgPresences">
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
-    <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">👥 Présences</div>
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:14px;">👥 Présences</div>
     <div style="display:flex;gap:8px;">
       <button onclick="paOpenAddModal()" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);border:none;color:#fff;font-size:11px;font-weight:800;padding:7px 14px;border-radius:10px;cursor:pointer;">+ Employé</button>
       <button onclick="paExportPDF()" style="background:rgba(59,130,246,.15);border:1.5px solid rgba(59,130,246,.4);color:#60a5fa;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">ð</button>
@@ -9109,8 +9155,9 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
      PAGE CHECKLIST RONDE MAGASIN
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgRonde">
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
-    <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">📋 Ronde Magasin</div>
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
+    <div class="pg-title" style="font-size:14px;">📋 Ronde Magasin</div>
     <div style="display:flex;gap:8px;">
       <button onclick="rondeExportPDF()" style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:#4ade80;font-size:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;">ð</button>
       <button onclick="rondeReset()" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--t2);font-size:11px;font-weight:700;padding:6px 12px;border-radius:10px;cursor:pointer;">↺ Reset</button>
@@ -9141,7 +9188,8 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
      PAGE PRÉPARATION J+1
 ══════════════════════════════════════════════ -->
 <div class="pg" id="pgJ1">
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px 0;flex-shrink:0;">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;">‹ Accueil</div>
     <div>
       <div style="font-size:18px;font-weight:900;font-family:'Syne',sans-serif;">📅 Prép. J+1</div>
       <div id="j1DateLabel" style="font-size:11px;color:var(--t2);margin-top:2px;"></div>
@@ -10541,7 +10589,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="font-size:10px;font-weight:900;color:#2dd4bf;letter-spacing:1.5px;text-transform:uppercase;">VIII. Techniques de Productivité Express</div>
       <div style="height:1.5px;flex:1;background:linear-gradient(90deg,transparent,rgba(45,212,191,.6));"></div>
     </div>
-    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">8 méthodes courtes pour reprendre le contrôle de sa journée</div>
+    <div style="font-size:10px;color:var(--t2);text-align:center;margin-bottom:10px;font-style:italic;">9 méthodes courtes pour reprendre le contrôle de sa journée</div>
 
     <div onclick="goPage('crapaud')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
       <div style="font-size:26px;">🐸</div>
@@ -10613,12 +10661,32 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="color:var(--t2);font-size:18px;">›</div>
     </div>
 
-    <div onclick="goPage('timeblocking')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+    <div onclick="goPage('timeblocking')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;">
       <div style="font-size:26px;">⏰</div>
       <div style="flex:1;">
         <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-8</div>
         <div style="font-size:14px;font-weight:900;color:#fff;">Time Blocking</div>
         <div style="font-size:10px;color:var(--t2);margin-top:1px;">Découper sa journée en créneaux dédiés</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="openReglesReunion('excellence')" style="background:linear-gradient(135deg,#134e4a,#0f766e);border:1px solid rgba(45,212,191,.3);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🍕</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#2dd4bf;margin-bottom:2px;">VIII-9</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">4 Règles pour des Réunions</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Deux pizzas, chaise vide, zéro PowerPoint, silence</div>
+      </div>
+      <div style="color:var(--t2);font-size:18px;">›</div>
+    </div>
+
+    <div onclick="goPage('leaderTruths')" style="background:linear-gradient(135deg,#1c1917,#44403c);border:1px solid rgba(220,38,38,.35);border-radius:14px;padding:14px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:26px;">🧭</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;color:#f87171;margin-bottom:2px;">VIII-10</div>
+        <div style="font-size:14px;font-weight:900;color:#fff;">10 Vérités Brutales du Leader</div>
+        <div style="font-size:10px;color:var(--t2);margin-top:1px;">Solitude, échec, feedback, repos — sans filtre</div>
       </div>
       <div style="color:var(--t2);font-size:18px;">›</div>
     </div>
@@ -10797,7 +10865,7 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
     <div style="width:34px;"></div>
   </div>
   <div class="scroll" style="padding:16px 16px 90px;">
-    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">8 techniques éprouvées pour maximiser votre productivité quotidienne</div>
+    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">10 techniques éprouvées pour maximiser votre productivité quotidienne</div>
 
     <div onclick="goPage('crapaud')" style="background:linear-gradient(135deg,#7c2d12,#c2410c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
       <div style="font-size:32px;">🐸</div>
@@ -10851,6 +10919,325 @@ body.light #bioSetupCard{background:rgba(99,102,241,.06);border-color:rgba(99,10
       <div style="font-size:32px;">⚖️</div>
       <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">6 Lois de Gestion du Temps</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">Murphy, Carlson, Fraisse… + prompts IA prêts à l'emploi</div></div>
       <div style="color:var(--t2);font-size:20px;">›</div>
+    </div>
+
+    <div onclick="goPage('reglesReunion')" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px;">🍕</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">4 Règles pour des Réunions</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">Qui ne vident pas la pièce</div></div>
+      <div style="color:var(--t2);font-size:20px;">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 4 RÈGLES RÉUNIONS ══ -->
+<div class="pg" id="pgReglesReunion">
+  <div class="pg-topbar">
+    <div class="pg-back" id="regReunBackLbl" onclick="backReglesReunion()" style="font-size:13px;font-weight:700;color:#f87171;cursor:pointer;">‹ Temps</div>
+    <div style="font-size:15px;font-weight:900;color:var(--t1);font-family:'Syne';">🍕 4 Règles Réunions</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(239,68,68,.15),rgba(185,28,28,.08));border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;"><b style="color:#f87171;">95% décrochent</b> à un moment ou un autre quand une réunion s'étire, se dilue ou manque de cadre. 4 règles simples pour des réunions qui ne vident pas la pièce.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:#f87171;font-family:'IBM Plex Mono';">5-8</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;">PERSONNES MAX<br>pour des échanges efficaces</div>
+      </div>
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:#f87171;font-family:'IBM Plex Mono';">20 min</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;">DE LECTURE<br>au début de la réunion</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#b91c1c;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🍕</div>
+          <div><div style="font-size:13px;font-weight:900;color:#f87171;">01 · La Règle des Deux Pizzas</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">5 à 8 personnes, pas 15 spectateurs</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Si deux pizzas ne suffisent pas à nourrir le groupe, la réunion est probablement trop grande. Les petits groupes débattent mieux, décident plus vite et noient moins les idées.</div>
+        <div style="margin-top:10px;background:rgba(220,38,38,.12);border-radius:10px;padding:8px 10px;font-size:10px;color:#fca5a5;"><b>Repère utile :</b> viser souvent 5 à 8 personnes pour tes réunions d'équipe.</div>
+      </div>
+      <div style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#b91c1c;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🪑</div>
+          <div><div style="font-size:13px;font-weight:900;color:#f87171;">02 · La Chaise Vide</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Une place symbolique pour le client</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Laissez symboliquement une place au client ou à l'utilisateur final. Cela évite les discussions autocentrées et rappelle que la réunion doit améliorer une réalité concrète, pas seulement produire des commentaires.</div>
+        <div style="margin-top:10px;background:rgba(220,38,38,.12);border-radius:10px;padding:8px 10px;font-size:10px;color:#fca5a5;"><b>Question clé :</b> pour qui cette décision améliore-t-elle vraiment quelque chose ?</div>
+      </div>
+      <div style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#b91c1c;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚫</div>
+          <div><div style="font-size:13px;font-weight:900;color:#f87171;">03 · Zéro PowerPoint, Plus de Fond</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">0 slide inutile</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Quand tout passe par des slides, on résume trop tôt. Préférez une note structurée, lisible et argumentée. Elle force la clarté, expose les hypothèses et élève la qualité de la discussion.</div>
+        <div style="margin-top:10px;background:rgba(220,38,38,.12);border-radius:10px;padding:8px 10px;font-size:10px;color:#fca5a5;"><b>Objectif :</b> moins de spectacle, plus de raisonnement.</div>
+      </div>
+      <div style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#b91c1c;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📖</div>
+          <div><div style="font-size:13px;font-weight:900;color:#f87171;">04 · Commencer par le Silence</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">20 min de lecture silencieuse</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Démarrez par 20 minutes de lecture silencieuse d'une note commune. Chacun part du même niveau d'information, les échanges deviennent plus précis et les objections gagnent en qualité.</div>
+        <div style="margin-top:10px;background:rgba(220,38,38,.12);border-radius:10px;padding:8px 10px;font-size:10px;color:#fca5a5;">Le silence au début fait souvent gagner du temps à la fin.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:14px;background:var(--s2);border-radius:14px;">
+      <div style="font-size:13px;font-weight:900;color:var(--t1);">Une bonne réunion n'ajoute pas du bruit.</div>
+      <div style="font-size:11px;color:#f87171;margin-top:4px;">Elle concentre l'attention, clarifie les choix et accélère l'exécution.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MERCHANDISING CLIENT — HUB ══ -->
+<div class="pg" id="pgMerchClient">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('terrain')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Terrain</div>
+    <div class="pg-title" style="font-size:14px;">👁️ Merchandising Côté Client</div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="font-size:11px;color:var(--t2);margin-bottom:14px;text-align:center;line-height:1.5;">Comprendre comment le client regarde vraiment le rayon</div>
+
+    <div onclick="goPage('merchClient3')" style="background:linear-gradient(135deg,#1a1033,#5b21b6);border-radius:16px;padding:16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px;border:1px solid rgba(196,181,253,.4);">
+      <div style="font-size:32px;">👁️</div>
+      <div style="flex:1;"><div style="font-size:15px;font-weight:900;color:#fff;font-family:'Syne';">#3 · Pourquoi le Client ne Lit Pas</div><div style="font-size:11px;color:var(--t2);margin-top:2px;">Il scanne, il ne lit pas · 3 à 7 secondes</div></div>
+      <div style="color:var(--t2);font-size:20px;">›</div>
+    </div>
+
+    <div style="text-align:center;padding:16px;color:var(--t3);font-size:10px;">#1 et #2 à venir</div>
+  </div>
+</div>
+
+<!-- ══ MERCHANDISING CLIENT #3 ══ -->
+<div class="pg" id="pgMerchClient3">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('merchClient')" style="font-size:13px;font-weight:700;color:#a78bfa;cursor:pointer;">‹ Merchandising</div>
+    <div style="font-size:14px;font-weight:900;color:var(--t1);font-family:'Syne';">👁️ #3 · Le Client ne Lit Pas</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(91,33,182,.08));border:1px solid rgba(167,139,250,.35);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;"><b style="color:#c084fc;">Le client ne lit pas.</b> Il scanne. Et s'il doit lire pour comprendre, il abandonne. Le scan doit être guidé.</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:22px;font-weight:900;color:#c084fc;font-family:'IBM Plex Mono';">3-7 s</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:2px;">DEVANT LE RAYON<br>pas plus</div>
+      </div>
+      <div style="background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);border-radius:12px;padding:12px;text-align:center;">
+        <div style="font-size:11px;font-weight:900;color:#c084fc;">👁️ ➜ 🧠 ➜ ⚖️ ➜ ✓</div>
+        <div style="font-size:9px;color:var(--t2);margin-top:4px;">Regarder · Comprendre<br>Comparer · Décider</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(88,28,135,.15);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⏱️</div>
+          <div><div style="font-size:13px;font-weight:900;color:#c084fc;">1 · Il n'a pas le temps</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">3 à 7 secondes devant un meuble</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Dans ce laps de temps, il veut comprendre, comparer et décider. Pas plus.</div>
+        <div style="margin-top:10px;background:rgba(124,58,237,.15);border-radius:10px;padding:8px 10px;font-size:10px;color:#d8b4fe;">La lecture est trop lente. Le scan est naturel.</div>
+      </div>
+
+      <div style="background:rgba(88,28,135,.15);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧠</div>
+          <div><div style="font-size:13px;font-weight:900;color:#c084fc;">2 · Il est saturé d'informations</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Prix, promos, packagings, messages, couleurs, stimuli</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Le magasin lui envoie trop de signaux à la fois. Le cerveau choisit toujours la voie la plus simple.</div>
+        <div style="margin-top:10px;background:rgba(124,58,237,.15);border-radius:10px;padding:8px 10px;font-size:10px;color:#d8b4fe;">Le cerveau choisit la voie la plus simple : regarder, pas lire.</div>
+      </div>
+
+      <div style="background:rgba(88,28,135,.15);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">👀</div>
+          <div><div style="font-size:13px;font-weight:900;color:#c084fc;">3 · Il ne sait pas où regarder</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Quand tout parle, rien ne parle</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Quand tout est important, rien n'est prioritaire : le regard se perd, l'attention se disperse, la compréhension s'effondre.</div>
+        <div style="margin-top:10px;background:rgba(124,58,237,.15);border-radius:10px;padding:8px 10px;font-size:10px;color:#d8b4fe;">C'est un problème de hiérarchie visuelle.</div>
+      </div>
+
+      <div style="background:rgba(88,28,135,.15);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚫</div>
+          <div><div style="font-size:13px;font-weight:900;color:#c084fc;">4 · Les termes techniques ne l'aident pas</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Bluetooth 5.3 · Lumens · IP68 · ANC · Hz · mAh</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Le client ne comprend pas, ou ne veut pas comprendre. Il cherche un usage, un bénéfice, une promesse — pas une spécification.</div>
+        <div style="margin-top:10px;background:rgba(124,58,237,.15);border-radius:10px;padding:8px 10px;font-size:10px;color:#d8b4fe;">Pas une fiche technique.</div>
+      </div>
+
+      <div style="background:rgba(88,28,135,.15);border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">❓</div>
+          <div><div style="font-size:13px;font-weight:900;color:#c084fc;">5 · Le rayon ne donne pas l'essentiel</div><div style="font-size:10px;color:var(--t2);margin-top:2px;">Il doit lire, chercher, interpréter</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Quand l'essentiel n'est pas visible immédiatement, le client hésite, ralentit, puis renonce.</div>
+        <div style="margin-top:10px;background:rgba(124,58,237,.15);border-radius:10px;padding:8px 10px;font-size:10px;color:#d8b4fe;">L'hésitation est un effet de complexité.</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:10px;font-weight:900;color:#a78bfa;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Ce qui guide le regard</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.8;">🔵 Les contrastes · 📊 Les volumes · 🪧 Les repères · 🎯 Les intentions · 💡 La mise en scène</div>
+    </div>
+
+    <div style="text-align:center;padding:14px;background:var(--s2);border-radius:14px;">
+      <div style="font-size:13px;font-weight:900;color:var(--t1);">Le client ne lit pas parce qu'il est paresseux.</div>
+      <div style="font-size:11px;color:#c084fc;margin-top:4px;">Il ne lit pas parce qu'il est humain. Un rayon lisible n'est pas un rayon rempli d'informations — c'est un rayon qui parle sans mots.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MA SEMAINE TYPE ══ -->
+<div class="pg" id="pgSemaineType">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('home')" style="font-size:13px;font-weight:700;color:#a5b4fc;cursor:pointer;">‹ Accueil</div>
+    <div style="font-size:14px;font-weight:900;color:var(--t1);font-family:'Syne';">📆 Ma Semaine Type</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(129,140,248,.06));border:1px solid rgba(129,140,248,.3);border-radius:16px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:10px;font-weight:900;color:#a5b4fc;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Le fil rouge</div>
+      <div style="font-size:13px;font-weight:800;color:var(--t1);">Performance · Client · Équipe</div>
+    </div>
+
+    <div id="semList"></div>
+
+    <div style="background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.25);border-radius:14px;padding:14px;margin-top:6px;margin-bottom:10px;">
+      <div style="font-size:11px;font-weight:900;color:#a5b4fc;margin-bottom:4px;">🏆 Règle d'or</div>
+      <div style="font-size:11px;color:var(--t2);line-height:1.6;">Ne pas subir la semaine. L'anticiper.</div>
+      <div style="font-size:11px;color:#a5b4fc;font-weight:700;margin-top:6px;">Analyser → Planifier → Coacher → Contrôler</div>
+    </div>
+    <div style="text-align:center;font-size:9px;color:var(--t3);">Touchez un jour pour personnaliser son thème</div>
+  </div>
+</div>
+
+<!-- ══ ÉDITION JOUR SEMAINE TYPE ══ -->
+<div class="mov" id="semEditMov" style="display:none;">
+  <div class="msh">
+    <div class="mhdl"></div>
+    <div class="mtit" id="semEditTit">Modifier · Lundi</div>
+    <div style="margin-bottom:10px;">
+      <label class="fl">Icône (emoji)</label>
+      <input type="text" class="fi" id="semEditIcon" maxlength="4" style="width:100%;box-sizing:border-box;">
+    </div>
+    <div style="margin-bottom:10px;">
+      <label class="fl">Thème du jour</label>
+      <input type="text" class="fi" id="semEditTheme" placeholder="Ex : Cadrer" style="width:100%;box-sizing:border-box;">
+    </div>
+    <div style="margin-bottom:14px;">
+      <label class="fl">Description</label>
+      <textarea class="fi" id="semEditDesc" rows="3" style="width:100%;box-sizing:border-box;resize:vertical;"></textarea>
+    </div>
+    <button class="mb" onclick="saveSemEdit()">💾 Enregistrer</button>
+    <button class="mb sec" onclick="closeM('semEditMov')">Annuler</button>
+  </div>
+</div>
+
+<!-- ══ 10 VÉRITÉS BRUTALES DU LEADER ══ -->
+<div class="pg" id="pgLeaderTruths">
+  <div class="pg-topbar">
+    <div class="pg-back" onclick="goPage('excellence')" style="font-size:13px;font-weight:700;color:#f87171;cursor:pointer;">‹ Excellence</div>
+    <div style="font-size:13px;font-weight:900;color:var(--t1);font-family:'Syne';">🧭 10 Vérités du Leader</div>
+    <div style="width:34px;"></div>
+  </div>
+  <div class="scroll" style="padding:14px 16px 90px;">
+    <div style="background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(28,25,23,.3));border:1px solid rgba(220,38,38,.3);border-radius:16px;padding:16px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--t2);line-height:1.7;"><b style="color:#f87171;">10 vérités brutales</b> que tout leader doit lire. Sans filtre, sans excuse — pour diriger avec lucidité.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">1</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">🧘 Le leadership est parfois solitaire</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Tu devras souvent trancher avant d'être rassuré.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">2</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">👎 Tout le monde ne t'aimera pas</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Cherche le respect, pas l'approbation.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">3</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">💔 L'échec fait partie du jeu</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Analyse, corrige, répare.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">4</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">📈 Le succès ne vient pas vite</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">La constance bat l'excitation.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">5</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">👥 Montre l'exemple</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">L'équipe copie ce que tu fais, pas ce que tu dis.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">6</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">❌ Dire non est un pouvoir</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Tout accepter détruit le cap.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">7</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">💬 Le feedback est indispensable</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Une vérité utile vaut mieux qu'un silence confortable.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">8</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">⚡ Le conflit fait partie du rôle</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Traité tôt, il évite le pourrissement.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">9</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">⏱️ Ton temps est limité</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Délègue, priorise, coupe le bruit.</div>
+      </div>
+
+      <div style="background:rgba(68,64,60,.25);border:1px solid rgba(220,38,38,.25);border-radius:14px;padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#991b1b;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;">10</div>
+          <div style="font-size:13px;font-weight:900;color:#fff;">🔋 Prendre soin de toi est obligatoire</div>
+        </div>
+        <div style="font-size:11px;color:var(--t2);line-height:1.6;">Un leader épuisé fragilise tout le reste.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:14px;background:var(--s2);border-radius:14px;">
+      <div style="font-size:12px;font-weight:900;color:var(--t1);">🧭 Diriger, c'est accepter l'inconfort</div>
+      <div style="font-size:11px;color:#f87171;margin-top:4px;">pour que l'équipe, elle, avance avec confiance.</div>
     </div>
   </div>
 </div>
@@ -13510,7 +13897,7 @@ function goPage(p){
     x.style.animation='none';
   });
   document.querySelectorAll('.bi').forEach(x=>x.classList.remove('on'));
-  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',loistemps:'pgLoisTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales',notesVocales:'pgVoiceNotes',planAction:'pgPlanAction',planActionStats:'pgPlanActionStats'};
+  const map={home:'pgHome',taches:'pgTaches',terrain:'pgTerrain',commercial:'pgCommercial',admin:'pgAdmin',dlc:'pgDlc',chiffres:'pgChiffres',equipe:'pgEquipe',vigilance:'pgVigilance',planning:'pgPlanning',hygiene:'pgHygiene',reunion:'pgReunion',pointage:'pgPointage',conge:'pgConge',retenus:'pgRetenus',pgAcompte:'pgAcompte',pgAvance:'pgAvance',pgAchat:'pgAchat',listepersonnel:'pgListePersonnel',avancees:'pgAvancees',excellence:'pgExcellence',pareto:'pgPareto',pdca:'pgPdca',eisenhower:'pgEisenhower',contraintes:'pgContraintes',lean:'pgLean',sixsigma:'pgSixsigma',kaizen:'pgKaizen',cinqs:'pgCinqs',crapaud:'pgCrapaud',deepwork:'pgDeepwork',methode135:'pgMethode135',timeblocking:'pgTimeblocking',documents:'pgDocuments',coswinGlpi:'pgCoswinGlpi',resume:'pgResume',archiveResume:'pgArchiveResume',archiveDetail:'pgArchiveDetail',dashboard:'pgDashboard',checklist:'pgChecklist',stats:'pgStats',messagerie:'pgMessagerie',pilotage:'pgPilotage',catalogue:'pgCatalogue',oncCatalogue:'pgOncCatalogue',prixApplication:'pgPrixApplication',vsd:'pgVsd',oncFleg:'pgOncFleg',oncPoissonnerie:'pgOncPoissonnerie',digitale:'pgDigitale',previsions:'pgPrevisions',saisonnalite:'pgSaisonnalite',saisondetail:'pgSaisonDetail',tendances:'pgTendances',optimisation:'pgOptimisation',demarque:'pgDemarque',veille:'pgVeille',auditRayon:'pgAuditRayon',objectifsKpi:'pgObjectifsKpi',ruptures:'pgRuptures',nonConformites:'pgNonConformites',compteRenduFournisseur:'pgCompteRenduFournisseur',gestionStock:'pgGestionStock',majPlano:'pgMajPlano',instancesSAV:'pgInstancesSAV',savCategorie:'pgSavCategorie',shrinkage:'pgShrinkage',locationTracking:'pgLocationTracking',fefo:'pgFefo',stockLourd:'pgStockLourd',pomodoro:'pgPomodoro',methode333:'pgMethode333',regle2min:'pgRegle2min',batching:'pgBatching',methodeABCDE:'pgMethodeABCDE',methodeMoscow:'pgMethodeMoscow',warren525:'pgWarren525',picklejar:'pgPicklejar',kanban:'pgKanban',gtd:'pgGtd',listeNonFaire:'pgListeNonFaire',regle5sec:'pgRegle5sec',visualisationConseq:'pgVisualisationConseq',partenaire:'pgPartenaire',gestiontemps:'pgGestionTemps',loistemps:'pgLoisTemps',visiteDR:'pgVisiteDR',reunionRegionale:'pgReunionRegionale',arrivageDepot:'pgArrivageDepot',collecteDechets:'pgCollecteDechets',chaineFroid:'pgChaineFroid',anomaliesQte:'pgAnomaliesQte',anomaliesPoissonnerie:'pgAnomaliesPoissonnerie',anomaliesFLEG:'pgAnomaliesFLEG',factureSteg:'pgFactureSteg',visiteAudit:'pgVisiteAudit',adminRH:'pgAdminRH',pointsRH:'pgPointsRH',noteService:'pgNoteService',sanctions:'pgSanctions',congesGlobal:'pgCongesGlobal',suiviFormations:'pgSuiviFormations',adminControle:'pgAdminControle',adminAutorites:'pgAdminAutorites',visiteAutorites:'pgVisiteAutorites',contrats:'pgContrats',demandeAvoir:'pgDemandeAvoir',scorePerf:'pgScorePerf',comparatif:'pgComparatif',equipeLive:'pgEquipeLive',decisions:'pgDecisions',tauxService:'pgTauxService',tauxSecteur:'pgTauxSecteur',offresCommerciales:'pgOffresCommerciales',calendPromo:'pgCalendPromo',ocRayon:'pgOcRayon',ocDetail:'pgOcDetail',planTg:'pgPlanTg',historique:'pgHistorique',rapportHebdo:'pgRapportHebdo',suiviBL:'pgSuiviBL',timeline:'pgTimeline',actions:'pgActions',ca:'pgCA',presences:'pgPresences',ronde:'pgRonde',j1:'pgJ1',rapport:'pgRapport',reclamations:'pgReclamations',pertesHub:'pgPertesHub',alertesCentre:'pgAlertesCentre',ticketMoyen:'pgTicketMoyen',comptage:'pgComptage',fac:'pgFAC',notesGlobales:'pgNotesGlobales',notesVocales:'pgVoiceNotes',planAction:'pgPlanAction',planActionStats:'pgPlanActionStats',sigJourn:'pgSigJourn',reglesReunion:'pgReglesReunion',merchClient:'pgMerchClient',merchClient3:'pgMerchClient3',semaineType:'pgSemaineType',leaderTruths:'pgLeaderTruths'};
   const nav={home:'navHome',taches:'navTaches',commercial:'navTaches',admin:'navTaches',dlc:'navDlc',chiffres:'navChiffres',equipe:'navTaches',vigilance:'navTaches',planning:'navTaches',hygiene:'navTaches',reunion:'navTaches',pointage:'navTaches',conge:'navTaches',retenus:'navTaches',pgAcompte:'navTaches',pgAvance:'navTaches',pgAchat:'navTaches',listepersonnel:'navTaches',avancees:'navTaches',excellence:'navHome',pareto:'navHome',pdca:'navHome',eisenhower:'navHome',contraintes:'navHome',lean:'navHome',sixsigma:'navHome',kaizen:'navHome',cinqs:'navHome',crapaud:'navHome',deepwork:'navHome',methode135:'navHome',timeblocking:'navHome',documents:'navHome',resume:'navHome',planAction:'navHome',planActionStats:'navHome',pilotage:'navTaches',catalogue:'navTaches',previsions:'navTaches',saisonnalite:'navTaches',saisondetail:'navTaches',tendances:'navTaches',optimisation:'navTaches',demarque:'navTaches',veille:'navTaches',timeline:'navDirecteur',actions:'navDirecteur',ca:'navDirecteur',presences:'navDirecteur',ronde:'navDirecteur',j1:'navDirecteur',rapport:'navDirecteur',scorePerf:'navDirecteur',comparatif:'navDirecteur',equipeLive:'navDirecteur',decisions:'navDirecteur'};
   if(map[p]){
     var activePg=document.getElementById(map[p]);
@@ -13525,7 +13912,7 @@ function goPage(p){
   const fab=document.getElementById('fab-main')||document.querySelector('.fab-main');
   if(fab)fab.style.display=(p==='home'||p==='taches'||p==='commercial')?'block':'none';
   var bnav=document.querySelector('.bnav');
-  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','loistemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','planAction','planActionStats','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline','notesVocales'];
+  var equipePages=['equipe','vigilance','planning','hygiene','reunion','pointage','conge','retenus','pgAcompte','pgAvance','pgAchat','listepersonnel','avancees','optimisation','auditRayon','objectifsKpi','ruptures','nonConformites','compteRenduFournisseur','excellence','pareto','pdca','eisenhower','contraintes','lean','sixsigma','kaizen','cinqs','crapaud','deepwork','methode135','timeblocking','documents','resume','archiveResume','archiveDetail','pilotage','catalogue','oncCatalogue','prixApplication','vsd','oncFleg','oncPoissonnerie','digitale','previsions','saisonnalite','saisondetail','tendances','demarque','veille','admin','adminRH','pointsRH','noteService','sanctions','congesGlobal','suiviFormations','adminControle','adminAutorites','contrats','demandeAvoir','dashboard','checklist','stats','messagerie','gestionStock','majPlano','instancesSAV','savCategorie','shrinkage','locationTracking','fefo','stockLourd','pomodoro','methode333','regle2min','batching','methodeABCDE','methodeMoscow','warren525','picklejar','kanban','gtd','listeNonFaire','regle5sec','visualisationConseq','partenaire','gestiontemps','loistemps','visiteDR','reunionRegionale','anomaliesQte','anomaliesPoissonnerie','anomaliesFLEG','visiteAudit','visiteAutorites','tauxService','tauxSecteur','offresCommerciales','ocRayon','ocDetail','planTg','reclamations','pertesHub','alertesCentre','ticketMoyen','comptage','fac','notesGlobales','planAction','planActionStats','actions','arrivageDepot','ca','calendPromo','chaineFroid','collecteDechets','comparatif','coswinGlpi','decisions','equipeLive','factureSteg','historique','j1','presences','rapport','rapportHebdo','ronde','scorePerf','suiviBL','timeline','notesVocales','sigJourn','reglesReunion','merchClient','merchClient3','semaineType','leaderTruths'];
   if(bnav)bnav.style.display=equipePages.includes(p)?'none':'flex';
   if(p==='home'){renderHome();updateHomeSLBadge();setTimeout(renderHomeSummary,100);}
     updateHomeAlerts();
@@ -13550,6 +13937,8 @@ function goPage(p){
   if(p==='notesGlobales')setTimeout(function(){renderNotesGlobales();},100);
   if(p==='notesVocales')setTimeout(function(){renderVoiceNotes();},100);
   if(p==='planAction')setTimeout(function(){renderPlanActions();},80);
+  if(p==='sigJourn')setTimeout(function(){renderSigJourn();},80);
+  if(p==='semaineType')setTimeout(function(){renderSemaineType();},80);
   if(p==='planActionStats')setTimeout(function(){renderPlanActionStats();},80);
   if(p==='excellence')setTimeout(function(){if(typeof paUpdateHomeBadge==='function')paUpdateHomeBadge();},80);
 
@@ -14297,6 +14686,10 @@ function renderMorningDash(){
   if(el('mdGreeting')) el('mdGreeting').textContent = greeting;
   if(el('mdName')) el('mdName').textContent = (prof && prof.name) ? prof.name : 'Directeur';
   if(el('mdDateFull')) el('mdDateFull').textContent = JOURS[now.getDay()] + ' ' + now.getDate() + ' ' + MOISF[now.getMonth()] + ' ' + now.getFullYear();
+  if(el('mdSemTheme')){
+    var _sd=loadSemaine()[semTodayIdx()];
+    el('mdSemTheme').innerHTML='<span style="font-size:13px;">'+_sd.ico+'</span><span style="font-size:11px;font-weight:800;color:#a5b4fc;">'+escHtml(_sd.theme)+'</span><span style="font-size:9px;color:var(--t3);">· Semaine Type</span>';
+  }
   if(el('mdTime')) el('mdTime').textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
 
   // ── Score santé (réutilise logique dashboard) ──
@@ -15670,11 +16063,11 @@ var HYG_MARDI_CATS=[
     {label:'Remplir check-list nettoyage complète',icon:'📝'}
   ]},
   {icon:'🌡️',label:'Points à Respecter Impérativement',col:'#38bdf8',items:[
-    {label:'Registre de température camions + produits MBA/PFLS tenu à jour',icon:'📊'},
+    {label:'Registre de température des camions + produits MBA/PFLS tenu à jour',icon:'📊'},
     {label:'Thermomètre à sonde disponible et fonctionnel',icon:'🌡️'},
     {label:'Produits stockés immédiatement à réception',icon:'📦'},
-    {label:'Procédures chaîne du froid respectées à 100%',icon:'❄️'},
-    {label:'Traçabilité produits frais et températures assurée',icon:'🔗'}
+    {label:'Procédures de la chaîne du froid respectées à 100%',icon:'❄️'},
+    {label:'Traçabilité des produits frais et des températures assurée',icon:'🔗'}
   ]},
   {icon:'🙋',label:'Rappel Hygiène Équipes',col:'#f472b6',items:[
     {label:'Tenue propre et adaptée',icon:'👔'},
@@ -21296,6 +21689,13 @@ function openMajLightbox(side, idx){
   var img = document.getElementById('majLightboxImg');
   if(lb && img){ img.src=data[idx]; lb.style.display='flex'; }
 }
+// Lightbox générique (réutilisée par Hygiène/Mardi et toute autre galerie photo)
+function openImgLightbox(src){
+  if(!src)return;
+  var lb = document.getElementById('majLightbox');
+  var img = document.getElementById('majLightboxImg');
+  if(lb && img){ img.src=src; lb.style.display='flex'; }
+}
 
 // ── Open form ───────────────────────────────────────────────
 function openMajPlanoForm(eid){
@@ -25697,6 +26097,13 @@ function buildResumeText(){
   return msg;
 }
 
+function aiAnalyzeResume(){
+  var txt=buildResumeText();
+  var prompt=_AI_BASE+'\n\nVoici le résumé complet de la journée du magasin (tâches, passation, anomalies, incidents, chaîne du froid) :\n\n'+txt
+    +'\n\nAnalyse cette journée : diagnostic global court, 3 actions prioritaires pour demain, 2 points de vigilance à surveiller, un conseil pratique pour le manager.';
+  _aiCall('btnAiResume','aiResumeResult',prompt);
+}
+
 // ══ WHATSAPP SHARE — HELPER & MODULES ══
 function shareWA(msg){ window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank'); }
 
@@ -26868,6 +27275,7 @@ function renderChecklist(){
   var html='';
   Object.keys(cats).forEach(function(cat){
     html+='<div style="font-size:10px;font-weight:800;color:var(--t2);text-transform:uppercase;letter-spacing:1px;margin-top:8px;margin-bottom:4px;padding:0 2px;">'+cat+'</div>';
+    if(cat.indexOf('🌡️')>-1) html+=cdfTodayBanner();
     cats[cat].forEach(function(item){
       var isDone=!!done[item.id];
       html+='<div onclick="toggleCheck(\''+item.id+'\')" style="display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:13px 14px;cursor:pointer;border:1px solid '+(isDone?'rgba(34,197,94,.3)':'var(--bord)')+';">'
@@ -27757,6 +28165,9 @@ function bnTransferTache(){
   bnRemoveAfterTransfer();
   if(typeof renderABCDE==='function') renderABCDE();
   showT('ok','Ajoute comme Tache A !');
+}
+function closeBnTransfer(){
+  var m=document.getElementById('bnTransferModal');if(m)m.style.display='none';
 }
 
 
@@ -28659,6 +29070,28 @@ var SJ_DEFAULTS=['Bordereaux des caissiers','Dossiers crédit','Frais personnels
 function loadSigJourn(){try{return JSON.parse(localStorage.getItem(SK_SJ)||'[]');}catch(e){return[];}}
 function saveSigJournData(d){localStorage.setItem(SK_SJ,JSON.stringify(d));}
 
+function renderSigJourn(){
+  var list=loadSigJourn().slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+  var c=document.getElementById('sjList');if(!c)return;
+  var empty=document.getElementById('sjEmpty');
+  if(!list.length){c.innerHTML='';if(empty)empty.style.display='block';return;}
+  if(empty)empty.style.display='none';
+  var stCfg={0:{lbl:'✅ Signée',col:'#4ade80',bg:'rgba(34,197,94,.12)'},1:{lbl:'⚠️ Partielle',col:'#fb923c',bg:'rgba(249,115,22,.12)'},2:{lbl:'❌ Non signée',col:'#f87171',bg:'rgba(239,68,68,.12)'}};
+  c.innerHTML=list.map(function(j){
+    var st=stCfg[j.statut]||stCfg[2];
+    var docsOk=(j.docsList||[]).filter(function(d){return d.checked;}).length;
+    var docsTotal=(j.docsList||[]).length;
+    return '<div onclick="openSigJournForm(\''+j.id+'\')" style="background:var(--card);border-radius:14px;padding:13px 14px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(192,132,252,.15);">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">'
+      +'<span style="font-size:13px;font-weight:800;color:var(--t1);">'+_auDateFmt(j.date)+'</span>'
+      +'<span style="font-size:9px;font-weight:800;color:'+st.col+';background:'+st.bg+';padding:3px 8px;border-radius:8px;">'+st.lbl+'</span>'
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--t2);">👤 '+escHtml(j.caissier||'—')+' · 📋 '+docsOk+'/'+docsTotal+' documents</div>'
+      +(j.obs?'<div style="font-size:10px;color:var(--t2);margin-top:4px;font-style:italic;">📝 '+escHtml(j.obs)+'</div>':'')
+      +'</div>';
+  }).join('');
+}
+
 function openSigJournForm(id){
   _sjEid=id||null;
   var j=id?loadSigJourn().find(function(x){return x.id===id;}):null;
@@ -28740,6 +29173,117 @@ function setSjStatut(v){
     btn.style.color=i===v?styles[i].col:'var(--t2)';
     btn.style.boxShadow=i===v?'0 0 0 2px '+styles[i].col.replace(')',',0.4)'):'';
   });
+}
+function saveSigJourn(){
+  var date=(document.getElementById('sjDate')||{value:tstr()}).value||tstr();
+  var caissier=(document.getElementById('sjCaissier')||{value:''}).value.trim();
+  var obs=(document.getElementById('sjObs')||{value:''}).value.trim();
+  if(!caissier){showT('⚠️','Nom du caissier requis');return;}
+  var list=loadSigJourn();
+  var docsList=_sjDocs.map(function(d){return{id:d.id,label:d.label,checked:d.checked};});
+  if(_sjEid){
+    var idx=list.findIndex(function(x){return x.id===_sjEid;});
+    if(idx>-1)list[idx]={id:_sjEid,date:date,caissier:caissier,obs:obs,docsList:docsList,statut:_sjStatut,createdAt:list[idx].createdAt||tstr()};
+  } else {
+    list.unshift({id:uid(),date:date,caissier:caissier,obs:obs,docsList:docsList,statut:_sjStatut,createdAt:tstr()});
+  }
+  saveSigJournData(list);
+  closeM('sigJournMov');
+  if(typeof renderSigJourn==='function')renderSigJourn();
+  showT('✅','Journée enregistrée');
+}
+function delSigJourn(id){
+  if(!id)return;
+  var list=loadSigJourn().filter(function(x){return x.id!==id;});
+  saveSigJournData(list);
+  if(typeof renderSigJourn==='function')renderSigJourn();
+  showT('🗑️','Journée supprimée');
+}
+
+// ── 4 Règles Réunions : retour intelligent vers la page d'origine ──
+var _regReunBack='gestiontemps';
+function openReglesReunion(from){
+  _regReunBack=from||'gestiontemps';
+  var l=document.getElementById('regReunBackLbl');
+  if(l)l.textContent=(from==='reunion')?'‹ Réunions':(from==='excellence')?'‹ Excellence':'‹ Temps';
+  goPage('reglesReunion');
+}
+function backReglesReunion(){
+  var b=_regReunBack||'gestiontemps';
+  _regReunBack='gestiontemps';
+  var l=document.getElementById('regReunBackLbl');
+  if(l)l.textContent='‹ Temps';
+  goPage(b);
+}
+
+// ── Ma Semaine Type ──
+var SEM_DAYS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+var SEM_DEFAULT=[
+  {ico:'🎯',theme:'Cadrer',desc:"Débrief CA/KPI du week-end, brief équipe, fixer les objectifs de la semaine.",link:'ca'},
+  {ico:'📊',theme:'Piloter',desc:'Analyse des écarts, actions correctives immédiates, contrôle réserve.',link:'planAction'},
+  {ico:'🎓',theme:'Coacher',desc:'Formation terrain express, observation et feedback en live.',link:'suiviFormations'},
+  {ico:'📦',theme:'Anticiper',desc:'Prépa stock, merchandising et planning pour le week-end.',link:'j1'},
+  {ico:'🌙',theme:'Repos',desc:"Jour de repos hebdomadaire. Déléguer le brief d'avant-week-end à l'équipe.",link:''},
+  {ico:'🛒',theme:'Vendre',desc:'100% terrain. Transformer le trafic en CA.',link:'terrain'},
+  {ico:'📈',theme:'Mesurer',desc:'Bilan semaine, valoriser les réussites, fixer les 3 priorités suivantes.',link:'rapportHebdo'}
+];
+var SEM_KEY=SK+'_semaine';
+var _semEditIdx=null;
+function loadSemaine(){
+  try{
+    var saved=JSON.parse(localStorage.getItem(SEM_KEY)||'null');
+    if(saved&&saved.length===7)return saved;
+  }catch(e){}
+  return SEM_DEFAULT.slice();
+}
+function saveSemaineData(d){localStorage.setItem(SEM_KEY,JSON.stringify(d));}
+function semTodayIdx(){return (new Date().getDay()+6)%7;}
+function renderSemaineType(){
+  var c=document.getElementById('semList');if(!c)return;
+  try{
+    var data=loadSemaine();
+    var todayIdx=semTodayIdx();
+    c.innerHTML=data.map(function(d,i){
+      var isToday=i===todayIdx;
+      return '<div style="background:'+(isToday?'linear-gradient(135deg,rgba(99,102,241,.18),rgba(129,140,248,.08))':'var(--card)')+';border:1px solid '+(isToday?'rgba(129,140,248,.5)':'rgba(255,255,255,.08)')+';border-radius:14px;padding:14px;margin-bottom:8px;">'
+        +'<div style="display:flex;align-items:center;gap:12px;">'
+        +'<div style="width:38px;height:38px;border-radius:11px;background:'+(isToday?'#4f46e5':'rgba(255,255,255,.06)')+';display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;">'+d.ico+'</div>'
+        +'<div style="flex:1;'+(d.link?'cursor:pointer;':'')+'" '+(d.link?('onclick="goPage(\''+d.link+'\')"'):'')+'>'
+        +'<span style="font-size:9px;font-weight:800;color:'+(isToday?'#a5b4fc':'var(--t3)')+';text-transform:uppercase;">'+SEM_DAYS[i]+(isToday?' · Aujourd\'hui':'')+'</span>'
+        +'<div style="font-size:13px;font-weight:900;color:var(--t1);margin-top:1px;">'+escHtml(d.theme)+'</div>'
+        +'<div style="font-size:10.5px;color:var(--t2);margin-top:3px;line-height:1.5;">'+escHtml(d.desc)+'</div>'
+        +'</div>'
+        +'<div onclick="openSemEdit('+i+')" style="color:var(--t3);font-size:15px;padding:4px 2px;cursor:pointer;flex-shrink:0;">✏️</div>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+    if(!c.innerHTML)throw new Error('empty render');
+  }catch(err){
+    c.innerHTML='<div style="text-align:center;padding:24px;color:#fca5a5;font-size:11px;">⚠️ Erreur d\'affichage — <span onclick="localStorage.removeItem(\''+SEM_KEY+'\');renderSemaineType();" style="text-decoration:underline;cursor:pointer;color:#a5b4fc;">réinitialiser cette page</span></div>';
+  }
+}
+function openSemEdit(i){
+  _semEditIdx=i;
+  var d=loadSemaine()[i];
+  document.getElementById('semEditTit').textContent='Modifier · '+SEM_DAYS[i];
+  document.getElementById('semEditIcon').value=d.ico;
+  document.getElementById('semEditTheme').value=d.theme;
+  document.getElementById('semEditDesc').value=d.desc;
+  var el=document.getElementById('semEditMov');el.style.display='';el.classList.add('on');
+}
+function saveSemEdit(){
+  if(_semEditIdx===null)return;
+  var data=loadSemaine();
+  data[_semEditIdx]={
+    ico:(document.getElementById('semEditIcon').value||'📌').trim(),
+    theme:(document.getElementById('semEditTheme').value||'').trim()||SEM_DAYS[_semEditIdx],
+    desc:(document.getElementById('semEditDesc').value||'').trim(),
+    link:data[_semEditIdx].link
+  };
+  saveSemaineData(data);
+  closeM('semEditMov');
+  renderSemaineType();
+  showT('✅','Jour mis à jour');
 }
 
 
@@ -31490,6 +32034,11 @@ var _GS=[
   {ico:'🏛️',bg:'#581c87',n:'Visites Autorités',d:'Traçabilité des visites officielles des autorités',p:'visiteAutorites',t:'visite autorite officiel tracabilite'},
   {ico:'🪞',bg:'#312e81',n:'Visualisation',d:'Visualiser les conséquences négatives de ne pas agir',p:'visualisationConseq',t:'visualisation consequence negative declencheur emotionnel'},
   {ico:'🏷️',bg:'#78350f',n:'VSD',d:'Suivi des articles VSD',p:'vsd',t:'vsd article suivi'},
+  {ico:'🖊️',bg:'#581c87',n:'Signature Journalière',d:'Documents caissier et signature quotidienne',p:'sigJourn',t:'signature journaliere caissier document bordereau credit'},
+  {ico:'🍕',bg:'#7f1d1d',n:'4 Règles Réunions',d:'Deux pizzas, chaise vide, zéro PowerPoint, silence',p:'reglesReunion',t:'reunion regle pizza chaise vide powerpoint silence lecture efficace'},
+  {ico:'👁️',bg:'#5b21b6',n:'Merchandising Côté Client',d:'Pourquoi le client ne lit pas le rayon, il scanne',p:'merchClient',t:'merchandising client scan lecture rayon regard contraste hierarchie visuelle coaching'},
+  {ico:'📆',bg:'#4338ca',n:'Ma Semaine Type',d:'Cadrer, Piloter, Coacher, Vendre — 7 jours éditables',p:'semaineType',t:'semaine type manager cadrer piloter coacher anticiper securiser vendre mesurer lundi mardi'},
+  {ico:'🧭',bg:'#1c1917',n:'10 Vérités Brutales du Leader',d:'Solitude, échec, feedback, repos — leadership sans filtre',p:'leaderTruths',t:'leadership verite brutale leader solitaire echec feedback conflit repos exemple'},
 ];
 function _gn(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function _gh(str,q){if(!q)return str;var ns=_gn(str),nq=_gn(q),i=ns.indexOf(nq);if(i<0)return str;return str.slice(0,i)+'<mark style="background:rgba(59,130,246,.35);color:#93c5fd;border-radius:3px;padding:0 2px;">'+str.slice(i,i+nq.length)+'</mark>'+str.slice(i+nq.length);}
@@ -32952,14 +33501,6 @@ function exportPlanTgPDF(){
       <div id="resumeIncidents"></div>
     </div>
 
-    <!-- IA Analyse Résumé -->
-    <div style="margin-bottom:12px;">
-      <button id="resumeIABtn" onclick="resumeAnalyseIA()" style="width:100%;background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(99,102,241,.15));border:1px solid rgba(124,58,237,.4);color:#c084fc;font-size:12px;font-weight:800;padding:12px;border-radius:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
-        <span>🤖</span><span>Analyser la journée avec l'IA</span>
-      </button>
-      <div id="resumeIAResult" style="margin-top:2px;"></div>
-    </div>
-
     <!-- 🤖 AI Analysis Résumé -->
     <div style="background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(139,92,246,.07));border:1px solid rgba(99,102,241,.25);border-radius:14px;padding:13px 14px;margin-bottom:9px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
@@ -34333,6 +34874,21 @@ function cdfStatusLabel(status){
   return                        {label:'🚨 Alarme',     color:'#f87171', bg:'rgba(239,68,68,.12)',   border:'rgba(239,68,68,.35)' };
 }
 
+function aiAnalyzeCdf(){
+  var td=tstr();
+  var day=cdfLoad().filter(function(e){return e.date===td;});
+  if(!day.length){showT('⚠️','Aucun relevé aujourd\'hui à analyser');return;}
+  var alm=day.filter(function(e){return cdfStatus(e.zone,e.temp)==='alarm';}).length;
+  var wrn=day.filter(function(e){return cdfStatus(e.zone,e.temp)==='warning';}).length;
+  var lines=day.map(function(e){
+    var z=cdfZoneById(e.zone);var st=cdfStatus(e.zone,e.temp);
+    return '- '+z.label+' : '+e.temp+'°C ('+e.heure+')'+(st!=='ok'?' ['+(st==='alarm'?'ALARME':'ATTENTION')+']':'')+(e.action?' · Action : '+e.action:'')+(e.obs?' · Obs : '+e.obs:'');
+  });
+  var prompt=_AI_BASE+'\n\nRelevés de température de la chaîne du froid du jour ('+day.length+' relevé(s), '+alm+' alarme(s), '+wrn+' attention(s)) :\n'+lines.join('\n')
+    +'\n\nAnalyse ces relevés : diagnostic global de la chaîne du froid, 3 actions correctives si nécessaire, 2 points de vigilance, un conseil pratique HACCP.';
+  _aiCall('btnAiCdf','aiCdfResult',prompt);
+}
+
 function cdfRender(){
   var list = cdfLoad();
   var filterDate = document.getElementById('cdfFilterDate');
@@ -35510,7 +36066,7 @@ function aiAnalyzeRapport(){
     'Avoirs: '+d.wAvoirs.length+' demandes',
     'Donne: bilan de semaine, points critiques, comparaison habituelle, recommandations semaine prochaine.'
   ];
-  _aiCall(parts.join('\n'),'btnAiRapport','aiRapportResult');
+  _aiCall('btnAiRapport','aiRapportResult',parts.join('\n'));
 }
 
 // ── Export PDF ──
@@ -35620,7 +36176,7 @@ function aiAnalyzeDashboard(){
     'Donne: etat general court, 2-3 points critiques a surveiller, 1 recommandation prioritaire pour la suite de la journee.'
   ];
 
-  _aiCall(parts.filter(Boolean).join('\n'), 'btnAiDash', 'aiDashResult');
+  _aiCall('btnAiDash','aiDashResult',parts.filter(Boolean).join('\n'));
 }
 
 // ══════════════════════════════════════════════════════
@@ -35906,7 +36462,7 @@ function aiAnalyzeAnomRayon(rayon){
     'Donne: tendances, fournisseurs problematiques, risques qualite specifiques au rayon '+cfg.label+', recommandations.'
   ];
 
-  _aiCall(parts.filter(Boolean).join('\n'), cfg.btn, cfg.result);
+  _aiCall(cfg.btn, cfg.result, parts.filter(Boolean).join('\n'));
 }
 
 // ══════════════════════════════════════════════════════
@@ -37070,6 +37626,29 @@ function rondeSetType(type,btn){
   btn.style.background='#3b82f6'; btn.style.color='#fff'; btn.style.border='none';
   rondeRender();
 }
+// Bannière live reliant les checklists (Ronde, Checklist Rayon) aux vrais relevés Chaîne du Froid du jour
+function cdfTodayBanner(){
+  var td=tstr();
+  var day=cdfLoad().filter(function(e){return e.date===td;});
+  if(!day.length){
+    return '<div onclick="event.stopPropagation();goPage(\'chaineFroid\')" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:8px 10px;margin:6px 0;cursor:pointer;">'
+      +'<span style="font-size:14px;">🌡️</span>'
+      +'<span style="flex:1;font-size:10px;color:#fca5a5;font-weight:700;">Aucun relevé Chaîne du Froid aujourd\'hui</span>'
+      +'<span style="font-size:9px;color:#fca5a5;font-weight:800;">Relever ›</span>'
+      +'</div>';
+  }
+  var alm=day.filter(function(e){return cdfStatus(e.zone,e.temp)==='alarm';}).length;
+  var wrn=day.filter(function(e){return cdfStatus(e.zone,e.temp)==='warning';}).length;
+  var col=alm?'#f87171':(wrn?'#fbbf24':'#4ade80');
+  var bg=alm?'rgba(239,68,68,.1)':(wrn?'rgba(251,191,36,.1)':'rgba(34,197,94,.1)');
+  var bd=alm?'rgba(239,68,68,.3)':(wrn?'rgba(251,191,36,.3)':'rgba(34,197,94,.3)');
+  var txt=alm?(alm+' alarme(s) relevée(s) aujourd\'hui'):(wrn?(wrn+' zone(s) à surveiller'):(day.length+' relevé(s) conforme(s) aujourd\'hui'));
+  return '<div onclick="event.stopPropagation();goPage(\'chaineFroid\')" style="display:flex;align-items:center;gap:8px;background:'+bg+';border:1px solid '+bd+';border-radius:10px;padding:8px 10px;margin:6px 0;cursor:pointer;">'
+    +'<span style="font-size:14px;">🌡️</span>'
+    +'<span style="flex:1;font-size:10px;color:'+col+';font-weight:700;">'+txt+'</span>'
+    +'<span style="font-size:9px;color:'+col+';font-weight:800;">Voir ›</span>'
+    +'</div>';
+}
 function rondeRender(){
   var zones=RONDE_ZONES[RONDE_TYPE]||[];
   var done=rondeGetDone();
@@ -37077,6 +37656,7 @@ function rondeRender(){
   var html='';
   zones.forEach(function(z,zi){
     html+='<div class="ronde-zone-hdr"><span>'+z.zone+'</span></div>';
+    if(z.zone.indexOf('🌡️')>-1) html+=cdfTodayBanner();
     html+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:0 12px;margin-bottom:8px;">';
     z.items.forEach(function(item,ii){
       var key=zi+'_'+ii;
@@ -39687,6 +40267,7 @@ document.addEventListener('DOMContentLoaded',function(){
     <div style="font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:var(--t2);margin-bottom:14px;">👔 Espace Directeur</div>
     <div class="dm-tile" onclick="closeDirecteurModal();showMorningDash()"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">🌅</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Tableau de Bord Matin</div><div class="dm-tile-desc">CA · DLC · Équipe · Tâches · Anomalies · Score santé</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
     <div class="dm-tile" onclick="closeDirecteurModal();goPage('timeline')"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">🕐</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Ma Journée Type</div><div class="dm-tile-desc">Planning horaire · 18 créneaux prédéfinis · Suivi en temps réel</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
+    <div class="dm-tile" onclick="closeDirecteurModal();goPage('semaineType')"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">📆</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Ma Semaine Type</div><div class="dm-tile-desc">Cadrer · Piloter · Coacher · Vendre — 7 jours, éditable</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
     <div class="dm-tile" onclick="closeDirecteurModal();goPage('ca')"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">💰</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Indicateurs CA</div><div class="dm-tile-desc">CA jour/semaine · Panier moyen · Clients · Taux de marge</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
     <div class="dm-tile" onclick="closeDirecteurModal();goPage('actions')"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">📈</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Actions Commerciales</div><div class="dm-tile-desc">Promos · TG · PLV · Soldes · Animations</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
     <div class="dm-tile" onclick="closeDirecteurModal();goPage('presences')"><div class="dm-tile-ico" style="background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(99,102,241,.1));border:1px solid rgba(129,140,248,.35);">👥</div><div class="dm-tile-info"><div class="dm-tile-title" style="color:#a5b4fc;">Présences &amp; Absences</div><div class="dm-tile-desc">Présents · Absents · Congés · Retards</div></div><svg fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" viewBox="0 0 24 24" style="color:var(--t3);flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg></div>
